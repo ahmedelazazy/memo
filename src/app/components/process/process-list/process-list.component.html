@@ -1,0 +1,12 @@
+<h3>Running Process</h3>
+<p>Goes here</p>
+
+<h3>Start new process</h3>
+<ul>
+  <li *ngFor="let template of templates | async">
+    <span>
+      {{template.title}} ({{template.steps.length}} Steps)
+    </span>
+    <button (click)="startProcess(template)">Start Process</button>
+  </li>
+</ul>

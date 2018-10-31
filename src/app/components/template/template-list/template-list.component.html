@@ -1,0 +1,8 @@
+<p>
+  {{templates | async | json }}
+</p>
+
+
+<ul>
+  <li *ngFor="let template of templates | async"> {{template.title}} ({{template.steps.length}} Steps) </li>
+</ul>
