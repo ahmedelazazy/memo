@@ -20,19 +20,13 @@ export class StepCreateComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getAll().subscribe(
-      u => this.users = u
-    );
+    this.userService.getAll().subscribe(users => this.users = users);
   }
 
   addStep(f) {
     if (f.invalid) return;
-
+    this.step.user_id = this.step.user.id;
     this.stepUpdated.emit(this.step);
-
-  }
-
-  onCancel(f) {
 
   }
 }

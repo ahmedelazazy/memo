@@ -1,0 +1,30 @@
+<div class="panel panel-default" *ngIf="template$ | async as template">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{template.title}}</h3>
+    <!-- {{isEdit ? 'Edit Step' : 'Add Step' }} -->
+  </div>
+  <div class="panel-body">
+    <form #f="ngForm" (ngSubmit)="addProcess(f, template.id)">
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" id="title" name="title" [(ngModel)]="process.title" placeholder="Title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" id="description" name="description" [(ngModel)]="process.description" placeholder="Description">
+      </div>
+
+      <div *ngIf="showError" class="alert alert-danger" role="alert">
+        <strong>Error!</strong> Unable to login. please try again.
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="f.invalid" type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-default" [routerLink]="['/process']">Cancel</button>
+      </div>
+
+    </form>
+  </div>
+</div>

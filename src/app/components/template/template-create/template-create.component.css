@@ -1,0 +1,12 @@
+.disabled{
+  color: #999 !important;
+  font-style: italic;
+}
+
+.right{
+  text-align: right;
+}
+
+button{
+  margin-right: 5px;
+}

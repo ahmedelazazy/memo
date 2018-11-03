@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from 'src/app/services/student.service';
-// import { IStudent, Student } from 'src/app/models/student';
-import { IStudent, Student } from 'src/app/models/student';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -22,19 +19,19 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     // this.getStudents();
-
+    this.service.getAll();
     this.service.init();
-    this.service.usersChange.subscribe(users => this.users = users);
+    this.service.usersChange.subscribe(users => this.users = users, error => console.log(error));
   }
 
   getAll() {
-    this.service.getAll().
-      subscribe(users => {
-        this.users = users;
-      }, error => {
-        console.error(error);
-        // alert(error.message);
-      });
+    // this.service.getAll().
+    //   subscribe(users => {
+    //     this.users = users;
+    //   }, error => {
+    //     console.error(error);
+    //     // alert(error.message);
+    //   });
   }
 
   add() {

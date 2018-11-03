@@ -1,8 +1,10 @@
-<p>
-  {{templates | async | json }}
-</p>
+<div>
+  <button class="btn btn-primary" [routerLink]="['/templates/create']">Create Template</button>
+</div>
 
 
-<ul>
-  <li *ngFor="let template of templates | async"> {{template.title}} ({{template.steps.length}} Steps) </li>
-</ul>
+<div *ngIf="templates$ | async as templates">
+  <ul>
+    <li *ngFor="let template of templates"> {{template.title}} ({{template.steps.length}} Steps) </li>
+  </ul>
+</div>

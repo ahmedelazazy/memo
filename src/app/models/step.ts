@@ -2,13 +2,16 @@ export class Step {
   id?: number;
   title: string;
   description: string;
-  type: 'task' | 'approval' | null;
-  templateId?: number;
-  userId?: number;
+  type: number;
+  template_id?: number;
+  user_id?: number;
   order?: number;
+  user?: any;
 
   constructor() {
-    this.type = 'task';
+    this.type = 1;
   }
+
+
 
 }

@@ -1,77 +1,112 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
 import { User } from '../models/user';
-import { from, Subject } from 'rxjs';
-
+import { from, Subject, of } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map, tap } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends BaseService {
+export class UserService {
 
   tableName = 'Users';
   users: User[] = [];
   usersChange: Subject<User[]> = new Subject();
+  apiUrl = environment['url'] + 'user/';
 
-  constructor() {
-    super();
-  }
+  constructor(private http: HttpClient) { }
 
   init() {
     this.getAll()
       .subscribe(users => {
+        // console.log(users);
         this.users = users;
-        this.usersChange.next(this.users.slice());
-      });
+        this.usersChange.next(this.users);
+      }
+      );
 
   }
   getAll() {
-    var result = from(this.connection.select<User>({
-      from: this.tableName
-    }))
-    return result;
+    let url = this.apiUrl + 'index';
+
+    return this.http.get<User[]>(url)
+      //  ;
+      .pipe(
+        tap(data => console.log("user service > getAll", data))
+      )
   }
 
   get(id: number) {
-    var result = this.connection.select<User>({
-      from: this.tableName,
-      where: {
-        id: id
-      }
-    });
-    this.init();
-    return from(result);
+    let url = this.apiUrl + 'getbyid';
+    let data = { 'id': id };
+    return this.http.post(url, data).pipe(
+      map(
+        data => {
+          if (data && Array.isArray(data))
+            return data[0] as User[];
+          else
+            return data as User[];
+        }
+      ));
   }
 
   add(obj: User) {
-    var result = this.connection.insert<User>({
-      into: this.tableName,
-      return: true, // as id is autoincrement, so we would like to get the inserted value
-      values: [obj]
-    });
+
+    let url = this.apiUrl + 'add';
+
+    const body = new HttpParams()
+      .set('email', obj.email)
+      .set('password', obj.password)
+      .set('name', obj.name);
+
+    let result = this.http.post(url,
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    ).pipe(tap(data => console.log(data)));
+
     this.init();
-    return from(result);
+    return result;
   }
 
   delete(id: number) {
-    var result = this.connection.remove({
-      from: this.tableName,
-      where: {
-        id: id
+    let url = this.apiUrl + 'remove';
+
+    const body = new HttpParams()
+      .set('id', id + "")
+
+    let result = this.http.post(url,
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    });
+    ).pipe(tap(data => console.log(data)));
+
     this.init();
-    return from(result);
+    return result;
   }
 
-  update(id: number, updateValue: User) {
-    var result = this.connection.update({
-      in: this.tableName,
-      where: {
-        id: id
-      },
-      set: updateValue
-    });
+  update(id: number, obj: User) {
+    let url = this.apiUrl + 'edit';
+
+    const body = new HttpParams()
+      .set('id', id + "")
+      .set('email', obj.email)
+      .set('password', obj.password)
+      .set('name', obj.name);
+
+    let result = this.http.post(url,
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    ).pipe(tap(data => console.log(data)));
+
     this.init();
-    return from(result);
+    return result;
   }
 }

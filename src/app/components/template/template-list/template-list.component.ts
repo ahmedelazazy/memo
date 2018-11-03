@@ -10,11 +10,10 @@ export class TemplateListComponent implements OnInit {
 
   constructor(private templateService: TemplateService) { }
 
-  templates;
+  templates$;
 
   ngOnInit() {
-
-    this.templates = this.templateService.getAll();
+    this.templates$ = this.templateService.getAll()
   }
 
 }

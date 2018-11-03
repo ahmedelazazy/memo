@@ -8,8 +8,8 @@
 export class User {
   id?: number;
   name;
-  email;
-  password;
+  email?;
+  password?;
 
   init(name, email, password) {
     this.name = name;

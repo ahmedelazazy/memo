@@ -1,88 +1,102 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
 import { Template } from '../models/template';
 import { Subject, from } from 'rxjs';
 import { StepService } from './step.service';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
-export class TemplateService extends BaseService {
+export class TemplateService {
 
   tableName = 'Templates';
-  users: Template[] = [];
+  templates: Template[] = [];
   usersChange: Subject<Template[]> = new Subject();
+  apiUrl = environment['url'] + 'template/';
 
-  constructor(private stepService: StepService) {
-    super();
+  constructor(private stepService: StepService, private http: HttpClient) {
   }
 
   init() {
-
+    this.getAll()
+      .subscribe(data => {
+        // console.log(users);
+        // this.templates = data;
+        this.usersChange.next(this.templates.slice());
+      }
+      );
   }
 
   getAll() {
-    var result = from(this.connection.select<Template>({
-      from: this.tableName
-    }))
-    return result;
+
+    let url = this.apiUrl + 'getWithDetails';
+
+    return this.http.get<Template[]>(url).pipe(
+      tap(
+        data => console.log("template Service > getAll", data)
+      )
+    );
   }
 
   get(id: number) {
-    var result = this.connection.select<Template>({
-      from: this.tableName,
-      where: {
-        id: id
-      }
-    });
-    this.init();
-    return from(result);
+
+    let url = this.apiUrl + 'getbyid';
+    let data = { 'id': id };
+    return this.http.post(url, data).pipe(
+      tap(data => console.log("template service > get by id", data))
+    );
   }
 
   add(obj: Template) {
 
-    for(let i = 0; i<obj.steps.length; i++){
-      obj.steps[i].order = i;
-    }
+    // for (let index = 0; index < obj.steps.length; index++) {
+    //   const element = obj.steps[index];
+    //   element.order = index + 1;
+    // }
 
-    // var result =
-    this.connection.insert<Template>({
-      into: this.tableName,
-      return: true, // as id is autoincrement, so we would like to get the inserted value
-      values: [obj]
-    }).then(
-      templateId => {
-        console.log("template saved successfully");
-        // this.stepService.add(obj.steps)
-        //   .then(() => console.log("steps saved successfully"))
-        //   .catch(error => console.error(error))
-      })
-      .catch(error => console.error(error));
-
-    // this.init();
-    // return from(result);
+    let url = this.apiUrl + 'add';
+    return this.http.post(url, obj);
   }
 
   delete(id: number) {
-    var result = this.connection.remove({
-      from: this.tableName,
-      where: {
-        id: id
+
+    let url = this.apiUrl + 'remove';
+
+    const body = new HttpParams()
+      .set('id', id + "")
+
+    let result = this.http.post(url,
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    });
+    ).pipe(tap(data => console.log(data)));
+
     this.init();
-    return from(result);
+    return result;
   }
 
-  update(id: number, updateValue: Template) {
-    var result = this.connection.update({
-      in: this.tableName,
-      where: {
-        id: id
-      },
-      set: updateValue
-    });
+  update(id: number, obj: Template) {
+
+    let url = this.apiUrl + 'edit';
+
+    const body = new HttpParams()
+      .set('id', id + "")
+      .set('title', obj.title)
+      .set('description', obj.description)
+
+    let result = this.http.post(url,
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    ).pipe(tap(data => console.log(data)));
+
     this.init();
-    return from(result);
+    return result;
   }
 }

@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <form [formGroup]="templateForm" (ngSubmit)="onSubmitTemplateForm()">
+        <div id="sortableContainer" [sortablejs]="templateForm.get('sections').controls" [sortablejsOptions]="sortableOptions">
+          <div formArrayName="sections" *ngFor="let section of templateForm.get('sections').controls; let i = index;">
+            <div [formGroupName]="i">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class="form-inline">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <i class="glyphicon glyphicon-move move"></i>
+                        <label for="sectionName">Section</label>
+                        <input type="text" id="sectionName" formControlName="sectionName" class="form-control"
+                          placeholder="Section name...">
+                      </div>
+                      <div class="col-md-4 right">
+                        <button class="btn btn-success" type="button" (click)="onAddControl(section.controls.fields)">+</button>
+                        <button class="btn btn-danger" type="button" (click)="deleteSection(i)">X</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <ul class="list-group">
+                    <div [sortablejs]="section.get('fields').controls" [sortablejsOptions]="sortableOptions">
+                      <li class="list-group-item" formArrayName="fields" *ngFor="let field of section.get('fields').controls; let j = index;">
+                        <div class="row">
+                          <div class="col-md-10">
+                            <div class="form-inline" [formGroupName]="j">
+                              <i class="glyphicon glyphicon-move move"></i>
+                              <div class="form-group">
+                                <label for="fieldName">Field Name</label>
+                                <input type="text" formControlName="fieldName" class="form-control" id="fieldName" name="fieldName"
+                                  placeholder="Field Name">
+                              </div>
+                              <div class="form-group">
+                                <label for="fieldType">Type</label>
+                                <select formControlName="fieldType" class="form-control">
+                                  <option [ngValue]="'text'">Text</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-2 right">
+                            <button class="btn btn-danger" type="button" (click)="deleteField(section.controls.fields,j)">X</button>
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-default" type="button" (click)="onAddSection()">Add Section</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="alert alert-dark">
+  > {{ templateForm.value | json }}
+</div>

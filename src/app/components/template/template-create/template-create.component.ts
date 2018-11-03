@@ -3,6 +3,10 @@ import { Template } from './../../../models/template';
 import { Step } from 'src/app/models/step';
 import { TouchSequence } from 'selenium-webdriver';
 import { TemplateService } from 'src/app/services/template.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-template-create',
@@ -15,7 +19,9 @@ export class TemplateCreateComponent implements OnInit {
   template: Template;
   selectedStep: Step;
   isEdit = false;
-  constructor(private templateService: TemplateService) {
+  users: User[];
+
+  constructor(private templateService: TemplateService, private toastrService: ToastrService, private router: Router, private userService: UserService) {
     if (!this.isEdit) {
       this.template = new Template();
       this.template.steps = [];
@@ -24,11 +30,14 @@ export class TemplateCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAll().subscribe(data => this.users = data);
   }
 
   addStep() {
     let emptyStep = new Step();
+    emptyStep.order = this.template.steps.length + 1;
     this.template.steps.push(emptyStep);
+    this.resort();
   }
 
   edit(step) {
@@ -36,33 +45,25 @@ export class TemplateCreateComponent implements OnInit {
   }
   remove(index) {
     this.template.steps.splice(index, 1)
+    this.resort();
   }
 
-  onStepUpdated(step) {
+  onStepUpdated(step: Step) {
+    step.user = this.users.find(user => user.id == step.user_id);
     this.selectedStep = null;
   }
 
   up(index) {
     if (index == 0) return;
     this.arraymove(this.template.steps, index, --index);
-    // if (!this.template.steps[--index]) return;
-    // let temp = this.template.steps[--index];
-    // this.template.steps[--index] = this.template.steps[index];
-    // this.template.steps[index] = temp;
+    this.resort();
   }
 
   down(index) {
     if (index == this.template.steps.length - 1) return;
     this.arraymove(this.template.steps, index, ++index);
-
-
-    // if (!this.template.steps[++index]) return;
-    // let temp = this.template.steps[++index];
-    // this.template.steps[++index] = this.template.steps[index];
-    // this.template.steps[index] = temp;
+    this.resort();
   }
-
-
 
   arraymove(arr, fromIndex, toIndex) {
     var element = arr[fromIndex];
@@ -70,14 +71,43 @@ export class TemplateCreateComponent implements OnInit {
     arr.splice(toIndex, 0, element);
   }
 
+  resort() {
+    for (let i = 0; i < this.template.steps.length; i++) {
+      const step = this.template.steps[i];
+      step.order = i + 1;
+    }
+  }
+
   addTemplate(f) {
     if (f.invalid) return;
+
     if (this.template.steps.length == 0) {
-      alert('You must add some steps');
+      this.toastrService.error('Template must have at least one step');
       return;
     }
 
-    this.templateService.add(this.template);
+    for (let i = 0; i < this.template.steps.length; i++) {
+      const step = this.template.steps[i];
+      if (!step || !step.title || !step.user_id || !step.type) {
+        this.toastrService.error('Please fill all requied data');
+        return;
+      }
+    }
+
+    for (let i = 0; i < this.template.steps.length; i++) {
+      this.template.steps[i].user = undefined;
+    }
+
+    this.templateService.add(this.template).subscribe(
+      data => {
+        this.toastrService.success('Data saved successfully');
+        this.router.navigate(['/templates']);
+      },
+      error => {
+        this.toastrService.error('Error wile saving');
+        console.error(error);
+      }
+    );
 
   }
 

@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-md-6" *ngIf="action.status == 1">
+    <h2>{{action?.step?.title}}</h2>
+    <p>{{action?.step?.description}}</p>
+    <p>{{action?.date_opened}}</p>
+
+
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <input class="form-control" type="text" [(ngModel)]="action.comment">
+    </div>
+
+    <div class="form-group" *ngIf="action?.step?.type == 1">
+      <button class="btn btn-success" (click)="onSave(2)">Complete</button>
+      <button class="btn btn-default" [routerLink]="['/action']">Cancel</button>
+    </div>
+
+    <div class="form-group" *ngIf="action?.step?.type == 2">
+      <button class="btn btn-success" (click)="onSave(2)">Approve</button>
+      <button class="btn btn-danger" (click)="onSave(3)">Reject</button>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+
+
+    <div id="exTab2">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#1" data-toggle="tab">Process Info</a>
+        </li>
+        <li><a href="#2" data-toggle="tab">History</a>
+        </li>
+      </ul>
+
+      <div class="tab-content ">
+        <div class="tab-pane active" id="1">
+          <h3>Process Info</h3>
+          <p>Process: {{action?.template?.title}} - {{action?.process?.title}}</p>
+          <p>Process Description: {{action?.process?.description}}</p>
+          <p>Date Requested: {{action?.process?.date_opened}}</p>
+          <p>Requested by: {{action?.process?.user?.name}}</p>
+          <hr>
+          <div class="list-group">
+            <div *ngFor="let step of action.template.steps">
+              <a class="list-group-item">
+                <h4 class="list-group-item-heading" [class.disabled]="!step.title">{{step.title}}</h4>
+                <p class="list-group-item-text">{{step?.user?.name || ''}}
+                  <span class="label label-primary">{{step.type ==1 ? 'Task' : 'Approval' }}</span>
+                </p>
+                <p class="list-group-item-text">{{step?.description}}</p>
+                <span class="label label-warning" *ngIf="step.id == action.step_id &&  action.status == 1">Current Task</span>
+                <span class="label label-success" *ngIf="getStepStatus(step.id) == 2">Completed</span>
+                <span class="label label-danger" *ngIf="getStepStatus(step.id) == 3">Rejected</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="tab-pane" id="2">
+          <h3>History</h3>
+          <ul class="timeline">
+            <li>
+              <a>{{action?.template?.title}} - {{action?.process?.title}}</a>
+              <a class="float-right">{{action?.process?.date_opened}}</a>
+              <p><strong>{{action?.process?.user?.name}}</strong> Started a process</p>
+              <p>Description: {{action?.process?.description}}</p>
+            </li>
+
+            <ng-container *ngFor="let act of action?.process?.actions">
+              <ng-container *ngIf="act.status == 1 || act.status == 2 || act.status == 3">
+                <ng-container *ngIf="getStep(act) as s">
+                  <li>
+                    <a>{{ s.title }}</a>
+                    <a class="float-right">{{act.date_opened}}</a>
+                    <p>Assigned to <strong>{{act.user_name}}</strong></p>
+                    <span class="label label-primary">{{ s.type == 1 ? 'Task' : 'Approval' }}</span>
+                  </li>
+                  <li *ngIf=" act.status == 2  || act.status == 3 ">
+                    <a>{{s.title}}</a>
+                    <a class="float-right">{{act.date_closed}}</a>
+                    <p>Done by <strong>{{act.user_name}}</strong></p>
+                    <p>Comment added: {{act.comment}}</p>
+                    <span class="label label-success" *ngIf="act.status == 2 && s.type == 1">Completed</span>
+                    <span class="label label-success" *ngIf="act.status == 2 && s.type == 2">Approved</span>
+                    <span class="label label-danger" *ngIf="act.status == 3">Rejected</span>
+                  </li>
+                </ng-container>
+              </ng-container>
+
+            </ng-container>
+            <li *ngIf="action.process?.status == 2 || action.process?.status == 3">
+              <a>{{action?.template?.title}} - {{action?.process?.title}}</a>
+              <p>Process completed</p>
+              <a class="float-right">{{action?.process?.date_closed}}</a>
+              <span class="label label-success" *ngIf="action?.process?.status == 2">Completed</span>
+              <span class="label label-danger" *ngIf="action?.process?.status == 3">Rejected</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

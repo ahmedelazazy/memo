@@ -1,0 +1,28 @@
+<h3>Pending actions</h3>
+<div *ngIf="pendingActions?.length > 0; else noPendingActions">
+  <div class="list-group">
+    <div *ngFor="let action of pendingActions">
+      <a class="list-group-item pointer" (click)="onActionSelect(action)" *ngIf="action.status == 1">
+        <h4 class="list-group-item-heading">{{action.step?.title}}</h4>
+        <p class="list-group-item-text">{{action.template?.title + ' - ' + action.process?.title}}</p>
+        <p class="list-group-item-text">{{action.process?.user?.name + ' - ' + action.date_opened}}</p>
+      </a>
+    </div>
+  </div>
+</div>
+<ng-template #noPendingActions>You don't have any pending actions.</ng-template>
+
+
+<h3>Completed actions</h3>
+<div *ngIf="completedActions?.length > 0; else noCompletedActions">
+  <div class="list-group">
+    <div *ngFor="let action of completedActions">
+      <a class="list-group-item pointer" (click)="onActionSelect(action)" *ngIf="action.status != 1">
+        <h4 class="list-group-item-heading">{{action.step?.title}}</h4>
+        <p class="list-group-item-text">{{action.template?.title + ' - ' + action.process?.title}}</p>
+        <p class="list-group-item-text">{{action.process?.user?.name + ' - ' + action.date_opened}}</p>
+      </a>
+    </div>
+  </div>
+</div>
+<ng-template #noCompletedActions>You don't have any completed actions.</ng-template>

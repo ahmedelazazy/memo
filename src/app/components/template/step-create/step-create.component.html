@@ -1,34 +1,37 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Step</h3>
+    <h3 class="panel-title">Step #{{step.order}}</h3>
     <!-- {{isEdit ? 'Edit Step' : 'Add Step' }} -->
   </div>
   <div class="panel-body">
     <form #f="ngForm" (ngSubmit)="addStep(f)">
 
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Title*</label>
         <input class="form-control" id="title" name="title" [(ngModel)]="step.title" placeholder="Title" required>
       </div>
 
-      <div class="checkbox">
-        <label>
-          <input type="radio" name="type" [(ngModel)]="step.type" value="task" checked required>Task
+      <div class="form-group">
+        <label style="margin-right: 10px;">Type*</label>
+
+        <label class="radio-inline">
+          <input type="radio" name="type" [(ngModel)]="step.type" value=1 checked required>Task
         </label>
-        <label>
-          <input type="radio" name="type" [(ngModel)]="step.type" value="approval" required>Approval
+        <label class="radio-inline">
+          <input type="radio" name="type" [(ngModel)]="step.type" value=2 required>Approval
         </label>
       </div>
 
       <div class="form-group">
         <label for="description">Description</label>
-        <input class="form-control" id="description" name="description" [(ngModel)]="step.description" placeholder="Description">
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="step.description" placeholder="Description"
+          rows="3"></textarea>
       </div>
 
       <div class="form-group">
-        <label for="email">Assigned To</label>
-        <select name="user" id="user" [(ngModel)]="step.userId" required>
-          <option [ngValue]="user.id" *ngFor="let user of users">{{user.name}}</option>
+        <label for="email">Assigned To*</label>
+        <select class="form-control" name="user" id="user" [(ngModel)]="step.user" required>
+          <option [ngValue]="user" *ngFor="let user of users">{{user.name}}</option>
         </select>
       </div>
 
@@ -38,7 +41,7 @@
 
       <div class="form-group">
         <button [disabled]="f.invalid" type="submit" class="btn btn-success">Save</button>
-        <!-- <button type="button" class="btn btn-secondary" (click)="onCancel(f)">Clear</button> -->
+        <!-- <button type="button" class="btn btn-default" (click)="onCancel(f)">Clear</button> -->
       </div>
 
     </form>

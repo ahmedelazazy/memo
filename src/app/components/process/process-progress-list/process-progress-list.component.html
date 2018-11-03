@@ -1,0 +1,39 @@
+<a [routerLink]="['/process/new']" class="btn btn-primary">Start new process</a>
+
+<h3>Active Processes</h3>
+<div *ngIf="pendingProcesses?.length > 0; else noPendingProcess">
+  <div class="list-group">
+    <div *ngFor="let process of pendingProcesses">
+      <a class="list-group-item pointer" (click)="onProcessSelect(process)">
+        <h4 class="list-group-item-heading">{{process.template?.title}} - {{process.title}}</h4>
+        <p class="list-group-item-text">Started on: {{process.date_opened}}</p>
+        <p class="list-group-item-text">{{process.actions?.length}} tasks</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success" role="progressbar" [style.width]="getProgress(process)"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<ng-template #noPendingProcess>
+  <p>You don't have any processes in progress</p>
+</ng-template>
+
+<h3>Completed Processes</h3>
+<div *ngIf="completedProcesses?.length > 0; else noCompletedProcess">
+  <div class="list-group">
+    <div *ngFor="let process of completedProcesses">
+      <a class="list-group-item pointer" (click)="onProcessSelect(process)">
+        <h4 class="list-group-item-heading">{{process.template?.title}} - {{process.title}}</h4>
+        <p class="list-group-item-text">Started on: {{process.date_opened}}</p>
+        <p class="list-group-item-text">Ended on: {{process.date_closed}}</p>
+        <p class="list-group-item-text">{{process.actions?.length}} tasks</p>
+        <span class="label label-success" *ngIf="process.status == 2">Completed</span>
+        <span class="label label-danger" *ngIf="process.status == 3">Rejected</span>
+      </a>
+    </div>
+  </div>
+</div>
+<ng-template #noCompletedProcess>
+  <p>You don't have any completed processes</p>
+</ng-template>

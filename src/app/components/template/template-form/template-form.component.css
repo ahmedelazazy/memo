@@ -1,0 +1,21 @@
+.form-inline label,
+.form-inline select,
+.form-inline input{
+  margin-right: 10px;
+}
+
+.form-inline .form-group{
+  margin-right: 25px;
+
+}
+
+.list-group{
+  margin-bottom: 0;
+}
+
+.move{
+  color: #aaa;
+  margin-right: 10px;
+  padding: 5px;
+  cursor: move;
+}

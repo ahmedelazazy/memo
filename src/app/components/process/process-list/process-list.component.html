@@ -1,12 +1,25 @@
-<h3>Running Process</h3>
-<p>Goes here</p>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Start new process</h3>
+  </div>
 
-<h3>Start new process</h3>
-<ul>
-  <li *ngFor="let template of templates | async">
-    <span>
-      {{template.title}} ({{template.steps.length}} Steps)
-    </span>
-    <button (click)="startProcess(template)">Start Process</button>
-  </li>
-</ul>
+  <div class="col-md-12">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" *ngFor="let template of templates | async">
+      <div class="box-part text-center">
+        <i class="glyphicon glyphicon-tasks process"></i>
+        <div class="title">
+          <h3>{{template.title}}</h3>
+          <p>{{template.steps.length}} Steps</p>
+        </div>
+        <div class="text left">
+          <ul>
+            <li *ngFor="let step of template.steps">
+              <i class="glyphicon glyphicon-ok"></i> {{step.title}}
+            </li>
+          </ul>
+        </div>
+        <button class="btn btn-primary btn-sm" [routerLink]="['/process', 'new', template.id]">Start Process</button>
+      </div>
+    </div>
+  </div>
+</div>

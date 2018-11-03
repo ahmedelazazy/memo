@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.3",
+    "@angular/animations": "^6.1.10",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
@@ -20,11 +20,15 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "angular-sortablejs": "^2.6.0",
+    "angular2-navigate-with-data": "^1.1.11",
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
     "jsstore": "^2.8.0",
+    "ngx-toastr": "^9.1.1",
     "rxjs": "^6.0.0",
+    "sortablejs": "^1.7.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
