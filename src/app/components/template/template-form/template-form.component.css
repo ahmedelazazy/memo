@@ -19,3 +19,7 @@
   padding: 5px;
   cursor: move;
 }
+
+.panel-heading{
+  background: #eee;
+}

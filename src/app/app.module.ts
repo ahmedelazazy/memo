@@ -6,7 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
-import { StepCreateComponent } from './components/template/step-create/step-create.component';
+import { TemplateStepCreateComponent } from './components/template/template-step-create/template-step-create.component';
 import { TemplateCreateComponent } from './components/template/template-create/template-create.component';
 import { TemplateListComponent } from './components/template/template-list/template-list.component';
 import { ProcessListComponent } from './components/process/process-list/process-list.component';
@@ -26,13 +26,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TemplateFormComponent } from './components/template/template-form/template-form.component';
 import { SortablejsModule } from 'angular-sortablejs';
+import { TabsModule } from 'ngx-bootstrap';
+import { TemplateStepsComponent } from './components/template/template-steps/template-steps.component';
+import { TemplateStepFieldsComponent } from './components/template/template-step-fields/template-step-fields.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    StepCreateComponent,
+    TemplateStepCreateComponent,
     TemplateCreateComponent,
     TemplateListComponent,
     ProcessListComponent,
@@ -46,6 +49,8 @@ import { SortablejsModule } from 'angular-sortablejs';
     ActionManageComponent,
     NotificationListComponent,
     TemplateFormComponent,
+    TemplateStepsComponent,
+    TemplateStepFieldsComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { SortablejsModule } from 'angular-sortablejs';
     ToastrModule.forRoot(), // ToastrModule added
     ReactiveFormsModule,
     SortablejsModule.forRoot({ animation: 150 }),
+    TabsModule.forRoot()
 
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: FormatInterceptor, multi: true }],

@@ -5,4 +5,11 @@ export class Template {
   title: string;
   description: string;
   steps: Step[];
+
+  constructor() {
+    this.title = '';
+    this.description = '';
+    this.steps = [];
+
+  }
 }

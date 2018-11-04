@@ -10,23 +10,23 @@
 
           <div class="form-group">
             <label for="title">Title*</label>
-            <input class="form-control" id="title" name="title" [(ngModel)]="template.title" placeholder="Title"
+            <input class="form-control" id="title" name="title" [(ngModel)]="this.template.title" placeholder="Title"
               required>
           </div>
 
 
           <div class="form-group">
             <label for="description">Description</label>
-            <input class="form-control" id="description" name="description" [(ngModel)]="template.description"
+            <input class="form-control" id="description" name="description" [(ngModel)]="this.template.description"
               placeholder="Description">
           </div>
 
           <div *ngIf="showError" class="alert alert-danger" role="alert">
             <strong>Error!</strong> Unable to login. please try again.
           </div>
-
+          <!-- [disabled]="f.invalid" -->
           <div class="form-group">
-            <button [disabled]="f.invalid" type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success">Save</button>
             <!-- <button type="button" class="btn btn-default" (click)="onCancel(f)">Clear</button> -->
           </div>
 
@@ -39,38 +39,13 @@
 </div>
 
 
-<div class="row">
-  <div class="col-md-6">
-
-    <div class="row">
-      <div class="col-md-8">
-        <h1>Steps</h1>
-      </div>
-      <div class="col-md-4 right">
-        <button class="btn btn-primary" (click)="addStep()">Add new step</button>
-      </div>
-    </div>
-    <div *ngIf="template.steps">
-      <div class="list-group">
-        <div *ngFor="let step of template.steps;  index as i">
-          <a class="list-group-item pointer" (click)="edit(step)">
-            <h4 class="list-group-item-heading" [class.disabled]="!step.title">{{step.title ? step.title : 'Step #'+
-              step.order }}</h4>
-            <p class="list-group-item-text">{{step?.type == 1 ? 'Task' : 'Approval' }} - {{step?.user?.name || ''}}</p>
-
-            <div class="right">
-              <button class="btn btn-xs btn-danger" (click)="remove(i)">X</button>
-              <button class="btn btn-xs btn-info" [disabled]="i == 0" (click)="up(i)">&uarr;</button>
-              <button class="btn btn-xs btn-info" [disabled]="i == template.steps.length - 1" (click)="down(i)">&darr;</button>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="col-md-6">
-    <app-step-create *ngIf="selectedStep" [step]="selectedStep" (stepUpdated)="onStepUpdated($event)"></app-step-create>
-  </div>
-
+<div>
+  <tabset>
+    <tab heading="Tasks">
+      <app-template-steps #templateSteps [users]="users"></app-template-steps>
+    </tab>
+    <tab heading="Data Form">
+      <app-template-form #templateForm></app-template-form>
+    </tab>
+  </tabset>
 </div>

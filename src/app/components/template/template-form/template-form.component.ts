@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { SortablejsOptions } from 'angular-sortablejs';
+import { TemplateService } from 'src/app/services/template.service';
+import { Helper } from 'src/app/models/helper';
 
 @Component({
   selector: 'app-template-form',
@@ -10,68 +12,83 @@ import { SortablejsOptions } from 'angular-sortablejs';
 export class TemplateFormComponent implements OnInit {
 
 
-  signupForm: FormGroup;
   templateForm: FormGroup;
-  sortableOptions: SortablejsOptions = {
+  private sortableOptions: SortablejsOptions = {
     handle: '.move',
-    onUpdate: (event) => console.log(event),
+    onUpdate: (event) => {
 
+      this._updateValueAndValidity(this.templateForm);
+
+      //update the formArray order
+      // let sections: any = this.templateForm.get('sections');
+      // if (sections && sections.controls) {
+      //   for (let i = 0; i < sections.controls.length; i++) {
+      //     const section = sections.controls[i];
+      //     section.updateValueAndValidity();
+
+      //     let fields: any = section.get('fields');
+      //     if (fields && fields.controls) {
+      //       for (let j = 0; j < fields.controls.length; j++) {
+      //         const field = fields.controls[j];
+      //         field.updateValueAndValidity();
+      //       }
+      //     }
+      //   }
+      // }
+    }
   };
 
 
+  constructor(private cdRef: ChangeDetectorRef, private templateService: TemplateService) { }
 
-  constructor() { }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
+    // setTimeout(() => {
+    //   this.dateNow = new Date();
+    // });
+  }
 
   ngOnInit() {
 
-    // form > section > control
+
 
     this.templateForm = new FormGroup({
-      // 'hidden': new FormControl(null),
       'sections': new FormArray([
         new FormGroup({
-          // 'hidden': new FormControl(null),
           'sectionName': new FormControl(null),
+          'sectionId': new FormControl(Helper.guid()),
           'fields': new FormArray([
             new FormGroup({
-              // 'hidden': new FormControl(null),
               'fieldName': new FormControl(null),
               'fieldType': new FormControl(null),
+              'fieldId': new FormControl(Helper.guid()),
             })
           ])
         })
       ])
     });
 
-    this.templateForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+    // this.templateForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
 
 
     this.templateForm.valueChanges.subscribe(
-      (value) => console.log("change event: ", value)
+      (value) => {
+        this.templateService.currentTemplate.form.next(value);
+        console.log("change event: ", value)
+      }
     );
-    // this.signupForm.statusChanges.subscribe(
-    //   (status) => console.log(status)
-    // );
-    // this.signupForm.setValue({
-    //   'userData': {
-    //     'username': 'Max',
-    //     'email': 'max@test.com'
-    //   },
-    //   'gender': 'male',
-    //   'hobbies': []
-    // });
-
-
   }
 
   onAddSection() {
     const control = new FormGroup({
       'sectionName': new FormControl(null),
+      'sectionId': new FormControl(Helper.guid()),
       'fields': new FormArray([
         new FormGroup({
-          // 'hidden': new FormControl(null),
           'fieldName': new FormControl(null),
-          'fieldType': new FormControl(null)
+          'fieldType': new FormControl(null),
+          'fieldId': new FormControl(Helper.guid()),
         })
       ])
     });
@@ -80,9 +97,9 @@ export class TemplateFormComponent implements OnInit {
 
   onAddControl(parent) {
     const control = new FormGroup({
-      'hidden': new FormControl(null),
       'fieldName': new FormControl(null),
-      'fieldType': new FormControl(null)
+      'fieldType': new FormControl(null),
+      'fieldId': new FormControl(Helper.guid()),
     });
     parent.push(control);
   }
@@ -90,32 +107,18 @@ export class TemplateFormComponent implements OnInit {
 
 
   onSubmitTemplateForm() {
-
-    // this.templateForm.get('hidden').setValue({
-    //   'hidden': 'hidden-form'
-    // });
-
-    // for (let index = 0; index < (<FormArray>this.templateForm.get('sections')).controls.length; index++) {
-    //   const section = (<FormArray>this.templateForm.get('sections')).controls[index];
-    //   section.get('hidden').setValue('section-hidden');
-
-    //   for (let j = 0; j < (<FormArray>section.get('fields')).controls.length; j++) {
-    //     const field = (<FormArray>section.get('fields')).controls[j];
-    //     field.get('hidden').setValue('field-hidden');
-    //   }
-    // }
-
-    console.log("submitting: ", this.templateForm.value);
-
+    // console.log("submitting: ", this.templateForm.value);
   }
 
 
   deleteSection(index) {
     let sections = <FormArray>this.templateForm.controls.sections;
+    if (sections.length == 1) return;
     sections.removeAt(index);
   }
 
   deleteField(fields, index) {
+    if (fields.length == 1) return;
     fields.removeAt(index);
   }
 
@@ -123,6 +126,18 @@ export class TemplateFormComponent implements OnInit {
   log(obj) {
     console.log(obj);
     return "Logged";
+  }
+
+  public _updateValueAndValidity(group: FormGroup | FormArray): void {
+    Object.keys(group.controls).forEach((key: string) => {
+      const abstractControl = group.controls[key];
+
+      if (abstractControl instanceof FormGroup || abstractControl instanceof FormArray) {
+        this._updateValueAndValidity(abstractControl);
+      } else {
+        abstractControl.updateValueAndValidity();
+      }
+    });
   }
 
 }

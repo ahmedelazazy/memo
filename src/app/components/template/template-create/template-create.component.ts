@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Template } from './../../../models/template';
 import { Step } from 'src/app/models/step';
 import { TouchSequence } from 'selenium-webdriver';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { TemplateFormComponent } from '../template-form/template-form.component';
 
 @Component({
   selector: 'app-template-create',
@@ -20,65 +21,27 @@ export class TemplateCreateComponent implements OnInit {
   selectedStep: Step;
   isEdit = false;
   users: User[];
+  constructor(public templateService: TemplateService, private toastrService: ToastrService, private router: Router, private userService: UserService) {
 
-  constructor(private templateService: TemplateService, private toastrService: ToastrService, private router: Router, private userService: UserService) {
-    if (!this.isEdit) {
-      this.template = new Template();
-      this.template.steps = [];
-    }
 
   }
 
+  mytemp;
   ngOnInit() {
+    if (!this.isEdit) {
+      this.templateService.currentTemplate.template = new Template();
+    }
+    this.template = this.templateService.currentTemplate.template;
     this.userService.getAll().subscribe(data => this.users = data);
   }
 
-  addStep() {
-    let emptyStep = new Step();
-    emptyStep.order = this.template.steps.length + 1;
-    this.template.steps.push(emptyStep);
-    this.resort();
-  }
 
-  edit(step) {
-    this.selectedStep = step;
-  }
-  remove(index) {
-    this.template.steps.splice(index, 1)
-    this.resort();
-  }
 
-  onStepUpdated(step: Step) {
-    step.user = this.users.find(user => user.id == step.user_id);
-    this.selectedStep = null;
-  }
-
-  up(index) {
-    if (index == 0) return;
-    this.arraymove(this.template.steps, index, --index);
-    this.resort();
-  }
-
-  down(index) {
-    if (index == this.template.steps.length - 1) return;
-    this.arraymove(this.template.steps, index, ++index);
-    this.resort();
-  }
-
-  arraymove(arr, fromIndex, toIndex) {
-    var element = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, element);
-  }
-
-  resort() {
-    for (let i = 0; i < this.template.steps.length; i++) {
-      const step = this.template.steps[i];
-      step.order = i + 1;
-    }
-  }
 
   addTemplate(f) {
+    console.log("service", this.template);
+    console.log("local", this.template);
+
     if (f.invalid) return;
 
     if (this.template.steps.length == 0) {

@@ -4,10 +4,10 @@ import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-step-create',
-  templateUrl: './step-create.component.html',
-  styleUrls: ['./step-create.component.css']
+  templateUrl: './template-step-create.component.html',
+  styleUrls: ['./template-step-create.component.css']
 })
-export class StepCreateComponent implements OnInit {
+export class TemplateStepCreateComponent implements OnInit {
 
   @Input('step') step: Step;
   @Output('stepUpdated') stepUpdated = new EventEmitter<Step>();

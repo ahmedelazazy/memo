@@ -11,3 +11,10 @@ button{
 .right{
   text-align: right;
 }
+
+
+form input.ng-touched.ng-invalid,
+form select.ng-touched.ng-invalid
+{
+  border: 1px solid red;
+}

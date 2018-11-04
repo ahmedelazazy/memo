@@ -7,6 +7,7 @@ export class Step {
   user_id?: number;
   order?: number;
   user?: any;
+  stepVisibility: any;
 
   constructor() {
     this.type = 1;
