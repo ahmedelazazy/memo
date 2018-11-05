@@ -1,0 +1,10 @@
+.move{
+  color: #aaa;
+  margin-right: 10px;
+  padding: 5px;
+  cursor: move;
+}
+
+.selected{
+  border:1px #3175af solid;
+}

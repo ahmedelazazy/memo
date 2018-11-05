@@ -18,6 +18,9 @@ export class TemplateStepsComponent implements OnInit {
 
   ngOnInit() {
     this.steps = this.templateService.currentTemplate.template.steps;
+    if (this.steps.length == 1) {
+      this.selectedStep = this.steps[0];
+    }
   }
 
   addStep() {
@@ -33,7 +36,17 @@ export class TemplateStepsComponent implements OnInit {
   }
   remove(index) {
     this.steps.splice(index, 1)
-    this.resort();
+    // this.resort();
+
+    if (this.steps.length > index + 1){
+      this.selectedStep = this.selectedStep[index + 1]; //select the one beneath it
+    }else{
+      this.selectedStep = this.selectedStep[index -1 ]; //select the one beneath it
+    }
+
+    if (this.steps.length == 1) {
+      this.selectedStep = this.steps[0];
+    }
   }
 
   onStepUpdated(step: Step) {
@@ -41,29 +54,29 @@ export class TemplateStepsComponent implements OnInit {
     this.selectedStep = null;
   }
 
-  up(index) {
-    if (index == 0) return;
-    this.arraymove(this.steps, index, --index);
-    this.resort();
-  }
+  // up(index) {
+  //   if (index == 0) return;
+  //   this.arraymove(this.steps, index, --index);
+  //   this.resort();
+  // }
 
-  down(index) {
-    if (index == this.steps.length - 1) return;
-    this.arraymove(this.steps, index, ++index);
-    this.resort();
-  }
+  // down(index) {
+  //   if (index == this.steps.length - 1) return;
+  //   this.arraymove(this.steps, index, ++index);
+  //   this.resort();
+  // }
 
-  arraymove(arr, fromIndex, toIndex) {
-    var element = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, element);
-  }
+  // arraymove(arr, fromIndex, toIndex) {
+  //   var element = arr[fromIndex];
+  //   arr.splice(fromIndex, 1);
+  //   arr.splice(toIndex, 0, element);
+  // }
 
-  resort() {
-    for (let i = 0; i < this.steps.length; i++) {
-      const step = this.steps[i];
-      step.order = i + 1;
-    }
-  }
+  // resort() {
+  //   for (let i = 0; i < this.steps.length; i++) {
+  //     const step = this.steps[i];
+  //     step.order = i + 1;
+  //   }
+  // }
 
 }

@@ -19,7 +19,6 @@ export class UserService {
   init() {
     this.getAll()
       .subscribe(users => {
-        // console.log(users);
         this.users = users;
         this.usersChange.next(this.users);
       }
@@ -29,11 +28,8 @@ export class UserService {
   getAll() {
     let url = this.apiUrl + 'index';
 
-    return this.http.get<User[]>(url)
-      //  ;
-      .pipe(
-        tap(data => console.log("user service > getAll", data))
-      )
+    return this.http.get<User[]>(url);
+
   }
 
   get(id: number) {
@@ -65,7 +61,7 @@ export class UserService {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    ).pipe(tap(data => console.log(data)));
+    );
 
     this.init();
     return result;
@@ -83,7 +79,7 @@ export class UserService {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    ).pipe(tap(data => console.log(data)));
+    );
 
     this.init();
     return result;
@@ -104,7 +100,7 @@ export class UserService {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    ).pipe(tap(data => console.log(data)));
+    );
 
     this.init();
     return result;

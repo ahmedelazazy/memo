@@ -11,21 +11,35 @@
     </div>
     <div *ngIf="steps">
       <div class="list-group">
-        <div *ngFor="let step of steps;  index as i">
-          <a class="list-group-item pointer" (click)="edit(step)">
-            <h4 class="list-group-item-heading" [class.disabled]="!step.title">{{step.title ? step.title : 'Step
-              #'+
-              step.order }}</h4>
-            <p class="list-group-item-text">{{step?.type == 1 ? 'Task' : 'Approval' }} - {{step?.user?.name ||
-              ''}}</p>
+        <div [sortablejs]="steps">
+          <div *ngFor="let step of steps;  index as i">
+            <div class="row list-group-item" [class.selected]="step == selectedStep">
+              <div class="col-md-1">
+                <i class="glyphicon glyphicon-move move"></i>
+              </div>
+              <div class="col-md-10">
+                <div class=" pointer" (click)="edit(step)">
+                  <h4 class="list-group-item-heading" [class.disabled]="!step.title">
+                    {{step.title ? step.title : 'Step #'+ step.order }}
+                  </h4>
+                  <p class="list-group-item-text">{{step?.type == 1 ? 'Task' : 'Approval' }} - {{step?.user?.name ||
+                    ''}}</p>
 
-            <div class="right">
-              <button class="btn btn-xs btn-danger" (click)="remove(i)">X</button>
-              <button class="btn btn-xs btn-info" [disabled]="i == 0" (click)="up(i)">&uarr;</button>
-              <button class="btn btn-xs btn-info" [disabled]="i == steps.length - 1" (click)="down(i)">&darr;</button>
+
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="right">
+                  <button class="btn btn-xs btn-danger" *ngIf="steps.length > 1" (click)="remove(i)">X</button>
+                  <!-- <button class="btn btn-xs btn-info" [disabled]="i == 0" (click)="up(i)">&uarr;</button> -->
+                  <!-- <button class="btn btn-xs btn-info" [disabled]="i == steps.length - 1" (click)="down(i)">&darr;</button> -->
+                </div>
+              </div>
             </div>
-          </a>
+
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -44,3 +58,45 @@
   </div>
 
 </div>
+<!--
+<div class="row">
+    <div class="col-md-12">
+      <h1>Steps</h1>
+      <button class="btn btn-primary" (click)="addStep()">Add new step</button>
+
+
+      <div class="row" *ngIf="steps">
+        <div *ngFor="let step of steps;  index as i">
+
+          <div class="col-md-6">
+            <a class="list-group-item pointer" (click)="edit(step)">
+              <h4 class="list-group-item-heading" [class.disabled]="!step.title">{{step.title ? step.title : 'Step
+                #'+
+                step.order }}</h4>
+              <p class="list-group-item-text">{{step?.type == 1 ? 'Task' : 'Approval' }} - {{step?.user?.name ||
+                ''}}</p>
+
+              <div class="right">
+                <button class="btn btn-xs btn-danger" (click)="remove(i)">X</button>
+                <button class="btn btn-xs btn-info" [disabled]="i == 0" (click)="up(i)">&uarr;</button>
+                <button class="btn btn-xs btn-info" [disabled]="i == steps.length - 1" (click)="down(i)">&darr;</button>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6">
+            <tabset>
+              <tab heading="Task Details">
+                <app-step-create *ngIf="selectedStep" [step]="selectedStep" (stepUpdated)="onStepUpdated($event)"></app-step-create>
+
+              </tab>
+              <tab heading="Fields Visibilty">
+                <app-template-step-fields #stepFields [step]="selectedStep"></app-template-step-fields>
+              </tab>
+            </tabset>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div> -->

@@ -18,9 +18,7 @@ export class ActionService {
     let url = this.apiUrl + 'index';
     let data = { 'user_id': this.authService.user.id };
 
-    return this.http.post<Action[]>(url, data).pipe(
-      tap(data => console.log("Action service > get", data))
-    );
+    return this.http.post<Action[]>(url, data);
   }
 
   update(action: Action) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { SortablejsOptions } from 'angular-sortablejs';
 import { TemplateService } from 'src/app/services/template.service';
@@ -11,7 +11,7 @@ import { Helper } from 'src/app/models/helper';
 })
 export class TemplateFormComponent implements OnInit {
 
-
+  @ViewChild('formRef') formRef;
   templateForm: FormGroup;
   private sortableOptions: SortablejsOptions = {
     handle: '.move',
@@ -75,7 +75,6 @@ export class TemplateFormComponent implements OnInit {
     this.templateForm.valueChanges.subscribe(
       (value) => {
         this.templateService.currentTemplate.form.next(value);
-        console.log("change event: ", value)
       }
     );
   }
@@ -107,7 +106,6 @@ export class TemplateFormComponent implements OnInit {
 
 
   onSubmitTemplateForm() {
-    // console.log("submitting: ", this.templateForm.value);
   }
 
 
@@ -123,10 +121,6 @@ export class TemplateFormComponent implements OnInit {
   }
 
 
-  log(obj) {
-    console.log(obj);
-    return "Logged";
-  }
 
   public _updateValueAndValidity(group: FormGroup | FormArray): void {
     Object.keys(group.controls).forEach((key: string) => {

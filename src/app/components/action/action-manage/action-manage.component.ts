@@ -16,7 +16,6 @@ export class ActionManageComponent implements OnInit {
 
   ngOnInit() {
     this.action = this.router.getNavigatedData();
-    console.log(this.action);
     if ((Object.keys(this.action).length === 0 && this.action.constructor === Object)) {
       this.router.navigate(['/action']);
     }

@@ -63,7 +63,6 @@ export class TemplateService {
   init() {
     this.getAll()
       .subscribe(data => {
-        // console.log(users);
         // this.templates = data;
         this.usersChange.next(this.templates.slice());
       }
@@ -74,20 +73,14 @@ export class TemplateService {
 
     let url = this.apiUrl + 'getWithDetails';
 
-    return this.http.get<Template[]>(url).pipe(
-      tap(
-        data => console.log("template Service > getAll", data)
-      )
-    );
+    return this.http.get<Template[]>(url);
   }
 
   get(id: number) {
 
     let url = this.apiUrl + 'getbyid';
     let data = { 'id': id };
-    return this.http.post(url, data).pipe(
-      tap(data => console.log("template service > get by id", data))
-    );
+    return this.http.post(url, data);
   }
 
   add(obj: Template) {
@@ -114,7 +107,7 @@ export class TemplateService {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    ).pipe(tap(data => console.log(data)));
+    );
 
     this.init();
     return result;
@@ -135,7 +128,7 @@ export class TemplateService {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       }
-    ).pipe(tap(data => console.log(data)));
+    );
 
     this.init();
     return result;

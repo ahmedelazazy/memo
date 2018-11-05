@@ -1,38 +1,43 @@
 <div class="row" *ngIf="step">
-  <div class="panel panel-default" *ngFor="let section of step?.stepVisibility?.sections">
-    <div class="panel-heading">
-      <div class="form-inline">
-        <div class="row">
-          <div class="col-md-8">
-            <label for="sectionName">{{section.sectionName}}</label>
-            <!-- <label for="sectionName">{{section.sectionId}}</label> -->
+  <div class="col-md-12">
+
+    <div class="panel panel-default" *ngFor="let section of step?.stepVisibility?.sections">
+      <div class="panel-heading">
+        <div class="form-inline">
+          <div class="row">
+            <div class="col-md-8">
+              <h3 class="panel-title">{{section.sectionName}}</h3>
+
+              <!-- <label for="sectionName">{{section.sectionName}}</label> -->
+              <!-- <label for="sectionName">{{section.sectionId}}</label> -->
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="panel-body">
-      <ul class="list-group">
-        <div>
-          <li class="list-group-item" *ngFor="let field of section.fields">
-            <div class="form-inline">
-              <div class="form-group">
-                <input type="text" class="form-control" disabled [value]="field.fieldName">
-                <label for="fieldType">{{ field.fieldId }}</label>
-              </div>
-              <!-- <div class="form-group">
+      <div class="panel-body">
+        <ul class="list-group">
+          <div>
+            <li class="list-group-item" *ngFor="let field of section.fields">
+              <div class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control" disabled [value]="field.fieldName">
+                  <!-- <label for="fieldType">{{ field.fieldId }}</label> -->
+                </div>
+                <!-- <div class="form-group">
                 <input type="text" class="form-control" disabled [value]="field.fieldType">
               </div> -->
-              <div class="form-group">
-                <select class="form-control" [(ngModel)]="field.visibility">
-                  <option>Hidden</option>
-                  <option>Read-only</option>
-                  <option>Editable</option>
-                  <option>Required</option>
-                </select>
+                <div class="form-group">
+                  <select class="form-control" [(ngModel)]="field.visibility">
+                    <option>Hidden</option>
+                    <option>Read-only</option>
+                    <option>Editable</option>
+                    <option>Required</option>
+                  </select>
+                </div>
               </div>
-            </div>
-          </li>
-        </div>
-      </ul>
+            </li>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>

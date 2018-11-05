@@ -7,7 +7,7 @@ import { Helper } from 'src/app/models/helper';
   templateUrl: './template-step-fields.component.html',
   styleUrls: ['./template-step-fields.component.css']
 })
-export class TemplateStepFieldsComponent implements OnInit, OnChanges {
+export class TemplateStepFieldsComponent implements OnInit {
 
   @Input('step') step;
 
@@ -39,18 +39,18 @@ export class TemplateStepFieldsComponent implements OnInit, OnChanges {
     // });
   }
 
-  ngOnChanges() {
-    if (this.templateService.currentTemplate.template.steps[0] &&
-      this.templateService.currentTemplate.template.steps[0].stepVisibility &&
-      this.templateService.currentTemplate.template.steps[0].stepVisibility.sections[0].fields[0].visible)
-      console.log("service1", this.templateService.currentTemplate.template.steps[0].stepVisibility.sections[0].fields[0].visible);
+  // ngOnChanges() {
+  //   if (this.templateService.currentTemplate.template.steps[0] &&
+  //     this.templateService.currentTemplate.template.steps[0].stepVisibility &&
+  //     this.templateService.currentTemplate.template.steps[0].stepVisibility.sections[0].fields[0].visible)
+  //     console.log("service1", this.templateService.currentTemplate.template.steps[0].stepVisibility.sections[0].fields[0].visible);
 
-    if (this.step && this.step.stepVisibility && this.step.stepVisibility.sections[0].fields[0].visible)
-      console.log("local1", this.step.stepVisibility.sections[0].fields[0].visible);
+  //   if (this.step && this.step.stepVisibility && this.step.stepVisibility.sections[0].fields[0].visible)
+  //     console.log("local1", this.step.stepVisibility.sections[0].fields[0].visible);
 
-    console.log("service2", this.templateService.currentTemplate.template.steps);
-    console.log("local2", this.step);
+  //   console.log("service2", this.templateService.currentTemplate.template.steps);
+  //   console.log("local2", this.step);
 
-    // this.step.stepVisibility = this.templateService.currentTemplate.form.getValue();
-  }
+  //   // this.step.stepVisibility = this.templateService.currentTemplate.form.getValue();
+  // }
 }

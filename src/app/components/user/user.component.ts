@@ -40,7 +40,6 @@ export class UserComponent implements OnInit {
         () => {
           this.clearNewUser();
           // alert('Successfully added');
-          console.log('Successfully added');
         },
         error => {
           console.error(error);
@@ -57,7 +56,6 @@ export class UserComponent implements OnInit {
       .subscribe(
         () => {
           // alert('Successfully deleted');
-          console.log('Successfully added');
         },
         error => {
           console.error(error);
@@ -82,7 +80,6 @@ export class UserComponent implements OnInit {
           if (rowsUpdated > 0) {
             this.clearOldStudent();
             // alert('Successfully updated');
-            console.log('Successfully added');
           }
         },
         error => {

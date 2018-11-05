@@ -18,9 +18,7 @@ export class NotificationService {
     let url = this.apiUrl + 'index';
     let data = { 'user_id': this.authService.user.id };
 
-    return this.http.post<UserNotification[]>(url, data).pipe(
-      tap(data => console.log("NotificationService > get", data))
-    );
+    return this.http.post<UserNotification[]>(url, data);
   }
 
 
@@ -28,9 +26,7 @@ export class NotificationService {
     let url = this.apiUrl + 'edit';
     let data = { 'id': id };
 
-    this.http.post(url, data).pipe(
-      tap(data => console.log("NotificationService > markRead", data))
-    ).subscribe();
+    this.http.post(url, data).subscribe();
   }
 
 }
