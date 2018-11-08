@@ -9,26 +9,29 @@ import { Action } from '../models/action';
   providedIn: 'root'
 })
 export class ActionService {
+
   apiUrl = environment['url'] + 'action/';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   get() {
-
     let url = this.apiUrl + 'index';
     let data = { 'user_id': this.authService.user.id };
 
     return this.http.post<Action[]>(url, data);
   }
 
-  update(action: Action) {
-    let url = this.apiUrl + 'edit';
-    let data = {
-      'id': action.id,
-      'comment': action.comment,
-      'status': action.status,
-    };
+  update(action) {
+    delete action.sections; //remove the sections property as it is not used on the server
 
-    return this.http.post(url, data);
+    let url = this.apiUrl + 'edit';
+    return this.http.post(url, action);
+  }
+
+  getById(id: any): any {
+    let url = this.apiUrl + 'getById';
+    let data = { 'user_id': this.authService.user.id, id: id };
+
+    return this.http.post<Action[]>(url, data);
   }
 }

@@ -18,3 +18,15 @@ form select.ng-touched.ng-invalid
 {
   border: 1px solid red;
 }
+
+
+.center{
+  text-align: center;
+}
+
+input.inline{
+      display: inline-block;
+     width: auto;
+     margin-right: 10px;
+     margin-left: 10px;
+}

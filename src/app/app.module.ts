@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
 import { TemplateStepCreateComponent } from './components/template/template-step-create/template-step-create.component';
 import { TemplateCreateComponent } from './components/template/template-create/template-create.component';
-import { TemplateListComponent } from './components/template/template-list/template-list.component';
+import { TemplateListComponent } from './components/template/templates-list/template-list.component';
 import { ProcessListComponent } from './components/process/process-list/process-list.component';
 import { ProcessCreateComponent } from './components/process/process-create/process-create.component';
 import { ProcessProgressListComponent } from './components/process/process-progress-list/process-progress-list.component';
@@ -29,6 +29,7 @@ import { SortablejsModule } from 'angular-sortablejs';
 import { TabsModule } from 'ngx-bootstrap';
 import { TemplateStepsComponent } from './components/template/template-steps/template-steps.component';
 import { TemplateStepFieldsComponent } from './components/template/template-step-fields/template-step-fields.component';
+import { TemplateStepProcessComponent } from './components/template/template-step-process/template-step-process.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { TemplateStepFieldsComponent } from './components/template/template-step
     TemplateFormComponent,
     TemplateStepsComponent,
     TemplateStepFieldsComponent,
+    TemplateStepProcessComponent,
   ],
   imports: [
     BrowserModule,

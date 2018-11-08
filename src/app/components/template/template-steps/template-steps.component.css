@@ -8,3 +8,13 @@
 .selected{
   border:1px #3175af solid;
 }
+
+.active i{
+  color: #fff;
+}
+p.new,
+h4.new
+{
+  color: #999 ;
+  font-style: italic ;
+}

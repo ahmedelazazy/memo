@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './components/user/user.component';
-import { TemplateListComponent } from './components/template/template-list/template-list.component';
+import { TemplateListComponent } from './components/template/templates-list/template-list.component';
 import { TemplateCreateComponent } from './components/template/template-create/template-create.component';
 import { ProcessListComponent } from './components/process/process-list/process-list.component';
 import { ProcessProgressListComponent } from './components/process/process-progress-list/process-progress-list.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: 'process/new', component: ProcessListComponent },
       { path: 'process/new/:id', component: ProcessCreateComponent },
       { path: 'action', component: ActionListComponent },
-      { path: 'action/view', component: ActionManageComponent },
+      { path: 'action/:id', component: ActionManageComponent },
       { path: 'notifications', component: NotificationListComponent },
     ]
   },

@@ -72,7 +72,11 @@ body {
   padding : 5px 15px;
 }
 
-
+.future,
+.future h4{
+  color: #999 !important;
+  font-style: italic;
+}
 
 
 

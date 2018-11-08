@@ -4,8 +4,10 @@
     <div *ngFor="let action of pendingActions">
       <a class="list-group-item pointer" (click)="onActionSelect(action)" *ngIf="action.status == 1">
         <h4 class="list-group-item-heading">{{action.step?.title}}</h4>
-        <p class="list-group-item-text">{{action.template?.title + ' - ' + action.process?.title}}</p>
-        <p class="list-group-item-text">{{action.process?.user?.name + ' - ' + action.date_opened}}</p>
+        <p class="list-group-item-text"> {{action.process?.title}} <span class="label label-default">{{action.template?.title}}</span>
+        </p>
+        <p class="list-group-item-text">Requested by: {{action.process?.user?.name}}</p>
+        <p class="list-group-item-text">Opened: {{action.date_opened}}</p>
       </a>
     </div>
   </div>
@@ -19,8 +21,10 @@
     <div *ngFor="let action of completedActions">
       <a class="list-group-item pointer" (click)="onActionSelect(action)" *ngIf="action.status != 1">
         <h4 class="list-group-item-heading">{{action.step?.title}}</h4>
-        <p class="list-group-item-text">{{action.template?.title + ' - ' + action.process?.title}}</p>
-        <p class="list-group-item-text">{{action.process?.user?.name + ' - ' + action.date_opened}}</p>
+        <p class="list-group-item-text"> {{action.process?.title}} <span class="label label-default">{{action.template?.title}}</span>
+        </p>
+        <p class="list-group-item-text">Requested by: {{action.process?.user?.name}}</p>
+        <p class="list-group-item-text">Opened: {{action.date_opened}} - Closed: {{action.date_closed}}</p>
       </a>
     </div>
   </div>

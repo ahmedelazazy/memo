@@ -1,74 +1,77 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <div class="panel panel-default">
-        <!-- #templateForm="ngForm" -->
-        <form id="templateForm" [formGroup]="templateForm" (ngSubmit)="onSubmitTemplateForm()" #formRef="ngForm">
-          <div id="sortableContainer" [sortablejs]="templateForm.get('sections').controls" [sortablejsOptions]="sortableOptions">
-            <div formArrayName="sections" *ngFor="let section of templateForm.get('sections').controls; let i = index;">
-              <div [formGroupName]="i">
-                <div class="panel-heading">
-                  <div class="form-inline">
-                    <div class="row">
-                      <div class="col-md-8">
-                        <i class="glyphicon glyphicon-move move"></i>
-                        <label for="sectionName">Section*</label>
-                        <input type="text" id="sectionName" formControlName="sectionName" class="form-control"
-                          placeholder="Section Name" required>
-                      </div>
-                      <div class="col-md-4 right">
-                        <button class="btn btn-danger" type="button" *ngIf="templateForm.get('sections').controls.length > 1"
-                          (click)="deleteSection(i)">X</button>
-                      </div>
+<div class="row" *ngIf="templateForm.get('sections'); else noForm;">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div id="templateForm" [formGroup]="templateForm" #formRef="ngForm">
+        <div id="sortableContainer" [sortablejs]="templateForm.get('sections').controls" [sortablejsOptions]="sortableOptions">
+          <div formArrayName="sections" *ngFor="let section of templateForm.get('sections').controls; let i = index;">
+            <div [formGroupName]="i">
+              <div class="panel-heading">
+                <div class="form-inline">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <i class="glyphicon glyphicon-move move"></i>
+                      <label for="sectionLabel">Section*</label>
+                      <input type="text" id="sectionLabel" formControlName="label" class="form-control " placeholder="Section Name"
+                        required>
+                    </div>
+                    <div class="col-md-4 right">
+                      <button class="btn btn-danger" type="button" (click)="deleteSection(i)">X</button>
                     </div>
                   </div>
                 </div>
-                <div class="panel-body">
-                  <ul class="list-group">
-                    <div [sortablejs]="section.get('fields').controls" [sortablejsOptions]="sortableOptions">
-                      <li class="list-group-item" formArrayName="fields" *ngFor="let field of section.get('fields').controls; let j = index;">
-                        <div class="row">
-                          <div class="col-md-10">
-                            <div class="form-inline" [formGroupName]="j">
-                              <i class="glyphicon glyphicon-move move"></i>
-                              <div class="form-group">
-                                <label for="fieldName">Field Name*</label>
-                                <input type="text" formControlName="fieldName" class="form-control" id="fieldName" name="fieldName"
-                                  placeholder="Field Name" required>
-                              </div>
-                              <div class="form-group">
-                                <label for="fieldType">Type*</label>
-                                <select formControlName="fieldType" class="form-control" required>
-                                  <option [ngValue]="'text'">Text</option>
-                                </select>
-                              </div>
+              </div>
+              <div class="panel-body">
+                <ul class="list-group">
+                  <div [sortablejs]="section.get('fields').controls" [sortablejsOptions]="sortableOptions">
+                    <li class="list-group-item" formArrayName="fields" *ngFor="let field of section.get('fields').controls; let j = index;">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <div class="form-inline" [formGroupName]="j">
+                            <i class="glyphicon glyphicon-move move"></i>
+                            <div class="form-group">
+                              <label for="fieldLabel">Field Name*</label>
+                              <input type="text" formControlName="label" class="form-control" id="fieldLabel" name="label"
+                                placeholder="Field Name" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="fieldType">Type*</label>
+                              <select id="fieldType" formControlName="type" class="form-control" required>
+                                <option [ngValue]="'text'">Text</option>
+                              </select>
                             </div>
                           </div>
-                          <div class="col-md-2 right">
-                            <button class="btn btn-danger" type="button" *ngIf="section.controls.fields.length > 1"
-                              (click)="deleteField(section.controls.fields,j)">X</button>
-                          </div>
                         </div>
-                      </li>
-                    </div>
-                    <button class="btn btn-default" type="button" (click)="onAddControl(section.controls.fields)">Add
-                      Control</button>
+                        <div class="col-md-2 right">
+                          <button class="btn btn-danger" type="button" *ngIf="section.controls.fields.length > 1"
+                            (click)="deleteField(section.controls.fields,j)">X</button>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                  <button class="btn btn-default" type="button" (click)="onAddControl(section.controls.fields)">Add
+                    Control</button>
 
-                  </ul>
-                </div>
-
+                </ul>
               </div>
+
             </div>
           </div>
-        </form>
-
-        <div class="panel-footer">
-          <button class="btn btn-default" type="button" (click)="onAddSection()">Add Section</button>
         </div>
       </div>
-      <!--  -->
-      <!-- <button form="templateForm" class="btn btn-primary" type="submit" [disabled]="!formRef.form.valid">Save</button> -->
 
+      <div class="panel-footer">
+        <button class="btn btn-default" type="button" (click)="onAddSection()">Add Section</button>
+      </div>
     </div>
   </div>
 </div>
+
+
+<ng-template #noForm>
+  <div class="jumbotron center">
+    <h3>Template Form</h3>
+    <p>Allows specific data to be passed between tasks</p>
+    <button type="button" class="btn btn-primary" (click)="onAddForm()">Create Form</button>
+  </div>
+
+</ng-template>

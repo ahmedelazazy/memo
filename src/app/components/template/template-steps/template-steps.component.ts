@@ -2,6 +2,9 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Step } from 'src/app/models/step';
 import { TemplateService } from 'src/app/services/template.service';
 import * as _ from 'lodash';
+import { FormArray, FormGroup } from '@angular/forms';
+import { FormHelper } from '../form-helper';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-template-steps',
@@ -11,47 +14,54 @@ import * as _ from 'lodash';
 export class TemplateStepsComponent implements OnInit {
 
   @Input('users') users;
-  selectedStep: Step;
-  steps;
-
+  @Input('templateContainer') templateContainer: FormGroup;
+  selectedStep: FormGroup;
+  processSelected: boolean;
+  steps: FormArray;
   constructor(public templateService: TemplateService) { }
 
   ngOnInit() {
-    this.steps = this.templateService.currentTemplate.template.steps;
-    if (this.steps.length == 1) {
-      this.selectedStep = this.steps[0];
-    }
+
+    this.processSelected = true;
+  }
+
+  onProcessClick() {
+    this.selectedStep = null;
+    this.processSelected = true;
   }
 
   addStep() {
-    let emptyStep = new Step();
-    emptyStep.stepVisibility = _.cloneDeep(this.templateService.currentTemplate.form.getValue())
-    emptyStep.order = this.steps.length + 1;
-    this.steps.push(emptyStep);
-    this.resort();
+    let emptyStep = this.templateService.getEmptyStep();
+    (this.steps).push(emptyStep);
   }
 
   edit(step) {
     this.selectedStep = step;
+    this.processSelected = false;
   }
   remove(index) {
-    this.steps.splice(index, 1)
+    (this.steps).removeAt(index);
     // this.resort();
 
-    if (this.steps.length > index + 1){
+    if (this.steps.controls.length > index + 1) {
       this.selectedStep = this.selectedStep[index + 1]; //select the one beneath it
-    }else{
-      this.selectedStep = this.selectedStep[index -1 ]; //select the one beneath it
+    } else {
+      this.selectedStep = this.selectedStep[index - 1]; //select the one beneath it
     }
 
-    if (this.steps.length == 1) {
-      this.selectedStep = this.steps[0];
+    if (this.steps.controls.length == 1) {
+      this.selectedStep = this.steps.controls[0] as FormGroup;
     }
   }
 
   onStepUpdated(step: Step) {
     step.user = this.users.find(user => user.id == step.user_id);
     this.selectedStep = null;
+  }
+
+  ngOnChanges() {
+    this.steps = this.templateContainer.get('steps') as FormArray;
+
   }
 
   // up(index) {

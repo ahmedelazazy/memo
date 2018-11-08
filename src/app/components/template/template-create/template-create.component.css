@@ -9,4 +9,10 @@
 
 button{
   margin-right: 5px;
+
 }
+button.btn-lg{
+  margin-top: 0;
+}
+
+

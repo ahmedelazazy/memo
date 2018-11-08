@@ -18,6 +18,7 @@ export class ActionListComponent implements OnInit {
   ngOnInit() {
     this.actionService.get().subscribe(
       actions => {
+        console.log(actions);
         this.pendingActions = actions.filter(a => a.status == 1);
         this.completedActions = actions.filter(a => a.status != 1);
       }
@@ -25,10 +26,12 @@ export class ActionListComponent implements OnInit {
   }
 
   onActionSelect(action: Action) {
-    this.router.navigateByData({
-      url: ["/action/view"],
-      data: action
-    });
+    // this.router.navigateByData({
+    //   url: ["/action/view"],
+    //   data: action
+    // });
+    // btoa(action.id.toString());
+    this.router.navigate(["action", action.id]);
   }
 
 
