@@ -11,14 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProcessListComponent implements OnInit {
 
-  templates;
+  templates$;
   selectedTemplate;
 
   constructor(private templateService: TemplateService, private processService: ProcessService,
     private authService: AuthService) { }
 
   ngOnInit() {
-    this.templates = this.templateService.getAll();
+    this.templates$ = this.templateService.getAll();
   }
 
   startProcess(template) {

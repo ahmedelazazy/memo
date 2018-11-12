@@ -8,30 +8,28 @@
         </h4>
         <p class="list-group-item-text"> Process details and general configuration</p>
       </a>
-      <!-- </div> -->
 
-      <!-- <div class="list-group"> -->
       <div [sortablejs]="steps.controls" formArrayName="steps">
         <div *ngFor="let step of steps.controls;  let i = index">
           <div [formGroupName]="i">
             <a class="list-group-item" [class.active]="step == selectedStep">
               <div class="row">
                 <div class="col-md-1">
-                  <i class="glyphicon glyphicon-move move"></i>
+                  <i class="la la-sort"></i>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-9">
                   <div class=" pointer" (click)="edit(step)">
-                    <h4 class="list-group-item-heading" [class.new]="!step.get('title').value">
+                    <h5 class="list-group-item-heading" [class.new]="!step.get('title').value">
                       {{step.get('title').value ? step.get('title').value : 'New Task' }}
-                    </h4>
+                    </h5>
                     <p class="list-group-item-text" [class.new]="!step.get('user_id').value">
                       {{step.get('user_id').value ?
                       templateService.getUserName(step.get('user_id').value) : 'No assignee' }}</p>
                   </div>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                   <div class="right">
-                    <button class="btn btn-xs btn-danger" *ngIf="steps.controls.length > 1" (click)="remove(i)">X</button>
+                    <button class="btn btn-sm btn-danger" *ngIf="steps.controls.length > 1" (click)="remove(i)">X</button>
                   </div>
                 </div>
               </div>
@@ -39,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="list-group-item pointer">
+      <div class="margin-top-20">
         <button type="button" class="btn btn-primary" (click)="addStep()">Add new step</button>
       </div>
     </div>
@@ -50,7 +48,46 @@
 
   <div class="col-md-6">
 
-    <tabset>
+
+    <div class="m-portlet m-portlet--tabs">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-tools">
+          <ul class="nav nav-tabs m-tabs-line m-tabs-line--info m-tabs-line--2x m-tabs-line--right" role="tablist">
+            <li class="nav-item m-tabs__item" *ngIf="!processSelected">
+              <a class="nav-link m-tabs__link  active show" data-toggle="tab" href="#tabStepCreate" role="tab">
+                Task Details
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item" *ngIf="!processSelected && (templateService.templateForm$ | async)">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#tabStepFields" role="tab">
+                Fields Visibilty
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item" *ngIf="processSelected">
+              <a class="nav-link m-tabs__link  active show" data-toggle="tab" href="#tabStepProcess" role="tab">
+                Process Details
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="m-portlet__body">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tabStepCreate" role="tabStepCreate" *ngIf="!processSelected">
+            <app-step-create *ngIf="selectedStep" [step]="selectedStep" (stepUpdated)="onStepUpdated($event)" active="true"></app-step-create>
+          </div>
+          <div class="tab-pane " id="tabStepFields" role="tabStepFields" *ngIf="!processSelected && (templateService.templateForm$ | async)">
+            <app-template-step-fields [step]="selectedStep"></app-template-step-fields>
+          </div>
+          <div class="tab-pane  active show" id="tabStepProcess" role="tabStepProcess" *ngIf="processSelected">
+            <app-template-step-process [templateContainer]="templateContainer"></app-template-step-process>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <tabset>
       <tab heading="Task Details" *ngIf="!processSelected" active="true">
         <app-step-create *ngIf="selectedStep" [step]="selectedStep" (stepUpdated)="onStepUpdated($event)" active="true"></app-step-create>
 
@@ -62,5 +99,5 @@
       <tab heading="Process Details" *ngIf="processSelected" active="true">
         <app-template-step-process [templateContainer]="templateContainer"></app-template-step-process>
       </tab>
-    </tabset>
+    </tabset> -->
   </div>

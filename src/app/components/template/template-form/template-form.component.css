@@ -14,12 +14,20 @@
 }
 
 .move{
-  color: #aaa;
-  margin-right: 10px;
-  padding: 5px;
+  /* color: #aaa; */
+  /* margin-right: 10px; */
+  /* padding: 5px; */
   cursor: move;
 }
 
 .panel-heading{
   background: #eee;
+}
+.field-container{
+  margin-bottom: 15px;
+}
+
+i{
+  padding: 10px;
+  color: #aaa;
 }

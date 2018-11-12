@@ -1,0 +1,26 @@
+.m-widget4.m-widget4--progress .m-widget4__info{
+  width: 30%;
+}
+
+.m-widget4.m-widget4--progress .m-widget4__progress{
+  width: 25%;
+}
+
+
+.m-widget4.m-widget4--progress .m-widget4__info.user{
+  width: 25%;
+}
+
+.m-widget4__ext{
+  padding: 0 10px;
+}
+
+.m-widget17__progress-number{
+
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.progress{
+  margin-top: 0.8rem;
+}

@@ -1,148 +1,76 @@
-<div class="row" *ngIf="action">
-  <div class="col-md-6" *ngIf="action.status == actionStatusEnum.assigned">
-    <form [formGroup]="actionForm" #f="ngForm">
-      <h2>{{action?.step?.title}}</h2>
-      <p>{{action?.step?.description}}</p>
-      <p>{{action?.date_opened}}</p>
-      <hr *ngIf="showForm">
-      <div class="panel panel-default" *ngIf="showForm">
-        <div class="panel-body">
-          <div formArrayName="sections" *ngFor="let section of action?.step?.sections; let i = index">
-            <label>{{section.label}}</label>
-            <ul class="list-group" [formGroupName]="i">
-              <li class="list-group-item" *ngFor="let field of section.fields; let j = index;">
-                <div class="form-inline" [formGroupName]="j">
-                  <div class="form-group">
-                    <p *ngIf="field.visibility != fieldVisibilityEnum.Hidden">
-                      {{ field.label ? field.label : 'Unnamed Field'}}{{field.label && field.visibility ==
-                      fieldVisibilityEnum.Required ? '*' : ''}}
-                    </p>
-                    <input type="text" class="form-control" readonly *ngIf="field.visibility == fieldVisibilityEnum.Readonly"
-                      formControlName="value">
-                    <input type="text" class="form-control" *ngIf="field.visibility == fieldVisibilityEnum.Editable"
-                      formControlName="value">
-                    <input type="text" class="form-control" required *ngIf="field.visibility == fieldVisibilityEnum.Required"
-                      formControlName="value">
-                  </div>
-                </div>
+<div *ngIf="action">
+  <div class="row" *ngIf="action.status == actionStatusEnum.assigned">
+    <div class="col-md-6">
+      <app-action-manage-active [action]="action" [actionForm]="actionForm" [showForm]="showForm"></app-action-manage-active>
+    </div>
+    <div class="col-md-6">
+      <div class="m-portlet m-portlet--tabs">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-tools">
+            <ul class="nav nav-tabs m-tabs-line m-tabs-line--info m-tabs-line--2x m-tabs-line--right" role="tablist">
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link  active show" data-toggle="tab" href="#tab1" role="tab">
+                  Process Info
+                </a>
+              </li>
+              <li class="nav-item m-tabs__item">
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#tab2" role="tab">
+                  History
+                </a>
               </li>
             </ul>
           </div>
         </div>
-      </div>
-
-
-
-      <hr>
-      <div class="form-group">
-        <label for="comment">Comment</label>
-        <textarea class="form-control" type="text" formControlName="comment" rows="3"></textarea>
-      </div>
-
-      <div class="form-group" *ngIf="action?.step?.type == taskTypeEnum.Task">
-        <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">Complete</button>
-        <button class="btn btn-default" [routerLink]="['/action']">Cancel</button>
-      </div>
-
-      <div class="form-group" *ngIf="action?.step?.type == taskTypeEnum.Approval">
-        <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">Approve</button>
-        <button class="btn btn-danger" (click)="onSave(actionStatusEnum.rejected)">Reject</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="col-md-6">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#1" data-toggle="tab">Process Info</a>
-      </li>
-      <li><a href="#2" data-toggle="tab">History</a>
-      </li>
-    </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="1">
-        <h3>Process Info</h3>
-        <p>Process: {{action?.template?.title}} - {{action?.process?.title}}</p>
-        <p>Process Description: {{action?.process?.description}}</p>
-        <p>Date Requested: {{action?.process?.date_opened}}</p>
-        <p>Requested by: {{action?.process?.user?.name}}</p>
-
-        <div *ngIf="showForm">
-          <hr>
-          <h4>Data Form</h4>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div *ngFor="let section of action?.step?.sections; let i = index">
-                <label>{{section.label}}</label>
-                <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let field of section.fields; let j = index;">
-                    <strong>{{field.label}}</strong> <input type="text" class="form-control inline" readonly [value]="field.value">
-                  </li>
-                </ul>
-              </div>
+        <div class="m-portlet__body">
+          <div class="tab-content">
+            <div class="tab-pane active show" id="tab1" role="tab1">
+              <app-action-manage-info [action]="action" [showForm]="showForm"></app-action-manage-info>
+            </div>
+            <div class="tab-pane " id="tab2" role="tab2">
+              <app-action-manage-history [action]="action"></app-action-manage-history>
             </div>
           </div>
         </div>
-
-        <hr>
-        <div class="list-group">
-          <div *ngFor="let step of action.template.steps">
-            <a class="list-group-item" [class.future]="!getStepStatus(step.id)"> <i class="fas fa-hexagon"></i> {{'S:' + !getStepStatus(step.id)}}
-              <h4 class="list-group-item-heading">{{step.title}}</h4>
-              <p class="list-group-item-text">{{step?.user_name || ''}} </p>
-              <p class="list-group-item-text">{{step?.description}}</p>
-              <span class="label label-primary">{{step.type == taskTypeEnum.Task ? 'Task' : 'Approval' }}</span>
-              <span class="label label-warning" *ngIf="step.id == action.step_id &&  action.status == actionStatusEnum.assigned">CurrentTask</span>
-              <span class="label label-success" *ngIf="getStepStatus(step.id) == actionStatusEnum.completed_or_approved">Completed</span>
-              <span class="label label-danger" *ngIf="getStepStatus(step.id) == actionStatusEnum.rejected">Rejected</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="tab-pane" id="2">
-        <h3>History</h3>
-        <ul class="timeline">
-          <li>
-            <a>{{action?.template?.title}} - {{action?.process?.title}}</a>
-            <a class="float-right">{{action?.process?.date_opened}}</a>
-            <p><strong>{{action?.process?.user?.name}}</strong> Started a process</p>
-            <p>Description: {{action?.process?.description}}</p>
-          </li>
-
-          <ng-container *ngFor="let act of action?.process?.actions">
-            <ng-container *ngIf="act.status == actionStatusEnum.assigned || act.status == actionStatusEnum.completed_or_approved || act.status == actionStatusEnum.rejected">
-              <ng-container *ngIf="getStep(act) as s">
-                <li>
-                  <a>{{ s.title }}</a>
-                  <a class="float-right">{{act.date_opened}}</a>
-                  <p>Assigned to <strong>{{act.user_name}}</strong></p>
-                  <span class="label label-primary">{{ s.type == taskTypeEnum.Task ? 'Task' : 'Approval' }}</span>
-                </li>
-                <li *ngIf="  act.status == actionStatusEnum.completed_or_approved || act.status == actionStatusEnum.rejected ">
-                  <a>{{s.title}}</a>
-                  <a class="float-right">{{act.date_closed}}</a>
-                  <p>Done by <strong>{{act.user_name}}</strong></p>
-                  <p>Comment added: {{act.comment}}</p>
-                  <span class="label label-success" *ngIf="act.status == actionStatusEnum.completed_or_approved  && s.type == taskTypeEnum.Task">Completed</span>
-                  <span class="label label-success" *ngIf="act.status == actionStatusEnum.completed_or_approved  && s.type == taskTypeEnum.Approval">Approved</span>
-                  <span class="label label-danger" *ngIf="act.status == actionStatusEnum.rejected">Rejected</span>
-                </li>
-              </ng-container>
-            </ng-container>
-
-          </ng-container>
-          <li *ngIf="action.process?.status == processStatusEnum.completed_or_approved || action.process?.status == processStatusEnum.rejected">
-            <a>{{action?.template?.title}} - {{action?.process?.title}}</a>
-            <p>Process completed</p>
-            <a class="float-right">{{action?.process?.date_closed}}</a>
-            <span class="label label-success" *ngIf="action?.process?.status == processStatusEnum.completed_or_approved ">Completed</span>
-            <span class="label label-danger" *ngIf="action?.process?.status == processStatusEnum.rejected">Rejected</span>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
+
+
+  <div class="row" *ngIf="action.status != actionStatusEnum.assigned">
+    <div class="col-md-6">
+
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">
+                Process Info
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <app-action-manage-info [action]="action" [showForm]="showForm"></app-action-manage-info>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">
+                History
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <app-action-manage-history [action]="action"></app-action-manage-history>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

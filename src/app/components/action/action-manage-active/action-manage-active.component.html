@@ -1,0 +1,61 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">
+          {{action?.step?.title}}
+        </h3>
+      </div>
+    </div>
+
+    <div class="m-portlet__head-tools">
+      <span>{{action?.date_opened | date}}</span>
+
+    </div>
+  </div>
+  <div class="m-portlet__body">
+    <form [formGroup]="actionForm" #f="ngForm" class="m-form" *ngIf="showForm">
+      <div class="section-container" formArrayName="sections" *ngFor="let section of action?.step?.sections; let i = index">
+        <div class="m-form__heading">
+          <h3 class="m-form__heading-title"> {{section.label}}</h3>
+        </div>
+        <ng-container [formGroupName]="i">
+          <ng-container *ngFor="let field of section.fields; let j = index;">
+            <div [formGroupName]="j" class="form-group m-form__group row">
+              <label for="example-text-input" class="col-4 col-form-label"> {{ field.label ? field.label :
+                'Unnamed
+                Field'}}{{field.label && field.visibility ==
+                fieldVisibilityEnum.Required ? '*' : ''}}</label>
+              <div class="col-8">
+                <input type="text" class="form-control m-input" readonly *ngIf="field.visibility == fieldVisibilityEnum.Readonly"
+                  formControlName="value">
+                <input type="text" class="form-control m-input" *ngIf="field.visibility == fieldVisibilityEnum.Editable"
+                  formControlName="value">
+                <input type="text" class="form-control m-input" required *ngIf="field.visibility == fieldVisibilityEnum.Required"
+                  formControlName="value">
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <div class="m-form__heading">
+          <h3 class="m-form__heading-title">Comment </h3>
+        </div>
+        <textarea class="form-control" type="text" formControlName="comment" rows="3"></textarea>
+      </div>
+
+      <div class="form-group" *ngIf="action?.step?.type == taskTypeEnum.Task">
+        <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">Complete</button>
+        <button class="btn btn-default" [routerLink]="['/action']">Cancel</button>
+      </div>
+
+      <div class="form-group" *ngIf="action?.step?.type == taskTypeEnum.Approval">
+        <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">Approve</button>
+        <button class="btn btn-danger" (click)="onSave(actionStatusEnum.rejected)">Reject</button>
+      </div>
+
+    </form>
+  </div>
+</div>

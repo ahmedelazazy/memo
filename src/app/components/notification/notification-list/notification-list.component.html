@@ -11,8 +11,8 @@
     <tbody>
       <tr *ngFor="let notification of notifications" [class.info]="notification.is_new == 1">
         <td>{{notification.text}}</td>
-        <td>{{notification.date}}</td>
-        <td><button *ngIf="notification.is_new == 1" class="btn btn-xs btn-primary" (click)="onMarkRead(notification)">Mark
+        <td>{{notification.date | date}}</td>
+        <td><button *ngIf="notification.is_new == 1" class="btn btn-sm m-btn--pill btn-primary" (click)="onMarkRead(notification)">Mark
             as read</button></td>
       </tr>
     </tbody>

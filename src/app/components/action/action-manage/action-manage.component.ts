@@ -15,10 +15,12 @@ import { map, tap } from 'rxjs/operators';
 export class ActionManageComponent implements OnInit {
 
   action;
+
   fieldVisibilityEnum = FieldVisibility;
   actionStatusEnum = ActionStatus;
   taskTypeEnum = TaskType;
   processStatusEnum = ProcessStatus;
+
   actionForm: FormGroup;
   showForm;
   actionId: number;
@@ -84,38 +86,6 @@ export class ActionManageComponent implements OnInit {
     return sectionFields;
   }
 
-  onSave(actionStatus) {
 
-    let flatFields = [];
-    if (this.actionForm.value.sections) {
-      for (let i = 0; i < this.actionForm.value.sections.length; i++) {
-        const section = this.actionForm.value.sections[i];
-        if (section.length > 0) {
-          flatFields.push(...section);
-        }
-      }
-    }
 
-    this.actionForm.value.process_control_value = flatFields;
-    this.actionForm.value.status = actionStatus;
-
-    this.actionService.update(this.actionForm.value).subscribe(
-      data => {
-        this.toastrService.success('Data saved successfully');
-        this.router.navigate(['/action']);
-      },
-      error => {
-        this.toastrService.error('Error wile saving');
-        console.error(error);
-      }
-    );
-  }
-
-  getStep(act) {
-    return this.action.template.steps.find(s => act.step_id == s.id);
-  }
-
-  getStepStatus(step_id) {
-    return this.action.process.actions.find(a => a.step_id == step_id).status;
-  }
 }

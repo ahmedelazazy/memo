@@ -30,3 +30,14 @@ input.inline{
      margin-right: 10px;
      margin-left: 10px;
 }
+
+
+.m-subheader {
+  padding-bottom: 30px;
+}
+
+@media (min-width: 1025px){
+  .m-aside-left--enabled .m-body .m-wrapper {
+      padding-left: 30px;
+  }
+}

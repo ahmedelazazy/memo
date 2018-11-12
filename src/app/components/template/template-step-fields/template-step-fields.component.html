@@ -1,33 +1,33 @@
-<div class="panel panel-default">
+<div class="m-list-search">
+  <div class="m-list-search__results">
+    <div *ngFor="let section of templateForm.sections" class="section-container">
+      <span class="m-list-search__result-category m-list-search__result-category--first">
+        {{section.label}}
+      </span>
 
-  <div class="panel-body">
 
-    <div *ngFor="let section of templateForm.sections">
-      <label>{{section.label}}</label>
-      <ul class="list-group">
-        <div>
-          <li class="list-group-item" *ngFor="let field of section.fields">
-            <div class="form-inline">
+      <a class="m-list-search__result-item" *ngFor="let field of section.fields">
+        <span class="m-list-search__result-item-text">
+
+          <div class="form-inline">
+            <div class="form-group">
+
+              <input type="text" class="form-control" id="fieldLabel" name="label" [value]="field.label" disabled="disabled"
+                placeholder="Unnamed Field">
+
               <div class="form-group">
-
-                <input type="text" class="form-control" id="fieldLabel" name="label" [value]="field.label" disabled="disabled"
-                  placeholder="Unnamed Field">
-
-                <div class="form-group">
-                  <select class="form-control" class="form-control" id="visibility" name="visibility" [value]="field.visibility"
-                    (change)="onVisibilityChange($event.target.value, field.field_ui_id)">
-                    <option value=1>Hidden</option>
-                    <option value=2>Read-only</option>
-                    <option value=3>Editable</option>
-                    <option value=4>Required</option>
-                  </select>
-                </div>
+                <select class="form-control" class="form-control" id="visibility" name="visibility" [value]="field.visibility"
+                  (change)="onVisibilityChange($event.target.value, field.field_ui_id)">
+                  <option value=1>Hidden</option>
+                  <option value=2>Read-only</option>
+                  <option value=3>Editable</option>
+                  <option value=4>Required</option>
+                </select>
               </div>
             </div>
-          </li>
-        </div>
-      </ul>
+          </div>
+        </span>
+      </a>
     </div>
-
   </div>
 </div>

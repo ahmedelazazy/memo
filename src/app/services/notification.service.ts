@@ -29,4 +29,11 @@ export class NotificationService {
     this.http.post(url, data).subscribe();
   }
 
+  getNewNotificationCount() {
+    let url = this.apiUrl + 'new';
+    let data = { 'user_id': this.authService.user.id };
+
+    return this.http.post(url, data);
+  }
+
 }

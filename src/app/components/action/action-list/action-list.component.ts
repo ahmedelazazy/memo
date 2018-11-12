@@ -3,6 +3,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { Observable } from 'rxjs';
 import { Action } from 'src/app/models/action';
 import { Router } from '@angular/router';
+import { TaskType } from 'src/app/models/enums';
 
 @Component({
   selector: 'app-action-list',
@@ -13,6 +14,8 @@ export class ActionListComponent implements OnInit {
 
   pendingActions: any[];
   completedActions: any[];
+  taskTypeEnum = TaskType;
+
   constructor(private actionService: ActionService, private router: Router) { }
 
   ngOnInit() {
@@ -34,7 +37,11 @@ export class ActionListComponent implements OnInit {
     this.router.navigate(["action", action.id]);
   }
 
-
+  getProgress(action) {
+    let total = action.process.actions.length;
+    let completed = action.process.actions.filter(a => a.status == 2).length;
+    return (completed / total * 100).toFixed(0) + "%";
+  }
 
 
 

@@ -30,6 +30,9 @@ import { TabsModule } from 'ngx-bootstrap';
 import { TemplateStepsComponent } from './components/template/template-steps/template-steps.component';
 import { TemplateStepFieldsComponent } from './components/template/template-step-fields/template-step-fields.component';
 import { TemplateStepProcessComponent } from './components/template/template-step-process/template-step-process.component';
+import { ActionManageInfoComponent } from './components/action/action-manage-info/action-manage-info.component';
+import { ActionManageHistoryComponent } from './components/action/action-manage-history/action-manage-history.component';
+import { ActionManageActiveComponent } from './components/action/action-manage-active/action-manage-active.component';
 
 
 @NgModule({
@@ -53,6 +56,9 @@ import { TemplateStepProcessComponent } from './components/template/template-ste
     TemplateStepsComponent,
     TemplateStepFieldsComponent,
     TemplateStepProcessComponent,
+    ActionManageInfoComponent,
+    ActionManageHistoryComponent,
+    ActionManageActiveComponent,
   ],
   imports: [
     BrowserModule,

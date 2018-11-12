@@ -1,0 +1,172 @@
+ul.timeline {
+  list-style-type: none;
+  position: relative;
+}
+ul.timeline:before {
+  content: ' ';
+  background: #d4d9df;
+  display: inline-block;
+  position: absolute;
+  left: 29px;
+  width: 2px;
+  height: 100%;
+  z-index: 400;
+}
+ul.timeline > li {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+ul.timeline > li:before {
+  content: ' ';
+  background: white;
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid #22c0e8;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  z-index: 400;
+}
+
+.float-right{
+  float: right;
+}
+
+
+/*tabs*/
+
+
+body {
+  padding : 10px ;
+
+}
+
+#exTab1 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+
+/* #exTab2 h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+} */
+
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills > li > a {
+  border-radius: 0;
+}
+
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-pills > li > a {
+  border-radius: 4px 4px 0 0 ;
+}
+
+#exTab3 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+
+.future,
+.future h4{
+  color: #999 !important;
+  font-style: italic;
+}
+
+strong{
+  margin-right: 10px
+}
+
+
+hr{
+  margin: 30px 0;
+}
+
+.m-badge{
+  margin-left: 10px;
+
+}
+
+.m-demo .m-demo__preview {
+  background: white;
+   border: 0;
+   padding: 0;
+}
+
+.m-form .m-form__group{
+      padding-top: 0;
+}
+
+
+.section-container {
+  margin-bottom: 20px;
+}
+
+.m-section{
+      margin: 0;
+}
+
+
+
+.m-timeline-1:after {
+  left: 0;
+}
+
+
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__marker {
+  left: 0;
+}
+
+
+.m-timeline-1.m-timeline-1--fixed {
+  width: 100%;
+  margin: 0;
+}
+
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item.m-timeline-1__item--right{
+      left: 0;
+}
+
+
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item {
+  width: 100%;
+}
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item.m-timeline-1__item--right .m-timeline-1__item-circle{
+    top: 0;
+    margin-top: 1.5rem;
+}
+
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item.m-timeline-1__item--right {
+  left: 0;
+  top: 0;
+  margin-bottom: 30px;
+}
+
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item .m-timeline-1__item-time {
+  position:static ;
+}
+
+.no-margin{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.m-timeline-1 .m-timeline-1__items {
+  padding-bottom: 2rem;
+}
+
+.m-form__heading-title{
+  margin-bottom: 30px;
+}
+.m-form__heading .m-form__heading-title{
+  margin-bottom: 0px;
+}
+
+.m-form__heading{
+  margin-bottom: 15px;
+}

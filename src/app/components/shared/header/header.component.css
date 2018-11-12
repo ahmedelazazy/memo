@@ -1,0 +1,7 @@
+@media (min-width: 1025px){
+
+  .m-dropdown.m-dropdown--align-center.m-dropdown--large .m-dropdown__wrapper {
+      width: 300px;
+      margin-left: -150px;
+  }
+}

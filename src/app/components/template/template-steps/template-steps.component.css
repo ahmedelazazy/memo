@@ -9,12 +9,29 @@
   border:1px #3175af solid;
 }
 
-.active i{
+/* .active i{
+  color: #fff;
+} */
+p.new,
+h5.new
+{
+  /* color: #999 ; */
+  font-style: italic ;
+}
+
+
+.list-group-item.active{
   color: #fff;
 }
-p.new,
-h4.new
-{
-  color: #999 ;
-  font-style: italic ;
+.list-group-item.active:hover {
+  color: #fff;
+}
+
+
+i{
+  padding-top: 10px;
+}
+
+.margin-top-20{
+margin-top: 20px
 }
