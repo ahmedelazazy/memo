@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    <!--begin:: Widgets/User Progress -->
     <div class="m-portlet m-portlet--full-height ">
       <div class="m-portlet__head">
         <div class="m-portlet__head-caption">
@@ -23,103 +22,101 @@
                 Completed
               </a>
             </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#tabMine" role="tab">
+                My Memos
+              </a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="m-portlet__body">
         <div class="tab-content">
           <div class="tab-pane active" id="tabActive">
-            <div class="m-widget4 m-widget4--progress" *ngIf="pendingActions?.length > 0; else noPendingActions">
-              <div class="m-widget4__item" *ngFor="let action of pendingActions">
+            <div class="m-widget4 m-widget4--progress" *ngIf="pendingMemoSteps?.length > 0; else noPendingMemoSteps">
+              <div class="m-widget4__item" *ngFor="let step of pendingMemoSteps">
                 <div class="m-widget4__img m-widget4__img--pic">
-                  <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="action.step.type == taskTypeEnum.Task"></i>
-                  <i class="fa fa-lg fa-check m--font-focus" *ngIf="action.step.type == taskTypeEnum.Approval"></i>
+                  <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="step.type == taskTypeEnum.Task"></i>
+                  <i class="fa fa-lg fa-check m--font-focus" *ngIf="step.type == taskTypeEnum.Approval"></i>
                 </div>
                 <div class="m-widget4__info user">
                   <span class="m-widget4__title">
-                    {{action.process?.user?.name}}
+                    {{step.memo?.user?.name}}
                   </span>
                 </div>
 
                 <div class="m-widget4__info">
                   <span class="m-widget4__title">
-                    {{action.step?.title}}
-                  </span><br>
-                  <span class="m-widget4__sub">
-                    {{action?.template?.title}} ({{action.process?.title}})
+                    {{step.memo?.title}}
                   </span>
                 </div>
 
                 <div class="m-widget4__progress">
                   <div class="">
-                    <span class="m-widget17__progress-number">{{getProgress(action)}}</span>
+                    <span class="m-widget17__progress-number">{{getProgress(step)}}</span>
                     <div class="progress m-progress--sm">
-                      <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(action)"></div>
+                      <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(step)"></div>
                     </div>
                   </div>
                 </div>
 
                 <div class="m-widget4__ext">
                   <span class="m-widget4__title">
-                    {{action.date_opened | date}}
-                  </span><br>
+                    {{step.date_opened | date}}
+                  </span>
                 </div>
 
                 <div class="m-widget4__ext">
-                  <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onActionSelect(action)">Details</a>
+                  <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onStepSelect(step)">Details</a>
                 </div>
               </div>
             </div>
-            <ng-template #noPendingActions>You don't have any pending actions.</ng-template>
+            <ng-template #noPendingMemoSteps>You don't have any pending memos.</ng-template>
 
           </div>
           <div class="tab-pane" id="tabCompleted">
-            <div class="m-widget4 m-widget4--progress" *ngIf="completedActions?.length > 0; else noCompletedActions">
-              <div class="m-widget4__item" *ngFor="let action of completedActions">
+            <div class="m-widget4 m-widget4--progress" *ngIf="completedMemoSteps?.length > 0; else noCompletedSteps">
+              <div class="m-widget4__item" *ngFor="let step of completedMemoSteps">
                 <div class="m-widget4__img m-widget4__img--pic">
                   <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="action.step.type == taskTypeEnum.Task"></i>
                   <i class="fa fa-lg fa-check m--font-focus" *ngIf="action.step.type == taskTypeEnum.Approval"></i>
                 </div>
                 <div class="m-widget4__info user">
                   <span class="m-widget4__title">
-                    {{action.process?.user?.name}}
+                    {{step.memo?.user?.name}}
                   </span>
                 </div>
 
                 <div class="m-widget4__info">
                   <span class="m-widget4__title">
-                    {{action.step?.title}}
-                  </span><br>
-                  <span class="m-widget4__sub">
-                    {{action?.template?.title}} ({{action.process?.title}})
+                    {{step.memo?.title}}
                   </span>
                 </div>
 
                 <div class="m-widget4__progress">
                   <div class="">
-                    <span class="m-widget17__progress-number">{{getProgress(action)}}</span>
+                    <span class="m-widget17__progress-number">{{getProgress(step)}}</span>
                     <div class="progress m-progress--sm">
-                      <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(action)"></div>
+                      <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(step)"></div>
                     </div>
                   </div>
                 </div>
 
                 <div class="m-widget4__ext">
                   <span class="m-widget4__title">
-                    {{action.date_opened | date}}
-                  </span><br>
+                    {{step.date_opened | date}}
+                  </span>
                 </div>
 
                 <div class="m-widget4__ext">
-                  <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onActionSelect(action)">Details</a>
+                  <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onStepSelect(step)">Details</a>
                 </div>
               </div>
             </div>
-            <ng-template #noCompletedActions>You don't have any completed actions.</ng-template>
+            <ng-template #noCompletedSteps>You don't have any completed memos.</ng-template>
           </div>
         </div>
       </div>
     </div>
-    <!--end:: Widgets/User Progress -->
   </div>
 </div>

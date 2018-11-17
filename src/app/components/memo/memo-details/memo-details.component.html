@@ -1,0 +1,66 @@
+<div *ngIf="step">
+  <div class="row" *ngIf="step.status == actionStatusEnum.assigned">
+    <div class="col-md-6">
+
+      <p><strong>Subject</strong> {{step.memo?.title}}</p>
+      <p><strong>Body</strong> {{step.memo?.description}}</p>
+      <p><strong>Owner</strong> {{step.memo?.user.name}}</p>
+      <p><strong>Start date</strong> {{step.memo?.date_opened | date}}</p>
+      <hr>
+      <div>Your comment</div>
+      <div>Add someone to the loop</div>
+      <div>Complete or approve</div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">
+                More Info
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <div class="m-section">
+            <h3 class="m-form__heading-title">
+              Users
+            </h3>
+            <div class="m-section__content">
+              <div class="m-demo__preview">
+                <div class="m-list-timeline">
+                  <div class="m-list-timeline__items">
+                    <div class="m-list-timeline__item" *ngFor="let memoStep of step.memo.steps">
+                      <span class="m-list-timeline__badge"></span>
+                      <span class="m-list-timeline__icon fa fa-lg fa-tasks m--font-accent" *ngIf="memoStep.type == taskTypeEnum.Task"></span>
+                      <span class="m-list-timeline__icon fa fa-lg fa-check m--font-focus" *ngIf="memoStep.type == taskTypeEnum.Approval"></span>
+                      <span class="m-list-timeline__text m--font-boldest">{{memoStep.user?.name}}
+                        <span class="m-list-timeline__text not-bold"> Here is the comment!!!! </span>
+                        <span class="m-badge m-badge--warning m-badge--wide not-bold" *ngIf="step.id == memoStep.id &&  memoStep.status == actionStatusEnum.assigned">Current
+                          Task</span>
+                        <span class="m-badge m-badge--success m-badge--wide not-bold" *ngIf="memoStep.status == actionStatusEnum.completed_or_approved">Completed</span>
+                        <span class="m-badge m-badge--danger m-badge--wide not-bold" *ngIf="memoStep.status == actionStatusEnum.rejected">Rejected</span>
+                      </span>
+                      <span class="m-list-timeline__time">{{memoStep?.date_opened | date}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+</div>

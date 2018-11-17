@@ -14,6 +14,9 @@ import { ActionListComponent } from './components/action/action-list/action-list
 import { ActionManageComponent } from './components/action/action-manage/action-manage.component';
 import { NotificationListComponent } from './components/notification/notification-list/notification-list.component';
 import { TemplateFormComponent } from './components/template/template-form/template-form.component';
+import { MemoCreateComponent } from './components/memo/memo-create/memo-create.component';
+import { MemosListComponent } from './components/memo/memos-list/memos-list.component';
+import { MemoDetailsComponent } from './components/memo/memo-details/memo-details.component';
 
 const routes: Routes = [
 
@@ -31,13 +34,16 @@ const routes: Routes = [
       { path: 'action', component: ActionListComponent },
       { path: 'action/:id', component: ActionManageComponent },
       { path: 'notifications', component: NotificationListComponent },
+      { path: 'memo/new', component: MemoCreateComponent },
+      { path: 'memo', component: MemosListComponent },
+      { path: 'memo/:id', component: MemoDetailsComponent },
     ]
   },
 
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
+@NgModule( {
+  imports: [RouterModule.forRoot( routes )],
   exports: [RouterModule]
-})
+} )
 export class AppRoutingModule { }

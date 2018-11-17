@@ -33,6 +33,9 @@ import { TemplateStepProcessComponent } from './components/template/template-ste
 import { ActionManageInfoComponent } from './components/action/action-manage-info/action-manage-info.component';
 import { ActionManageHistoryComponent } from './components/action/action-manage-history/action-manage-history.component';
 import { ActionManageActiveComponent } from './components/action/action-manage-active/action-manage-active.component';
+import { MemoCreateComponent } from './components/memo/memo-create/memo-create.component';
+import { MemosListComponent } from './components/memo/memos-list/memos-list.component';
+import { MemoDetailsComponent } from './components/memo/memo-details/memo-details.component';
 
 
 @NgModule({
@@ -59,6 +62,9 @@ import { ActionManageActiveComponent } from './components/action/action-manage-a
     ActionManageInfoComponent,
     ActionManageHistoryComponent,
     ActionManageActiveComponent,
+    MemoCreateComponent,
+    MemosListComponent,
+    MemoDetailsComponent,
   ],
   imports: [
     BrowserModule,

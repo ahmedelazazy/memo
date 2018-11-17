@@ -41,3 +41,6 @@ input.inline{
       padding-left: 30px;
   }
 }
+.move{
+  cursor: move;
+}

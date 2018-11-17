@@ -25,9 +25,7 @@ export class TemplateFormComponent implements OnInit {
     }
   };
 
-
   constructor(private cdRef: ChangeDetectorRef, private templateService: TemplateService) { }
-
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
@@ -38,7 +36,6 @@ export class TemplateFormComponent implements OnInit {
 
   ngOnInit() {
     this.templateForm = this.templateContainer.get('dataForm');
-
   }
 
   onAddForm() {
@@ -61,10 +58,7 @@ export class TemplateFormComponent implements OnInit {
     parent.push(control);
   }
 
-
-
   onSubmitTemplateForm() { }
-
 
   deleteSection(index) {
     let sections = <FormArray>this.templateForm.controls.sections;
@@ -79,12 +73,12 @@ export class TemplateFormComponent implements OnInit {
     if (fields.length == 1) return;
     fields.removeAt(index);
   }
+
   removeForm() {
     this.templateForm.removeControl('sections');
     this.templateService.templateForm$.next(null);
     this.subscription.unsubscribe();
   }
-
 
   public _updateValueAndValidity(group: FormGroup | FormArray): void {
     Object.keys(group.controls).forEach((key: string) => {
@@ -97,5 +91,4 @@ export class TemplateFormComponent implements OnInit {
       }
     });
   }
-
 }
