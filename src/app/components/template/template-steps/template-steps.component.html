@@ -1,7 +1,7 @@
 <div class="row" [formGroup]="templateContainer">
   <div class="col-md-6">
     <div class="list-group">
-      <a class="list-group-item pointer" [class.active]="step == selectedStep" (click)="onProcessClick()">
+      <a class="list-group-item pointer" [class.active]="processSelected" (click)="onProcessClick()">
         <h4 class="list-group-item-heading">Process Start Task</h4>
         <p class="list-group-item-text">Process details and general configuration</p>
       </a>
