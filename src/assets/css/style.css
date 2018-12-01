@@ -155,7 +155,7 @@
   box-shadow: 0 0 2px #0a6aa1;
 }
 .vakata-context li > a.vakata-context-parent {
-  background-image: url("data:image/gif;base64,R0lGODlhCwAHAIAAACgoKP///yH5BAEAAAEALAAAAAALAAcAAAIORI4JlrqN1oMSnmmZDQUAOw==");
+  background-image: url('data:image/gif;base64,R0lGODlhCwAHAIAAACgoKP///yH5BAEAAAEALAAAAAALAAcAAAIORI4JlrqN1oMSnmmZDQUAOw==');
   background-position: right center;
   background-repeat: no-repeat;
 }
@@ -225,7 +225,7 @@
   margin-right: -4px;
 }
 .vakata-context-rtl li > a.vakata-context-parent {
-  background-image: url("data:image/gif;base64,R0lGODlhCwAHAIAAACgoKP///yH5BAEAAAEALAAAAAALAAcAAAINjI+AC7rWHIsPtmoxLAA7");
+  background-image: url('data:image/gif;base64,R0lGODlhCwAHAIAAACgoKP///yH5BAEAAAEALAAAAAALAAcAAAINjI+AC7rWHIsPtmoxLAA7');
   background-position: left center;
   background-repeat: no-repeat;
 }
@@ -349,20 +349,16 @@
 .jstree-default.jstree-checkbox-no-clicked .jstree-clicked.jstree-hovered {
   background: #e7f4f9;
 }
-.jstree-default.jstree-checkbox-no-clicked
-  > .jstree-wholerow-ul
-  .jstree-wholerow-clicked {
+.jstree-default.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked {
   background: transparent;
 }
-.jstree-default.jstree-checkbox-no-clicked
-  > .jstree-wholerow-ul
-  .jstree-wholerow-clicked.jstree-wholerow-hovered {
+.jstree-default.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered {
   background: #e7f4f9;
 }
 .jstree-default > .jstree-striped {
   min-width: 100%;
   display: inline-block;
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAMAAAB/qqA+AAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlMNAMM9s3UAAAAXSURBVHjajcEBAQAAAIKg/H/aCQZ70AUBjAATb6YPDgAAAABJRU5ErkJggg==")
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAMAAAB/qqA+AAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlMNAMM9s3UAAAAXSURBVHjajcEBAQAAAIKg/H/aCQZ70AUBjAATb6YPDgAAAABJRU5ErkJggg==')
     left top repeat;
 }
 .jstree-default > .jstree-wholerow-ul .jstree-hovered,
@@ -412,7 +408,7 @@
 }
 .jstree-default .jstree-node,
 .jstree-default .jstree-icon {
-  background-image: url("32px.png");
+  background-image: url('32px.png');
 }
 .jstree-default .jstree-node {
   background-position: -292px -4px;
@@ -462,9 +458,7 @@
 .jstree-default .jstree-checked > .jstree-checkbox {
   background-position: -228px -4px;
 }
-.jstree-default.jstree-checkbox-selection
-  .jstree-clicked
-  > .jstree-checkbox:hover,
+.jstree-default.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox:hover,
 .jstree-default .jstree-checked > .jstree-checkbox:hover {
   background-position: -228px -36px;
 }
@@ -487,7 +481,7 @@
   background-size: auto 48px;
 }
 .jstree-default.jstree-rtl .jstree-node {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==');
   background-position: 100% 1px;
   background-repeat: repeat-y;
 }
@@ -519,13 +513,13 @@
   background-position: 0 0;
 }
 .jstree-default > .jstree-container-ul .jstree-loading > .jstree-ocl {
-  background: url("throbber.gif") center center no-repeat;
+  background: url('throbber.gif') center center no-repeat;
 }
 .jstree-default .jstree-file {
-  background: url("32px.png") -100px -68px no-repeat;
+  background: url('32px.png') -100px -68px no-repeat;
 }
 .jstree-default .jstree-folder {
-  background: url("32px.png") -260px -4px no-repeat;
+  background: url('32px.png') -260px -4px no-repeat;
 }
 .jstree-default > .jstree-container-ul > .jstree-node {
   margin-left: 0;
@@ -537,7 +531,7 @@
 }
 #jstree-dnd.jstree-default .jstree-ok,
 #jstree-dnd.jstree-default .jstree-er {
-  background-image: url("32px.png");
+  background-image: url('32px.png');
   background-repeat: no-repeat;
   background-color: transparent;
 }
@@ -565,7 +559,7 @@
   width: calc(100% - 5px);
 }
 .jstree-default.jstree-rtl .jstree-node {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==');
 }
 .jstree-default.jstree-rtl .jstree-last {
   background: transparent;
@@ -598,7 +592,7 @@
 }
 .jstree-default-small .jstree-node,
 .jstree-default-small .jstree-icon {
-  background-image: url("32px.png");
+  background-image: url('32px.png');
 }
 .jstree-default-small .jstree-node {
   background-position: -295px -7px;
@@ -644,15 +638,11 @@
 .jstree-default-small .jstree-checkbox:hover {
   background-position: -167px -39px;
 }
-.jstree-default-small.jstree-checkbox-selection
-  .jstree-clicked
-  > .jstree-checkbox,
+.jstree-default-small.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox,
 .jstree-default-small .jstree-checked > .jstree-checkbox {
   background-position: -231px -7px;
 }
-.jstree-default-small.jstree-checkbox-selection
-  .jstree-clicked
-  > .jstree-checkbox:hover,
+.jstree-default-small.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox:hover,
 .jstree-default-small .jstree-checked > .jstree-checkbox:hover {
   background-position: -231px -39px;
 }
@@ -675,7 +665,7 @@
   background-size: auto 36px;
 }
 .jstree-default-small.jstree-rtl .jstree-node {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==');
   background-position: 100% 1px;
   background-repeat: repeat-y;
 }
@@ -698,10 +688,7 @@
 .jstree-default-small.jstree-rtl > .jstree-no-dots .jstree-open > .jstree-ocl {
   background-position: -39px -39px;
 }
-.jstree-default-small.jstree-rtl
-  > .jstree-no-dots
-  .jstree-closed
-  > .jstree-ocl {
+.jstree-default-small.jstree-rtl > .jstree-no-dots .jstree-closed > .jstree-ocl {
   background-position: -7px -39px;
 }
 .jstree-default-small .jstree-themeicon-custom {
@@ -710,13 +697,13 @@
   background-position: 0 0;
 }
 .jstree-default-small > .jstree-container-ul .jstree-loading > .jstree-ocl {
-  background: url("throbber.gif") center center no-repeat;
+  background: url('throbber.gif') center center no-repeat;
 }
 .jstree-default-small .jstree-file {
-  background: url("32px.png") -103px -71px no-repeat;
+  background: url('32px.png') -103px -71px no-repeat;
 }
 .jstree-default-small .jstree-folder {
-  background: url("32px.png") -263px -7px no-repeat;
+  background: url('32px.png') -263px -7px no-repeat;
 }
 .jstree-default-small > .jstree-container-ul > .jstree-node {
   margin-left: 0;
@@ -728,7 +715,7 @@
 }
 #jstree-dnd.jstree-default-small .jstree-ok,
 #jstree-dnd.jstree-default-small .jstree-er {
-  background-image: url("32px.png");
+  background-image: url('32px.png');
   background-repeat: no-repeat;
   background-color: transparent;
 }
@@ -756,7 +743,7 @@
   width: calc(100% - 5px);
 }
 .jstree-default-small.jstree-rtl .jstree-node {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAACAQMAAABv1h6PAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMHBgAAiABBI4gz9AAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAACAQMAAABv1h6PAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMHBgAAiABBI4gz9AAAAABJRU5ErkJggg==');
 }
 .jstree-default-small.jstree-rtl .jstree-last {
   background: transparent;
@@ -789,7 +776,7 @@
 }
 .jstree-default-large .jstree-node,
 .jstree-default-large .jstree-icon {
-  background-image: url("32px.png");
+  background-image: url('32px.png');
 }
 .jstree-default-large .jstree-node {
   background-position: -288px 0px;
@@ -835,15 +822,11 @@
 .jstree-default-large .jstree-checkbox:hover {
   background-position: -160px -32px;
 }
-.jstree-default-large.jstree-checkbox-selection
-  .jstree-clicked
-  > .jstree-checkbox,
+.jstree-default-large.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox,
 .jstree-default-large .jstree-checked > .jstree-checkbox {
   background-position: -224px 0px;
 }
-.jstree-default-large.jstree-checkbox-selection
-  .jstree-clicked
-  > .jstree-checkbox:hover,
+.jstree-default-large.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox:hover,
 .jstree-default-large .jstree-checked > .jstree-checkbox:hover {
   background-position: -224px -32px;
 }
@@ -866,7 +849,7 @@
   background-size: auto 64px;
 }
 .jstree-default-large.jstree-rtl .jstree-node {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==');
   background-position: 100% 1px;
   background-repeat: repeat-y;
 }
@@ -889,10 +872,7 @@
 .jstree-default-large.jstree-rtl > .jstree-no-dots .jstree-open > .jstree-ocl {
   background-position: -32px -32px;
 }
-.jstree-default-large.jstree-rtl
-  > .jstree-no-dots
-  .jstree-closed
-  > .jstree-ocl {
+.jstree-default-large.jstree-rtl > .jstree-no-dots .jstree-closed > .jstree-ocl {
   background-position: 0px -32px;
 }
 .jstree-default-large .jstree-themeicon-custom {
@@ -901,13 +881,13 @@
   background-position: 0 0;
 }
 .jstree-default-large > .jstree-container-ul .jstree-loading > .jstree-ocl {
-  background: url("throbber.gif") center center no-repeat;
+  background: url('throbber.gif') center center no-repeat;
 }
 .jstree-default-large .jstree-file {
-  background: url("32px.png") -96px -64px no-repeat;
+  background: url('32px.png') -96px -64px no-repeat;
 }
 .jstree-default-large .jstree-folder {
-  background: url("32px.png") -256px 0px no-repeat;
+  background: url('32px.png') -256px 0px no-repeat;
 }
 .jstree-default-large > .jstree-container-ul > .jstree-node {
   margin-left: 0;
@@ -919,7 +899,7 @@
 }
 #jstree-dnd.jstree-default-large .jstree-ok,
 #jstree-dnd.jstree-default-large .jstree-er {
-  background-image: url("32px.png");
+  background-image: url('32px.png');
   background-repeat: no-repeat;
   background-color: transparent;
 }
@@ -947,7 +927,7 @@
   width: calc(100% - 5px);
 }
 .jstree-default-large.jstree-rtl .jstree-node {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAACAQMAAAAD0EyKAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjgIIGBgABCgCBvVLXcAAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAACAQMAAAAD0EyKAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjgIIGBgABCgCBvVLXcAAAAABJRU5ErkJggg==');
 }
 .jstree-default-large.jstree-rtl .jstree-last {
   background: transparent;
@@ -965,12 +945,12 @@
     height: 40px;
   }
   #jstree-dnd.jstree-dnd-responsive > .jstree-ok {
-    background-image: url("40px.png");
+    background-image: url('40px.png');
     background-position: 0 -200px;
     background-size: 120px 240px;
   }
   #jstree-dnd.jstree-dnd-responsive > .jstree-er {
-    background-image: url("40px.png");
+    background-image: url('40px.png');
     background-position: -40px -200px;
     background-size: 120px 240px;
   }
@@ -989,7 +969,7 @@
 	*/
   }
   .jstree-default-responsive .jstree-icon {
-    background-image: url("40px.png");
+    background-image: url('40px.png');
   }
   .jstree-default-responsive .jstree-node,
   .jstree-default-responsive .jstree-leaf > .jstree-ocl {
@@ -1048,12 +1028,8 @@
   .jstree-default-responsive .jstree-checkbox:hover {
     background-position: -40px -80px;
   }
-  .jstree-default-responsive.jstree-checkbox-selection
-    .jstree-clicked
-    > .jstree-checkbox,
-  .jstree-default-responsive.jstree-checkbox-selection
-    .jstree-clicked
-    > .jstree-checkbox:hover,
+  .jstree-default-responsive.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox,
+  .jstree-default-responsive.jstree-checkbox-selection .jstree-clicked > .jstree-checkbox:hover,
   .jstree-default-responsive .jstree-checked > .jstree-checkbox,
   .jstree-default-responsive .jstree-checked > .jstree-checkbox:hover {
     background-position: 0 -80px;
@@ -1097,7 +1073,7 @@
   .jstree-default-responsive .jstree-node > .jstree-ocl,
   .jstree-default-responsive .jstree-themeicon,
   .jstree-default-responsive .jstree-checkbox {
-    background-image: url("40px.png");
+    background-image: url('40px.png');
     background-size: 120px 240px;
   }
   .jstree-default-responsive .jstree-node {
@@ -1119,11 +1095,11 @@
     background-position: 0 0;
   }
   .jstree-default-responsive .jstree-file {
-    background: url("40px.png") 0 -160px no-repeat;
+    background: url('40px.png') 0 -160px no-repeat;
     background-size: 120px 240px;
   }
   .jstree-default-responsive .jstree-folder {
-    background: url("40px.png") -40px -40px no-repeat;
+    background: url('40px.png') -40px -40px no-repeat;
     background-size: 120px 240px;
   }
   .jstree-default-responsive > .jstree-container-ul > .jstree-node {

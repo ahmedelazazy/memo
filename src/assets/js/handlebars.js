@@ -25,11 +25,10 @@ THE SOFTWARE.
 
 */
 (function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === "object" && typeof module === "object")
-    module.exports = factory();
-  else if (typeof define === "function" && define.amd) define([], factory);
-  else if (typeof exports === "object") exports["Handlebars"] = factory();
-  else root["Handlebars"] = factory();
+  if (typeof exports === 'object' && typeof module === 'object') module.exports = factory();
+  else if (typeof define === 'function' && define.amd) define([], factory);
+  else if (typeof exports === 'object') exports['Handlebars'] = factory();
+  else root['Handlebars'] = factory();
 })(this, function() {
   return /******/ (function(modules) {
     // webpackBootstrap
@@ -38,8 +37,7 @@ THE SOFTWARE.
 
     /******/ /******/ function __webpack_require__(moduleId) {
       /******/ // Check if module is in cache
-      /******/ if (installedModules[moduleId])
-        /******/ return installedModules[moduleId].exports; // Create a new module (and put it into the cache)
+      /******/ if (installedModules[moduleId]) /******/ return installedModules[moduleId].exports; // Create a new module (and put it into the cache)
 
       /******/ /******/ var module = (installedModules[moduleId] = {
         /******/ exports: {},
@@ -48,12 +46,7 @@ THE SOFTWARE.
         /******/
       }); // Execute the module function
 
-      /******/ /******/ modules[moduleId].call(
-        module.exports,
-        module,
-        module.exports,
-        __webpack_require__
-      ); // Flag the module as loaded
+      /******/ /******/ modules[moduleId].call(module.exports, module, module.exports, __webpack_require__); // Flag the module as loaded
 
       /******/ /******/ module.loaded = true; // Return the exports of the module
 
@@ -65,7 +58,7 @@ THE SOFTWARE.
 
     /******/ /******/ __webpack_require__.c = installedModules; // __webpack_public_path__
 
-    /******/ /******/ __webpack_require__.p = ""; // Load entry module and return exports
+    /******/ /******/ __webpack_require__.p = ''; // Load entry module and return exports
 
     /******/ /******/ return __webpack_require__(0);
     /******/
@@ -74,9 +67,9 @@ THE SOFTWARE.
     /******/ [
       /* 0 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -88,9 +81,7 @@ THE SOFTWARE.
 
         var _handlebarsCompilerAst = __webpack_require__(35);
 
-        var _handlebarsCompilerAst2 = _interopRequireDefault(
-          _handlebarsCompilerAst
-        );
+        var _handlebarsCompilerAst2 = _interopRequireDefault(_handlebarsCompilerAst);
 
         var _handlebarsCompilerBase = __webpack_require__(36);
 
@@ -98,23 +89,17 @@ THE SOFTWARE.
 
         var _handlebarsCompilerJavascriptCompiler = __webpack_require__(42);
 
-        var _handlebarsCompilerJavascriptCompiler2 = _interopRequireDefault(
-          _handlebarsCompilerJavascriptCompiler
-        );
+        var _handlebarsCompilerJavascriptCompiler2 = _interopRequireDefault(_handlebarsCompilerJavascriptCompiler);
 
         var _handlebarsCompilerVisitor = __webpack_require__(39);
 
-        var _handlebarsCompilerVisitor2 = _interopRequireDefault(
-          _handlebarsCompilerVisitor
-        );
+        var _handlebarsCompilerVisitor2 = _interopRequireDefault(_handlebarsCompilerVisitor);
 
         var _handlebarsNoConflict = __webpack_require__(34);
 
-        var _handlebarsNoConflict2 = _interopRequireDefault(
-          _handlebarsNoConflict
-        );
+        var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
-        var _create = _handlebarsRuntime2["default"].create;
+        var _create = _handlebarsRuntime2['default'].create;
         function create() {
           var hb = _create();
 
@@ -125,10 +110,9 @@ THE SOFTWARE.
             return _handlebarsCompilerCompiler.precompile(input, options, hb);
           };
 
-          hb.AST = _handlebarsCompilerAst2["default"];
+          hb.AST = _handlebarsCompilerAst2['default'];
           hb.Compiler = _handlebarsCompilerCompiler.Compiler;
-          hb.JavaScriptCompiler =
-            _handlebarsCompilerJavascriptCompiler2["default"];
+          hb.JavaScriptCompiler = _handlebarsCompilerJavascriptCompiler2['default'];
           hb.Parser = _handlebarsCompilerBase.parser;
           hb.parse = _handlebarsCompilerBase.parse;
 
@@ -138,22 +122,22 @@ THE SOFTWARE.
         var inst = create();
         inst.create = create;
 
-        _handlebarsNoConflict2["default"](inst);
+        _handlebarsNoConflict2['default'](inst);
 
-        inst.Visitor = _handlebarsCompilerVisitor2["default"];
+        inst.Visitor = _handlebarsCompilerVisitor2['default'];
 
-        inst["default"] = inst;
+        inst['default'] = inst;
 
-        exports["default"] = inst;
-        module.exports = exports["default"];
+        exports['default'] = inst;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 1 */
       /***/ function(module, exports) {
-        "use strict";
+        'use strict';
 
-        exports["default"] = function(obj) {
+        exports['default'] = function(obj) {
           return obj && obj.__esModule
             ? obj
             : {
@@ -167,11 +151,11 @@ THE SOFTWARE.
       },
       /* 2 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireWildcard = __webpack_require__(3)["default"];
+        var _interopRequireWildcard = __webpack_require__(3)['default'];
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -184,15 +168,11 @@ THE SOFTWARE.
 
         var _handlebarsSafeString = __webpack_require__(21);
 
-        var _handlebarsSafeString2 = _interopRequireDefault(
-          _handlebarsSafeString
-        );
+        var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
         var _handlebarsException = __webpack_require__(6);
 
-        var _handlebarsException2 = _interopRequireDefault(
-          _handlebarsException
-        );
+        var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
         var _handlebarsUtils = __webpack_require__(5);
 
@@ -204,17 +184,15 @@ THE SOFTWARE.
 
         var _handlebarsNoConflict = __webpack_require__(34);
 
-        var _handlebarsNoConflict2 = _interopRequireDefault(
-          _handlebarsNoConflict
-        );
+        var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
         // For compatibility and usage outside of module systems, make the Handlebars object a namespace
         function create() {
           var hb = new base.HandlebarsEnvironment();
 
           Utils.extend(hb, base);
-          hb.SafeString = _handlebarsSafeString2["default"];
-          hb.Exception = _handlebarsException2["default"];
+          hb.SafeString = _handlebarsSafeString2['default'];
+          hb.Exception = _handlebarsException2['default'];
           hb.Utils = Utils;
           hb.escapeExpression = Utils.escapeExpression;
 
@@ -229,20 +207,20 @@ THE SOFTWARE.
         var inst = create();
         inst.create = create;
 
-        _handlebarsNoConflict2["default"](inst);
+        _handlebarsNoConflict2['default'](inst);
 
-        inst["default"] = inst;
+        inst['default'] = inst;
 
-        exports["default"] = inst;
-        module.exports = exports["default"];
+        exports['default'] = inst;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 3 */
       /***/ function(module, exports) {
-        "use strict";
+        'use strict';
 
-        exports["default"] = function(obj) {
+        exports['default'] = function(obj) {
           if (obj && obj.__esModule) {
             return obj;
           } else {
@@ -250,12 +228,11 @@ THE SOFTWARE.
 
             if (obj != null) {
               for (var key in obj) {
-                if (Object.prototype.hasOwnProperty.call(obj, key))
-                  newObj[key] = obj[key];
+                if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
               }
             }
 
-            newObj["default"] = obj;
+            newObj['default'] = obj;
             return newObj;
           }
         };
@@ -266,9 +243,9 @@ THE SOFTWARE.
       },
       /* 4 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
         exports.HandlebarsEnvironment = HandlebarsEnvironment;
@@ -287,23 +264,23 @@ THE SOFTWARE.
 
         var _logger2 = _interopRequireDefault(_logger);
 
-        var VERSION = "4.0.10";
+        var VERSION = '4.0.10';
         exports.VERSION = VERSION;
         var COMPILER_REVISION = 7;
 
         exports.COMPILER_REVISION = COMPILER_REVISION;
         var REVISION_CHANGES = {
-          1: "<= 1.0.rc.2", // 1.0.rc.2 is actually rev2 but doesn't report it
-          2: "== 1.0.0-rc.3",
-          3: "== 1.0.0-rc.4",
-          4: "== 1.x.x",
-          5: "== 2.0.0-alpha.x",
-          6: ">= 2.0.0-beta.1",
-          7: ">= 4.0.0"
+          1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
+          2: '== 1.0.0-rc.3',
+          3: '== 1.0.0-rc.4',
+          4: '== 1.x.x',
+          5: '== 2.0.0-alpha.x',
+          6: '>= 2.0.0-beta.1',
+          7: '>= 4.0.0'
         };
 
         exports.REVISION_CHANGES = REVISION_CHANGES;
-        var objectType = "[object Object]";
+        var objectType = '[object Object]';
 
         function HandlebarsEnvironment(helpers, partials, decorators) {
           this.helpers = helpers || {};
@@ -317,15 +294,13 @@ THE SOFTWARE.
         HandlebarsEnvironment.prototype = {
           constructor: HandlebarsEnvironment,
 
-          logger: _logger2["default"],
-          log: _logger2["default"].log,
+          logger: _logger2['default'],
+          log: _logger2['default'].log,
 
           registerHelper: function registerHelper(name, fn) {
             if (_utils.toString.call(name) === objectType) {
               if (fn) {
-                throw new _exception2["default"](
-                  "Arg not supported with multiple helpers"
-                );
+                throw new _exception2['default']('Arg not supported with multiple helpers');
               }
               _utils.extend(this.helpers, name);
             } else {
@@ -340,12 +315,8 @@ THE SOFTWARE.
             if (_utils.toString.call(name) === objectType) {
               _utils.extend(this.partials, name);
             } else {
-              if (typeof partial === "undefined") {
-                throw new _exception2["default"](
-                  'Attempting to register a partial called "' +
-                    name +
-                    '" as undefined'
-                );
+              if (typeof partial === 'undefined') {
+                throw new _exception2['default']('Attempting to register a partial called "' + name + '" as undefined');
               }
               this.partials[name] = partial;
             }
@@ -357,9 +328,7 @@ THE SOFTWARE.
           registerDecorator: function registerDecorator(name, fn) {
             if (_utils.toString.call(name) === objectType) {
               if (fn) {
-                throw new _exception2["default"](
-                  "Arg not supported with multiple decorators"
-                );
+                throw new _exception2['default']('Arg not supported with multiple decorators');
               }
               _utils.extend(this.decorators, name);
             } else {
@@ -371,17 +340,17 @@ THE SOFTWARE.
           }
         };
 
-        var log = _logger2["default"].log;
+        var log = _logger2['default'].log;
 
         exports.log = log;
         exports.createFrame = _utils.createFrame;
-        exports.logger = _logger2["default"];
+        exports.logger = _logger2['default'];
 
         /***/
       },
       /* 5 */
       /***/ function(module, exports) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
         exports.extend = extend;
@@ -392,13 +361,13 @@ THE SOFTWARE.
         exports.blockParams = blockParams;
         exports.appendContextPath = appendContextPath;
         var escape = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#x27;",
-          "`": "&#x60;",
-          "=": "&#x3D;"
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#x27;',
+          '`': '&#x60;',
+          '=': '&#x3D;'
         };
 
         var badChars = /[&<>"'`=]/g,
@@ -427,16 +396,13 @@ THE SOFTWARE.
         // https://github.com/bestiejs/lodash/blob/master/LICENSE.txt
         /* eslint-disable func-style */
         var isFunction = function isFunction(value) {
-          return typeof value === "function";
+          return typeof value === 'function';
         };
         // fallback for older versions of Chrome and Safari
         /* istanbul ignore next */
         if (isFunction(/x/)) {
           exports.isFunction = isFunction = function(value) {
-            return (
-              typeof value === "function" &&
-              toString.call(value) === "[object Function]"
-            );
+            return typeof value === 'function' && toString.call(value) === '[object Function]';
           };
         }
         exports.isFunction = isFunction;
@@ -447,9 +413,7 @@ THE SOFTWARE.
         var isArray =
           Array.isArray ||
           function(value) {
-            return value && typeof value === "object"
-              ? toString.call(value) === "[object Array]"
-              : false;
+            return value && typeof value === 'object' ? toString.call(value) === '[object Array]' : false;
           };
 
         exports.isArray = isArray;
@@ -465,20 +429,20 @@ THE SOFTWARE.
         }
 
         function escapeExpression(string) {
-          if (typeof string !== "string") {
+          if (typeof string !== 'string') {
             // don't escape SafeStrings, since they're already safe
             if (string && string.toHTML) {
               return string.toHTML();
             } else if (string == null) {
-              return "";
+              return '';
             } else if (!string) {
-              return string + "";
+              return string + '';
             }
 
             // Force a string conversion as this will be done by the append regardless and
             // the regex test will do this transparently behind the scenes, causing issues if
             // an object's to string has escaped characters in it.
-            string = "" + string;
+            string = '' + string;
           }
 
           if (!possible.test(string)) {
@@ -509,28 +473,20 @@ THE SOFTWARE.
         }
 
         function appendContextPath(contextPath, id) {
-          return (contextPath ? contextPath + "." : "") + id;
+          return (contextPath ? contextPath + '.' : '') + id;
         }
 
         /***/
       },
       /* 6 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _Object$defineProperty = __webpack_require__(7)["default"];
+        var _Object$defineProperty = __webpack_require__(7)['default'];
 
         exports.__esModule = true;
 
-        var errorProps = [
-          "description",
-          "fileName",
-          "lineNumber",
-          "message",
-          "name",
-          "number",
-          "stack"
-        ];
+        var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
 
         function Exception(message, node) {
           var loc = node && node.loc,
@@ -540,7 +496,7 @@ THE SOFTWARE.
             line = loc.start.line;
             column = loc.start.column;
 
-            message += " - " + line + ":" + column;
+            message += ' - ' + line + ':' + column;
           }
 
           var tmp = Error.prototype.constructor.call(this, message);
@@ -562,7 +518,7 @@ THE SOFTWARE.
               // Work around issue under safari where we can't directly set the column value
               /* istanbul ignore next */
               if (_Object$defineProperty) {
-                Object.defineProperty(this, "column", {
+                Object.defineProperty(this, 'column', {
                   value: column,
                   enumerable: true
                 });
@@ -577,8 +533,8 @@ THE SOFTWARE.
 
         Exception.prototype = new Error();
 
-        exports["default"] = Exception;
-        module.exports = exports["default"];
+        exports['default'] = Exception;
+        module.exports = exports['default'];
 
         /***/
       },
@@ -617,18 +573,16 @@ THE SOFTWARE.
       },
       /* 10 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
         exports.registerDefaultHelpers = registerDefaultHelpers;
 
         var _helpersBlockHelperMissing = __webpack_require__(11);
 
-        var _helpersBlockHelperMissing2 = _interopRequireDefault(
-          _helpersBlockHelperMissing
-        );
+        var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
         var _helpersEach = __webpack_require__(12);
 
@@ -636,9 +590,7 @@ THE SOFTWARE.
 
         var _helpersHelperMissing = __webpack_require__(13);
 
-        var _helpersHelperMissing2 = _interopRequireDefault(
-          _helpersHelperMissing
-        );
+        var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
         var _helpersIf = __webpack_require__(14);
 
@@ -657,30 +609,27 @@ THE SOFTWARE.
         var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
         function registerDefaultHelpers(instance) {
-          _helpersBlockHelperMissing2["default"](instance);
-          _helpersEach2["default"](instance);
-          _helpersHelperMissing2["default"](instance);
-          _helpersIf2["default"](instance);
-          _helpersLog2["default"](instance);
-          _helpersLookup2["default"](instance);
-          _helpersWith2["default"](instance);
+          _helpersBlockHelperMissing2['default'](instance);
+          _helpersEach2['default'](instance);
+          _helpersHelperMissing2['default'](instance);
+          _helpersIf2['default'](instance);
+          _helpersLog2['default'](instance);
+          _helpersLookup2['default'](instance);
+          _helpersWith2['default'](instance);
         }
 
         /***/
       },
       /* 11 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
         var _utils = __webpack_require__(5);
 
-        exports["default"] = function(instance) {
-          instance.registerHelper("blockHelperMissing", function(
-            context,
-            options
-          ) {
+        exports['default'] = function(instance) {
+          instance.registerHelper('blockHelperMissing', function(context, options) {
             var inverse = options.inverse,
               fn = options.fn;
 
@@ -701,10 +650,7 @@ THE SOFTWARE.
             } else {
               if (options.data && options.ids) {
                 var data = _utils.createFrame(options.data);
-                data.contextPath = _utils.appendContextPath(
-                  options.data.contextPath,
-                  options.name
-                );
+                data.contextPath = _utils.appendContextPath(options.data.contextPath, options.name);
                 options = { data: data };
               }
 
@@ -713,15 +659,15 @@ THE SOFTWARE.
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 12 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -731,25 +677,21 @@ THE SOFTWARE.
 
         var _exception2 = _interopRequireDefault(_exception);
 
-        exports["default"] = function(instance) {
-          instance.registerHelper("each", function(context, options) {
+        exports['default'] = function(instance) {
+          instance.registerHelper('each', function(context, options) {
             if (!options) {
-              throw new _exception2["default"]("Must pass iterator to #each");
+              throw new _exception2['default']('Must pass iterator to #each');
             }
 
             var fn = options.fn,
               inverse = options.inverse,
               i = 0,
-              ret = "",
+              ret = '',
               data = undefined,
               contextPath = undefined;
 
             if (options.data && options.ids) {
-              contextPath =
-                _utils.appendContextPath(
-                  options.data.contextPath,
-                  options.ids[0]
-                ) + ".";
+              contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';
             }
 
             if (_utils.isFunction(context)) {
@@ -776,14 +718,11 @@ THE SOFTWARE.
                 ret +
                 fn(context[field], {
                   data: data,
-                  blockParams: _utils.blockParams(
-                    [context[field], field],
-                    [contextPath + field, null]
-                  )
+                  blockParams: _utils.blockParams([context[field], field], [contextPath + field, null])
                 });
             }
 
-            if (context && typeof context === "object") {
+            if (context && typeof context === 'object') {
               if (_utils.isArray(context)) {
                 for (var j = context.length; i < j; i++) {
                   if (i in context) {
@@ -819,15 +758,15 @@ THE SOFTWARE.
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 13 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -835,39 +774,32 @@ THE SOFTWARE.
 
         var _exception2 = _interopRequireDefault(_exception);
 
-        exports["default"] = function(instance) {
-          instance.registerHelper(
-            "helperMissing",
-            function() /* [args, ]options */ {
-              if (arguments.length === 1) {
-                // A missing field in a {{foo}} construct.
-                return undefined;
-              } else {
-                // Someone is actually trying to call something, blow up.
-                throw new _exception2["default"](
-                  'Missing helper: "' +
-                    arguments[arguments.length - 1].name +
-                    '"'
-                );
-              }
+        exports['default'] = function(instance) {
+          instance.registerHelper('helperMissing', function() /* [args, ]options */ {
+            if (arguments.length === 1) {
+              // A missing field in a {{foo}} construct.
+              return undefined;
+            } else {
+              // Someone is actually trying to call something, blow up.
+              throw new _exception2['default']('Missing helper: "' + arguments[arguments.length - 1].name + '"');
             }
-          );
+          });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 14 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
         var _utils = __webpack_require__(5);
 
-        exports["default"] = function(instance) {
-          instance.registerHelper("if", function(conditional, options) {
+        exports['default'] = function(instance) {
+          instance.registerHelper('if', function(conditional, options) {
             if (_utils.isFunction(conditional)) {
               conditional = conditional.call(this);
             }
@@ -875,18 +807,15 @@ THE SOFTWARE.
             // Default behavior is to render the positive path if the value is truthy and not empty.
             // The `includeZero` option may be set to treat the condtional as purely not empty based on the
             // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.
-            if (
-              (!options.hash.includeZero && !conditional) ||
-              _utils.isEmpty(conditional)
-            ) {
+            if ((!options.hash.includeZero && !conditional) || _utils.isEmpty(conditional)) {
               return options.inverse(this);
             } else {
               return options.fn(this);
             }
           });
 
-          instance.registerHelper("unless", function(conditional, options) {
-            return instance.helpers["if"].call(this, conditional, {
+          instance.registerHelper('unless', function(conditional, options) {
+            return instance.helpers['if'].call(this, conditional, {
               fn: options.inverse,
               inverse: options.fn,
               hash: options.hash
@@ -894,18 +823,18 @@ THE SOFTWARE.
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 15 */
       /***/ function(module, exports) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
-        exports["default"] = function(instance) {
-          instance.registerHelper("log", function() /* message, options */ {
+        exports['default'] = function(instance) {
+          instance.registerHelper('log', function() /* message, options */ {
             var args = [undefined],
               options = arguments[arguments.length - 1];
             for (var i = 0; i < arguments.length - 1; i++) {
@@ -924,36 +853,36 @@ THE SOFTWARE.
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 16 */
       /***/ function(module, exports) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
-        exports["default"] = function(instance) {
-          instance.registerHelper("lookup", function(obj, field) {
+        exports['default'] = function(instance) {
+          instance.registerHelper('lookup', function(obj, field) {
             return obj && obj[field];
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 17 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
         var _utils = __webpack_require__(5);
 
-        exports["default"] = function(instance) {
-          instance.registerHelper("with", function(context, options) {
+        exports['default'] = function(instance) {
+          instance.registerHelper('with', function(context, options) {
             if (_utils.isFunction(context)) {
               context = context.call(this);
             }
@@ -964,18 +893,12 @@ THE SOFTWARE.
               var data = options.data;
               if (options.data && options.ids) {
                 data = _utils.createFrame(options.data);
-                data.contextPath = _utils.appendContextPath(
-                  options.data.contextPath,
-                  options.ids[0]
-                );
+                data.contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]);
               }
 
               return fn(context, {
                 data: data,
-                blockParams: _utils.blockParams(
-                  [context],
-                  [data && data.contextPath]
-                )
+                blockParams: _utils.blockParams([context], [data && data.contextPath])
               });
             } else {
               return options.inverse(this);
@@ -983,15 +906,15 @@ THE SOFTWARE.
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 18 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
         exports.registerDefaultDecorators = registerDefaultDecorators;
@@ -1001,37 +924,28 @@ THE SOFTWARE.
         var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
         function registerDefaultDecorators(instance) {
-          _decoratorsInline2["default"](instance);
+          _decoratorsInline2['default'](instance);
         }
 
         /***/
       },
       /* 19 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
         var _utils = __webpack_require__(5);
 
-        exports["default"] = function(instance) {
-          instance.registerDecorator("inline", function(
-            fn,
-            props,
-            container,
-            options
-          ) {
+        exports['default'] = function(instance) {
+          instance.registerDecorator('inline', function(fn, props, container, options) {
             var ret = fn;
             if (!props.partials) {
               props.partials = {};
               ret = function(context, options) {
                 // Create a new partials stack frame prior to exec.
                 var original = container.partials;
-                container.partials = _utils.extend(
-                  {},
-                  original,
-                  props.partials
-                );
+                container.partials = _utils.extend({}, original, props.partials);
                 var ret = fn(context, options);
                 container.partials = original;
                 return ret;
@@ -1044,29 +958,26 @@ THE SOFTWARE.
           });
         };
 
-        module.exports = exports["default"];
+        module.exports = exports['default'];
 
         /***/
       },
       /* 20 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
         var _utils = __webpack_require__(5);
 
         var logger = {
-          methodMap: ["debug", "info", "warn", "error"],
-          level: "info",
+          methodMap: ['debug', 'info', 'warn', 'error'],
+          level: 'info',
 
           // Maps a given level value to the `methodMap` indexes above.
           lookupLevel: function lookupLevel(level) {
-            if (typeof level === "string") {
-              var levelMap = _utils.indexOf(
-                logger.methodMap,
-                level.toLowerCase()
-              );
+            if (typeof level === 'string') {
+              var levelMap = _utils.indexOf(logger.methodMap, level.toLowerCase());
               if (levelMap >= 0) {
                 level = levelMap;
               } else {
@@ -1081,20 +992,15 @@ THE SOFTWARE.
           log: function log(level) {
             level = logger.lookupLevel(level);
 
-            if (
-              typeof console !== "undefined" &&
-              logger.lookupLevel(logger.level) <= level
-            ) {
+            if (typeof console !== 'undefined' && logger.lookupLevel(logger.level) <= level) {
               var method = logger.methodMap[level];
               if (!console[method]) {
                 // eslint-disable-line no-console
-                method = "log";
+                method = 'log';
               }
 
               for (
-                var _len = arguments.length,
-                  message = Array(_len > 1 ? _len - 1 : 0),
-                  _key = 1;
+                var _len = arguments.length, message = Array(_len > 1 ? _len - 1 : 0), _key = 1;
                 _key < _len;
                 _key++
               ) {
@@ -1106,15 +1012,15 @@ THE SOFTWARE.
           }
         };
 
-        exports["default"] = logger;
-        module.exports = exports["default"];
+        exports['default'] = logger;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 21 */
       /***/ function(module, exports) {
         // Build out our basic SafeString type
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
         function SafeString(string) {
@@ -1122,23 +1028,23 @@ THE SOFTWARE.
         }
 
         SafeString.prototype.toString = SafeString.prototype.toHTML = function() {
-          return "" + this.string;
+          return '' + this.string;
         };
 
-        exports["default"] = SafeString;
-        module.exports = exports["default"];
+        exports['default'] = SafeString;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 22 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _Object$seal = __webpack_require__(23)["default"];
+        var _Object$seal = __webpack_require__(23)['default'];
 
-        var _interopRequireWildcard = __webpack_require__(3)["default"];
+        var _interopRequireWildcard = __webpack_require__(3)['default'];
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
         exports.checkRevision = checkRevision;
@@ -1166,21 +1072,21 @@ THE SOFTWARE.
             if (compilerRevision < currentRevision) {
               var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
                 compilerVersions = _base.REVISION_CHANGES[compilerRevision];
-              throw new _exception2["default"](
-                "Template was precompiled with an older version of Handlebars than the current runtime. " +
-                  "Please update your precompiler to a newer version (" +
+              throw new _exception2['default'](
+                'Template was precompiled with an older version of Handlebars than the current runtime. ' +
+                  'Please update your precompiler to a newer version (' +
                   runtimeVersions +
-                  ") or downgrade your runtime to an older version (" +
+                  ') or downgrade your runtime to an older version (' +
                   compilerVersions +
-                  ")."
+                  ').'
               );
             } else {
               // Use the embedded version info since the runtime doesn't know about this revision yet
-              throw new _exception2["default"](
-                "Template was precompiled with a newer version of Handlebars than the current runtime. " +
-                  "Please update your runtime to a newer version (" +
+              throw new _exception2['default'](
+                'Template was precompiled with a newer version of Handlebars than the current runtime. ' +
+                  'Please update your runtime to a newer version (' +
                   compilerInfo[1] +
-                  ")."
+                  ').'
               );
             }
           }
@@ -1189,14 +1095,10 @@ THE SOFTWARE.
         function template(templateSpec, env) {
           /* istanbul ignore next */
           if (!env) {
-            throw new _exception2["default"](
-              "No environment passed to template"
-            );
+            throw new _exception2['default']('No environment passed to template');
           }
           if (!templateSpec || !templateSpec.main) {
-            throw new _exception2["default"](
-              "Unknown template object: " + typeof templateSpec
-            );
+            throw new _exception2['default']('Unknown template object: ' + typeof templateSpec);
           }
 
           templateSpec.main.decorator = templateSpec.main_d;
@@ -1213,30 +1115,16 @@ THE SOFTWARE.
               }
             }
 
-            partial = env.VM.resolvePartial.call(
-              this,
-              partial,
-              context,
-              options
-            );
-            var result = env.VM.invokePartial.call(
-              this,
-              partial,
-              context,
-              options
-            );
+            partial = env.VM.resolvePartial.call(this, partial, context, options);
+            var result = env.VM.invokePartial.call(this, partial, context, options);
 
             if (result == null && env.compile) {
-              options.partials[options.name] = env.compile(
-                partial,
-                templateSpec.compilerOptions,
-                env
-              );
+              options.partials[options.name] = env.compile(partial, templateSpec.compilerOptions, env);
               result = options.partials[options.name](context, options);
             }
             if (result != null) {
               if (options.indent) {
-                var lines = result.split("\n");
+                var lines = result.split('\n');
                 for (var i = 0, l = lines.length; i < l; i++) {
                   if (!lines[i] && i + 1 === l) {
                     break;
@@ -1244,14 +1132,12 @@ THE SOFTWARE.
 
                   lines[i] = options.indent + lines[i];
                 }
-                result = lines.join("\n");
+                result = lines.join('\n');
               }
               return result;
             } else {
-              throw new _exception2["default"](
-                "The partial " +
-                  options.name +
-                  " could not be compiled when running in runtime-only mode"
+              throw new _exception2['default'](
+                'The partial ' + options.name + ' could not be compiled when running in runtime-only mode'
               );
             }
           }
@@ -1260,9 +1146,7 @@ THE SOFTWARE.
           var container = {
             strict: function strict(obj, name) {
               if (!(name in obj)) {
-                throw new _exception2["default"](
-                  '"' + name + '" not defined in ' + obj
-                );
+                throw new _exception2['default']('"' + name + '" not defined in ' + obj);
               }
               return obj[name];
             },
@@ -1275,9 +1159,7 @@ THE SOFTWARE.
               }
             },
             lambda: function lambda(current, context) {
-              return typeof current === "function"
-                ? current.call(context)
-                : current;
+              return typeof current === 'function' ? current.call(context) : current;
             },
 
             escapeExpression: Utils.escapeExpression,
@@ -1285,30 +1167,16 @@ THE SOFTWARE.
 
             fn: function fn(i) {
               var ret = templateSpec[i];
-              ret.decorator = templateSpec[i + "_d"];
+              ret.decorator = templateSpec[i + '_d'];
               return ret;
             },
 
             programs: [],
-            program: function program(
-              i,
-              data,
-              declaredBlockParams,
-              blockParams,
-              depths
-            ) {
+            program: function program(i, data, declaredBlockParams, blockParams, depths) {
               var programWrapper = this.programs[i],
                 fn = this.fn(i);
               if (data || depths || blockParams || declaredBlockParams) {
-                programWrapper = wrapProgram(
-                  this,
-                  i,
-                  fn,
-                  data,
-                  declaredBlockParams,
-                  blockParams,
-                  depths
-                );
+                programWrapper = wrapProgram(this, i, fn, data, declaredBlockParams, blockParams, depths);
               } else if (!programWrapper) {
                 programWrapper = this.programs[i] = wrapProgram(this, i, fn);
               }
@@ -1338,10 +1206,7 @@ THE SOFTWARE.
           };
 
           function ret(context) {
-            var options =
-              arguments.length <= 1 || arguments[1] === undefined
-                ? {}
-                : arguments[1];
+            var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
             var data = options.data;
 
@@ -1353,10 +1218,7 @@ THE SOFTWARE.
               blockParams = templateSpec.useBlockParams ? [] : undefined;
             if (templateSpec.useDepths) {
               if (options.depths) {
-                depths =
-                  context != options.depths[0]
-                    ? [context].concat(options.depths)
-                    : options.depths;
+                depths = context != options.depths[0] ? [context].concat(options.depths) : options.depths;
               } else {
                 depths = [context];
               }
@@ -1364,26 +1226,11 @@ THE SOFTWARE.
 
             function main(context /*, options*/) {
               return (
-                "" +
-                templateSpec.main(
-                  container,
-                  context,
-                  container.helpers,
-                  container.partials,
-                  data,
-                  blockParams,
-                  depths
-                )
+                '' +
+                templateSpec.main(container, context, container.helpers, container.partials, data, blockParams, depths)
               );
             }
-            main = executeDecorators(
-              templateSpec.main,
-              main,
-              container,
-              options.depths || [],
-              data,
-              blockParams
-            );
+            main = executeDecorators(templateSpec.main, main, container, options.depths || [], data, blockParams);
             return main(context, options);
           }
           ret.isTop = true;
@@ -1393,16 +1240,10 @@ THE SOFTWARE.
               container.helpers = container.merge(options.helpers, env.helpers);
 
               if (templateSpec.usePartial) {
-                container.partials = container.merge(
-                  options.partials,
-                  env.partials
-                );
+                container.partials = container.merge(options.partials, env.partials);
               }
               if (templateSpec.usePartial || templateSpec.useDecorators) {
-                container.decorators = container.merge(
-                  options.decorators,
-                  env.decorators
-                );
+                container.decorators = container.merge(options.decorators, env.decorators);
               }
             } else {
               container.helpers = options.helpers;
@@ -1413,46 +1254,23 @@ THE SOFTWARE.
 
           ret._child = function(i, data, blockParams, depths) {
             if (templateSpec.useBlockParams && !blockParams) {
-              throw new _exception2["default"]("must pass block params");
+              throw new _exception2['default']('must pass block params');
             }
             if (templateSpec.useDepths && !depths) {
-              throw new _exception2["default"]("must pass parent depths");
+              throw new _exception2['default']('must pass parent depths');
             }
 
-            return wrapProgram(
-              container,
-              i,
-              templateSpec[i],
-              data,
-              0,
-              blockParams,
-              depths
-            );
+            return wrapProgram(container, i, templateSpec[i], data, 0, blockParams, depths);
           };
           return ret;
         }
 
-        function wrapProgram(
-          container,
-          i,
-          fn,
-          data,
-          declaredBlockParams,
-          blockParams,
-          depths
-        ) {
+        function wrapProgram(container, i, fn, data, declaredBlockParams, blockParams, depths) {
           function prog(context) {
-            var options =
-              arguments.length <= 1 || arguments[1] === undefined
-                ? {}
-                : arguments[1];
+            var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
             var currentDepths = depths;
-            if (
-              depths &&
-              context != depths[0] &&
-              !(context === container.nullContext && depths[0] === null)
-            ) {
+            if (depths && context != depths[0] && !(context === container.nullContext && depths[0] === null)) {
               currentDepths = [context].concat(depths);
             }
 
@@ -1467,14 +1285,7 @@ THE SOFTWARE.
             );
           }
 
-          prog = executeDecorators(
-            fn,
-            prog,
-            container,
-            depths,
-            data,
-            blockParams
-          );
+          prog = executeDecorators(fn, prog, container, depths, data, blockParams);
 
           prog.program = i;
           prog.depth = depths ? depths.length : 0;
@@ -1484,8 +1295,8 @@ THE SOFTWARE.
 
         function resolvePartial(partial, context, options) {
           if (!partial) {
-            if (options.name === "@partial-block") {
-              partial = options.data["partial-block"];
+            if (options.name === '@partial-block') {
+              partial = options.data['partial-block'];
             } else {
               partial = options.partials[options.name];
             }
@@ -1499,12 +1310,10 @@ THE SOFTWARE.
 
         function invokePartial(partial, context, options) {
           // Use the current closure context to save the partial-block if this partial
-          var currentPartialBlock =
-            options.data && options.data["partial-block"];
+          var currentPartialBlock = options.data && options.data['partial-block'];
           options.partial = true;
           if (options.ids) {
-            options.data.contextPath =
-              options.ids[0] || options.data.contextPath;
+            options.data.contextPath = options.ids[0] || options.data.contextPath;
           }
 
           var partialBlock = undefined;
@@ -1513,26 +1322,17 @@ THE SOFTWARE.
               options.data = _base.createFrame(options.data);
               // Wrapper function to get access to currentPartialBlock from the closure
               var fn = options.fn;
-              partialBlock = options.data[
-                "partial-block"
-              ] = function partialBlockWrapper(context) {
-                var options =
-                  arguments.length <= 1 || arguments[1] === undefined
-                    ? {}
-                    : arguments[1];
+              partialBlock = options.data['partial-block'] = function partialBlockWrapper(context) {
+                var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
                 // Restore the partial-block from the closure for the execution of the block
                 // i.e. the part inside the block of the partial call.
                 options.data = _base.createFrame(options.data);
-                options.data["partial-block"] = currentPartialBlock;
+                options.data['partial-block'] = currentPartialBlock;
                 return fn(context, options);
               };
               if (fn.partials) {
-                options.partials = Utils.extend(
-                  {},
-                  options.partials,
-                  fn.partials
-                );
+                options.partials = Utils.extend({}, options.partials, fn.partials);
               }
             })();
           }
@@ -1542,45 +1342,28 @@ THE SOFTWARE.
           }
 
           if (partial === undefined) {
-            throw new _exception2["default"](
-              "The partial " + options.name + " could not be found"
-            );
+            throw new _exception2['default']('The partial ' + options.name + ' could not be found');
           } else if (partial instanceof Function) {
             return partial(context, options);
           }
         }
 
         function noop() {
-          return "";
+          return '';
         }
 
         function initData(context, data) {
-          if (!data || !("root" in data)) {
+          if (!data || !('root' in data)) {
             data = data ? _base.createFrame(data) : {};
             data.root = context;
           }
           return data;
         }
 
-        function executeDecorators(
-          fn,
-          prog,
-          container,
-          depths,
-          data,
-          blockParams
-        ) {
+        function executeDecorators(fn, prog, container, depths, data, blockParams) {
           if (fn.decorator) {
             var props = {};
-            prog = fn.decorator(
-              prog,
-              props,
-              container,
-              depths && depths[0],
-              data,
-              blockParams,
-              depths
-            );
+            prog = fn.decorator(prog, props, container, depths && depths[0], data, blockParams, depths);
             Utils.extend(prog, props);
           }
           return prog;
@@ -1606,7 +1389,7 @@ THE SOFTWARE.
         // 19.1.2.17 Object.seal(O)
         var isObject = __webpack_require__(26);
 
-        __webpack_require__(27)("seal", function($seal) {
+        __webpack_require__(27)('seal', function($seal) {
           return function seal(it) {
             return $seal && isObject(it) ? $seal(it) : it;
           };
@@ -1617,9 +1400,7 @@ THE SOFTWARE.
       /* 26 */
       /***/ function(module, exports) {
         module.exports = function(it) {
-          return typeof it === "object"
-            ? it !== null
-            : typeof it === "function";
+          return typeof it === 'object' ? it !== null : typeof it === 'function';
         };
 
         /***/
@@ -1640,7 +1421,7 @@ THE SOFTWARE.
                 fails(function() {
                   fn(1);
                 }),
-            "Object",
+            'Object',
             exp
           );
         };
@@ -1652,7 +1433,7 @@ THE SOFTWARE.
         var global = __webpack_require__(29),
           core = __webpack_require__(30),
           ctx = __webpack_require__(31),
-          PROTOTYPE = "prototype";
+          PROTOTYPE = 'prototype';
 
         var $export = function(type, name, source) {
           var IS_FORCED = type & $export.F,
@@ -1662,11 +1443,7 @@ THE SOFTWARE.
             IS_BIND = type & $export.B,
             IS_WRAP = type & $export.W,
             exports = IS_GLOBAL ? core : core[name] || (core[name] = {}),
-            target = IS_GLOBAL
-              ? global
-              : IS_STATIC
-              ? global[name]
-              : (global[name] || {})[PROTOTYPE],
+            target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE],
             key,
             own,
             out;
@@ -1679,7 +1456,7 @@ THE SOFTWARE.
             out = own ? target[key] : source[key];
             // prevent global pollution for namespaces
             exports[key] =
-              IS_GLOBAL && typeof target[key] != "function"
+              IS_GLOBAL && typeof target[key] != 'function'
                 ? source[key]
                 : // bind timers to global for call from export context
                 IS_BIND && own
@@ -1694,11 +1471,10 @@ THE SOFTWARE.
                     return F;
                     // make static versions for prototype methods
                   })(out)
-                : IS_PROTO && typeof out == "function"
+                : IS_PROTO && typeof out == 'function'
                 ? ctx(Function.call, out)
                 : out;
-            if (IS_PROTO)
-              (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+            if (IS_PROTO) (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
           }
         };
         // type bitmap
@@ -1716,19 +1492,19 @@ THE SOFTWARE.
       /***/ function(module, exports) {
         // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
         var global = (module.exports =
-          typeof window != "undefined" && window.Math == Math
+          typeof window != 'undefined' && window.Math == Math
             ? window
-            : typeof self != "undefined" && self.Math == Math
+            : typeof self != 'undefined' && self.Math == Math
             ? self
-            : Function("return this")());
-        if (typeof __g == "number") __g = global; // eslint-disable-line no-undef
+            : Function('return this')());
+        if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
         /***/
       },
       /* 30 */
       /***/ function(module, exports) {
-        var core = (module.exports = { version: "1.2.6" });
-        if (typeof __e == "number") __e = core; // eslint-disable-line no-undef
+        var core = (module.exports = { version: '1.2.6' });
+        if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
         /***/
       },
@@ -1763,8 +1539,7 @@ THE SOFTWARE.
       /* 32 */
       /***/ function(module, exports) {
         module.exports = function(it) {
-          if (typeof it != "function")
-            throw TypeError(it + " is not a function!");
+          if (typeof it != 'function') throw TypeError(it + ' is not a function!');
           return it;
         };
 
@@ -1786,13 +1561,13 @@ THE SOFTWARE.
       /***/ function(module, exports) {
         /* WEBPACK VAR INJECTION */ (function(global) {
           /* global window */
-          "use strict";
+          'use strict';
 
           exports.__esModule = true;
 
-          exports["default"] = function(Handlebars) {
+          exports['default'] = function(Handlebars) {
             /* istanbul ignore next */
-            var root = typeof global !== "undefined" ? global : window,
+            var root = typeof global !== 'undefined' ? global : window,
               $Handlebars = root.Handlebars;
             /* istanbul ignore next */
             Handlebars.noConflict = function() {
@@ -1803,7 +1578,7 @@ THE SOFTWARE.
             };
           };
 
-          module.exports = exports["default"];
+          module.exports = exports['default'];
           /* WEBPACK VAR INJECTION */
         }.call(
           exports,
@@ -1816,7 +1591,7 @@ THE SOFTWARE.
       },
       /* 35 */
       /***/ function(module, exports) {
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
         var AST = {
@@ -1827,9 +1602,8 @@ THE SOFTWARE.
             // * it has at least one parameter or hash segment
             helperExpression: function helperExpression(node) {
               return (
-                node.type === "SubExpression" ||
-                ((node.type === "MustacheStatement" ||
-                  node.type === "BlockStatement") &&
+                node.type === 'SubExpression' ||
+                ((node.type === 'MustacheStatement' || node.type === 'BlockStatement') &&
                   !!((node.params && node.params.length) || node.hash))
               );
             },
@@ -1841,29 +1615,25 @@ THE SOFTWARE.
             // an ID is simple if it only has one part, and that part is not
             // `..` or `this`.
             simpleId: function simpleId(path) {
-              return (
-                path.parts.length === 1 &&
-                !AST.helpers.scopedId(path) &&
-                !path.depth
-              );
+              return path.parts.length === 1 && !AST.helpers.scopedId(path) && !path.depth;
             }
           }
         };
 
         // Must be exported as an object rather than the root of the module as the jison lexer
         // must modify the object to operate properly.
-        exports["default"] = AST;
-        module.exports = exports["default"];
+        exports['default'] = AST;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 36 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
-        var _interopRequireWildcard = __webpack_require__(3)["default"];
+        var _interopRequireWildcard = __webpack_require__(3)['default'];
 
         exports.__esModule = true;
         exports.parse = parse;
@@ -1882,26 +1652,26 @@ THE SOFTWARE.
 
         var _utils = __webpack_require__(5);
 
-        exports.parser = _parser2["default"];
+        exports.parser = _parser2['default'];
 
         var yy = {};
         _utils.extend(yy, Helpers);
 
         function parse(input, options) {
           // Just return if an already-compiled AST was passed in.
-          if (input.type === "Program") {
+          if (input.type === 'Program') {
             return input;
           }
 
-          _parser2["default"].yy = yy;
+          _parser2['default'].yy = yy;
 
           // Altering the shared object here, but this is ok as parser is a sync operation
           yy.locInfo = function(locInfo) {
             return new yy.SourceLocation(options && options.srcName, locInfo);
           };
 
-          var strip = new _whitespaceControl2["default"](options);
-          return strip.accept(_parser2["default"].parse(input));
+          var strip = new _whitespaceControl2['default'](options);
+          return strip.accept(_parser2['default'].parse(input));
         }
 
         /***/
@@ -1910,7 +1680,7 @@ THE SOFTWARE.
       /***/ function(module, exports) {
         // File ignored in coverage tests via setting in .istanbul.yml
         /* Jison generated parser */
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
         var handlebars = (function() {
@@ -2008,37 +1778,37 @@ THE SOFTWARE.
               $end: 1
             },
             terminals_: {
-              2: "error",
-              5: "EOF",
-              14: "COMMENT",
-              15: "CONTENT",
-              18: "END_RAW_BLOCK",
-              19: "OPEN_RAW_BLOCK",
-              23: "CLOSE_RAW_BLOCK",
-              29: "OPEN_BLOCK",
-              33: "CLOSE",
-              34: "OPEN_INVERSE",
-              39: "OPEN_INVERSE_CHAIN",
-              44: "INVERSE",
-              47: "OPEN_ENDBLOCK",
-              48: "OPEN",
-              51: "OPEN_UNESCAPED",
-              54: "CLOSE_UNESCAPED",
-              55: "OPEN_PARTIAL",
-              60: "OPEN_PARTIAL_BLOCK",
-              65: "OPEN_SEXPR",
-              68: "CLOSE_SEXPR",
-              72: "ID",
-              73: "EQUALS",
-              75: "OPEN_BLOCK_PARAMS",
-              77: "CLOSE_BLOCK_PARAMS",
-              80: "STRING",
-              81: "NUMBER",
-              82: "BOOLEAN",
-              83: "UNDEFINED",
-              84: "NULL",
-              85: "DATA",
-              87: "SEP"
+              2: 'error',
+              5: 'EOF',
+              14: 'COMMENT',
+              15: 'CONTENT',
+              18: 'END_RAW_BLOCK',
+              19: 'OPEN_RAW_BLOCK',
+              23: 'CLOSE_RAW_BLOCK',
+              29: 'OPEN_BLOCK',
+              33: 'CLOSE',
+              34: 'OPEN_INVERSE',
+              39: 'OPEN_INVERSE_CHAIN',
+              44: 'INVERSE',
+              47: 'OPEN_ENDBLOCK',
+              48: 'OPEN',
+              51: 'OPEN_UNESCAPED',
+              54: 'CLOSE_UNESCAPED',
+              55: 'OPEN_PARTIAL',
+              60: 'OPEN_PARTIAL_BLOCK',
+              65: 'OPEN_SEXPR',
+              68: 'CLOSE_SEXPR',
+              72: 'ID',
+              73: 'EQUALS',
+              75: 'OPEN_BLOCK_PARAMS',
+              77: 'CLOSE_BLOCK_PARAMS',
+              80: 'STRING',
+              81: 'NUMBER',
+              82: 'BOOLEAN',
+              83: 'UNDEFINED',
+              84: 'NULL',
+              85: 'DATA',
+              87: 'SEP'
             },
             productions_: [
               0,
@@ -2182,7 +1952,7 @@ THE SOFTWARE.
                   break;
                 case 9:
                   this.$ = {
-                    type: "CommentStatement",
+                    type: 'CommentStatement',
                     value: yy.stripComment($$[$0]),
                     strip: yy.stripFlags($$[$0], $$[$0]),
                     loc: yy.locInfo(this._$)
@@ -2191,7 +1961,7 @@ THE SOFTWARE.
                   break;
                 case 10:
                   this.$ = {
-                    type: "ContentStatement",
+                    type: 'ContentStatement',
                     original: $$[$0],
                     value: $$[$0],
                     loc: yy.locInfo(this._$)
@@ -2199,12 +1969,7 @@ THE SOFTWARE.
 
                   break;
                 case 11:
-                  this.$ = yy.prepareRawBlock(
-                    $$[$0 - 2],
-                    $$[$0 - 1],
-                    $$[$0],
-                    this._$
-                  );
+                  this.$ = yy.prepareRawBlock($$[$0 - 2], $$[$0 - 1], $$[$0], this._$);
                   break;
                 case 12:
                   this.$ = {
@@ -2214,24 +1979,10 @@ THE SOFTWARE.
                   };
                   break;
                 case 13:
-                  this.$ = yy.prepareBlock(
-                    $$[$0 - 3],
-                    $$[$0 - 2],
-                    $$[$0 - 1],
-                    $$[$0],
-                    false,
-                    this._$
-                  );
+                  this.$ = yy.prepareBlock($$[$0 - 3], $$[$0 - 2], $$[$0 - 1], $$[$0], false, this._$);
                   break;
                 case 14:
-                  this.$ = yy.prepareBlock(
-                    $$[$0 - 3],
-                    $$[$0 - 2],
-                    $$[$0 - 1],
-                    $$[$0],
-                    true,
-                    this._$
-                  );
+                  this.$ = yy.prepareBlock($$[$0 - 3], $$[$0 - 2], $$[$0 - 1], $$[$0], true, this._$);
                   break;
                 case 15:
                   this.$ = {
@@ -2268,14 +2019,7 @@ THE SOFTWARE.
                   };
                   break;
                 case 19:
-                  var inverse = yy.prepareBlock(
-                      $$[$0 - 2],
-                      $$[$0 - 1],
-                      $$[$0],
-                      $$[$0],
-                      false,
-                      this._$
-                    ),
+                  var inverse = yy.prepareBlock($$[$0 - 2], $$[$0 - 1], $$[$0], $$[$0], false, this._$),
                     program = yy.prepareProgram([inverse], $$[$0 - 1].loc);
                   program.chained = true;
 
@@ -2317,23 +2061,18 @@ THE SOFTWARE.
                   break;
                 case 24:
                   this.$ = {
-                    type: "PartialStatement",
+                    type: 'PartialStatement',
                     name: $$[$0 - 3],
                     params: $$[$0 - 2],
                     hash: $$[$0 - 1],
-                    indent: "",
+                    indent: '',
                     strip: yy.stripFlags($$[$0 - 4], $$[$0]),
                     loc: yy.locInfo(this._$)
                   };
 
                   break;
                 case 25:
-                  this.$ = yy.preparePartialBlock(
-                    $$[$0 - 2],
-                    $$[$0 - 1],
-                    $$[$0],
-                    this._$
-                  );
+                  this.$ = yy.preparePartialBlock($$[$0 - 2], $$[$0 - 1], $$[$0], this._$);
                   break;
                 case 26:
                   this.$ = {
@@ -2351,7 +2090,7 @@ THE SOFTWARE.
                   break;
                 case 29:
                   this.$ = {
-                    type: "SubExpression",
+                    type: 'SubExpression',
                     path: $$[$0 - 3],
                     params: $$[$0 - 2],
                     hash: $$[$0 - 1],
@@ -2361,14 +2100,14 @@ THE SOFTWARE.
                   break;
                 case 30:
                   this.$ = {
-                    type: "Hash",
+                    type: 'Hash',
                     pairs: $$[$0],
                     loc: yy.locInfo(this._$)
                   };
                   break;
                 case 31:
                   this.$ = {
-                    type: "HashPair",
+                    type: 'HashPair',
                     key: yy.id($$[$0 - 2]),
                     value: $$[$0],
                     loc: yy.locInfo(this._$)
@@ -2385,7 +2124,7 @@ THE SOFTWARE.
                   break;
                 case 35:
                   this.$ = {
-                    type: "StringLiteral",
+                    type: 'StringLiteral',
                     value: $$[$0],
                     original: $$[$0],
                     loc: yy.locInfo(this._$)
@@ -2393,7 +2132,7 @@ THE SOFTWARE.
                   break;
                 case 36:
                   this.$ = {
-                    type: "NumberLiteral",
+                    type: 'NumberLiteral',
                     value: Number($$[$0]),
                     original: Number($$[$0]),
                     loc: yy.locInfo(this._$)
@@ -2401,15 +2140,15 @@ THE SOFTWARE.
                   break;
                 case 37:
                   this.$ = {
-                    type: "BooleanLiteral",
-                    value: $$[$0] === "true",
-                    original: $$[$0] === "true",
+                    type: 'BooleanLiteral',
+                    value: $$[$0] === 'true',
+                    original: $$[$0] === 'true',
                     loc: yy.locInfo(this._$)
                   };
                   break;
                 case 38:
                   this.$ = {
-                    type: "UndefinedLiteral",
+                    type: 'UndefinedLiteral',
                     original: undefined,
                     value: undefined,
                     loc: yy.locInfo(this._$)
@@ -2417,7 +2156,7 @@ THE SOFTWARE.
                   break;
                 case 39:
                   this.$ = {
-                    type: "NullLiteral",
+                    type: 'NullLiteral',
                     original: null,
                     value: null,
                     loc: yy.locInfo(this._$)
@@ -3894,7 +3633,7 @@ THE SOFTWARE.
                 vstack = [null],
                 lstack = [],
                 table = this.table,
-                yytext = "",
+                yytext = '',
                 yylineno = 0,
                 yyleng = 0,
                 recovering = 0,
@@ -3904,13 +3643,11 @@ THE SOFTWARE.
               this.lexer.yy = this.yy;
               this.yy.lexer = this.lexer;
               this.yy.parser = this;
-              if (typeof this.lexer.yylloc == "undefined")
-                this.lexer.yylloc = {};
+              if (typeof this.lexer.yylloc == 'undefined') this.lexer.yylloc = {};
               var yyloc = this.lexer.yylloc;
               lstack.push(yyloc);
               var ranges = this.lexer.options && this.lexer.options.ranges;
-              if (typeof this.yy.parseError === "function")
-                this.parseError = this.yy.parseError;
+              if (typeof this.yy.parseError === 'function') this.parseError = this.yy.parseError;
               function popStack(n) {
                 stack.length = stack.length - 2 * n;
                 vstack.length = vstack.length - n;
@@ -3919,7 +3656,7 @@ THE SOFTWARE.
               function lex() {
                 var token;
                 token = self.lexer.lex() || 1;
-                if (typeof token !== "number") {
+                if (typeof token !== 'number') {
                   token = self.symbols_[token] || token;
                 }
                 return token;
@@ -3940,17 +3677,13 @@ THE SOFTWARE.
                 if (this.defaultActions[state]) {
                   action = this.defaultActions[state];
                 } else {
-                  if (symbol === null || typeof symbol == "undefined") {
+                  if (symbol === null || typeof symbol == 'undefined') {
                     symbol = lex();
                   }
                   action = table[state] && table[state][symbol];
                 }
-                if (
-                  typeof action === "undefined" ||
-                  !action.length ||
-                  !action[0]
-                ) {
-                  var errStr = "";
+                if (typeof action === 'undefined' || !action.length || !action[0]) {
+                  var errStr = '';
                   if (!recovering) {
                     expected = [];
                     for (p in table[state])
@@ -3959,23 +3692,21 @@ THE SOFTWARE.
                       }
                     if (this.lexer.showPosition) {
                       errStr =
-                        "Parse error on line " +
+                        'Parse error on line ' +
                         (yylineno + 1) +
-                        ":\n" +
+                        ':\n' +
                         this.lexer.showPosition() +
-                        "\nExpecting " +
-                        expected.join(", ") +
+                        '\nExpecting ' +
+                        expected.join(', ') +
                         ", got '" +
                         (this.terminals_[symbol] || symbol) +
                         "'";
                     } else {
                       errStr =
-                        "Parse error on line " +
+                        'Parse error on line ' +
                         (yylineno + 1) +
-                        ": Unexpected " +
-                        (symbol == 1
-                          ? "end of input"
-                          : "'" + (this.terminals_[symbol] || symbol) + "'");
+                        ': Unexpected ' +
+                        (symbol == 1 ? 'end of input' : "'" + (this.terminals_[symbol] || symbol) + "'");
                     }
                     this.parseError(errStr, {
                       text: this.lexer.match,
@@ -3987,12 +3718,7 @@ THE SOFTWARE.
                   }
                 }
                 if (action[0] instanceof Array && action.length > 1) {
-                  throw new Error(
-                    "Parse Error: multiple actions possible at state: " +
-                      state +
-                      ", token: " +
-                      symbol
-                  );
+                  throw new Error('Parse Error: multiple actions possible at state: ' + state + ', token: ' + symbol);
                 }
                 switch (action[0]) {
                   case 1:
@@ -4018,8 +3744,7 @@ THE SOFTWARE.
                     yyval._$ = {
                       first_line: lstack[lstack.length - (len || 1)].first_line,
                       last_line: lstack[lstack.length - 1].last_line,
-                      first_column:
-                        lstack[lstack.length - (len || 1)].first_column,
+                      first_column: lstack[lstack.length - (len || 1)].first_column,
                       last_column: lstack[lstack.length - 1].last_column
                     };
                     if (ranges) {
@@ -4028,17 +3753,8 @@ THE SOFTWARE.
                         lstack[lstack.length - 1].range[1]
                       ];
                     }
-                    r = this.performAction.call(
-                      yyval,
-                      yytext,
-                      yyleng,
-                      yylineno,
-                      this.yy,
-                      action[1],
-                      vstack,
-                      lstack
-                    );
-                    if (typeof r !== "undefined") {
+                    r = this.performAction.call(yyval, yytext, yyleng, yylineno, this.yy, action[1], vstack, lstack);
+                    if (typeof r !== 'undefined') {
                       return r;
                     }
                     if (len) {
@@ -4049,8 +3765,7 @@ THE SOFTWARE.
                     stack.push(this.productions_[action[1]][0]);
                     vstack.push(yyval.$);
                     lstack.push(yyval._$);
-                    newState =
-                      table[stack[stack.length - 2]][stack[stack.length - 1]];
+                    newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
                     stack.push(newState);
                     break;
                   case 3:
@@ -4075,8 +3790,8 @@ THE SOFTWARE.
                 this._input = input;
                 this._more = this._less = this.done = false;
                 this.yylineno = this.yyleng = 0;
-                this.yytext = this.matched = this.match = "";
-                this.conditionStack = ["INITIAL"];
+                this.yytext = this.matched = this.match = '';
+                this.conditionStack = ['INITIAL'];
                 this.yylloc = {
                   first_line: 1,
                   first_column: 0,
@@ -4111,10 +3826,7 @@ THE SOFTWARE.
                 var lines = ch.split(/(?:\r\n?|\n)/g);
 
                 this._input = ch + this._input;
-                this.yytext = this.yytext.substr(
-                  0,
-                  this.yytext.length - len - 1
-                );
+                this.yytext = this.yytext.substr(0, this.yytext.length - len - 1);
                 //this.yyleng -= len;
                 this.offset -= len;
                 var oldLines = this.match.split(/(?:\r\n?|\n)/g);
@@ -4129,9 +3841,7 @@ THE SOFTWARE.
                   last_line: this.yylineno + 1,
                   first_column: this.yylloc.first_column,
                   last_column: lines
-                    ? (lines.length === oldLines.length
-                        ? this.yylloc.first_column
-                        : 0) +
+                    ? (lines.length === oldLines.length ? this.yylloc.first_column : 0) +
                       oldLines[oldLines.length - lines.length].length -
                       lines[0].length
                     : this.yylloc.first_column - len
@@ -4150,28 +3860,20 @@ THE SOFTWARE.
                 this.unput(this.match.slice(n));
               },
               pastInput: function pastInput() {
-                var past = this.matched.substr(
-                  0,
-                  this.matched.length - this.match.length
-                );
-                return (
-                  (past.length > 20 ? "..." : "") +
-                  past.substr(-20).replace(/\n/g, "")
-                );
+                var past = this.matched.substr(0, this.matched.length - this.match.length);
+                return (past.length > 20 ? '...' : '') + past.substr(-20).replace(/\n/g, '');
               },
               upcomingInput: function upcomingInput() {
                 var next = this.match;
                 if (next.length < 20) {
                   next += this._input.substr(0, 20 - next.length);
                 }
-                return (
-                  next.substr(0, 20) + (next.length > 20 ? "..." : "")
-                ).replace(/\n/g, "");
+                return (next.substr(0, 20) + (next.length > 20 ? '...' : '')).replace(/\n/g, '');
               },
               showPosition: function showPosition() {
                 var pre = this.pastInput();
-                var c = new Array(pre.length + 1).join("-");
-                return pre + this.upcomingInput() + "\n" + c + "^";
+                var c = new Array(pre.length + 1).join('-');
+                return pre + this.upcomingInput() + '\n' + c + '^';
               },
               next: function next() {
                 if (this.done) {
@@ -4181,16 +3883,13 @@ THE SOFTWARE.
 
                 var token, match, tempMatch, index, col, lines;
                 if (!this._more) {
-                  this.yytext = "";
-                  this.match = "";
+                  this.yytext = '';
+                  this.match = '';
                 }
                 var rules = this._currentRules();
                 for (var i = 0; i < rules.length; i++) {
                   tempMatch = this._input.match(this.rules[rules[i]]);
-                  if (
-                    tempMatch &&
-                    (!match || tempMatch[0].length > match[0].length)
-                  ) {
+                  if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
                     match = tempMatch;
                     index = i;
                     if (!this.options.flex) break;
@@ -4204,8 +3903,7 @@ THE SOFTWARE.
                     last_line: this.yylineno + 1,
                     first_column: this.yylloc.last_column,
                     last_column: lines
-                      ? lines[lines.length - 1].length -
-                        lines[lines.length - 1].match(/\r?\n?/)[0].length
+                      ? lines[lines.length - 1].length - lines[lines.length - 1].match(/\r?\n?/)[0].length
                       : this.yylloc.last_column + match[0].length
                   };
                   this.yytext += match[0];
@@ -4213,10 +3911,7 @@ THE SOFTWARE.
                   this.matches = match;
                   this.yyleng = this.yytext.length;
                   if (this.options.ranges) {
-                    this.yylloc.range = [
-                      this.offset,
-                      (this.offset += this.yyleng)
-                    ];
+                    this.yylloc.range = [this.offset, (this.offset += this.yyleng)];
                   }
                   this._more = false;
                   this._input = this._input.slice(match[0].length);
@@ -4232,21 +3927,18 @@ THE SOFTWARE.
                   if (token) return token;
                   else return;
                 }
-                if (this._input === "") {
+                if (this._input === '') {
                   return this.EOF;
                 } else {
                   return this.parseError(
-                    "Lexical error on line " +
-                      (this.yylineno + 1) +
-                      ". Unrecognized text.\n" +
-                      this.showPosition(),
-                    { text: "", token: null, line: this.yylineno }
+                    'Lexical error on line ' + (this.yylineno + 1) + '. Unrecognized text.\n' + this.showPosition(),
+                    { text: '', token: null, line: this.yylineno }
                   );
                 }
               },
               lex: function lex() {
                 var r = this.next();
-                if (typeof r !== "undefined") {
+                if (typeof r !== 'undefined') {
                   return r;
                 } else {
                   return this.lex();
@@ -4259,9 +3951,7 @@ THE SOFTWARE.
                 return this.conditionStack.pop();
               },
               _currentRules: function _currentRules() {
-                return this.conditions[
-                  this.conditionStack[this.conditionStack.length - 1]
-                ].rules;
+                return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
               },
               topState: function topState() {
                 return this.conditionStack[this.conditionStack.length - 2];
@@ -4279,23 +3969,20 @@ THE SOFTWARE.
               /**/
             ) {
               function strip(start, end) {
-                return (yy_.yytext = yy_.yytext.substr(
-                  start,
-                  yy_.yyleng - end
-                ));
+                return (yy_.yytext = yy_.yytext.substr(start, yy_.yyleng - end));
               }
 
               var YYSTATE = YY_START;
               switch ($avoiding_name_collisions) {
                 case 0:
-                  if (yy_.yytext.slice(-2) === "\\\\") {
+                  if (yy_.yytext.slice(-2) === '\\\\') {
                     strip(0, 1);
-                    this.begin("mu");
-                  } else if (yy_.yytext.slice(-1) === "\\") {
+                    this.begin('mu');
+                  } else if (yy_.yytext.slice(-1) === '\\') {
                     strip(0, 1);
-                    this.begin("emu");
+                    this.begin('emu');
                   } else {
-                    this.begin("mu");
+                    this.begin('mu');
                   }
                   if (yy_.yytext) return 15;
 
@@ -4309,7 +3996,7 @@ THE SOFTWARE.
 
                   break;
                 case 3:
-                  this.begin("raw");
+                  this.begin('raw');
                   return 15;
                   break;
                 case 4:
@@ -4317,14 +4004,11 @@ THE SOFTWARE.
                   // Should be using `this.topState()` below, but it currently
                   // returns the second top instead of the first top. Opened an
                   // issue about it at https://github.com/zaach/jison/issues/291
-                  if (
-                    this.conditionStack[this.conditionStack.length - 1] ===
-                    "raw"
-                  ) {
+                  if (this.conditionStack[this.conditionStack.length - 1] === 'raw') {
                     return 15;
                   } else {
                     yy_.yytext = yy_.yytext.substr(5, yy_.yyleng - 9);
-                    return "END_RAW_BLOCK";
+                    return 'END_RAW_BLOCK';
                   }
 
                   break;
@@ -4347,7 +4031,7 @@ THE SOFTWARE.
                   break;
                 case 10:
                   this.popState();
-                  this.begin("raw");
+                  this.begin('raw');
                   return 23;
 
                   break;
@@ -4386,7 +4070,7 @@ THE SOFTWARE.
                 case 21:
                   this.unput(yy_.yytext);
                   this.popState();
-                  this.begin("com");
+                  this.begin('com');
 
                   break;
                 case 22:
@@ -4456,11 +4140,11 @@ THE SOFTWARE.
                   return 72;
                   break;
                 case 42:
-                  yy_.yytext = yy_.yytext.replace(/\\([\\\]])/g, "$1");
+                  yy_.yytext = yy_.yytext.replace(/\\([\\\]])/g, '$1');
                   return 72;
                   break;
                 case 43:
-                  return "INVALID";
+                  return 'INVALID';
                   break;
                 case 44:
                   return 5;
@@ -4573,16 +4257,16 @@ THE SOFTWARE.
           parser.Parser = Parser;
           return new Parser();
         })();
-        exports["default"] = handlebars;
-        module.exports = exports["default"];
+        exports['default'] = handlebars;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 38 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -4591,14 +4275,11 @@ THE SOFTWARE.
         var _visitor2 = _interopRequireDefault(_visitor);
 
         function WhitespaceControl() {
-          var options =
-            arguments.length <= 0 || arguments[0] === undefined
-              ? {}
-              : arguments[0];
+          var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
           this.options = options;
         }
-        WhitespaceControl.prototype = new _visitor2["default"]();
+        WhitespaceControl.prototype = new _visitor2['default']();
 
         WhitespaceControl.prototype.Program = function(program) {
           var doStandalone = !this.options.ignoreStandalone;
@@ -4619,10 +4300,7 @@ THE SOFTWARE.
               _isNextWhitespace = isNextWhitespace(body, i, isRoot),
               openStandalone = strip.openStandalone && _isPrevWhitespace,
               closeStandalone = strip.closeStandalone && _isNextWhitespace,
-              inlineStandalone =
-                strip.inlineStandalone &&
-                _isPrevWhitespace &&
-                _isNextWhitespace;
+              inlineStandalone = strip.inlineStandalone && _isPrevWhitespace && _isNextWhitespace;
 
             if (strip.close) {
               omitRight(body, i, true);
@@ -4636,7 +4314,7 @@ THE SOFTWARE.
 
               if (omitLeft(body, i)) {
                 // If we are on a standalone node, save the indent info for partials
-                if (current.type === "PartialStatement") {
+                if (current.type === 'PartialStatement') {
                   // Pull out the whitespace from the final line
                   current.indent = /([ \t]+$)/.exec(body[i - 1].original)[1];
                 }
@@ -4676,8 +4354,7 @@ THE SOFTWARE.
 
             // Walk the inverse chain to find the last inverse that is actually in the chain.
             while (lastInverse.chained) {
-              lastInverse =
-                lastInverse.body[lastInverse.body.length - 1].program;
+              lastInverse = lastInverse.body[lastInverse.body.length - 1].program;
             }
           }
 
@@ -4725,15 +4402,11 @@ THE SOFTWARE.
           return strip;
         };
 
-        WhitespaceControl.prototype.Decorator = WhitespaceControl.prototype.MustacheStatement = function(
-          mustache
-        ) {
+        WhitespaceControl.prototype.Decorator = WhitespaceControl.prototype.MustacheStatement = function(mustache) {
           return mustache.strip;
         };
 
-        WhitespaceControl.prototype.PartialStatement = WhitespaceControl.prototype.CommentStatement = function(
-          node
-        ) {
+        WhitespaceControl.prototype.PartialStatement = WhitespaceControl.prototype.CommentStatement = function(node) {
           /* istanbul ignore next */
           var strip = node.strip || {};
           return {
@@ -4756,10 +4429,8 @@ THE SOFTWARE.
             return isRoot;
           }
 
-          if (prev.type === "ContentStatement") {
-            return (sibling || !isRoot ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(
-              prev.original
-            );
+          if (prev.type === 'ContentStatement') {
+            return (sibling || !isRoot ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(prev.original);
           }
         }
         function isNextWhitespace(body, i, isRoot) {
@@ -4773,10 +4444,8 @@ THE SOFTWARE.
             return isRoot;
           }
 
-          if (next.type === "ContentStatement") {
-            return (sibling || !isRoot ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(
-              next.original
-            );
+          if (next.type === 'ContentStatement') {
+            return (sibling || !isRoot ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(next.original);
           }
         }
 
@@ -4789,19 +4458,12 @@ THE SOFTWARE.
         // content is met.
         function omitRight(body, i, multiple) {
           var current = body[i == null ? 0 : i + 1];
-          if (
-            !current ||
-            current.type !== "ContentStatement" ||
-            (!multiple && current.rightStripped)
-          ) {
+          if (!current || current.type !== 'ContentStatement' || (!multiple && current.rightStripped)) {
             return;
           }
 
           var original = current.value;
-          current.value = current.value.replace(
-            multiple ? /^\s+/ : /^[ \t]*\r?\n?/,
-            ""
-          );
+          current.value = current.value.replace(multiple ? /^\s+/ : /^[ \t]*\r?\n?/, '');
           current.rightStripped = current.value !== original;
         }
 
@@ -4814,34 +4476,27 @@ THE SOFTWARE.
         // content is met.
         function omitLeft(body, i, multiple) {
           var current = body[i == null ? body.length - 1 : i - 1];
-          if (
-            !current ||
-            current.type !== "ContentStatement" ||
-            (!multiple && current.leftStripped)
-          ) {
+          if (!current || current.type !== 'ContentStatement' || (!multiple && current.leftStripped)) {
             return;
           }
 
           // We omit the last node if it's whitespace only and not preceeded by a non-content node.
           var original = current.value;
-          current.value = current.value.replace(
-            multiple ? /\s+$/ : /[ \t]+$/,
-            ""
-          );
+          current.value = current.value.replace(multiple ? /\s+$/ : /[ \t]+$/, '');
           current.leftStripped = current.value !== original;
           return current.leftStripped;
         }
 
-        exports["default"] = WhitespaceControl;
-        module.exports = exports["default"];
+        exports['default'] = WhitespaceControl;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 39 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -4864,13 +4519,8 @@ THE SOFTWARE.
               // Hacky sanity check: This may have a few false positives for type for the helper
               // methods but will generally do the right thing without a lot of overhead.
               if (value && !Visitor.prototype[value.type]) {
-                throw new _exception2["default"](
-                  'Unexpected node type "' +
-                    value.type +
-                    '" found when accepting ' +
-                    name +
-                    " on " +
-                    node.type
+                throw new _exception2['default'](
+                  'Unexpected node type "' + value.type + '" found when accepting ' + name + ' on ' + node.type
                 );
               }
               node[name] = value;
@@ -4883,7 +4533,7 @@ THE SOFTWARE.
             this.acceptKey(node, name);
 
             if (!node[name]) {
-              throw new _exception2["default"](node.type + " requires " + name);
+              throw new _exception2['default'](node.type + ' requires ' + name);
             }
           },
 
@@ -4908,10 +4558,7 @@ THE SOFTWARE.
 
             /* istanbul ignore next: Sanity code */
             if (!this[object.type]) {
-              throw new _exception2["default"](
-                "Unknown type: " + object.type,
-                object
-              );
+              throw new _exception2['default']('Unknown type: ' + object.type, object);
             }
 
             if (this.current) {
@@ -4944,7 +4591,7 @@ THE SOFTWARE.
           PartialBlockStatement: function PartialBlockStatement(partial) {
             visitPartial.call(this, partial);
 
-            this.acceptKey(partial, "program");
+            this.acceptKey(partial, 'program');
           },
 
           ContentStatement: function ContentStatement() /* content */ {},
@@ -4964,37 +4611,37 @@ THE SOFTWARE.
             this.acceptArray(hash.pairs);
           },
           HashPair: function HashPair(pair) {
-            this.acceptRequired(pair, "value");
+            this.acceptRequired(pair, 'value');
           }
         };
 
         function visitSubExpression(mustache) {
-          this.acceptRequired(mustache, "path");
+          this.acceptRequired(mustache, 'path');
           this.acceptArray(mustache.params);
-          this.acceptKey(mustache, "hash");
+          this.acceptKey(mustache, 'hash');
         }
         function visitBlock(block) {
           visitSubExpression.call(this, block);
 
-          this.acceptKey(block, "program");
-          this.acceptKey(block, "inverse");
+          this.acceptKey(block, 'program');
+          this.acceptKey(block, 'inverse');
         }
         function visitPartial(partial) {
-          this.acceptRequired(partial, "name");
+          this.acceptRequired(partial, 'name');
           this.acceptArray(partial.params);
-          this.acceptKey(partial, "hash");
+          this.acceptKey(partial, 'hash');
         }
 
-        exports["default"] = Visitor;
-        module.exports = exports["default"];
+        exports['default'] = Visitor;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 40 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
         exports.SourceLocation = SourceLocation;
@@ -5018,10 +4665,7 @@ THE SOFTWARE.
           if (open.path.original !== close) {
             var errorNode = { loc: open.path.loc };
 
-            throw new _exception2["default"](
-              open.path.original + " doesn't match " + close,
-              errorNode
-            );
+            throw new _exception2['default'](open.path.original + " doesn't match " + close, errorNode);
           }
         }
 
@@ -5047,43 +4691,38 @@ THE SOFTWARE.
 
         function stripFlags(open, close) {
           return {
-            open: open.charAt(2) === "~",
-            close: close.charAt(close.length - 3) === "~"
+            open: open.charAt(2) === '~',
+            close: close.charAt(close.length - 3) === '~'
           };
         }
 
         function stripComment(comment) {
-          return comment
-            .replace(/^\{\{~?\!-?-?/, "")
-            .replace(/-?-?~?\}\}$/, "");
+          return comment.replace(/^\{\{~?\!-?-?/, '').replace(/-?-?~?\}\}$/, '');
         }
 
         function preparePath(data, parts, loc) {
           loc = this.locInfo(loc);
 
-          var original = data ? "@" : "",
+          var original = data ? '@' : '',
             dig = [],
             depth = 0,
-            depthString = "";
+            depthString = '';
 
           for (var i = 0, l = parts.length; i < l; i++) {
             var part = parts[i].part,
               // If we have [] syntax then we do not treat path references as operators,
               // i.e. foo.[this] resolves to approximately context.foo['this']
               isLiteral = parts[i].original !== part;
-            original += (parts[i].separator || "") + part;
+            original += (parts[i].separator || '') + part;
 
-            if (
-              !isLiteral &&
-              (part === ".." || part === "." || part === "this")
-            ) {
+            if (!isLiteral && (part === '..' || part === '.' || part === 'this')) {
               if (dig.length > 0) {
-                throw new _exception2["default"]("Invalid path: " + original, {
+                throw new _exception2['default']('Invalid path: ' + original, {
                   loc: loc
                 });
-              } else if (part === "..") {
+              } else if (part === '..') {
                 depth++;
-                depthString += "../";
+                depthString += '../';
               }
             } else {
               dig.push(part);
@@ -5091,7 +4730,7 @@ THE SOFTWARE.
           }
 
           return {
-            type: "PathExpression",
+            type: 'PathExpression',
             data: data,
             depth: depth,
             parts: dig,
@@ -5103,11 +4742,11 @@ THE SOFTWARE.
         function prepareMustache(path, params, hash, open, strip, locInfo) {
           // Must use charAt to support IE pre-10
           var escapeFlag = open.charAt(3) || open.charAt(2),
-            escaped = escapeFlag !== "{" && escapeFlag !== "&";
+            escaped = escapeFlag !== '{' && escapeFlag !== '&';
 
           var decorator = /\*/.test(open);
           return {
-            type: decorator ? "Decorator" : "MustacheStatement",
+            type: decorator ? 'Decorator' : 'MustacheStatement',
             path: path,
             params: params,
             hash: hash,
@@ -5122,14 +4761,14 @@ THE SOFTWARE.
 
           locInfo = this.locInfo(locInfo);
           var program = {
-            type: "Program",
+            type: 'Program',
             body: contents,
             strip: {},
             loc: locInfo
           };
 
           return {
-            type: "BlockStatement",
+            type: 'BlockStatement',
             path: openRawBlock.path,
             params: openRawBlock.params,
             hash: openRawBlock.hash,
@@ -5141,14 +4780,7 @@ THE SOFTWARE.
           };
         }
 
-        function prepareBlock(
-          openBlock,
-          program,
-          inverseAndProgram,
-          close,
-          inverted,
-          locInfo
-        ) {
+        function prepareBlock(openBlock, program, inverseAndProgram, close, inverted, locInfo) {
           if (close && close.path) {
             validateClose(openBlock, close);
           }
@@ -5162,10 +4794,7 @@ THE SOFTWARE.
 
           if (inverseAndProgram) {
             if (decorator) {
-              throw new _exception2["default"](
-                "Unexpected inverse block on decorator",
-                inverseAndProgram
-              );
+              throw new _exception2['default']('Unexpected inverse block on decorator', inverseAndProgram);
             }
 
             if (inverseAndProgram.chain) {
@@ -5183,7 +4812,7 @@ THE SOFTWARE.
           }
 
           return {
-            type: decorator ? "DecoratorBlock" : "BlockStatement",
+            type: decorator ? 'DecoratorBlock' : 'BlockStatement',
             path: openBlock.path,
             params: openBlock.params,
             hash: openBlock.hash,
@@ -5218,7 +4847,7 @@ THE SOFTWARE.
           }
 
           return {
-            type: "Program",
+            type: 'Program',
             body: statements,
             strip: {},
             loc: loc
@@ -5229,7 +4858,7 @@ THE SOFTWARE.
           validateClose(open, close);
 
           return {
-            type: "PartialBlockStatement",
+            type: 'PartialBlockStatement',
             name: open.path,
             params: open.params,
             hash: open.hash,
@@ -5246,9 +4875,9 @@ THE SOFTWARE.
       /***/ function(module, exports, __webpack_require__) {
         /* eslint-disable new-cap */
 
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
         exports.Compiler = Compiler;
@@ -5286,10 +4915,7 @@ THE SOFTWARE.
             for (var i = 0; i < len; i++) {
               var opcode = this.opcodes[i],
                 otherOpcode = other.opcodes[i];
-              if (
-                opcode.opcode !== otherOpcode.opcode ||
-                !argEquals(opcode.args, otherOpcode.args)
-              ) {
+              if (opcode.opcode !== otherOpcode.opcode || !argEquals(opcode.args, otherOpcode.args)) {
                 return false;
               }
             }
@@ -5359,10 +4985,7 @@ THE SOFTWARE.
           accept: function accept(node) {
             /* istanbul ignore next: Sanity code */
             if (!this[node.type]) {
-              throw new _exception2["default"](
-                "Unknown type: " + node.type,
-                node
-              );
+              throw new _exception2['default']('Unknown type: ' + node.type, node);
             }
 
             this.sourceNode.unshift(node);
@@ -5383,9 +5006,7 @@ THE SOFTWARE.
             this.options.blockParams.shift();
 
             this.isSimple = bodyLength === 1;
-            this.blockParams = program.blockParams
-              ? program.blockParams.length
-              : 0;
+            this.blockParams = program.blockParams ? program.blockParams.length : 0;
 
             return this;
           },
@@ -5401,43 +5022,38 @@ THE SOFTWARE.
 
             var type = this.classifySexpr(block);
 
-            if (type === "helper") {
+            if (type === 'helper') {
               this.helperSexpr(block, program, inverse);
-            } else if (type === "simple") {
+            } else if (type === 'simple') {
               this.simpleSexpr(block);
 
               // now that the simple mustache is resolved, we need to
               // evaluate it by executing `blockHelperMissing`
-              this.opcode("pushProgram", program);
-              this.opcode("pushProgram", inverse);
-              this.opcode("emptyHash");
-              this.opcode("blockValue", block.path.original);
+              this.opcode('pushProgram', program);
+              this.opcode('pushProgram', inverse);
+              this.opcode('emptyHash');
+              this.opcode('blockValue', block.path.original);
             } else {
               this.ambiguousSexpr(block, program, inverse);
 
               // now that the simple mustache is resolved, we need to
               // evaluate it by executing `blockHelperMissing`
-              this.opcode("pushProgram", program);
-              this.opcode("pushProgram", inverse);
-              this.opcode("emptyHash");
-              this.opcode("ambiguousBlockValue");
+              this.opcode('pushProgram', program);
+              this.opcode('pushProgram', inverse);
+              this.opcode('emptyHash');
+              this.opcode('ambiguousBlockValue');
             }
 
-            this.opcode("append");
+            this.opcode('append');
           },
 
           DecoratorBlock: function DecoratorBlock(decorator) {
-            var program =
-              decorator.program && this.compileProgram(decorator.program);
-            var params = this.setupFullMustacheParams(
-                decorator,
-                program,
-                undefined
-              ),
+            var program = decorator.program && this.compileProgram(decorator.program);
+            var params = this.setupFullMustacheParams(decorator, program, undefined),
               path = decorator.path;
 
             this.useDecorators = true;
-            this.opcode("registerDecorator", params.length, path.original);
+            this.opcode('registerDecorator', params.length, path.original);
           },
 
           PartialStatement: function PartialStatement(partial) {
@@ -5450,34 +5066,31 @@ THE SOFTWARE.
 
             var params = partial.params;
             if (params.length > 1) {
-              throw new _exception2["default"](
-                "Unsupported number of partial arguments: " + params.length,
-                partial
-              );
+              throw new _exception2['default']('Unsupported number of partial arguments: ' + params.length, partial);
             } else if (!params.length) {
               if (this.options.explicitPartialContext) {
-                this.opcode("pushLiteral", "undefined");
+                this.opcode('pushLiteral', 'undefined');
               } else {
-                params.push({ type: "PathExpression", parts: [], depth: 0 });
+                params.push({ type: 'PathExpression', parts: [], depth: 0 });
               }
             }
 
             var partialName = partial.name.original,
-              isDynamic = partial.name.type === "SubExpression";
+              isDynamic = partial.name.type === 'SubExpression';
             if (isDynamic) {
               this.accept(partial.name);
             }
 
             this.setupFullMustacheParams(partial, program, undefined, true);
 
-            var indent = partial.indent || "";
+            var indent = partial.indent || '';
             if (this.options.preventIndent && indent) {
-              this.opcode("appendContent", indent);
-              indent = "";
+              this.opcode('appendContent', indent);
+              indent = '';
             }
 
-            this.opcode("invokePartial", isDynamic, partialName, indent);
-            this.opcode("append");
+            this.opcode('invokePartial', isDynamic, partialName, indent);
+            this.opcode('append');
           },
           PartialBlockStatement: function PartialBlockStatement(partialBlock) {
             this.PartialStatement(partialBlock);
@@ -5487,9 +5100,9 @@ THE SOFTWARE.
             this.SubExpression(mustache);
 
             if (mustache.escaped && !this.options.noEscape) {
-              this.opcode("appendEscaped");
+              this.opcode('appendEscaped');
             } else {
-              this.opcode("append");
+              this.opcode('append');
             }
           },
           Decorator: function Decorator(decorator) {
@@ -5498,7 +5111,7 @@ THE SOFTWARE.
 
           ContentStatement: function ContentStatement(content) {
             if (content.value) {
-              this.opcode("appendContent", content.value);
+              this.opcode('appendContent', content.value);
             }
           },
 
@@ -5508,9 +5121,9 @@ THE SOFTWARE.
             transformLiteralToPath(sexpr);
             var type = this.classifySexpr(sexpr);
 
-            if (type === "simple") {
+            if (type === 'simple') {
               this.simpleSexpr(sexpr);
-            } else if (type === "helper") {
+            } else if (type === 'helper') {
               this.helperSexpr(sexpr);
             } else {
               this.ambiguousSexpr(sexpr);
@@ -5521,22 +5134,22 @@ THE SOFTWARE.
               name = path.parts[0],
               isBlock = program != null || inverse != null;
 
-            this.opcode("getContext", path.depth);
+            this.opcode('getContext', path.depth);
 
-            this.opcode("pushProgram", program);
-            this.opcode("pushProgram", inverse);
+            this.opcode('pushProgram', program);
+            this.opcode('pushProgram', inverse);
 
             path.strict = true;
             this.accept(path);
 
-            this.opcode("invokeAmbiguous", name, isBlock);
+            this.opcode('invokeAmbiguous', name, isBlock);
           },
 
           simpleSexpr: function simpleSexpr(sexpr) {
             var path = sexpr.path;
             path.strict = true;
             this.accept(path);
-            this.opcode("resolvePossibleLambda");
+            this.opcode('resolvePossibleLambda');
           },
 
           helperSexpr: function helperSexpr(sexpr, program, inverse) {
@@ -5545,11 +5158,10 @@ THE SOFTWARE.
               name = path.parts[0];
 
             if (this.options.knownHelpers[name]) {
-              this.opcode("invokeKnownHelper", params.length, name);
+              this.opcode('invokeKnownHelper', params.length, name);
             } else if (this.options.knownHelpersOnly) {
-              throw new _exception2["default"](
-                "You specified knownHelpersOnly, but used the unknown helper " +
-                  name,
+              throw new _exception2['default'](
+                'You specified knownHelpersOnly, but used the unknown helper ' + name,
                 sexpr
               );
             } else {
@@ -5557,61 +5169,49 @@ THE SOFTWARE.
               path.falsy = true;
 
               this.accept(path);
-              this.opcode(
-                "invokeHelper",
-                params.length,
-                path.original,
-                _ast2["default"].helpers.simpleId(path)
-              );
+              this.opcode('invokeHelper', params.length, path.original, _ast2['default'].helpers.simpleId(path));
             }
           },
 
           PathExpression: function PathExpression(path) {
             this.addDepth(path.depth);
-            this.opcode("getContext", path.depth);
+            this.opcode('getContext', path.depth);
 
             var name = path.parts[0],
-              scoped = _ast2["default"].helpers.scopedId(path),
-              blockParamId =
-                !path.depth && !scoped && this.blockParamIndex(name);
+              scoped = _ast2['default'].helpers.scopedId(path),
+              blockParamId = !path.depth && !scoped && this.blockParamIndex(name);
 
             if (blockParamId) {
-              this.opcode("lookupBlockParam", blockParamId, path.parts);
+              this.opcode('lookupBlockParam', blockParamId, path.parts);
             } else if (!name) {
               // Context reference, i.e. `{{foo .}}` or `{{foo ..}}`
-              this.opcode("pushContext");
+              this.opcode('pushContext');
             } else if (path.data) {
               this.options.data = true;
-              this.opcode("lookupData", path.depth, path.parts, path.strict);
+              this.opcode('lookupData', path.depth, path.parts, path.strict);
             } else {
-              this.opcode(
-                "lookupOnContext",
-                path.parts,
-                path.falsy,
-                path.strict,
-                scoped
-              );
+              this.opcode('lookupOnContext', path.parts, path.falsy, path.strict, scoped);
             }
           },
 
           StringLiteral: function StringLiteral(string) {
-            this.opcode("pushString", string.value);
+            this.opcode('pushString', string.value);
           },
 
           NumberLiteral: function NumberLiteral(number) {
-            this.opcode("pushLiteral", number.value);
+            this.opcode('pushLiteral', number.value);
           },
 
           BooleanLiteral: function BooleanLiteral(bool) {
-            this.opcode("pushLiteral", bool.value);
+            this.opcode('pushLiteral', bool.value);
           },
 
           UndefinedLiteral: function UndefinedLiteral() {
-            this.opcode("pushLiteral", "undefined");
+            this.opcode('pushLiteral', 'undefined');
           },
 
           NullLiteral: function NullLiteral() {
-            this.opcode("pushLiteral", "null");
+            this.opcode('pushLiteral', 'null');
           },
 
           Hash: function Hash(hash) {
@@ -5619,15 +5219,15 @@ THE SOFTWARE.
               i = 0,
               l = pairs.length;
 
-            this.opcode("pushHash");
+            this.opcode('pushHash');
 
             for (; i < l; i++) {
               this.pushParam(pairs[i].value);
             }
             while (i--) {
-              this.opcode("assignToHash", pairs[i].key);
+              this.opcode('assignToHash', pairs[i].key);
             }
-            this.opcode("popHash");
+            this.opcode('popHash');
           },
 
           // HELPERS
@@ -5648,15 +5248,13 @@ THE SOFTWARE.
           },
 
           classifySexpr: function classifySexpr(sexpr) {
-            var isSimple = _ast2["default"].helpers.simpleId(sexpr.path);
+            var isSimple = _ast2['default'].helpers.simpleId(sexpr.path);
 
-            var isBlockParam =
-              isSimple && !!this.blockParamIndex(sexpr.path.parts[0]);
+            var isBlockParam = isSimple && !!this.blockParamIndex(sexpr.path.parts[0]);
 
             // a mustache is an eligible helper if:
             // * its id is simple (a single part, not `this` or `..`)
-            var isHelper =
-              !isBlockParam && _ast2["default"].helpers.helperExpression(sexpr);
+            var isHelper = !isBlockParam && _ast2['default'].helpers.helperExpression(sexpr);
 
             // if a mustache is an eligible helper but not a definite
             // helper, it is ambiguous, and will be resolved in a later
@@ -5677,11 +5275,11 @@ THE SOFTWARE.
             }
 
             if (isHelper) {
-              return "helper";
+              return 'helper';
             } else if (isEligible) {
-              return "ambiguous";
+              return 'ambiguous';
             } else {
-              return "simple";
+              return 'simple';
             }
           },
 
@@ -5692,20 +5290,20 @@ THE SOFTWARE.
           },
 
           pushParam: function pushParam(val) {
-            var value = val.value != null ? val.value : val.original || "";
+            var value = val.value != null ? val.value : val.original || '';
 
             if (this.stringParams) {
               if (value.replace) {
-                value = value.replace(/^(\.?\.\/)*/g, "").replace(/\//g, ".");
+                value = value.replace(/^(\.?\.\/)*/g, '').replace(/\//g, '.');
               }
 
               if (val.depth) {
                 this.addDepth(val.depth);
               }
-              this.opcode("getContext", val.depth || 0);
-              this.opcode("pushStringParam", value, val.type);
+              this.opcode('getContext', val.depth || 0);
+              this.opcode('pushStringParam', value, val.type);
 
-              if (val.type === "SubExpression") {
+              if (val.type === 'SubExpression') {
                 // SubExpressions get evaluated and passed in
                 // in string params mode.
                 this.accept(val);
@@ -5713,64 +5311,46 @@ THE SOFTWARE.
             } else {
               if (this.trackIds) {
                 var blockParamIndex = undefined;
-                if (
-                  val.parts &&
-                  !_ast2["default"].helpers.scopedId(val) &&
-                  !val.depth
-                ) {
+                if (val.parts && !_ast2['default'].helpers.scopedId(val) && !val.depth) {
                   blockParamIndex = this.blockParamIndex(val.parts[0]);
                 }
                 if (blockParamIndex) {
-                  var blockParamChild = val.parts.slice(1).join(".");
-                  this.opcode(
-                    "pushId",
-                    "BlockParam",
-                    blockParamIndex,
-                    blockParamChild
-                  );
+                  var blockParamChild = val.parts.slice(1).join('.');
+                  this.opcode('pushId', 'BlockParam', blockParamIndex, blockParamChild);
                 } else {
                   value = val.original || value;
                   if (value.replace) {
                     value = value
-                      .replace(/^this(?:\.|$)/, "")
-                      .replace(/^\.\//, "")
-                      .replace(/^\.$/, "");
+                      .replace(/^this(?:\.|$)/, '')
+                      .replace(/^\.\//, '')
+                      .replace(/^\.$/, '');
                   }
 
-                  this.opcode("pushId", val.type, value);
+                  this.opcode('pushId', val.type, value);
                 }
               }
               this.accept(val);
             }
           },
 
-          setupFullMustacheParams: function setupFullMustacheParams(
-            sexpr,
-            program,
-            inverse,
-            omitEmpty
-          ) {
+          setupFullMustacheParams: function setupFullMustacheParams(sexpr, program, inverse, omitEmpty) {
             var params = sexpr.params;
             this.pushParams(params);
 
-            this.opcode("pushProgram", program);
-            this.opcode("pushProgram", inverse);
+            this.opcode('pushProgram', program);
+            this.opcode('pushProgram', inverse);
 
             if (sexpr.hash) {
               this.accept(sexpr.hash);
             } else {
-              this.opcode("emptyHash", omitEmpty);
+              this.opcode('emptyHash', omitEmpty);
             }
 
             return params;
           },
 
           blockParamIndex: function blockParamIndex(name) {
-            for (
-              var depth = 0, len = this.options.blockParams.length;
-              depth < len;
-              depth++
-            ) {
+            for (var depth = 0, len = this.options.blockParams.length; depth < len; depth++) {
               var blockParams = this.options.blockParams[depth],
                 param = blockParams && _utils.indexOf(blockParams, name);
               if (blockParams && param >= 0) {
@@ -5781,18 +5361,14 @@ THE SOFTWARE.
         };
 
         function precompile(input, options, env) {
-          if (
-            input == null ||
-            (typeof input !== "string" && input.type !== "Program")
-          ) {
-            throw new _exception2["default"](
-              "You must pass a string or Handlebars AST to Handlebars.precompile. You passed " +
-                input
+          if (input == null || (typeof input !== 'string' && input.type !== 'Program')) {
+            throw new _exception2['default'](
+              'You must pass a string or Handlebars AST to Handlebars.precompile. You passed ' + input
             );
           }
 
           options = options || {};
-          if (!("data" in options)) {
+          if (!('data' in options)) {
             options.data = true;
           }
           if (options.compat) {
@@ -5807,18 +5383,14 @@ THE SOFTWARE.
         function compile(input, options, env) {
           if (options === undefined) options = {};
 
-          if (
-            input == null ||
-            (typeof input !== "string" && input.type !== "Program")
-          ) {
-            throw new _exception2["default"](
-              "You must pass a string or Handlebars AST to Handlebars.compile. You passed " +
-                input
+          if (input == null || (typeof input !== 'string' && input.type !== 'Program')) {
+            throw new _exception2['default'](
+              'You must pass a string or Handlebars AST to Handlebars.compile. You passed ' + input
             );
           }
 
           options = _utils.extend({}, options);
-          if (!("data" in options)) {
+          if (!('data' in options)) {
             options.data = true;
           }
           if (options.compat) {
@@ -5830,12 +5402,7 @@ THE SOFTWARE.
           function compileInput() {
             var ast = env.parse(input, options),
               environment = new env.Compiler().compile(ast, options),
-              templateSpec = new env.JavaScriptCompiler().compile(
-                environment,
-                options,
-                undefined,
-                true
-              );
+              templateSpec = new env.JavaScriptCompiler().compile(environment, options, undefined, true);
             return env.template(templateSpec);
           }
 
@@ -5882,11 +5449,11 @@ THE SOFTWARE.
             // Casting to string here to make false and 0 literal values play nicely with the rest
             // of the system.
             sexpr.path = {
-              type: "PathExpression",
+              type: 'PathExpression',
               data: false,
               depth: 0,
-              parts: [literal.original + ""],
-              original: literal.original + "",
+              parts: [literal.original + ''],
+              original: literal.original + '',
               loc: literal.loc
             };
           }
@@ -5896,9 +5463,9 @@ THE SOFTWARE.
       },
       /* 42 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
+        'use strict';
 
-        var _interopRequireDefault = __webpack_require__(1)["default"];
+        var _interopRequireDefault = __webpack_require__(1)['default'];
 
         exports.__esModule = true;
 
@@ -5925,18 +5492,13 @@ THE SOFTWARE.
           // alternative compiled forms for name lookup and buffering semantics
           nameLookup: function nameLookup(parent, name /* , type*/) {
             if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
-              return [parent, ".", name];
+              return [parent, '.', name];
             } else {
-              return [parent, "[", JSON.stringify(name), "]"];
+              return [parent, '[', JSON.stringify(name), ']'];
             }
           },
           depthedLookup: function depthedLookup(name) {
-            return [
-              this.aliasable("container.lookup"),
-              '(depths, "',
-              name,
-              '")'
-            ];
+            return [this.aliasable('container.lookup'), '(depths, "', name, '")'];
           },
 
           compilerInfo: function compilerInfo() {
@@ -5953,12 +5515,12 @@ THE SOFTWARE.
             source = this.source.wrap(source, location);
 
             if (this.environment.isSimple) {
-              return ["return ", source, ";"];
+              return ['return ', source, ';'];
             } else if (explicit) {
               // This is a case where the buffer operation occurs as a child of another
               // construct, generally braces. We have to explicitly output these buffer
               // operations to ensure that the emitted code goes in the correct location.
-              return ["buffer += ", source, ";"];
+              return ['buffer += ', source, ';'];
             } else {
               source.appendToBuffer = true;
               return source;
@@ -5966,7 +5528,7 @@ THE SOFTWARE.
           },
 
           initializeBuffer: function initializeBuffer() {
-            return this.quotedString("");
+            return this.quotedString('');
           },
           // END PUBLIC API
 
@@ -5999,12 +5561,8 @@ THE SOFTWARE.
             this.compileChildren(environment, options);
 
             this.useDepths =
-              this.useDepths ||
-              environment.useDepths ||
-              environment.useDecorators ||
-              this.options.compat;
-            this.useBlockParams =
-              this.useBlockParams || environment.useBlockParams;
+              this.useDepths || environment.useDepths || environment.useDecorators || this.options.compat;
+            this.useBlockParams = this.useBlockParams || environment.useBlockParams;
 
             var opcodes = environment.opcodes,
               opcode = undefined,
@@ -6022,43 +5580,33 @@ THE SOFTWARE.
 
             // Flush any trailing content that might be pending.
             this.source.currentLocation = firstLoc;
-            this.pushSource("");
+            this.pushSource('');
 
             /* istanbul ignore next */
-            if (
-              this.stackSlot ||
-              this.inlineStack.length ||
-              this.compileStack.length
-            ) {
-              throw new _exception2["default"](
-                "Compile completed with content left on stack"
-              );
+            if (this.stackSlot || this.inlineStack.length || this.compileStack.length) {
+              throw new _exception2['default']('Compile completed with content left on stack');
             }
 
             if (!this.decorators.isEmpty()) {
               this.useDecorators = true;
 
-              this.decorators.prepend(
-                "var decorators = container.decorators;\n"
-              );
-              this.decorators.push("return fn;");
+              this.decorators.prepend('var decorators = container.decorators;\n');
+              this.decorators.push('return fn;');
 
               if (asObject) {
                 this.decorators = Function.apply(this, [
-                  "fn",
-                  "props",
-                  "container",
-                  "depth0",
-                  "data",
-                  "blockParams",
-                  "depths",
+                  'fn',
+                  'props',
+                  'container',
+                  'depth0',
+                  'data',
+                  'blockParams',
+                  'depths',
                   this.decorators.merge()
                 ]);
               } else {
-                this.decorators.prepend(
-                  "function(fn, props, container, depth0, data, blockParams, depths) {\n"
-                );
-                this.decorators.push("}\n");
+                this.decorators.prepend('function(fn, props, container, depth0, data, blockParams, depths) {\n');
+                this.decorators.push('}\n');
                 this.decorators = this.decorators.merge();
               }
             } else {
@@ -6085,7 +5633,7 @@ THE SOFTWARE.
                 if (programs[i]) {
                   ret[i] = programs[i];
                   if (decorators[i]) {
-                    ret[i + "_d"] = decorators[i];
+                    ret[i + '_d'] = decorators[i];
                     ret.useDecorators = true;
                   }
                 }
@@ -6133,16 +5681,16 @@ THE SOFTWARE.
             // track the last context pushed into place to allow skipping the
             // getContext opcode when it would be a noop
             this.lastContext = 0;
-            this.source = new _codeGen2["default"](this.options.srcName);
-            this.decorators = new _codeGen2["default"](this.options.srcName);
+            this.source = new _codeGen2['default'](this.options.srcName);
+            this.decorators = new _codeGen2['default'](this.options.srcName);
           },
 
           createFunctionContext: function createFunctionContext(asObject) {
-            var varDeclarations = "";
+            var varDeclarations = '';
 
             var locals = this.stackVars.concat(this.registers.list);
             if (locals.length > 0) {
-              varDeclarations += ", " + locals.join(", ");
+              varDeclarations += ', ' + locals.join(', ');
             }
 
             // Generate minimizer alias mappings
@@ -6156,23 +5704,19 @@ THE SOFTWARE.
               // eslint-disable-line guard-for-in
               var node = this.aliases[alias];
 
-              if (
-                this.aliases.hasOwnProperty(alias) &&
-                node.children &&
-                node.referenceCount > 1
-              ) {
-                varDeclarations += ", alias" + ++aliasCount + "=" + alias;
-                node.children[0] = "alias" + aliasCount;
+              if (this.aliases.hasOwnProperty(alias) && node.children && node.referenceCount > 1) {
+                varDeclarations += ', alias' + ++aliasCount + '=' + alias;
+                node.children[0] = 'alias' + aliasCount;
               }
             }
 
-            var params = ["container", "depth0", "helpers", "partials", "data"];
+            var params = ['container', 'depth0', 'helpers', 'partials', 'data'];
 
             if (this.useBlockParams || this.useDepths) {
-              params.push("blockParams");
+              params.push('blockParams');
             }
             if (this.useDepths) {
-              params.push("depths");
+              params.push('depths');
             }
 
             // Perform a second pass over the output to merge content when possible
@@ -6183,13 +5727,7 @@ THE SOFTWARE.
 
               return Function.apply(this, params);
             } else {
-              return this.source.wrap([
-                "function(",
-                params.join(","),
-                ") {\n  ",
-                source,
-                "}"
-              ]);
+              return this.source.wrap(['function(', params.join(','), ') {\n  ', source, '}']);
             }
           },
           mergeSource: function mergeSource(varDeclarations) {
@@ -6202,7 +5740,7 @@ THE SOFTWARE.
             this.source.each(function(line) {
               if (line.appendToBuffer) {
                 if (bufferStart) {
-                  line.prepend("  + ");
+                  line.prepend('  + ');
                 } else {
                   bufferStart = line;
                 }
@@ -6212,9 +5750,9 @@ THE SOFTWARE.
                   if (!sourceSeen) {
                     appendFirst = true;
                   } else {
-                    bufferStart.prepend("buffer += ");
+                    bufferStart.prepend('buffer += ');
                   }
-                  bufferEnd.add(";");
+                  bufferEnd.add(';');
                   bufferStart = bufferEnd = undefined;
                 }
 
@@ -6227,29 +5765,24 @@ THE SOFTWARE.
 
             if (appendOnly) {
               if (bufferStart) {
-                bufferStart.prepend("return ");
-                bufferEnd.add(";");
+                bufferStart.prepend('return ');
+                bufferEnd.add(';');
               } else if (!sourceSeen) {
                 this.source.push('return "";');
               }
             } else {
-              varDeclarations +=
-                ", buffer = " + (appendFirst ? "" : this.initializeBuffer());
+              varDeclarations += ', buffer = ' + (appendFirst ? '' : this.initializeBuffer());
 
               if (bufferStart) {
-                bufferStart.prepend("return buffer + ");
-                bufferEnd.add(";");
+                bufferStart.prepend('return buffer + ');
+                bufferEnd.add(';');
               } else {
-                this.source.push("return buffer;");
+                this.source.push('return buffer;');
               }
             }
 
             if (varDeclarations) {
-              this.source.prepend(
-                "var " +
-                  varDeclarations.substring(2) +
-                  (appendFirst ? "" : ";\n")
-              );
+              this.source.prepend('var ' + varDeclarations.substring(2) + (appendFirst ? '' : ';\n'));
             }
 
             return this.source.merge();
@@ -6265,18 +5798,14 @@ THE SOFTWARE.
           // replace it on the stack with the result of properly
           // invoking blockHelperMissing.
           blockValue: function blockValue(name) {
-            var blockHelperMissing = this.aliasable(
-                "helpers.blockHelperMissing"
-              ),
+            var blockHelperMissing = this.aliasable('helpers.blockHelperMissing'),
               params = [this.contextName(0)];
             this.setupHelperArgs(name, 0, params);
 
             var blockName = this.popStack();
             params.splice(1, 0, blockName);
 
-            this.push(
-              this.source.functionCall(blockHelperMissing, "call", params)
-            );
+            this.push(this.source.functionCall(blockHelperMissing, 'call', params));
           },
 
           // [ambiguousBlockValue]
@@ -6287,11 +5816,9 @@ THE SOFTWARE.
           // On stack, after, if lastHelper: value
           ambiguousBlockValue: function ambiguousBlockValue() {
             // We're being a bit cheeky and reusing the options value from the prior exec
-            var blockHelperMissing = this.aliasable(
-                "helpers.blockHelperMissing"
-              ),
+            var blockHelperMissing = this.aliasable('helpers.blockHelperMissing'),
               params = [this.contextName(0)];
-            this.setupHelperArgs("", 0, params, true);
+            this.setupHelperArgs('', 0, params, true);
 
             this.flushInline();
 
@@ -6299,13 +5826,13 @@ THE SOFTWARE.
             params.splice(1, 0, current);
 
             this.pushSource([
-              "if (!",
+              'if (!',
               this.lastHelper,
-              ") { ",
+              ') { ',
               current,
-              " = ",
-              this.source.functionCall(blockHelperMissing, "call", params),
-              "}"
+              ' = ',
+              this.source.functionCall(blockHelperMissing, 'call', params),
+              '}'
             ]);
           },
 
@@ -6337,25 +5864,15 @@ THE SOFTWARE.
           append: function append() {
             if (this.isInline()) {
               this.replaceStack(function(current) {
-                return [" != null ? ", current, ' : ""'];
+                return [' != null ? ', current, ' : ""'];
               });
 
               this.pushSource(this.appendToBuffer(this.popStack()));
             } else {
               var local = this.popStack();
-              this.pushSource([
-                "if (",
-                local,
-                " != null) { ",
-                this.appendToBuffer(local, undefined, true),
-                " }"
-              ]);
+              this.pushSource(['if (', local, ' != null) { ', this.appendToBuffer(local, undefined, true), ' }']);
               if (this.environment.isSimple) {
-                this.pushSource([
-                  "else { ",
-                  this.appendToBuffer("''", undefined, true),
-                  " }"
-                ]);
+                this.pushSource(['else { ', this.appendToBuffer("''", undefined, true), ' }']);
               }
             }
           },
@@ -6368,12 +5885,7 @@ THE SOFTWARE.
           // Escape `value` and append it to the buffer
           appendEscaped: function appendEscaped() {
             this.pushSource(
-              this.appendToBuffer([
-                this.aliasable("container.escapeExpression"),
-                "(",
-                this.popStack(),
-                ")"
-              ])
+              this.appendToBuffer([this.aliasable('container.escapeExpression'), '(', this.popStack(), ')'])
             );
           },
 
@@ -6405,12 +5917,7 @@ THE SOFTWARE.
           //
           // Looks up the value of `name` on the current context and pushes
           // it onto the stack.
-          lookupOnContext: function lookupOnContext(
-            parts,
-            falsy,
-            strict,
-            scoped
-          ) {
+          lookupOnContext: function lookupOnContext(parts, falsy, strict, scoped) {
             var i = 0;
 
             if (!scoped && this.options.compat && !this.lastContext) {
@@ -6421,7 +5928,7 @@ THE SOFTWARE.
               this.pushContext();
             }
 
-            this.resolvePath("context", parts, i, falsy, strict);
+            this.resolvePath('context', parts, i, falsy, strict);
           },
 
           // [lookupBlockParam]
@@ -6434,14 +5941,8 @@ THE SOFTWARE.
           lookupBlockParam: function lookupBlockParam(blockParamId, parts) {
             this.useBlockParams = true;
 
-            this.push([
-              "blockParams[",
-              blockParamId[0],
-              "][",
-              blockParamId[1],
-              "]"
-            ]);
-            this.resolvePath("context", parts, 1);
+            this.push(['blockParams[', blockParamId[0], '][', blockParamId[1], ']']);
+            this.resolvePath('context', parts, 1);
           },
 
           // [lookupData]
@@ -6452,12 +5953,12 @@ THE SOFTWARE.
           // Push the data lookup operator
           lookupData: function lookupData(depth, parts, strict) {
             if (!depth) {
-              this.pushStackLiteral("data");
+              this.pushStackLiteral('data');
             } else {
-              this.pushStackLiteral("container.data(data, " + depth + ")");
+              this.pushStackLiteral('container.data(data, ' + depth + ')');
             }
 
-            this.resolvePath("data", parts, 0, true, strict);
+            this.resolvePath('data', parts, 0, true, strict);
           },
 
           resolvePath: function resolvePath(type, parts, i, falsy, strict) {
@@ -6466,9 +5967,7 @@ THE SOFTWARE.
             var _this = this;
 
             if (this.options.strict || this.options.assumeObjects) {
-              this.push(
-                strictLookup(this.options.strict && strict, this, parts, type)
-              );
+              this.push(strictLookup(this.options.strict && strict, this, parts, type));
               return;
             }
 
@@ -6480,10 +5979,10 @@ THE SOFTWARE.
                 // We want to ensure that zero and false are handled properly if the context (falsy flag)
                 // needs to have the special handling for these values.
                 if (!falsy) {
-                  return [" != null ? ", lookup, " : ", current];
+                  return [' != null ? ', lookup, ' : ', current];
                 } else {
                   // Otherwise we can use generic falsy handling
-                  return [" && ", lookup];
+                  return [' && ', lookup];
                 }
               });
               /* eslint-enable no-loop-func */
@@ -6498,14 +5997,7 @@ THE SOFTWARE.
           // If the `value` is a lambda, replace it on the stack by
           // the return value of the lambda
           resolvePossibleLambda: function resolvePossibleLambda() {
-            this.push([
-              this.aliasable("container.lambda"),
-              "(",
-              this.popStack(),
-              ", ",
-              this.contextName(0),
-              ")"
-            ]);
+            this.push([this.aliasable('container.lambda'), '(', this.popStack(), ', ', this.contextName(0), ')']);
           },
 
           // [pushStringParam]
@@ -6522,8 +6014,8 @@ THE SOFTWARE.
 
             // If it's a subexpression, the string result
             // will be pushed after this opcode.
-            if (type !== "SubExpression") {
-              if (typeof string === "string") {
+            if (type !== 'SubExpression') {
+              if (typeof string === 'string') {
                 this.pushString(string);
               } else {
                 this.pushStackLiteral(string);
@@ -6533,13 +6025,13 @@ THE SOFTWARE.
 
           emptyHash: function emptyHash(omitEmpty) {
             if (this.trackIds) {
-              this.push("{}"); // hashIds
+              this.push('{}'); // hashIds
             }
             if (this.stringParams) {
-              this.push("{}"); // hashContexts
-              this.push("{}"); // hashTypes
+              this.push('{}'); // hashContexts
+              this.push('{}'); // hashTypes
             }
-            this.pushStackLiteral(omitEmpty ? "undefined" : "{}");
+            this.pushStackLiteral(omitEmpty ? 'undefined' : '{}');
           },
           pushHash: function pushHash() {
             if (this.hash) {
@@ -6608,22 +6100,13 @@ THE SOFTWARE.
           // Pops off the decorator's parameters, invokes the decorator,
           // and inserts the decorator into the decorators list.
           registerDecorator: function registerDecorator(paramSize, name) {
-            var foundDecorator = this.nameLookup(
-                "decorators",
-                name,
-                "decorator"
-              ),
+            var foundDecorator = this.nameLookup('decorators', name, 'decorator'),
               options = this.setupHelperArgs(name, paramSize);
 
             this.decorators.push([
-              "fn = ",
-              this.decorators.functionCall(foundDecorator, "", [
-                "fn",
-                "props",
-                "container",
-                options
-              ]),
-              " || fn;"
+              'fn = ',
+              this.decorators.functionCall(foundDecorator, '', ['fn', 'props', 'container', options]),
+              ' || fn;'
             ]);
           },
 
@@ -6639,17 +6122,15 @@ THE SOFTWARE.
           invokeHelper: function invokeHelper(paramSize, name, isSimple) {
             var nonHelper = this.popStack(),
               helper = this.setupHelper(paramSize, name),
-              simple = isSimple ? [helper.name, " || "] : "";
+              simple = isSimple ? [helper.name, ' || '] : '';
 
-            var lookup = ["("].concat(simple, nonHelper);
+            var lookup = ['('].concat(simple, nonHelper);
             if (!this.options.strict) {
-              lookup.push(" || ", this.aliasable("helpers.helperMissing"));
+              lookup.push(' || ', this.aliasable('helpers.helperMissing'));
             }
-            lookup.push(")");
+            lookup.push(')');
 
-            this.push(
-              this.source.functionCall(lookup, "call", helper.callParams)
-            );
+            this.push(this.source.functionCall(lookup, 'call', helper.callParams));
           },
 
           // [invokeKnownHelper]
@@ -6661,9 +6142,7 @@ THE SOFTWARE.
           // so a `helperMissing` fallback is not required.
           invokeKnownHelper: function invokeKnownHelper(paramSize, name) {
             var helper = this.setupHelper(paramSize, name);
-            this.push(
-              this.source.functionCall(helper.name, "call", helper.callParams)
-            );
+            this.push(this.source.functionCall(helper.name, 'call', helper.callParams));
           },
 
           // [invokeAmbiguous]
@@ -6679,45 +6158,31 @@ THE SOFTWARE.
           // and can be avoided by passing the `knownHelpers` and
           // `knownHelpersOnly` flags at compile-time.
           invokeAmbiguous: function invokeAmbiguous(name, helperCall) {
-            this.useRegister("helper");
+            this.useRegister('helper');
 
             var nonHelper = this.popStack();
 
             this.emptyHash();
             var helper = this.setupHelper(0, name, helperCall);
 
-            var helperName = (this.lastHelper = this.nameLookup(
-              "helpers",
-              name,
-              "helper"
-            ));
+            var helperName = (this.lastHelper = this.nameLookup('helpers', name, 'helper'));
 
-            var lookup = [
-              "(",
-              "(helper = ",
-              helperName,
-              " || ",
-              nonHelper,
-              ")"
-            ];
+            var lookup = ['(', '(helper = ', helperName, ' || ', nonHelper, ')'];
             if (!this.options.strict) {
-              lookup[0] = "(helper = ";
-              lookup.push(
-                " != null ? helper : ",
-                this.aliasable("helpers.helperMissing")
-              );
+              lookup[0] = '(helper = ';
+              lookup.push(' != null ? helper : ', this.aliasable('helpers.helperMissing'));
             }
 
             this.push([
-              "(",
+              '(',
               lookup,
-              helper.paramsInit ? ["),(", helper.paramsInit] : [],
-              "),",
-              "(typeof helper === ",
+              helper.paramsInit ? ['),(', helper.paramsInit] : [],
+              '),',
+              '(typeof helper === ',
               this.aliasable('"function"'),
-              " ? ",
-              this.source.functionCall("helper", "call", helper.callParams),
-              " : helper))"
+              ' ? ',
+              this.source.functionCall('helper', 'call', helper.callParams),
+              ' : helper))'
             ]);
           },
 
@@ -6740,25 +6205,23 @@ THE SOFTWARE.
             if (indent) {
               options.indent = JSON.stringify(indent);
             }
-            options.helpers = "helpers";
-            options.partials = "partials";
-            options.decorators = "container.decorators";
+            options.helpers = 'helpers';
+            options.partials = 'partials';
+            options.decorators = 'container.decorators';
 
             if (!isDynamic) {
-              params.unshift(this.nameLookup("partials", name, "partial"));
+              params.unshift(this.nameLookup('partials', name, 'partial'));
             } else {
               params.unshift(name);
             }
 
             if (this.options.compat) {
-              options.depths = "depths";
+              options.depths = 'depths';
             }
             options = this.objectLiteral(options);
             params.push(options);
 
-            this.push(
-              this.source.functionCall("container.invokePartial", "", params)
-            );
+            this.push(this.source.functionCall('container.invokePartial', '', params));
           },
 
           // [assignToHash]
@@ -6795,21 +6258,21 @@ THE SOFTWARE.
           },
 
           pushId: function pushId(type, name, child) {
-            if (type === "BlockParam") {
+            if (type === 'BlockParam') {
               this.pushStackLiteral(
-                "blockParams[" +
+                'blockParams[' +
                   name[0] +
-                  "].path[" +
+                  '].path[' +
                   name[1] +
-                  "]" +
-                  (child ? " + " + JSON.stringify("." + child) : "")
+                  ']' +
+                  (child ? ' + ' + JSON.stringify('.' + child) : '')
               );
-            } else if (type === "PathExpression") {
+            } else if (type === 'PathExpression') {
               this.pushString(name);
-            } else if (type === "SubExpression") {
-              this.pushStackLiteral("true");
+            } else if (type === 'SubExpression') {
+              this.pushStackLiteral('true');
             } else {
-              this.pushStackLiteral("null");
+              this.pushStackLiteral('null');
             }
           },
 
@@ -6829,40 +6292,29 @@ THE SOFTWARE.
               var existing = this.matchExistingProgram(child);
 
               if (existing == null) {
-                this.context.programs.push(""); // Placeholder to prevent name conflicts for nested children
+                this.context.programs.push(''); // Placeholder to prevent name conflicts for nested children
                 var index = this.context.programs.length;
                 child.index = index;
-                child.name = "program" + index;
-                this.context.programs[index] = compiler.compile(
-                  child,
-                  options,
-                  this.context,
-                  !this.precompile
-                );
+                child.name = 'program' + index;
+                this.context.programs[index] = compiler.compile(child, options, this.context, !this.precompile);
                 this.context.decorators[index] = compiler.decorators;
                 this.context.environments[index] = child;
 
                 this.useDepths = this.useDepths || compiler.useDepths;
-                this.useBlockParams =
-                  this.useBlockParams || compiler.useBlockParams;
+                this.useBlockParams = this.useBlockParams || compiler.useBlockParams;
                 child.useDepths = this.useDepths;
                 child.useBlockParams = this.useBlockParams;
               } else {
                 child.index = existing.index;
-                child.name = "program" + existing.index;
+                child.name = 'program' + existing.index;
 
                 this.useDepths = this.useDepths || existing.useDepths;
-                this.useBlockParams =
-                  this.useBlockParams || existing.useBlockParams;
+                this.useBlockParams = this.useBlockParams || existing.useBlockParams;
               }
             }
           },
           matchExistingProgram: function matchExistingProgram(child) {
-            for (
-              var i = 0, len = this.context.environments.length;
-              i < len;
-              i++
-            ) {
+            for (var i = 0, len = this.context.environments.length; i < len; i++) {
               var environment = this.context.environments[i];
               if (environment && environment.equals(child)) {
                 return environment;
@@ -6872,16 +6324,16 @@ THE SOFTWARE.
 
           programExpression: function programExpression(guid) {
             var child = this.environment.children[guid],
-              programParams = [child.index, "data", child.blockParams];
+              programParams = [child.index, 'data', child.blockParams];
 
             if (this.useBlockParams || this.useDepths) {
-              programParams.push("blockParams");
+              programParams.push('blockParams');
             }
             if (this.useDepths) {
-              programParams.push("depths");
+              programParams.push('depths');
             }
 
-            return "container.program(" + programParams.join(", ") + ")";
+            return 'container.program(' + programParams.join(', ') + ')';
           },
 
           useRegister: function useRegister(name) {
@@ -6907,10 +6359,7 @@ THE SOFTWARE.
           pushSource: function pushSource(source) {
             if (this.pendingContent) {
               this.source.push(
-                this.appendToBuffer(
-                  this.source.quotedString(this.pendingContent),
-                  this.pendingLocation
-                )
+                this.appendToBuffer(this.source.quotedString(this.pendingContent), this.pendingLocation)
               );
               this.pendingContent = undefined;
             }
@@ -6921,14 +6370,14 @@ THE SOFTWARE.
           },
 
           replaceStack: function replaceStack(callback) {
-            var prefix = ["("],
+            var prefix = ['('],
               stack = undefined,
               createdStack = undefined,
               usedLiteral = undefined;
 
             /* istanbul ignore next */
             if (!this.isInline()) {
-              throw new _exception2["default"]("replaceStack on non-inline");
+              throw new _exception2['default']('replaceStack on non-inline');
             }
 
             // We want to merge the inline statement into the replacement statement via ','
@@ -6937,14 +6386,14 @@ THE SOFTWARE.
             if (top instanceof Literal) {
               // Literals do not need to be inlined
               stack = [top.value];
-              prefix = ["(", stack];
+              prefix = ['(', stack];
               usedLiteral = true;
             } else {
               // Get or create the current stack name for use by the inline
               createdStack = true;
               var _name = this.incrStack();
 
-              prefix = ["((", this.push(_name), " = ", top, ")"];
+              prefix = ['((', this.push(_name), ' = ', top, ')'];
               stack = this.topStack();
             }
 
@@ -6956,18 +6405,18 @@ THE SOFTWARE.
             if (createdStack) {
               this.stackSlot--;
             }
-            this.push(prefix.concat(item, ")"));
+            this.push(prefix.concat(item, ')'));
           },
 
           incrStack: function incrStack() {
             this.stackSlot++;
             if (this.stackSlot > this.stackVars.length) {
-              this.stackVars.push("stack" + this.stackSlot);
+              this.stackVars.push('stack' + this.stackSlot);
             }
             return this.topStackName();
           },
           topStackName: function topStackName() {
-            return "stack" + this.stackSlot;
+            return 'stack' + this.stackSlot;
           },
           flushInline: function flushInline() {
             var inlineStack = this.inlineStack;
@@ -6979,7 +6428,7 @@ THE SOFTWARE.
                 this.compileStack.push(entry);
               } else {
                 var stack = this.incrStack();
-                this.pushSource([stack, " = ", entry, ";"]);
+                this.pushSource([stack, ' = ', entry, ';']);
                 this.compileStack.push(stack);
               }
             }
@@ -6998,7 +6447,7 @@ THE SOFTWARE.
               if (!inline) {
                 /* istanbul ignore next */
                 if (!this.stackSlot) {
-                  throw new _exception2["default"]("Invalid stack pop");
+                  throw new _exception2['default']('Invalid stack pop');
                 }
                 this.stackSlot--;
               }
@@ -7020,9 +6469,9 @@ THE SOFTWARE.
 
           contextName: function contextName(context) {
             if (this.useDepths && context) {
-              return "depths[" + context + "]";
+              return 'depths[' + context + ']';
             } else {
-              return "depth" + context;
+              return 'depth' + context;
             }
           },
 
@@ -7050,18 +6499,10 @@ THE SOFTWARE.
 
           setupHelper: function setupHelper(paramSize, name, blockHelper) {
             var params = [],
-              paramsInit = this.setupHelperArgs(
-                name,
-                paramSize,
-                params,
-                blockHelper
-              );
-            var foundHelper = this.nameLookup("helpers", name, "helper"),
+              paramsInit = this.setupHelperArgs(name, paramSize, params, blockHelper);
+            var foundHelper = this.nameLookup('helpers', name, 'helper'),
               callContext = this.aliasable(
-                this.contextName(0) +
-                  " != null ? " +
-                  this.contextName(0) +
-                  " : (container.nullContext || {})"
+                this.contextName(0) + ' != null ? ' + this.contextName(0) + ' : (container.nullContext || {})'
               );
 
             return {
@@ -7101,8 +6542,8 @@ THE SOFTWARE.
             // Avoid setting fn and inverse if neither are set. This allows
             // helpers to do a check for `if (options.fn)`
             if (program || inverse) {
-              options.fn = program || "container.noop";
-              options.inverse = inverse || "container.noop";
+              options.fn = program || 'container.noop';
+              options.inverse = inverse || 'container.noop';
             }
 
             // The parameters go on to the stack in order (making sure that they are evaluated in order)
@@ -7134,29 +6575,24 @@ THE SOFTWARE.
             }
 
             if (this.options.data) {
-              options.data = "data";
+              options.data = 'data';
             }
             if (this.useBlockParams) {
-              options.blockParams = "blockParams";
+              options.blockParams = 'blockParams';
             }
             return options;
           },
 
-          setupHelperArgs: function setupHelperArgs(
-            helper,
-            paramSize,
-            params,
-            useRegister
-          ) {
+          setupHelperArgs: function setupHelperArgs(helper, paramSize, params, useRegister) {
             var options = this.setupParams(helper, paramSize, params);
             options = this.objectLiteral(options);
             if (useRegister) {
-              this.useRegister("options");
-              params.push("options");
-              return ["options=", options];
+              this.useRegister('options');
+              params.push('options');
+              return ['options=', options];
             } else if (params) {
               params.push(options);
-              return "";
+              return '';
             } else {
               return options;
             }
@@ -7165,23 +6601,23 @@ THE SOFTWARE.
 
         (function() {
           var reservedWords = (
-            "break else new var" +
-            " case finally return void" +
-            " catch for switch while" +
-            " continue function this with" +
-            " default if throw" +
-            " delete in try" +
-            " do instanceof typeof" +
-            " abstract enum int short" +
-            " boolean export interface static" +
-            " byte extends long super" +
-            " char final native synchronized" +
-            " class float package throws" +
-            " const goto private transient" +
-            " debugger implements protected volatile" +
-            " double import public let yield await" +
-            " null true false"
-          ).split(" ");
+            'break else new var' +
+            ' case finally return void' +
+            ' catch for switch while' +
+            ' continue function this with' +
+            ' default if throw' +
+            ' delete in try' +
+            ' do instanceof typeof' +
+            ' abstract enum int short' +
+            ' boolean export interface static' +
+            ' byte extends long super' +
+            ' char final native synchronized' +
+            ' class float package throws' +
+            ' const goto private transient' +
+            ' debugger implements protected volatile' +
+            ' double import public let yield await' +
+            ' null true false'
+          ).split(' ');
 
           var compilerWords = (JavaScriptCompiler.RESERVED_WORDS = {});
 
@@ -7191,10 +6627,7 @@ THE SOFTWARE.
         })();
 
         JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
-          return (
-            !JavaScriptCompiler.RESERVED_WORDS[name] &&
-            /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(name)
-          );
+          return !JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(name);
         };
 
         function strictLookup(requireTerminal, compiler, parts, type) {
@@ -7210,28 +6643,21 @@ THE SOFTWARE.
           }
 
           if (requireTerminal) {
-            return [
-              compiler.aliasable("container.strict"),
-              "(",
-              stack,
-              ", ",
-              compiler.quotedString(parts[i]),
-              ")"
-            ];
+            return [compiler.aliasable('container.strict'), '(', stack, ', ', compiler.quotedString(parts[i]), ')'];
           } else {
             return stack;
           }
         }
 
-        exports["default"] = JavaScriptCompiler;
-        module.exports = exports["default"];
+        exports['default'] = JavaScriptCompiler;
+        module.exports = exports['default'];
 
         /***/
       },
       /* 43 */
       /***/ function(module, exports, __webpack_require__) {
         /* global define */
-        "use strict";
+        'use strict';
 
         exports.__esModule = true;
 
@@ -7244,7 +6670,7 @@ THE SOFTWARE.
           if (false) {
             // We don't support this in AMD environments. For these environments, we asusme that
             // they are running on the browser and thus have no need for the source-map library.
-            var SourceMap = require("source-map");
+            var SourceMap = require('source-map');
             SourceNode = SourceMap.SourceNode;
           }
         } catch (err) {}
@@ -7253,7 +6679,7 @@ THE SOFTWARE.
         /* istanbul ignore if: tested but not covered in istanbul due to dist build  */
         if (!SourceNode) {
           SourceNode = function(line, column, srcFile, chunks) {
-            this.src = "";
+            this.src = '';
             if (chunks) {
               this.add(chunks);
             }
@@ -7262,13 +6688,13 @@ THE SOFTWARE.
           SourceNode.prototype = {
             add: function add(chunks) {
               if (_utils.isArray(chunks)) {
-                chunks = chunks.join("");
+                chunks = chunks.join('');
               }
               this.src += chunks;
             },
             prepend: function prepend(chunks) {
               if (_utils.isArray(chunks)) {
-                chunks = chunks.join("");
+                chunks = chunks.join('');
               }
               this.src = chunks + this.src;
             },
@@ -7289,9 +6715,9 @@ THE SOFTWARE.
               ret.push(codeGen.wrap(chunk[i], loc));
             }
             return ret;
-          } else if (typeof chunk === "boolean" || typeof chunk === "number") {
+          } else if (typeof chunk === 'boolean' || typeof chunk === 'number') {
             // Handle primitives that the SourceNode will throw up on
-            return chunk + "";
+            return chunk + '';
           }
           return chunk;
         }
@@ -7315,7 +6741,7 @@ THE SOFTWARE.
           merge: function merge() {
             var source = this.empty();
             this.each(function(line) {
-              source.add(["  ", line, "\n"]);
+              source.add(['  ', line, '\n']);
             });
             return source;
           },
@@ -7328,11 +6754,7 @@ THE SOFTWARE.
 
           empty: function empty() {
             var loc = this.currentLocation || { start: {} };
-            return new SourceNode(
-              loc.start.line,
-              loc.start.column,
-              this.srcFile
-            );
+            return new SourceNode(loc.start.line, loc.start.column, this.srcFile);
           },
           wrap: function wrap(chunk) {
             var loc =
@@ -7346,29 +6768,24 @@ THE SOFTWARE.
 
             chunk = castChunk(chunk, this, loc);
 
-            return new SourceNode(
-              loc.start.line,
-              loc.start.column,
-              this.srcFile,
-              chunk
-            );
+            return new SourceNode(loc.start.line, loc.start.column, this.srcFile, chunk);
           },
 
           functionCall: function functionCall(fn, type, params) {
             params = this.generateList(params);
-            return this.wrap([fn, type ? "." + type + "(" : "(", params, ")"]);
+            return this.wrap([fn, type ? '.' + type + '(' : '(', params, ')']);
           },
 
           quotedString: function quotedString(str) {
             return (
               '"' +
-              (str + "")
-                .replace(/\\/g, "\\\\")
+              (str + '')
+                .replace(/\\/g, '\\\\')
                 .replace(/"/g, '\\"')
-                .replace(/\n/g, "\\n")
-                .replace(/\r/g, "\\r")
-                .replace(/\u2028/g, "\\u2028") // Per Ecma-262 7.3 + 7.8.4
-                .replace(/\u2029/g, "\\u2029") +
+                .replace(/\n/g, '\\n')
+                .replace(/\r/g, '\\r')
+                .replace(/\u2028/g, '\\u2028') // Per Ecma-262 7.3 + 7.8.4
+                .replace(/\u2029/g, '\\u2029') +
               '"'
             );
           },
@@ -7379,15 +6796,15 @@ THE SOFTWARE.
             for (var key in obj) {
               if (obj.hasOwnProperty(key)) {
                 var value = castChunk(obj[key], this);
-                if (value !== "undefined") {
-                  pairs.push([this.quotedString(key), ":", value]);
+                if (value !== 'undefined') {
+                  pairs.push([this.quotedString(key), ':', value]);
                 }
               }
             }
 
             var ret = this.generateList(pairs);
-            ret.prepend("{");
-            ret.add("}");
+            ret.prepend('{');
+            ret.add('}');
             return ret;
           },
 
@@ -7396,7 +6813,7 @@ THE SOFTWARE.
 
             for (var i = 0, len = entries.length; i < len; i++) {
               if (i) {
-                ret.add(",");
+                ret.add(',');
               }
 
               ret.add(castChunk(entries[i], this));
@@ -7407,15 +6824,15 @@ THE SOFTWARE.
 
           generateArray: function generateArray(entries) {
             var ret = this.generateList(entries);
-            ret.prepend("[");
-            ret.add("]");
+            ret.prepend('[');
+            ret.add(']');
 
             return ret;
           }
         };
 
-        exports["default"] = CodeGen;
-        module.exports = exports["default"];
+        exports['default'] = CodeGen;
+        module.exports = exports['default'];
 
         /***/
       }

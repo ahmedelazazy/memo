@@ -3,7 +3,7 @@ ul.timeline {
   position: relative;
 }
 ul.timeline:before {
-  content: " ";
+  content: ' ';
   background: #d4d9df;
   display: inline-block;
   position: absolute;
@@ -17,7 +17,7 @@ ul.timeline > li {
   padding-left: 20px;
 }
 ul.timeline > li:before {
-  content: " ";
+  content: ' ';
   background: white;
   display: inline-block;
   position: absolute;
@@ -118,35 +118,25 @@ hr {
   margin: 0;
 }
 
-.m-timeline-1
-  .m-timeline-1__items
-  .m-timeline-1__item.m-timeline-1__item--right {
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item.m-timeline-1__item--right {
   left: 0;
 }
 
 .m-timeline-1 .m-timeline-1__items .m-timeline-1__item {
   width: 100%;
 }
-.m-timeline-1
-  .m-timeline-1__items
-  .m-timeline-1__item.m-timeline-1__item--right
-  .m-timeline-1__item-circle {
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item.m-timeline-1__item--right .m-timeline-1__item-circle {
   top: 0;
   margin-top: 1.5rem;
 }
 
-.m-timeline-1
-  .m-timeline-1__items
-  .m-timeline-1__item.m-timeline-1__item--right {
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item.m-timeline-1__item--right {
   left: 0;
   top: 0;
   margin-bottom: 30px;
 }
 
-.m-timeline-1
-  .m-timeline-1__items
-  .m-timeline-1__item
-  .m-timeline-1__item-time {
+.m-timeline-1 .m-timeline-1__items .m-timeline-1__item .m-timeline-1__item-time {
   position: static;
 }
 

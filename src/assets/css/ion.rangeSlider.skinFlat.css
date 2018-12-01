@@ -101,7 +101,7 @@
 .irs-single:after {
   position: absolute;
   display: block;
-  content: "";
+  content: '';
   bottom: -6px;
   left: 50%;
   width: 0;

@@ -1,23 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  FormArray,
-  FormBuilder,
-  Validators
-} from "@angular/forms";
-import { TaskType } from "src/app/models/enums";
-import { UserService } from "src/app/services/user.service";
-import { MemoService } from "src/app/services/memo.service";
-import { SortablejsOptions } from "angular-sortablejs";
-import { FormHelper } from "../../template/form-helper";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { TaskType } from 'src/app/models/enums';
+import { UserService } from 'src/app/services/user.service';
+import { MemoService } from 'src/app/services/memo.service';
+import { SortablejsOptions } from 'angular-sortablejs';
+import { FormHelper } from '../../template/form-helper';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: "app-memo-create",
-  templateUrl: "./memo-create.component.html",
-  styleUrls: ["./memo-create.component.css"]
+  selector: 'app-memo-create',
+  templateUrl: './memo-create.component.html',
+  styleUrls: ['./memo-create.component.css']
 })
 export class MemoCreateComponent implements OnInit {
   taskTypeEnum = TaskType;
@@ -26,7 +20,7 @@ export class MemoCreateComponent implements OnInit {
   submitted = false;
 
   sortableOptions: SortablejsOptions = {
-    handle: ".move",
+    handle: '.move',
     onUpdate: event => {
       new FormHelper().updateValueAndValidity(this.memoForm);
     }
@@ -58,29 +52,29 @@ export class MemoCreateComponent implements OnInit {
   }
 
   addTask(taskType) {
-    let tasks = this.memoForm.get("tasks") as FormArray;
+    let tasks = this.memoForm.get('tasks') as FormArray;
     tasks.push(this.getEmptyUser(taskType));
   }
 
   remove(index) {
-    (this.memoForm.get("tasks") as FormArray).removeAt(index);
+    (this.memoForm.get('tasks') as FormArray).removeAt(index);
   }
 
   save() {
     this.submitted = true;
 
     if (this.memoForm.invalid) {
-      this.toastrService.error("Some fields have invalid values");
+      this.toastrService.error('Some fields have invalid values');
       return;
     }
 
     this.memoService.add(this.memoForm.value).subscribe(
       () => {
-        this.toastrService.success("Data saved successfully");
-        this.router.navigate(["/memo"]);
+        this.toastrService.success('Data saved successfully');
+        this.router.navigate(['/memo']);
       },
       error => {
-        this.toastrService.error("Error wile saving");
+        this.toastrService.error('Error wile saving');
         console.error(error);
       }
     );

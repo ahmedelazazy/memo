@@ -4,16 +4,10 @@
 
     <!-- FIRST -->
     <div class="m-timeline-1__item m-timeline-1__item--right">
-      <div class="m-timeline-1__item-circle">
-        <div class="m--bg-warning"></div>
-      </div>
-      <span class="m-timeline-1__item-time m--font-brand">{{
-        action?.process?.dateOpened | date
-      }}</span>
+      <div class="m-timeline-1__item-circle"><div class="m--bg-warning"></div></div>
+      <span class="m-timeline-1__item-time m--font-brand">{{ action?.process?.dateOpened | date }}</span>
       <div class="m-timeline-1__item-content">
-        <div class="m-timeline-1__item-title">
-          {{ action?.template?.title }} ({{ action?.process?.title }})
-        </div>
+        <div class="m-timeline-1__item-title">{{ action?.template?.title }} ({{ action?.process?.title }})</div>
         <hr class="no-margin" />
         <div class="m-timeline-1__item-body">
           <p><strong>Requested by</strong>{{ action?.process?.user?.name }}</p>
@@ -32,12 +26,8 @@
       >
         <ng-container *ngIf="getStep(act) as s">
           <div class="m-timeline-1__item m-timeline-1__item--right">
-            <div class="m-timeline-1__item-circle">
-              <div class="m--bg-metal"></div>
-            </div>
-            <span class="m-timeline-1__item-time m--font-brand">{{
-              act.dateOpened | date
-            }}</span>
+            <div class="m-timeline-1__item-circle"><div class="m--bg-metal"></div></div>
+            <span class="m-timeline-1__item-time m--font-brand">{{ act.dateOpened | date }}</span>
             <div class="m-timeline-1__item-content">
               <div class="m-timeline-1__item-title">{{ s.title }}</div>
               <hr class="no-margin" />
@@ -49,17 +39,10 @@
 
           <div
             class="m-timeline-1__item m-timeline-1__item--right"
-            *ngIf="
-              act.status == actionStatusEnum.completed_or_approved ||
-              act.status == actionStatusEnum.rejected
-            "
+            *ngIf="act.status == actionStatusEnum.completed_or_approved || act.status == actionStatusEnum.rejected"
           >
-            <div class="m-timeline-1__item-circle">
-              <div class="m--bg-info"></div>
-            </div>
-            <span class="m-timeline-1__item-time m--font-brand">{{
-              act.dateClosed | date
-            }}</span>
+            <div class="m-timeline-1__item-circle"><div class="m--bg-info"></div></div>
+            <span class="m-timeline-1__item-time m--font-brand">{{ act.dateClosed | date }}</span>
             <div class="m-timeline-1__item-content">
               <div class="m-timeline-1__item-title">{{ s.title }}</div>
               <hr class="no-margin" />
@@ -69,23 +52,15 @@
                   <strong>Comment</strong> {{ act.comment }}
                   <span
                     class="m-badge m-badge--success m-badge--wide"
-                    *ngIf="
-                      act.status == actionStatusEnum.completed_or_approved &&
-                      s.type == taskTypeEnum.Task
-                    "
+                    *ngIf="act.status == actionStatusEnum.completed_or_approved && s.type == taskTypeEnum.Task"
                     >Completed</span
                   >
                   <span
                     class="m-badge m-badge--success m-badge--wide"
-                    *ngIf="
-                      act.status == actionStatusEnum.completed_or_approved &&
-                      s.type == taskTypeEnum.Approval
-                    "
+                    *ngIf="act.status == actionStatusEnum.completed_or_approved && s.type == taskTypeEnum.Approval"
                     >Approved</span
                   >
-                  <span
-                    class="m-badge m-badge--danger m-badge--wide"
-                    *ngIf="act.status == actionStatusEnum.rejected"
+                  <span class="m-badge m-badge--danger m-badge--wide" *ngIf="act.status == actionStatusEnum.rejected"
                     >Rejected</span
                   >
                 </p>
@@ -104,22 +79,13 @@
         action.process?.status == processStatusEnum.rejected
       "
     >
-      <div class="m-timeline-1__item-circle">
-        <div class="m--bg-warning"></div>
-      </div>
-      <span class="m-timeline-1__item-time m--font-brand">{{
-        action?.process?.dateClosed | date
-      }}</span>
+      <div class="m-timeline-1__item-circle"><div class="m--bg-warning"></div></div>
+      <span class="m-timeline-1__item-time m--font-brand">{{ action?.process?.dateClosed | date }}</span>
       <div class="m-timeline-1__item-content">
-        <div class="m-timeline-1__item-title">
-          {{ action?.template?.title }} ({{ action?.process?.title }})
-        </div>
+        <div class="m-timeline-1__item-title">{{ action?.template?.title }} ({{ action?.process?.title }})</div>
         <hr class="no-margin" />
         <div class="m-timeline-1__item-body">
-          <p>
-            <strong>Process completed by</strong
-            >{{ action?.process?.user?.name }}
-          </p>
+          <p><strong>Process completed by</strong>{{ action?.process?.user?.name }}</p>
         </div>
       </div>
     </div>

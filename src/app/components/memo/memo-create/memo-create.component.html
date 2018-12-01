@@ -1,9 +1,4 @@
-<form
-  [formGroup]="memoForm"
-  (ngSubmit)="save()"
-  class=" m-form"
-  [class.invalidform]="submitted && memoForm.invalid"
->
+<form [formGroup]="memoForm" (ngSubmit)="save()" class=" m-form" [class.invalidform]="submitted && memoForm.invalid">
   <div class="row">
     <div class="col-md-12">
       <h4>Create New Memo</h4>
@@ -39,45 +34,21 @@
     <div class="col-md-6">
       <label>Memo Participants</label>
       <div class="">
-        <div
-          [sortablejs]="memoForm.get('tasks').controls"
-          [sortablejsOptions]="sortableOptions"
-          formArrayName="tasks"
-        >
-          <div
-            *ngFor="let task of memoForm.get('tasks').controls; let i = index"
-          >
+        <div [sortablejs]="memoForm.get('tasks').controls" [sortablejsOptions]="sortableOptions" formArrayName="tasks">
+          <div *ngFor="let task of memoForm.get('tasks').controls; let i = index">
             <div [formGroupName]="i">
               <a class="">
                 <div class="row">
                   <div class="col-md-1 move"><i class="la la-sort"></i></div>
                   <div class="col-md-1">
-                    <i
-                      class="fa fa-lg fa-tasks m--font-accent"
-                      *ngIf="task.value.type == taskTypeEnum.Task"
-                    ></i>
-                    <i
-                      class="fa fa-lg fa-check m--font-focus"
-                      *ngIf="task.value.type == taskTypeEnum.Approval"
-                    ></i>
+                    <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="task.value.type == taskTypeEnum.Task"></i>
+                    <i class="fa fa-lg fa-check m--font-focus" *ngIf="task.value.type == taskTypeEnum.Approval"></i>
                   </div>
                   <div class="col-md-8">
                     <div class="form-group m-form__group">
-                      <select
-                        class="form-control m-input"
-                        name="user"
-                        id="user"
-                        formControlName="userId"
-                        required
-                      >
-                        <option value="null" disabled selected
-                          >Assigned to</option
-                        >
-                        <option
-                          [ngValue]="user.id"
-                          *ngFor="let user of users"
-                          >{{ user.name }}</option
-                        >
+                      <select class="form-control m-input" name="user" id="user" formControlName="userId" required>
+                        <option value="null" disabled selected>Assigned to</option>
+                        <option [ngValue]="user.id" *ngFor="let user of users">{{ user.name }}</option>
                       </select>
                     </div>
                   </div>
@@ -100,18 +71,10 @@
         <div class="margin-top-20 row">
           <div class="col-md-2"></div>
           <div class="col-md-10">
-            <button
-              type="button"
-              class="btn btn-accent m-btn--pill btn-sm"
-              (click)="addTask(taskTypeEnum.Task)"
-            >
+            <button type="button" class="btn btn-accent m-btn--pill btn-sm" (click)="addTask(taskTypeEnum.Task)">
               Add Task
             </button>
-            <button
-              type="button"
-              class="btn btn-focus m-btn--pill btn-sm"
-              (click)="addTask(taskTypeEnum.Approval)"
-            >
+            <button type="button" class="btn btn-focus m-btn--pill btn-sm" (click)="addTask(taskTypeEnum.Approval)">
               Add Approval
             </button>
           </div>

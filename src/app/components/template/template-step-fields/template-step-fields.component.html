@@ -1,19 +1,9 @@
 <div class="m-list-search">
   <div class="m-list-search__results">
-    <div
-      *ngFor="let section of templateForm.sections"
-      class="section-container"
-    >
-      <span
-        class="m-list-search__result-category m-list-search__result-category--first"
-      >
-        {{ section.label }}
-      </span>
+    <div *ngFor="let section of templateForm.sections" class="section-container">
+      <span class="m-list-search__result-category m-list-search__result-category--first"> {{ section.label }} </span>
 
-      <a
-        class="m-list-search__result-item"
-        *ngFor="let field of section.fields"
-      >
+      <a class="m-list-search__result-item" *ngFor="let field of section.fields">
         <span class="m-list-search__result-item-text">
           <div class="form-inline">
             <div class="form-group">
@@ -34,20 +24,12 @@
                   id="visibility"
                   name="visibility"
                   [value]="field.visibility"
-                  (change)="
-                    onVisibilityChange($event.target.value, field.controlUiId)
-                  "
+                  (change)="onVisibilityChange($event.target.value, field.controlUiId)"
                 >
                   <option [value]="fieldVisibilityEnum.Hidden">Hidden</option>
-                  <option [value]="fieldVisibilityEnum.Readonly"
-                    >Read-only</option
-                  >
-                  <option [value]="fieldVisibilityEnum.Editable"
-                    >Editable</option
-                  >
-                  <option [value]="fieldVisibilityEnum.Required"
-                    >Required</option
-                  >
+                  <option [value]="fieldVisibilityEnum.Readonly">Read-only</option>
+                  <option [value]="fieldVisibilityEnum.Editable">Editable</option>
+                  <option [value]="fieldVisibilityEnum.Required">Required</option>
                 </select>
               </div>
             </div>

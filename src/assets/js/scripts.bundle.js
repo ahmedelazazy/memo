@@ -59,12 +59,11 @@ this.Element &&
 //
 (function() {
   var lastTime = 0;
-  var vendors = ["webkit", "moz"];
+  var vendors = ['webkit', 'moz'];
   for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-    window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"];
+    window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
     window.cancelAnimationFrame =
-      window[vendors[x] + "CancelAnimationFrame"] ||
-      window[vendors[x] + "CancelRequestAnimationFrame"];
+      window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
   }
 
   if (!window.requestAnimationFrame)
@@ -87,10 +86,10 @@ this.Element &&
 // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
 (function(arr) {
   arr.forEach(function(item) {
-    if (item.hasOwnProperty("prepend")) {
+    if (item.hasOwnProperty('prepend')) {
       return;
     }
-    Object.defineProperty(item, "prepend", {
+    Object.defineProperty(item, 'prepend', {
       configurable: true,
       enumerable: true,
       writable: true,
@@ -100,9 +99,7 @@ this.Element &&
 
         argArr.forEach(function(argItem) {
           var isNode = argItem instanceof Node;
-          docFrag.appendChild(
-            isNode ? argItem : document.createTextNode(String(argItem))
-          );
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
         });
 
         this.insertBefore(docFrag, this.firstChild);
@@ -143,7 +140,7 @@ var mUtil = (function() {
     var timeout = false; // holder for timeout id
     var delay = 250; // delay after event is "complete" to run callback
 
-    window.addEventListener("resize", function() {
+    window.addEventListener('resize', function() {
       clearTimeout(timeout);
       timeout = setTimeout(function() {
         _runResizeHandlers();
@@ -194,14 +191,14 @@ var mUtil = (function() {
     },
 
     resize: function() {
-      if (typeof Event === "function") {
+      if (typeof Event === 'function') {
         // modern browsers
-        window.dispatchEvent(new Event("resize"));
+        window.dispatchEvent(new Event('resize'));
       } else {
         // for IE and other old browsers
         // causes deprecation warning on modern browsers
-        var evt = window.document.createEvent("UIEvents");
-        evt.initUIEvent("resize", true, false, window, 0);
+        var evt = window.document.createEvent('UIEvents');
+        evt.initUIEvent('resize', true, false, window, 0);
         window.dispatchEvent(evt);
       }
     },
@@ -215,10 +212,10 @@ var mUtil = (function() {
       var searchString = window.location.search.substring(1),
         i,
         val,
-        params = searchString.split("&");
+        params = searchString.split('&');
 
       for (i = 0; i < params.length; i++) {
-        val = params[i].split("=");
+        val = params[i].split('=');
         if (val[0] == paramName) {
           return unescape(val[1]);
         }
@@ -232,7 +229,7 @@ var mUtil = (function() {
      * @returns {boolean}
      */
     isMobileDevice: function() {
-      return this.getViewPort().width < this.getBreakpoint("lg") ? true : false;
+      return this.getViewPort().width < this.getBreakpoint('lg') ? true : false;
     },
 
     /**
@@ -250,15 +247,15 @@ var mUtil = (function() {
      */
     getViewPort: function() {
       var e = window,
-        a = "inner";
-      if (!("innerWidth" in window)) {
-        a = "client";
+        a = 'inner';
+      if (!('innerWidth' in window)) {
+        a = 'client';
         e = document.documentElement || document.body;
       }
 
       return {
-        width: e[a + "Width"],
-        height: e[a + "Height"]
+        width: e[a + 'Width'],
+        height: e[a + 'Height']
       };
     },
 
@@ -271,35 +268,22 @@ var mUtil = (function() {
     isInResponsiveRange: function(mode) {
       var breakpoint = this.getViewPort().width;
 
-      if (mode == "general") {
+      if (mode == 'general') {
+        return true;
+      } else if (mode == 'desktop' && breakpoint >= this.getBreakpoint('lg') + 1) {
         return true;
       } else if (
-        mode == "desktop" &&
-        breakpoint >= this.getBreakpoint("lg") + 1
+        mode == 'tablet' &&
+        (breakpoint >= this.getBreakpoint('md') + 1 && breakpoint < this.getBreakpoint('lg'))
       ) {
         return true;
-      } else if (
-        mode == "tablet" &&
-        (breakpoint >= this.getBreakpoint("md") + 1 &&
-          breakpoint < this.getBreakpoint("lg"))
-      ) {
+      } else if (mode == 'mobile' && breakpoint <= this.getBreakpoint('md')) {
         return true;
-      } else if (mode == "mobile" && breakpoint <= this.getBreakpoint("md")) {
+      } else if (mode == 'desktop-and-tablet' && breakpoint >= this.getBreakpoint('md') + 1) {
         return true;
-      } else if (
-        mode == "desktop-and-tablet" &&
-        breakpoint >= this.getBreakpoint("md") + 1
-      ) {
+      } else if (mode == 'tablet-and-mobile' && breakpoint <= this.getBreakpoint('lg')) {
         return true;
-      } else if (
-        mode == "tablet-and-mobile" &&
-        breakpoint <= this.getBreakpoint("lg")
-      ) {
-        return true;
-      } else if (
-        mode == "minimal-desktop-and-below" &&
-        breakpoint <= this.getBreakpoint("xl")
-      ) {
+      } else if (mode == 'minimal-desktop-and-below' && breakpoint <= this.getBreakpoint('xl')) {
         return true;
       }
 
@@ -333,13 +317,13 @@ var mUtil = (function() {
     isset: function(obj, keys) {
       var stone;
 
-      keys = keys || "";
+      keys = keys || '';
 
-      if (keys.indexOf("[") !== -1) {
-        throw new Error("Unsupported object path notation.");
+      if (keys.indexOf('[') !== -1) {
+        throw new Error('Unsupported object path notation.');
       }
 
-      keys = keys.split(".");
+      keys = keys.split('.');
 
       do {
         if (obj === undefined) {
@@ -372,18 +356,14 @@ var mUtil = (function() {
         // Ignore z-index if position is set to a value where z-index is ignored by the browser
         // This makes behavior of this function consistent across browsers
         // WebKit always returns auto if the element is positioned
-        position = mUtil.css(elem, "position");
+        position = mUtil.css(elem, 'position');
 
-        if (
-          position === "absolute" ||
-          position === "relative" ||
-          position === "fixed"
-        ) {
+        if (position === 'absolute' || position === 'relative' || position === 'fixed') {
           // IE returns 0 when zIndex is not specified
           // other browsers return a string
           // we ignore the case of nested elements with an explicit value of 0
           // <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-          value = parseInt(mUtil.css(elem, "z-index"));
+          value = parseInt(mUtil.css(elem, 'z-index'));
 
           if (!isNaN(value) && value !== 0) {
             return value;
@@ -403,9 +383,9 @@ var mUtil = (function() {
      */
     hasFixedPositionedParent: function(el) {
       while (el && el !== document) {
-        position = mUtil.css(el, "position");
+        position = mUtil.css(el, 'position');
 
-        if (position === "fixed") {
+        if (position === 'fixed') {
           return true;
         }
 
@@ -458,8 +438,7 @@ var mUtil = (function() {
 
         for (var key in obj) {
           if (obj.hasOwnProperty(key)) {
-            if (typeof obj[key] === "object")
-              out[key] = mUtil.deepExtend(out[key], obj[key]);
+            if (typeof obj[key] === 'object') out[key] = mUtil.deepExtend(out[key], obj[key]);
             else out[key] = obj[key];
           }
         }
@@ -526,7 +505,7 @@ var mUtil = (function() {
         return;
       }
 
-      var classesArr = classes.split(" ");
+      var classesArr = classes.split(' ');
 
       for (var i = 0; i < classesArr.length; i++) {
         if (mUtil.hasClass(el, mUtil.trim(classesArr[i])) == false) {
@@ -542,17 +521,15 @@ var mUtil = (function() {
         return;
       }
 
-      return el.classList
-        ? el.classList.contains(className)
-        : new RegExp("\\b" + className + "\\b").test(el.className);
+      return el.classList ? el.classList.contains(className) : new RegExp('\\b' + className + '\\b').test(el.className);
     },
 
     addClass: function(el, className) {
-      if (!el || typeof className === "undefined") {
+      if (!el || typeof className === 'undefined') {
         return;
       }
 
-      var classNames = className.split(" ");
+      var classNames = className.split(' ');
 
       if (el.classList) {
         for (var i = 0; i < classNames.length; i++) {
@@ -562,17 +539,17 @@ var mUtil = (function() {
         }
       } else if (!mUtil.hasClass(el, className)) {
         for (var i = 0; i < classNames.length; i++) {
-          el.className += " " + mUtil.trim(classNames[i]);
+          el.className += ' ' + mUtil.trim(classNames[i]);
         }
       }
     },
 
     removeClass: function(el, className) {
-      if (!el || typeof className === "undefined") {
+      if (!el || typeof className === 'undefined') {
         return;
       }
 
-      var classNames = className.split(" ");
+      var classNames = className.split(' ');
 
       if (el.classList) {
         for (var i = 0; i < classNames.length; i++) {
@@ -580,10 +557,7 @@ var mUtil = (function() {
         }
       } else if (mUtil.hasClass(el, className)) {
         for (var i = 0; i < classNames.length; i++) {
-          el.className = el.className.replace(
-            new RegExp("\\b" + mUtil.trim(classNames[i]) + "\\b", "g"),
-            ""
-          );
+          el.className = el.className.replace(new RegExp('\\b' + mUtil.trim(classNames[i]) + '\\b', 'g'), '');
         }
       }
     },
@@ -594,7 +568,7 @@ var mUtil = (function() {
           detail: data
         });
       } else {
-        var event = document.createEvent("CustomEvent");
+        var event = document.createEvent('CustomEvent');
         event.initCustomEvent(eventName, true, true, data);
       }
 
@@ -636,10 +610,7 @@ var mUtil = (function() {
     },
 
     insertAfter: function(el, referenceNode) {
-      return referenceNode.parentNode.insertBefore(
-        el,
-        referenceNode.nextSibling
-      );
+      return referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
     },
 
     parents: function(el, query) {
@@ -677,10 +648,7 @@ var mUtil = (function() {
         l = el.childNodes.length;
 
       for (var i; i < l; ++i) {
-        if (
-          el.childNodes[i].nodeType == 1 &&
-          mUtil.matches(el.childNodes[i], selector, log)
-        ) {
+        if (el.childNodes[i].nodeType == 1 && mUtil.matches(el.childNodes[i], selector, log)) {
           result.push(el.childNodes[i]);
         }
       }
@@ -730,14 +698,11 @@ var mUtil = (function() {
         },
 
         get: function(name) {
-          return this.has(name)
-            ? mUtilElementDataStore[element.customDataTag][name]
-            : null;
+          return this.has(name) ? mUtilElementDataStore[element.customDataTag][name] : null;
         },
 
         has: function(name) {
-          return mUtilElementDataStore[element.customDataTag] &&
-            mUtilElementDataStore[element.customDataTag][name]
+          return mUtilElementDataStore[element.customDataTag] && mUtilElementDataStore[element.customDataTag][name]
             ? true
             : false;
         },
@@ -755,9 +720,7 @@ var mUtil = (function() {
 
       if (margin === true) {
         var width = parseFloat(el.offsetWidth);
-        width +=
-          parseFloat(mUtil.css(el, "margin-left")) +
-          parseFloat(mUtil.css(el, "margin-right"));
+        width += parseFloat(mUtil.css(el, 'margin-left')) + parseFloat(mUtil.css(el, 'margin-right'));
 
         return parseFloat(width);
       } else {
@@ -795,7 +758,7 @@ var mUtil = (function() {
     },
 
     height: function(el) {
-      return mUtil.css(el, "height");
+      return mUtil.css(el, 'height');
     },
 
     visible: function(el) {
@@ -852,16 +815,16 @@ var mUtil = (function() {
 
       // Early bail out if called incorrectly
       if (
-        typeof from !== "number" ||
-        typeof to !== "number" ||
-        typeof duration !== "number" ||
-        typeof update !== "function"
+        typeof from !== 'number' ||
+        typeof to !== 'number' ||
+        typeof duration !== 'number' ||
+        typeof update !== 'function'
       ) {
         return;
       }
 
       // Create mock done() function if necessary
-      if (typeof done !== "function") {
+      if (typeof done !== 'function') {
         done = function() {};
       }
 
@@ -893,10 +856,7 @@ var mUtil = (function() {
       update(from);
 
       // Start animation loop
-      var start =
-        window.performance && window.performance.now
-          ? window.performance.now()
-          : +new Date();
+      var start = window.performance && window.performance.now ? window.performance.now() : +new Date();
 
       rAF(loop);
     },
@@ -906,45 +866,44 @@ var mUtil = (function() {
         return;
       }
 
-      if (!el.getAttribute("m-hidden-" + prop) || cache === false) {
+      if (!el.getAttribute('m-hidden-' + prop) || cache === false) {
         var value;
 
         // the element is hidden so:
         // making the el block so we can meassure its height but still be hidden
-        el.style.cssText =
-          "position: absolute; visibility: hidden; display: block;";
+        el.style.cssText = 'position: absolute; visibility: hidden; display: block;';
 
-        if (prop == "width") {
+        if (prop == 'width') {
           value = el.offsetWidth;
-        } else if (prop == "height") {
+        } else if (prop == 'height') {
           value = el.offsetHeight;
         }
 
-        el.style.cssText = "";
+        el.style.cssText = '';
 
         // store it in cache
-        el.setAttribute("m-hidden-" + prop, value);
+        el.setAttribute('m-hidden-' + prop, value);
 
         return parseFloat(value);
       } else {
         // store it in cache
-        return parseFloat(el.getAttribute("m-hidden-" + prop));
+        return parseFloat(el.getAttribute('m-hidden-' + prop));
       }
     },
 
     actualHeight: function(el, cache) {
-      return mUtil.actualCss(el, "height", cache);
+      return mUtil.actualCss(el, 'height', cache);
     },
 
     actualWidth: function(el, cache) {
-      return mUtil.actualCss(el, "width", cache);
+      return mUtil.actualCss(el, 'width', cache);
     },
 
     getScroll: function(element, method) {
       // The passed in `method` value should be 'Top' or 'Left'
-      method = "scroll" + method;
+      method = 'scroll' + method;
       return element == window || element == document
-        ? self[method == "scrollTop" ? "pageYOffset" : "pageXOffset"] ||
+        ? self[method == 'scrollTop' ? 'pageYOffset' : 'pageXOffset'] ||
             (browserSupportsBoxModel && document.documentElement[method]) ||
             document.body[method]
         : element[method];
@@ -966,10 +925,8 @@ var mUtil = (function() {
         if (defaultView && defaultView.getComputedStyle) {
           // sanitize property name to css notation
           // (hyphen separated words eg. font-Size)
-          styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
-          return defaultView
-            .getComputedStyle(el, null)
-            .getPropertyValue(styleProp);
+          styleProp = styleProp.replace(/([A-Z])/g, '-$1').toLowerCase();
+          return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
         } else if (el.currentStyle) {
           // IE
           // sanitize property name to camelCase
@@ -984,7 +941,7 @@ var mUtil = (function() {
                 oldRsLeft = el.runtimeStyle.left;
               el.runtimeStyle.left = el.currentStyle.left;
               el.style.left = value || 0;
-              value = el.style.pixelLeft + "px";
+              value = el.style.pixelLeft + 'px';
               el.style.left = oldLeft;
               el.runtimeStyle.left = oldRsLeft;
               return value;
@@ -996,11 +953,7 @@ var mUtil = (function() {
     },
 
     slide: function(el, dir, speed, callback, recalcMaxHeight) {
-      if (
-        !el ||
-        (dir == "up" && mUtil.visible(el) === false) ||
-        (dir == "down" && mUtil.visible(el) === true)
-      ) {
+      if (!el || (dir == 'up' && mUtil.visible(el) === false) || (dir == 'down' && mUtil.visible(el) === true)) {
         return;
       }
 
@@ -1009,35 +962,25 @@ var mUtil = (function() {
       var calcPaddingTop = false;
       var calcPaddingBottom = false;
 
-      if (
-        mUtil.css(el, "padding-top") &&
-        mUtil.data(el).has("slide-padding-top") !== true
-      ) {
-        mUtil.data(el).set("slide-padding-top", mUtil.css(el, "padding-top"));
+      if (mUtil.css(el, 'padding-top') && mUtil.data(el).has('slide-padding-top') !== true) {
+        mUtil.data(el).set('slide-padding-top', mUtil.css(el, 'padding-top'));
       }
 
-      if (
-        mUtil.css(el, "padding-bottom") &&
-        mUtil.data(el).has("slide-padding-bottom") !== true
-      ) {
-        mUtil
-          .data(el)
-          .set("slide-padding-bottom", mUtil.css(el, "padding-bottom"));
+      if (mUtil.css(el, 'padding-bottom') && mUtil.data(el).has('slide-padding-bottom') !== true) {
+        mUtil.data(el).set('slide-padding-bottom', mUtil.css(el, 'padding-bottom'));
       }
 
-      if (mUtil.data(el).has("slide-padding-top")) {
-        calcPaddingTop = parseInt(mUtil.data(el).get("slide-padding-top"));
+      if (mUtil.data(el).has('slide-padding-top')) {
+        calcPaddingTop = parseInt(mUtil.data(el).get('slide-padding-top'));
       }
 
-      if (mUtil.data(el).has("slide-padding-bottom")) {
-        calcPaddingBottom = parseInt(
-          mUtil.data(el).get("slide-padding-bottom")
-        );
+      if (mUtil.data(el).has('slide-padding-bottom')) {
+        calcPaddingBottom = parseInt(mUtil.data(el).get('slide-padding-bottom'));
       }
 
-      if (dir == "up") {
+      if (dir == 'up') {
         // up
-        el.style.cssText = "display: block; overflow: hidden;";
+        el.style.cssText = 'display: block; overflow: hidden;';
 
         if (calcPaddingTop) {
           mUtil.animate(
@@ -1045,9 +988,9 @@ var mUtil = (function() {
             calcPaddingTop,
             speed,
             function(value) {
-              el.style.paddingTop = calcPaddingTop - value + "px";
+              el.style.paddingTop = calcPaddingTop - value + 'px';
             },
-            "linear"
+            'linear'
           );
         }
 
@@ -1057,9 +1000,9 @@ var mUtil = (function() {
             calcPaddingBottom,
             speed,
             function(value) {
-              el.style.paddingBottom = calcPaddingBottom - value + "px";
+              el.style.paddingBottom = calcPaddingBottom - value + 'px';
             },
-            "linear"
+            'linear'
           );
         }
 
@@ -1068,18 +1011,18 @@ var mUtil = (function() {
           calcHeight,
           speed,
           function(value) {
-            el.style.height = calcHeight - value + "px";
+            el.style.height = calcHeight - value + 'px';
           },
-          "linear",
+          'linear',
           function() {
             callback();
-            el.style.height = "";
-            el.style.display = "none";
+            el.style.height = '';
+            el.style.display = 'none';
           }
         );
-      } else if (dir == "down") {
+      } else if (dir == 'down') {
         // down
-        el.style.cssText = "display: block; overflow: hidden;";
+        el.style.cssText = 'display: block; overflow: hidden;';
 
         if (calcPaddingTop) {
           mUtil.animate(
@@ -1087,11 +1030,11 @@ var mUtil = (function() {
             calcPaddingTop,
             speed,
             function(value) {
-              el.style.paddingTop = value + "px";
+              el.style.paddingTop = value + 'px';
             },
-            "linear",
+            'linear',
             function() {
-              el.style.paddingTop = "";
+              el.style.paddingTop = '';
             }
           );
         }
@@ -1102,11 +1045,11 @@ var mUtil = (function() {
             calcPaddingBottom,
             speed,
             function(value) {
-              el.style.paddingBottom = value + "px";
+              el.style.paddingBottom = value + 'px';
             },
-            "linear",
+            'linear',
             function() {
-              el.style.paddingBottom = "";
+              el.style.paddingBottom = '';
             }
           );
         }
@@ -1116,38 +1059,38 @@ var mUtil = (function() {
           calcHeight,
           speed,
           function(value) {
-            el.style.height = value + "px";
+            el.style.height = value + 'px';
           },
-          "linear",
+          'linear',
           function() {
             callback();
-            el.style.height = "";
-            el.style.display = "";
-            el.style.overflow = "";
+            el.style.height = '';
+            el.style.display = '';
+            el.style.overflow = '';
           }
         );
       }
     },
 
     slideUp: function(el, speed, callback) {
-      mUtil.slide(el, "up", speed, callback);
+      mUtil.slide(el, 'up', speed, callback);
     },
 
     slideDown: function(el, speed, callback) {
-      mUtil.slide(el, "down", speed, callback);
+      mUtil.slide(el, 'down', speed, callback);
     },
 
     show: function(el, display) {
-      el.style.display = display ? display : "block";
+      el.style.display = display ? display : 'block';
     },
 
     hide: function(el) {
-      el.style.display = "none";
+      el.style.display = 'none';
     },
 
     addEvent: function(el, type, handler, one) {
       el = mUtil.get(el);
-      if (typeof el !== "undefined") {
+      if (typeof el !== 'undefined') {
         el.addEventListener(type, handler);
       }
     },
@@ -1162,7 +1105,7 @@ var mUtil = (function() {
         return;
       }
 
-      var eventId = mUtil.getUniqueID("event");
+      var eventId = mUtil.getUniqueID('event');
 
       mUtilDelegatedEventHandlers[eventId] = function(e) {
         var targets = element.querySelectorAll(selector);
@@ -1221,13 +1164,12 @@ var mUtil = (function() {
     },
 
     animateClass: function(el, animationName, callback) {
-      var animationEnd =
-        "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+      var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
-      mUtil.addClass(el, "animated " + animationName);
+      mUtil.addClass(el, 'animated ' + animationName);
 
       mUtil.one(el, animationEnd, function() {
-        mUtil.removeClass(el, "animated " + animationName);
+        mUtil.removeClass(el, 'animated ' + animationName);
       });
 
       if (callback) {
@@ -1236,16 +1178,16 @@ var mUtil = (function() {
     },
 
     animateDelay: function(el, value) {
-      var vendors = ["webkit-", "moz-", "ms-", "o-", ""];
+      var vendors = ['webkit-', 'moz-', 'ms-', 'o-', ''];
       for (var i = 0; i < vendors.length; i++) {
-        mUtil.css(el, vendors[i] + "animation-delay", value);
+        mUtil.css(el, vendors[i] + 'animation-delay', value);
       }
     },
 
     animateDuration: function(el, value) {
-      var vendors = ["webkit-", "moz-", "ms-", "o-", ""];
+      var vendors = ['webkit-', 'moz-', 'ms-', 'o-', ''];
       for (var i = 0; i < vendors.length; i++) {
-        mUtil.css(el, vendors[i] + "animation-duration", value);
+        mUtil.css(el, vendors[i] + 'animation-duration', value);
       }
     },
 
@@ -1253,11 +1195,7 @@ var mUtil = (function() {
       var duration = duration ? duration : 500;
       var target = mUtil.get(target);
       var targetPos = target ? mUtil.offset(target).top : 0;
-      var scrollPos =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
+      var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
       var from, to;
 
       if (targetPos > scrollPos) {
@@ -1288,14 +1226,10 @@ var mUtil = (function() {
     },
 
     ready: function(callback) {
-      if (
-        document.attachEvent
-          ? document.readyState === "complete"
-          : document.readyState !== "loading"
-      ) {
+      if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {
         callback();
       } else {
-        document.addEventListener("DOMContentLoaded", callback);
+        document.addEventListener('DOMContentLoaded', callback);
       }
     },
 
@@ -1310,13 +1244,13 @@ var mUtil = (function() {
     },
 
     numberString: function(nStr) {
-      nStr += "";
-      var x = nStr.split(".");
+      nStr += '';
+      var x = nStr.split('.');
       var x1 = x[0];
-      var x2 = x.length > 1 ? "." + x[1] : "";
+      var x2 = x.length > 1 ? '.' + x[1] : '';
       var rgx = /(\d+)(\d{3})/;
       while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, "$1" + "," + "$2");
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
       }
       return x1 + x2;
     },
@@ -1338,23 +1272,23 @@ var mUtil = (function() {
       // Edge 13
       // ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586';
 
-      var msie = ua.indexOf("MSIE ");
+      var msie = ua.indexOf('MSIE ');
       if (msie > 0) {
         // IE 10 or older => return version number
-        return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
       }
 
-      var trident = ua.indexOf("Trident/");
+      var trident = ua.indexOf('Trident/');
       if (trident > 0) {
         // IE 11 => return version number
-        var rv = ua.indexOf("rv:");
-        return parseInt(ua.substring(rv + 3, ua.indexOf(".", rv)), 10);
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
       }
 
-      var edge = ua.indexOf("Edge/");
+      var edge = ua.indexOf('Edge/');
       if (edge > 0) {
         // Edge (IE 12+) => return version number
-        return parseInt(ua.substring(edge + 5, ua.indexOf(".", edge)), 10);
+        return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
       }
 
       // other browser
@@ -1362,7 +1296,7 @@ var mUtil = (function() {
     },
 
     isRTL: function() {
-      return mUtil.attr(mUtil.get("html"), "direction") == "rtl";
+      return mUtil.attr(mUtil.get('html'), 'direction') == 'rtl';
     },
 
     //== Scroller
@@ -1379,41 +1313,38 @@ var mUtil = (function() {
         }
 
         //== Destroy scroll on table and mobile modes
-        if (
-          options.disableForMobile &&
-          mUtil.isInResponsiveRange("tablet-and-mobile")
-        ) {
-          if ((ps = mUtil.data(element).get("ps"))) {
+        if (options.disableForMobile && mUtil.isInResponsiveRange('tablet-and-mobile')) {
+          if ((ps = mUtil.data(element).get('ps'))) {
             if (options.resetHeightOnDestroy) {
-              mUtil.css(element, "height", "auto");
+              mUtil.css(element, 'height', 'auto');
             } else {
-              mUtil.css(element, "overflow", "auto");
+              mUtil.css(element, 'overflow', 'auto');
               if (height > 0) {
-                mUtil.css(element, "height", height + "px");
+                mUtil.css(element, 'height', height + 'px');
               }
             }
 
             ps.destroy();
-            ps = mUtil.data(element).remove("ps");
+            ps = mUtil.data(element).remove('ps');
           } else if (height > 0) {
-            mUtil.css(element, "overflow", "auto");
-            mUtil.css(element, "height", height + "px");
+            mUtil.css(element, 'overflow', 'auto');
+            mUtil.css(element, 'height', height + 'px');
           }
 
           return;
         }
 
         if (height > 0) {
-          mUtil.css(element, "height", height + "px");
+          mUtil.css(element, 'height', height + 'px');
         }
 
-        mUtil.css(element, "overflow", "hidden");
+        mUtil.css(element, 'overflow', 'hidden');
 
         //== Init scroll
-        if ((ps = mUtil.data(element).get("ps"))) {
+        if ((ps = mUtil.data(element).get('ps'))) {
           ps.update();
         } else {
-          mUtil.addClass(element, "m-scroller");
+          mUtil.addClass(element, 'm-scroller');
           ps = new PerfectScrollbar(element, {
             wheelSpeed: 0.5,
             swipeEasing: true,
@@ -1422,7 +1353,7 @@ var mUtil = (function() {
             suppressScrollX: mUtil.isRTL() ? false : true
           });
 
-          mUtil.data(element).set("ps", ps);
+          mUtil.data(element).set('ps', ps);
         }
       }
 
@@ -1439,13 +1370,13 @@ var mUtil = (function() {
 
     scrollerUpdate: function(element) {
       var ps;
-      if ((ps = mUtil.data(element).get("ps"))) {
+      if ((ps = mUtil.data(element).get('ps'))) {
         ps.update();
       }
     },
 
     scrollersUpdate: function(parent) {
-      var scrollers = mUtil.findAll(parent, ".ps");
+      var scrollers = mUtil.findAll(parent, '.ps');
       for (var i = 0, len = scrollers.length; i < len; i++) {
         mUtil.scrollerUpdate(scrollers[i]);
       }
@@ -1453,16 +1384,16 @@ var mUtil = (function() {
 
     scrollerTop: function(element) {
       var ps;
-      if ((ps = mUtil.data(element).get("ps"))) {
+      if ((ps = mUtil.data(element).get('ps'))) {
         element.scrollTop = 0;
       }
     },
 
     scrollerDestroy: function(element) {
       var ps;
-      if ((ps = mUtil.data(element).get("ps"))) {
+      if ((ps = mUtil.data(element).get('ps'))) {
         ps.destroy();
-        ps = mUtil.data(element).remove("ps");
+        ps = mUtil.data(element).remove('ps');
       }
     }
   };
@@ -1479,33 +1410,33 @@ mUtil.ready(function() {
 var mApp = (function() {
   /** @type {object} colors State colors **/
   var colors = {
-    brand: "#716aca",
-    metal: "#c4c5d6",
-    light: "#ffffff",
-    accent: "#00c5dc",
-    primary: "#5867dd",
-    success: "#34bfa3",
-    info: "#36a3f7",
-    warning: "#ffb822",
-    danger: "#f4516c",
-    focus: "#9816f4"
+    brand: '#716aca',
+    metal: '#c4c5d6',
+    light: '#ffffff',
+    accent: '#00c5dc',
+    primary: '#5867dd',
+    success: '#34bfa3',
+    info: '#36a3f7',
+    warning: '#ffb822',
+    danger: '#f4516c',
+    focus: '#9816f4'
   };
 
   /**
    * Initializes bootstrap tooltip
    */
   var initTooltip = function(el) {
-    var skin = el.data("skin") ? "m-tooltip--skin-" + el.data("skin") : "";
-    var width = el.data("width") == "auto" ? "m-tooltop--auto-width" : "";
-    var triggerValue = el.data("trigger") ? el.data("trigger") : "hover";
-    var placement = el.data("placement") ? el.data("placement") : "left";
+    var skin = el.data('skin') ? 'm-tooltip--skin-' + el.data('skin') : '';
+    var width = el.data('width') == 'auto' ? 'm-tooltop--auto-width' : '';
+    var triggerValue = el.data('trigger') ? el.data('trigger') : 'hover';
+    var placement = el.data('placement') ? el.data('placement') : 'left';
 
     el.tooltip({
       trigger: triggerValue,
       template:
         '<div class="m-tooltip ' +
         skin +
-        " " +
+        ' ' +
         width +
         ' tooltip" role="tooltip">\
                 <div class="arrow"></div>\
@@ -1528,8 +1459,8 @@ var mApp = (function() {
    * Initializes bootstrap popover
    */
   var initPopover = function(el) {
-    var skin = el.data("skin") ? "m-popover--skin-" + el.data("skin") : "";
-    var triggerValue = el.data("trigger") ? el.data("trigger") : "hover";
+    var skin = el.data('skin') ? 'm-popover--skin-' + el.data('skin') : '';
+    var triggerValue = el.data('trigger') ? el.data('trigger') : 'hover';
 
     el.popover({
       trigger: triggerValue,
@@ -1560,11 +1491,11 @@ var mApp = (function() {
    */
   var initFileInput = function() {
     // init bootstrap popover
-    $(".custom-file-input").on("change", function() {
+    $('.custom-file-input').on('change', function() {
       var fileName = $(this).val();
       $(this)
-        .next(".custom-file-label")
-        .addClass("selected")
+        .next('.custom-file-label')
+        .addClass('selected')
         .html(fileName);
     });
   };
@@ -1586,9 +1517,9 @@ var mApp = (function() {
     $('[m-portlet="true"]').each(function() {
       var el = $(this);
 
-      if (el.data("portlet-initialized") !== true) {
+      if (el.data('portlet-initialized') !== true) {
         initPortlet(el, {});
-        el.data("portlet-initialized", true);
+        el.data('portlet-initialized', true);
       }
     });
   };
@@ -1603,13 +1534,10 @@ var mApp = (function() {
         disableForMobile: true,
         handleWindowResize: true,
         height: function() {
-          if (
-            mUtil.isInResponsiveRange("tablet-and-mobile") &&
-            el.data("mobile-height")
-          ) {
-            return el.data("mobile-height");
+          if (mUtil.isInResponsiveRange('tablet-and-mobile') && el.data('mobile-height')) {
+            return el.data('mobile-height');
           } else {
-            return el.data("height");
+            return el.data('height');
           }
         }
       });
@@ -1621,9 +1549,9 @@ var mApp = (function() {
    */
   var initAlerts = function() {
     // init bootstrap popover
-    $("body").on("click", "[data-close=alert]", function() {
+    $('body').on('click', '[data-close=alert]', function() {
       $(this)
-        .closest(".alert")
+        .closest('.alert')
         .hide();
     });
   };
@@ -1633,8 +1561,8 @@ var mApp = (function() {
    */
   var initCustomTabs = function() {
     // init bootstrap popover
-    $("[data-tab-target]").each(function() {
-      if ($(this).data("tabs-initialized") == true) {
+    $('[data-tab-target]').each(function() {
+      if ($(this).data('tabs-initialized') == true) {
         return;
       }
 
@@ -1643,52 +1571,48 @@ var mApp = (function() {
 
         var tab = $(this);
         var tabs = tab.closest('[data-tabs="true"]');
-        var contents = $(tabs.data("tabs-contents"));
-        var content = $(tab.data("tab-target"));
+        var contents = $(tabs.data('tabs-contents'));
+        var content = $(tab.data('tab-target'));
 
-        tabs
-          .find(".m-tabs__item.m-tabs__item--active")
-          .removeClass("m-tabs__item--active");
-        tab.addClass("m-tabs__item--active");
+        tabs.find('.m-tabs__item.m-tabs__item--active').removeClass('m-tabs__item--active');
+        tab.addClass('m-tabs__item--active');
 
-        contents
-          .find(".m-tabs-content__item.m-tabs-content__item--active")
-          .removeClass("m-tabs-content__item--active");
-        content.addClass("m-tabs-content__item--active");
+        contents.find('.m-tabs-content__item.m-tabs-content__item--active').removeClass('m-tabs-content__item--active');
+        content.addClass('m-tabs-content__item--active');
       });
 
-      $(this).data("tabs-initialized", true);
+      $(this).data('tabs-initialized', true);
     });
   };
 
   var hideTouchWarning = function() {
     jQuery.event.special.touchstart = {
       setup: function(_, ns, handle) {
-        if (typeof this === "function")
-          if (ns.includes("noPreventDefault")) {
-            this.addEventListener("touchstart", handle, { passive: false });
+        if (typeof this === 'function')
+          if (ns.includes('noPreventDefault')) {
+            this.addEventListener('touchstart', handle, { passive: false });
           } else {
-            this.addEventListener("touchstart", handle, { passive: true });
+            this.addEventListener('touchstart', handle, { passive: true });
           }
       }
     };
     jQuery.event.special.touchmove = {
       setup: function(_, ns, handle) {
-        if (typeof this === "function")
-          if (ns.includes("noPreventDefault")) {
-            this.addEventListener("touchmove", handle, { passive: false });
+        if (typeof this === 'function')
+          if (ns.includes('noPreventDefault')) {
+            this.addEventListener('touchmove', handle, { passive: false });
           } else {
-            this.addEventListener("touchmove", handle, { passive: true });
+            this.addEventListener('touchmove', handle, { passive: true });
           }
       }
     };
     jQuery.event.special.wheel = {
       setup: function(_, ns, handle) {
-        if (typeof this === "function")
-          if (ns.includes("noPreventDefault")) {
-            this.addEventListener("wheel", handle, { passive: false });
+        if (typeof this === 'function')
+          if (ns.includes('noPreventDefault')) {
+            this.addEventListener('wheel', handle, { passive: false });
           } else {
-            this.addEventListener("wheel", handle, { passive: true });
+            this.addEventListener('wheel', handle, { passive: true });
           }
       }
     };
@@ -1792,15 +1716,15 @@ var mApp = (function() {
         true,
         {
           opacity: 0.03,
-          overlayColor: "#000000",
-          state: "brand",
-          type: "loader",
-          size: "lg",
+          overlayColor: '#000000',
+          state: 'brand',
+          type: 'loader',
+          size: 'lg',
           centerX: true,
           centerY: true,
-          message: "",
+          message: '',
           shadow: true,
-          width: "auto"
+          width: 'auto'
         },
         options
       );
@@ -1809,41 +1733,30 @@ var mApp = (function() {
       var state;
       var loading;
 
-      if (options.type == "spinner") {
-        skin = options.skin ? "m-spinner--skin-" + options.skin : "";
-        state = options.state ? "m-spinner--" + options.state : "";
-        loading = '<div class="m-spinner ' + skin + " " + state + '"></div';
+      if (options.type == 'spinner') {
+        skin = options.skin ? 'm-spinner--skin-' + options.skin : '';
+        state = options.state ? 'm-spinner--' + options.state : '';
+        loading = '<div class="m-spinner ' + skin + ' ' + state + '"></div';
       } else {
-        skin = options.skin ? "m-loader--skin-" + options.skin : "";
-        state = options.state ? "m-loader--" + options.state : "";
-        size = options.size ? "m-loader--" + options.size : "";
-        loading =
-          '<div class="m-loader ' + skin + " " + state + " " + size + '"></div';
+        skin = options.skin ? 'm-loader--skin-' + options.skin : '';
+        state = options.state ? 'm-loader--' + options.state : '';
+        size = options.size ? 'm-loader--' + options.size : '';
+        loading = '<div class="m-loader ' + skin + ' ' + state + ' ' + size + '"></div';
       }
 
       if (options.message && options.message.length > 0) {
-        var classes =
-          "m-blockui " +
-          (options.shadow === false ? "m-blockui-no-shadow" : "");
+        var classes = 'm-blockui ' + (options.shadow === false ? 'm-blockui-no-shadow' : '');
 
-        html =
-          '<div class="' +
-          classes +
-          '"><span>' +
-          options.message +
-          "</span><span>" +
-          loading +
-          "</span></div>";
+        html = '<div class="' + classes + '"><span>' + options.message + '</span><span>' + loading + '</span></div>';
 
-        var el = document.createElement("div");
-        mUtil.get("body").prepend(el);
+        var el = document.createElement('div');
+        mUtil.get('body').prepend(el);
         mUtil.addClass(el, classes);
-        el.innerHTML =
-          "<span>" + options.message + "</span><span>" + loading + "</span>";
+        el.innerHTML = '<span>' + options.message + '</span><span>' + loading + '</span>';
         options.width = mUtil.actualWidth(el) + 10;
         mUtil.remove(el);
 
-        if (target == "body") {
+        if (target == 'body') {
           html =
             '<div class="' +
             classes +
@@ -1851,9 +1764,9 @@ var mApp = (function() {
             options.width / 2 +
             'px;"><span>' +
             options.message +
-            "</span><span>" +
+            '</span><span>' +
             loading +
-            "</span></div>";
+            '</span></div>';
         }
       } else {
         html = loading;
@@ -1864,29 +1777,29 @@ var mApp = (function() {
         centerY: options.centerY,
         centerX: options.centerX,
         css: {
-          top: "30%",
-          left: "50%",
-          border: "0",
-          padding: "0",
-          backgroundColor: "none",
+          top: '30%',
+          left: '50%',
+          border: '0',
+          padding: '0',
+          backgroundColor: 'none',
           width: options.width
         },
         overlayCSS: {
           backgroundColor: options.overlayColor,
           opacity: options.opacity,
-          cursor: "wait",
-          zIndex: "10"
+          cursor: 'wait',
+          zIndex: '10'
         },
         onUnblock: function() {
           if (el && el[0]) {
-            mUtil.css(el[0], "position", "");
-            mUtil.css(el[0], "zoom", "");
+            mUtil.css(el[0], 'position', '');
+            mUtil.css(el[0], 'zoom', '');
           }
         }
       };
 
-      if (target == "body") {
-        params.css.top = "50%";
+      if (target == 'body') {
+        params.css.top = '50%';
         $.blockUI(params);
       } else {
         var el = $(target);
@@ -1899,7 +1812,7 @@ var mApp = (function() {
      * @param {object} target jQuery element object
      */
     unblock: function(target) {
-      if (target && target != "body") {
+      if (target && target != 'body') {
         $(target).unblock();
       } else {
         $.unblockUI();
@@ -1911,14 +1824,14 @@ var mApp = (function() {
      * @param {object} options
      */
     blockPage: function(options) {
-      return mApp.block("body", options);
+      return mApp.block('body', options);
     },
 
     /**
      * Un-blocks the blocked page body element
      */
     unblockPage: function() {
-      return mApp.unblock("body");
+      return mApp.unblock('body');
     },
 
     /**
@@ -1927,23 +1840,15 @@ var mApp = (function() {
      * @param {object} options
      */
     progress: function(target, options) {
-      var skin = options && options.skin ? options.skin : "light";
-      var alignment =
-        options && options.alignment ? options.alignment : "right";
-      var size = options && options.size ? "m-spinner--" + options.size : "";
-      var classes =
-        "m-loader " +
-        "m-loader--" +
-        skin +
-        " m-loader--" +
-        alignment +
-        " m-loader--" +
-        size;
+      var skin = options && options.skin ? options.skin : 'light';
+      var alignment = options && options.alignment ? options.alignment : 'right';
+      var size = options && options.size ? 'm-spinner--' + options.size : '';
+      var classes = 'm-loader ' + 'm-loader--' + skin + ' m-loader--' + alignment + ' m-loader--' + size;
 
       mApp.unprogress(target);
 
       $(target).addClass(classes);
-      $(target).data("progress-classes", classes);
+      $(target).data('progress-classes', classes);
     },
 
     /**
@@ -1951,7 +1856,7 @@ var mApp = (function() {
      * @param {object} target jQuery element object
      */
     unprogress: function(target) {
-      $(target).removeClass($(target).data("progress-classes"));
+      $(target).removeClass($(target).data('progress-classes'));
     },
 
     /**
@@ -1970,20 +1875,17 @@ $(document).ready(function() {
   mApp.init({});
 });
 (function($) {
-  var pluginName = "mDatatable";
-  var pfx = "m-";
+  var pluginName = 'mDatatable';
+  var pfx = 'm-';
   var util = mUtil;
   var app = mApp;
 
-  if (typeof util === "undefined")
-    throw new Error(
-      "Util class is required and must be included before " + pluginName
-    );
+  if (typeof util === 'undefined') throw new Error('Util class is required and must be included before ' + pluginName);
 
   // plugin setup
   $.fn[pluginName] = function(options) {
     if ($(this).length === 0) {
-      console.log("No " + pluginName + " element exist.");
+      console.log('No ' + pluginName + ' element exist.');
       return;
     }
 
@@ -2008,7 +1910,7 @@ $(document).ready(function() {
        ********************/
       isInit: false,
       offset: 110,
-      stateId: "meta",
+      stateId: 'meta',
       ajaxParams: {},
 
       init: function(options) {
@@ -2024,41 +1926,29 @@ $(document).ready(function() {
         Plugin.spinnerCallback(true);
 
         // set custom query from options
-        Plugin.setDataSourceQuery(
-          Plugin.getOption("data.source.read.params.query")
-        );
+        Plugin.setDataSourceQuery(Plugin.getOption('data.source.read.params.query'));
 
         // on event after layout had done setup, show datatable
-        $(datatable).on(
-          pfx + "datatable--on-layout-updated",
-          Plugin.afterRender
-        );
+        $(datatable).on(pfx + 'datatable--on-layout-updated', Plugin.afterRender);
 
         if (datatable.debug) Plugin.stateRemove(Plugin.stateId);
 
         // initialize extensions
-        $.each(Plugin.getOption("extensions"), function(extName, extOptions) {
-          if (typeof $.fn[pluginName][extName] === "function")
-            new $.fn[pluginName][extName](datatable, extOptions);
+        $.each(Plugin.getOption('extensions'), function(extName, extOptions) {
+          if (typeof $.fn[pluginName][extName] === 'function') new $.fn[pluginName][extName](datatable, extOptions);
         });
 
         // get data
-        if (options.data.type === "remote" || options.data.type === "local") {
+        if (options.data.type === 'remote' || options.data.type === 'local') {
           if (
             options.data.saveState === false ||
-            (options.data.saveState.cookie === false &&
-              options.data.saveState.webstorage === false)
+            (options.data.saveState.cookie === false && options.data.saveState.webstorage === false)
           ) {
             Plugin.stateRemove(Plugin.stateId);
           }
           // get data for local datatable and local table
-          if (
-            options.data.type === "local" &&
-            typeof options.data.source === "object"
-          ) {
-            datatable.dataSet = datatable.originalDataSet = Plugin.dataMapCallback(
-              options.data.source
-            );
+          if (options.data.type === 'local' && typeof options.data.source === 'object') {
+            datatable.dataSet = datatable.originalDataSet = Plugin.dataMapCallback(options.data.source);
           }
           Plugin.dataRender();
         }
@@ -2066,33 +1956,27 @@ $(document).ready(function() {
         if (!isHtmlTable) {
           // if not a html table, setup header
           Plugin.setHeadTitle();
-          if (Plugin.getOption("layout.footer")) {
+          if (Plugin.getOption('layout.footer')) {
             Plugin.setHeadTitle(datatable.tableFoot);
           }
         }
 
         // hide header
-        if (
-          typeof options.layout.header !== "undefined" &&
-          options.layout.header === false
-        ) {
+        if (typeof options.layout.header !== 'undefined' && options.layout.header === false) {
           $(datatable.table)
-            .find("thead")
+            .find('thead')
             .remove();
         }
 
         // hide footer
-        if (
-          typeof options.layout.footer !== "undefined" &&
-          options.layout.footer === false
-        ) {
+        if (typeof options.layout.footer !== 'undefined' && options.layout.footer === false) {
           $(datatable.table)
-            .find("tfoot")
+            .find('tfoot')
             .remove();
         }
 
         // for normal and local data type, run layoutUpdate
-        if (options.data.type === null || options.data.type === "local") {
+        if (options.data.type === null || options.data.type === 'local') {
           Plugin.setupCellField.call();
           Plugin.setupTemplateCell.call();
 
@@ -2106,10 +1990,10 @@ $(document).ready(function() {
 
         $(window).resize(Plugin.fullRender);
 
-        $(datatable).height("");
+        $(datatable).height('');
 
-        $(Plugin.getOption("search.input")).on("keyup", function(e) {
-          if (Plugin.getOption("search.onEnter") && e.which !== 13) return;
+        $(Plugin.getOption('search.input')).on('keyup', function(e) {
+          if (Plugin.getOption('search.onEnter') && e.which !== 13) return;
           Plugin.search($(this).val());
         });
 
@@ -2122,11 +2006,11 @@ $(document).ready(function() {
       extractTable: function() {
         var columns = [];
         var headers = $(datatable)
-          .find("tr:first-child th")
+          .find('tr:first-child th')
           .get()
           .map(function(cell, i) {
-            var field = $(cell).data("field");
-            if (typeof field === "undefined") {
+            var field = $(cell).data('field');
+            if (typeof field === 'undefined') {
               field = $(cell)
                 .text()
                 .trim();
@@ -2147,14 +2031,14 @@ $(document).ready(function() {
         var source = [];
 
         $(datatable)
-          .find("tr")
+          .find('tr')
           .each(function() {
-            if ($(this).find("td").length) {
-              rowProp.push($(this).prop("attributes"));
+            if ($(this).find('td').length) {
+              rowProp.push($(this).prop('attributes'));
             }
             var td = {};
             $(this)
-              .find("td")
+              .find('td')
               .each(function(i, cell) {
                 td[headers[i]] = cell.innerHTML.trim();
               });
@@ -2181,7 +2065,7 @@ $(document).ready(function() {
         Plugin.setupHover.call();
 
         if (
-          typeof options.detail === "undefined" &&
+          typeof options.detail === 'undefined' &&
           // temporary disable lock column in subtable
           Plugin.getDepth() === 1
         ) {
@@ -2194,15 +2078,15 @@ $(document).ready(function() {
         Plugin.resetScroll();
 
         if (!Plugin.isInit) {
-          $(datatable).trigger(pfx + "datatable--on-init", {
-            table: $(datatable.wrap).attr("id"),
+          $(datatable).trigger(pfx + 'datatable--on-init', {
+            table: $(datatable.wrap).attr('id'),
             options: options
           });
           Plugin.isInit = true;
         }
 
-        $(datatable).trigger(pfx + "datatable--on-layout-updated", {
-          table: $(datatable.wrap).attr("id")
+        $(datatable).trigger(pfx + 'datatable--on-layout-updated', {
+          table: $(datatable.wrap).attr('id')
         });
       },
 
@@ -2213,10 +2097,7 @@ $(document).ready(function() {
           init: function() {
             // check if table should be locked columns
             lock.lockEnabled = Plugin.lockEnabledColumns();
-            if (
-              lock.lockEnabled.left.length === 0 &&
-              lock.lockEnabled.right.length === 0
-            ) {
+            if (lock.lockEnabled.left.length === 0 && lock.lockEnabled.right.length === 0) {
               return;
             }
             lock.enable();
@@ -2224,54 +2105,43 @@ $(document).ready(function() {
           enable: function() {
             var enableLock = function(tablePart) {
               // check if already has lock column
-              if ($(tablePart).find("." + pfx + "datatable__lock").length > 0) {
-                Plugin.log("Locked container already exist in: ", tablePart);
+              if ($(tablePart).find('.' + pfx + 'datatable__lock').length > 0) {
+                Plugin.log('Locked container already exist in: ', tablePart);
                 return;
               }
               // check if no rows exists
-              if (
-                $(tablePart).find("." + pfx + "datatable__row").length === 0
-              ) {
-                Plugin.log("No row exist in: ", tablePart);
+              if ($(tablePart).find('.' + pfx + 'datatable__row').length === 0) {
+                Plugin.log('No row exist in: ', tablePart);
                 return;
               }
 
               // locked div container
-              var lockLeft = $("<div/>").addClass(
-                pfx + "datatable__lock " + pfx + "datatable__lock--left"
-              );
-              var lockScroll = $("<div/>").addClass(
-                pfx + "datatable__lock " + pfx + "datatable__lock--scroll"
-              );
-              var lockRight = $("<div/>").addClass(
-                pfx + "datatable__lock " + pfx + "datatable__lock--right"
-              );
+              var lockLeft = $('<div/>').addClass(pfx + 'datatable__lock ' + pfx + 'datatable__lock--left');
+              var lockScroll = $('<div/>').addClass(pfx + 'datatable__lock ' + pfx + 'datatable__lock--scroll');
+              var lockRight = $('<div/>').addClass(pfx + 'datatable__lock ' + pfx + 'datatable__lock--right');
 
               $(tablePart)
-                .find("." + pfx + "datatable__row")
+                .find('.' + pfx + 'datatable__row')
                 .each(function() {
-                  var rowLeft = $("<tr/>")
-                    .addClass(pfx + "datatable__row")
+                  var rowLeft = $('<tr/>')
+                    .addClass(pfx + 'datatable__row')
                     .appendTo(lockLeft);
-                  var rowScroll = $("<tr/>")
-                    .addClass(pfx + "datatable__row")
+                  var rowScroll = $('<tr/>')
+                    .addClass(pfx + 'datatable__row')
                     .appendTo(lockScroll);
-                  var rowRight = $("<tr/>")
-                    .addClass(pfx + "datatable__row")
+                  var rowRight = $('<tr/>')
+                    .addClass(pfx + 'datatable__row')
                     .appendTo(lockRight);
                   $(this)
-                    .find("." + pfx + "datatable__cell")
+                    .find('.' + pfx + 'datatable__cell')
                     .each(function() {
-                      var locked = $(this).data("locked");
-                      if (typeof locked !== "undefined") {
-                        if (
-                          typeof locked.left !== "undefined" ||
-                          locked === true
-                        ) {
+                      var locked = $(this).data('locked');
+                      if (typeof locked !== 'undefined') {
+                        if (typeof locked.left !== 'undefined' || locked === true) {
                           // default locked to left
                           $(this).appendTo(rowLeft);
                         }
-                        if (typeof locked.right !== "undefined") {
+                        if (typeof locked.right !== 'undefined') {
                           $(this).appendTo(rowRight);
                         }
                       } else {
@@ -2283,26 +2153,23 @@ $(document).ready(function() {
                 });
 
               if (lock.lockEnabled.left.length > 0) {
-                $(datatable.wrap).addClass(pfx + "datatable--lock");
+                $(datatable.wrap).addClass(pfx + 'datatable--lock');
                 $(lockLeft).appendTo(tablePart);
               }
-              if (
-                lock.lockEnabled.left.length > 0 ||
-                lock.lockEnabled.right.length > 0
-              ) {
+              if (lock.lockEnabled.left.length > 0 || lock.lockEnabled.right.length > 0) {
                 $(lockScroll).appendTo(tablePart);
               }
               if (lock.lockEnabled.right.length > 0) {
-                $(datatable.wrap).addClass(pfx + "datatable--lock");
+                $(datatable.wrap).addClass(pfx + 'datatable--lock');
                 $(lockRight).appendTo(tablePart);
               }
             };
 
             $(datatable.table)
-              .find("thead,tbody,tfoot")
+              .find('thead,tbody,tfoot')
               .each(function() {
                 var tablePart = this;
-                if ($(this).find("." + pfx + "datatable__lock").length === 0) {
+                if ($(this).find('.' + pfx + 'datatable__lock').length === 0) {
                   $(this).ready(function() {
                     enableLock(tablePart);
                   });
@@ -2321,14 +2188,14 @@ $(document).ready(function() {
         if (Plugin.isLocked()) {
           $(datatable.tableHead).empty();
           Plugin.setHeadTitle();
-          if (Plugin.getOption("layout.footer")) {
+          if (Plugin.getOption('layout.footer')) {
             $(datatable.tableFoot).empty();
             Plugin.setHeadTitle(datatable.tableFoot);
           }
 
           // todo; full render datatable for specific condition only
           Plugin.spinnerCallback(true);
-          $(datatable.wrap).removeClass(pfx + "datatable--loaded");
+          $(datatable.wrap).removeClass(pfx + 'datatable--loaded');
 
           Plugin.insertData();
         }
@@ -2339,15 +2206,15 @@ $(document).ready(function() {
         var columns = options.columns;
         var enabled = { left: [], right: [] };
         $.each(columns, function(i, column) {
-          if (typeof column.locked !== "undefined") {
-            if (typeof column.locked.left !== "undefined") {
+          if (typeof column.locked !== 'undefined') {
+            if (typeof column.locked.left !== 'undefined') {
               if (util.getBreakpoint(column.locked.left) <= screen) {
-                enabled["left"].push(column.locked.left);
+                enabled['left'].push(column.locked.left);
               }
             }
-            if (typeof column.locked.right !== "undefined") {
+            if (typeof column.locked.right !== 'undefined') {
               if (util.getBreakpoint(column.locked.right) <= screen) {
-                enabled["right"].push(column.locked.right);
+                enabled['right'].push(column.locked.right);
               }
             }
           }
@@ -2361,17 +2228,17 @@ $(document).ready(function() {
        * @param args
        */
       afterRender: function(e, args) {
-        if (args.table == $(datatable.wrap).attr("id")) {
+        if (args.table == $(datatable.wrap).attr('id')) {
           $(datatable).ready(function() {
             if (!Plugin.isLocked()) {
               Plugin.redraw();
               // work on non locked columns
-              if (Plugin.getOption("rows.autoHide")) {
+              if (Plugin.getOption('rows.autoHide')) {
                 Plugin.autoHide();
                 // reset row
                 $(datatable.table)
-                  .find("." + pfx + "datatable__row")
-                  .css("height", "");
+                  .find('.' + pfx + 'datatable__row')
+                  .css('height', '');
               }
             }
 
@@ -2379,8 +2246,8 @@ $(document).ready(function() {
 
             // redraw locked columns table
             if (Plugin.isLocked()) Plugin.redraw();
-            $(datatable.tableBody).css("visibility", "");
-            $(datatable.wrap).addClass(pfx + "datatable--loaded");
+            $(datatable.tableBody).css('visibility', '');
+            $(datatable.wrap).addClass(pfx + 'datatable--loaded');
 
             Plugin.scrollbar.call();
 
@@ -2401,9 +2268,9 @@ $(document).ready(function() {
         });
 
         $(datatable.tableBody)
-          .find("." + pfx + "datatable__cell")
-          .off("mouseenter", "mouseleave")
-          .on("mouseenter", function() {
+          .find('.' + pfx + 'datatable__cell')
+          .off('mouseenter', 'mouseleave')
+          .on('mouseenter', function() {
             // reset scroll timer to hover class
             Plugin.hoverTimer = setTimeout(function() {
               Plugin.isScrolling = false;
@@ -2412,30 +2279,30 @@ $(document).ready(function() {
 
             // normal table
             var row = $(this)
-              .closest("." + pfx + "datatable__row")
-              .addClass(pfx + "datatable__row--hover");
+              .closest('.' + pfx + 'datatable__row')
+              .addClass(pfx + 'datatable__row--hover');
             var index = $(row).index() + 1;
 
             // lock table
             $(row)
-              .closest("." + pfx + "datatable__lock")
+              .closest('.' + pfx + 'datatable__lock')
               .parent()
-              .find("." + pfx + "datatable__row:nth-child(" + index + ")")
-              .addClass(pfx + "datatable__row--hover");
+              .find('.' + pfx + 'datatable__row:nth-child(' + index + ')')
+              .addClass(pfx + 'datatable__row--hover');
           })
-          .on("mouseleave", function() {
+          .on('mouseleave', function() {
             // normal table
             var row = $(this)
-              .closest("." + pfx + "datatable__row")
-              .removeClass(pfx + "datatable__row--hover");
+              .closest('.' + pfx + 'datatable__row')
+              .removeClass(pfx + 'datatable__row--hover');
             var index = $(row).index() + 1;
 
             // look table
             $(row)
-              .closest("." + pfx + "datatable__lock")
+              .closest('.' + pfx + 'datatable__lock')
               .parent()
-              .find("." + pfx + "datatable__row:nth-child(" + index + ")")
-              .removeClass(pfx + "datatable__row--hover");
+              .find('.' + pfx + 'datatable__row:nth-child(' + index + ')')
+              .removeClass(pfx + 'datatable__row--hover');
           });
       },
 
@@ -2449,19 +2316,19 @@ $(document).ready(function() {
         // refer to head dimension
         var containerWidth = $(datatable.tableHead).width();
         var lockLeft = $(datatable.tableHead)
-          .find("." + pfx + "datatable__lock--left")
+          .find('.' + pfx + 'datatable__lock--left')
           .width();
         var lockRight = $(datatable.tableHead)
-          .find("." + pfx + "datatable__lock--right")
+          .find('.' + pfx + 'datatable__lock--right')
           .width();
 
-        if (typeof lockLeft === "undefined") lockLeft = 0;
-        if (typeof lockRight === "undefined") lockRight = 0;
+        if (typeof lockLeft === 'undefined') lockLeft = 0;
+        if (typeof lockRight === 'undefined') lockRight = 0;
 
         var lockScroll = Math.floor(containerWidth - lockLeft - lockRight);
         $(datatable.table)
-          .find("." + pfx + "datatable__lock--scroll")
-          .css("width", lockScroll);
+          .find('.' + pfx + 'datatable__lock--scroll')
+          .css('width', lockScroll);
 
         return lockScroll;
       },
@@ -2474,32 +2341,32 @@ $(document).ready(function() {
         var start = undefined;
         var startX, startWidth;
         $(datatable.tableHead)
-          .find("." + pfx + "datatable__cell")
+          .find('.' + pfx + 'datatable__cell')
           .mousedown(function(e) {
             start = $(this);
             pressed = true;
             startX = e.pageX;
             startWidth = $(this).width();
-            $(start).addClass(pfx + "datatable__cell--resizing");
+            $(start).addClass(pfx + 'datatable__cell--resizing');
           })
           .mousemove(function(e) {
             if (pressed) {
               var i = $(start).index();
               var tableBody = $(datatable.tableBody);
-              var ifLocked = $(start).closest("." + pfx + "datatable__lock");
+              var ifLocked = $(start).closest('.' + pfx + 'datatable__lock');
 
               if (ifLocked) {
                 var lockedIndex = $(ifLocked).index();
                 tableBody = $(datatable.tableBody)
-                  .find("." + pfx + "datatable__lock")
+                  .find('.' + pfx + 'datatable__lock')
                   .eq(lockedIndex);
               }
 
               $(tableBody)
-                .find("." + pfx + "datatable__row")
+                .find('.' + pfx + 'datatable__row')
                 .each(function(tri, tr) {
                   $(tr)
-                    .find("." + pfx + "datatable__cell")
+                    .find('.' + pfx + 'datatable__cell')
                     .eq(i)
                     .width(startWidth + (e.pageX - startX))
                     .children()
@@ -2508,16 +2375,16 @@ $(document).ready(function() {
 
               $(start)
                 .children()
-                .css("width", startWidth + (e.pageX - startX));
+                .css('width', startWidth + (e.pageX - startX));
             }
           })
           .mouseup(function() {
-            $(start).removeClass(pfx + "datatable__cell--resizing");
+            $(start).removeClass(pfx + 'datatable__cell--resizing');
             pressed = false;
           });
 
         $(document).mouseup(function() {
-          $(start).removeClass(pfx + "datatable__cell--resizing");
+          $(start).removeClass(pfx + 'datatable__cell--resizing');
           pressed = false;
         });
       },
@@ -2528,10 +2395,10 @@ $(document).ready(function() {
       initHeight: function() {
         if (options.layout.height && options.layout.scroll) {
           var theadHeight = $(datatable.tableHead)
-            .find("." + pfx + "datatable__row")
+            .find('.' + pfx + 'datatable__row')
             .height();
           var tfootHeight = $(datatable.tableFoot)
-            .find("." + pfx + "datatable__row")
+            .find('.' + pfx + 'datatable__row')
             .height();
           var bodyHeight = options.layout.height;
           if (theadHeight > 0) {
@@ -2540,12 +2407,12 @@ $(document).ready(function() {
           if (tfootHeight > 0) {
             bodyHeight -= tfootHeight;
           }
-          $(datatable.tableBody).css("max-height", bodyHeight);
+          $(datatable.tableBody).css('max-height', bodyHeight);
 
           // set scrollable area fixed height
           $(datatable.tableBody)
-            .find("." + pfx + "datatable__lock--scroll")
-            .css("height", bodyHeight);
+            .find('.' + pfx + 'datatable__lock--scroll')
+            .css('height', bodyHeight);
         }
       },
 
@@ -2557,85 +2424,73 @@ $(document).ready(function() {
         datatable.initialDatatable = $(datatable).clone();
 
         // main element
-        if ($(datatable).prop("tagName") === "TABLE") {
+        if ($(datatable).prop('tagName') === 'TABLE') {
           // if main init element is <table>, wrap with div
           datatable.table = $(datatable)
-            .removeClass(pfx + "datatable")
-            .addClass(pfx + "datatable__table");
-          if (
-            $(datatable.table).parents("." + pfx + "datatable").length === 0
-          ) {
+            .removeClass(pfx + 'datatable')
+            .addClass(pfx + 'datatable__table');
+          if ($(datatable.table).parents('.' + pfx + 'datatable').length === 0) {
             datatable.table.wrap(
-              $("<div/>")
-                .addClass(pfx + "datatable")
-                .addClass(pfx + "datatable--" + options.layout.theme)
+              $('<div/>')
+                .addClass(pfx + 'datatable')
+                .addClass(pfx + 'datatable--' + options.layout.theme)
             );
             datatable.wrap = $(datatable.table).parent();
           }
         } else {
           // create table
           datatable.wrap = $(datatable)
-            .addClass(pfx + "datatable")
-            .addClass(pfx + "datatable--" + options.layout.theme);
-          datatable.table = $("<table/>")
-            .addClass(pfx + "datatable__table")
+            .addClass(pfx + 'datatable')
+            .addClass(pfx + 'datatable--' + options.layout.theme);
+          datatable.table = $('<table/>')
+            .addClass(pfx + 'datatable__table')
             .appendTo(datatable);
         }
 
-        if (typeof options.layout.class !== "undefined") {
+        if (typeof options.layout.class !== 'undefined') {
           $(datatable.wrap).addClass(options.layout.class);
         }
 
         $(datatable.table)
-          .removeClass(pfx + "datatable--destroyed")
-          .css("display", "block");
+          .removeClass(pfx + 'datatable--destroyed')
+          .css('display', 'block');
 
         // force disable save state
-        if (typeof $(datatable).attr("id") === "undefined") {
-          Plugin.setOption("data.saveState", false);
-          $(datatable.table).attr("id", util.getUniqueID(pfx + "datatable--"));
+        if (typeof $(datatable).attr('id') === 'undefined') {
+          Plugin.setOption('data.saveState', false);
+          $(datatable.table).attr('id', util.getUniqueID(pfx + 'datatable--'));
         }
 
         // predefine table height
-        if (Plugin.getOption("layout.minHeight"))
-          $(datatable.table).css(
-            "min-height",
-            Plugin.getOption("layout.minHeight")
-          );
+        if (Plugin.getOption('layout.minHeight'))
+          $(datatable.table).css('min-height', Plugin.getOption('layout.minHeight'));
 
-        if (Plugin.getOption("layout.height"))
-          $(datatable.table).css(
-            "max-height",
-            Plugin.getOption("layout.height")
-          );
+        if (Plugin.getOption('layout.height')) $(datatable.table).css('max-height', Plugin.getOption('layout.height'));
 
         // for normal table load
         if (options.data.type === null) {
           $(datatable.table)
-            .css("width", "")
-            .css("display", "");
+            .css('width', '')
+            .css('display', '');
         }
 
         // create table head element
-        datatable.tableHead = $(datatable.table).find("thead");
+        datatable.tableHead = $(datatable.table).find('thead');
         if ($(datatable.tableHead).length === 0) {
-          datatable.tableHead = $("<thead/>").prependTo(datatable.table);
+          datatable.tableHead = $('<thead/>').prependTo(datatable.table);
         }
 
         // create table head element
-        datatable.tableBody = $(datatable.table).find("tbody");
+        datatable.tableBody = $(datatable.table).find('tbody');
         if ($(datatable.tableBody).length === 0) {
-          datatable.tableBody = $("<tbody/>").appendTo(datatable.table);
+          datatable.tableBody = $('<tbody/>').appendTo(datatable.table);
         }
 
-        if (
-          typeof options.layout.footer !== "undefined" &&
-          options.layout.footer
-        ) {
+        if (typeof options.layout.footer !== 'undefined' && options.layout.footer) {
           // create table foot element
-          datatable.tableFoot = $(datatable.table).find("tfoot");
+          datatable.tableFoot = $(datatable.table).find('tfoot');
           if ($(datatable.tableFoot).length === 0) {
-            datatable.tableFoot = $("<tfoot/>").appendTo(datatable.table);
+            datatable.tableFoot = $('<tfoot/>').appendTo(datatable.table);
           }
         }
       },
@@ -2644,18 +2499,17 @@ $(document).ready(function() {
        * Set column data before table manipulation.
        */
       setupCellField: function(tableParts) {
-        if (typeof tableParts === "undefined")
-          tableParts = $(datatable.table).children();
+        if (typeof tableParts === 'undefined') tableParts = $(datatable.table).children();
         var columns = options.columns;
         $.each(tableParts, function(part, tablePart) {
           $(tablePart)
-            .find("." + pfx + "datatable__row")
+            .find('.' + pfx + 'datatable__row')
             .each(function(tri, tr) {
               // prepare data
               $(tr)
-                .find("." + pfx + "datatable__cell")
+                .find('.' + pfx + 'datatable__cell')
                 .each(function(tdi, td) {
-                  if (typeof columns[tdi] !== "undefined") {
+                  if (typeof columns[tdi] !== 'undefined') {
                     $(td).data(columns[tdi]);
                   }
                 });
@@ -2668,13 +2522,13 @@ $(document).ready(function() {
        * @param tablePart
        */
       setupTemplateCell: function(tablePart) {
-        if (typeof tablePart === "undefined") tablePart = datatable.tableBody;
+        if (typeof tablePart === 'undefined') tablePart = datatable.tableBody;
         var columns = options.columns;
         $(tablePart)
-          .find("." + pfx + "datatable__row")
+          .find('.' + pfx + 'datatable__row')
           .each(function(tri, tr) {
             // row data object, if any
-            var obj = $(tr).data("obj") || {};
+            var obj = $(tr).data('obj') || {};
 
             // @deprecated in v5.0.6
             // obj['getIndex'] = function() {
@@ -2686,67 +2540,67 @@ $(document).ready(function() {
             // };
 
             // @deprecated in v5.0.6
-            var rowCallback = Plugin.getOption("rows.callback");
-            if (typeof rowCallback === "function") {
+            var rowCallback = Plugin.getOption('rows.callback');
+            if (typeof rowCallback === 'function') {
               rowCallback($(tr), obj, tri);
             }
             // before template row callback
-            var beforeTemplate = Plugin.getOption("rows.beforeTemplate");
-            if (typeof beforeTemplate === "function") {
+            var beforeTemplate = Plugin.getOption('rows.beforeTemplate');
+            if (typeof beforeTemplate === 'function') {
               beforeTemplate($(tr), obj, tri);
             }
             // if data object is undefined, collect from table
-            if (typeof obj === "undefined") {
+            if (typeof obj === 'undefined') {
               obj = {};
               $(tr)
-                .find("." + pfx + "datatable__cell")
+                .find('.' + pfx + 'datatable__cell')
                 .each(function(tdi, td) {
                   // get column settings by field
                   var column = $.grep(columns, function(n, i) {
-                    return $(td).data("field") === n.field;
+                    return $(td).data('field') === n.field;
                   })[0];
-                  if (typeof column !== "undefined") {
-                    obj[column["field"]] = $(td).text();
+                  if (typeof column !== 'undefined') {
+                    obj[column['field']] = $(td).text();
                   }
                 });
             }
 
             $(tr)
-              .find("." + pfx + "datatable__cell")
+              .find('.' + pfx + 'datatable__cell')
               .each(function(tdi, td) {
                 // get column settings by field
                 var column = $.grep(columns, function(n, i) {
-                  return $(td).data("field") === n.field;
+                  return $(td).data('field') === n.field;
                 })[0];
-                if (typeof column !== "undefined") {
+                if (typeof column !== 'undefined') {
                   // column template
-                  if (typeof column.template !== "undefined") {
-                    var finalValue = "";
+                  if (typeof column.template !== 'undefined') {
+                    var finalValue = '';
                     // template string
-                    if (typeof column.template === "string") {
+                    if (typeof column.template === 'string') {
                       finalValue = Plugin.dataPlaceholder(column.template, obj);
                     }
                     // template callback function
-                    if (typeof column.template === "function") {
+                    if (typeof column.template === 'function') {
                       finalValue = column.template(obj, tri, datatable);
                     }
-                    var span = document.createElement("span");
+                    var span = document.createElement('span');
                     span.innerHTML = finalValue;
                     // insert to cell, wrap with span
                     $(td).html(span);
 
                     // set span overflow
-                    if (typeof column.overflow !== "undefined") {
-                      $(span).css("overflow", column.overflow);
-                      $(span).css("position", "relative");
+                    if (typeof column.overflow !== 'undefined') {
+                      $(span).css('overflow', column.overflow);
+                      $(span).css('position', 'relative');
                     }
                   }
                 }
               });
 
             // after template row callback
-            var afterTemplate = Plugin.getOption("rows.afterTemplate");
-            if (typeof afterTemplate === "function") {
+            var afterTemplate = Plugin.getOption('rows.afterTemplate');
+            if (typeof afterTemplate === 'function') {
               afterTemplate($(tr), obj, tri);
             }
           });
@@ -2763,41 +2617,34 @@ $(document).ready(function() {
 
         var columns = options.columns;
         $(datatable.tableBody)
-          .find("." + pfx + "datatable__row")
+          .find('.' + pfx + 'datatable__row')
           .each(function(tri, tr) {
             $(tr)
-              .find("." + pfx + "datatable__cell")
+              .find('.' + pfx + 'datatable__cell')
               .each(function(tdi, td) {
                 // get column settings by field
                 var column = $.grep(columns, function(n, i) {
-                  return $(td).data("field") === n.field;
+                  return $(td).data('field') === n.field;
                 })[0];
-                if (typeof column !== "undefined") {
+                if (typeof column !== 'undefined') {
                   var value = $(td).text();
 
                   // enable column selector
-                  if (
-                    typeof column.selector !== "undefined" &&
-                    column.selector !== false
-                  ) {
+                  if (typeof column.selector !== 'undefined' && column.selector !== false) {
                     // check if checkbox exist
-                    if (
-                      $(td).find("." + pfx + 'checkbox [type="checkbox"]')
-                        .length > 0
-                    )
-                      return;
+                    if ($(td).find('.' + pfx + 'checkbox [type="checkbox"]').length > 0) return;
 
-                    $(td).addClass(pfx + "datatable__cell--check");
+                    $(td).addClass(pfx + 'datatable__cell--check');
 
                     // append checkbox
-                    var chk = $("<label/>")
-                      .addClass(pfx + "checkbox " + pfx + "checkbox--single")
+                    var chk = $('<label/>')
+                      .addClass(pfx + 'checkbox ' + pfx + 'checkbox--single')
                       .append(
-                        $("<input/>")
-                          .attr("type", "checkbox")
-                          .attr("value", value)
-                          .on("click", function() {
-                            if ($(this).is(":checked")) {
+                        $('<input/>')
+                          .attr('type', 'checkbox')
+                          .attr('value', value)
+                          .on('click', function() {
+                            if ($(this).is(':checked')) {
                               // add checkbox active row class
                               Plugin.setActive(this);
                             } else {
@@ -2806,10 +2653,10 @@ $(document).ready(function() {
                             }
                           })
                       )
-                      .append("&nbsp;<span></span>");
+                      .append('&nbsp;<span></span>');
 
                     // checkbox selector has outline style
-                    if (typeof column.selector.class !== "undefined") {
+                    if (typeof column.selector.class !== 'undefined') {
                       $(chk).addClass(column.selector.class);
                     }
 
@@ -2819,31 +2666,18 @@ $(document).ready(function() {
                   }
 
                   // enable column subtable toggle
-                  if (
-                    typeof column.subtable !== "undefined" &&
-                    column.subtable
-                  ) {
+                  if (typeof column.subtable !== 'undefined' && column.subtable) {
                     // check if subtable toggle exist
-                    if (
-                      $(td).find("." + pfx + "datatable__toggle-subtable")
-                        .length > 0
-                    )
-                      return;
+                    if ($(td).find('.' + pfx + 'datatable__toggle-subtable').length > 0) return;
                     // append subtable toggle
                     $(td)
                       .children()
                       .html(
-                        $("<a/>")
-                          .addClass(pfx + "datatable__toggle-subtable")
-                          .attr("href", "#")
-                          .attr("data-value", value)
-                          .append(
-                            $("<i/>").addClass(
-                              Plugin.getOption(
-                                "layout.icons.rowDetail.collapse"
-                              )
-                            )
-                          )
+                        $('<a/>')
+                          .addClass(pfx + 'datatable__toggle-subtable')
+                          .attr('href', '#')
+                          .attr('data-value', value)
+                          .append($('<i/>').addClass(Plugin.getOption('layout.icons.rowDetail.collapse')))
                       );
                   }
                 }
@@ -2854,49 +2688,36 @@ $(document).ready(function() {
         var initCheckbox = function(tr) {
           // get column settings by field
           var column = $.grep(columns, function(n, i) {
-            return typeof n.selector !== "undefined" && n.selector !== false;
+            return typeof n.selector !== 'undefined' && n.selector !== false;
           })[0];
 
-          if (typeof column !== "undefined") {
+          if (typeof column !== 'undefined') {
             // enable column selector
-            if (
-              typeof column.selector !== "undefined" &&
-              column.selector !== false
-            ) {
+            if (typeof column.selector !== 'undefined' && column.selector !== false) {
               var td = $(tr).find('[data-field="' + column.field + '"]');
               // check if checkbox exist
-              if (
-                $(td).find("." + pfx + 'checkbox [type="checkbox"]').length > 0
-              )
-                return;
+              if ($(td).find('.' + pfx + 'checkbox [type="checkbox"]').length > 0) return;
 
-              $(td).addClass(pfx + "datatable__cell--check");
+              $(td).addClass(pfx + 'datatable__cell--check');
 
               // append checkbox
-              var chk = $("<label/>")
-                .addClass(
-                  pfx +
-                    "checkbox " +
-                    pfx +
-                    "checkbox--single " +
-                    pfx +
-                    "checkbox--all"
-                )
+              var chk = $('<label/>')
+                .addClass(pfx + 'checkbox ' + pfx + 'checkbox--single ' + pfx + 'checkbox--all')
                 .append(
-                  $("<input/>")
-                    .attr("type", "checkbox")
-                    .on("click", function() {
-                      if ($(this).is(":checked")) {
+                  $('<input/>')
+                    .attr('type', 'checkbox')
+                    .on('click', function() {
+                      if ($(this).is(':checked')) {
                         Plugin.setActiveAll(true);
                       } else {
                         Plugin.setActiveAll(false);
                       }
                     })
                 )
-                .append("&nbsp;<span></span>");
+                .append('&nbsp;<span></span>');
 
               // checkbox selector has outline style
-              if (typeof column.selector.class !== "undefined") {
+              if (typeof column.selector.class !== 'undefined') {
                 $(chk).addClass(column.selector.class);
               }
 
@@ -2910,14 +2731,14 @@ $(document).ready(function() {
         if (options.layout.header) {
           initCheckbox(
             $(datatable.tableHead)
-              .find("." + pfx + "datatable__row")
+              .find('.' + pfx + 'datatable__row')
               .first()
           );
         }
         if (options.layout.footer) {
           initCheckbox(
             $(datatable.tableFoot)
-              .find("." + pfx + "datatable__row")
+              .find('.' + pfx + 'datatable__row')
               .first()
           );
         }
@@ -2935,8 +2756,8 @@ $(document).ready(function() {
 
         // get total number of columns
         var columns = $(datatable.tableHead)
-          .find("." + pfx + "datatable__row:first-child")
-          .find("." + pfx + "datatable__cell:visible").length;
+          .find('.' + pfx + 'datatable__row:first-child')
+          .find('.' + pfx + 'datatable__cell:visible').length;
         if (columns > 0) {
           //  remove reserved sort icon width
           containerWidth = containerWidth - sortOffset * columns;
@@ -2948,17 +2769,17 @@ $(document).ready(function() {
           }
 
           $(datatable.table)
-            .find("." + pfx + "datatable__row")
-            .find("." + pfx + "datatable__cell:visible")
+            .find('.' + pfx + 'datatable__row')
+            .find('.' + pfx + 'datatable__cell:visible')
             .each(function(tdi, td) {
               var width = minWidth;
-              var dataWidth = $(td).data("width");
-              if (typeof dataWidth !== "undefined") {
+              var dataWidth = $(td).data('width');
+              if (typeof dataWidth !== 'undefined') {
                 width = dataWidth;
               }
               $(td)
                 .children()
-                .css("width", parseInt(width));
+                .css('width', parseInt(width));
             });
         }
 
@@ -2971,14 +2792,12 @@ $(document).ready(function() {
       adjustCellsHeight: function() {
         $.each($(datatable.table).children(), function(part, tablePart) {
           var totalRows = $(tablePart)
-            .find("." + pfx + "datatable__row")
+            .find('.' + pfx + 'datatable__row')
             .first()
             .parent()
-            .find("." + pfx + "datatable__row").length;
+            .find('.' + pfx + 'datatable__row').length;
           for (var i = 1; i <= totalRows; i++) {
-            var rows = $(tablePart).find(
-              "." + pfx + "datatable__row:nth-child(" + i + ")"
-            );
+            var rows = $(tablePart).find('.' + pfx + 'datatable__row:nth-child(' + i + ')');
             if ($(rows).length > 0) {
               var maxHeight = Math.max.apply(
                 null,
@@ -2988,7 +2807,7 @@ $(document).ready(function() {
                   })
                   .get()
               );
-              $(rows).css("height", Math.ceil(parseInt(maxHeight)));
+              $(rows).css('height', Math.ceil(parseInt(maxHeight)));
             }
           }
         });
@@ -3000,25 +2819,25 @@ $(document).ready(function() {
       setupDOM: function(table) {
         // set table classes
         $(table)
-          .find("> thead")
-          .addClass(pfx + "datatable__head");
+          .find('> thead')
+          .addClass(pfx + 'datatable__head');
         $(table)
-          .find("> tbody")
-          .addClass(pfx + "datatable__body");
+          .find('> tbody')
+          .addClass(pfx + 'datatable__body');
         $(table)
-          .find("> tfoot")
-          .addClass(pfx + "datatable__foot");
+          .find('> tfoot')
+          .addClass(pfx + 'datatable__foot');
         $(table)
-          .find("tr")
-          .addClass(pfx + "datatable__row");
+          .find('tr')
+          .addClass(pfx + 'datatable__row');
         $(table)
-          .find("tr > th, tr > td")
-          .addClass(pfx + "datatable__cell");
+          .find('tr > th, tr > td')
+          .addClass(pfx + 'datatable__cell');
         $(table)
-          .find("tr > th, tr > td")
+          .find('tr > th, tr > td')
           .each(function(i, td) {
-            if ($(td).find("span").length === 0) {
-              $(td).wrapInner($("<span/>").css("width", Plugin.offset));
+            if ($(td).find('span').length === 0) {
+              $(td).wrapInner($('<span/>').css('width', Plugin.offset));
             }
           });
       },
@@ -3045,68 +2864,44 @@ $(document).ready(function() {
               updateOnContentResize: true,
               autoExpandHorizontalScroll: true
             },
-            theme: "minimal-dark"
+            theme: 'minimal-dark'
           },
           init: function() {
             var screen = util.getViewPort().width;
             // setup scrollable datatable
             if (options.layout.scroll) {
               // add scrollable datatable class
-              $(datatable.wrap).addClass(pfx + "datatable--scroll");
+              $(datatable.wrap).addClass(pfx + 'datatable--scroll');
 
-              var scrollable = $(datatable.tableBody).find(
-                "." + pfx + "datatable__lock--scroll"
-              );
+              var scrollable = $(datatable.tableBody).find('.' + pfx + 'datatable__lock--scroll');
 
               // check if scrollable area have rows
-              if (
-                $(scrollable).find("." + pfx + "datatable__row").length > 0 &&
-                $(scrollable).length > 0
-              ) {
+              if ($(scrollable).find('.' + pfx + 'datatable__row').length > 0 && $(scrollable).length > 0) {
                 scroll.scrollHead = $(datatable.tableHead).find(
-                  "> ." +
-                    pfx +
-                    "datatable__lock--scroll > ." +
-                    pfx +
-                    "datatable__row"
+                  '> .' + pfx + 'datatable__lock--scroll > .' + pfx + 'datatable__row'
                 );
                 scroll.scrollFoot = $(datatable.tableFoot).find(
-                  "> ." +
-                    pfx +
-                    "datatable__lock--scroll > ." +
-                    pfx +
-                    "datatable__row"
+                  '> .' + pfx + 'datatable__lock--scroll > .' + pfx + 'datatable__row'
                 );
                 scroll.tableLocked = $(datatable.tableBody).find(
-                  "." +
-                    pfx +
-                    "datatable__lock:not(." +
-                    pfx +
-                    "datatable__lock--scroll)"
+                  '.' + pfx + 'datatable__lock:not(.' + pfx + 'datatable__lock--scroll)'
                 );
                 if (
-                  Plugin.getOption("layout.customScrollbar") &&
+                  Plugin.getOption('layout.customScrollbar') &&
                   util.detectIE() != 10 &&
-                  screen > util.getBreakpoint("lg")
+                  screen > util.getBreakpoint('lg')
                 ) {
                   scroll.initCustomScrollbar(scrollable[0]);
                 } else {
                   scroll.initDefaultScrollbar(scrollable);
                 }
-              } else if (
-                $(datatable.tableBody).find("." + pfx + "datatable__row")
-                  .length > 0
-              ) {
-                scroll.scrollHead = $(datatable.tableHead).find(
-                  "> ." + pfx + "datatable__row"
-                );
-                scroll.scrollFoot = $(datatable.tableFoot).find(
-                  "> ." + pfx + "datatable__row"
-                );
+              } else if ($(datatable.tableBody).find('.' + pfx + 'datatable__row').length > 0) {
+                scroll.scrollHead = $(datatable.tableHead).find('> .' + pfx + 'datatable__row');
+                scroll.scrollFoot = $(datatable.tableFoot).find('> .' + pfx + 'datatable__row');
                 if (
-                  Plugin.getOption("layout.customScrollbar") &&
+                  Plugin.getOption('layout.customScrollbar') &&
                   util.detectIE() != 10 &&
-                  screen > util.getBreakpoint("lg")
+                  screen > util.getBreakpoint('lg')
                 ) {
                   scroll.initCustomScrollbar(datatable.tableBody);
                 } else {
@@ -3115,22 +2910,22 @@ $(document).ready(function() {
               }
             } else {
               $(datatable.table) // css('height', 'auto').
-                .css("overflow-x", "auto");
+                .css('overflow-x', 'auto');
             }
           },
           initDefaultScrollbar: function(scrollable) {
             $(scrollable)
-              .css("overflow", "auto")
+              .css('overflow', 'auto')
               .off()
-              .on("scroll", scroll.onScrolling);
+              .on('scroll', scroll.onScrolling);
           },
           onScrolling: function(e) {
             var left = $(this).scrollLeft();
             var top = $(this).scrollTop();
-            $(scroll.scrollHead).css("left", -left);
-            $(scroll.scrollFoot).css("left", -left);
+            $(scroll.scrollHead).css('left', -left);
+            $(scroll.scrollFoot).css('left', -left);
             $(scroll.tableLocked).each(function(i, table) {
-              $(table).css("top", -top);
+              $(table).css('top', -top);
             });
           },
           initCustomScrollbar: function(scrollable) {
@@ -3139,7 +2934,7 @@ $(document).ready(function() {
             Plugin.initScrollbar(scrollable);
             $(scrollable)
               .off()
-              .on("scroll", scroll.onScrolling);
+              .on('scroll', scroll.onScrolling);
           }
         };
         scroll.init();
@@ -3152,14 +2947,14 @@ $(document).ready(function() {
        * @param options
        */
       initScrollbar: function(element, options) {
-        $(datatable.tableBody).css("overflow", "");
-        if (util.hasClass(element, "ps")) {
+        $(datatable.tableBody).css('overflow', '');
+        if (util.hasClass(element, 'ps')) {
           $(element)
-            .data("ps")
+            .data('ps')
             .update();
         } else {
           var ps = new PerfectScrollbar(element);
-          $(element).data("ps", ps);
+          $(element).data('ps', ps);
         }
       },
 
@@ -3167,45 +2962,43 @@ $(document).ready(function() {
        * Set column title from options.columns settings
        */
       setHeadTitle: function(tablePart) {
-        if (typeof tablePart === "undefined") tablePart = datatable.tableHead;
+        if (typeof tablePart === 'undefined') tablePart = datatable.tableHead;
         tablePart = $(tablePart)[0];
         var columns = options.columns;
-        var row = tablePart.getElementsByTagName("tr")[0];
-        var ths = tablePart.getElementsByTagName("td");
+        var row = tablePart.getElementsByTagName('tr')[0];
+        var ths = tablePart.getElementsByTagName('td');
 
-        if (typeof row === "undefined") {
-          row = document.createElement("tr");
+        if (typeof row === 'undefined') {
+          row = document.createElement('tr');
           tablePart.appendChild(row);
         }
 
         $.each(columns, function(i, column) {
           var th = ths[i];
-          if (typeof th === "undefined") {
-            th = document.createElement("th");
+          if (typeof th === 'undefined') {
+            th = document.createElement('th');
             row.appendChild(th);
           }
 
           // set column title
-          if (typeof column["title"] !== "undefined") {
+          if (typeof column['title'] !== 'undefined') {
             th.innerHTML = column.title;
-            th.setAttribute("data-field", column.field);
+            th.setAttribute('data-field', column.field);
             util.addClass(th, column.class);
             $(th).data(column);
           }
 
           // set header attr option
-          if (typeof column.attr !== "undefined") {
+          if (typeof column.attr !== 'undefined') {
             $.each(column.attr, function(key, val) {
               th.setAttribute(key, val);
             });
           }
 
           // apply text align to thead/tfoot
-          if (typeof column.textAlign !== "undefined") {
+          if (typeof column.textAlign !== 'undefined') {
             var align =
-              typeof datatable.textAlign[column.textAlign] !== "undefined"
-                ? datatable.textAlign[column.textAlign]
-                : "";
+              typeof datatable.textAlign[column.textAlign] !== 'undefined' ? datatable.textAlign[column.textAlign] : '';
             util.addClass(th, align);
           }
         });
@@ -3217,14 +3010,14 @@ $(document).ready(function() {
        */
       dataRender: function(action) {
         $(datatable.table)
-          .siblings("." + pfx + "datatable__pager")
-          .removeClass(pfx + "datatable--paging-loaded");
+          .siblings('.' + pfx + 'datatable__pager')
+          .removeClass(pfx + 'datatable--paging-loaded');
 
         var buildMeta = function() {
           datatable.dataSet = datatable.dataSet || [];
           Plugin.localDataUpdate();
           // local pagination meta
-          var meta = Plugin.getDataSourceParam("pagination");
+          var meta = Plugin.getDataSourceParam('pagination');
           if (meta.perpage === 0) {
             meta.perpage = options.data.pageSize || 10;
           }
@@ -3237,13 +3030,13 @@ $(document).ready(function() {
 
         var afterGetData = function(result) {
           var localPagingCallback = function(ctx, meta) {
-            if (!$(ctx.pager).hasClass(pfx + "datatable--paging-loaded")) {
+            if (!$(ctx.pager).hasClass(pfx + 'datatable--paging-loaded')) {
               $(ctx.pager).remove();
               ctx.init(meta);
             }
             $(ctx.pager)
               .off()
-              .on(pfx + "datatable--on-goto-page", function(e) {
+              .on(pfx + 'datatable--on-goto-page', function(e) {
                 $(ctx.pager).remove();
                 ctx.init(meta);
               });
@@ -3258,12 +3051,12 @@ $(document).ready(function() {
             Plugin.insertData();
           };
 
-          $(datatable.wrap).removeClass(pfx + "datatable--error");
+          $(datatable.wrap).removeClass(pfx + 'datatable--error');
           // pagination enabled
           if (options.pagination) {
-            if (options.data.serverPaging && options.data.type !== "local") {
+            if (options.data.serverPaging && options.data.type !== 'local') {
               // server pagination
-              var serverMeta = Plugin.getObject("meta", result || null);
+              var serverMeta = Plugin.getObject('meta', result || null);
               if (serverMeta !== null) {
                 Plugin.paging(serverMeta);
               } else {
@@ -3284,12 +3077,12 @@ $(document).ready(function() {
 
         // get local datasource
         if (
-          options.data.type === "local" ||
+          options.data.type === 'local' ||
           // for remote json datasource
           // || typeof options.data.source.read === 'undefined' && datatable.dataSet !== null
           // for remote datasource, server sorting is disabled and data already received from remote
-          (options.data.serverSorting === false && action === "sort") ||
-          (options.data.serverFiltering === false && action === "search")
+          (options.data.serverSorting === false && action === 'sort') ||
+          (options.data.serverFiltering === false && action === 'search')
         ) {
           afterGetData();
           return;
@@ -3309,28 +3102,24 @@ $(document).ready(function() {
         // get row attributes
         var pagination = params.pagination;
         var start = (Math.max(pagination.page, 1) - 1) * pagination.perpage;
-        var end =
-          Math.min(pagination.page, pagination.pages) * pagination.perpage;
+        var end = Math.min(pagination.page, pagination.pages) * pagination.perpage;
         var rowProps = {};
-        if (
-          typeof options.data.attr.rowProps !== "undefined" &&
-          options.data.attr.rowProps.length
-        ) {
+        if (typeof options.data.attr.rowProps !== 'undefined' && options.data.attr.rowProps.length) {
           rowProps = options.data.attr.rowProps.slice(start, end);
         }
 
         // todo; fix performance
-        var tableBody = document.createElement("tbody");
-        tableBody.style.visibility = "hidden";
+        var tableBody = document.createElement('tbody');
+        tableBody.style.visibility = 'hidden';
         var colLength = options.columns.length;
 
         $.each(datatable.dataSet, function(rowIndex, row) {
-          var tr = document.createElement("tr");
-          tr.setAttribute("data-row", rowIndex);
+          var tr = document.createElement('tr');
+          tr.setAttribute('data-row', rowIndex);
           // keep data object to row
-          $(tr).data("obj", row);
+          $(tr).data('obj', row);
 
-          if (typeof rowProps[rowIndex] !== "undefined") {
+          if (typeof rowProps[rowIndex] !== 'undefined') {
             $.each(rowProps[rowIndex], function() {
               tr.setAttribute(this.name, this.value);
             });
@@ -3342,27 +3131,27 @@ $(document).ready(function() {
             var column = options.columns[a];
             var classes = [];
             // add sorted class to cells
-            if (Plugin.getObject("sort.field", params) === column.field) {
-              classes.push(pfx + "datatable__cell--sorted");
+            if (Plugin.getObject('sort.field', params) === column.field) {
+              classes.push(pfx + 'datatable__cell--sorted');
             }
 
             // apply text align
-            if (typeof column.textAlign !== "undefined") {
+            if (typeof column.textAlign !== 'undefined') {
               var align =
-                typeof datatable.textAlign[column.textAlign] !== "undefined"
+                typeof datatable.textAlign[column.textAlign] !== 'undefined'
                   ? datatable.textAlign[column.textAlign]
-                  : "";
+                  : '';
               classes.push(align);
             }
 
             // var classAttr = '';
-            if (typeof column.class !== "undefined") {
+            if (typeof column.class !== 'undefined') {
               classes.push(column.class);
             }
 
-            var td = document.createElement("td");
-            util.addClass(td, classes.join(" "));
-            td.setAttribute("data-field", column.field);
+            var td = document.createElement('td');
+            util.addClass(td, classes.join(' '));
+            td.setAttribute('data-field', column.field);
             td.innerHTML = Plugin.getObject(column.field, row);
             tr.appendChild(td);
           }
@@ -3372,13 +3161,11 @@ $(document).ready(function() {
 
         // display no records message
         if (datatable.dataSet.length === 0) {
-          var errorSpan = document.createElement("span");
-          util.addClass(errorSpan, pfx + "datatable--error");
-          errorSpan.innerHTML = Plugin.getOption("translate.records.noRecords");
+          var errorSpan = document.createElement('span');
+          util.addClass(errorSpan, pfx + 'datatable--error');
+          errorSpan.innerHTML = Plugin.getOption('translate.records.noRecords');
           tableBody.appendChild(errorSpan);
-          $(datatable.wrap).addClass(
-            pfx + "datatable--error " + pfx + "datatable--loaded"
-          );
+          $(datatable.wrap).addClass(pfx + 'datatable--error ' + pfx + 'datatable--loaded');
           Plugin.spinnerCallback(false);
         }
 
@@ -3394,9 +3181,9 @@ $(document).ready(function() {
       },
 
       updateTableComponents: function() {
-        datatable.tableHead = $(datatable.table).children("thead");
-        datatable.tableBody = $(datatable.table).children("tbody");
-        datatable.tableFoot = $(datatable.table).children("tfoot");
+        datatable.tableHead = $(datatable.table).children('thead');
+        datatable.tableBody = $(datatable.table).children('tbody');
+        datatable.tableFoot = $(datatable.table).children('tfoot');
       },
 
       /**
@@ -3406,64 +3193,50 @@ $(document).ready(function() {
         Plugin.spinnerCallback(true);
 
         var ajaxParams = {
-          dataType: "json",
-          method: "GET",
+          dataType: 'json',
+          method: 'GET',
           data: {},
-          timeout: Plugin.getOption("data.source.read.timeout") || 30000
+          timeout: Plugin.getOption('data.source.read.timeout') || 30000
         };
 
-        if (options.data.type === "local") {
+        if (options.data.type === 'local') {
           ajaxParams.url = options.data.source;
         }
 
-        if (options.data.type === "remote") {
-          ajaxParams.url = Plugin.getOption("data.source.read.url");
-          if (typeof ajaxParams.url !== "string")
-            ajaxParams.url = Plugin.getOption("data.source.read");
-          if (typeof ajaxParams.url !== "string")
-            ajaxParams.url = Plugin.getOption("data.source");
-          ajaxParams.headers = Plugin.getOption("data.source.read.headers");
-          ajaxParams.method =
-            Plugin.getOption("data.source.read.method") || "POST";
+        if (options.data.type === 'remote') {
+          ajaxParams.url = Plugin.getOption('data.source.read.url');
+          if (typeof ajaxParams.url !== 'string') ajaxParams.url = Plugin.getOption('data.source.read');
+          if (typeof ajaxParams.url !== 'string') ajaxParams.url = Plugin.getOption('data.source');
+          ajaxParams.headers = Plugin.getOption('data.source.read.headers');
+          ajaxParams.method = Plugin.getOption('data.source.read.method') || 'POST';
 
           var data = Plugin.getDataSourceParam();
           // remove if server params is not enabled
-          if (!Plugin.getOption("data.serverPaging")) {
-            delete data["pagination"];
+          if (!Plugin.getOption('data.serverPaging')) {
+            delete data['pagination'];
           }
-          if (!Plugin.getOption("data.serverSorting")) {
-            delete data["sort"];
+          if (!Plugin.getOption('data.serverSorting')) {
+            delete data['sort'];
           }
-          ajaxParams.data = $.extend(
-            {},
-            ajaxParams.data,
-            data,
-            Plugin.getOption("data.source.read.params")
-          );
+          ajaxParams.data = $.extend({}, ajaxParams.data, data, Plugin.getOption('data.source.read.params'));
         }
 
         return $.ajax(ajaxParams)
           .done(function(response, textStatus, jqXHR) {
             datatable.lastResponse = response;
             // extendible data map callback for custom datasource
-            datatable.dataSet = datatable.originalDataSet = Plugin.dataMapCallback(
-              response
-            );
+            datatable.dataSet = datatable.originalDataSet = Plugin.dataMapCallback(response);
             Plugin.setAutoColumns();
-            $(datatable).trigger(pfx + "datatable--on-ajax-done", [
-              datatable.dataSet
-            ]);
+            $(datatable).trigger(pfx + 'datatable--on-ajax-done', [datatable.dataSet]);
           })
           .fail(function(jqXHR, textStatus, errorThrown) {
-            $(datatable).trigger(pfx + "datatable--on-ajax-fail", [jqXHR]);
+            $(datatable).trigger(pfx + 'datatable--on-ajax-fail', [jqXHR]);
             $(datatable.tableBody).html(
-              $("<span/>")
-                .addClass(pfx + "datatable--error")
-                .html(Plugin.getOption("translate.records.noRecords"))
+              $('<span/>')
+                .addClass(pfx + 'datatable--error')
+                .html(Plugin.getOption('translate.records.noRecords'))
             );
-            $(datatable.wrap).addClass(
-              pfx + "datatable--error " + pfx + "datatable--loaded"
-            );
+            $(datatable.wrap).addClass(pfx + 'datatable--error ' + pfx + 'datatable--loaded');
             Plugin.spinnerCallback(false);
           })
           .always(function() {});
@@ -3492,10 +3265,7 @@ $(document).ready(function() {
 
             // todo; if meta object not exist will cause error
             // always recount total pages
-            pg.meta.pages = Math.max(
-              Math.ceil(pg.meta.total / pg.meta.perpage),
-              1
-            );
+            pg.meta.pages = Math.max(Math.ceil(pg.meta.total / pg.meta.perpage), 1);
 
             // current page must be not over than total pages
             if (pg.meta.page > pg.meta.pages) pg.meta.page = pg.meta.pages;
@@ -3503,10 +3273,8 @@ $(document).ready(function() {
             // set unique event name between tables
             pg.paginateEvent = Plugin.getTablePrefix();
 
-            pg.pager = $(datatable.table).siblings(
-              "." + pfx + "datatable__pager"
-            );
-            if ($(pg.pager).hasClass(pfx + "datatable--paging-loaded")) return;
+            pg.pager = $(datatable.table).siblings('.' + pfx + 'datatable__pager');
+            if ($(pg.pager).hasClass(pfx + 'datatable--paging-loaded')) return;
 
             // if class .'+pfx+'datatable--paging-loaded not exist, recreate pagination
             $(pg.pager).remove();
@@ -3515,7 +3283,7 @@ $(document).ready(function() {
             if (pg.meta.pages === 0) return;
 
             // update datasource params
-            Plugin.setDataSourceParam("pagination", {
+            Plugin.setDataSourceParam('pagination', {
               page: pg.meta.page,
               pages: pg.meta.pages,
               perpage: pg.meta.perpage,
@@ -3525,7 +3293,7 @@ $(document).ready(function() {
             // default callback function, contains remote pagination handler
             pg.callback = pg.serverCallback;
             // custom callback function
-            if (typeof callback === "function") pg.callback = callback;
+            if (typeof callback === 'function') pg.callback = callback;
 
             pg.addPaginateEvent();
             pg.populate();
@@ -3541,88 +3309,64 @@ $(document).ready(function() {
             Plugin.dataRender();
           },
           populate: function() {
-            var icons = Plugin.getOption("layout.icons.pagination");
-            var title = Plugin.getOption(
-              "translate.toolbar.pagination.items.default"
-            );
+            var icons = Plugin.getOption('layout.icons.pagination');
+            var title = Plugin.getOption('translate.toolbar.pagination.items.default');
             // pager root element
-            pg.pager = $("<div/>").addClass(
-              pfx +
-                "datatable__pager " +
-                pfx +
-                "datatable--paging-loaded clearfix"
-            );
+            pg.pager = $('<div/>').addClass(pfx + 'datatable__pager ' + pfx + 'datatable--paging-loaded clearfix');
             // numbering links
-            var pagerNumber = $("<ul/>").addClass(pfx + "datatable__pager-nav");
-            pg.pagerLayout["pagination"] = pagerNumber;
+            var pagerNumber = $('<ul/>').addClass(pfx + 'datatable__pager-nav');
+            pg.pagerLayout['pagination'] = pagerNumber;
 
             // pager first/previous button
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<a/>")
-                  .attr("title", title.first)
-                  .addClass(
-                    pfx +
-                      "datatable__pager-link " +
-                      pfx +
-                      "datatable__pager-link--first"
-                  )
-                  .append($("<i/>").addClass(icons.first))
-                  .on("click", pg.gotoMorePage)
-                  .attr("data-page", 1)
+                $('<a/>')
+                  .attr('title', title.first)
+                  .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link--first')
+                  .append($('<i/>').addClass(icons.first))
+                  .on('click', pg.gotoMorePage)
+                  .attr('data-page', 1)
               )
               .appendTo(pagerNumber);
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<a/>")
-                  .attr("title", title.prev)
-                  .addClass(
-                    pfx +
-                      "datatable__pager-link " +
-                      pfx +
-                      "datatable__pager-link--prev"
-                  )
-                  .append($("<i/>").addClass(icons.prev))
-                  .on("click", pg.gotoMorePage)
+                $('<a/>')
+                  .attr('title', title.prev)
+                  .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link--prev')
+                  .append($('<i/>').addClass(icons.prev))
+                  .on('click', pg.gotoMorePage)
               )
               .appendTo(pagerNumber);
 
             // more previous pages
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<a/>")
-                  .attr("title", title.more)
-                  .addClass(
-                    pfx +
-                      "datatable__pager-link " +
-                      pfx +
-                      "datatable__pager-link--more-prev"
-                  )
-                  .html($("<i/>").addClass(icons.more))
-                  .on("click", pg.gotoMorePage)
+                $('<a/>')
+                  .attr('title', title.more)
+                  .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link--more-prev')
+                  .html($('<i/>').addClass(icons.more))
+                  .on('click', pg.gotoMorePage)
               )
               .appendTo(pagerNumber);
 
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<input/>")
-                  .attr("type", "text")
-                  .addClass(pfx + "pager-input form-control")
-                  .attr("title", title.input)
-                  .on("keyup", function() {
+                $('<input/>')
+                  .attr('type', 'text')
+                  .addClass(pfx + 'pager-input form-control')
+                  .attr('title', title.input)
+                  .on('keyup', function() {
                     // on keyup update [data-page]
-                    $(this).attr("data-page", Math.abs($(this).val()));
+                    $(this).attr('data-page', Math.abs($(this).val()));
                   })
-                  .on("keypress", function(e) {
+                  .on('keypress', function(e) {
                     // on keypressed enter button
                     if (e.which === 13) pg.gotoMorePage(e);
                   })
               )
               .appendTo(pagerNumber);
 
-            var pagesNumber = Plugin.getOption(
-              "toolbar.items.pagination.pages.desktop.pagesNumber"
-            );
+            var pagesNumber = Plugin.getOption('toolbar.items.pagination.pages.desktop.pagesNumber');
             var end = Math.ceil(pg.meta.page / pagesNumber) * pagesNumber;
             var start = end - pagesNumber;
             if (end > pg.meta.pages) {
@@ -3630,140 +3374,105 @@ $(document).ready(function() {
             }
             for (var x = start; x < end; x++) {
               var pageNumber = x + 1;
-              $("<li/>")
+              $('<li/>')
                 .append(
-                  $("<a/>")
-                    .addClass(
-                      pfx +
-                        "datatable__pager-link " +
-                        pfx +
-                        "datatable__pager-link-number"
-                    )
+                  $('<a/>')
+                    .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link-number')
                     .text(pageNumber)
-                    .attr("data-page", pageNumber)
-                    .attr("title", pageNumber)
-                    .on("click", pg.gotoPage)
+                    .attr('data-page', pageNumber)
+                    .attr('title', pageNumber)
+                    .on('click', pg.gotoPage)
                 )
                 .appendTo(pagerNumber);
             }
 
             // more next pages
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<a/>")
-                  .attr("title", title.more)
-                  .addClass(
-                    pfx +
-                      "datatable__pager-link " +
-                      pfx +
-                      "datatable__pager-link--more-next"
-                  )
-                  .html($("<i/>").addClass(icons.more))
-                  .on("click", pg.gotoMorePage)
+                $('<a/>')
+                  .attr('title', title.more)
+                  .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link--more-next')
+                  .html($('<i/>').addClass(icons.more))
+                  .on('click', pg.gotoMorePage)
               )
               .appendTo(pagerNumber);
 
             // pager next/last button
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<a/>")
-                  .attr("title", title.next)
-                  .addClass(
-                    pfx +
-                      "datatable__pager-link " +
-                      pfx +
-                      "datatable__pager-link--next"
-                  )
-                  .append($("<i/>").addClass(icons.next))
-                  .on("click", pg.gotoMorePage)
+                $('<a/>')
+                  .attr('title', title.next)
+                  .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link--next')
+                  .append($('<i/>').addClass(icons.next))
+                  .on('click', pg.gotoMorePage)
               )
               .appendTo(pagerNumber);
-            $("<li/>")
+            $('<li/>')
               .append(
-                $("<a/>")
-                  .attr("title", title.last)
-                  .addClass(
-                    pfx +
-                      "datatable__pager-link " +
-                      pfx +
-                      "datatable__pager-link--last"
-                  )
-                  .append($("<i/>").addClass(icons.last))
-                  .on("click", pg.gotoMorePage)
-                  .attr("data-page", pg.meta.pages)
+                $('<a/>')
+                  .attr('title', title.last)
+                  .addClass(pfx + 'datatable__pager-link ' + pfx + 'datatable__pager-link--last')
+                  .append($('<i/>').addClass(icons.last))
+                  .on('click', pg.gotoMorePage)
+                  .attr('data-page', pg.meta.pages)
               )
               .appendTo(pagerNumber);
 
             // page info
-            if (Plugin.getOption("toolbar.items.info")) {
-              pg.pagerLayout["info"] = $("<div/>")
-                .addClass(pfx + "datatable__pager-info")
-                .append($("<span/>").addClass(pfx + "datatable__pager-detail"));
+            if (Plugin.getOption('toolbar.items.info')) {
+              pg.pagerLayout['info'] = $('<div/>')
+                .addClass(pfx + 'datatable__pager-info')
+                .append($('<span/>').addClass(pfx + 'datatable__pager-detail'));
             }
 
-            $.each(Plugin.getOption("toolbar.layout"), function(i, layout) {
+            $.each(Plugin.getOption('toolbar.layout'), function(i, layout) {
               $(pg.pagerLayout[layout]).appendTo(pg.pager);
             });
 
             // page size select
-            var pageSizeSelect = $("<select/>")
-              .addClass("selectpicker " + pfx + "datatable__pager-size")
-              .attr(
-                "title",
-                Plugin.getOption(
-                  "translate.toolbar.pagination.items.default.select"
-                )
-              )
-              .attr("data-width", "70px")
+            var pageSizeSelect = $('<select/>')
+              .addClass('selectpicker ' + pfx + 'datatable__pager-size')
+              .attr('title', Plugin.getOption('translate.toolbar.pagination.items.default.select'))
+              .attr('data-width', '70px')
               .val(pg.meta.perpage)
-              .on("change", pg.updatePerpage)
-              .prependTo(pg.pagerLayout["info"]);
+              .on('change', pg.updatePerpage)
+              .prependTo(pg.pagerLayout['info']);
 
-            var pageSizes = Plugin.getOption(
-              "toolbar.items.pagination.pageSizeSelect"
-            );
+            var pageSizes = Plugin.getOption('toolbar.items.pagination.pageSizeSelect');
             // default value here, to fix override option by user
             if (pageSizes.length == 0) pageSizes = [10, 20, 30, 50, 100];
             $.each(pageSizes, function(i, size) {
               var display = size;
-              if (size === -1) display = "All";
-              $("<option/>")
-                .attr("value", size)
+              if (size === -1) display = 'All';
+              $('<option/>')
+                .attr('value', size)
                 .html(display)
                 .appendTo(pageSizeSelect);
             });
 
             // init selectpicker to dropdown
             $(datatable).ready(function() {
-              $(".selectpicker")
+              $('.selectpicker')
                 .selectpicker()
-                .siblings(".dropdown-toggle")
-                .attr(
-                  "title",
-                  Plugin.getOption(
-                    "translate.toolbar.pagination.items.default.select"
-                  )
-                );
+                .siblings('.dropdown-toggle')
+                .attr('title', Plugin.getOption('translate.toolbar.pagination.items.default.select'));
             });
 
             pg.paste();
           },
           paste: function() {
             // insert pagination based on placement position, top|bottom
-            $.each($.unique(Plugin.getOption("toolbar.placement")), function(
-              i,
-              position
-            ) {
-              if (position === "bottom") {
+            $.each($.unique(Plugin.getOption('toolbar.placement')), function(i, position) {
+              if (position === 'bottom') {
                 $(pg.pager)
                   .clone(true)
                   .insertAfter(datatable.table);
               }
-              if (position === "top") {
+              if (position === 'top') {
                 // pager top need some extra space
                 $(pg.pager)
                   .clone(true)
-                  .addClass(pfx + "datatable__pager--top")
+                  .addClass(pfx + 'datatable__pager--top')
                   .insertBefore(datatable.table);
               }
             });
@@ -3772,13 +3481,13 @@ $(document).ready(function() {
             e.preventDefault();
             // $(this) is a link of .'+pfx+'datatable__pager-link
 
-            if ($(this).attr("disabled") === "disabled") return false;
+            if ($(this).attr('disabled') === 'disabled') return false;
 
-            var page = $(this).attr("data-page");
+            var page = $(this).attr('data-page');
 
             // event from text input
-            if (typeof page === "undefined") {
-              page = $(e.target).attr("data-page");
+            if (typeof page === 'undefined') {
+              page = $(e.target).attr('data-page');
             }
 
             pg.openPage(parseInt(page));
@@ -3787,9 +3496,9 @@ $(document).ready(function() {
           gotoPage: function(e) {
             e.preventDefault();
             // prevent from click same page number
-            if ($(this).hasClass(pfx + "datatable__pager-link--active")) return;
+            if ($(this).hasClass(pfx + 'datatable__pager-link--active')) return;
 
-            pg.openPage(parseInt($(this).data("page")));
+            pg.openPage(parseInt($(this).data('page')));
           },
           openPage: function(page) {
             // currentPage is 1-based index
@@ -3799,7 +3508,7 @@ $(document).ready(function() {
             pg.callback(pg, pg.meta);
 
             // update page callback function
-            $(pg.pager).trigger(pfx + "datatable--on-goto-page", pg.meta);
+            $(pg.pager).trigger(pfx + 'datatable--on-goto-page', pg.meta);
           },
           updatePerpage: function(e) {
             e.preventDefault();
@@ -3809,8 +3518,8 @@ $(document).ready(function() {
             // }
 
             pg.pager = $(datatable.table)
-              .siblings("." + pfx + "datatable__pager")
-              .removeClass(pfx + "datatable--paging-loaded");
+              .siblings('.' + pfx + 'datatable__pager')
+              .removeClass(pfx + 'datatable--paging-loaded');
 
             // on change select page size
             if (e.originalEvent) {
@@ -3818,12 +3527,12 @@ $(document).ready(function() {
             }
 
             $(pg.pager)
-              .find("select." + pfx + "datatable__pager-size")
+              .find('select.' + pfx + 'datatable__pager-size')
               .val(pg.meta.perpage)
-              .attr("data-selected", pg.meta.perpage);
+              .attr('data-selected', pg.meta.perpage);
 
             // update datasource params
-            Plugin.setDataSourceParam("pagination", {
+            Plugin.setDataSourceParam('pagination', {
               page: pg.meta.page,
               pages: pg.meta.pages,
               perpage: pg.meta.perpage,
@@ -3831,7 +3540,7 @@ $(document).ready(function() {
             });
 
             // update page callback function
-            $(pg.pager).trigger(pfx + "datatable--on-update-perpage", pg.meta);
+            $(pg.pager).trigger(pfx + 'datatable--on-update-perpage', pg.meta);
             $(datatable).trigger(pg.paginateEvent, pg.meta);
             pg.callback(pg, pg.meta);
 
@@ -3845,54 +3554,44 @@ $(document).ready(function() {
               .on(pg.paginateEvent, function(e, meta) {
                 Plugin.spinnerCallback(true);
 
-                pg.pager = $(datatable.table).siblings(
-                  "." + pfx + "datatable__pager"
-                );
-                var pagerNumber = $(pg.pager).find(
-                  "." + pfx + "datatable__pager-nav"
-                );
+                pg.pager = $(datatable.table).siblings('.' + pfx + 'datatable__pager');
+                var pagerNumber = $(pg.pager).find('.' + pfx + 'datatable__pager-nav');
 
                 // set sync active page class
                 $(pagerNumber)
-                  .find("." + pfx + "datatable__pager-link--active")
-                  .removeClass(pfx + "datatable__pager-link--active");
+                  .find('.' + pfx + 'datatable__pager-link--active')
+                  .removeClass(pfx + 'datatable__pager-link--active');
                 $(pagerNumber)
-                  .find(
-                    "." +
-                      pfx +
-                      'datatable__pager-link-number[data-page="' +
-                      meta.page +
-                      '"]'
-                  )
-                  .addClass(pfx + "datatable__pager-link--active");
+                  .find('.' + pfx + 'datatable__pager-link-number[data-page="' + meta.page + '"]')
+                  .addClass(pfx + 'datatable__pager-link--active');
 
                 // set next and previous link page number
                 $(pagerNumber)
-                  .find("." + pfx + "datatable__pager-link--prev")
-                  .attr("data-page", Math.max(meta.page - 1, 1));
+                  .find('.' + pfx + 'datatable__pager-link--prev')
+                  .attr('data-page', Math.max(meta.page - 1, 1));
                 $(pagerNumber)
-                  .find("." + pfx + "datatable__pager-link--next")
-                  .attr("data-page", Math.min(meta.page + 1, meta.pages));
+                  .find('.' + pfx + 'datatable__pager-link--next')
+                  .attr('data-page', Math.min(meta.page + 1, meta.pages));
 
                 // current page input value sync
                 $(pg.pager).each(function() {
                   $(this)
-                    .find("." + pfx + 'pager-input[type="text"]')
-                    .prop("value", meta.page);
+                    .find('.' + pfx + 'pager-input[type="text"]')
+                    .prop('value', meta.page);
                 });
 
                 $(pg.pager)
-                  .find("." + pfx + "datatable__pager-nav")
+                  .find('.' + pfx + 'datatable__pager-nav')
                   .show();
                 if (meta.pages <= 1) {
                   // hide pager if has 1 page
                   $(pg.pager)
-                    .find("." + pfx + "datatable__pager-nav")
+                    .find('.' + pfx + 'datatable__pager-nav')
                     .hide();
                 }
 
                 // update datasource params
-                Plugin.setDataSourceParam("pagination", {
+                Plugin.setDataSourceParam('pagination', {
                   page: pg.meta.page,
                   pages: pg.meta.pages,
                   perpage: pg.meta.perpage,
@@ -3900,17 +3599,17 @@ $(document).ready(function() {
                 });
 
                 $(pg.pager)
-                  .find("select." + pfx + "datatable__pager-size")
+                  .find('select.' + pfx + 'datatable__pager-size')
                   .val(meta.perpage)
-                  .attr("data-selected", meta.perpage);
+                  .attr('data-selected', meta.perpage);
 
                 // clear active rows
                 $(datatable.table)
-                  .find("." + pfx + 'checkbox > [type="checkbox"]')
-                  .prop("checked", false);
+                  .find('.' + pfx + 'checkbox > [type="checkbox"]')
+                  .prop('checked', false);
                 $(datatable.table)
-                  .find("." + pfx + "datatable__row--active")
-                  .removeClass(pfx + "datatable__row--active");
+                  .find('.' + pfx + 'datatable__row--active')
+                  .removeClass(pfx + 'datatable__row--active');
 
                 pg.updateInfo.call();
                 pg.pagingBreakpoint.call();
@@ -3922,21 +3621,16 @@ $(document).ready(function() {
             var end = Math.min(start + pg.meta.perpage - 1, pg.meta.total);
             // page info update
             $(pg.pager)
-              .find("." + pfx + "datatable__pager-info")
-              .find("." + pfx + "datatable__pager-detail")
+              .find('.' + pfx + 'datatable__pager-info')
+              .find('.' + pfx + 'datatable__pager-detail')
               .html(
-                Plugin.dataPlaceholder(
-                  Plugin.getOption("translate.toolbar.pagination.items.info"),
-                  {
-                    start: start,
-                    end: pg.meta.perpage === -1 ? pg.meta.total : end,
-                    pageSize:
-                      pg.meta.perpage === -1 || pg.meta.perpage >= pg.meta.total
-                        ? pg.meta.total
-                        : pg.meta.perpage,
-                    total: pg.meta.total
-                  }
-                )
+                Plugin.dataPlaceholder(Plugin.getOption('translate.toolbar.pagination.items.info'), {
+                  start: start,
+                  end: pg.meta.perpage === -1 ? pg.meta.total : end,
+                  pageSize:
+                    pg.meta.perpage === -1 || pg.meta.perpage >= pg.meta.total ? pg.meta.total : pg.meta.perpage,
+                  total: pg.meta.total
+                })
               );
           },
 
@@ -3946,51 +3640,46 @@ $(document).ready(function() {
           pagingBreakpoint: function() {
             // keep page links reference
             var pagerNumber = $(datatable.table)
-              .siblings("." + pfx + "datatable__pager")
-              .find("." + pfx + "datatable__pager-nav");
+              .siblings('.' + pfx + 'datatable__pager')
+              .find('.' + pfx + 'datatable__pager-nav');
             if ($(pagerNumber).length === 0) return;
 
             var currentPage = Plugin.getCurrentPage();
             var pagerInput = $(pagerNumber)
-              .find("." + pfx + "pager-input")
-              .closest("li");
+              .find('.' + pfx + 'pager-input')
+              .closest('li');
 
             // reset
             $(pagerNumber)
-              .find("li")
+              .find('li')
               .show();
 
             // pagination update
-            $.each(Plugin.getOption("toolbar.items.pagination.pages"), function(
-              mode,
-              option
-            ) {
+            $.each(Plugin.getOption('toolbar.items.pagination.pages'), function(mode, option) {
               if (util.isInResponsiveRange(mode)) {
                 switch (mode) {
-                  case "desktop":
-                  case "tablet":
-                    var end =
-                      Math.ceil(currentPage / option.pagesNumber) *
-                      option.pagesNumber;
+                  case 'desktop':
+                  case 'tablet':
+                    var end = Math.ceil(currentPage / option.pagesNumber) * option.pagesNumber;
                     var start = end - option.pagesNumber;
                     $(pagerInput).hide();
-                    pg.meta = Plugin.getDataSourceParam("pagination");
+                    pg.meta = Plugin.getDataSourceParam('pagination');
                     pg.paginationUpdate();
                     break;
 
-                  case "mobile":
+                  case 'mobile':
                     $(pagerInput).show();
                     $(pagerNumber)
-                      .find("." + pfx + "datatable__pager-link--more-prev")
-                      .closest("li")
+                      .find('.' + pfx + 'datatable__pager-link--more-prev')
+                      .closest('li')
                       .hide();
                     $(pagerNumber)
-                      .find("." + pfx + "datatable__pager-link--more-next")
-                      .closest("li")
+                      .find('.' + pfx + 'datatable__pager-link--more-next')
+                      .closest('li')
                       .hide();
                     $(pagerNumber)
-                      .find("." + pfx + "datatable__pager-link-number")
-                      .closest("li")
+                      .find('.' + pfx + 'datatable__pager-link-number')
+                      .closest('li')
                       .hide();
                     break;
                 }
@@ -4005,40 +3694,26 @@ $(document).ready(function() {
            */
           paginationUpdate: function() {
             var pager = $(datatable.table)
-                .siblings("." + pfx + "datatable__pager")
-                .find("." + pfx + "datatable__pager-nav"),
-              pagerMorePrev = $(pager).find(
-                "." + pfx + "datatable__pager-link--more-prev"
-              ),
-              pagerMoreNext = $(pager).find(
-                "." + pfx + "datatable__pager-link--more-next"
-              ),
-              pagerFirst = $(pager).find(
-                "." + pfx + "datatable__pager-link--first"
-              ),
-              pagerPrev = $(pager).find(
-                "." + pfx + "datatable__pager-link--prev"
-              ),
-              pagerNext = $(pager).find(
-                "." + pfx + "datatable__pager-link--next"
-              ),
-              pagerLast = $(pager).find(
-                "." + pfx + "datatable__pager-link--last"
-              );
+                .siblings('.' + pfx + 'datatable__pager')
+                .find('.' + pfx + 'datatable__pager-nav'),
+              pagerMorePrev = $(pager).find('.' + pfx + 'datatable__pager-link--more-prev'),
+              pagerMoreNext = $(pager).find('.' + pfx + 'datatable__pager-link--more-next'),
+              pagerFirst = $(pager).find('.' + pfx + 'datatable__pager-link--first'),
+              pagerPrev = $(pager).find('.' + pfx + 'datatable__pager-link--prev'),
+              pagerNext = $(pager).find('.' + pfx + 'datatable__pager-link--next'),
+              pagerLast = $(pager).find('.' + pfx + 'datatable__pager-link--last');
 
             // get visible page
-            var pagerNumber = $(pager).find(
-              "." + pfx + "datatable__pager-link-number"
-            );
+            var pagerNumber = $(pager).find('.' + pfx + 'datatable__pager-link-number');
             // get page before of first visible
             var morePrevPage = Math.max(
               $(pagerNumber)
                 .first()
-                .data("page") - 1,
+                .data('page') - 1,
               1
             );
             $(pagerMorePrev).each(function(i, prev) {
-              $(prev).attr("data-page", morePrevPage);
+              $(prev).attr('data-page', morePrevPage);
             });
             // show/hide <li>
             if (morePrevPage === 1) {
@@ -4055,12 +3730,12 @@ $(document).ready(function() {
             var moreNextPage = Math.min(
               $(pagerNumber)
                 .last()
-                .data("page") + 1,
+                .data('page') + 1,
               pg.meta.pages
             );
             $(pagerMoreNext).each(function(i, prev) {
               $(pagerMoreNext)
-                .attr("data-page", moreNextPage)
+                .attr('data-page', moreNextPage)
                 .show();
             });
 
@@ -4071,7 +3746,7 @@ $(document).ready(function() {
               moreNextPage ===
                 $(pagerNumber)
                   .last()
-                  .data("page")
+                  .data('page')
             ) {
               $(pagerMoreNext)
                 .parent()
@@ -4085,37 +3760,37 @@ $(document).ready(function() {
             // begin/end of pages
             if (pg.meta.page === 1) {
               $(pagerFirst)
-                .attr("disabled", true)
-                .addClass(pfx + "datatable__pager-link--disabled");
+                .attr('disabled', true)
+                .addClass(pfx + 'datatable__pager-link--disabled');
               $(pagerPrev)
-                .attr("disabled", true)
-                .addClass(pfx + "datatable__pager-link--disabled");
+                .attr('disabled', true)
+                .addClass(pfx + 'datatable__pager-link--disabled');
             } else {
               $(pagerFirst)
-                .removeAttr("disabled")
-                .removeClass(pfx + "datatable__pager-link--disabled");
+                .removeAttr('disabled')
+                .removeClass(pfx + 'datatable__pager-link--disabled');
               $(pagerPrev)
-                .removeAttr("disabled")
-                .removeClass(pfx + "datatable__pager-link--disabled");
+                .removeAttr('disabled')
+                .removeClass(pfx + 'datatable__pager-link--disabled');
             }
             if (pg.meta.page === pg.meta.pages) {
               $(pagerNext)
-                .attr("disabled", true)
-                .addClass(pfx + "datatable__pager-link--disabled");
+                .attr('disabled', true)
+                .addClass(pfx + 'datatable__pager-link--disabled');
               $(pagerLast)
-                .attr("disabled", true)
-                .addClass(pfx + "datatable__pager-link--disabled");
+                .attr('disabled', true)
+                .addClass(pfx + 'datatable__pager-link--disabled');
             } else {
               $(pagerNext)
-                .removeAttr("disabled")
-                .removeClass(pfx + "datatable__pager-link--disabled");
+                .removeAttr('disabled')
+                .removeClass(pfx + 'datatable__pager-link--disabled');
               $(pagerLast)
-                .removeAttr("disabled")
-                .removeClass(pfx + "datatable__pager-link--disabled");
+                .removeAttr('disabled')
+                .removeClass(pfx + 'datatable__pager-link--disabled');
             }
 
             // display more buttons
-            var nav = Plugin.getOption("toolbar.items.pagination.navigation");
+            var nav = Plugin.getOption('toolbar.items.pagination.navigation');
             if (!nav.first) $(pagerFirst).remove();
             if (!nav.prev) $(pagerPrev).remove();
             if (!nav.next) $(pagerNext).remove();
@@ -4134,14 +3809,11 @@ $(document).ready(function() {
         var screen = util.getViewPort().width;
         // foreach columns setting
         $.each(options.columns, function(i, column) {
-          if (typeof column.responsive !== "undefined") {
+          if (typeof column.responsive !== 'undefined') {
             var field = column.field;
-            var tds = $.grep(
-              $(datatable.table).find("." + pfx + "datatable__cell"),
-              function(n, i) {
-                return field === $(n).data("field");
-              }
-            );
+            var tds = $.grep($(datatable.table).find('.' + pfx + 'datatable__cell'), function(n, i) {
+              return field === $(n).data('field');
+            });
             if (util.getBreakpoint(column.responsive.hidden) >= screen) {
               $(tds).hide();
             } else {
@@ -4160,91 +3832,73 @@ $(document).ready(function() {
        * Setup sub datatable
        */
       setupSubDatatable: function() {
-        var subTableCallback = Plugin.getOption("detail.content");
-        if (typeof subTableCallback !== "function") return;
+        var subTableCallback = Plugin.getOption('detail.content');
+        if (typeof subTableCallback !== 'function') return;
 
         // subtable already exist
-        if (
-          $(datatable.table).find("." + pfx + "datatable__subtable").length > 0
-        )
-          return;
+        if ($(datatable.table).find('.' + pfx + 'datatable__subtable').length > 0) return;
 
-        $(datatable.wrap).addClass(pfx + "datatable--subtable");
+        $(datatable.wrap).addClass(pfx + 'datatable--subtable');
 
-        options.columns[0]["subtable"] = true;
+        options.columns[0]['subtable'] = true;
 
         // toggle on open sub table
         var toggleSubTable = function(e) {
           e.preventDefault();
           // get parent row of this subtable
-          var parentRow = $(this).closest("." + pfx + "datatable__row");
+          var parentRow = $(this).closest('.' + pfx + 'datatable__row');
 
           // get subtable row for sub table
-          var subTableRow = $(parentRow).next(
-            "." + pfx + "datatable__row-subtable"
-          );
+          var subTableRow = $(parentRow).next('.' + pfx + 'datatable__row-subtable');
           if ($(subTableRow).length === 0) {
             // prepare DOM for sub table, each <tr> as parent and add <tr> as child table
-            subTableRow = $("<tr/>")
-              .addClass(
-                pfx +
-                  "datatable__row-subtable " +
-                  pfx +
-                  "datatable__row-loading"
-              )
+            subTableRow = $('<tr/>')
+              .addClass(pfx + 'datatable__row-subtable ' + pfx + 'datatable__row-loading')
               .hide()
               .append(
-                $("<td/>")
-                  .addClass(pfx + "datatable__subtable")
-                  .attr("colspan", Plugin.getTotalColumns())
+                $('<td/>')
+                  .addClass(pfx + 'datatable__subtable')
+                  .attr('colspan', Plugin.getTotalColumns())
               );
             $(parentRow).after(subTableRow);
             // add class to even row
-            if ($(parentRow).hasClass(pfx + "datatable__row--even")) {
-              $(subTableRow).addClass(pfx + "datatable__row-subtable--even");
+            if ($(parentRow).hasClass(pfx + 'datatable__row--even')) {
+              $(subTableRow).addClass(pfx + 'datatable__row-subtable--even');
             }
           }
 
           $(subTableRow).toggle();
 
-          var subTable = $(subTableRow).find("." + pfx + "datatable__subtable");
+          var subTable = $(subTableRow).find('.' + pfx + 'datatable__subtable');
 
           // get id from first column of parent row
           var primaryKey = $(this)
-            .closest("[data-field]:first-child")
-            .find("." + pfx + "datatable__toggle-subtable")
-            .data("value");
+            .closest('[data-field]:first-child')
+            .find('.' + pfx + 'datatable__toggle-subtable')
+            .data('value');
 
           var icon = $(this)
-            .find("i")
-            .removeAttr("class");
+            .find('i')
+            .removeAttr('class');
 
           // prevent duplicate datatable init
-          if (
-            $(parentRow).hasClass(pfx + "datatable__row--subtable-expanded")
-          ) {
-            $(icon).addClass(
-              Plugin.getOption("layout.icons.rowDetail.collapse")
-            );
+          if ($(parentRow).hasClass(pfx + 'datatable__row--subtable-expanded')) {
+            $(icon).addClass(Plugin.getOption('layout.icons.rowDetail.collapse'));
             // remove expand class from parent row
-            $(parentRow).removeClass(pfx + "datatable__row--subtable-expanded");
+            $(parentRow).removeClass(pfx + 'datatable__row--subtable-expanded');
             // trigger event on collapse
-            $(datatable).trigger(pfx + "datatable--on-collapse-subtable", [
-              parentRow
-            ]);
+            $(datatable).trigger(pfx + 'datatable--on-collapse-subtable', [parentRow]);
           } else {
             // expand and run callback function
-            $(icon).addClass(Plugin.getOption("layout.icons.rowDetail.expand"));
+            $(icon).addClass(Plugin.getOption('layout.icons.rowDetail.expand'));
             // add expand class to parent row
-            $(parentRow).addClass(pfx + "datatable__row--subtable-expanded");
+            $(parentRow).addClass(pfx + 'datatable__row--subtable-expanded');
             // trigger event on expand
-            $(datatable).trigger(pfx + "datatable--on-expand-subtable", [
-              parentRow
-            ]);
+            $(datatable).trigger(pfx + 'datatable--on-expand-subtable', [parentRow]);
           }
 
           // prevent duplicate datatable init
-          if ($(subTable).find("." + pfx + "datatable").length === 0) {
+          if ($(subTable).find('.' + pfx + 'datatable').length === 0) {
             // get data by primary id
             $.map(datatable.dataSet, function(n, i) {
               // primary id must be at the first column, otherwise e.data will be undefined
@@ -4265,56 +3919,45 @@ $(document).ready(function() {
             subTableCallback(e);
 
             $(subTable)
-              .children("." + pfx + "datatable")
-              .on(pfx + "datatable--on-init", function(e) {
-                $(subTableRow).removeClass(pfx + "datatable__row-loading");
+              .children('.' + pfx + 'datatable')
+              .on(pfx + 'datatable--on-init', function(e) {
+                $(subTableRow).removeClass(pfx + 'datatable__row-loading');
               });
-            if (Plugin.getOption("data.type") === "local") {
-              $(subTableRow).removeClass(pfx + "datatable__row-loading");
+            if (Plugin.getOption('data.type') === 'local') {
+              $(subTableRow).removeClass(pfx + 'datatable__row-loading');
             }
           }
         };
 
         var columns = options.columns;
         $(datatable.tableBody)
-          .find("." + pfx + "datatable__row")
+          .find('.' + pfx + 'datatable__row')
           .each(function(tri, tr) {
             $(tr)
-              .find("." + pfx + "datatable__cell")
+              .find('.' + pfx + 'datatable__cell')
               .each(function(tdi, td) {
                 // get column settings by field
                 var column = $.grep(columns, function(n, i) {
-                  return $(td).data("field") === n.field;
+                  return $(td).data('field') === n.field;
                 })[0];
-                if (typeof column !== "undefined") {
+                if (typeof column !== 'undefined') {
                   var value = $(td).text();
                   // enable column subtable toggle
-                  if (
-                    typeof column.subtable !== "undefined" &&
-                    column.subtable
-                  ) {
+                  if (typeof column.subtable !== 'undefined' && column.subtable) {
                     // check if subtable toggle exist
-                    if (
-                      $(td).find("." + pfx + "datatable__toggle-subtable")
-                        .length > 0
-                    )
-                      return;
+                    if ($(td).find('.' + pfx + 'datatable__toggle-subtable').length > 0) return;
                     // append subtable toggle
                     $(td).html(
-                      $("<a/>")
-                        .addClass(pfx + "datatable__toggle-subtable")
-                        .attr("href", "#")
-                        .attr("data-value", value)
-                        .attr("title", Plugin.getOption("detail.title"))
-                        .on("click", toggleSubTable)
+                      $('<a/>')
+                        .addClass(pfx + 'datatable__toggle-subtable')
+                        .attr('href', '#')
+                        .attr('data-value', value)
+                        .attr('title', Plugin.getOption('detail.title'))
+                        .on('click', toggleSubTable)
                         .append(
-                          $("<i/>")
-                            .css("width", $(td).data("width"))
-                            .addClass(
-                              Plugin.getOption(
-                                "layout.icons.rowDetail.collapse"
-                              )
-                            )
+                          $('<i/>')
+                            .css('width', $(td).data('width'))
+                            .addClass(Plugin.getOption('layout.icons.rowDetail.collapse'))
                         )
                     );
                   }
@@ -4332,11 +3975,11 @@ $(document).ready(function() {
         // static dataset array
         var dataSet = raw;
         // dataset mapping callback
-        if (typeof Plugin.getOption("data.source.read.map") === "function") {
-          return Plugin.getOption("data.source.read.map")(raw);
+        if (typeof Plugin.getOption('data.source.read.map') === 'function') {
+          return Plugin.getOption('data.source.read.map')(raw);
         } else {
           // default data mapping fallback
-          if (typeof raw !== "undefined" && typeof raw.data !== "undefined") {
+          if (typeof raw !== 'undefined' && typeof raw.data !== 'undefined') {
             dataSet = raw.data;
           }
         }
@@ -4352,24 +3995,19 @@ $(document).ready(function() {
         if (block) {
           if (!Plugin.isSpinning) {
             // get spinner options
-            var spinnerOptions = Plugin.getOption("layout.spinner");
-            if (
-              typeof spinnerOptions.message !== "undefined" &&
-              spinnerOptions.message === true
-            ) {
+            var spinnerOptions = Plugin.getOption('layout.spinner');
+            if (typeof spinnerOptions.message !== 'undefined' && spinnerOptions.message === true) {
               // use default spinner message from translation
-              spinnerOptions.message = Plugin.getOption(
-                "translate.records.processing"
-              );
+              spinnerOptions.message = Plugin.getOption('translate.records.processing');
             }
             Plugin.isSpinning = true;
-            if (typeof app !== "undefined") {
+            if (typeof app !== 'undefined') {
               app.block(datatable, spinnerOptions);
             }
           }
         } else {
           Plugin.isSpinning = false;
-          if (typeof app !== "undefined") {
+          if (typeof app !== 'undefined') {
             app.unblock(datatable);
           }
         }
@@ -4383,46 +4021,46 @@ $(document).ready(function() {
        * @returns {*|Array.<T>|{sort, field}|{asc, desc}}
        */
       sortCallback: function(data, sort, column) {
-        var type = column["type"] || "string";
-        var format = column["format"] || "";
-        var field = column["field"];
+        var type = column['type'] || 'string';
+        var format = column['format'] || '';
+        var field = column['field'];
 
         return $(data).sort(function(a, b) {
           var aField = a[field];
           var bField = b[field];
 
           switch (type) {
-            case "date":
-              if (typeof moment === "undefined") {
-                throw new Error("Moment.js is required.");
+            case 'date':
+              if (typeof moment === 'undefined') {
+                throw new Error('Moment.js is required.');
               }
               var diff = moment(aField, format).diff(moment(bField, format));
-              if (sort === "asc") {
+              if (sort === 'asc') {
                 return diff > 0 ? 1 : diff < 0 ? -1 : 0;
               } else {
                 return diff < 0 ? 1 : diff > 0 ? -1 : 0;
               }
               break;
 
-            case "number":
+            case 'number':
               if (isNaN(parseFloat(aField)) && aField != null) {
-                aField = Number(aField.replace(/[^0-9\.-]+/g, ""));
+                aField = Number(aField.replace(/[^0-9\.-]+/g, ''));
               }
               if (isNaN(parseFloat(bField)) && bField != null) {
-                bField = Number(bField.replace(/[^0-9\.-]+/g, ""));
+                bField = Number(bField.replace(/[^0-9\.-]+/g, ''));
               }
               aField = parseFloat(aField);
               bField = parseFloat(bField);
-              if (sort === "asc") {
+              if (sort === 'asc') {
                 return aField > bField ? 1 : aField < bField ? -1 : 0;
               } else {
                 return aField < bField ? 1 : aField > bField ? -1 : 0;
               }
               break;
 
-            case "string":
+            case 'string':
             default:
-              if (sort === "asc") {
+              if (sort === 'asc') {
                 return aField > bField ? 1 : aField < bField ? -1 : 0;
               } else {
                 return aField < bField ? 1 : aField > bField ? -1 : 0;
@@ -4438,7 +4076,7 @@ $(document).ready(function() {
        * @param obj
        */
       log: function(text, obj) {
-        if (typeof obj === "undefined") obj = "";
+        if (typeof obj === 'undefined') obj = '';
         if (datatable.debug) {
           console.log(text, obj);
         }
@@ -4449,16 +4087,16 @@ $(document).ready(function() {
        */
       autoHide: function() {
         $(datatable.table)
-          .find("." + pfx + "datatable__cell")
+          .find('.' + pfx + 'datatable__cell')
           .show();
         $(datatable.tableBody).each(function() {
           while ($(this)[0].offsetWidth < $(this)[0].scrollWidth) {
             $(datatable.table)
-              .find("." + pfx + "datatable__row")
+              .find('.' + pfx + 'datatable__row')
               .each(function(i) {
                 var cell = $(this)
-                  .find("." + pfx + "datatable__cell")
-                  .not(":hidden")
+                  .find('.' + pfx + 'datatable__cell')
+                  .not(':hidden')
                   .last();
                 $(cell).hide();
               });
@@ -4469,31 +4107,31 @@ $(document).ready(function() {
         var toggleHiddenColumns = function(e) {
           e.preventDefault();
 
-          var row = $(this).closest("." + pfx + "datatable__row");
+          var row = $(this).closest('.' + pfx + 'datatable__row');
           var detailRow = $(row).next();
 
-          if (!$(detailRow).hasClass(pfx + "datatable__row-detail")) {
+          if (!$(detailRow).hasClass(pfx + 'datatable__row-detail')) {
             $(this)
-              .find("i")
-              .removeClass(Plugin.getOption("layout.icons.rowDetail.collapse"))
-              .addClass(Plugin.getOption("layout.icons.rowDetail.expand"));
+              .find('i')
+              .removeClass(Plugin.getOption('layout.icons.rowDetail.collapse'))
+              .addClass(Plugin.getOption('layout.icons.rowDetail.expand'));
 
             var hidden = $(row)
-              .find("." + pfx + "datatable__cell:hidden")
+              .find('.' + pfx + 'datatable__cell:hidden')
               .clone()
               .show();
 
-            detailRow = $("<tr/>")
-              .addClass(pfx + "datatable__row-detail")
+            detailRow = $('<tr/>')
+              .addClass(pfx + 'datatable__row-detail')
               .insertAfter(row);
-            var detailRowTd = $("<td/>")
-              .addClass(pfx + "datatable__detail")
-              .attr("colspan", Plugin.getTotalColumns())
+            var detailRowTd = $('<td/>')
+              .addClass(pfx + 'datatable__detail')
+              .attr('colspan', Plugin.getTotalColumns())
               .appendTo(detailRow);
 
-            var detailSubTable = $("<table/>");
+            var detailSubTable = $('<table/>');
             $(hidden).each(function() {
-              var field = $(this).data("field");
+              var field = $(this).data('field');
               var column = $.grep(options.columns, function(n, i) {
                 return field === n.field;
               })[0];
@@ -4501,8 +4139,8 @@ $(document).ready(function() {
                 $('<tr class="' + pfx + 'datatable__row"></tr>')
                   .append(
                     $('<td class="' + pfx + 'datatable__cell"></td>').append(
-                      $("<span/>")
-                        .css("width", Plugin.offset)
+                      $('<span/>')
+                        .css('width', Plugin.offset)
                         .append(column.title)
                     )
                   )
@@ -4512,68 +4150,60 @@ $(document).ready(function() {
             $(detailRowTd).append(detailSubTable);
           } else {
             $(this)
-              .find("i")
-              .removeClass(Plugin.getOption("layout.icons.rowDetail.expand"))
-              .addClass(Plugin.getOption("layout.icons.rowDetail.collapse"));
+              .find('i')
+              .removeClass(Plugin.getOption('layout.icons.rowDetail.expand'))
+              .addClass(Plugin.getOption('layout.icons.rowDetail.collapse'));
             $(detailRow).remove();
           }
         };
 
         // toggle show hidden columns
         $(datatable.tableBody)
-          .find("." + pfx + "datatable__row")
+          .find('.' + pfx + 'datatable__row')
           .each(function() {
             $(this).prepend(
-              $("<td/>")
-                .addClass(
-                  pfx + "datatable__cell " + pfx + "datatable__toggle--detail"
-                )
+              $('<td/>')
+                .addClass(pfx + 'datatable__cell ' + pfx + 'datatable__toggle--detail')
                 .append(
-                  $("<a/>")
-                    .addClass(pfx + "datatable__toggle-detail")
-                    .attr("href", "")
-                    .on("click", toggleHiddenColumns)
+                  $('<a/>')
+                    .addClass(pfx + 'datatable__toggle-detail')
+                    .attr('href', '')
+                    .on('click', toggleHiddenColumns)
                     .append(
-                      $("<i/>")
-                        .css("width", "21px") // maintain width for both icons expand and collapse
-                        .addClass(
-                          Plugin.getOption("layout.icons.rowDetail.collapse")
-                        )
+                      $('<i/>')
+                        .css('width', '21px') // maintain width for both icons expand and collapse
+                        .addClass(Plugin.getOption('layout.icons.rowDetail.collapse'))
                     )
                 )
             );
 
             // check if subtable toggle exist
-            if (
-              $(datatable.tableHead).find(
-                "." + pfx + "datatable__toggle-detail"
-              ).length === 0
-            ) {
+            if ($(datatable.tableHead).find('.' + pfx + 'datatable__toggle-detail').length === 0) {
               $(datatable.tableHead)
-                .find("." + pfx + "datatable__row")
+                .find('.' + pfx + 'datatable__row')
                 .first()
                 .prepend(
                   '<th class="' +
                     pfx +
-                    "datatable__cell " +
+                    'datatable__cell ' +
                     pfx +
                     'datatable__toggle-detail"><span style="width: 21px"></span></th>'
                 );
               $(datatable.tableFoot)
-                .find("." + pfx + "datatable__row")
+                .find('.' + pfx + 'datatable__row')
                 .first()
                 .prepend(
                   '<th class="' +
                     pfx +
-                    "datatable__cell " +
+                    'datatable__cell ' +
                     pfx +
                     'datatable__toggle-detail"><span style="width: 21px"></span></th>'
                 );
             } else {
               $(datatable.tableHead)
-                .find("." + pfx + "datatable__toggle-detail")
-                .find("span")
-                .css("width", "21px");
+                .find('.' + pfx + 'datatable__toggle-detail')
+                .find('span')
+                .css('width', '21px');
             }
           });
       },
@@ -4582,26 +4212,18 @@ $(document).ready(function() {
        * todo; implement hover column
        */
       hoverColumn: function() {
-        $(datatable.tableBody).on(
-          "mouseenter",
-          "." + pfx + "datatable__cell",
-          function() {
-            var colIdx = $(Plugin.cell(this).nodes()).index();
-            $(Plugin.cells().nodes()).removeClass(
-              pfx + "datatable__cell--hover"
-            );
-            $(Plugin.column(colIdx).nodes()).addClass(
-              pfx + "datatable__cell--hover"
-            );
-          }
-        );
+        $(datatable.tableBody).on('mouseenter', '.' + pfx + 'datatable__cell', function() {
+          var colIdx = $(Plugin.cell(this).nodes()).index();
+          $(Plugin.cells().nodes()).removeClass(pfx + 'datatable__cell--hover');
+          $(Plugin.column(colIdx).nodes()).addClass(pfx + 'datatable__cell--hover');
+        });
       },
 
       /**
        * To enable auto columns features for remote data source
        */
       setAutoColumns: function() {
-        if (Plugin.getOption("data.autoColumns")) {
+        if (Plugin.getOption('data.autoColumns')) {
           $.each(datatable.dataSet[0], function(k, v) {
             var found = $.grep(options.columns, function(n, i) {
               return k === n.field;
@@ -4611,12 +4233,12 @@ $(document).ready(function() {
             }
           });
           $(datatable.tableHead)
-            .find("." + pfx + "datatable__row")
+            .find('.' + pfx + 'datatable__row')
             .remove();
           Plugin.setHeadTitle();
-          if (Plugin.getOption("layout.footer")) {
+          if (Plugin.getOption('layout.footer')) {
             $(datatable.tableFoot)
-              .find("." + pfx + "datatable__row")
+              .find('.' + pfx + 'datatable__row')
               .remove();
             Plugin.setHeadTitle(datatable.tableFoot);
           }
@@ -4631,9 +4253,7 @@ $(document).ready(function() {
        * Check if table is a locked colums table
        */
       isLocked: function() {
-        return (
-          util.hasClass(datatable.wrap[0], pfx + "datatable--lock") || false
-        );
+        return util.hasClass(datatable.wrap[0], pfx + 'datatable--lock') || false;
       },
 
       /**
@@ -4643,16 +4263,12 @@ $(document).ready(function() {
        * @returns {number}
        */
       getExtraSpace: function(element) {
-        var padding =
-          parseInt($(element).css("paddingRight")) +
-          parseInt($(element).css("paddingLeft"));
-        var margin =
-          parseInt($(element).css("marginRight")) +
-          parseInt($(element).css("marginLeft"));
+        var padding = parseInt($(element).css('paddingRight')) + parseInt($(element).css('paddingLeft'));
+        var margin = parseInt($(element).css('marginRight')) + parseInt($(element).css('marginLeft'));
         var border = Math.ceil(
           $(element)
-            .css("border-right-width")
-            .replace("px", "")
+            .css('border-right-width')
+            .replace('px', '')
         );
         return padding + margin + border;
       },
@@ -4666,7 +4282,7 @@ $(document).ready(function() {
       dataPlaceholder: function(template, data) {
         var result = template;
         $.each(data, function(key, val) {
-          result = result.replace("{{" + key + "}}", val);
+          result = result.replace('{{' + key + '}}', val);
         });
         return result;
       },
@@ -4678,12 +4294,12 @@ $(document).ready(function() {
        * @returns {*}
        */
       getTableId: function(suffix) {
-        if (typeof suffix === "undefined") suffix = "";
-        var id = $(datatable).attr("id");
-        if (typeof id === "undefined") {
+        if (typeof suffix === 'undefined') suffix = '';
+        var id = $(datatable).attr('id');
+        if (typeof id === 'undefined') {
           id = $(datatable)
-            .attr("class")
-            .split(" ")[0];
+            .attr('class')
+            .split(' ')[0];
         }
         return id + suffix;
       },
@@ -4692,8 +4308,8 @@ $(document).ready(function() {
        * Get table prefix with depth number
        */
       getTablePrefix: function(suffix) {
-        if (typeof suffix !== "undefined") suffix = "-" + suffix;
-        return Plugin.getTableId() + "-" + Plugin.getDepth() + suffix;
+        if (typeof suffix !== 'undefined') suffix = '-' + suffix;
+        return Plugin.getTableId() + '-' + Plugin.getDepth() + suffix;
       },
 
       /**
@@ -4704,7 +4320,7 @@ $(document).ready(function() {
         var depth = 0;
         var table = datatable.table;
         do {
-          table = $(table).parents("." + pfx + "datatable__table");
+          table = $(table).parents('.' + pfx + 'datatable__table');
           depth++;
         } while ($(table).length > 0);
         return depth;
@@ -4717,11 +4333,11 @@ $(document).ready(function() {
        */
       stateKeep: function(key, value) {
         key = Plugin.getTablePrefix(key);
-        if (Plugin.getOption("data.saveState") === false) return;
-        if (Plugin.getOption("data.saveState.webstorage") && localStorage) {
+        if (Plugin.getOption('data.saveState') === false) return;
+        if (Plugin.getOption('data.saveState.webstorage') && localStorage) {
           localStorage.setItem(key, JSON.stringify(value));
         }
-        if (Plugin.getOption("data.saveState.cookie")) {
+        if (Plugin.getOption('data.saveState.cookie')) {
           Cookies.set(key, JSON.stringify(value));
         }
       },
@@ -4733,14 +4349,14 @@ $(document).ready(function() {
        */
       stateGet: function(key, defValue) {
         key = Plugin.getTablePrefix(key);
-        if (Plugin.getOption("data.saveState") === false) return;
+        if (Plugin.getOption('data.saveState') === false) return;
         var value = null;
-        if (Plugin.getOption("data.saveState.webstorage") && localStorage) {
+        if (Plugin.getOption('data.saveState.webstorage') && localStorage) {
           value = localStorage.getItem(key);
         } else {
           value = Cookies.get(key);
         }
-        if (typeof value !== "undefined" && value !== null) {
+        if (typeof value !== 'undefined' && value !== null) {
           return JSON.parse(value);
         }
       },
@@ -4752,7 +4368,7 @@ $(document).ready(function() {
        */
       stateUpdate: function(key, value) {
         var ori = Plugin.stateGet(key);
-        if (typeof ori === "undefined" || ori === null) ori = {};
+        if (typeof ori === 'undefined' || ori === null) ori = {};
         Plugin.stateKeep(key, $.extend({}, ori, value));
       },
 
@@ -4772,11 +4388,11 @@ $(document).ready(function() {
        * Get total columns.
        */
       getTotalColumns: function(tablePart) {
-        if (typeof tablePart === "undefined") tablePart = datatable.tableBody;
+        if (typeof tablePart === 'undefined') tablePart = datatable.tableBody;
         return $(tablePart)
-          .find("." + pfx + "datatable__row")
+          .find('.' + pfx + 'datatable__row')
           .first()
-          .find("." + pfx + "datatable__cell").length;
+          .find('.' + pfx + 'datatable__cell').length;
       },
 
       /**
@@ -4789,20 +4405,14 @@ $(document).ready(function() {
        * @returns {*}
        */
       getOneRow: function(tablePart, row, tdOnly) {
-        if (typeof tdOnly === "undefined") tdOnly = true;
+        if (typeof tdOnly === 'undefined') tdOnly = true;
         // get list of <tr>
         var result = $(tablePart).find(
-          "." +
-            pfx +
-            "datatable__row:not(." +
-            pfx +
-            "datatable__row-detail):nth-child(" +
-            row +
-            ")"
+          '.' + pfx + 'datatable__row:not(.' + pfx + 'datatable__row-detail):nth-child(' + row + ')'
         );
         if (tdOnly) {
           // get list of <td> or <th>
-          result = result.find("." + pfx + "datatable__cell");
+          result = result.find('.' + pfx + 'datatable__cell');
         }
         return result;
       },
@@ -4813,7 +4423,7 @@ $(document).ready(function() {
        * @returns {boolean}
        */
       hasOverflowY: function(element) {
-        var children = $(element).find("." + pfx + "datatable__row");
+        var children = $(element).find('.' + pfx + 'datatable__row');
         var maxHeight = 0;
 
         if (children.length > 0) {
@@ -4836,28 +4446,28 @@ $(document).ready(function() {
        *     Default false
        */
       sortColumn: function(header, sort, int) {
-        if (typeof sort === "undefined") sort = "asc"; // desc
-        if (typeof int === "undefined") int = false;
+        if (typeof sort === 'undefined') sort = 'asc'; // desc
+        if (typeof int === 'undefined') int = false;
 
         var column = $(header).index();
-        var rows = $(datatable.tableBody).find("." + pfx + "datatable__row");
+        var rows = $(datatable.tableBody).find('.' + pfx + 'datatable__row');
         var hIndex = $(header)
-          .closest("." + pfx + "datatable__lock")
+          .closest('.' + pfx + 'datatable__lock')
           .index();
         if (hIndex !== -1) {
           rows = $(datatable.tableBody)
-            .find("." + pfx + "datatable__lock:nth-child(" + (hIndex + 1) + ")")
-            .find("." + pfx + "datatable__row");
+            .find('.' + pfx + 'datatable__lock:nth-child(' + (hIndex + 1) + ')')
+            .find('.' + pfx + 'datatable__row');
         }
 
         var container = $(rows).parent();
         $(rows)
           .sort(function(a, b) {
             var tda = $(a)
-              .find("td:nth-child(" + column + ")")
+              .find('td:nth-child(' + column + ')')
               .text();
             var tdb = $(b)
-              .find("td:nth-child(" + column + ")")
+              .find('td:nth-child(' + column + ')')
               .text();
 
             if (int) {
@@ -4866,7 +4476,7 @@ $(document).ready(function() {
               tdb = parseInt(tdb);
             }
 
-            if (sort === "asc") {
+            if (sort === 'asc') {
               return tda > tdb ? 1 : tda < tdb ? -1 : 0;
             } else {
               return tda < tdb ? 1 : tda > tdb ? -1 : 0;
@@ -4883,79 +4493,66 @@ $(document).ready(function() {
           init: function() {
             if (options.sortable) {
               $(datatable.tableHead)
-                .find(
-                  "." +
-                    pfx +
-                    "datatable__cell:not(." +
-                    pfx +
-                    "datatable__cell--check)"
-                )
-                .addClass(pfx + "datatable__cell--sort")
-                .off("click")
-                .on("click", sortObj.sortClick);
+                .find('.' + pfx + 'datatable__cell:not(.' + pfx + 'datatable__cell--check)')
+                .addClass(pfx + 'datatable__cell--sort')
+                .off('click')
+                .on('click', sortObj.sortClick);
               // first init
               sortObj.setIcon();
             }
           },
           setIcon: function() {
-            var meta = Plugin.getDataSourceParam("sort");
+            var meta = Plugin.getDataSourceParam('sort');
             if ($.isEmptyObject(meta)) return;
 
             // sort icon beside column header
             var td = $(datatable.tableHead)
-              .find(
-                "." + pfx + 'datatable__cell[data-field="' + meta.field + '"]'
-              )
-              .attr("data-sort", meta.sort);
-            var sorting = $(td).find("span");
-            var icon = $(sorting).find("i");
+              .find('.' + pfx + 'datatable__cell[data-field="' + meta.field + '"]')
+              .attr('data-sort', meta.sort);
+            var sorting = $(td).find('span');
+            var icon = $(sorting).find('i');
 
-            var icons = Plugin.getOption("layout.icons.sort");
+            var icons = Plugin.getOption('layout.icons.sort');
             // update sort icon; desc & asc
             if ($(icon).length > 0) {
               $(icon)
-                .removeAttr("class")
+                .removeAttr('class')
                 .addClass(icons[meta.sort]);
             } else {
-              $(sorting).append($("<i/>").addClass(icons[meta.sort]));
+              $(sorting).append($('<i/>').addClass(icons[meta.sort]));
             }
           },
           sortClick: function(e) {
-            var meta = Plugin.getDataSourceParam("sort");
-            var field = $(this).data("field");
+            var meta = Plugin.getDataSourceParam('sort');
+            var field = $(this).data('field');
             var column = Plugin.getColumnByField(field);
             // sort is disabled for this column
-            if (
-              typeof column.sortable !== "undefined" &&
-              column.sortable === false
-            )
-              return;
+            if (typeof column.sortable !== 'undefined' && column.sortable === false) return;
 
             $(datatable.tableHead)
-              .find("." + pfx + "datatable__cell > span > i")
+              .find('.' + pfx + 'datatable__cell > span > i')
               .remove();
 
             if (options.sortable) {
               Plugin.spinnerCallback(true);
 
-              var sort = "desc";
-              if (Plugin.getObject("field", meta) === field) {
-                sort = Plugin.getObject("sort", meta);
+              var sort = 'desc';
+              if (Plugin.getObject('field', meta) === field) {
+                sort = Plugin.getObject('sort', meta);
               }
 
               // toggle sort
-              sort =
-                typeof sort === "undefined" || sort === "desc" ? "asc" : "desc";
+              sort = typeof sort === 'undefined' || sort === 'desc' ? 'asc' : 'desc';
 
               // update field and sort params
               meta = { field: field, sort: sort };
-              Plugin.setDataSourceParam("sort", meta);
+              Plugin.setDataSourceParam('sort', meta);
 
               sortObj.setIcon();
 
               setTimeout(function() {
-                Plugin.dataRender("sort");
-                $(datatable).trigger(pfx + "datatable--on-sort", meta);
+                Plugin.dataRender('sort');
+                $(datatable).trigger(pfx + 'datatable--on-sort', meta);
               }, 300);
             }
           }
@@ -4971,64 +4568,47 @@ $(document).ready(function() {
       localDataUpdate: function() {
         // todo; fix twice execution
         var params = Plugin.getDataSourceParam();
-        if (typeof datatable.originalDataSet === "undefined") {
+        if (typeof datatable.originalDataSet === 'undefined') {
           datatable.originalDataSet = datatable.dataSet;
         }
 
-        var field = Plugin.getObject("sort.field", params);
-        var sort = Plugin.getObject("sort.sort", params);
+        var field = Plugin.getObject('sort.field', params);
+        var sort = Plugin.getObject('sort.sort', params);
         var column = Plugin.getColumnByField(field);
-        if (
-          typeof column !== "undefined" &&
-          Plugin.getOption("data.serverSorting") !== true
-        ) {
-          if (typeof column.sortCallback === "function") {
-            datatable.dataSet = column.sortCallback(
-              datatable.originalDataSet,
-              sort,
-              column
-            );
+        if (typeof column !== 'undefined' && Plugin.getOption('data.serverSorting') !== true) {
+          if (typeof column.sortCallback === 'function') {
+            datatable.dataSet = column.sortCallback(datatable.originalDataSet, sort, column);
           } else {
-            datatable.dataSet = Plugin.sortCallback(
-              datatable.originalDataSet,
-              sort,
-              column
-            );
+            datatable.dataSet = Plugin.sortCallback(datatable.originalDataSet, sort, column);
           }
         } else {
           datatable.dataSet = datatable.originalDataSet;
         }
 
         // if server filter enable, don't pass local filter
-        if (
-          typeof params.query === "object" &&
-          !Plugin.getOption("data.serverFiltering")
-        ) {
+        if (typeof params.query === 'object' && !Plugin.getOption('data.serverFiltering')) {
           params.query = params.query || {};
 
           var nestedSearch = function(obj) {
             for (var field in obj) {
               if (!obj.hasOwnProperty(field)) continue;
-              if (typeof obj[field] === "string") {
-                if (
-                  obj[field].toLowerCase() == search ||
-                  obj[field].toLowerCase().indexOf(search) !== -1
-                ) {
+              if (typeof obj[field] === 'string') {
+                if (obj[field].toLowerCase() == search || obj[field].toLowerCase().indexOf(search) !== -1) {
                   return true;
                 }
-              } else if (typeof obj[field] === "number") {
+              } else if (typeof obj[field] === 'number') {
                 if (obj[field] === search) {
                   return true;
                 }
-              } else if (typeof obj[field] === "object") {
+              } else if (typeof obj[field] === 'object') {
                 return nestedSearch(obj[field]);
               }
             }
             return false;
           };
 
-          var search = $(Plugin.getOption("search.input")).val();
-          if (typeof search !== "undefined" && search !== "") {
+          var search = $(Plugin.getOption('search.input')).val();
+          if (typeof search !== 'undefined' && search !== '') {
             search = search.toLowerCase();
             datatable.dataSet = $.grep(datatable.dataSet, nestedSearch);
             // remove generalSearch as we don't need this for next columns filter
@@ -5037,16 +4617,13 @@ $(document).ready(function() {
 
           // remove empty element from array
           $.each(params.query, function(k, v) {
-            if (v === "") {
+            if (v === '') {
               delete params.query[k];
             }
           });
 
           // filter array by query
-          datatable.dataSet = Plugin.filterArray(
-            datatable.dataSet,
-            params.query
-          );
+          datatable.dataSet = Plugin.filterArray(datatable.dataSet, params.query);
 
           // reset array index
           datatable.dataSet = datatable.dataSet.filter(function() {
@@ -5065,19 +4642,19 @@ $(document).ready(function() {
        * @returns {*}
        */
       filterArray: function(list, args, operator) {
-        if (typeof list !== "object") {
+        if (typeof list !== 'object') {
           return [];
         }
 
-        if (typeof operator === "undefined") operator = "AND";
+        if (typeof operator === 'undefined') operator = 'AND';
 
-        if (typeof args !== "object") {
+        if (typeof args !== 'object') {
           return list;
         }
 
         operator = operator.toUpperCase();
 
-        if ($.inArray(operator, ["AND", "OR", "NOT"]) === -1) {
+        if ($.inArray(operator, ['AND', 'OR', 'NOT']) === -1) {
           return [];
         }
 
@@ -5093,10 +4670,7 @@ $(document).ready(function() {
             if (to_match.hasOwnProperty(m_key)) {
               var lhs = to_match[m_key].toString().toLowerCase();
               m_value.forEach(function(item, index) {
-                if (
-                  item.toString().toLowerCase() == lhs ||
-                  lhs.indexOf(item.toString().toLowerCase()) !== -1
-                ) {
+                if (item.toString().toLowerCase() == lhs || lhs.indexOf(item.toString().toLowerCase()) !== -1) {
                   matched++;
                 }
               });
@@ -5104,9 +4678,9 @@ $(document).ready(function() {
           });
 
           if (
-            ("AND" == operator && matched == count) ||
-            ("OR" == operator && matched > 0) ||
-            ("NOT" == operator && 0 == matched)
+            ('AND' == operator && matched == count) ||
+            ('OR' == operator && matched > 0) ||
+            ('NOT' == operator && 0 == matched)
           ) {
             filtered[key] = obj;
           }
@@ -5121,13 +4695,13 @@ $(document).ready(function() {
        * Reset lock column scroll to 0 when resize
        */
       resetScroll: function() {
-        if (typeof options.detail === "undefined" && Plugin.getDepth() === 1) {
+        if (typeof options.detail === 'undefined' && Plugin.getDepth() === 1) {
           $(datatable.table)
-            .find("." + pfx + "datatable__row")
-            .css("left", 0);
+            .find('.' + pfx + 'datatable__row')
+            .css('left', 0);
           $(datatable.table)
-            .find("." + pfx + "datatable__lock")
-            .css("top", 0);
+            .find('.' + pfx + 'datatable__lock')
+            .css('top', 0);
           $(datatable.tableBody).scrollTop(0);
         }
       },
@@ -5138,7 +4712,7 @@ $(document).ready(function() {
        * @returns {boolean}
        */
       getColumnByField: function(field) {
-        if (typeof field === "undefined") return;
+        if (typeof field === 'undefined') return;
         var result;
         $.each(options.columns, function(i, column) {
           if (field === column.field) {
@@ -5155,10 +4729,7 @@ $(document).ready(function() {
       getDefaultSortColumn: function() {
         var result;
         $.each(options.columns, function(i, column) {
-          if (
-            typeof column.sortable !== "undefined" &&
-            $.inArray(column.sortable, ["asc", "desc"]) !== -1
-          ) {
+          if (typeof column.sortable !== 'undefined' && $.inArray(column.sortable, ['asc', 'desc']) !== -1) {
             result = { sort: column.sortable, field: column.field };
             return false;
           }
@@ -5175,9 +4746,9 @@ $(document).ready(function() {
        */
       getHiddenDimensions: function(element, includeMargin) {
         var props = {
-            position: "absolute",
-            visibility: "hidden",
-            display: "block"
+            position: 'absolute',
+            visibility: 'hidden',
+            display: 'block'
           },
           dim = {
             width: 0,
@@ -5190,9 +4761,8 @@ $(document).ready(function() {
           hiddenParents = $(element)
             .parents()
             .addBack()
-            .not(":visible");
-        includeMargin =
-          typeof includeMargin === "boolean" ? includeMargin : false;
+            .not(':visible');
+        includeMargin = typeof includeMargin === 'boolean' ? includeMargin : false;
 
         var oldProps = [];
         hiddenParents.each(function() {
@@ -5224,8 +4794,8 @@ $(document).ready(function() {
       },
 
       getGeneralSearchKey: function() {
-        var searchInput = $(Plugin.getOption("search.input"));
-        return $(searchInput).prop("name") || $(searchInput).prop("id");
+        var searchInput = $(Plugin.getOption('search.input'));
+        return $(searchInput).prop('name') || $(searchInput).prop('id');
       },
 
       /**
@@ -5235,8 +4805,8 @@ $(document).ready(function() {
        * @returns {*}
        */
       getObject: function(path, object) {
-        return path.split(".").reduce(function(obj, i) {
-          return obj !== null && typeof obj[i] !== "undefined" ? obj[i] : null;
+        return path.split('.').reduce(function(obj, i) {
+          return obj !== null && typeof obj[i] !== 'undefined' ? obj[i] : null;
         }, object);
       },
 
@@ -5248,16 +4818,13 @@ $(document).ready(function() {
        * @returns {*}
        */
       extendObj: function(obj, path, value) {
-        var levels = path.split("."),
+        var levels = path.split('.'),
           i = 0;
 
         function createLevel(child) {
           var name = levels[i++];
-          if (typeof child[name] !== "undefined" && child[name] !== null) {
-            if (
-              typeof child[name] !== "object" &&
-              typeof child[name] !== "function"
-            ) {
+          if (typeof child[name] !== 'undefined' && child[name] !== null) {
+            if (typeof child[name] !== 'object' && typeof child[name] !== 'function') {
               child[name] = {};
             }
           } else {
@@ -5277,22 +4844,16 @@ $(document).ready(function() {
       rowEvenOdd: function() {
         // row even class
         $(datatable.tableBody)
-          .find("." + pfx + "datatable__row")
-          .removeClass(pfx + "datatable__row--even");
-        if ($(datatable.wrap).hasClass(pfx + "datatable--subtable")) {
+          .find('.' + pfx + 'datatable__row')
+          .removeClass(pfx + 'datatable__row--even');
+        if ($(datatable.wrap).hasClass(pfx + 'datatable--subtable')) {
           $(datatable.tableBody)
-            .find(
-              "." +
-                pfx +
-                "datatable__row:not(." +
-                pfx +
-                "datatable__row-detail):even"
-            )
-            .addClass(pfx + "datatable__row--even");
+            .find('.' + pfx + 'datatable__row:not(.' + pfx + 'datatable__row-detail):even')
+            .addClass(pfx + 'datatable__row--even');
         } else {
           $(datatable.tableBody)
-            .find("." + pfx + "datatable__row:nth-child(even)")
-            .addClass(pfx + "datatable__row--even");
+            .find('.' + pfx + 'datatable__row:nth-child(even)')
+            .addClass(pfx + 'datatable__row--even');
         }
       },
 
@@ -5347,8 +4908,8 @@ $(document).ready(function() {
             Plugin.localDataUpdate();
           }
           Plugin.dataRender();
-          $(datatable).trigger(pfx + "datatable--on-reloaded");
-        }, Plugin.getOption("search.delay"));
+          $(datatable).trigger(pfx + 'datatable--on-reloaded');
+        }, Plugin.getOption('search.delay'));
         return datatable;
       },
 
@@ -5358,20 +4919,16 @@ $(document).ready(function() {
        * @returns {jQuery}
        */
       getRecord: function(id) {
-        if (typeof datatable.tableBody === "undefined")
-          datatable.tableBody = $(datatable.table).children("tbody");
+        if (typeof datatable.tableBody === 'undefined') datatable.tableBody = $(datatable.table).children('tbody');
         $(datatable.tableBody)
-          .find("." + pfx + "datatable__cell:first-child")
+          .find('.' + pfx + 'datatable__cell:first-child')
           .each(function(i, cell) {
             if (id == $(cell).text()) {
               var rowNumber =
                 $(cell)
-                  .closest("." + pfx + "datatable__row")
+                  .closest('.' + pfx + 'datatable__row')
                   .index() + 1;
-              datatable.API.record = datatable.API.value = Plugin.getOneRow(
-                datatable.tableBody,
-                rowNumber
-              );
+              datatable.API.record = datatable.API.value = Plugin.getOneRow(datatable.tableBody, rowNumber);
               return datatable;
             }
           });
@@ -5386,9 +4943,7 @@ $(document).ready(function() {
        */
       getColumn: function(columnName) {
         Plugin.setSelectedRecords();
-        datatable.API.value = $(datatable.API.record).find(
-          '[data-field="' + columnName + '"]'
-        );
+        datatable.API.value = $(datatable.API.record).find('[data-field="' + columnName + '"]');
         return datatable;
       },
 
@@ -5400,14 +4955,14 @@ $(document).ready(function() {
       destroy: function() {
         $(datatable)
           .parent()
-          .find("." + pfx + "datatable__pager")
+          .find('.' + pfx + 'datatable__pager')
           .remove();
         var initialDatatable = $(datatable.initialDatatable)
-          .addClass(pfx + "datatable--destroyed")
+          .addClass(pfx + 'datatable--destroyed')
           .show();
         $(datatable).replaceWith(initialDatatable);
         datatable = initialDatatable;
-        $(datatable).trigger(pfx + "datatable--on-destroy");
+        $(datatable).trigger(pfx + 'datatable--on-destroy');
         Plugin.isInit = false;
         initialDatatable = null;
         return initialDatatable;
@@ -5420,19 +4975,19 @@ $(document).ready(function() {
        */
       sort: function(field, sort) {
         // toggle sort
-        sort = typeof sort === "undefined" ? "asc" : sort;
+        sort = typeof sort === 'undefined' ? 'asc' : sort;
 
         Plugin.spinnerCallback(true);
 
         // update field and sort params
         var meta = { field: field, sort: sort };
-        Plugin.setDataSourceParam("sort", meta);
+        Plugin.setDataSourceParam('sort', meta);
 
         setTimeout(function() {
-          Plugin.dataRender("sort");
-          $(datatable).trigger(pfx + "datatable--on-sort", meta);
+          Plugin.dataRender('sort');
+          $(datatable).trigger(pfx + 'datatable--on-sort', meta);
           $(datatable.tableHead)
-            .find("." + pfx + "datatable__cell > span > i")
+            .find('.' + pfx + 'datatable__cell > span > i')
             .remove();
         }, 300);
 
@@ -5453,49 +5008,37 @@ $(document).ready(function() {
        * @param cell JQuery selector or checkbox ID
        */
       setActive: function(cell) {
-        if (typeof cell === "string") {
+        if (typeof cell === 'string') {
           // set by checkbox id
-          cell = $(datatable.tableBody).find(
-            "." +
-              pfx +
-              'checkbox--single > [type="checkbox"][value="' +
-              cell +
-              '"]'
-          );
+          cell = $(datatable.tableBody).find('.' + pfx + 'checkbox--single > [type="checkbox"][value="' + cell + '"]');
         }
 
-        $(cell).prop("checked", true);
+        $(cell).prop('checked', true);
 
         // normal table
         var row = $(cell)
-          .closest("." + pfx + "datatable__row")
-          .addClass(pfx + "datatable__row--active");
+          .closest('.' + pfx + 'datatable__row')
+          .addClass(pfx + 'datatable__row--active');
 
         var index = $(row).index() + 1;
         // lock table
         $(row)
-          .closest("." + pfx + "datatable__lock")
+          .closest('.' + pfx + 'datatable__lock')
           .parent()
-          .find("." + pfx + "datatable__row:nth-child(" + index + ")")
-          .addClass(pfx + "datatable__row--active");
+          .find('.' + pfx + 'datatable__row:nth-child(' + index + ')')
+          .addClass(pfx + 'datatable__row--active');
 
         var ids = [];
         $(row).each(function(i, td) {
           var id = $(td)
-            .find(
-              "." +
-                pfx +
-                "checkbox--single:not(." +
-                pfx +
-                'checkbox--all) > [type="checkbox"]'
-            )
+            .find('.' + pfx + 'checkbox--single:not(.' + pfx + 'checkbox--all) > [type="checkbox"]')
             .val();
-          if (typeof id !== "undefined") {
+          if (typeof id !== 'undefined') {
             ids.push(id);
           }
         });
 
-        $(datatable).trigger(pfx + "datatable--on-check", [ids]);
+        $(datatable).trigger(pfx + 'datatable--on-check', [ids]);
       },
 
       /**
@@ -5503,49 +5046,37 @@ $(document).ready(function() {
        * @param cell JQuery selector or checkbox ID
        */
       setInactive: function(cell) {
-        if (typeof cell === "string") {
+        if (typeof cell === 'string') {
           // set by checkbox id
-          cell = $(datatable.tableBody).find(
-            "." +
-              pfx +
-              'checkbox--single > [type="checkbox"][value="' +
-              cell +
-              '"]'
-          );
+          cell = $(datatable.tableBody).find('.' + pfx + 'checkbox--single > [type="checkbox"][value="' + cell + '"]');
         }
 
-        $(cell).prop("checked", false);
+        $(cell).prop('checked', false);
 
         // normal table
         var row = $(cell)
-          .closest("." + pfx + "datatable__row")
-          .removeClass(pfx + "datatable__row--active");
+          .closest('.' + pfx + 'datatable__row')
+          .removeClass(pfx + 'datatable__row--active');
         var index = $(row).index() + 1;
 
         // lock table
         $(row)
-          .closest("." + pfx + "datatable__lock")
+          .closest('.' + pfx + 'datatable__lock')
           .parent()
-          .find("." + pfx + "datatable__row:nth-child(" + index + ")")
-          .removeClass(pfx + "datatable__row--active");
+          .find('.' + pfx + 'datatable__row:nth-child(' + index + ')')
+          .removeClass(pfx + 'datatable__row--active');
 
         var ids = [];
         $(row).each(function(i, td) {
           var id = $(td)
-            .find(
-              "." +
-                pfx +
-                "checkbox--single:not(." +
-                pfx +
-                'checkbox--all) > [type="checkbox"]'
-            )
+            .find('.' + pfx + 'checkbox--single:not(.' + pfx + 'checkbox--all) > [type="checkbox"]')
             .val();
-          if (typeof id !== "undefined") {
+          if (typeof id !== 'undefined') {
             ids.push(id);
           }
         });
 
-        $(datatable).trigger(pfx + "datatable--on-uncheck", [ids]);
+        $(datatable).trigger(pfx + 'datatable--on-uncheck', [ids]);
       },
 
       /**
@@ -5555,9 +5086,9 @@ $(document).ready(function() {
       setActiveAll: function(active) {
         // todo; check if child table also will set active?
         var checkboxes = $(datatable.table)
-          .find("> tbody, > thead")
-          .find("> tr:not(." + pfx + "datatable__row-subtable)")
-          .find("." + pfx + 'datatable__cell--check [type="checkbox"]');
+          .find('> tbody, > thead')
+          .find('> tr:not(.' + pfx + 'datatable__row-subtable)')
+          .find('.' + pfx + 'datatable__cell--check [type="checkbox"]');
         if (active) {
           Plugin.setActive(checkboxes);
         } else {
@@ -5571,9 +5102,7 @@ $(document).ready(function() {
        * @returns {jQuery}
        */
       setSelectedRecords: function() {
-        datatable.API.record = $(datatable.tableBody).find(
-          "." + pfx + "datatable__row--active"
-        );
+        datatable.API.record = $(datatable.tableBody).find('.' + pfx + 'datatable__row--active');
         return datatable;
       },
 
@@ -5584,9 +5113,7 @@ $(document).ready(function() {
       getSelectedRecords: function() {
         // support old method
         Plugin.setSelectedRecords();
-        datatable.API.record = datatable
-          .rows("." + pfx + "datatable__row--active")
-          .nodes();
+        datatable.API.record = datatable.rows('.' + pfx + 'datatable__row--active').nodes();
         return datatable.API.record;
       },
 
@@ -5614,7 +5141,7 @@ $(document).ready(function() {
        * @param columns. Optional list of columns to be filtered.
        */
       search: function(value, columns) {
-        if (typeof columns !== "undefined") columns = $.makeArray(columns);
+        if (typeof columns !== 'undefined') columns = $.makeArray(columns);
         var delay = (function() {
           return function(callback, ms) {
             clearTimeout(Plugin.timer);
@@ -5627,19 +5154,19 @@ $(document).ready(function() {
           var query = Plugin.getDataSourceQuery();
 
           // search not by columns
-          if (typeof columns === "undefined" && typeof value !== "undefined") {
+          if (typeof columns === 'undefined' && typeof value !== 'undefined') {
             var key = Plugin.getGeneralSearchKey();
             query[key] = value;
           }
 
           // search by columns, support multiple columns
-          if (typeof columns === "object") {
+          if (typeof columns === 'object') {
             $.each(columns, function(k, column) {
               query[column] = value;
             });
             // remove empty element from arrays
             $.each(query, function(k, v) {
-              if (v === "" || $.isEmptyObject(v)) {
+              if (v === '' || $.isEmptyObject(v)) {
                 delete query[k];
               }
             });
@@ -5651,8 +5178,8 @@ $(document).ready(function() {
           if (!options.data.serverFiltering) {
             Plugin.localDataUpdate();
           }
-          Plugin.dataRender("search");
-        }, Plugin.getOption("search.delay"));
+          Plugin.dataRender('search');
+        }, Plugin.getOption('search.delay'));
       },
 
       /**
@@ -5664,7 +5191,7 @@ $(document).ready(function() {
         datatable.API.params = $.extend(
           {},
           {
-            pagination: { page: 1, perpage: Plugin.getOption("data.pageSize") },
+            pagination: { page: 1, perpage: Plugin.getOption('data.pageSize') },
             sort: Plugin.getDefaultSortColumn(),
             query: {}
           },
@@ -5672,11 +5199,7 @@ $(document).ready(function() {
           Plugin.stateGet(Plugin.stateId)
         );
 
-        datatable.API.params = Plugin.extendObj(
-          datatable.API.params,
-          param,
-          value
-        );
+        datatable.API.params = Plugin.extendObj(datatable.API.params, param, value);
 
         Plugin.stateKeep(Plugin.stateId, datatable.API.params);
       },
@@ -5689,7 +5212,7 @@ $(document).ready(function() {
         datatable.API.params = $.extend(
           {},
           {
-            pagination: { page: 1, perpage: Plugin.getOption("data.pageSize") },
+            pagination: { page: 1, perpage: Plugin.getOption('data.pageSize') },
             sort: Plugin.getDefaultSortColumn(),
             query: {}
           },
@@ -5697,7 +5220,7 @@ $(document).ready(function() {
           Plugin.stateGet(Plugin.stateId)
         );
 
-        if (typeof param === "string") {
+        if (typeof param === 'string') {
           return Plugin.getObject(param, datatable.API.params);
         }
 
@@ -5709,7 +5232,7 @@ $(document).ready(function() {
        * @returns {*}
        */
       getDataSourceQuery: function() {
-        return Plugin.getDataSourceParam("query") || {};
+        return Plugin.getDataSourceParam('query') || {};
       },
 
       /**
@@ -5717,7 +5240,7 @@ $(document).ready(function() {
        * @param query
        */
       setDataSourceQuery: function(query) {
-        Plugin.setDataSourceParam("query", query);
+        Plugin.setDataSourceParam('query', query);
       },
 
       /**
@@ -5727,17 +5250,11 @@ $(document).ready(function() {
       getCurrentPage: function() {
         return (
           $(datatable.table)
-            .siblings("." + pfx + "datatable__pager")
+            .siblings('.' + pfx + 'datatable__pager')
             .last()
-            .find("." + pfx + "datatable__pager-nav")
-            .find(
-              "." +
-                pfx +
-                "datatable__pager-link." +
-                pfx +
-                "datatable__pager-link--active"
-            )
-            .data("page") || 1
+            .find('.' + pfx + 'datatable__pager-nav')
+            .find('.' + pfx + 'datatable__pager-link.' + pfx + 'datatable__pager-link--active')
+            .data('page') || 1
         );
       },
 
@@ -5748,9 +5265,9 @@ $(document).ready(function() {
       getPageSize: function() {
         return (
           $(datatable.table)
-            .siblings("." + pfx + "datatable__pager")
+            .siblings('.' + pfx + 'datatable__pager')
             .last()
-            .find("select." + pfx + "datatable__pager-size")
+            .find('select.' + pfx + 'datatable__pager-size')
             .val() || 10
         );
       },
@@ -5779,17 +5296,14 @@ $(document).ready(function() {
         // add hide option for this column
         $.map(options.columns, function(column) {
           if (fieldName === column.field) {
-            column.responsive = { hidden: "xl" };
+            column.responsive = { hidden: 'xl' };
           }
           return column;
         });
         // hide current displayed column
-        var tds = $.grep(
-          $(datatable.table).find("." + pfx + "datatable__cell"),
-          function(n, i) {
-            return fieldName === $(n).data("field");
-          }
-        );
+        var tds = $.grep($(datatable.table).find('.' + pfx + 'datatable__cell'), function(n, i) {
+          return fieldName === $(n).data('field');
+        });
         $(tds).hide();
       },
 
@@ -5807,12 +5321,9 @@ $(document).ready(function() {
           return column;
         });
         // hide current displayed column
-        var tds = $.grep(
-          $(datatable.table).find("." + pfx + "datatable__cell"),
-          function(n, i) {
-            return fieldName === $(n).data("field");
-          }
-        );
+        var tds = $.grep($(datatable.table).find('.' + pfx + 'datatable__cell'), function(n, i) {
+          return fieldName === $(n).data('field');
+        });
         $(tds).show();
       },
 
@@ -5844,7 +5355,7 @@ $(document).ready(function() {
       rows: function(selector) {
         Plugin.nodeTr = Plugin.recentNode = $(datatable.tableBody)
           .find(selector)
-          .filter("." + pfx + "datatable__row");
+          .filter('.' + pfx + 'datatable__row');
         return datatable;
       },
 
@@ -5855,7 +5366,7 @@ $(document).ready(function() {
        */
       column: function(index) {
         Plugin.nodeCols = Plugin.recentNode = $(datatable.tableBody).find(
-          "." + pfx + "datatable__cell:nth-child(" + (index + 1) + ")"
+          '.' + pfx + 'datatable__cell:nth-child(' + (index + 1) + ')'
         );
         return datatable;
       },
@@ -5870,15 +5381,13 @@ $(document).ready(function() {
         if (Plugin.nodeTr === Plugin.recentNode) {
           context = Plugin.nodeTr;
         }
-        var columns = $(context).find(
-          "." + pfx + 'datatable__cell[data-field="' + selector + '"]'
-        );
+        var columns = $(context).find('.' + pfx + 'datatable__cell[data-field="' + selector + '"]');
         if (columns.length > 0) {
           Plugin.nodeCols = Plugin.recentNode = columns;
         } else {
           Plugin.nodeCols = Plugin.recentNode = $(context)
             .find(selector)
-            .filter("." + pfx + "datatable__cell");
+            .filter('.' + pfx + 'datatable__cell');
         }
         return datatable;
       },
@@ -5890,8 +5399,8 @@ $(document).ready(function() {
       },
 
       cells: function(selector) {
-        var cells = $(datatable.tableBody).find("." + pfx + "datatable__cell");
-        if (typeof selector !== "undefined") {
+        var cells = $(datatable.tableBody).find('.' + pfx + 'datatable__cell');
+        if (typeof selector !== 'undefined') {
           cells = $(cells).filter(selector);
         }
         Plugin.nodeTd = Plugin.recentNode = cells;
@@ -5920,17 +5429,11 @@ $(document).ready(function() {
             var index = Plugin.recentNode.index();
 
             if (Plugin.isLocked()) {
-              var scrollColumns = $(Plugin.recentNode).closest(
-                "." + pfx + "datatable__lock--scroll"
-              ).length;
+              var scrollColumns = $(Plugin.recentNode).closest('.' + pfx + 'datatable__lock--scroll').length;
               if (scrollColumns) {
                 // is at center of scrollable area
                 index += locked.left.length + 1;
-              } else if (
-                $(Plugin.recentNode).closest(
-                  "." + pfx + "datatable__lock--right"
-                ).length
-              ) {
+              } else if ($(Plugin.recentNode).closest('.' + pfx + 'datatable__lock--right').length) {
                 // is at the right locked table
                 index += locked.left.length + scrollColumns + 1;
               }
@@ -5944,8 +5447,8 @@ $(document).ready(function() {
             $(Plugin.recentNode).show();
           } else {
             if (Plugin.recentNode === Plugin.nodeCols) {
-              Plugin.setOption("columns." + index + ".responsive", {
-                hidden: "xl"
+              Plugin.setOption('columns.' + index + '.responsive', {
+                hidden: 'xl'
               });
             }
             $(Plugin.recentNode).hide();
@@ -5979,24 +5482,21 @@ $(document).ready(function() {
     });
 
     // initialize main datatable plugin
-    if (typeof options !== "undefined") {
-      if (typeof options === "string") {
+    if (typeof options !== 'undefined') {
+      if (typeof options === 'string') {
         var method = options;
         datatable = $(this).data(pluginName);
-        if (typeof datatable !== "undefined") {
+        if (typeof datatable !== 'undefined') {
           options = datatable.options;
           Plugin[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }
       } else {
-        if (
-          !datatable.data(pluginName) &&
-          !$(this).hasClass(pfx + "datatable--loaded")
-        ) {
+        if (!datatable.data(pluginName) && !$(this).hasClass(pfx + 'datatable--loaded')) {
           datatable.dataSet = null;
           datatable.textAlign = {
-            left: pfx + "datatable__cell--left",
-            center: pfx + "datatable__cell--center",
-            right: pfx + "datatable__cell--right"
+            left: pfx + 'datatable__cell--left',
+            center: pfx + 'datatable__cell--center',
+            right: pfx + 'datatable__cell--right'
           };
 
           // merge default and user defined options
@@ -6013,8 +5513,8 @@ $(document).ready(function() {
     } else {
       // get existing instance datatable
       datatable = $(this).data(pluginName);
-      if (typeof datatable === "undefined") {
-        $.error(pluginName + " not initialized");
+      if (typeof datatable === 'undefined') {
+        $.error(pluginName + ' not initialized');
       }
       options = datatable.options;
     }
@@ -6026,7 +5526,7 @@ $(document).ready(function() {
   $.fn[pluginName].defaults = {
     // datasource definition
     data: {
-      type: "local",
+      type: 'local',
       source: null,
       pageSize: 10, // display records per page
       saveState: {
@@ -6047,8 +5547,8 @@ $(document).ready(function() {
 
     // layout definition
     layout: {
-      theme: "default", // datatable will support multiple themes and designs
-      class: pfx + "datatable--brand", // custom wrapper class
+      theme: 'default', // datatable will support multiple themes and designs
+      class: pfx + 'datatable--brand', // custom wrapper class
       scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
       height: null, // datatable's body's fixed height
       minHeight: 300,
@@ -6058,24 +5558,24 @@ $(document).ready(function() {
 
       // datatable spinner
       spinner: {
-        overlayColor: "#000000",
+        overlayColor: '#000000',
         opacity: 0,
-        type: "loader",
-        state: "brand",
+        type: 'loader',
+        state: 'brand',
         message: true
       },
 
       // datatable UI icons
       icons: {
-        sort: { asc: "la la-arrow-up", desc: "la la-arrow-down" },
+        sort: { asc: 'la la-arrow-up', desc: 'la la-arrow-down' },
         pagination: {
-          next: "la la-angle-right",
-          prev: "la la-angle-left",
-          first: "la la-angle-double-left",
-          last: "la la-angle-double-right",
-          more: "la la-ellipsis-h"
+          next: 'la la-angle-right',
+          prev: 'la la-angle-left',
+          first: 'la la-angle-double-left',
+          last: 'la la-angle-double-right',
+          more: 'la la-ellipsis-h'
         },
-        rowDetail: { expand: "fa fa-caret-down", collapse: "fa fa-caret-right" }
+        rowDetail: { expand: 'fa fa-caret-down', collapse: 'fa fa-caret-right' }
       }
     },
 
@@ -6119,30 +5619,30 @@ $(document).ready(function() {
     // toolbar
     toolbar: {
       // place pagination and displayInfo blocks according to the array order
-      layout: ["pagination", "info"],
+      layout: ['pagination', 'info'],
 
       // toolbar placement can be at top or bottom or both top and bottom repeated
-      placement: ["bottom"], //'top', 'bottom'
+      placement: ['bottom'], //'top', 'bottom'
 
       // toolbar items
       items: {
         // pagination
         pagination: {
           // pagination type(default or scroll)
-          type: "default",
+          type: 'default',
 
           // number of pages to display by breakpoints
           pages: {
             desktop: {
-              layout: "default",
+              layout: 'default',
               pagesNumber: 6
             },
             tablet: {
-              layout: "default",
+              layout: 'default',
               pagesNumber: 3
             },
             mobile: {
-              layout: "compact"
+              layout: 'compact'
             }
           },
 
@@ -6167,22 +5667,22 @@ $(document).ready(function() {
     // By default the stirngs will be in the plugin source and here can override it
     translate: {
       records: {
-        processing: "Please wait...",
-        noRecords: "No records found"
+        processing: 'Please wait...',
+        noRecords: 'No records found'
       },
       toolbar: {
         pagination: {
           items: {
             default: {
-              first: "First",
-              prev: "Previous",
-              next: "Next",
-              last: "Last",
-              more: "More pages",
-              input: "Page number",
-              select: "Select page size"
+              first: 'First',
+              prev: 'Previous',
+              next: 'Next',
+              last: 'Last',
+              more: 'More pages',
+              input: 'Page number',
+              select: 'Select page size'
             },
-            info: "Displaying {{start}} - {{end}} of {{total}} records"
+            info: 'Displaying {{start}} - {{end}} of {{total}} records'
           }
         }
       }
@@ -6198,7 +5698,7 @@ var mDropdown = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -6206,10 +5706,10 @@ var mDropdown = function(elementId, options) {
 
   //== Default options
   var defaultOptions = {
-    toggle: "click",
+    toggle: 'click',
     hoverTimeout: 300,
-    skin: "light",
-    height: "auto",
+    skin: 'light',
+    height: 'auto',
     maxHeight: false,
     minHeight: false,
     persistent: false,
@@ -6226,15 +5726,15 @@ var mDropdown = function(elementId, options) {
      * @returns {mdropdown}
      */
     construct: function(options) {
-      if (mUtil.data(element).has("dropdown")) {
-        the = mUtil.data(element).get("dropdown");
+      if (mUtil.data(element).has('dropdown')) {
+        the = mUtil.data(element).get('dropdown');
       } else {
         // reset dropdown
         Plugin.init(options);
 
         Plugin.setup();
 
-        mUtil.data(element).set("dropdown", the);
+        mUtil.data(element).set('dropdown', the);
       }
 
       return the;
@@ -6252,17 +5752,15 @@ var mDropdown = function(elementId, options) {
       the.open = false;
 
       the.layout = {};
-      the.layout.close = mUtil.find(element, ".m-dropdown__close");
-      the.layout.toggle = mUtil.find(element, ".m-dropdown__toggle");
-      the.layout.arrow = mUtil.find(element, ".m-dropdown__arrow");
-      the.layout.wrapper = mUtil.find(element, ".m-dropdown__wrapper");
-      the.layout.defaultDropPos = mUtil.hasClass(element, "m-dropdown--up")
-        ? "up"
-        : "down";
+      the.layout.close = mUtil.find(element, '.m-dropdown__close');
+      the.layout.toggle = mUtil.find(element, '.m-dropdown__toggle');
+      the.layout.arrow = mUtil.find(element, '.m-dropdown__arrow');
+      the.layout.wrapper = mUtil.find(element, '.m-dropdown__wrapper');
+      the.layout.defaultDropPos = mUtil.hasClass(element, 'm-dropdown--up') ? 'up' : 'down';
       the.layout.currentDropPos = the.layout.defaultDropPos;
 
-      if (mUtil.attr(element, "m-dropdown-toggle") == "hover") {
-        the.options.toggle = "hover";
+      if (mUtil.attr(element, 'm-dropdown-toggle') == 'hover') {
+        the.options.toggle = 'hover';
       }
     },
 
@@ -6271,23 +5769,23 @@ var mDropdown = function(elementId, options) {
      */
     setup: function() {
       if (the.options.placement) {
-        mUtil.addClass(element, "m-dropdown--" + the.options.placement);
+        mUtil.addClass(element, 'm-dropdown--' + the.options.placement);
       }
 
       if (the.options.align) {
-        mUtil.addClass(element, "m-dropdown--align-" + the.options.align);
+        mUtil.addClass(element, 'm-dropdown--align-' + the.options.align);
       }
 
       if (the.options.width) {
-        mUtil.css(the.layout.wrapper, "width", the.options.width + "px");
+        mUtil.css(the.layout.wrapper, 'width', the.options.width + 'px');
       }
 
-      if (mUtil.attr(element, "m-dropdown-persistent") == "1") {
+      if (mUtil.attr(element, 'm-dropdown-persistent') == '1') {
         the.options.persistent = true;
       }
 
-      if (the.options.toggle == "hover") {
-        mUtil.addEvent(element, "mouseout", Plugin.hideMouseout);
+      if (the.options.toggle == 'hover') {
+        mUtil.addEvent(element, 'mouseout', Plugin.hideMouseout);
       }
 
       // set zindex
@@ -6309,10 +5807,7 @@ var mDropdown = function(elementId, options) {
      * Set content
      */
     setContent: function(content) {
-      var content = (mUtil.find(
-        element,
-        ".m-dropdown__content"
-      ).innerHTML = content);
+      var content = (mUtil.find(element, '.m-dropdown__content').innerHTML = content);
 
       return the;
     },
@@ -6321,7 +5816,7 @@ var mDropdown = function(elementId, options) {
      * Show dropdown
      */
     show: function() {
-      if (the.options.toggle == "hover" && mUtil.hasAttr(element, "hover")) {
+      if (the.options.toggle == 'hover' && mUtil.hasAttr(element, 'hover')) {
         Plugin.clearHovered();
         return the;
       }
@@ -6334,26 +5829,23 @@ var mDropdown = function(elementId, options) {
         Plugin.adjustArrowPos();
       }
 
-      Plugin.eventTrigger("beforeShow");
+      Plugin.eventTrigger('beforeShow');
 
       Plugin.hideOpened();
 
-      mUtil.addClass(element, "m-dropdown--open");
+      mUtil.addClass(element, 'm-dropdown--open');
 
       if (mUtil.isMobileDevice() && the.options.mobileOverlay) {
-        var zIndex = mUtil.css(element, "z-index") - 1;
+        var zIndex = mUtil.css(element, 'z-index') - 1;
 
-        var dropdownoff = mUtil.insertAfter(
-          document.createElement("DIV"),
-          element
-        );
+        var dropdownoff = mUtil.insertAfter(document.createElement('DIV'), element);
 
-        mUtil.addClass(dropdownoff, "m-dropdown__dropoff");
-        mUtil.css(dropdownoff, "z-index", zIndex);
-        mUtil.data(dropdownoff).set("dropdown", element);
-        mUtil.data(element).set("dropoff", dropdownoff);
+        mUtil.addClass(dropdownoff, 'm-dropdown__dropoff');
+        mUtil.css(dropdownoff, 'z-index', zIndex);
+        mUtil.data(dropdownoff).set('dropdown', element);
+        mUtil.data(element).set('dropoff', dropdownoff);
 
-        mUtil.addEvent(dropdownoff, "click", function(e) {
+        mUtil.addEvent(dropdownoff, 'click', function(e) {
           Plugin.hide();
           mUtil.remove(this);
           e.preventDefault();
@@ -6361,13 +5853,13 @@ var mDropdown = function(elementId, options) {
       }
 
       element.focus();
-      element.setAttribute("aria-expanded", "true");
+      element.setAttribute('aria-expanded', 'true');
       the.open = true;
 
       //== Update scrollers
       mUtil.scrollersUpdate(element);
 
-      Plugin.eventTrigger("afterShow");
+      Plugin.eventTrigger('afterShow');
 
       return the;
     },
@@ -6376,10 +5868,10 @@ var mDropdown = function(elementId, options) {
      * Clear dropdown hover
      */
     clearHovered: function() {
-      var timeout = mUtil.attr(element, "timeout");
+      var timeout = mUtil.attr(element, 'timeout');
 
-      mUtil.removeAttr(element, "hover");
-      mUtil.removeAttr(element, "timeout");
+      mUtil.removeAttr(element, 'hover');
+      mUtil.removeAttr(element, 'timeout');
 
       clearTimeout(timeout);
     },
@@ -6389,34 +5881,34 @@ var mDropdown = function(elementId, options) {
      */
     hideHovered: function(force) {
       if (force === true) {
-        if (Plugin.eventTrigger("beforeHide") === false) {
+        if (Plugin.eventTrigger('beforeHide') === false) {
           return;
         }
 
         Plugin.clearHovered();
-        mUtil.removeClass(element, "m-dropdown--open");
+        mUtil.removeClass(element, 'm-dropdown--open');
         the.open = false;
-        Plugin.eventTrigger("afterHide");
+        Plugin.eventTrigger('afterHide');
       } else {
-        if (mUtil.hasAttr(element, "hover") === true) {
+        if (mUtil.hasAttr(element, 'hover') === true) {
           return;
         }
 
-        if (Plugin.eventTrigger("beforeHide") === false) {
+        if (Plugin.eventTrigger('beforeHide') === false) {
           return;
         }
 
         var timeout = setTimeout(function() {
-          if (mUtil.attr(element, "hover")) {
+          if (mUtil.attr(element, 'hover')) {
             Plugin.clearHovered();
-            mUtil.removeClass(element, "m-dropdown--open");
+            mUtil.removeClass(element, 'm-dropdown--open');
             the.open = false;
-            Plugin.eventTrigger("afterHide");
+            Plugin.eventTrigger('afterHide');
           }
         }, the.options.hoverTimeout);
 
-        mUtil.attr(element, "hover", "1");
-        mUtil.attr(element, "timeout", timeout);
+        mUtil.attr(element, 'hover', '1');
+        mUtil.attr(element, 'timeout', timeout);
       }
     },
 
@@ -6424,14 +5916,14 @@ var mDropdown = function(elementId, options) {
      * Hide clicked dropdown
      */
     hideClicked: function() {
-      if (Plugin.eventTrigger("beforeHide") === false) {
+      if (Plugin.eventTrigger('beforeHide') === false) {
         return;
       }
 
-      mUtil.removeClass(element, "m-dropdown--open");
-      mUtil.data(element).remove("dropoff");
+      mUtil.removeClass(element, 'm-dropdown--open');
+      mUtil.data(element).remove('dropoff');
       the.open = false;
-      Plugin.eventTrigger("afterHide");
+      Plugin.eventTrigger('afterHide');
     },
 
     /**
@@ -6442,19 +5934,16 @@ var mDropdown = function(elementId, options) {
         return the;
       }
 
-      if (mUtil.isDesktopDevice() && the.options.toggle == "hover") {
+      if (mUtil.isDesktopDevice() && the.options.toggle == 'hover') {
         Plugin.hideHovered(force);
       } else {
         Plugin.hideClicked();
       }
 
-      if (
-        the.layout.defaultDropPos == "down" &&
-        the.layout.currentDropPos == "up"
-      ) {
-        mUtil.removeClass(element, "m-dropdown--up");
+      if (the.layout.defaultDropPos == 'down' && the.layout.currentDropPos == 'up') {
+        mUtil.removeClass(element, 'm-dropdown--up');
         the.layout.arrow.prependTo(the.layout.wrapper);
-        the.layout.currentDropPos = "down";
+        the.layout.currentDropPos = 'down';
       }
 
       return the;
@@ -6473,13 +5962,13 @@ var mDropdown = function(elementId, options) {
      * Hide opened dropdowns
      */
     hideOpened: function() {
-      var query = mUtil.findAll(body, ".m-dropdown.m-dropdown--open");
+      var query = mUtil.findAll(body, '.m-dropdown.m-dropdown--open');
 
       for (var i = 0, j = query.length; i < j; i++) {
         var dropdown = query[i];
         mUtil
           .data(dropdown)
-          .get("dropdown")
+          .get('dropdown')
           .hide(true);
       }
     },
@@ -6490,55 +5979,43 @@ var mDropdown = function(elementId, options) {
     adjustArrowPos: function() {
       var width = mUtil.outerWidth(element); // ?
 
-      var alignment = mUtil.hasClass(
-        the.layout.arrow,
-        "m-dropdown__arrow--right"
-      )
-        ? "right"
-        : "left";
+      var alignment = mUtil.hasClass(the.layout.arrow, 'm-dropdown__arrow--right') ? 'right' : 'left';
       var pos = 0;
 
       if (the.layout.arrow) {
-        if (
-          mUtil.isInResponsiveRange("mobile") &&
-          mUtil.hasClass(element, "m-dropdown--mobile-full-width")
-        ) {
+        if (mUtil.isInResponsiveRange('mobile') && mUtil.hasClass(element, 'm-dropdown--mobile-full-width')) {
           pos =
             mUtil.offset(element).left +
             width / 2 -
-            Math.abs(parseInt(mUtil.css(the.layout.arrow, "width")) / 2) -
-            parseInt(mUtil.css(the.layout.wrapper, "left"));
+            Math.abs(parseInt(mUtil.css(the.layout.arrow, 'width')) / 2) -
+            parseInt(mUtil.css(the.layout.wrapper, 'left'));
 
-          mUtil.css(the.layout.arrow, "right", "auto");
-          mUtil.css(the.layout.arrow, "left", pos + "px");
+          mUtil.css(the.layout.arrow, 'right', 'auto');
+          mUtil.css(the.layout.arrow, 'left', pos + 'px');
 
-          mUtil.css(the.layout.arrow, "margin-left", "auto");
-          mUtil.css(the.layout.arrow, "margin-right", "auto");
-        } else if (
-          mUtil.hasClass(the.layout.arrow, "m-dropdown__arrow--adjust")
-        ) {
-          pos =
-            width / 2 -
-            Math.abs(parseInt(mUtil.css(the.layout.arrow, "width")) / 2);
-          if (mUtil.hasClass(element, "m-dropdown--align-push")) {
+          mUtil.css(the.layout.arrow, 'margin-left', 'auto');
+          mUtil.css(the.layout.arrow, 'margin-right', 'auto');
+        } else if (mUtil.hasClass(the.layout.arrow, 'm-dropdown__arrow--adjust')) {
+          pos = width / 2 - Math.abs(parseInt(mUtil.css(the.layout.arrow, 'width')) / 2);
+          if (mUtil.hasClass(element, 'm-dropdown--align-push')) {
             pos = pos + 20;
           }
 
-          if (alignment == "right") {
+          if (alignment == 'right') {
             if (mUtil.isRTL()) {
-              mUtil.css(the.layout.arrow, "right", "auto");
-              mUtil.css(the.layout.arrow, "left", pos + "px");
+              mUtil.css(the.layout.arrow, 'right', 'auto');
+              mUtil.css(the.layout.arrow, 'left', pos + 'px');
             } else {
-              mUtil.css(the.layout.arrow, "left", "auto");
-              mUtil.css(the.layout.arrow, "right", pos + "px");
+              mUtil.css(the.layout.arrow, 'left', 'auto');
+              mUtil.css(the.layout.arrow, 'right', pos + 'px');
             }
           } else {
             if (mUtil.isRTL()) {
-              mUtil.css(the.layout.arrow, "left", "auto");
-              mUtil.css(the.layout.arrow, "right", pos + "px");
+              mUtil.css(the.layout.arrow, 'left', 'auto');
+              mUtil.css(the.layout.arrow, 'right', pos + 'px');
             } else {
-              mUtil.css(the.layout.arrow, "right", "auto");
-              mUtil.css(the.layout.arrow, "left", pos + "px");
+              mUtil.css(the.layout.arrow, 'right', 'auto');
+              mUtil.css(the.layout.arrow, 'left', pos + 'px');
             }
           }
         }
@@ -6555,7 +6032,7 @@ var mDropdown = function(elementId, options) {
         zIndex = newZindex + 1;
       }
 
-      mUtil.css(the.layout.wrapper, "z-index", zIndex);
+      mUtil.css(the.layout.wrapper, 'z-index', zIndex);
     },
 
     /**
@@ -6690,17 +6167,35 @@ var mDropdown = function(elementId, options) {
 };
 
 //== Plugin global lazy initialization
-mUtil.on(
-  document,
-  '[m-dropdown-toggle="click"] .m-dropdown__toggle',
-  "click",
-  function(e) {
-    var element = this.closest(".m-dropdown");
+mUtil.on(document, '[m-dropdown-toggle="click"] .m-dropdown__toggle', 'click', function(e) {
+  var element = this.closest('.m-dropdown');
+  var dropdown;
+
+  if (element) {
+    if (mUtil.data(element).has('dropdown')) {
+      dropdown = mUtil.data(element).get('dropdown');
+    } else {
+      dropdown = new mDropdown(element);
+    }
+
+    dropdown.toggle();
+
+    e.preventDefault();
+  }
+});
+
+mUtil.on(document, '[m-dropdown-toggle="hover"] .m-dropdown__toggle', 'click', function(e) {
+  if (mUtil.isDesktopDevice()) {
+    if (mUtil.attr(this, 'href') == '#') {
+      e.preventDefault();
+    }
+  } else if (mUtil.isMobileDevice()) {
+    var element = this.closest('.m-dropdown');
     var dropdown;
 
     if (element) {
-      if (mUtil.data(element).has("dropdown")) {
-        dropdown = mUtil.data(element).get("dropdown");
+      if (mUtil.data(element).has('dropdown')) {
+        dropdown = mUtil.data(element).get('dropdown');
       } else {
         dropdown = new mDropdown(element);
       }
@@ -6710,44 +6205,16 @@ mUtil.on(
       e.preventDefault();
     }
   }
-);
+});
 
-mUtil.on(
-  document,
-  '[m-dropdown-toggle="hover"] .m-dropdown__toggle',
-  "click",
-  function(e) {
-    if (mUtil.isDesktopDevice()) {
-      if (mUtil.attr(this, "href") == "#") {
-        e.preventDefault();
-      }
-    } else if (mUtil.isMobileDevice()) {
-      var element = this.closest(".m-dropdown");
-      var dropdown;
-
-      if (element) {
-        if (mUtil.data(element).has("dropdown")) {
-          dropdown = mUtil.data(element).get("dropdown");
-        } else {
-          dropdown = new mDropdown(element);
-        }
-
-        dropdown.toggle();
-
-        e.preventDefault();
-      }
-    }
-  }
-);
-
-mUtil.on(document, '[m-dropdown-toggle="hover"]', "mouseover", function(e) {
+mUtil.on(document, '[m-dropdown-toggle="hover"]', 'mouseover', function(e) {
   if (mUtil.isDesktopDevice()) {
     var element = this;
     var dropdown;
 
     if (element) {
-      if (mUtil.data(element).has("dropdown")) {
-        dropdown = mUtil.data(element).get("dropdown");
+      if (mUtil.data(element).has('dropdown')) {
+        dropdown = mUtil.data(element).get('dropdown');
       } else {
         dropdown = new mDropdown(element);
       }
@@ -6759,34 +6226,29 @@ mUtil.on(document, '[m-dropdown-toggle="hover"]', "mouseover", function(e) {
   }
 });
 
-document.addEventListener("click", function(e) {
+document.addEventListener('click', function(e) {
   var query;
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
   var target = e.target;
 
   //== Handle dropdown close
-  if ((query = body.querySelectorAll(".m-dropdown.m-dropdown--open"))) {
+  if ((query = body.querySelectorAll('.m-dropdown.m-dropdown--open'))) {
     for (var i = 0, len = query.length; i < len; i++) {
       var element = query[i];
-      if (mUtil.data(element).has("dropdown") === false) {
+      if (mUtil.data(element).has('dropdown') === false) {
         return;
       }
 
-      var the = mUtil.data(element).get("dropdown");
-      var toggle = mUtil.find(element, ".m-dropdown__toggle");
+      var the = mUtil.data(element).get('dropdown');
+      var toggle = mUtil.find(element, '.m-dropdown__toggle');
 
-      if (mUtil.hasClass(element, "m-dropdown--disable-close")) {
+      if (mUtil.hasClass(element, 'm-dropdown--disable-close')) {
         e.preventDefault();
         e.stopPropagation();
         //return;
       }
 
-      if (
-        toggle &&
-        target !== toggle &&
-        toggle.contains(target) === false &&
-        target.contains(toggle) === false
-      ) {
+      if (toggle && target !== toggle && toggle.contains(target) === false && target.contains(toggle) === false) {
         if (the.isPersistent() === false) {
           the.hide();
         }
@@ -6803,7 +6265,7 @@ var mHeader = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (element === undefined) {
     return;
@@ -6832,8 +6294,8 @@ var mHeader = function(elementId, options) {
      * @returns {mHeader}
      */
     construct: function(options) {
-      if (mUtil.data(element).has("header")) {
-        the = mUtil.data(element).get("header");
+      if (mUtil.data(element).has('header')) {
+        the = mUtil.data(element).get('header');
       } else {
         // reset header
         Plugin.init(options);
@@ -6841,7 +6303,7 @@ var mHeader = function(elementId, options) {
         // build header
         Plugin.build();
 
-        mUtil.data(element).set("header", the);
+        mUtil.data(element).set('header', the);
       }
 
       return the;
@@ -6865,24 +6327,21 @@ var mHeader = function(elementId, options) {
     build: function() {
       var lastScrollTop = 0;
 
-      if (
-        the.options.minimize.mobile === false &&
-        the.options.minimize.desktop === false
-      ) {
+      if (the.options.minimize.mobile === false && the.options.minimize.desktop === false) {
         return;
       }
 
-      window.addEventListener("scroll", function() {
+      window.addEventListener('scroll', function() {
         var offset = 0,
           on,
           off,
           st;
 
-        if (mUtil.isInResponsiveRange("desktop")) {
+        if (mUtil.isInResponsiveRange('desktop')) {
           offset = the.options.offset.desktop;
           on = the.options.minimize.desktop.on;
           off = the.options.minimize.desktop.off;
-        } else if (mUtil.isInResponsiveRange("tablet-and-mobile")) {
+        } else if (mUtil.isInResponsiveRange('tablet-and-mobile')) {
           offset = the.options.offset.mobile;
           on = the.options.minimize.mobile.on;
           off = the.options.minimize.mobile.off;
@@ -6891,12 +6350,8 @@ var mHeader = function(elementId, options) {
         st = window.pageYOffset;
 
         if (
-          (mUtil.isInResponsiveRange("tablet-and-mobile") &&
-            the.options.classic &&
-            the.options.classic.mobile) ||
-          (mUtil.isInResponsiveRange("desktop") &&
-            the.options.classic &&
-            the.options.classic.desktop)
+          (mUtil.isInResponsiveRange('tablet-and-mobile') && the.options.classic && the.options.classic.mobile) ||
+          (mUtil.isInResponsiveRange('desktop') && the.options.classic && the.options.classic.desktop)
         ) {
           if (st > offset) {
             // down scroll mode
@@ -6991,7 +6446,7 @@ var mMenu = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -7023,8 +6478,8 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     construct: function(options) {
-      if (mUtil.data(element).has("menu")) {
-        the = mUtil.data(element).get("menu");
+      if (mUtil.data(element).has('menu')) {
+        the = mUtil.data(element).get('menu');
       } else {
         // reset menu
         Plugin.init(options);
@@ -7035,7 +6490,7 @@ var mMenu = function(elementId, options) {
         // build menu
         Plugin.build();
 
-        mUtil.data(element).set("menu", the);
+        mUtil.data(element).set('menu', the);
       }
 
       return the;
@@ -7074,7 +6529,7 @@ var mMenu = function(elementId, options) {
       // build menu
       Plugin.build();
 
-      mUtil.data(element).set("menu", the);
+      mUtil.data(element).set('menu', the);
     },
 
     reload: function() {
@@ -7091,52 +6546,44 @@ var mMenu = function(elementId, options) {
      */
     build: function() {
       //== General accordion submenu toggle
-      the.eventHandlers["event_1"] = mUtil.on(
-        element,
-        ".m-menu__toggle",
-        "click",
-        Plugin.handleSubmenuAccordion
-      );
+      the.eventHandlers['event_1'] = mUtil.on(element, '.m-menu__toggle', 'click', Plugin.handleSubmenuAccordion);
 
       //== Dropdown mode(hoverable)
-      if (
-        Plugin.getSubmenuMode() === "dropdown" ||
-        Plugin.isConditionalSubmenuDropdown()
-      ) {
+      if (Plugin.getSubmenuMode() === 'dropdown' || Plugin.isConditionalSubmenuDropdown()) {
         // dropdown submenu - hover toggle
-        the.eventHandlers["event_2"] = mUtil.on(
+        the.eventHandlers['event_2'] = mUtil.on(
           element,
           '[m-menu-submenu-toggle="hover"]',
-          "mouseover",
+          'mouseover',
           Plugin.handleSubmenuDrodownHoverEnter
         );
-        the.eventHandlers["event_3"] = mUtil.on(
+        the.eventHandlers['event_3'] = mUtil.on(
           element,
           '[m-menu-submenu-toggle="hover"]',
-          "mouseout",
+          'mouseout',
           Plugin.handleSubmenuDrodownHoverExit
         );
 
         // dropdown submenu - click toggle
-        the.eventHandlers["event_4"] = mUtil.on(
+        the.eventHandlers['event_4'] = mUtil.on(
           element,
           '[m-menu-submenu-toggle="click"] > .m-menu__toggle, [m-menu-submenu-toggle="click"] > .m-menu__link .m-menu__toggle',
-          "click",
+          'click',
           Plugin.handleSubmenuDropdownClick
         );
-        the.eventHandlers["event_5"] = mUtil.on(
+        the.eventHandlers['event_5'] = mUtil.on(
           element,
           '[m-menu-submenu-toggle="tab"] > .m-menu__toggle, [m-menu-submenu-toggle="tab"] > .m-menu__link .m-menu__toggle',
-          "click",
+          'click',
           Plugin.handleSubmenuDropdownTabClick
         );
       }
 
       //== General link click
-      the.eventHandlers["event_6"] = mUtil.on(
+      the.eventHandlers['event_6'] = mUtil.on(
         element,
-        ".m-menu__item:not(.m-menu__item--submenu) > .m-menu__link:not(.m-menu__toggle):not(.m-menu__link--toggle-skip)",
-        "click",
+        '.m-menu__item:not(.m-menu__item--submenu) > .m-menu__link:not(.m-menu__toggle):not(.m-menu__link--toggle-skip)',
+        'click',
         Plugin.handleLinkClick
       );
 
@@ -7151,17 +6598,17 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     reset: function() {
-      mUtil.off(element, "click", the.eventHandlers["event_1"]);
+      mUtil.off(element, 'click', the.eventHandlers['event_1']);
 
       // dropdown submenu - hover toggle
-      mUtil.off(element, "mouseover", the.eventHandlers["event_2"]);
-      mUtil.off(element, "mouseout", the.eventHandlers["event_3"]);
+      mUtil.off(element, 'mouseover', the.eventHandlers['event_2']);
+      mUtil.off(element, 'mouseout', the.eventHandlers['event_3']);
 
       // dropdown submenu - click toggle
-      mUtil.off(element, "click", the.eventHandlers["event_4"]);
-      mUtil.off(element, "click", the.eventHandlers["event_5"]);
+      mUtil.off(element, 'click', the.eventHandlers['event_4']);
+      mUtil.off(element, 'click', the.eventHandlers['event_5']);
 
-      mUtil.off(element, "click", the.eventHandlers["event_6"]);
+      mUtil.off(element, 'click', the.eventHandlers['event_6']);
     },
 
     /**
@@ -7205,29 +6652,23 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     getSubmenuMode: function(el) {
-      if (mUtil.isInResponsiveRange("desktop")) {
-        if (el && mUtil.hasAttr(el, "m-menu-submenu-toggle")) {
-          return mUtil.attr(el, "m-menu-submenu-toggle");
+      if (mUtil.isInResponsiveRange('desktop')) {
+        if (el && mUtil.hasAttr(el, 'm-menu-submenu-toggle')) {
+          return mUtil.attr(el, 'm-menu-submenu-toggle');
         }
 
-        if (mUtil.isset(the.options.submenu, "desktop.state.body")) {
+        if (mUtil.isset(the.options.submenu, 'desktop.state.body')) {
           if (mUtil.hasClass(body, the.options.submenu.desktop.state.body)) {
             return the.options.submenu.desktop.state.mode;
           } else {
             return the.options.submenu.desktop.default;
           }
-        } else if (mUtil.isset(the.options.submenu, "desktop")) {
+        } else if (mUtil.isset(the.options.submenu, 'desktop')) {
           return the.options.submenu.desktop;
         }
-      } else if (
-        mUtil.isInResponsiveRange("tablet") &&
-        mUtil.isset(the.options.submenu, "tablet")
-      ) {
+      } else if (mUtil.isInResponsiveRange('tablet') && mUtil.isset(the.options.submenu, 'tablet')) {
         return the.options.submenu.tablet;
-      } else if (
-        mUtil.isInResponsiveRange("mobile") &&
-        mUtil.isset(the.options.submenu, "mobile")
-      ) {
+      } else if (mUtil.isInResponsiveRange('mobile') && mUtil.isset(the.options.submenu, 'mobile')) {
         return the.options.submenu.mobile;
       } else {
         return false;
@@ -7239,10 +6680,7 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     isConditionalSubmenuDropdown: function() {
-      if (
-        mUtil.isInResponsiveRange("desktop") &&
-        mUtil.isset(the.options.submenu, "desktop.state.body")
-      ) {
+      if (mUtil.isInResponsiveRange('desktop') && mUtil.isset(the.options.submenu, 'desktop.state.body')) {
         return true;
       } else {
         return false;
@@ -7254,14 +6692,11 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     handleLinkClick: function(e) {
-      if (Plugin.eventTrigger("linkClick", this) === false) {
+      if (Plugin.eventTrigger('linkClick', this) === false) {
         e.preventDefault();
       }
 
-      if (
-        Plugin.getSubmenuMode(this) === "dropdown" ||
-        Plugin.isConditionalSubmenuDropdown()
-      ) {
+      if (Plugin.getSubmenuMode(this) === 'dropdown' || Plugin.isConditionalSubmenuDropdown()) {
         Plugin.handleSubmenuDropdownClose(e, this);
       }
     },
@@ -7271,7 +6706,7 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     handleSubmenuDrodownHoverEnter: function(e) {
-      if (Plugin.getSubmenuMode(this) === "accordion") {
+      if (Plugin.getSubmenuMode(this) === 'accordion') {
         return;
       }
 
@@ -7281,10 +6716,10 @@ var mMenu = function(elementId, options) {
 
       var item = this;
 
-      if (item.getAttribute("data-hover") == "1") {
-        item.removeAttribute("data-hover");
-        clearTimeout(item.getAttribute("data-timeout"));
-        item.removeAttribute("data-timeout");
+      if (item.getAttribute('data-hover') == '1') {
+        item.removeAttribute('data-hover');
+        clearTimeout(item.getAttribute('data-timeout'));
+        item.removeAttribute('data-timeout');
         //Plugin.hideSubmenuDropdown(item, false);
       }
 
@@ -7300,7 +6735,7 @@ var mMenu = function(elementId, options) {
         return;
       }
 
-      if (Plugin.getSubmenuMode(this) === "accordion") {
+      if (Plugin.getSubmenuMode(this) === 'accordion') {
         return;
       }
 
@@ -7308,13 +6743,13 @@ var mMenu = function(elementId, options) {
       var time = the.options.dropdown.timeout;
 
       var timeout = setTimeout(function() {
-        if (item.getAttribute("data-hover") == "1") {
+        if (item.getAttribute('data-hover') == '1') {
           Plugin.hideSubmenuDropdown(item, true);
         }
       }, time);
 
-      item.setAttribute("data-hover", "1");
-      item.setAttribute("data-timeout", timeout);
+      item.setAttribute('data-hover', '1');
+      item.setAttribute('data-timeout', timeout);
     },
 
     /**
@@ -7322,21 +6757,21 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     handleSubmenuDropdownClick: function(e) {
-      if (Plugin.getSubmenuMode(this) === "accordion") {
+      if (Plugin.getSubmenuMode(this) === 'accordion') {
         return;
       }
 
-      var item = this.closest(".m-menu__item");
+      var item = this.closest('.m-menu__item');
 
-      if (item.getAttribute("m-menu-submenu-mode") == "accordion") {
+      if (item.getAttribute('m-menu-submenu-mode') == 'accordion') {
         return;
       }
 
-      if (mUtil.hasClass(item, "m-menu__item--hover") === false) {
-        mUtil.addClass(item, "m-menu__item--open-dropdown");
+      if (mUtil.hasClass(item, 'm-menu__item--hover') === false) {
+        mUtil.addClass(item, 'm-menu__item--open-dropdown');
         Plugin.showSubmenuDropdown(item);
       } else {
-        mUtil.removeClass(item, "m-menu__item--open-dropdown");
+        mUtil.removeClass(item, 'm-menu__item--open-dropdown');
         Plugin.hideSubmenuDropdown(item, true);
       }
 
@@ -7348,18 +6783,18 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     handleSubmenuDropdownTabClick: function(e) {
-      if (Plugin.getSubmenuMode(this) === "accordion") {
+      if (Plugin.getSubmenuMode(this) === 'accordion') {
         return;
       }
 
-      var item = this.closest(".m-menu__item");
+      var item = this.closest('.m-menu__item');
 
-      if (item.getAttribute("m-menu-submenu-mode") == "accordion") {
+      if (item.getAttribute('m-menu-submenu-mode') == 'accordion') {
         return;
       }
 
-      if (mUtil.hasClass(item, "m-menu__item--hover") == false) {
-        mUtil.addClass(item, "m-menu__item--open-dropdown");
+      if (mUtil.hasClass(item, 'm-menu__item--hover') == false) {
+        mUtil.addClass(item, 'm-menu__item--open-dropdown');
         Plugin.showSubmenuDropdown(item);
       }
 
@@ -7372,19 +6807,19 @@ var mMenu = function(elementId, options) {
      */
     handleSubmenuDropdownClose: function(e, el) {
       // exit if its not submenu dropdown mode
-      if (Plugin.getSubmenuMode(el) === "accordion") {
+      if (Plugin.getSubmenuMode(el) === 'accordion') {
         return;
       }
 
       var shown = element.querySelectorAll(
-        ".m-menu__item.m-menu__item--submenu.m-menu__item--hover:not(.m-menu__item--tabs)"
+        '.m-menu__item.m-menu__item--submenu.m-menu__item--hover:not(.m-menu__item--tabs)'
       );
 
       // check if currently clicked link's parent item ha
       if (
         shown.length > 0 &&
-        mUtil.hasClass(el, "m-menu__toggle") === false &&
-        el.querySelectorAll(".m-menu__toggle").length === 0
+        mUtil.hasClass(el, 'm-menu__toggle') === false &&
+        el.querySelectorAll('.m-menu__toggle').length === 0
       ) {
         // close opened dropdown menus
         for (var i = 0, len = shown.length; i < len; i++) {
@@ -7401,25 +6836,17 @@ var mMenu = function(elementId, options) {
       var query;
       var item = el ? el : this;
 
-      if (
-        Plugin.getSubmenuMode(el) === "dropdown" &&
-        (query = item.closest(".m-menu__item"))
-      ) {
-        if (query.getAttribute("m-menu-submenu-mode") != "accordion") {
+      if (Plugin.getSubmenuMode(el) === 'dropdown' && (query = item.closest('.m-menu__item'))) {
+        if (query.getAttribute('m-menu-submenu-mode') != 'accordion') {
           e.preventDefault();
           return;
         }
       }
 
-      var li = item.closest(".m-menu__item");
-      var submenu = mUtil.child(li, ".m-menu__submenu, .m-menu__inner");
+      var li = item.closest('.m-menu__item');
+      var submenu = mUtil.child(li, '.m-menu__submenu, .m-menu__inner');
 
-      if (
-        mUtil.hasClass(
-          item.closest(".m-menu__item"),
-          "m-menu__item--open-always"
-        )
-      ) {
+      if (mUtil.hasClass(item.closest('.m-menu__item'), 'm-menu__item--open-always')) {
         return;
       }
 
@@ -7428,23 +6855,23 @@ var mMenu = function(elementId, options) {
         var speed = the.options.accordion.slideSpeed;
         var hasClosables = false;
 
-        if (mUtil.hasClass(li, "m-menu__item--open") === false) {
+        if (mUtil.hasClass(li, 'm-menu__item--open') === false) {
           // hide other accordions
           if (the.options.accordion.expandAll === false) {
-            var subnav = item.closest(".m-menu__nav, .m-menu__subnav");
+            var subnav = item.closest('.m-menu__nav, .m-menu__subnav');
             var closables = mUtil.children(
               subnav,
-              ".m-menu__item.m-menu__item--open.m-menu__item--submenu:not(.m-menu__item--expanded):not(.m-menu__item--open-always)"
+              '.m-menu__item.m-menu__item--open.m-menu__item--submenu:not(.m-menu__item--expanded):not(.m-menu__item--open-always)'
             );
 
             if (subnav && closables) {
               for (var i = 0, len = closables.length; i < len; i++) {
                 var el_ = closables[0];
-                var submenu_ = mUtil.child(el_, ".m-menu__submenu");
+                var submenu_ = mUtil.child(el_, '.m-menu__submenu');
                 if (submenu_) {
                   mUtil.slideUp(submenu_, speed, function() {
                     Plugin.scrollerUpdate();
-                    mUtil.removeClass(el_, "m-menu__item--open");
+                    mUtil.removeClass(el_, 'm-menu__item--open');
                   });
                 }
               }
@@ -7455,17 +6882,17 @@ var mMenu = function(elementId, options) {
             Plugin.scrollToItem(item);
             Plugin.scrollerUpdate();
 
-            Plugin.eventTrigger("submenuToggle", submenu);
+            Plugin.eventTrigger('submenuToggle', submenu);
           });
 
-          mUtil.addClass(li, "m-menu__item--open");
+          mUtil.addClass(li, 'm-menu__item--open');
         } else {
           mUtil.slideUp(submenu, speed, function() {
             Plugin.scrollToItem(item);
-            Plugin.eventTrigger("submenuToggle", submenu);
+            Plugin.eventTrigger('submenuToggle', submenu);
           });
 
-          mUtil.removeClass(li, "m-menu__item--open");
+          mUtil.removeClass(li, 'm-menu__item--open');
         }
       }
     },
@@ -7477,9 +6904,9 @@ var mMenu = function(elementId, options) {
     scrollToItem: function(item) {
       // handle auto scroll for accordion submenus
       if (
-        mUtil.isInResponsiveRange("desktop") &&
+        mUtil.isInResponsiveRange('desktop') &&
         the.options.accordion.autoScroll &&
-        element.getAttribute("m-menu-scrollable") !== "1"
+        element.getAttribute('m-menu-scrollable') !== '1'
       ) {
         mUtil.scrollTo(item, the.options.accordion.autoScrollSpeed);
       }
@@ -7492,22 +6919,19 @@ var mMenu = function(elementId, options) {
     hideSubmenuDropdown: function(item, classAlso) {
       // remove submenu activation class
       if (classAlso) {
-        mUtil.removeClass(item, "m-menu__item--hover");
-        mUtil.removeClass(item, "m-menu__item--active-tab");
+        mUtil.removeClass(item, 'm-menu__item--hover');
+        mUtil.removeClass(item, 'm-menu__item--active-tab');
       }
 
       // clear timeout
-      item.removeAttribute("data-hover");
+      item.removeAttribute('data-hover');
 
-      if (item.getAttribute("m-menu-dropdown-toggle-class")) {
-        mUtil.removeClass(
-          body,
-          item.getAttribute("m-menu-dropdown-toggle-class")
-        );
+      if (item.getAttribute('m-menu-dropdown-toggle-class')) {
+        mUtil.removeClass(body, item.getAttribute('m-menu-dropdown-toggle-class'));
       }
 
-      var timeout = item.getAttribute("data-timeout");
-      item.removeAttribute("data-timeout");
+      var timeout = item.getAttribute('data-timeout');
+      item.removeAttribute('data-timeout');
       clearTimeout(timeout);
     },
 
@@ -7518,17 +6942,13 @@ var mMenu = function(elementId, options) {
     showSubmenuDropdown: function(item) {
       // close active submenus
       var list = element.querySelectorAll(
-        ".m-menu__item--submenu.m-menu__item--hover, .m-menu__item--submenu.m-menu__item--active-tab"
+        '.m-menu__item--submenu.m-menu__item--hover, .m-menu__item--submenu.m-menu__item--active-tab'
       );
 
       if (list) {
         for (var i = 0, len = list.length; i < len; i++) {
           var el = list[i];
-          if (
-            item !== el &&
-            el.contains(item) === false &&
-            item.contains(el) === false
-          ) {
+          if (item !== el && el.contains(item) === false && item.contains(el) === false) {
             Plugin.hideSubmenuDropdown(el, true);
           }
         }
@@ -7538,10 +6958,10 @@ var mMenu = function(elementId, options) {
       Plugin.adjustSubmenuDropdownArrowPos(item);
 
       // add submenu activation class
-      mUtil.addClass(item, "m-menu__item--hover");
+      mUtil.addClass(item, 'm-menu__item--hover');
 
-      if (item.getAttribute("m-menu-dropdown-toggle-class")) {
-        mUtil.addClass(body, item.getAttribute("m-menu-dropdown-toggle-class"));
+      if (item.getAttribute('m-menu-dropdown-toggle-class')) {
+        mUtil.addClass(body, item.getAttribute('m-menu-dropdown-toggle-class'));
       }
     },
 
@@ -7551,10 +6971,7 @@ var mMenu = function(elementId, options) {
      */
     createSubmenuDropdownClickDropoff: function(el) {
       var query;
-      var zIndex =
-        (query = mUtil.child(el, ".m-menu__submenu")
-          ? mUtil.css(query, "z-index")
-          : 0) - 1;
+      var zIndex = (query = mUtil.child(el, '.m-menu__submenu') ? mUtil.css(query, 'z-index') : 0) - 1;
 
       var dropoff = document.createElement(
         '<div class="m-menu__dropoff" style="background: transparent; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: ' +
@@ -7564,7 +6981,7 @@ var mMenu = function(elementId, options) {
 
       body.appendChild(dropoff);
 
-      mUtil.addEvent(dropoff, "click", function(e) {
+      mUtil.addEvent(dropoff, 'click', function(e) {
         e.stopPropagation();
         e.preventDefault();
         mUtil.remove(this);
@@ -7577,65 +6994,49 @@ var mMenu = function(elementId, options) {
      * @returns {mMenu}
      */
     adjustSubmenuDropdownArrowPos: function(item) {
-      var submenu = mUtil.child(item, ".m-menu__submenu");
-      var arrow = mUtil.child(submenu, ".m-menu__arrow.m-menu__arrow--adjust");
-      var subnav = mUtil.child(submenu, ".m-menu__subnav");
+      var submenu = mUtil.child(item, '.m-menu__submenu');
+      var arrow = mUtil.child(submenu, '.m-menu__arrow.m-menu__arrow--adjust');
+      var subnav = mUtil.child(submenu, '.m-menu__subnav');
 
       if (arrow) {
         var pos = 0;
-        var link = mUtil.child(item, ".m-menu__link");
+        var link = mUtil.child(item, '.m-menu__link');
 
-        if (
-          mUtil.hasClass(submenu, "m-menu__submenu--classic") ||
-          mUtil.hasClass(submenu, "m-menu__submenu--fixed")
-        ) {
-          if (mUtil.hasClass(submenu, "m-menu__submenu--right")) {
+        if (mUtil.hasClass(submenu, 'm-menu__submenu--classic') || mUtil.hasClass(submenu, 'm-menu__submenu--fixed')) {
+          if (mUtil.hasClass(submenu, 'm-menu__submenu--right')) {
             pos = mUtil.outerWidth(item) / 2;
-            if (mUtil.hasClass(submenu, "m-menu__submenu--pull")) {
+            if (mUtil.hasClass(submenu, 'm-menu__submenu--pull')) {
               if (mUtil.isRTL()) {
-                pos =
-                  pos + Math.abs(parseFloat(mUtil.css(submenu, "margin-left")));
+                pos = pos + Math.abs(parseFloat(mUtil.css(submenu, 'margin-left')));
               } else {
-                pos =
-                  pos +
-                  Math.abs(parseFloat(mUtil.css(submenu, "margin-right")));
+                pos = pos + Math.abs(parseFloat(mUtil.css(submenu, 'margin-right')));
               }
             }
-            pos = parseInt(mUtil.css(submenu, "width")) - pos;
-          } else if (mUtil.hasClass(submenu, "m-menu__submenu--left")) {
+            pos = parseInt(mUtil.css(submenu, 'width')) - pos;
+          } else if (mUtil.hasClass(submenu, 'm-menu__submenu--left')) {
             pos = mUtil.outerWidth(item) / 2;
-            if (mUtil.hasClass(submenu, "m-menu__submenu--pull")) {
+            if (mUtil.hasClass(submenu, 'm-menu__submenu--pull')) {
               if (mUtil.isRTL()) {
-                pos =
-                  pos +
-                  Math.abs(parseFloat(mUtil.css(submenu, "margin-right")));
+                pos = pos + Math.abs(parseFloat(mUtil.css(submenu, 'margin-right')));
               } else {
-                pos =
-                  pos + Math.abs(parseFloat(mUtil.css(submenu, "margin-left")));
+                pos = pos + Math.abs(parseFloat(mUtil.css(submenu, 'margin-left')));
               }
             }
           }
 
           if (mUtil.isRTL()) {
-            mUtil.css(arrow, "right", pos + "px");
+            mUtil.css(arrow, 'right', pos + 'px');
           } else {
-            mUtil.css(arrow, "left", pos + "px");
+            mUtil.css(arrow, 'left', pos + 'px');
           }
         } else {
-          if (
-            mUtil.hasClass(submenu, "m-menu__submenu--center") ||
-            mUtil.hasClass(submenu, "m-menu__submenu--full")
-          ) {
-            pos =
-              mUtil.offset(item).left -
-              (mUtil.getViewPort().width -
-                parseInt(mUtil.css(submenu, "width"))) /
-                2;
+          if (mUtil.hasClass(submenu, 'm-menu__submenu--center') || mUtil.hasClass(submenu, 'm-menu__submenu--full')) {
+            pos = mUtil.offset(item).left - (mUtil.getViewPort().width - parseInt(mUtil.css(submenu, 'width'))) / 2;
             pos = pos + mUtil.outerWidth(item) / 2;
 
-            mUtil.css(arrow, "left", pos + "px");
+            mUtil.css(arrow, 'left', pos + 'px');
             if (mUtil.isRTL()) {
-              mUtil.css(arrow, "right", "auto");
+              mUtil.css(arrow, 'right', 'auto');
             }
           }
         }
@@ -7670,26 +7071,26 @@ var mMenu = function(elementId, options) {
       var list;
       var parents;
 
-      list = element.querySelectorAll(".m-menu__item--active");
+      list = element.querySelectorAll('.m-menu__item--active');
 
       for (var i = 0, len = list.length; i < len; i++) {
         var el = list[0];
-        mUtil.removeClass(el, "m-menu__item--active");
-        mUtil.hide(mUtil.child(el, ".m-menu__submenu"));
-        parents = mUtil.parents(el, ".m-menu__item--submenu");
+        mUtil.removeClass(el, 'm-menu__item--active');
+        mUtil.hide(mUtil.child(el, '.m-menu__submenu'));
+        parents = mUtil.parents(el, '.m-menu__item--submenu');
 
         for (var i_ = 0, len_ = parents.length; i_ < len_; i_++) {
           var el_ = parents[i];
-          mUtil.removeClass(el_, "m-menu__item--open");
-          mUtil.hide(mUtil.child(el_, ".m-menu__submenu"));
+          mUtil.removeClass(el_, 'm-menu__item--open');
+          mUtil.hide(mUtil.child(el_, '.m-menu__submenu'));
         }
       }
 
       // close open submenus
       if (the.options.accordion.expandAll === false) {
-        if ((list = element.querySelectorAll(".m-menu__item--open"))) {
+        if ((list = element.querySelectorAll('.m-menu__item--open'))) {
           for (var i = 0, len = list.length; i < len; i++) {
-            mUtil.removeClass(parents[0], "m-menu__item--open");
+            mUtil.removeClass(parents[0], 'm-menu__item--open');
           }
         }
       }
@@ -7703,11 +7104,11 @@ var mMenu = function(elementId, options) {
       // reset current active item
       Plugin.resetActiveItem();
 
-      mUtil.addClass(item, "m-menu__item--active");
+      mUtil.addClass(item, 'm-menu__item--active');
 
-      var parents = mUtil.parents(item, ".m-menu__item--submenu");
+      var parents = mUtil.parents(item, '.m-menu__item--submenu');
       for (var i = 0, len = parents.length; i < len; i++) {
-        mUtil.addClass(parents[i], "m-menu__item--open");
+        mUtil.addClass(parents[i], 'm-menu__item--open');
       }
     },
 
@@ -7718,26 +7119,22 @@ var mMenu = function(elementId, options) {
     getBreadcrumbs: function(item) {
       var query;
       var breadcrumbs = [];
-      var link = mUtil.child(item, ".m-menu__link");
+      var link = mUtil.child(item, '.m-menu__link');
 
       breadcrumbs.push({
-        text: (query = mUtil.child(link, ".m-menu__link-text")
-          ? query.innerHTML
-          : ""),
-        title: link.getAttribute("title"),
-        href: link.getAttribute("href")
+        text: (query = mUtil.child(link, '.m-menu__link-text') ? query.innerHTML : ''),
+        title: link.getAttribute('title'),
+        href: link.getAttribute('href')
       });
 
-      var parents = mUtil.parents(item, ".m-menu__item--submenu");
+      var parents = mUtil.parents(item, '.m-menu__item--submenu');
       for (var i = 0, len = parents.length; i < len; i++) {
-        var submenuLink = mUtil.child(parents[i], ".m-menu__link");
+        var submenuLink = mUtil.child(parents[i], '.m-menu__link');
 
         breadcrumbs.push({
-          text: (query = mUtil.child(submenuLink, ".m-menu__link-text")
-            ? query.innerHTML
-            : ""),
-          title: submenuLink.getAttribute("title"),
-          href: submenuLink.getAttribute("href")
+          text: (query = mUtil.child(submenuLink, '.m-menu__link-text') ? query.innerHTML : ''),
+          title: submenuLink.getAttribute('title'),
+          href: submenuLink.getAttribute('href')
         });
       }
 
@@ -7751,9 +7148,7 @@ var mMenu = function(elementId, options) {
     getPageTitle: function(item) {
       var query;
 
-      return (query = mUtil.child(item, ".m-menu__link-text")
-        ? query.innerHTML
-        : "");
+      return (query = mUtil.child(item, '.m-menu__link-text') ? query.innerHTML : '');
     },
 
     /**
@@ -7914,8 +7309,8 @@ var mMenu = function(elementId, options) {
 };
 
 // Plugin global lazy initialization
-document.addEventListener("click", function(e) {
-  var body = mUtil.get("body");
+document.addEventListener('click', function(e) {
+  var body = mUtil.get('body');
   var query;
   if (
     (query = body.querySelectorAll(
@@ -7923,16 +7318,16 @@ document.addEventListener("click", function(e) {
     ))
   ) {
     for (var i = 0, len = query.length; i < len; i++) {
-      var element = query[i].closest(".m-menu__nav").parentNode;
+      var element = query[i].closest('.m-menu__nav').parentNode;
 
       if (element) {
-        var the = mUtil.data(element).get("menu");
+        var the = mUtil.data(element).get('menu');
 
         if (!the) {
           break;
         }
 
-        if (!the || the.getSubmenuMode() !== "dropdown") {
+        if (!the || the.getSubmenuMode() !== 'dropdown') {
           break;
         }
 
@@ -7959,7 +7354,7 @@ var mOffcanvas = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -7978,8 +7373,8 @@ var mOffcanvas = function(elementId, options) {
      * @returns {moffcanvas}
      */
     construct: function(options) {
-      if (mUtil.data(element).has("offcanvas")) {
-        the = mUtil.data(element).get("offcanvas");
+      if (mUtil.data(element).has('offcanvas')) {
+        the = mUtil.data(element).get('offcanvas');
       } else {
         // reset offcanvas
         Plugin.init(options);
@@ -7987,7 +7382,7 @@ var mOffcanvas = function(elementId, options) {
         // build offcanvas
         Plugin.build();
 
-        mUtil.data(element).set("offcanvas", the);
+        mUtil.data(element).set('offcanvas', the);
       }
 
       return the;
@@ -8005,38 +7400,30 @@ var mOffcanvas = function(elementId, options) {
       the.overlay;
 
       the.classBase = the.options.baseClass;
-      the.classShown = the.classBase + "--on";
-      the.classOverlay = the.classBase + "-overlay";
+      the.classShown = the.classBase + '--on';
+      the.classOverlay = the.classBase + '-overlay';
 
-      the.state = mUtil.hasClass(element, the.classShown) ? "shown" : "hidden";
+      the.state = mUtil.hasClass(element, the.classShown) ? 'shown' : 'hidden';
     },
 
     build: function() {
       //== offcanvas toggle
       if (the.options.toggleBy) {
-        if (typeof the.options.toggleBy === "string") {
-          mUtil.addEvent(the.options.toggleBy, "click", Plugin.toggle);
-        } else if (
-          the.options.toggleBy &&
-          the.options.toggleBy[0] &&
-          the.options.toggleBy[0].target
-        ) {
+        if (typeof the.options.toggleBy === 'string') {
+          mUtil.addEvent(the.options.toggleBy, 'click', Plugin.toggle);
+        } else if (the.options.toggleBy && the.options.toggleBy[0] && the.options.toggleBy[0].target) {
           for (var i in the.options.toggleBy) {
-            mUtil.addEvent(
-              the.options.toggleBy[i].target,
-              "click",
-              Plugin.toggle
-            );
+            mUtil.addEvent(the.options.toggleBy[i].target, 'click', Plugin.toggle);
           }
         } else if (the.options.toggleBy && the.options.toggleBy.target) {
-          mUtil.addEvent(the.options.toggleBy.target, "click", Plugin.toggle);
+          mUtil.addEvent(the.options.toggleBy.target, 'click', Plugin.toggle);
         }
       }
 
       //== offcanvas close
       var closeBy = mUtil.get(the.options.closeBy);
       if (closeBy) {
-        mUtil.addEvent(closeBy, "click", Plugin.hide);
+        mUtil.addEvent(closeBy, 'click', Plugin.hide);
       }
     },
 
@@ -8044,9 +7431,9 @@ var mOffcanvas = function(elementId, options) {
      * Handles offcanvas toggle
      */
     toggle: function() {
-      Plugin.eventTrigger("toggle");
+      Plugin.eventTrigger('toggle');
 
-      if (the.state == "shown") {
+      if (the.state == 'shown') {
         Plugin.hide(this);
       } else {
         Plugin.show(this);
@@ -8057,55 +7444,55 @@ var mOffcanvas = function(elementId, options) {
      * Handles offcanvas show
      */
     show: function(target) {
-      if (the.state == "shown") {
+      if (the.state == 'shown') {
         return;
       }
 
-      Plugin.eventTrigger("beforeShow");
+      Plugin.eventTrigger('beforeShow');
 
-      Plugin.togglerClass(target, "show");
+      Plugin.togglerClass(target, 'show');
 
       //== Offcanvas panel
       mUtil.addClass(body, the.classShown);
       mUtil.addClass(element, the.classShown);
 
-      the.state = "shown";
+      the.state = 'shown';
 
       if (the.options.overlay) {
-        the.overlay = mUtil.insertAfter(document.createElement("DIV"), element);
+        the.overlay = mUtil.insertAfter(document.createElement('DIV'), element);
         mUtil.addClass(the.overlay, the.classOverlay);
-        mUtil.addEvent(the.overlay, "click", function(e) {
+        mUtil.addEvent(the.overlay, 'click', function(e) {
           e.stopPropagation();
           e.preventDefault();
           Plugin.hide(target);
         });
       }
 
-      Plugin.eventTrigger("afterShow");
+      Plugin.eventTrigger('afterShow');
     },
 
     /**
      * Handles offcanvas hide
      */
     hide: function(target) {
-      if (the.state == "hidden") {
+      if (the.state == 'hidden') {
         return;
       }
 
-      Plugin.eventTrigger("beforeHide");
+      Plugin.eventTrigger('beforeHide');
 
-      Plugin.togglerClass(target, "hide");
+      Plugin.togglerClass(target, 'hide');
 
       mUtil.removeClass(body, the.classShown);
       mUtil.removeClass(element, the.classShown);
 
-      the.state = "hidden";
+      the.state = 'hidden';
 
       if (the.options.overlay && the.overlay) {
         mUtil.remove(the.overlay);
       }
 
-      Plugin.eventTrigger("afterHide");
+      Plugin.eventTrigger('afterHide');
     },
 
     /**
@@ -8113,14 +7500,10 @@ var mOffcanvas = function(elementId, options) {
      */
     togglerClass: function(target, mode) {
       //== Toggler
-      var id = mUtil.attr(target, "id");
+      var id = mUtil.attr(target, 'id');
       var toggleBy;
 
-      if (
-        the.options.toggleBy &&
-        the.options.toggleBy[0] &&
-        the.options.toggleBy[0].target
-      ) {
+      if (the.options.toggleBy && the.options.toggleBy[0] && the.options.toggleBy[0].target) {
         for (var i in the.options.toggleBy) {
           if (the.options.toggleBy[i].target === id) {
             toggleBy = the.options.toggleBy[i];
@@ -8133,11 +7516,11 @@ var mOffcanvas = function(elementId, options) {
       if (toggleBy) {
         var el = mUtil.get(toggleBy.target);
 
-        if (mode === "show") {
+        if (mode === 'show') {
           mUtil.addClass(el, toggleBy.state);
         }
 
-        if (mode === "hide") {
+        if (mode === 'hide') {
           mUtil.removeClass(el, toggleBy.state);
         }
       }
@@ -8234,7 +7617,7 @@ var mPortlet = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -8246,14 +7629,14 @@ var mPortlet = function(elementId, options) {
     tooltips: true,
     tools: {
       toggle: {
-        collapse: "Collapse",
-        expand: "Expand"
+        collapse: 'Collapse',
+        expand: 'Expand'
       },
-      reload: "Reload",
-      remove: "Remove",
+      reload: 'Reload',
+      remove: 'Remove',
       fullscreen: {
-        on: "Fullscreen",
-        off: "Exit Fullscreen"
+        on: 'Fullscreen',
+        off: 'Exit Fullscreen'
       }
     },
     sticky: {
@@ -8272,8 +7655,8 @@ var mPortlet = function(elementId, options) {
      */
 
     construct: function(options) {
-      if (mUtil.data(element).has("portlet")) {
-        the = mUtil.data(element).get("portlet");
+      if (mUtil.data(element).has('portlet')) {
+        the = mUtil.data(element).get('portlet');
       } else {
         // reset menu
         Plugin.init(options);
@@ -8281,7 +7664,7 @@ var mPortlet = function(elementId, options) {
         // build menu
         Plugin.build();
 
-        mUtil.data(element).set("portlet", the);
+        mUtil.data(element).set('portlet', the);
       }
 
       return the;
@@ -8296,13 +7679,13 @@ var mPortlet = function(elementId, options) {
 
       // merge default and user defined options
       the.options = mUtil.deepExtend({}, defaultOptions, options);
-      the.head = mUtil.child(element, ".m-portlet__head");
-      the.foot = mUtil.child(element, ".m-portlet__foot");
+      the.head = mUtil.child(element, '.m-portlet__head');
+      the.foot = mUtil.child(element, '.m-portlet__foot');
 
-      if (mUtil.child(element, ".m-portlet__body")) {
-        the.body = mUtil.child(element, ".m-portlet__body");
-      } else if (mUtil.child(element, ".m-form").length !== 0) {
-        the.body = mUtil.child(element, ".m-form");
+      if (mUtil.child(element, '.m-portlet__body')) {
+        the.body = mUtil.child(element, '.m-portlet__body');
+      } else if (mUtil.child(element, '.m-form').length !== 0) {
+        the.body = mUtil.child(element, '.m-form');
       }
     },
 
@@ -8311,36 +7694,36 @@ var mPortlet = function(elementId, options) {
      */
     build: function() {
       //== Remove
-      var remove = mUtil.find(the.head, "[m-portlet-tool=remove]");
+      var remove = mUtil.find(the.head, '[m-portlet-tool=remove]');
       if (remove) {
-        mUtil.addEvent(remove, "click", function(e) {
+        mUtil.addEvent(remove, 'click', function(e) {
           e.preventDefault();
           Plugin.remove();
         });
       }
 
       //== Reload
-      var reload = mUtil.find(the.head, "[m-portlet-tool=reload]");
+      var reload = mUtil.find(the.head, '[m-portlet-tool=reload]');
       if (reload) {
-        mUtil.addEvent(reload, "click", function(e) {
+        mUtil.addEvent(reload, 'click', function(e) {
           e.preventDefault();
           Plugin.reload();
         });
       }
 
       //== Toggle
-      var toggle = mUtil.find(the.head, "[m-portlet-tool=toggle]");
+      var toggle = mUtil.find(the.head, '[m-portlet-tool=toggle]');
       if (toggle) {
-        mUtil.addEvent(toggle, "click", function(e) {
+        mUtil.addEvent(toggle, 'click', function(e) {
           e.preventDefault();
           Plugin.toggle();
         });
       }
 
       //== Fullscreen
-      var fullscreen = mUtil.find(the.head, "[m-portlet-tool=fullscreen]");
+      var fullscreen = mUtil.find(the.head, '[m-portlet-tool=fullscreen]');
       if (fullscreen) {
-        mUtil.addEvent(fullscreen, "click", function(e) {
+        mUtil.addEvent(fullscreen, 'click', function(e) {
           e.preventDefault();
           Plugin.fullscreen();
         });
@@ -8357,21 +7740,21 @@ var mPortlet = function(elementId, options) {
       var offset = the.options.sticky.offset;
 
       if (st > offset) {
-        if (mUtil.hasClass(body, "m-portlet--sticky") === false) {
-          Plugin.eventTrigger("stickyOn");
+        if (mUtil.hasClass(body, 'm-portlet--sticky') === false) {
+          Plugin.eventTrigger('stickyOn');
 
-          mUtil.addClass(body, "m-portlet--sticky");
-          mUtil.addClass(element, "m-portlet--sticky");
+          mUtil.addClass(body, 'm-portlet--sticky');
+          mUtil.addClass(element, 'm-portlet--sticky');
 
           Plugin.updateSticky();
         }
       } else {
         // back scroll mode
-        if (mUtil.hasClass(body, "m-portlet--sticky")) {
-          Plugin.eventTrigger("stickyOff");
+        if (mUtil.hasClass(body, 'm-portlet--sticky')) {
+          Plugin.eventTrigger('stickyOff');
 
-          mUtil.removeClass(body, "m-portlet--sticky");
-          mUtil.removeClass(element, "m-portlet--sticky");
+          mUtil.removeClass(body, 'm-portlet--sticky');
+          mUtil.removeClass(element, 'm-portlet--sticky');
 
           Plugin.resetSticky();
         }
@@ -8386,7 +7769,7 @@ var mPortlet = function(elementId, options) {
         return;
       }
 
-      window.addEventListener("scroll", Plugin.onScrollSticky);
+      window.addEventListener('scroll', Plugin.onScrollSticky);
     },
 
     /**
@@ -8399,7 +7782,7 @@ var mPortlet = function(elementId, options) {
 
       var top;
 
-      if (mUtil.hasClass(body, "m-portlet--sticky")) {
+      if (mUtil.hasClass(body, 'm-portlet--sticky')) {
         if (the.options.sticky.position.top instanceof Function) {
           top = parseInt(the.options.sticky.position.top.call());
         } else {
@@ -8420,15 +7803,15 @@ var mPortlet = function(elementId, options) {
           right = parseInt(the.options.sticky.position.right);
         }
 
-        mUtil.css(the.head, "z-index", the.options.sticky.zIndex);
-        mUtil.css(the.head, "top", top + "px");
+        mUtil.css(the.head, 'z-index', the.options.sticky.zIndex);
+        mUtil.css(the.head, 'top', top + 'px');
 
         if (mUtil.isRTL()) {
-          mUtil.css(the.head, "left", right + "px");
-          mUtil.css(the.head, "right", left + "px");
+          mUtil.css(the.head, 'left', right + 'px');
+          mUtil.css(the.head, 'right', left + 'px');
         } else {
-          mUtil.css(the.head, "left", left + "px");
-          mUtil.css(the.head, "right", right + "px");
+          mUtil.css(the.head, 'left', left + 'px');
+          mUtil.css(the.head, 'right', right + 'px');
         }
       }
     },
@@ -8441,11 +7824,11 @@ var mPortlet = function(elementId, options) {
         return;
       }
 
-      if (mUtil.hasClass(body, "m-portlet--sticky") === false) {
-        mUtil.css(the.head, "z-index", "");
-        mUtil.css(the.head, "top", "");
-        mUtil.css(the.head, "left", "");
-        mUtil.css(the.head, "right", "");
+      if (mUtil.hasClass(body, 'm-portlet--sticky') === false) {
+        mUtil.css(the.head, 'z-index', '');
+        mUtil.css(the.head, 'top', '');
+        mUtil.css(the.head, 'left', '');
+        mUtil.css(the.head, 'right', '');
       }
     },
 
@@ -8459,29 +7842,26 @@ var mPortlet = function(elementId, options) {
 
       Plugin.resetSticky();
 
-      window.removeEventListener("scroll", Plugin.onScrollSticky);
+      window.removeEventListener('scroll', Plugin.onScrollSticky);
     },
 
     /**
      * Remove portlet
      */
     remove: function() {
-      if (Plugin.eventTrigger("beforeRemove") === false) {
+      if (Plugin.eventTrigger('beforeRemove') === false) {
         return;
       }
 
-      if (
-        mUtil.hasClass(body, "m-portlet--fullscreen") &&
-        mUtil.hasClass(element, "m-portlet--fullscreen")
-      ) {
-        Plugin.fullscreen("off");
+      if (mUtil.hasClass(body, 'm-portlet--fullscreen') && mUtil.hasClass(element, 'm-portlet--fullscreen')) {
+        Plugin.fullscreen('off');
       }
 
       Plugin.removeTooltips();
 
       mUtil.remove(element);
 
-      Plugin.eventTrigger("afterRemove");
+      Plugin.eventTrigger('afterRemove');
     },
 
     /**
@@ -8513,21 +7893,19 @@ var mPortlet = function(elementId, options) {
     setupTooltips: function() {
       if (the.options.tooltips) {
         var collapsed =
-          mUtil.hasClass(element, "m-portlet--collapse") ||
-          mUtil.hasClass(element, "m-portlet--collapsed");
+          mUtil.hasClass(element, 'm-portlet--collapse') || mUtil.hasClass(element, 'm-portlet--collapsed');
         var fullscreenOn =
-          mUtil.hasClass(body, "m-portlet--fullscreen") &&
-          mUtil.hasClass(element, "m-portlet--fullscreen");
+          mUtil.hasClass(body, 'm-portlet--fullscreen') && mUtil.hasClass(element, 'm-portlet--fullscreen');
 
         //== Remove
-        var remove = mUtil.find(the.head, "[m-portlet-tool=remove]");
+        var remove = mUtil.find(the.head, '[m-portlet-tool=remove]');
         if (remove) {
-          var placement = fullscreenOn ? "bottom" : "top";
+          var placement = fullscreenOn ? 'bottom' : 'top';
           var tip = new Tooltip(remove, {
             title: the.options.tools.remove,
             placement: placement,
-            offset: fullscreenOn ? "0,10px,0,0" : "0,5px",
-            trigger: "hover",
+            offset: fullscreenOn ? '0,10px,0,0' : '0,5px',
+            trigger: 'hover',
             template:
               '<div class="m-tooltip m-tooltip--portlet tooltip bs-tooltip-' +
               placement +
@@ -8537,18 +7915,18 @@ var mPortlet = function(elementId, options) {
                         </div>'
           });
 
-          mUtil.data(remove).set("tooltip", tip);
+          mUtil.data(remove).set('tooltip', tip);
         }
 
         //== Reload
-        var reload = mUtil.find(the.head, "[m-portlet-tool=reload]");
+        var reload = mUtil.find(the.head, '[m-portlet-tool=reload]');
         if (reload) {
-          var placement = fullscreenOn ? "bottom" : "top";
+          var placement = fullscreenOn ? 'bottom' : 'top';
           var tip = new Tooltip(reload, {
             title: the.options.tools.reload,
             placement: placement,
-            offset: fullscreenOn ? "0,10px,0,0" : "0,5px",
-            trigger: "hover",
+            offset: fullscreenOn ? '0,10px,0,0' : '0,5px',
+            trigger: 'hover',
             template:
               '<div class="m-tooltip m-tooltip--portlet tooltip bs-tooltip-' +
               placement +
@@ -8558,20 +7936,18 @@ var mPortlet = function(elementId, options) {
                         </div>'
           });
 
-          mUtil.data(reload).set("tooltip", tip);
+          mUtil.data(reload).set('tooltip', tip);
         }
 
         //== Toggle
-        var toggle = mUtil.find(the.head, "[m-portlet-tool=toggle]");
+        var toggle = mUtil.find(the.head, '[m-portlet-tool=toggle]');
         if (toggle) {
-          var placement = fullscreenOn ? "bottom" : "top";
+          var placement = fullscreenOn ? 'bottom' : 'top';
           var tip = new Tooltip(toggle, {
-            title: collapsed
-              ? the.options.tools.toggle.expand
-              : the.options.tools.toggle.collapse,
+            title: collapsed ? the.options.tools.toggle.expand : the.options.tools.toggle.collapse,
             placement: placement,
-            offset: fullscreenOn ? "0,10px,0,0" : "0,5px",
-            trigger: "hover",
+            offset: fullscreenOn ? '0,10px,0,0' : '0,5px',
+            trigger: 'hover',
             template:
               '<div class="m-tooltip m-tooltip--portlet tooltip bs-tooltip-' +
               placement +
@@ -8581,20 +7957,18 @@ var mPortlet = function(elementId, options) {
                         </div>'
           });
 
-          mUtil.data(toggle).set("tooltip", tip);
+          mUtil.data(toggle).set('tooltip', tip);
         }
 
         //== Fullscreen
-        var fullscreen = mUtil.find(the.head, "[m-portlet-tool=fullscreen]");
+        var fullscreen = mUtil.find(the.head, '[m-portlet-tool=fullscreen]');
         if (fullscreen) {
-          var placement = fullscreenOn ? "bottom" : "top";
+          var placement = fullscreenOn ? 'bottom' : 'top';
           var tip = new Tooltip(fullscreen, {
-            title: fullscreenOn
-              ? the.options.tools.fullscreen.off
-              : the.options.tools.fullscreen.on,
+            title: fullscreenOn ? the.options.tools.fullscreen.off : the.options.tools.fullscreen.on,
             placement: placement,
-            offset: fullscreenOn ? "0,10px,0,0" : "0,5px",
-            trigger: "hover",
+            offset: fullscreenOn ? '0,10px,0,0' : '0,5px',
+            trigger: 'hover',
             template:
               '<div class="m-tooltip m-tooltip--portlet tooltip bs-tooltip-' +
               placement +
@@ -8604,7 +7978,7 @@ var mPortlet = function(elementId, options) {
                         </div>'
           });
 
-          mUtil.data(fullscreen).set("tooltip", tip);
+          mUtil.data(fullscreen).set('tooltip', tip);
         }
       }
     },
@@ -8615,38 +7989,38 @@ var mPortlet = function(elementId, options) {
     removeTooltips: function() {
       if (the.options.tooltips) {
         //== Remove
-        var remove = mUtil.find(the.head, "[m-portlet-tool=remove]");
-        if (remove && mUtil.data(remove).has("tooltip")) {
+        var remove = mUtil.find(the.head, '[m-portlet-tool=remove]');
+        if (remove && mUtil.data(remove).has('tooltip')) {
           mUtil
             .data(remove)
-            .get("tooltip")
+            .get('tooltip')
             .dispose();
         }
 
         //== Reload
-        var reload = mUtil.find(the.head, "[m-portlet-tool=reload]");
-        if (reload && mUtil.data(reload).has("tooltip")) {
+        var reload = mUtil.find(the.head, '[m-portlet-tool=reload]');
+        if (reload && mUtil.data(reload).has('tooltip')) {
           mUtil
             .data(reload)
-            .get("tooltip")
+            .get('tooltip')
             .dispose();
         }
 
         //== Toggle
-        var toggle = mUtil.find(the.head, "[m-portlet-tool=toggle]");
-        if (toggle && mUtil.data(toggle).has("tooltip")) {
+        var toggle = mUtil.find(the.head, '[m-portlet-tool=toggle]');
+        if (toggle && mUtil.data(toggle).has('tooltip')) {
           mUtil
             .data(toggle)
-            .get("tooltip")
+            .get('tooltip')
             .dispose();
         }
 
         //== Fullscreen
-        var fullscreen = mUtil.find(the.head, "[m-portlet-tool=fullscreen]");
-        if (fullscreen && mUtil.data(fullscreen).has("tooltip")) {
+        var fullscreen = mUtil.find(the.head, '[m-portlet-tool=fullscreen]');
+        if (fullscreen && mUtil.data(fullscreen).has('tooltip')) {
           mUtil
             .data(fullscreen)
-            .get("tooltip")
+            .get('tooltip')
             .dispose();
         }
       }
@@ -8656,17 +8030,14 @@ var mPortlet = function(elementId, options) {
      * Reload
      */
     reload: function() {
-      Plugin.eventTrigger("reload");
+      Plugin.eventTrigger('reload');
     },
 
     /**
      * Toggle
      */
     toggle: function() {
-      if (
-        mUtil.hasClass(element, "m-portlet--collapse") ||
-        mUtil.hasClass(element, "m-portlet--collapsed")
-      ) {
+      if (mUtil.hasClass(element, 'm-portlet--collapse') || mUtil.hasClass(element, 'm-portlet--collapsed')) {
         Plugin.expand();
       } else {
         Plugin.collapse();
@@ -8677,21 +8048,21 @@ var mPortlet = function(elementId, options) {
      * Collapse
      */
     collapse: function() {
-      if (Plugin.eventTrigger("beforeCollapse") === false) {
+      if (Plugin.eventTrigger('beforeCollapse') === false) {
         return;
       }
 
       mUtil.slideUp(the.body, the.options.bodyToggleSpeed, function() {
-        Plugin.eventTrigger("afterCollapse");
+        Plugin.eventTrigger('afterCollapse');
       });
 
-      mUtil.addClass(element, "m-portlet--collapse");
+      mUtil.addClass(element, 'm-portlet--collapse');
 
-      var toggle = mUtil.find(the.head, "[m-portlet-tool=toggle]");
-      if (toggle && mUtil.data(toggle).has("tooltip")) {
+      var toggle = mUtil.find(the.head, '[m-portlet-tool=toggle]');
+      if (toggle && mUtil.data(toggle).has('tooltip')) {
         mUtil
           .data(toggle)
-          .get("tooltip")
+          .get('tooltip')
           .updateTitleContent(the.options.tools.toggle.expand);
       }
     },
@@ -8700,22 +8071,22 @@ var mPortlet = function(elementId, options) {
      * Expand
      */
     expand: function() {
-      if (Plugin.eventTrigger("beforeExpand") === false) {
+      if (Plugin.eventTrigger('beforeExpand') === false) {
         return;
       }
 
       mUtil.slideDown(the.body, the.options.bodyToggleSpeed, function() {
-        Plugin.eventTrigger("afterExpand");
+        Plugin.eventTrigger('afterExpand');
       });
 
-      mUtil.removeClass(element, "m-portlet--collapse");
-      mUtil.removeClass(element, "m-portlet--collapsed");
+      mUtil.removeClass(element, 'm-portlet--collapse');
+      mUtil.removeClass(element, 'm-portlet--collapsed');
 
-      var toggle = mUtil.find(the.head, "[m-portlet-tool=toggle]");
-      if (toggle && mUtil.data(toggle).has("tooltip")) {
+      var toggle = mUtil.find(the.head, '[m-portlet-tool=toggle]');
+      if (toggle && mUtil.data(toggle).has('tooltip')) {
         mUtil
           .data(toggle)
-          .get("tooltip")
+          .get('tooltip')
           .updateTitleContent(the.options.tools.toggle.collapse);
       }
     },
@@ -8728,43 +8099,40 @@ var mPortlet = function(elementId, options) {
       var speed = 300;
 
       if (
-        mode === "off" ||
-        (mUtil.hasClass(body, "m-portlet--fullscreen") &&
-          mUtil.hasClass(element, "m-portlet--fullscreen"))
+        mode === 'off' ||
+        (mUtil.hasClass(body, 'm-portlet--fullscreen') && mUtil.hasClass(element, 'm-portlet--fullscreen'))
       ) {
-        Plugin.eventTrigger("beforeFullscreenOff");
+        Plugin.eventTrigger('beforeFullscreenOff');
 
-        mUtil.removeClass(body, "m-portlet--fullscreen");
-        mUtil.removeClass(element, "m-portlet--fullscreen");
+        mUtil.removeClass(body, 'm-portlet--fullscreen');
+        mUtil.removeClass(element, 'm-portlet--fullscreen');
 
         Plugin.removeTooltips();
         Plugin.setupTooltips();
 
         if (the.foot) {
-          mUtil.css(the.body, "margin-bottom", "");
-          mUtil.css(the.foot, "margin-top", "");
+          mUtil.css(the.body, 'margin-bottom', '');
+          mUtil.css(the.foot, 'margin-top', '');
         }
 
-        Plugin.eventTrigger("afterFullscreenOff");
+        Plugin.eventTrigger('afterFullscreenOff');
       } else {
-        Plugin.eventTrigger("beforeFullscreenOn");
+        Plugin.eventTrigger('beforeFullscreenOn');
 
-        mUtil.addClass(element, "m-portlet--fullscreen");
-        mUtil.addClass(body, "m-portlet--fullscreen");
+        mUtil.addClass(element, 'm-portlet--fullscreen');
+        mUtil.addClass(body, 'm-portlet--fullscreen');
 
         Plugin.removeTooltips();
         Plugin.setupTooltips();
 
         if (the.foot) {
-          var height1 = parseInt(mUtil.css(the.foot, "height"));
-          var height2 =
-            parseInt(mUtil.css(the.foot, "height")) +
-            parseInt(mUtil.css(the.head, "height"));
-          mUtil.css(the.body, "margin-bottom", height1 + "px");
-          mUtil.css(the.foot, "margin-top", "-" + height2 + "px");
+          var height1 = parseInt(mUtil.css(the.foot, 'height'));
+          var height2 = parseInt(mUtil.css(the.foot, 'height')) + parseInt(mUtil.css(the.head, 'height'));
+          mUtil.css(the.body, 'margin-bottom', height1 + 'px');
+          mUtil.css(the.foot, 'margin-top', '-' + height2 + 'px');
         }
 
-        Plugin.eventTrigger("afterFullscreenOn");
+        Plugin.eventTrigger('afterFullscreenOn');
       }
     },
 
@@ -8897,7 +8265,7 @@ var mPortlet = function(elementId, options) {
    * @returns {mPortlet}
    */
   the.fullscreen = function() {
-    return Plugin.fullscreen("on");
+    return Plugin.fullscreen('on');
   };
 
   /**
@@ -8905,7 +8273,7 @@ var mPortlet = function(elementId, options) {
    * @returns {mPortlet}
    */
   the.unFullscreen = function() {
-    return Plugin.fullscreen("off");
+    return Plugin.fullscreen('off');
   };
 
   /**
@@ -8951,7 +8319,7 @@ var mQuicksearch = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -8959,17 +8327,17 @@ var mQuicksearch = function(elementId, options) {
 
   //== Default options
   var defaultOptions = {
-    mode: "default", //'default/dropdown'
+    mode: 'default', //'default/dropdown'
     minLength: 1,
     maxHeight: 300,
     requestTimeout: 200, // ajax request fire timeout in milliseconds
-    inputTarget: "m_quicksearch_input",
-    iconCloseTarget: "m_quicksearch_close",
-    iconCancelTarget: "m_quicksearch_cancel",
-    iconSearchTarget: "m_quicksearch_search",
+    inputTarget: 'm_quicksearch_input',
+    iconCloseTarget: 'm_quicksearch_close',
+    iconCancelTarget: 'm_quicksearch_cancel',
+    iconSearchTarget: 'm_quicksearch_search',
 
-    spinnerClass: "m-loader m-loader--skin-light m-loader--right",
-    hasResultClass: "m-list-search--has-result",
+    spinnerClass: 'm-loader m-loader--skin-light m-loader--right',
+    hasResultClass: 'm-list-search--has-result',
 
     templates: {
       error:
@@ -8987,8 +8355,8 @@ var mQuicksearch = function(elementId, options) {
      */
 
     construct: function(options) {
-      if (mUtil.data(element).has("quicksearch")) {
-        the = mUtil.data(element).get("quicksearch");
+      if (mUtil.data(element).has('quicksearch')) {
+        the = mUtil.data(element).get('quicksearch');
       } else {
         // reset menu
         Plugin.init(options);
@@ -8996,7 +8364,7 @@ var mQuicksearch = function(elementId, options) {
         // build menu
         Plugin.build();
 
-        mUtil.data(element).set("quicksearch", the);
+        mUtil.data(element).set('quicksearch', the);
       }
 
       return the;
@@ -9010,10 +8378,10 @@ var mQuicksearch = function(elementId, options) {
       the.options = mUtil.deepExtend({}, defaultOptions, options);
 
       // search query
-      the.query = "";
+      the.query = '';
 
       // form
-      the.form = mUtil.find(element, "form");
+      the.form = mUtil.find(element, 'form');
 
       // input element
       the.input = mUtil.get(the.options.inputTarget);
@@ -9021,7 +8389,7 @@ var mQuicksearch = function(elementId, options) {
       // close icon
       the.iconClose = mUtil.get(the.options.iconCloseTarget);
 
-      if (the.options.mode == "default") {
+      if (the.options.mode == 'default') {
         // search icon
         the.iconSearch = mUtil.get(the.options.iconSearchTarget);
 
@@ -9049,46 +8417,46 @@ var mQuicksearch = function(elementId, options) {
      */
     build: function() {
       // attach input keyup handler
-      mUtil.addEvent(the.input, "keyup", Plugin.search);
+      mUtil.addEvent(the.input, 'keyup', Plugin.search);
 
       // Prevent enter click
-      mUtil.find(element, "form").onkeypress = function(e) {
+      mUtil.find(element, 'form').onkeypress = function(e) {
         var key = e.charCode || e.keyCode || 0;
         if (key == 13) {
           e.preventDefault();
         }
       };
 
-      if (the.options.mode == "default") {
-        mUtil.addEvent(the.input, "focus", Plugin.showDropdown);
-        mUtil.addEvent(the.iconCancel, "click", Plugin.handleCancel);
+      if (the.options.mode == 'default') {
+        mUtil.addEvent(the.input, 'focus', Plugin.showDropdown);
+        mUtil.addEvent(the.iconCancel, 'click', Plugin.handleCancel);
 
-        mUtil.addEvent(the.iconSearch, "click", function() {
-          if (mUtil.isInResponsiveRange("tablet-and-mobile")) {
-            mUtil.addClass(body, "m-header-search--mobile-expanded");
+        mUtil.addEvent(the.iconSearch, 'click', function() {
+          if (mUtil.isInResponsiveRange('tablet-and-mobile')) {
+            mUtil.addClass(body, 'm-header-search--mobile-expanded');
             the.input.focus();
           }
         });
 
-        mUtil.addEvent(the.iconClose, "click", function() {
-          if (mUtil.isInResponsiveRange("tablet-and-mobile")) {
-            mUtil.removeClass(body, "m-header-search--mobile-expanded");
+        mUtil.addEvent(the.iconClose, 'click', function() {
+          if (mUtil.isInResponsiveRange('tablet-and-mobile')) {
+            mUtil.removeClass(body, 'm-header-search--mobile-expanded');
             Plugin.closeDropdown();
           }
         });
-      } else if (the.options.mode == "dropdown") {
-        the.dropdown.on("afterShow", function() {
+      } else if (the.options.mode == 'dropdown') {
+        the.dropdown.on('afterShow', function() {
           the.input.focus();
         });
 
-        mUtil.addEvent(the.iconClose, "click", Plugin.closeDropdown);
+        mUtil.addEvent(the.iconClose, 'click', Plugin.closeDropdown);
       }
     },
 
     showProgress: function() {
       the.processing = true;
       mUtil.addClass(the.form, the.options.spinnerClass);
-      Plugin.handleCancelIconVisibility("off");
+      Plugin.handleCancelIconVisibility('off');
 
       return the;
     },
@@ -9096,7 +8464,7 @@ var mQuicksearch = function(elementId, options) {
     hideProgress: function() {
       the.processing = false;
       mUtil.removeClass(the.form, the.options.spinnerClass);
-      Plugin.handleCancelIconVisibility("on");
+      Plugin.handleCancelIconVisibility('on');
       mUtil.addClass(element, the.options.hasResultClass);
 
       return the;
@@ -9109,7 +8477,7 @@ var mQuicksearch = function(elementId, options) {
       the.query = the.input.value;
 
       if (the.query.length === 0) {
-        Plugin.handleCancelIconVisibility("on");
+        Plugin.handleCancelIconVisibility('on');
         mUtil.removeClass(element, the.options.hasResultClass);
         mUtil.removeClass(the.form, the.options.spinnerClass);
       }
@@ -9125,7 +8493,7 @@ var mQuicksearch = function(elementId, options) {
       the.requestTimeout = false;
 
       the.requestTimeout = setTimeout(function() {
-        Plugin.eventTrigger("search");
+        Plugin.eventTrigger('search');
       }, the.options.requestTimeout);
 
       return the;
@@ -9135,22 +8503,20 @@ var mQuicksearch = function(elementId, options) {
      * Handle cancel icon visibility
      */
     handleCancelIconVisibility: function(status) {
-      if (status == "on") {
+      if (status == 'on') {
         if (the.input.value.length === 0) {
-          if (the.iconCancel) mUtil.css(the.iconCancel, "visibility", "hidden");
-          if (the.iconClose) mUtil.css(the.iconClose, "visibility", "visible");
+          if (the.iconCancel) mUtil.css(the.iconCancel, 'visibility', 'hidden');
+          if (the.iconClose) mUtil.css(the.iconClose, 'visibility', 'visible');
         } else {
           clearTimeout(the.cancelTimeout);
           the.cancelTimeout = setTimeout(function() {
-            if (the.iconCancel)
-              mUtil.css(the.iconCancel, "visibility", "visible");
-            if (the.iconClose)
-              mUtil.css(the.iconClose, "visibility", "visible");
+            if (the.iconCancel) mUtil.css(the.iconCancel, 'visibility', 'visible');
+            if (the.iconClose) mUtil.css(the.iconClose, 'visibility', 'visible');
           }, 500);
         }
       } else {
-        if (the.iconCancel) mUtil.css(the.iconCancel, "visibility", "hidden");
-        if (the.iconClose) mUtil.css(the.iconClose, "visibility", "hidden");
+        if (the.iconCancel) mUtil.css(the.iconCancel, 'visibility', 'hidden');
+        if (the.iconClose) mUtil.css(the.iconClose, 'visibility', 'hidden');
       }
     },
 
@@ -9158,8 +8524,8 @@ var mQuicksearch = function(elementId, options) {
      * Cancel handler
      */
     handleCancel: function(e) {
-      the.input.value = "";
-      mUtil.css(the.iconCancel, "visibility", "hidden");
+      the.input.value = '';
+      mUtil.css(the.iconCancel, 'visibility', 'hidden');
       mUtil.removeClass(element, the.options.hasResultClass);
 
       Plugin.closeDropdown();
@@ -9181,7 +8547,7 @@ var mQuicksearch = function(elementId, options) {
         the.input.value.length > the.options.minLength &&
         the.processing == false
       ) {
-        console.log("show!!!");
+        console.log('show!!!');
         the.dropdown.show();
         if (e) {
           e.preventDefault();
@@ -9249,7 +8615,7 @@ var mQuicksearch = function(elementId, options) {
   };
 
   the.showError = function(text) {
-    var msg = the.options.templates.error.replace("{{message}}", text);
+    var msg = the.options.templates.error.replace('{{message}}', text);
     the.dropdown.setContent(msg);
     Plugin.showDropdown();
 
@@ -9302,7 +8668,7 @@ var mScrollTop = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -9324,8 +8690,8 @@ var mScrollTop = function(elementId, options) {
      * @returns {mscrolltop}
      */
     construct: function(options) {
-      if (mUtil.data(element).has("scrolltop")) {
-        the = mUtil.data(element).get("scrolltop");
+      if (mUtil.data(element).has('scrolltop')) {
+        the = mUtil.data(element).get('scrolltop');
       } else {
         // reset scrolltop
         Plugin.init(options);
@@ -9333,7 +8699,7 @@ var mScrollTop = function(elementId, options) {
         // build scrolltop
         Plugin.build();
 
-        mUtil.data(element).set("scrolltop", the);
+        mUtil.data(element).set('scrolltop', the);
       }
 
       return the;
@@ -9353,25 +8719,25 @@ var mScrollTop = function(elementId, options) {
     build: function() {
       // handle window scroll
       if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-        window.addEventListener("touchend", function() {
+        window.addEventListener('touchend', function() {
           Plugin.handle();
         });
 
-        window.addEventListener("touchcancel", function() {
+        window.addEventListener('touchcancel', function() {
           Plugin.handle();
         });
 
-        window.addEventListener("touchleave", function() {
+        window.addEventListener('touchleave', function() {
           Plugin.handle();
         });
       } else {
-        window.addEventListener("scroll", function() {
+        window.addEventListener('scroll', function() {
           Plugin.handle();
         });
       }
 
       // handle button click
-      mUtil.addEvent(element, "click", Plugin.scroll);
+      mUtil.addEvent(element, 'click', Plugin.scroll);
     },
 
     /**
@@ -9380,9 +8746,9 @@ var mScrollTop = function(elementId, options) {
     handle: function() {
       var pos = window.pageYOffset; // current vertical position
       if (pos > the.options.offset) {
-        mUtil.addClass(body, "m-scroll-top--shown");
+        mUtil.addClass(body, 'm-scroll-top--shown');
       } else {
-        mUtil.removeClass(body, "m-scroll-top--shown");
+        mUtil.removeClass(body, 'm-scroll-top--shown');
       }
     },
 
@@ -9472,7 +8838,7 @@ var mToggle = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -9480,8 +8846,8 @@ var mToggle = function(elementId, options) {
 
   //== Default options
   var defaultOptions = {
-    togglerState: "",
-    targetState: ""
+    togglerState: '',
+    targetState: ''
   };
 
   ////////////////////////////
@@ -9494,8 +8860,8 @@ var mToggle = function(elementId, options) {
      */
 
     construct: function(options) {
-      if (mUtil.data(element).has("toggle")) {
-        the = mUtil.data(element).get("toggle");
+      if (mUtil.data(element).has('toggle')) {
+        the = mUtil.data(element).get('toggle');
       } else {
         // reset menu
         Plugin.init(options);
@@ -9503,7 +8869,7 @@ var mToggle = function(elementId, options) {
         // build menu
         Plugin.build();
 
-        mUtil.data(element).set("toggle", the);
+        mUtil.data(element).set('toggle', the);
       }
 
       return the;
@@ -9523,23 +8889,23 @@ var mToggle = function(elementId, options) {
       the.targetState = the.options.targetState;
       the.togglerState = the.options.togglerState;
 
-      the.state = mUtil.hasClasses(the.target, the.targetState) ? "on" : "off";
+      the.state = mUtil.hasClasses(the.target, the.targetState) ? 'on' : 'off';
     },
 
     /**
      * Setup toggle
      */
     build: function() {
-      mUtil.addEvent(element, "mouseup", Plugin.toggle);
+      mUtil.addEvent(element, 'mouseup', Plugin.toggle);
     },
 
     /**
      * Handles offcanvas click toggle
      */
     toggle: function() {
-      Plugin.eventTrigger("beforeToggle");
+      Plugin.eventTrigger('beforeToggle');
 
-      if (the.state == "off") {
+      if (the.state == 'off') {
         Plugin.toggleOn();
       } else {
         Plugin.toggleOff();
@@ -9552,7 +8918,7 @@ var mToggle = function(elementId, options) {
      * Handles toggle click toggle
      */
     toggleOn: function() {
-      Plugin.eventTrigger("beforeOn");
+      Plugin.eventTrigger('beforeOn');
 
       mUtil.addClass(the.target, the.targetState);
 
@@ -9560,11 +8926,11 @@ var mToggle = function(elementId, options) {
         mUtil.addClass(element, the.togglerState);
       }
 
-      the.state = "on";
+      the.state = 'on';
 
-      Plugin.eventTrigger("afterOn");
+      Plugin.eventTrigger('afterOn');
 
-      Plugin.eventTrigger("toggle");
+      Plugin.eventTrigger('toggle');
 
       return the;
     },
@@ -9573,7 +8939,7 @@ var mToggle = function(elementId, options) {
      * Handles toggle click toggle
      */
     toggleOff: function() {
-      Plugin.eventTrigger("beforeOff");
+      Plugin.eventTrigger('beforeOff');
 
       mUtil.removeClass(the.target, the.targetState);
 
@@ -9581,11 +8947,11 @@ var mToggle = function(elementId, options) {
         mUtil.removeClass(element, the.togglerState);
       }
 
-      the.state = "off";
+      the.state = 'off';
 
-      Plugin.eventTrigger("afterOff");
+      Plugin.eventTrigger('afterOff');
 
-      Plugin.eventTrigger("toggle");
+      Plugin.eventTrigger('toggle');
 
       return the;
     },
@@ -9691,7 +9057,7 @@ var mWizard = function(elementId, options) {
 
   //== Get element object
   var element = mUtil.get(elementId);
-  var body = mUtil.get("body");
+  var body = mUtil.get('body');
 
   if (!element) {
     return;
@@ -9713,8 +9079,8 @@ var mWizard = function(elementId, options) {
      */
 
     construct: function(options) {
-      if (mUtil.data(element).has("wizard")) {
-        the = mUtil.data(element).get("wizard");
+      if (mUtil.data(element).has('wizard')) {
+        the = mUtil.data(element).get('wizard');
       } else {
         // reset menu
         Plugin.init(options);
@@ -9722,7 +9088,7 @@ var mWizard = function(elementId, options) {
         // build menu
         Plugin.build();
 
-        mUtil.data(element).set("wizard", the);
+        mUtil.data(element).set('wizard', the);
       }
 
       return the;
@@ -9739,9 +9105,9 @@ var mWizard = function(elementId, options) {
       the.options = mUtil.deepExtend({}, defaultOptions, options);
 
       //== Elements
-      the.steps = mUtil.findAll(element, ".m-wizard__step");
+      the.steps = mUtil.findAll(element, '.m-wizard__step');
 
-      the.progress = mUtil.find(element, ".m-wizard__progress .progress-bar");
+      the.progress = mUtil.find(element, '.m-wizard__progress .progress-bar');
       the.btnSubmit = mUtil.find(element, '[data-wizard-action="submit"]');
       the.btnNext = mUtil.find(element, '[data-wizard-action="next"]');
       the.btnPrev = mUtil.find(element, '[data-wizard-action="prev"]');
@@ -9768,57 +9134,52 @@ var mWizard = function(elementId, options) {
      */
     build: function() {
       //== Next button event handler
-      mUtil.addEvent(the.btnNext, "click", function(e) {
+      mUtil.addEvent(the.btnNext, 'click', function(e) {
         e.preventDefault();
         Plugin.goNext();
       });
 
       //== Prev button event handler
-      mUtil.addEvent(the.btnPrev, "click", function(e) {
+      mUtil.addEvent(the.btnPrev, 'click', function(e) {
         e.preventDefault();
         Plugin.goPrev();
       });
 
       //== First button event handler
-      mUtil.addEvent(the.btnFirst, "click", function(e) {
+      mUtil.addEvent(the.btnFirst, 'click', function(e) {
         e.preventDefault();
         Plugin.goFirst();
       });
 
       //== Last button event handler
-      mUtil.addEvent(the.btnLast, "click", function(e) {
+      mUtil.addEvent(the.btnLast, 'click', function(e) {
         e.preventDefault();
         Plugin.goLast();
       });
 
-      mUtil.on(
-        element,
-        ".m-wizard__step a.m-wizard__step-number",
-        "click",
-        function() {
-          var step = this.closest(".m-wizard__step");
-          var steps = mUtil.parents(this, ".m-wizard__steps");
-          var find = mUtil.findAll(steps, ".m-wizard__step");
-          var num;
+      mUtil.on(element, '.m-wizard__step a.m-wizard__step-number', 'click', function() {
+        var step = this.closest('.m-wizard__step');
+        var steps = mUtil.parents(this, '.m-wizard__steps');
+        var find = mUtil.findAll(steps, '.m-wizard__step');
+        var num;
 
-          for (var i = 0, j = find.length; i < j; i++) {
-            if (step === find[i]) {
-              num = i + 1;
-              break;
-            }
-          }
-
-          if (num) {
-            if (the.options.manualStepForward === false) {
-              if (num < the.currentStep) {
-                Plugin.goTo(num);
-              }
-            } else {
-              Plugin.goTo(num);
-            }
+        for (var i = 0, j = find.length; i < j; i++) {
+          if (step === find[i]) {
+            num = i + 1;
+            break;
           }
         }
-      );
+
+        if (num) {
+          if (the.options.manualStepForward === false) {
+            if (num < the.currentStep) {
+              Plugin.goTo(num);
+            }
+          } else {
+            Plugin.goTo(num);
+          }
+        }
+      });
     },
 
     /**
@@ -9841,9 +9202,9 @@ var mWizard = function(elementId, options) {
       var callback;
 
       if (number > the.currentStep) {
-        callback = Plugin.eventTrigger("beforeNext");
+        callback = Plugin.eventTrigger('beforeNext');
       } else {
-        callback = Plugin.eventTrigger("beforePrev");
+        callback = Plugin.eventTrigger('beforePrev');
       }
 
       //== Skip if stopped
@@ -9855,7 +9216,7 @@ var mWizard = function(elementId, options) {
       //== Continue if no exit
       if (callback !== false) {
         //== Before change
-        Plugin.eventTrigger("beforeChange");
+        Plugin.eventTrigger('beforeChange');
 
         //== Set current step
         the.currentStep = number;
@@ -9864,14 +9225,14 @@ var mWizard = function(elementId, options) {
         Plugin.updateUI();
 
         //== Trigger change event
-        Plugin.eventTrigger("change");
+        Plugin.eventTrigger('change');
       }
 
       //== After next and prev events
       if (number > the.startStep) {
-        Plugin.eventTrigger("afterNext");
+        Plugin.eventTrigger('afterNext');
       } else {
-        Plugin.eventTrigger("afterPrev");
+        Plugin.eventTrigger('afterPrev');
       }
 
       return the;
@@ -9882,21 +9243,21 @@ var mWizard = function(elementId, options) {
      */
     setStepClass: function() {
       if (Plugin.isLastStep()) {
-        mUtil.addClass(element, "m-wizard--step-last");
+        mUtil.addClass(element, 'm-wizard--step-last');
       } else {
-        mUtil.removeClass(element, "m-wizard--step-last");
+        mUtil.removeClass(element, 'm-wizard--step-last');
       }
 
       if (Plugin.isFirstStep()) {
-        mUtil.addClass(element, "m-wizard--step-first");
+        mUtil.addClass(element, 'm-wizard--step-first');
       } else {
-        mUtil.removeClass(element, "m-wizard--step-first");
+        mUtil.removeClass(element, 'm-wizard--step-first');
       }
 
       if (Plugin.isBetweenStep()) {
-        mUtil.addClass(element, "m-wizard--step-between");
+        mUtil.addClass(element, 'm-wizard--step-between');
       } else {
-        mUtil.removeClass(element, "m-wizard--step-between");
+        mUtil.removeClass(element, 'm-wizard--step-between');
       }
     },
 
@@ -9912,17 +9273,14 @@ var mWizard = function(elementId, options) {
 
       //== Apply nav step classes
       for (var i = 0, j = the.steps.length; i < j; i++) {
-        mUtil.removeClass(
-          the.steps[i],
-          "m-wizard__step--current m-wizard__step--done"
-        );
+        mUtil.removeClass(the.steps[i], 'm-wizard__step--current m-wizard__step--done');
       }
 
       for (var i = 1; i < the.currentStep; i++) {
-        mUtil.addClass(the.steps[i - 1], "m-wizard__step--done");
+        mUtil.addClass(the.steps[i - 1], 'm-wizard__step--done');
       }
 
-      mUtil.addClass(the.steps[the.currentStep - 1], "m-wizard__step--current");
+      mUtil.addClass(the.steps[the.currentStep - 1], 'm-wizard__step--current');
     },
 
     /**
@@ -9998,31 +9356,26 @@ var mWizard = function(elementId, options) {
       }
 
       //== Update progress
-      if (mUtil.hasClass(element, "m-wizard--1")) {
+      if (mUtil.hasClass(element, 'm-wizard--1')) {
         var width = 100 * ((the.currentStep - 1) / the.totalSteps);
-        var number = mUtil.find(element, ".m-wizard__step-number");
-        var offset = parseInt(mUtil.css(number, "width"));
-        mUtil.css(
-          the.progress,
-          "width",
-          "calc(" + width + "% + " + offset / 2 + "px)"
-        );
-      } else if (mUtil.hasClass(element, "m-wizard--2")) {
+        var number = mUtil.find(element, '.m-wizard__step-number');
+        var offset = parseInt(mUtil.css(number, 'width'));
+        mUtil.css(the.progress, 'width', 'calc(' + width + '% + ' + offset / 2 + 'px)');
+      } else if (mUtil.hasClass(element, 'm-wizard--2')) {
         if (the.currentStep === 1) {
           //return;
         }
 
-        var progress =
-          (the.currentStep - 1) * (100 * (1 / (the.totalSteps - 1)));
+        var progress = (the.currentStep - 1) * (100 * (1 / (the.totalSteps - 1)));
 
-        if (mUtil.isInResponsiveRange("minimal-desktop-and-below")) {
-          mUtil.css(the.progress, "height", progress + "%");
+        if (mUtil.isInResponsiveRange('minimal-desktop-and-below')) {
+          mUtil.css(the.progress, 'height', progress + '%');
         } else {
-          mUtil.css(the.progress, "width", progress + "%");
+          mUtil.css(the.progress, 'width', progress + '%');
         }
       } else {
         var width = 100 * (the.currentStep / the.totalSteps);
-        mUtil.css(the.progress, "width", width + "%");
+        mUtil.css(the.progress, 'width', width + '%');
       }
     },
 
@@ -10031,11 +9384,11 @@ var mWizard = function(elementId, options) {
      */
     handleTarget: function() {
       var step = the.steps[the.currentStep - 1];
-      var target = mUtil.get(mUtil.attr(step, "m-wizard-target"));
-      var current = mUtil.find(element, ".m-wizard__form-step--current");
+      var target = mUtil.get(mUtil.attr(step, 'm-wizard-target'));
+      var current = mUtil.find(element, '.m-wizard__form-step--current');
 
-      mUtil.removeClass(current, "m-wizard__form-step--current");
-      mUtil.addClass(target, "m-wizard__form-step--current");
+      mUtil.removeClass(current, 'm-wizard__form-step--current');
+      mUtil.addClass(target, 'm-wizard__form-step--current');
     },
 
     /**
@@ -10194,8 +9547,8 @@ var mWizard = function(elementId, options) {
   return the;
 };
 (function($) {
-  var pluginName = "mDatatable";
-  var pfx = "m-";
+  var pluginName = 'mDatatable';
+  var pfx = 'm-';
 
   $.fn[pluginName] = $.fn[pluginName] || {};
 
@@ -10214,7 +9567,7 @@ var mWizard = function(elementId, options) {
         if (Extension.selectorEnabled()) {
           // reset
           datatable.setDataSourceParam(options.vars.selectedAllRows, false);
-          datatable.stateRemove("checkbox");
+          datatable.stateRemove('checkbox');
 
           // requestIds is not null
           if (options.vars.requestIds) {
@@ -10223,8 +9576,8 @@ var mWizard = function(elementId, options) {
           }
 
           // remove selected checkbox on datatable reload
-          $(datatable).on(pfx + "datatable--on-reloaded", function() {
-            datatable.stateRemove("checkbox");
+          $(datatable).on(pfx + 'datatable--on-reloaded', function() {
+            datatable.stateRemove('checkbox');
             datatable.setDataSourceParam(options.vars.selectedAllRows, false);
             Extension.selectedAllRows = false;
             Extension.selectedRows = [];
@@ -10232,15 +9585,10 @@ var mWizard = function(elementId, options) {
           });
 
           // select all on extension init
-          Extension.selectedAllRows = datatable.getDataSourceParam(
-            options.vars.selectedAllRows
-          );
+          Extension.selectedAllRows = datatable.getDataSourceParam(options.vars.selectedAllRows);
 
-          $(datatable).on(pfx + "datatable--on-layout-updated", function(
-            e,
-            args
-          ) {
-            if (args.table != $(datatable.wrap).attr("id")) {
+          $(datatable).on(pfx + 'datatable--on-layout-updated', function(e, args) {
+            if (args.table != $(datatable.wrap).attr('id')) {
               return;
             }
             datatable.ready(function() {
@@ -10250,33 +9598,27 @@ var mWizard = function(elementId, options) {
             });
           });
 
-          $(datatable).on(pfx + "datatable--on-check", function(e, ids) {
+          $(datatable).on(pfx + 'datatable--on-check', function(e, ids) {
             ids.forEach(function(id) {
               Extension.selectedRows.push(id);
               // // remove from unselected rows
-              Extension.unselectedRows = Extension.remove(
-                Extension.unselectedRows,
-                id
-              );
+              Extension.unselectedRows = Extension.remove(Extension.unselectedRows, id);
             });
             var storage = {};
-            storage["selectedRows"] = $.unique(Extension.selectedRows);
-            storage["unselectedRows"] = $.unique(Extension.unselectedRows);
-            datatable.stateKeep("checkbox", storage);
+            storage['selectedRows'] = $.unique(Extension.selectedRows);
+            storage['unselectedRows'] = $.unique(Extension.unselectedRows);
+            datatable.stateKeep('checkbox', storage);
           });
-          $(datatable).on(pfx + "datatable--on-uncheck", function(e, ids) {
+          $(datatable).on(pfx + 'datatable--on-uncheck', function(e, ids) {
             ids.forEach(function(id) {
               Extension.unselectedRows.push(id);
               // // remove from selected rows
-              Extension.selectedRows = Extension.remove(
-                Extension.selectedRows,
-                id
-              );
+              Extension.selectedRows = Extension.remove(Extension.selectedRows, id);
             });
             var storage = {};
-            storage["selectedRows"] = $.unique(Extension.selectedRows);
-            storage["unselectedRows"] = $.unique(Extension.unselectedRows);
-            datatable.stateKeep("checkbox", storage);
+            storage['selectedRows'] = $.unique(Extension.selectedRows);
+            storage['unselectedRows'] = $.unique(Extension.unselectedRows);
+            datatable.stateKeep('checkbox', storage);
           });
         }
       },
@@ -10287,14 +9629,14 @@ var mWizard = function(elementId, options) {
       initEvent: function() {
         // select all checkbox click
         $(datatable.tableHead)
-          .find("." + pfx + 'checkbox--all > [type="checkbox"]')
+          .find('.' + pfx + 'checkbox--all > [type="checkbox"]')
           .click(function(e) {
             // clear selected and unselected rows
             Extension.selectedRows = Extension.unselectedRows = [];
-            datatable.stateRemove("checkbox");
+            datatable.stateRemove('checkbox');
 
             // select all rows
-            if ($(this).is(":checked")) {
+            if ($(this).is(':checked')) {
               Extension.selectedAllRows = true;
             } else {
               Extension.selectedAllRows = false;
@@ -10302,79 +9644,66 @@ var mWizard = function(elementId, options) {
 
             // local select all current page rows
             if (!options.vars.requestIds) {
-              if ($(this).is(":checked")) {
+              if ($(this).is(':checked')) {
                 Extension.selectedRows = $.makeArray(
                   $(datatable.tableBody)
-                    .find("." + pfx + 'checkbox--single > [type="checkbox"]')
+                    .find('.' + pfx + 'checkbox--single > [type="checkbox"]')
                     .map(function(i, chk) {
                       return $(chk).val();
                     })
                 );
               }
               var storage = {};
-              storage["selectedRows"] = $.unique(Extension.selectedRows);
-              datatable.stateKeep("checkbox", storage);
+              storage['selectedRows'] = $.unique(Extension.selectedRows);
+              datatable.stateKeep('checkbox', storage);
             }
 
             // keep selectedAllRows in datasource params
-            datatable.setDataSourceParam(
-              options.vars.selectedAllRows,
-              Extension.selectedAllRows
-            );
+            datatable.setDataSourceParam(options.vars.selectedAllRows, Extension.selectedAllRows);
 
-            $(datatable).trigger(pfx + "datatable--on-click-checkbox", [
-              $(this)
-            ]);
+            $(datatable).trigger(pfx + 'datatable--on-click-checkbox', [$(this)]);
           });
 
         // single row checkbox click
         $(datatable.tableBody)
-          .find("." + pfx + 'checkbox--single > [type="checkbox"]')
+          .find('.' + pfx + 'checkbox--single > [type="checkbox"]')
           .click(function(e) {
             var id = $(this).val();
-            if ($(this).is(":checked")) {
+            if ($(this).is(':checked')) {
               Extension.selectedRows.push(id);
               // remove from unselected rows
-              Extension.unselectedRows = Extension.remove(
-                Extension.unselectedRows,
-                id
-              );
+              Extension.unselectedRows = Extension.remove(Extension.unselectedRows, id);
             } else {
               Extension.unselectedRows.push(id);
               // remove from selected rows
-              Extension.selectedRows = Extension.remove(
-                Extension.selectedRows,
-                id
-              );
+              Extension.selectedRows = Extension.remove(Extension.selectedRows, id);
             }
 
             // local checkbox header check
             if (!options.vars.requestIds && Extension.selectedRows.length < 1) {
               // remove select all checkbox, if there is no checked checkbox left
               $(datatable.tableHead)
-                .find("." + pfx + 'checkbox--all > [type="checkbox"]')
-                .prop("checked", false);
+                .find('.' + pfx + 'checkbox--all > [type="checkbox"]')
+                .prop('checked', false);
             }
 
             var storage = {};
-            storage["selectedRows"] = $.unique(Extension.selectedRows);
-            storage["unselectedRows"] = $.unique(Extension.unselectedRows);
-            datatable.stateKeep("checkbox", storage);
+            storage['selectedRows'] = $.unique(Extension.selectedRows);
+            storage['unselectedRows'] = $.unique(Extension.unselectedRows);
+            datatable.stateKeep('checkbox', storage);
 
-            $(datatable).trigger(pfx + "datatable--on-click-checkbox", [
-              $(this)
-            ]);
+            $(datatable).trigger(pfx + 'datatable--on-click-checkbox', [$(this)]);
           });
       },
 
       initSelect: function() {
         // selected all rows from server
         if (Extension.selectedAllRows && options.vars.requestIds) {
-          if (!datatable.hasClass(pfx + "datatable--error")) {
+          if (!datatable.hasClass(pfx + 'datatable--error')) {
             // set header select all checkbox checked
             $(datatable.tableHead)
-              .find("." + pfx + 'checkbox--all > [type="checkbox"]')
-              .prop("checked", true);
+              .find('.' + pfx + 'checkbox--all > [type="checkbox"]')
+              .prop('checked', true);
           }
 
           // set all checkbox in table body
@@ -10392,15 +9721,15 @@ var mWizard = function(elementId, options) {
 
           // local checkbox; check if all checkboxes of currect page are checked
           if (
-            !datatable.hasClass(pfx + "datatable--error") &&
+            !datatable.hasClass(pfx + 'datatable--error') &&
             $(datatable.tableBody)
-              .find("." + pfx + 'checkbox--single > [type="checkbox"]')
-              .not(":checked").length < 1
+              .find('.' + pfx + 'checkbox--single > [type="checkbox"]')
+              .not(':checked').length < 1
           ) {
             // set header select all checkbox checked
             $(datatable.tableHead)
-              .find("." + pfx + 'checkbox--all > [type="checkbox"]')
-              .prop("checked", true);
+              .find('.' + pfx + 'checkbox--all > [type="checkbox"]')
+              .prop('checked', true);
           }
         }
       },
@@ -10416,10 +9745,10 @@ var mWizard = function(elementId, options) {
 
       initVars: function() {
         // get single select/unselect from localstorage
-        var storage = datatable.stateGet("checkbox");
-        if (typeof storage !== "undefined") {
-          Extension.selectedRows = storage["selectedRows"] || [];
-          Extension.unselectedRows = storage["unselectedRows"] || [];
+        var storage = datatable.stateGet('checkbox');
+        if (typeof storage !== 'undefined') {
+          Extension.selectedRows = storage['selectedRows'] || [];
+          Extension.unselectedRows = storage['unselectedRows'] || [];
         }
       },
 
@@ -10428,13 +9757,12 @@ var mWizard = function(elementId, options) {
 
         // server selected all rows
         if (Extension.selectedAllRows && options.vars.requestIds) {
-          if (typeof path === "undefined") {
+          if (typeof path === 'undefined') {
             path = options.vars.rowIds;
           }
 
           // if selected all rows, return id from response meta
-          var selectedAllRows =
-            datatable.getObject(path, datatable.lastResponse) || [];
+          var selectedAllRows = datatable.getObject(path, datatable.lastResponse) || [];
 
           if (selectedAllRows.length > 0) {
             // remove single unselected rows from selectedAllRows ids from server response emta
@@ -10461,7 +9789,7 @@ var mWizard = function(elementId, options) {
       return Extension;
     };
 
-    if (typeof options === "object") {
+    if (typeof options === 'object') {
       options = $.extend(true, {}, $.fn[pluginName].checkbox.default, options);
       Extension.init.apply(this, [options]);
     }
@@ -10472,11 +9800,11 @@ var mWizard = function(elementId, options) {
   $.fn[pluginName].checkbox.default = {
     vars: {
       // select all rows flag to be sent to the server
-      selectedAllRows: "selectedAllRows",
+      selectedAllRows: 'selectedAllRows',
       // request id parameter's name
-      requestIds: "requestIds",
+      requestIds: 'requestIds',
       // response path to all rows id
-      rowIds: "meta.rowIds"
+      rowIds: 'meta.rowIds'
     }
   };
 })(jQuery);
@@ -10489,57 +9817,57 @@ var mLayout = (function() {
   //== Header
   var initStickyHeader = function() {
     var tmp;
-    var headerEl = mUtil.get("m_header");
+    var headerEl = mUtil.get('m_header');
     var options = {
       offset: {},
       minimize: {}
     };
 
-    if (mUtil.attr(headerEl, "m-minimize-mobile") == "minimize") {
+    if (mUtil.attr(headerEl, 'm-minimize-mobile') == 'minimize') {
       options.minimize.mobile = {};
-      options.minimize.mobile.on = "m-header--minimize-on";
-      options.minimize.mobile.off = "m-header--minimize-off";
+      options.minimize.mobile.on = 'm-header--minimize-on';
+      options.minimize.mobile.off = 'm-header--minimize-off';
     } else {
       options.minimize.mobile = false;
     }
 
-    if (mUtil.attr(headerEl, "m-minimize") == "minimize") {
+    if (mUtil.attr(headerEl, 'm-minimize') == 'minimize') {
       options.minimize.desktop = {};
-      options.minimize.desktop.on = "m-header--minimize-on";
-      options.minimize.desktop.off = "m-header--minimize-off";
+      options.minimize.desktop.on = 'm-header--minimize-on';
+      options.minimize.desktop.off = 'm-header--minimize-off';
     } else {
       options.minimize.desktop = false;
     }
 
-    if ((tmp = mUtil.attr(headerEl, "m-minimize-offset"))) {
+    if ((tmp = mUtil.attr(headerEl, 'm-minimize-offset'))) {
       options.offset.desktop = tmp;
     }
 
-    if ((tmp = mUtil.attr(headerEl, "m-minimize-mobile-offset"))) {
+    if ((tmp = mUtil.attr(headerEl, 'm-minimize-mobile-offset'))) {
       options.offset.mobile = tmp;
     }
 
-    header = new mHeader("m_header", options);
+    header = new mHeader('m_header', options);
   };
 
   //== Hor menu
   var initHorMenu = function() {
     // init aside left offcanvas
-    horMenuOffcanvas = new mOffcanvas("m_header_menu", {
+    horMenuOffcanvas = new mOffcanvas('m_header_menu', {
       overlay: true,
-      baseClass: "m-aside-header-menu-mobile",
-      closeBy: "m_aside_header_menu_mobile_close_btn",
+      baseClass: 'm-aside-header-menu-mobile',
+      closeBy: 'm_aside_header_menu_mobile_close_btn',
       toggleBy: {
-        target: "m_aside_header_menu_mobile_toggle",
-        state: "m-brand__toggler--active"
+        target: 'm_aside_header_menu_mobile_toggle',
+        state: 'm-brand__toggler--active'
       }
     });
 
-    horMenu = new mMenu("m_header_menu", {
+    horMenu = new mMenu('m_header_menu', {
       submenu: {
-        desktop: "dropdown",
-        tablet: "accordion",
-        mobile: "accordion"
+        desktop: 'dropdown',
+        tablet: 'accordion',
+        mobile: 'accordion'
       },
       accordion: {
         slideSpeed: 200, // accordion toggle slide speed in milliseconds
@@ -10551,11 +9879,10 @@ var mLayout = (function() {
   //== Aside menu
   var initLeftAsideMenu = function() {
     //== Init aside menu
-    var menu = mUtil.get("m_ver_menu");
-    var menuDesktopMode =
-      mUtil.attr(menu, "m-menu-dropdown") === "1" ? "dropdown" : "accordion";
+    var menu = mUtil.get('m_ver_menu');
+    var menuDesktopMode = mUtil.attr(menu, 'm-menu-dropdown') === '1' ? 'dropdown' : 'accordion';
 
-    asideMenu = new mMenu("m_ver_menu", {
+    asideMenu = new mMenu('m_ver_menu', {
       // submenu setup
       submenu: {
         desktop: {
@@ -10563,12 +9890,12 @@ var mLayout = (function() {
           default: menuDesktopMode,
           // whenever body has this class switch the menu mode to dropdown
           state: {
-            body: "m-aside-left--minimize",
-            mode: "dropdown"
+            body: 'm-aside-left--minimize',
+            mode: 'dropdown'
           }
         },
-        tablet: "accordion", // menu set to accordion in tablet mode
-        mobile: "accordion" // menu set to accordion in mobile mode
+        tablet: 'accordion', // menu set to accordion in tablet mode
+        mobile: 'accordion' // menu set to accordion in mobile mode
       },
 
       //accordion setup
@@ -10582,43 +9909,40 @@ var mLayout = (function() {
   //== Aside
   var initLeftAside = function() {
     // init aside left offcanvas
-    var asideLeft = mUtil.get("m_aside_left");
-    var asideOffcanvasClass = mUtil.hasClass(
-      asideLeft,
-      "m-aside-left--offcanvas-default"
-    )
-      ? "m-aside-left--offcanvas-default"
-      : "m-aside-left";
+    var asideLeft = mUtil.get('m_aside_left');
+    var asideOffcanvasClass = mUtil.hasClass(asideLeft, 'm-aside-left--offcanvas-default')
+      ? 'm-aside-left--offcanvas-default'
+      : 'm-aside-left';
 
-    asideMenuOffcanvas = new mOffcanvas("m_aside_left", {
+    asideMenuOffcanvas = new mOffcanvas('m_aside_left', {
       baseClass: asideOffcanvasClass,
       overlay: true,
-      closeBy: "m_aside_left_close_btn",
+      closeBy: 'm_aside_left_close_btn',
       toggleBy: {
-        target: "m_aside_left_offcanvas_toggle",
-        state: "m-brand__toggler--active"
+        target: 'm_aside_left_offcanvas_toggle',
+        state: 'm-brand__toggler--active'
       }
     });
   };
 
   //== Sidebar toggle
   var initLeftAsideToggle = function() {
-    if ($("#m_aside_left_minimize_toggle").length === 0) {
+    if ($('#m_aside_left_minimize_toggle').length === 0) {
       return;
     }
 
-    asideLeftToggle = new mToggle("m_aside_left_minimize_toggle", {
-      target: "body",
-      targetState: "m-brand--minimize m-aside-left--minimize",
-      togglerState: "m-brand__toggler--active"
+    asideLeftToggle = new mToggle('m_aside_left_minimize_toggle', {
+      target: 'body',
+      targetState: 'm-brand--minimize m-aside-left--minimize',
+      togglerState: 'm-brand__toggler--active'
     });
 
-    asideLeftToggle.on("toggle", function(toggle) {
+    asideLeftToggle.on('toggle', function(toggle) {
       horMenu.pauseDropdownHover(800);
       asideMenu.pauseDropdownHover(800);
 
       //== Remember state in cookie
-      Cookies.set("sidebar_toggle_state", toggle.getState());
+      Cookies.set('sidebar_toggle_state', toggle.getState());
       // to set default minimized left aside use this cookie value in your
       // server side code and add "m-brand--minimize m-aside-left--minimize" classes to
       // the body tag in order to initialize the minimized left aside mode during page loading.
@@ -10627,39 +9951,38 @@ var mLayout = (function() {
 
   //== Topbar
   var initTopbar = function() {
-    $("#m_aside_header_topbar_mobile_toggle").click(function() {
-      $("body").toggleClass("m-topbar--on");
+    $('#m_aside_header_topbar_mobile_toggle').click(function() {
+      $('body').toggleClass('m-topbar--on');
     });
   };
 
   //== Quicksearch
   var initQuicksearch = function() {
-    if ($("#m_quicksearch").length === 0) {
+    if ($('#m_quicksearch').length === 0) {
       return;
     }
 
-    quicksearch = new mQuicksearch("m_quicksearch", {
-      mode: mUtil.attr("m_quicksearch", "m-quicksearch-mode"), // quick search type
+    quicksearch = new mQuicksearch('m_quicksearch', {
+      mode: mUtil.attr('m_quicksearch', 'm-quicksearch-mode'), // quick search type
       minLength: 1
     });
 
     //<div class="m-search-results m-search-results--skin-light"><span class="m-search-result__message">Something went wrong</div></div>
 
-    quicksearch.on("search", function(the) {
+    quicksearch.on('search', function(the) {
       the.showProgress();
 
       $.ajax({
-        url:
-          "https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/quick_search.php",
+        url: 'https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/quick_search.php',
         data: { query: the.query },
-        dataType: "html",
+        dataType: 'html',
         success: function(res) {
           the.hideProgress();
           the.showResult(res);
         },
         error: function(res) {
           the.hideProgress();
-          the.showError("Connection error. Pleae try again later.");
+          the.showError('Connection error. Pleae try again later.');
         }
       });
     });
@@ -10667,7 +9990,7 @@ var mLayout = (function() {
 
   //== Scrolltop
   var initScrollTop = function() {
-    var scrollTop = new mScrollTop("m_scroll_top", {
+    var scrollTop = new mScrollTop('m_scroll_top', {
       offset: 300,
       speed: 600
     });
@@ -10718,27 +10041,20 @@ $(document).ready(function() {
 });
 
 var mQuickSidebar = (function() {
-  var topbarAside = $("#m_quick_sidebar");
-  var topbarAsideTabs = $("#m_quick_sidebar_tabs");
-  var topbarAsideContent = topbarAside.find(".m-quick-sidebar__content");
+  var topbarAside = $('#m_quick_sidebar');
+  var topbarAsideTabs = $('#m_quick_sidebar_tabs');
+  var topbarAsideContent = topbarAside.find('.m-quick-sidebar__content');
 
   var initMessages = function() {
-    var messages = mUtil.find(
-      mUtil.get("m_quick_sidebar_tabs_messenger"),
-      ".m-messenger__messages"
-    );
-    var form = $("#m_quick_sidebar_tabs_messenger .m-messenger__form");
+    var messages = mUtil.find(mUtil.get('m_quick_sidebar_tabs_messenger'), '.m-messenger__messages');
+    var form = $('#m_quick_sidebar_tabs_messenger .m-messenger__form');
 
     mUtil.scrollerInit(messages, {
       disableForMobile: true,
       resetHeightOnDestroy: false,
       handleWindowResize: true,
       height: function() {
-        var height =
-          topbarAside.outerHeight(true) -
-          topbarAsideTabs.outerHeight(true) -
-          form.outerHeight(true) -
-          120;
+        var height = topbarAside.outerHeight(true) - topbarAsideTabs.outerHeight(true) - form.outerHeight(true) - 120;
 
         return height;
       }
@@ -10746,10 +10062,7 @@ var mQuickSidebar = (function() {
   };
 
   var initSettings = function() {
-    var settings = mUtil.find(
-      mUtil.get("m_quick_sidebar_tabs_settings"),
-      ".m-list-settings"
-    );
+    var settings = mUtil.find(mUtil.get('m_quick_sidebar_tabs_settings'), '.m-list-settings');
 
     if (!settings) {
       return;
@@ -10760,18 +10073,13 @@ var mQuickSidebar = (function() {
       resetHeightOnDestroy: false,
       handleWindowResize: true,
       height: function() {
-        return (
-          mUtil.getViewPort().height - topbarAsideTabs.outerHeight(true) - 60
-        );
+        return mUtil.getViewPort().height - topbarAsideTabs.outerHeight(true) - 60;
       }
     });
   };
 
   var initLogs = function() {
-    var logs = mUtil.find(
-      mUtil.get("m_quick_sidebar_tabs_logs"),
-      ".m-list-timeline"
-    );
+    var logs = mUtil.find(mUtil.get('m_quick_sidebar_tabs_logs'), '.m-list-timeline');
 
     if (!logs) {
       return;
@@ -10782,9 +10090,7 @@ var mQuickSidebar = (function() {
       resetHeightOnDestroy: false,
       handleWindowResize: true,
       height: function() {
-        return (
-          mUtil.getViewPort().height - topbarAsideTabs.outerHeight(true) - 60
-        );
+        return mUtil.getViewPort().height - topbarAsideTabs.outerHeight(true) - 60;
       }
     });
   };
@@ -10796,21 +10102,21 @@ var mQuickSidebar = (function() {
   };
 
   var initOffcanvas = function() {
-    var topbarAsideObj = new mOffcanvas("m_quick_sidebar", {
+    var topbarAsideObj = new mOffcanvas('m_quick_sidebar', {
       overlay: true,
-      baseClass: "m-quick-sidebar",
-      closeBy: "m_quick_sidebar_close",
-      toggleBy: "m_quick_sidebar_toggle"
+      baseClass: 'm-quick-sidebar',
+      closeBy: 'm_quick_sidebar_close',
+      toggleBy: 'm_quick_sidebar_toggle'
     });
 
     // run once on first time dropdown shown
-    topbarAsideObj.one("afterShow", function() {
+    topbarAsideObj.one('afterShow', function() {
       mApp.block(topbarAside);
 
       setTimeout(function() {
         mApp.unblock(topbarAside);
 
-        topbarAsideContent.removeClass("m--hide");
+        topbarAsideContent.removeClass('m--hide');
 
         initOffcanvasTabs();
       }, 1000);

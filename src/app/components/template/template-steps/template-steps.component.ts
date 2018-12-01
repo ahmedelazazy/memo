@@ -1,19 +1,19 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { Step } from "src/app/models/step";
-import { TemplateService } from "src/app/services/template.service";
-import * as _ from "lodash";
-import { FormArray, FormGroup } from "@angular/forms";
-import { FormHelper } from "../form-helper";
-import { TabsetComponent } from "ngx-bootstrap";
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Step } from 'src/app/models/step';
+import { TemplateService } from 'src/app/services/template.service';
+import * as _ from 'lodash';
+import { FormArray, FormGroup } from '@angular/forms';
+import { FormHelper } from '../form-helper';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
-  selector: "app-template-steps",
-  templateUrl: "./template-steps.component.html",
-  styleUrls: ["./template-steps.component.css"]
+  selector: 'app-template-steps',
+  templateUrl: './template-steps.component.html',
+  styleUrls: ['./template-steps.component.css']
 })
 export class TemplateStepsComponent implements OnInit {
-  @Input("users") users;
-  @Input("templateContainer") templateContainer: FormGroup;
+  @Input('users') users;
+  @Input('templateContainer') templateContainer: FormGroup;
   selectedStep: FormGroup;
   processSelected: boolean;
   steps: FormArray;
@@ -58,6 +58,6 @@ export class TemplateStepsComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.steps = this.templateContainer.get("steps") as FormArray;
+    this.steps = this.templateContainer.get('steps') as FormArray;
   }
 }

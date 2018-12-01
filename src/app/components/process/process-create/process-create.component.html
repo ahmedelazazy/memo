@@ -4,21 +4,10 @@
     <!-- {{isEdit ? 'Edit Step' : 'Add Step' }} -->
   </div>
   <div class="panel-body">
-    <form
-      [class.invalidform]="submitted"
-      #f="ngForm"
-      (ngSubmit)="addProcess(f, template.id)"
-    >
+    <form [class.invalidform]="submitted" #f="ngForm" (ngSubmit)="addProcess(f, template.id)">
       <div class="form-group">
         <label for="title">Title*</label>
-        <input
-          class="form-control"
-          id="title"
-          name="title"
-          [(ngModel)]="process.title"
-          placeholder="Title"
-          required
-        />
+        <input class="form-control" id="title" name="title" [(ngModel)]="process.title" placeholder="Title" required />
       </div>
 
       <div class="form-group">
@@ -34,13 +23,7 @@
 
       <div class="form-group">
         <button type="submit" class="btn btn-success">Save</button>
-        <button
-          type="button"
-          class="btn btn-default"
-          [routerLink]="['/process']"
-        >
-          Cancel
-        </button>
+        <button type="button" class="btn btn-default" [routerLink]="['/process']">Cancel</button>
       </div>
     </form>
   </div>

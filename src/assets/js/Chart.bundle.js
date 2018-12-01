@@ -8,17 +8,17 @@
  * https://github.com/chartjs/Chart.js/blob/master/LICENSE.md
  */
 (function(f) {
-  if (typeof exports === "object" && typeof module !== "undefined") {
+  if (typeof exports === 'object' && typeof module !== 'undefined') {
     module.exports = f();
-  } else if (typeof define === "function" && define.amd) {
+  } else if (typeof define === 'function' && define.amd) {
     define([], f);
   } else {
     var g;
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       g = window;
-    } else if (typeof global !== "undefined") {
+    } else if (typeof global !== 'undefined') {
       g = global;
-    } else if (typeof self !== "undefined") {
+    } else if (typeof self !== 'undefined') {
       g = self;
     } else {
       g = this;
@@ -32,11 +32,11 @@
       function s(o, u) {
         if (!n[o]) {
           if (!t[o]) {
-            var a = typeof require == "function" && require;
+            var a = typeof require == 'function' && require;
             if (!u && a) return a(o, !0);
             if (i) return i(o, !0);
             var f = new Error("Cannot find module '" + o + "'");
-            throw ((f.code = "MODULE_NOT_FOUND"), f);
+            throw ((f.code = 'MODULE_NOT_FOUND'), f);
           }
           var l = (n[o] = { exports: {} });
           t[o][0].call(
@@ -55,7 +55,7 @@
         }
         return n[o].exports;
       }
-      var i = typeof require == "function" && require;
+      var i = typeof require == 'function' && require;
       for (var o = 0; o < r.length; o++) s(r[o]);
       return s;
     }
@@ -120,7 +120,7 @@
               }
               a = parseFloat(match[4]);
             } else if ((match = string.match(keyword))) {
-              if (match[1] == "transparent") {
+              if (match[1] == 'transparent') {
                 return [0, 0, 0, 0];
               }
               rgb = colorNames[match[1]];
@@ -196,33 +196,21 @@
 
           // generators
           function hexString(rgb) {
-            return (
-              "#" + hexDouble(rgb[0]) + hexDouble(rgb[1]) + hexDouble(rgb[2])
-            );
+            return '#' + hexDouble(rgb[0]) + hexDouble(rgb[1]) + hexDouble(rgb[2]);
           }
 
           function rgbString(rgba, alpha) {
             if (alpha < 1 || (rgba[3] && rgba[3] < 1)) {
               return rgbaString(rgba, alpha);
             }
-            return "rgb(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ")";
+            return 'rgb(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ')';
           }
 
           function rgbaString(rgba, alpha) {
             if (alpha === undefined) {
               alpha = rgba[3] !== undefined ? rgba[3] : 1;
             }
-            return (
-              "rgba(" +
-              rgba[0] +
-              ", " +
-              rgba[1] +
-              ", " +
-              rgba[2] +
-              ", " +
-              alpha +
-              ")"
-            );
+            return 'rgba(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ', ' + alpha + ')';
           }
 
           function percentString(rgba, alpha) {
@@ -233,48 +221,28 @@
               g = Math.round((rgba[1] / 255) * 100),
               b = Math.round((rgba[2] / 255) * 100);
 
-            return "rgb(" + r + "%, " + g + "%, " + b + "%)";
+            return 'rgb(' + r + '%, ' + g + '%, ' + b + '%)';
           }
 
           function percentaString(rgba, alpha) {
             var r = Math.round((rgba[0] / 255) * 100),
               g = Math.round((rgba[1] / 255) * 100),
               b = Math.round((rgba[2] / 255) * 100);
-            return (
-              "rgba(" +
-              r +
-              "%, " +
-              g +
-              "%, " +
-              b +
-              "%, " +
-              (alpha || rgba[3] || 1) +
-              ")"
-            );
+            return 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + (alpha || rgba[3] || 1) + ')';
           }
 
           function hslString(hsla, alpha) {
             if (alpha < 1 || (hsla[3] && hsla[3] < 1)) {
               return hslaString(hsla, alpha);
             }
-            return "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)";
+            return 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)';
           }
 
           function hslaString(hsla, alpha) {
             if (alpha === undefined) {
               alpha = hsla[3] !== undefined ? hsla[3] : 1;
             }
-            return (
-              "hsla(" +
-              hsla[0] +
-              ", " +
-              hsla[1] +
-              "%, " +
-              hsla[2] +
-              "%, " +
-              alpha +
-              ")"
-            );
+            return 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + alpha + ')';
           }
 
           // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
@@ -284,15 +252,15 @@
               alpha = hwb[3] !== undefined ? hwb[3] : 1;
             }
             return (
-              "hwb(" +
+              'hwb(' +
               hwb[0] +
-              ", " +
+              ', ' +
               hwb[1] +
-              "%, " +
+              '%, ' +
               hwb[2] +
-              "%" +
-              (alpha !== undefined && alpha !== 1 ? ", " + alpha : "") +
-              ")"
+              '%' +
+              (alpha !== undefined && alpha !== 1 ? ', ' + alpha : '') +
+              ')'
             );
           }
 
@@ -307,7 +275,7 @@
 
           function hexDouble(num) {
             var str = num.toString(16).toUpperCase();
-            return str.length < 2 ? "0" + str : str;
+            return str.length < 2 ? '0' + str : str;
           }
 
           //create a list of reverse color names
@@ -316,7 +284,7 @@
             reverseNames[colorNames[name]] = name;
           }
         },
-        { "5": 5 }
+        { '5': 5 }
       ],
       2: [
         function(require, module, exports) {
@@ -344,27 +312,27 @@
 
             // parse Color() argument
             var vals;
-            if (typeof obj === "string") {
+            if (typeof obj === 'string') {
               vals = string.getRgba(obj);
               if (vals) {
-                this.setValues("rgb", vals);
+                this.setValues('rgb', vals);
               } else if ((vals = string.getHsla(obj))) {
-                this.setValues("hsl", vals);
+                this.setValues('hsl', vals);
               } else if ((vals = string.getHwb(obj))) {
-                this.setValues("hwb", vals);
+                this.setValues('hwb', vals);
               }
-            } else if (typeof obj === "object") {
+            } else if (typeof obj === 'object') {
               vals = obj;
               if (vals.r !== undefined || vals.red !== undefined) {
-                this.setValues("rgb", vals);
+                this.setValues('rgb', vals);
               } else if (vals.l !== undefined || vals.lightness !== undefined) {
-                this.setValues("hsl", vals);
+                this.setValues('hsl', vals);
               } else if (vals.v !== undefined || vals.value !== undefined) {
-                this.setValues("hsv", vals);
+                this.setValues('hsv', vals);
               } else if (vals.w !== undefined || vals.whiteness !== undefined) {
-                this.setValues("hwb", vals);
+                this.setValues('hwb', vals);
               } else if (vals.c !== undefined || vals.cyan !== undefined) {
-                this.setValues("cmyk", vals);
+                this.setValues('cmyk', vals);
               }
             }
           };
@@ -374,19 +342,19 @@
               return this.valid;
             },
             rgb: function() {
-              return this.setSpace("rgb", arguments);
+              return this.setSpace('rgb', arguments);
             },
             hsl: function() {
-              return this.setSpace("hsl", arguments);
+              return this.setSpace('hsl', arguments);
             },
             hsv: function() {
-              return this.setSpace("hsv", arguments);
+              return this.setSpace('hsv', arguments);
             },
             hwb: function() {
-              return this.setSpace("hwb", arguments);
+              return this.setSpace('hwb', arguments);
             },
             cmyk: function() {
-              return this.setSpace("cmyk", arguments);
+              return this.setSpace('cmyk', arguments);
             },
 
             rgbArray: function() {
@@ -420,55 +388,55 @@
               if (val === undefined) {
                 return this.values.alpha;
               }
-              this.setValues("alpha", val);
+              this.setValues('alpha', val);
               return this;
             },
 
             red: function(val) {
-              return this.setChannel("rgb", 0, val);
+              return this.setChannel('rgb', 0, val);
             },
             green: function(val) {
-              return this.setChannel("rgb", 1, val);
+              return this.setChannel('rgb', 1, val);
             },
             blue: function(val) {
-              return this.setChannel("rgb", 2, val);
+              return this.setChannel('rgb', 2, val);
             },
             hue: function(val) {
               if (val) {
                 val %= 360;
                 val = val < 0 ? 360 + val : val;
               }
-              return this.setChannel("hsl", 0, val);
+              return this.setChannel('hsl', 0, val);
             },
             saturation: function(val) {
-              return this.setChannel("hsl", 1, val);
+              return this.setChannel('hsl', 1, val);
             },
             lightness: function(val) {
-              return this.setChannel("hsl", 2, val);
+              return this.setChannel('hsl', 2, val);
             },
             saturationv: function(val) {
-              return this.setChannel("hsv", 1, val);
+              return this.setChannel('hsv', 1, val);
             },
             whiteness: function(val) {
-              return this.setChannel("hwb", 1, val);
+              return this.setChannel('hwb', 1, val);
             },
             blackness: function(val) {
-              return this.setChannel("hwb", 2, val);
+              return this.setChannel('hwb', 2, val);
             },
             value: function(val) {
-              return this.setChannel("hsv", 2, val);
+              return this.setChannel('hsv', 2, val);
             },
             cyan: function(val) {
-              return this.setChannel("cmyk", 0, val);
+              return this.setChannel('cmyk', 0, val);
             },
             magenta: function(val) {
-              return this.setChannel("cmyk", 1, val);
+              return this.setChannel('cmyk', 1, val);
             },
             yellow: function(val) {
-              return this.setChannel("cmyk", 2, val);
+              return this.setChannel('cmyk', 2, val);
             },
             black: function(val) {
-              return this.setChannel("cmyk", 3, val);
+              return this.setChannel('cmyk', 3, val);
             },
 
             hexString: function() {
@@ -507,10 +475,7 @@
               var lum = [];
               for (var i = 0; i < rgb.length; i++) {
                 var chan = rgb[i] / 255;
-                lum[i] =
-                  chan <= 0.03928
-                    ? chan / 12.92
-                    : Math.pow((chan + 0.055) / 1.055, 2.4);
+                lum[i] = chan <= 0.03928 ? chan / 12.92 : Math.pow((chan + 0.055) / 1.055, 2.4);
               }
               return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
             },
@@ -528,10 +493,10 @@
             level: function(color2) {
               var contrastRatio = this.contrast(color2);
               if (contrastRatio >= 7.1) {
-                return "AAA";
+                return 'AAA';
               }
 
-              return contrastRatio >= 4.5 ? "AA" : "";
+              return contrastRatio >= 4.5 ? 'AA' : '';
             },
 
             dark: function() {
@@ -550,49 +515,49 @@
               for (var i = 0; i < 3; i++) {
                 rgb[i] = 255 - this.values.rgb[i];
               }
-              this.setValues("rgb", rgb);
+              this.setValues('rgb', rgb);
               return this;
             },
 
             lighten: function(ratio) {
               var hsl = this.values.hsl;
               hsl[2] += hsl[2] * ratio;
-              this.setValues("hsl", hsl);
+              this.setValues('hsl', hsl);
               return this;
             },
 
             darken: function(ratio) {
               var hsl = this.values.hsl;
               hsl[2] -= hsl[2] * ratio;
-              this.setValues("hsl", hsl);
+              this.setValues('hsl', hsl);
               return this;
             },
 
             saturate: function(ratio) {
               var hsl = this.values.hsl;
               hsl[1] += hsl[1] * ratio;
-              this.setValues("hsl", hsl);
+              this.setValues('hsl', hsl);
               return this;
             },
 
             desaturate: function(ratio) {
               var hsl = this.values.hsl;
               hsl[1] -= hsl[1] * ratio;
-              this.setValues("hsl", hsl);
+              this.setValues('hsl', hsl);
               return this;
             },
 
             whiten: function(ratio) {
               var hwb = this.values.hwb;
               hwb[1] += hwb[1] * ratio;
-              this.setValues("hwb", hwb);
+              this.setValues('hwb', hwb);
               return this;
             },
 
             blacken: function(ratio) {
               var hwb = this.values.hwb;
               hwb[2] += hwb[2] * ratio;
-              this.setValues("hwb", hwb);
+              this.setValues('hwb', hwb);
               return this;
             },
 
@@ -600,19 +565,19 @@
               var rgb = this.values.rgb;
               // http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
               var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
-              this.setValues("rgb", [val, val, val]);
+              this.setValues('rgb', [val, val, val]);
               return this;
             },
 
             clearer: function(ratio) {
               var alpha = this.values.alpha;
-              this.setValues("alpha", alpha - alpha * ratio);
+              this.setValues('alpha', alpha - alpha * ratio);
               return this;
             },
 
             opaquer: function(ratio) {
               var alpha = this.values.alpha;
-              this.setValues("alpha", alpha + alpha * ratio);
+              this.setValues('alpha', alpha + alpha * ratio);
               return this;
             },
 
@@ -620,7 +585,7 @@
               var hsl = this.values.hsl;
               var hue = (hsl[0] + degrees) % 360;
               hsl[0] = hue < 0 ? 360 + hue : hue;
-              this.setValues("hsl", hsl);
+              this.setValues('hsl', hsl);
               return this;
             },
 
@@ -664,12 +629,12 @@
                 if (source.hasOwnProperty(prop)) {
                   value = source[prop];
                   type = {}.toString.call(value);
-                  if (type === "[object Array]") {
+                  if (type === '[object Array]') {
                     target[prop] = value.slice(0);
-                  } else if (type === "[object Number]") {
+                  } else if (type === '[object Number]') {
                     target[prop] = value;
                   } else {
-                    console.error("unexpected color value:", value);
+                    console.error('unexpected color value:', value);
                   }
                 }
               }
@@ -679,11 +644,11 @@
           };
 
           Color.prototype.spaces = {
-            rgb: ["red", "green", "blue"],
-            hsl: ["hue", "saturation", "lightness"],
-            hsv: ["hue", "saturation", "value"],
-            hwb: ["hue", "whiteness", "blackness"],
-            cmyk: ["cyan", "magenta", "yellow", "black"]
+            rgb: ['red', 'green', 'blue'],
+            hsl: ['hue', 'saturation', 'lightness'],
+            hsv: ['hue', 'saturation', 'value'],
+            hwb: ['hue', 'whiteness', 'blackness'],
+            cmyk: ['cyan', 'magenta', 'yellow', 'black']
           };
 
           Color.prototype.maxes = {
@@ -719,7 +684,7 @@
 
             this.valid = true;
 
-            if (space === "alpha") {
+            if (space === 'alpha') {
               alpha = vals;
             } else if (vals.length) {
               // [10, 10, 10]
@@ -743,12 +708,9 @@
               alpha = vals.alpha;
             }
 
-            values.alpha = Math.max(
-              0,
-              Math.min(1, alpha === undefined ? values.alpha : alpha)
-            );
+            values.alpha = Math.max(0, Math.min(1, alpha === undefined ? values.alpha : alpha));
 
-            if (space === "alpha") {
+            if (space === 'alpha') {
               return false;
             }
 
@@ -779,7 +741,7 @@
             }
 
             // color.rgb(10, 10, 10)
-            if (typeof vals === "number") {
+            if (typeof vals === 'number') {
               vals = Array.prototype.slice.call(args);
             }
 
@@ -804,13 +766,13 @@
             return this;
           };
 
-          if (typeof window !== "undefined") {
+          if (typeof window !== 'undefined') {
             window.Color = Color;
           }
 
           module.exports = Color;
         },
-        { "1": 1, "4": 4 }
+        { '1': 1, '4': 4 }
       ],
       3: [
         function(require, module, exports) {
@@ -1250,20 +1212,11 @@
             b = x * 0.0557 + y * -0.204 + z * 1.057;
 
             // assume sRGB
-            r =
-              r > 0.0031308
-                ? 1.055 * Math.pow(r, 1.0 / 2.4) - 0.055
-                : (r = r * 12.92);
+            r = r > 0.0031308 ? 1.055 * Math.pow(r, 1.0 / 2.4) - 0.055 : (r = r * 12.92);
 
-            g =
-              g > 0.0031308
-                ? 1.055 * Math.pow(g, 1.0 / 2.4) - 0.055
-                : (g = g * 12.92);
+            g = g > 0.0031308 ? 1.055 * Math.pow(g, 1.0 / 2.4) - 0.055 : (g = g * 12.92);
 
-            b =
-              b > 0.0031308
-                ? 1.055 * Math.pow(b, 1.0 / 2.4) - 0.055
-                : (b = b * 12.92);
+            b = b > 0.0031308 ? 1.055 * Math.pow(b, 1.0 / 2.4) - 0.055 : (b = b * 12.92);
 
             r = Math.min(Math.max(0, r), 1);
             g = Math.min(Math.max(0, g), 1);
@@ -1568,11 +1521,10 @@
 
           for (var func in conversions) {
             // export Raw versions
-            convert[func + "Raw"] = (function(func) {
+            convert[func + 'Raw'] = (function(func) {
               // accept array or plain args
               return function(arg) {
-                if (typeof arg == "number")
-                  arg = Array.prototype.slice.call(arguments);
+                if (typeof arg == 'number') arg = Array.prototype.slice.call(arguments);
                 return conversions[func](arg);
               };
             })(func);
@@ -1586,14 +1538,12 @@
 
             convert[from][to] = convert[func] = (function(func) {
               return function(arg) {
-                if (typeof arg == "number")
-                  arg = Array.prototype.slice.call(arguments);
+                if (typeof arg == 'number') arg = Array.prototype.slice.call(arguments);
 
                 var val = conversions[func](arg);
-                if (typeof val == "string" || val === undefined) return val; // keyword
+                if (typeof val == 'string' || val === undefined) return val; // keyword
 
-                for (var i = 0; i < val.length; i++)
-                  val[i] = Math.round(val[i]);
+                for (var i = 0; i < val.length; i++) val[i] = Math.round(val[i]);
                 return val;
               };
             })(func);
@@ -1613,7 +1563,7 @@
               return this.getValues(space);
             }
             // color.rgb(10, 10, 10)
-            if (typeof values == "number") {
+            if (typeof values == 'number') {
               values = Array.prototype.slice.call(args);
             }
 
@@ -1643,7 +1593,7 @@
             return vals;
           };
 
-          ["rgb", "hsl", "hsv", "cmyk", "keyword"].forEach(function(space) {
+          ['rgb', 'hsl', 'hsv', 'cmyk', 'keyword'].forEach(function(space) {
             Converter.prototype[space] = function(vals) {
               return this.routeSpace(space, arguments);
             };
@@ -1651,11 +1601,11 @@
 
           module.exports = convert;
         },
-        { "3": 3 }
+        { '3': 3 }
       ],
       5: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = {
             aliceblue: [240, 248, 255],
@@ -1819,13 +1769,13 @@
           //! momentjs.com
 
           (function(global, factory) {
-            typeof exports === "object" && typeof module !== "undefined"
+            typeof exports === 'object' && typeof module !== 'undefined'
               ? (module.exports = factory())
-              : typeof define === "function" && define.amd
+              : typeof define === 'function' && define.amd
               ? define(factory)
               : (global.moment = factory());
           })(this, function() {
-            "use strict";
+            'use strict';
 
             var hookCallback;
 
@@ -1840,19 +1790,13 @@
             }
 
             function isArray(input) {
-              return (
-                input instanceof Array ||
-                Object.prototype.toString.call(input) === "[object Array]"
-              );
+              return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]';
             }
 
             function isObject(input) {
               // IE8 will treat undefined and null as object if it wasn't for
               // input != null
-              return (
-                input != null &&
-                Object.prototype.toString.call(input) === "[object Object]"
-              );
+              return input != null && Object.prototype.toString.call(input) === '[object Object]';
             }
 
             function isObjectEmpty(obj) {
@@ -1874,17 +1818,11 @@
             }
 
             function isNumber(input) {
-              return (
-                typeof input === "number" ||
-                Object.prototype.toString.call(input) === "[object Number]"
-              );
+              return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
             }
 
             function isDate(input) {
-              return (
-                input instanceof Date ||
-                Object.prototype.toString.call(input) === "[object Date]"
-              );
+              return input instanceof Date || Object.prototype.toString.call(input) === '[object Date]';
             }
 
             function map(arr, fn) {
@@ -1907,11 +1845,11 @@
                 }
               }
 
-              if (hasOwnProp(b, "toString")) {
+              if (hasOwnProp(b, 'toString')) {
                 a.toString = b.toString;
               }
 
-              if (hasOwnProp(b, "valueOf")) {
+              if (hasOwnProp(b, 'valueOf')) {
                 a.valueOf = b.valueOf;
               }
 
@@ -1919,13 +1857,7 @@
             }
 
             function createUTC(input, format, locale, strict) {
-              return createLocalOrUTC(
-                input,
-                format,
-                locale,
-                strict,
-                true
-              ).utc();
+              return createLocalOrUTC(input, format, locale, strict, true).utc();
             }
 
             function defaultParsingFlags() {
@@ -2089,10 +2021,7 @@
             }
 
             function isMoment(obj) {
-              return (
-                obj instanceof Moment ||
-                (obj != null && obj._isAMomentObject != null)
-              );
+              return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
             }
 
             function absFloor(number) {
@@ -2133,12 +2062,8 @@
             }
 
             function warn(msg) {
-              if (
-                hooks.suppressDeprecationWarnings === false &&
-                typeof console !== "undefined" &&
-                console.warn
-              ) {
-                console.warn("Deprecation warning: " + msg);
+              if (hooks.suppressDeprecationWarnings === false && typeof console !== 'undefined' && console.warn) {
+                console.warn('Deprecation warning: ' + msg);
               }
             }
 
@@ -2153,11 +2078,11 @@
                   var args = [];
                   var arg;
                   for (var i = 0; i < arguments.length; i++) {
-                    arg = "";
-                    if (typeof arguments[i] === "object") {
-                      arg += "\n[" + i + "] ";
+                    arg = '';
+                    if (typeof arguments[i] === 'object') {
+                      arg += '\n[' + i + '] ';
                       for (var key in arguments[0]) {
-                        arg += key + ": " + arguments[0][key] + ", ";
+                        arg += key + ': ' + arguments[0][key] + ', ';
                       }
                       arg = arg.slice(0, -2); // Remove trailing comma and space
                     } else {
@@ -2165,13 +2090,7 @@
                     }
                     args.push(arg);
                   }
-                  warn(
-                    msg +
-                      "\nArguments: " +
-                      Array.prototype.slice.call(args).join("") +
-                      "\n" +
-                      new Error().stack
-                  );
+                  warn(msg + '\nArguments: ' + Array.prototype.slice.call(args).join('') + '\n' + new Error().stack);
                   firstTime = false;
                 }
                 return fn.apply(this, arguments);
@@ -2194,10 +2113,7 @@
             hooks.deprecationHandler = null;
 
             function isFunction(input) {
-              return (
-                input instanceof Function ||
-                Object.prototype.toString.call(input) === "[object Function]"
-              );
+              return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
             }
 
             function set(config) {
@@ -2207,7 +2123,7 @@
                 if (isFunction(prop)) {
                   this[i] = prop;
                 } else {
-                  this["_" + i] = prop;
+                  this['_' + i] = prop;
                 }
               }
               this._config = config;
@@ -2215,10 +2131,7 @@
               // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
               // TODO: Remove "ordinalParse" fallback in next major release.
               this._dayOfMonthOrdinalParseLenient = new RegExp(
-                (this._dayOfMonthOrdinalParse.source ||
-                  this._ordinalParse.source) +
-                  "|" +
-                  /\d{1,2}/.source
+                (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) + '|' + /\d{1,2}/.source
               );
             }
 
@@ -2227,10 +2140,7 @@
                 prop;
               for (prop in childConfig) {
                 if (hasOwnProp(childConfig, prop)) {
-                  if (
-                    isObject(parentConfig[prop]) &&
-                    isObject(childConfig[prop])
-                  ) {
+                  if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
                     res[prop] = {};
                     extend(res[prop], parentConfig[prop]);
                     extend(res[prop], childConfig[prop]);
@@ -2242,11 +2152,7 @@
                 }
               }
               for (prop in parentConfig) {
-                if (
-                  hasOwnProp(parentConfig, prop) &&
-                  !hasOwnProp(childConfig, prop) &&
-                  isObject(parentConfig[prop])
-                ) {
+                if (hasOwnProp(parentConfig, prop) && !hasOwnProp(childConfig, prop) && isObject(parentConfig[prop])) {
                   // make sure changes to properties don't modify parent config
                   res[prop] = extend({}, res[prop]);
                 }
@@ -2278,26 +2184,26 @@
             }
 
             var defaultCalendar = {
-              sameDay: "[Today at] LT",
-              nextDay: "[Tomorrow at] LT",
-              nextWeek: "dddd [at] LT",
-              lastDay: "[Yesterday at] LT",
-              lastWeek: "[Last] dddd [at] LT",
-              sameElse: "L"
+              sameDay: '[Today at] LT',
+              nextDay: '[Tomorrow at] LT',
+              nextWeek: 'dddd [at] LT',
+              lastDay: '[Yesterday at] LT',
+              lastWeek: '[Last] dddd [at] LT',
+              sameElse: 'L'
             };
 
             function calendar(key, mom, now) {
-              var output = this._calendar[key] || this._calendar["sameElse"];
+              var output = this._calendar[key] || this._calendar['sameElse'];
               return isFunction(output) ? output.call(mom, now) : output;
             }
 
             var defaultLongDateFormat = {
-              LTS: "h:mm:ss A",
-              LT: "h:mm A",
-              L: "MM/DD/YYYY",
-              LL: "MMMM D, YYYY",
-              LLL: "MMMM D, YYYY h:mm A",
-              LLLL: "dddd, MMMM D, YYYY h:mm A"
+              LTS: 'h:mm:ss A',
+              LT: 'h:mm A',
+              L: 'MM/DD/YYYY',
+              LL: 'MMMM D, YYYY',
+              LLL: 'MMMM D, YYYY h:mm A',
+              LLLL: 'dddd, MMMM D, YYYY h:mm A'
             };
 
             function longDateFormat(key) {
@@ -2308,44 +2214,41 @@
                 return format;
               }
 
-              this._longDateFormat[key] = formatUpper.replace(
-                /MMMM|MM|DD|dddd/g,
-                function(val) {
-                  return val.slice(1);
-                }
-              );
+              this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function(val) {
+                return val.slice(1);
+              });
 
               return this._longDateFormat[key];
             }
 
-            var defaultInvalidDate = "Invalid date";
+            var defaultInvalidDate = 'Invalid date';
 
             function invalidDate() {
               return this._invalidDate;
             }
 
-            var defaultOrdinal = "%d";
+            var defaultOrdinal = '%d';
             var defaultDayOfMonthOrdinalParse = /\d{1,2}/;
 
             function ordinal(number) {
-              return this._ordinal.replace("%d", number);
+              return this._ordinal.replace('%d', number);
             }
 
             var defaultRelativeTime = {
-              future: "in %s",
-              past: "%s ago",
-              s: "a few seconds",
-              ss: "%d seconds",
-              m: "a minute",
-              mm: "%d minutes",
-              h: "an hour",
-              hh: "%d hours",
-              d: "a day",
-              dd: "%d days",
-              M: "a month",
-              MM: "%d months",
-              y: "a year",
-              yy: "%d years"
+              future: 'in %s',
+              past: '%s ago',
+              s: 'a few seconds',
+              ss: '%d seconds',
+              m: 'a minute',
+              mm: '%d minutes',
+              h: 'an hour',
+              hh: '%d hours',
+              d: 'a day',
+              dd: '%d days',
+              M: 'a month',
+              MM: '%d months',
+              y: 'a year',
+              yy: '%d years'
             };
 
             function relativeTime(number, withoutSuffix, string, isFuture) {
@@ -2356,25 +2259,19 @@
             }
 
             function pastFuture(diff, output) {
-              var format = this._relativeTime[diff > 0 ? "future" : "past"];
-              return isFunction(format)
-                ? format(output)
-                : format.replace(/%s/i, output);
+              var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+              return isFunction(format) ? format(output) : format.replace(/%s/i, output);
             }
 
             var aliases = {};
 
             function addUnitAlias(unit, shorthand) {
               var lowerCase = unit.toLowerCase();
-              aliases[lowerCase] = aliases[lowerCase + "s"] = aliases[
-                shorthand
-              ] = unit;
+              aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
             }
 
             function normalizeUnits(units) {
-              return typeof units === "string"
-                ? aliases[units] || aliases[units.toLowerCase()]
-                : undefined;
+              return typeof units === 'string' ? aliases[units] || aliases[units.toLowerCase()] : undefined;
             }
 
             function normalizeObjectUnits(inputObject) {
@@ -2412,11 +2309,11 @@
             }
 
             function zeroFill(number, targetLength, forceSign) {
-              var absNumber = "" + Math.abs(number),
+              var absNumber = '' + Math.abs(number),
                 zerosToFill = targetLength - absNumber.length,
                 sign = number >= 0;
               return (
-                (sign ? (forceSign ? "+" : "") : "-") +
+                (sign ? (forceSign ? '+' : '') : '-') +
                 Math.pow(10, Math.max(0, zerosToFill))
                   .toString()
                   .substr(1) +
@@ -2438,7 +2335,7 @@
             // callback: function () { this.month() + 1 }
             function addFormatToken(token, padded, ordinal, callback) {
               var func = callback;
-              if (typeof callback === "string") {
+              if (typeof callback === 'string') {
                 func = function() {
                   return this[callback]();
                 };
@@ -2448,28 +2345,21 @@
               }
               if (padded) {
                 formatTokenFunctions[padded[0]] = function() {
-                  return zeroFill(
-                    func.apply(this, arguments),
-                    padded[1],
-                    padded[2]
-                  );
+                  return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
                 };
               }
               if (ordinal) {
                 formatTokenFunctions[ordinal] = function() {
-                  return this.localeData().ordinal(
-                    func.apply(this, arguments),
-                    token
-                  );
+                  return this.localeData().ordinal(func.apply(this, arguments), token);
                 };
               }
             }
 
             function removeFormattingTokens(input) {
               if (input.match(/\[[\s\S]/)) {
-                return input.replace(/^\[|\]$/g, "");
+                return input.replace(/^\[|\]$/g, '');
               }
-              return input.replace(/\\/g, "");
+              return input.replace(/\\/g, '');
             }
 
             function makeFormatFunction(format) {
@@ -2486,12 +2376,10 @@
               }
 
               return function(mom) {
-                var output = "",
+                var output = '',
                   i;
                 for (i = 0; i < length; i++) {
-                  output += isFunction(array[i])
-                    ? array[i].call(mom, format)
-                    : array[i];
+                  output += isFunction(array[i]) ? array[i].call(mom, format) : array[i];
                 }
                 return output;
               };
@@ -2504,8 +2392,7 @@
               }
 
               format = expandFormat(format, m.localeData());
-              formatFunctions[format] =
-                formatFunctions[format] || makeFormatFunction(format);
+              formatFunctions[format] = formatFunctions[format] || makeFormatFunction(format);
 
               return formatFunctions[format](m);
             }
@@ -2519,10 +2406,7 @@
 
               localFormattingTokens.lastIndex = 0;
               while (i >= 0 && localFormattingTokens.test(format)) {
-                format = format.replace(
-                  localFormattingTokens,
-                  replaceLongDateFormatTokens
-                );
+                format = format.replace(localFormattingTokens, replaceLongDateFormatTokens);
                 localFormattingTokens.lastIndex = 0;
                 i -= 1;
               }
@@ -2575,22 +2459,14 @@
             // Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
             function unescapeFormat(s) {
               return regexEscape(
-                s
-                  .replace("\\", "")
-                  .replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function(
-                    matched,
-                    p1,
-                    p2,
-                    p3,
-                    p4
-                  ) {
-                    return p1 || p2 || p3 || p4;
-                  })
+                s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function(matched, p1, p2, p3, p4) {
+                  return p1 || p2 || p3 || p4;
+                })
               );
             }
 
             function regexEscape(s) {
-              return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+              return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
             }
 
             var tokens = {};
@@ -2598,7 +2474,7 @@
             function addParseToken(token, callback) {
               var i,
                 func = callback;
-              if (typeof token === "string") {
+              if (typeof token === 'string') {
                 token = [token];
               }
               if (isNumber(callback)) {
@@ -2636,46 +2512,43 @@
 
             // FORMATTING
 
-            addFormatToken("Y", 0, 0, function() {
+            addFormatToken('Y', 0, 0, function() {
               var y = this.year();
-              return y <= 9999 ? "" + y : "+" + y;
+              return y <= 9999 ? '' + y : '+' + y;
             });
 
-            addFormatToken(0, ["YY", 2], 0, function() {
+            addFormatToken(0, ['YY', 2], 0, function() {
               return this.year() % 100;
             });
 
-            addFormatToken(0, ["YYYY", 4], 0, "year");
-            addFormatToken(0, ["YYYYY", 5], 0, "year");
-            addFormatToken(0, ["YYYYYY", 6, true], 0, "year");
+            addFormatToken(0, ['YYYY', 4], 0, 'year');
+            addFormatToken(0, ['YYYYY', 5], 0, 'year');
+            addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
 
             // ALIASES
 
-            addUnitAlias("year", "y");
+            addUnitAlias('year', 'y');
 
             // PRIORITIES
 
-            addUnitPriority("year", 1);
+            addUnitPriority('year', 1);
 
             // PARSING
 
-            addRegexToken("Y", matchSigned);
-            addRegexToken("YY", match1to2, match2);
-            addRegexToken("YYYY", match1to4, match4);
-            addRegexToken("YYYYY", match1to6, match6);
-            addRegexToken("YYYYYY", match1to6, match6);
+            addRegexToken('Y', matchSigned);
+            addRegexToken('YY', match1to2, match2);
+            addRegexToken('YYYY', match1to4, match4);
+            addRegexToken('YYYYY', match1to6, match6);
+            addRegexToken('YYYYYY', match1to6, match6);
 
-            addParseToken(["YYYYY", "YYYYYY"], YEAR);
-            addParseToken("YYYY", function(input, array) {
-              array[YEAR] =
-                input.length === 2
-                  ? hooks.parseTwoDigitYear(input)
-                  : toInt(input);
+            addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+            addParseToken('YYYY', function(input, array) {
+              array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
             });
-            addParseToken("YY", function(input, array) {
+            addParseToken('YY', function(input, array) {
               array[YEAR] = hooks.parseTwoDigitYear(input);
             });
-            addParseToken("Y", function(input, array) {
+            addParseToken('Y', function(input, array) {
               array[YEAR] = parseInt(input, 10);
             });
 
@@ -2697,7 +2570,7 @@
 
             // MOMENTS
 
-            var getSetYear = makeGetSet("FullYear", true);
+            var getSetYear = makeGetSet('FullYear', true);
 
             function getIsLeapYear() {
               return isLeapYear(this.year());
@@ -2716,26 +2589,15 @@
             }
 
             function get(mom, unit) {
-              return mom.isValid()
-                ? mom._d["get" + (mom._isUTC ? "UTC" : "") + unit]()
-                : NaN;
+              return mom.isValid() ? mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
             }
 
             function set$1(mom, unit, value) {
               if (mom.isValid() && !isNaN(value)) {
-                if (
-                  unit === "FullYear" &&
-                  isLeapYear(mom.year()) &&
-                  mom.month() === 1 &&
-                  mom.date() === 29
-                ) {
-                  mom._d["set" + (mom._isUTC ? "UTC" : "") + unit](
-                    value,
-                    mom.month(),
-                    daysInMonth(value, mom.month())
-                  );
+                if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
+                  mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
                 } else {
-                  mom._d["set" + (mom._isUTC ? "UTC" : "") + unit](value);
+                  mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
                 }
               }
             }
@@ -2751,7 +2613,7 @@
             }
 
             function stringSet(units, value) {
-              if (typeof units === "object") {
+              if (typeof units === 'object') {
                 units = normalizeObjectUnits(units);
                 var prioritized = getPrioritizedUnits(units);
                 for (var i = 0; i < prioritized.length; i++) {
@@ -2793,61 +2655,48 @@
               }
               var modMonth = mod(month, 12);
               year += (month - modMonth) / 12;
-              return modMonth === 1
-                ? isLeapYear(year)
-                  ? 29
-                  : 28
-                : 31 - ((modMonth % 7) % 2);
+              return modMonth === 1 ? (isLeapYear(year) ? 29 : 28) : 31 - ((modMonth % 7) % 2);
             }
 
             // FORMATTING
 
-            addFormatToken("M", ["MM", 2], "Mo", function() {
+            addFormatToken('M', ['MM', 2], 'Mo', function() {
               return this.month() + 1;
             });
 
-            addFormatToken("MMM", 0, 0, function(format) {
+            addFormatToken('MMM', 0, 0, function(format) {
               return this.localeData().monthsShort(this, format);
             });
 
-            addFormatToken("MMMM", 0, 0, function(format) {
+            addFormatToken('MMMM', 0, 0, function(format) {
               return this.localeData().months(this, format);
             });
 
             // ALIASES
 
-            addUnitAlias("month", "M");
+            addUnitAlias('month', 'M');
 
             // PRIORITY
 
-            addUnitPriority("month", 8);
+            addUnitPriority('month', 8);
 
             // PARSING
 
-            addRegexToken("M", match1to2);
-            addRegexToken("MM", match1to2, match2);
-            addRegexToken("MMM", function(isStrict, locale) {
+            addRegexToken('M', match1to2);
+            addRegexToken('MM', match1to2, match2);
+            addRegexToken('MMM', function(isStrict, locale) {
               return locale.monthsShortRegex(isStrict);
             });
-            addRegexToken("MMMM", function(isStrict, locale) {
+            addRegexToken('MMMM', function(isStrict, locale) {
               return locale.monthsRegex(isStrict);
             });
 
-            addParseToken(["M", "MM"], function(input, array) {
+            addParseToken(['M', 'MM'], function(input, array) {
               array[MONTH] = toInt(input) - 1;
             });
 
-            addParseToken(["MMM", "MMMM"], function(
-              input,
-              array,
-              config,
-              token
-            ) {
-              var month = config._locale.monthsParse(
-                input,
-                token,
-                config._strict
-              );
+            addParseToken(['MMM', 'MMMM'], function(input, array, config, token) {
+              var month = config._locale.monthsParse(input, token, config._strict);
               // if we didn't find a month name, mark the date as invalid.
               if (month != null) {
                 array[MONTH] = month;
@@ -2859,38 +2708,28 @@
             // LOCALES
 
             var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
-            var defaultLocaleMonths = "January_February_March_April_May_June_July_August_September_October_November_December".split(
-              "_"
+            var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+              '_'
             );
             function localeMonths(m, format) {
               if (!m) {
-                return isArray(this._months)
-                  ? this._months
-                  : this._months["standalone"];
+                return isArray(this._months) ? this._months : this._months['standalone'];
               }
               return isArray(this._months)
                 ? this._months[m.month()]
-                : this._months[
-                    (this._months.isFormat || MONTHS_IN_FORMAT).test(format)
-                      ? "format"
-                      : "standalone"
-                  ][m.month()];
+                : this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][
+                    m.month()
+                  ];
             }
 
-            var defaultLocaleMonthsShort = "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split(
-              "_"
-            );
+            var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
             function localeMonthsShort(m, format) {
               if (!m) {
-                return isArray(this._monthsShort)
-                  ? this._monthsShort
-                  : this._monthsShort["standalone"];
+                return isArray(this._monthsShort) ? this._monthsShort : this._monthsShort['standalone'];
               }
               return isArray(this._monthsShort)
                 ? this._monthsShort[m.month()]
-                : this._monthsShort[
-                    MONTHS_IN_FORMAT.test(format) ? "format" : "standalone"
-                  ][m.month()];
+                : this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
             }
 
             function handleStrictParse(monthName, format, strict) {
@@ -2905,19 +2744,13 @@
                 this._shortMonthsParse = [];
                 for (i = 0; i < 12; ++i) {
                   mom = createUTC([2000, i]);
-                  this._shortMonthsParse[i] = this.monthsShort(
-                    mom,
-                    ""
-                  ).toLocaleLowerCase();
-                  this._longMonthsParse[i] = this.months(
-                    mom,
-                    ""
-                  ).toLocaleLowerCase();
+                  this._shortMonthsParse[i] = this.monthsShort(mom, '').toLocaleLowerCase();
+                  this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
                 }
               }
 
               if (strict) {
-                if (format === "MMM") {
+                if (format === 'MMM') {
                   ii = indexOf.call(this._shortMonthsParse, llc);
                   return ii !== -1 ? ii : null;
                 } else {
@@ -2925,7 +2758,7 @@
                   return ii !== -1 ? ii : null;
                 }
               } else {
-                if (format === "MMM") {
+                if (format === 'MMM') {
                   ii = indexOf.call(this._shortMonthsParse, llc);
                   if (ii !== -1) {
                     return ii;
@@ -2963,38 +2796,17 @@
                 // make the regex if we don't have it already
                 mom = createUTC([2000, i]);
                 if (strict && !this._longMonthsParse[i]) {
-                  this._longMonthsParse[i] = new RegExp(
-                    "^" + this.months(mom, "").replace(".", "") + "$",
-                    "i"
-                  );
-                  this._shortMonthsParse[i] = new RegExp(
-                    "^" + this.monthsShort(mom, "").replace(".", "") + "$",
-                    "i"
-                  );
+                  this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
+                  this._shortMonthsParse[i] = new RegExp('^' + this.monthsShort(mom, '').replace('.', '') + '$', 'i');
                 }
                 if (!strict && !this._monthsParse[i]) {
-                  regex =
-                    "^" +
-                    this.months(mom, "") +
-                    "|^" +
-                    this.monthsShort(mom, "");
-                  this._monthsParse[i] = new RegExp(
-                    regex.replace(".", ""),
-                    "i"
-                  );
+                  regex = '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+                  this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
                 }
                 // test the regex
-                if (
-                  strict &&
-                  format === "MMMM" &&
-                  this._longMonthsParse[i].test(monthName)
-                ) {
+                if (strict && format === 'MMMM' && this._longMonthsParse[i].test(monthName)) {
                   return i;
-                } else if (
-                  strict &&
-                  format === "MMM" &&
-                  this._shortMonthsParse[i].test(monthName)
-                ) {
+                } else if (strict && format === 'MMM' && this._shortMonthsParse[i].test(monthName)) {
                   return i;
                 } else if (!strict && this._monthsParse[i].test(monthName)) {
                   return i;
@@ -3012,7 +2824,7 @@
                 return mom;
               }
 
-              if (typeof value === "string") {
+              if (typeof value === 'string') {
                 if (/^\d+$/.test(value)) {
                   value = toInt(value);
                 } else {
@@ -3025,10 +2837,7 @@
               }
 
               dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
-              mom._d["set" + (mom._isUTC ? "UTC" : "") + "Month"](
-                value,
-                dayOfMonth
-              );
+              mom._d['set' + (mom._isUTC ? 'UTC' : '') + 'Month'](value, dayOfMonth);
               return mom;
             }
 
@@ -3038,7 +2847,7 @@
                 hooks.updateOffset(this, true);
                 return this;
               } else {
-                return get(this, "Month");
+                return get(this, 'Month');
               }
             }
 
@@ -3049,7 +2858,7 @@
             var defaultMonthsShortRegex = matchWord;
             function monthsShortRegex(isStrict) {
               if (this._monthsParseExact) {
-                if (!hasOwnProp(this, "_monthsRegex")) {
+                if (!hasOwnProp(this, '_monthsRegex')) {
                   computeMonthsParse.call(this);
                 }
                 if (isStrict) {
@@ -3058,19 +2867,17 @@
                   return this._monthsShortRegex;
                 }
               } else {
-                if (!hasOwnProp(this, "_monthsShortRegex")) {
+                if (!hasOwnProp(this, '_monthsShortRegex')) {
                   this._monthsShortRegex = defaultMonthsShortRegex;
                 }
-                return this._monthsShortStrictRegex && isStrict
-                  ? this._monthsShortStrictRegex
-                  : this._monthsShortRegex;
+                return this._monthsShortStrictRegex && isStrict ? this._monthsShortStrictRegex : this._monthsShortRegex;
               }
             }
 
             var defaultMonthsRegex = matchWord;
             function monthsRegex(isStrict) {
               if (this._monthsParseExact) {
-                if (!hasOwnProp(this, "_monthsRegex")) {
+                if (!hasOwnProp(this, '_monthsRegex')) {
                   computeMonthsParse.call(this);
                 }
                 if (isStrict) {
@@ -3079,12 +2886,10 @@
                   return this._monthsRegex;
                 }
               } else {
-                if (!hasOwnProp(this, "_monthsRegex")) {
+                if (!hasOwnProp(this, '_monthsRegex')) {
                   this._monthsRegex = defaultMonthsRegex;
                 }
-                return this._monthsStrictRegex && isStrict
-                  ? this._monthsStrictRegex
-                  : this._monthsRegex;
+                return this._monthsStrictRegex && isStrict ? this._monthsStrictRegex : this._monthsRegex;
               }
             }
 
@@ -3101,10 +2906,10 @@
               for (i = 0; i < 12; i++) {
                 // make the regex if we don't have it already
                 mom = createUTC([2000, i]);
-                shortPieces.push(this.monthsShort(mom, ""));
-                longPieces.push(this.months(mom, ""));
-                mixedPieces.push(this.months(mom, ""));
-                mixedPieces.push(this.monthsShort(mom, ""));
+                shortPieces.push(this.monthsShort(mom, ''));
+                longPieces.push(this.months(mom, ''));
+                mixedPieces.push(this.months(mom, ''));
+                mixedPieces.push(this.monthsShort(mom, ''));
               }
               // Sorting makes sure if one month (or abbr) is a prefix of another it
               // will match the longer piece.
@@ -3119,19 +2924,10 @@
                 mixedPieces[i] = regexEscape(mixedPieces[i]);
               }
 
-              this._monthsRegex = new RegExp(
-                "^(" + mixedPieces.join("|") + ")",
-                "i"
-              );
+              this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
               this._monthsShortRegex = this._monthsRegex;
-              this._monthsStrictRegex = new RegExp(
-                "^(" + longPieces.join("|") + ")",
-                "i"
-              );
-              this._monthsShortStrictRegex = new RegExp(
-                "^(" + shortPieces.join("|") + ")",
-                "i"
-              );
+              this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+              this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
             }
 
             function createDate(y, m, d, h, M, s, ms) {
@@ -3222,32 +3018,27 @@
 
             // FORMATTING
 
-            addFormatToken("w", ["ww", 2], "wo", "week");
-            addFormatToken("W", ["WW", 2], "Wo", "isoWeek");
+            addFormatToken('w', ['ww', 2], 'wo', 'week');
+            addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
 
             // ALIASES
 
-            addUnitAlias("week", "w");
-            addUnitAlias("isoWeek", "W");
+            addUnitAlias('week', 'w');
+            addUnitAlias('isoWeek', 'W');
 
             // PRIORITIES
 
-            addUnitPriority("week", 5);
-            addUnitPriority("isoWeek", 5);
+            addUnitPriority('week', 5);
+            addUnitPriority('isoWeek', 5);
 
             // PARSING
 
-            addRegexToken("w", match1to2);
-            addRegexToken("ww", match1to2, match2);
-            addRegexToken("W", match1to2);
-            addRegexToken("WW", match1to2, match2);
+            addRegexToken('w', match1to2);
+            addRegexToken('ww', match1to2, match2);
+            addRegexToken('W', match1to2);
+            addRegexToken('WW', match1to2, match2);
 
-            addWeekParseToken(["w", "ww", "W", "WW"], function(
-              input,
-              week,
-              config,
-              token
-            ) {
+            addWeekParseToken(['w', 'ww', 'W', 'WW'], function(input, week, config, token) {
               week[token.substr(0, 1)] = toInt(input);
             });
 
@@ -3276,70 +3067,61 @@
 
             function getSetWeek(input) {
               var week = this.localeData().week(this);
-              return input == null ? week : this.add((input - week) * 7, "d");
+              return input == null ? week : this.add((input - week) * 7, 'd');
             }
 
             function getSetISOWeek(input) {
               var week = weekOfYear(this, 1, 4).week;
-              return input == null ? week : this.add((input - week) * 7, "d");
+              return input == null ? week : this.add((input - week) * 7, 'd');
             }
 
             // FORMATTING
 
-            addFormatToken("d", 0, "do", "day");
+            addFormatToken('d', 0, 'do', 'day');
 
-            addFormatToken("dd", 0, 0, function(format) {
+            addFormatToken('dd', 0, 0, function(format) {
               return this.localeData().weekdaysMin(this, format);
             });
 
-            addFormatToken("ddd", 0, 0, function(format) {
+            addFormatToken('ddd', 0, 0, function(format) {
               return this.localeData().weekdaysShort(this, format);
             });
 
-            addFormatToken("dddd", 0, 0, function(format) {
+            addFormatToken('dddd', 0, 0, function(format) {
               return this.localeData().weekdays(this, format);
             });
 
-            addFormatToken("e", 0, 0, "weekday");
-            addFormatToken("E", 0, 0, "isoWeekday");
+            addFormatToken('e', 0, 0, 'weekday');
+            addFormatToken('E', 0, 0, 'isoWeekday');
 
             // ALIASES
 
-            addUnitAlias("day", "d");
-            addUnitAlias("weekday", "e");
-            addUnitAlias("isoWeekday", "E");
+            addUnitAlias('day', 'd');
+            addUnitAlias('weekday', 'e');
+            addUnitAlias('isoWeekday', 'E');
 
             // PRIORITY
-            addUnitPriority("day", 11);
-            addUnitPriority("weekday", 11);
-            addUnitPriority("isoWeekday", 11);
+            addUnitPriority('day', 11);
+            addUnitPriority('weekday', 11);
+            addUnitPriority('isoWeekday', 11);
 
             // PARSING
 
-            addRegexToken("d", match1to2);
-            addRegexToken("e", match1to2);
-            addRegexToken("E", match1to2);
-            addRegexToken("dd", function(isStrict, locale) {
+            addRegexToken('d', match1to2);
+            addRegexToken('e', match1to2);
+            addRegexToken('E', match1to2);
+            addRegexToken('dd', function(isStrict, locale) {
               return locale.weekdaysMinRegex(isStrict);
             });
-            addRegexToken("ddd", function(isStrict, locale) {
+            addRegexToken('ddd', function(isStrict, locale) {
               return locale.weekdaysShortRegex(isStrict);
             });
-            addRegexToken("dddd", function(isStrict, locale) {
+            addRegexToken('dddd', function(isStrict, locale) {
               return locale.weekdaysRegex(isStrict);
             });
 
-            addWeekParseToken(["dd", "ddd", "dddd"], function(
-              input,
-              week,
-              config,
-              token
-            ) {
-              var weekday = config._locale.weekdaysParse(
-                input,
-                token,
-                config._strict
-              );
+            addWeekParseToken(['dd', 'ddd', 'dddd'], function(input, week, config, token) {
+              var weekday = config._locale.weekdaysParse(input, token, config._strict);
               // if we didn't get a weekday name, mark the date as invalid
               if (weekday != null) {
                 week.d = weekday;
@@ -3348,19 +3130,14 @@
               }
             });
 
-            addWeekParseToken(["d", "e", "E"], function(
-              input,
-              week,
-              config,
-              token
-            ) {
+            addWeekParseToken(['d', 'e', 'E'], function(input, week, config, token) {
               week[token] = toInt(input);
             });
 
             // HELPERS
 
             function parseWeekday(input, locale) {
-              if (typeof input !== "string") {
+              if (typeof input !== 'string') {
                 return input;
               }
 
@@ -3369,7 +3146,7 @@
               }
 
               input = locale.weekdaysParse(input);
-              if (typeof input === "number") {
+              if (typeof input === 'number') {
                 return input;
               }
 
@@ -3377,7 +3154,7 @@
             }
 
             function parseIsoWeekday(input, locale) {
-              if (typeof input === "string") {
+              if (typeof input === 'string') {
                 return locale.weekdaysParse(input) % 7 || 7;
               }
               return isNaN(input) ? null : input;
@@ -3385,32 +3162,22 @@
 
             // LOCALES
 
-            var defaultLocaleWeekdays = "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split(
-              "_"
-            );
+            var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
             function localeWeekdays(m, format) {
               if (!m) {
-                return isArray(this._weekdays)
-                  ? this._weekdays
-                  : this._weekdays["standalone"];
+                return isArray(this._weekdays) ? this._weekdays : this._weekdays['standalone'];
               }
               return isArray(this._weekdays)
                 ? this._weekdays[m.day()]
-                : this._weekdays[
-                    this._weekdays.isFormat.test(format)
-                      ? "format"
-                      : "standalone"
-                  ][m.day()];
+                : this._weekdays[this._weekdays.isFormat.test(format) ? 'format' : 'standalone'][m.day()];
             }
 
-            var defaultLocaleWeekdaysShort = "Sun_Mon_Tue_Wed_Thu_Fri_Sat".split(
-              "_"
-            );
+            var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
             function localeWeekdaysShort(m) {
               return m ? this._weekdaysShort[m.day()] : this._weekdaysShort;
             }
 
-            var defaultLocaleWeekdaysMin = "Su_Mo_Tu_We_Th_Fr_Sa".split("_");
+            var defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
             function localeWeekdaysMin(m) {
               return m ? this._weekdaysMin[m.day()] : this._weekdaysMin;
             }
@@ -3427,26 +3194,17 @@
 
                 for (i = 0; i < 7; ++i) {
                   mom = createUTC([2000, 1]).day(i);
-                  this._minWeekdaysParse[i] = this.weekdaysMin(
-                    mom,
-                    ""
-                  ).toLocaleLowerCase();
-                  this._shortWeekdaysParse[i] = this.weekdaysShort(
-                    mom,
-                    ""
-                  ).toLocaleLowerCase();
-                  this._weekdaysParse[i] = this.weekdays(
-                    mom,
-                    ""
-                  ).toLocaleLowerCase();
+                  this._minWeekdaysParse[i] = this.weekdaysMin(mom, '').toLocaleLowerCase();
+                  this._shortWeekdaysParse[i] = this.weekdaysShort(mom, '').toLocaleLowerCase();
+                  this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
                 }
               }
 
               if (strict) {
-                if (format === "dddd") {
+                if (format === 'dddd') {
                   ii = indexOf.call(this._weekdaysParse, llc);
                   return ii !== -1 ? ii : null;
-                } else if (format === "ddd") {
+                } else if (format === 'ddd') {
                   ii = indexOf.call(this._shortWeekdaysParse, llc);
                   return ii !== -1 ? ii : null;
                 } else {
@@ -3454,7 +3212,7 @@
                   return ii !== -1 ? ii : null;
                 }
               } else {
-                if (format === "dddd") {
+                if (format === 'dddd') {
                   ii = indexOf.call(this._weekdaysParse, llc);
                   if (ii !== -1) {
                     return ii;
@@ -3465,7 +3223,7 @@
                   }
                   ii = indexOf.call(this._minWeekdaysParse, llc);
                   return ii !== -1 ? ii : null;
-                } else if (format === "ddd") {
+                } else if (format === 'ddd') {
                   ii = indexOf.call(this._shortWeekdaysParse, llc);
                   if (ii !== -1) {
                     return ii;
@@ -3495,12 +3253,7 @@
               var i, mom, regex;
 
               if (this._weekdaysParseExact) {
-                return handleStrictParse$1.call(
-                  this,
-                  weekdayName,
-                  format,
-                  strict
-                );
+                return handleStrictParse$1.call(this, weekdayName, format, strict);
               }
 
               if (!this._weekdaysParse) {
@@ -3515,55 +3268,31 @@
 
                 mom = createUTC([2000, 1]).day(i);
                 if (strict && !this._fullWeekdaysParse[i]) {
-                  this._fullWeekdaysParse[i] = new RegExp(
-                    "^" + this.weekdays(mom, "").replace(".", ".?") + "$",
-                    "i"
-                  );
+                  this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '.?') + '$', 'i');
                   this._shortWeekdaysParse[i] = new RegExp(
-                    "^" + this.weekdaysShort(mom, "").replace(".", ".?") + "$",
-                    "i"
+                    '^' + this.weekdaysShort(mom, '').replace('.', '.?') + '$',
+                    'i'
                   );
-                  this._minWeekdaysParse[i] = new RegExp(
-                    "^" + this.weekdaysMin(mom, "").replace(".", ".?") + "$",
-                    "i"
-                  );
+                  this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '.?') + '$', 'i');
                 }
                 if (!this._weekdaysParse[i]) {
                   regex =
-                    "^" +
-                    this.weekdays(mom, "") +
-                    "|^" +
-                    this.weekdaysShort(mom, "") +
-                    "|^" +
-                    this.weekdaysMin(mom, "");
-                  this._weekdaysParse[i] = new RegExp(
-                    regex.replace(".", ""),
-                    "i"
-                  );
+                    '^' +
+                    this.weekdays(mom, '') +
+                    '|^' +
+                    this.weekdaysShort(mom, '') +
+                    '|^' +
+                    this.weekdaysMin(mom, '');
+                  this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
                 }
                 // test the regex
-                if (
-                  strict &&
-                  format === "dddd" &&
-                  this._fullWeekdaysParse[i].test(weekdayName)
-                ) {
+                if (strict && format === 'dddd' && this._fullWeekdaysParse[i].test(weekdayName)) {
                   return i;
-                } else if (
-                  strict &&
-                  format === "ddd" &&
-                  this._shortWeekdaysParse[i].test(weekdayName)
-                ) {
+                } else if (strict && format === 'ddd' && this._shortWeekdaysParse[i].test(weekdayName)) {
                   return i;
-                } else if (
-                  strict &&
-                  format === "dd" &&
-                  this._minWeekdaysParse[i].test(weekdayName)
-                ) {
+                } else if (strict && format === 'dd' && this._minWeekdaysParse[i].test(weekdayName)) {
                   return i;
-                } else if (
-                  !strict &&
-                  this._weekdaysParse[i].test(weekdayName)
-                ) {
+                } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
                   return i;
                 }
               }
@@ -3578,7 +3307,7 @@
               var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
               if (input != null) {
                 input = parseWeekday(input, this.localeData());
-                return this.add(input - day, "d");
+                return this.add(input - day, 'd');
               } else {
                 return day;
               }
@@ -3589,7 +3318,7 @@
                 return input != null ? this : NaN;
               }
               var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
-              return input == null ? weekday : this.add(input - weekday, "d");
+              return input == null ? weekday : this.add(input - weekday, 'd');
             }
 
             function getSetISODayOfWeek(input) {
@@ -3612,7 +3341,7 @@
             var defaultWeekdaysRegex = matchWord;
             function weekdaysRegex(isStrict) {
               if (this._weekdaysParseExact) {
-                if (!hasOwnProp(this, "_weekdaysRegex")) {
+                if (!hasOwnProp(this, '_weekdaysRegex')) {
                   computeWeekdaysParse.call(this);
                 }
                 if (isStrict) {
@@ -3621,19 +3350,17 @@
                   return this._weekdaysRegex;
                 }
               } else {
-                if (!hasOwnProp(this, "_weekdaysRegex")) {
+                if (!hasOwnProp(this, '_weekdaysRegex')) {
                   this._weekdaysRegex = defaultWeekdaysRegex;
                 }
-                return this._weekdaysStrictRegex && isStrict
-                  ? this._weekdaysStrictRegex
-                  : this._weekdaysRegex;
+                return this._weekdaysStrictRegex && isStrict ? this._weekdaysStrictRegex : this._weekdaysRegex;
               }
             }
 
             var defaultWeekdaysShortRegex = matchWord;
             function weekdaysShortRegex(isStrict) {
               if (this._weekdaysParseExact) {
-                if (!hasOwnProp(this, "_weekdaysRegex")) {
+                if (!hasOwnProp(this, '_weekdaysRegex')) {
                   computeWeekdaysParse.call(this);
                 }
                 if (isStrict) {
@@ -3642,7 +3369,7 @@
                   return this._weekdaysShortRegex;
                 }
               } else {
-                if (!hasOwnProp(this, "_weekdaysShortRegex")) {
+                if (!hasOwnProp(this, '_weekdaysShortRegex')) {
                   this._weekdaysShortRegex = defaultWeekdaysShortRegex;
                 }
                 return this._weekdaysShortStrictRegex && isStrict
@@ -3654,7 +3381,7 @@
             var defaultWeekdaysMinRegex = matchWord;
             function weekdaysMinRegex(isStrict) {
               if (this._weekdaysParseExact) {
-                if (!hasOwnProp(this, "_weekdaysRegex")) {
+                if (!hasOwnProp(this, '_weekdaysRegex')) {
                   computeWeekdaysParse.call(this);
                 }
                 if (isStrict) {
@@ -3663,12 +3390,10 @@
                   return this._weekdaysMinRegex;
                 }
               } else {
-                if (!hasOwnProp(this, "_weekdaysMinRegex")) {
+                if (!hasOwnProp(this, '_weekdaysMinRegex')) {
                   this._weekdaysMinRegex = defaultWeekdaysMinRegex;
                 }
-                return this._weekdaysMinStrictRegex && isStrict
-                  ? this._weekdaysMinStrictRegex
-                  : this._weekdaysMinRegex;
+                return this._weekdaysMinStrictRegex && isStrict ? this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
               }
             }
 
@@ -3689,9 +3414,9 @@
               for (i = 0; i < 7; i++) {
                 // make the regex if we don't have it already
                 mom = createUTC([2000, 1]).day(i);
-                minp = this.weekdaysMin(mom, "");
-                shortp = this.weekdaysShort(mom, "");
-                longp = this.weekdays(mom, "");
+                minp = this.weekdaysMin(mom, '');
+                shortp = this.weekdaysShort(mom, '');
+                longp = this.weekdays(mom, '');
                 minPieces.push(minp);
                 shortPieces.push(shortp);
                 longPieces.push(longp);
@@ -3711,25 +3436,13 @@
                 mixedPieces[i] = regexEscape(mixedPieces[i]);
               }
 
-              this._weekdaysRegex = new RegExp(
-                "^(" + mixedPieces.join("|") + ")",
-                "i"
-              );
+              this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
               this._weekdaysShortRegex = this._weekdaysRegex;
               this._weekdaysMinRegex = this._weekdaysRegex;
 
-              this._weekdaysStrictRegex = new RegExp(
-                "^(" + longPieces.join("|") + ")",
-                "i"
-              );
-              this._weekdaysShortStrictRegex = new RegExp(
-                "^(" + shortPieces.join("|") + ")",
-                "i"
-              );
-              this._weekdaysMinStrictRegex = new RegExp(
-                "^(" + minPieces.join("|") + ")",
-                "i"
-              );
+              this._weekdaysStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+              this._weekdaysShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+              this._weekdaysMinStrictRegex = new RegExp('^(' + minPieces.join('|') + ')', 'i');
             }
 
             // FORMATTING
@@ -3742,55 +3455,41 @@
               return this.hours() || 24;
             }
 
-            addFormatToken("H", ["HH", 2], 0, "hour");
-            addFormatToken("h", ["hh", 2], 0, hFormat);
-            addFormatToken("k", ["kk", 2], 0, kFormat);
+            addFormatToken('H', ['HH', 2], 0, 'hour');
+            addFormatToken('h', ['hh', 2], 0, hFormat);
+            addFormatToken('k', ['kk', 2], 0, kFormat);
 
-            addFormatToken("hmm", 0, 0, function() {
-              return "" + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+            addFormatToken('hmm', 0, 0, function() {
+              return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
             });
 
-            addFormatToken("hmmss", 0, 0, function() {
-              return (
-                "" +
-                hFormat.apply(this) +
-                zeroFill(this.minutes(), 2) +
-                zeroFill(this.seconds(), 2)
-              );
+            addFormatToken('hmmss', 0, 0, function() {
+              return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) + zeroFill(this.seconds(), 2);
             });
 
-            addFormatToken("Hmm", 0, 0, function() {
-              return "" + this.hours() + zeroFill(this.minutes(), 2);
+            addFormatToken('Hmm', 0, 0, function() {
+              return '' + this.hours() + zeroFill(this.minutes(), 2);
             });
 
-            addFormatToken("Hmmss", 0, 0, function() {
-              return (
-                "" +
-                this.hours() +
-                zeroFill(this.minutes(), 2) +
-                zeroFill(this.seconds(), 2)
-              );
+            addFormatToken('Hmmss', 0, 0, function() {
+              return '' + this.hours() + zeroFill(this.minutes(), 2) + zeroFill(this.seconds(), 2);
             });
 
             function meridiem(token, lowercase) {
               addFormatToken(token, 0, 0, function() {
-                return this.localeData().meridiem(
-                  this.hours(),
-                  this.minutes(),
-                  lowercase
-                );
+                return this.localeData().meridiem(this.hours(), this.minutes(), lowercase);
               });
             }
 
-            meridiem("a", true);
-            meridiem("A", false);
+            meridiem('a', true);
+            meridiem('A', false);
 
             // ALIASES
 
-            addUnitAlias("hour", "h");
+            addUnitAlias('hour', 'h');
 
             // PRIORITY
-            addUnitPriority("hour", 13);
+            addUnitPriority('hour', 13);
 
             // PARSING
 
@@ -3798,40 +3497,40 @@
               return locale._meridiemParse;
             }
 
-            addRegexToken("a", matchMeridiem);
-            addRegexToken("A", matchMeridiem);
-            addRegexToken("H", match1to2);
-            addRegexToken("h", match1to2);
-            addRegexToken("k", match1to2);
-            addRegexToken("HH", match1to2, match2);
-            addRegexToken("hh", match1to2, match2);
-            addRegexToken("kk", match1to2, match2);
+            addRegexToken('a', matchMeridiem);
+            addRegexToken('A', matchMeridiem);
+            addRegexToken('H', match1to2);
+            addRegexToken('h', match1to2);
+            addRegexToken('k', match1to2);
+            addRegexToken('HH', match1to2, match2);
+            addRegexToken('hh', match1to2, match2);
+            addRegexToken('kk', match1to2, match2);
 
-            addRegexToken("hmm", match3to4);
-            addRegexToken("hmmss", match5to6);
-            addRegexToken("Hmm", match3to4);
-            addRegexToken("Hmmss", match5to6);
+            addRegexToken('hmm', match3to4);
+            addRegexToken('hmmss', match5to6);
+            addRegexToken('Hmm', match3to4);
+            addRegexToken('Hmmss', match5to6);
 
-            addParseToken(["H", "HH"], HOUR);
-            addParseToken(["k", "kk"], function(input, array, config) {
+            addParseToken(['H', 'HH'], HOUR);
+            addParseToken(['k', 'kk'], function(input, array, config) {
               var kInput = toInt(input);
               array[HOUR] = kInput === 24 ? 0 : kInput;
             });
-            addParseToken(["a", "A"], function(input, array, config) {
+            addParseToken(['a', 'A'], function(input, array, config) {
               config._isPm = config._locale.isPM(input);
               config._meridiem = input;
             });
-            addParseToken(["h", "hh"], function(input, array, config) {
+            addParseToken(['h', 'hh'], function(input, array, config) {
               array[HOUR] = toInt(input);
               getParsingFlags(config).bigHour = true;
             });
-            addParseToken("hmm", function(input, array, config) {
+            addParseToken('hmm', function(input, array, config) {
               var pos = input.length - 2;
               array[HOUR] = toInt(input.substr(0, pos));
               array[MINUTE] = toInt(input.substr(pos));
               getParsingFlags(config).bigHour = true;
             });
-            addParseToken("hmmss", function(input, array, config) {
+            addParseToken('hmmss', function(input, array, config) {
               var pos1 = input.length - 4;
               var pos2 = input.length - 2;
               array[HOUR] = toInt(input.substr(0, pos1));
@@ -3839,12 +3538,12 @@
               array[SECOND] = toInt(input.substr(pos2));
               getParsingFlags(config).bigHour = true;
             });
-            addParseToken("Hmm", function(input, array, config) {
+            addParseToken('Hmm', function(input, array, config) {
               var pos = input.length - 2;
               array[HOUR] = toInt(input.substr(0, pos));
               array[MINUTE] = toInt(input.substr(pos));
             });
-            addParseToken("Hmmss", function(input, array, config) {
+            addParseToken('Hmmss', function(input, array, config) {
               var pos1 = input.length - 4;
               var pos2 = input.length - 2;
               array[HOUR] = toInt(input.substr(0, pos1));
@@ -3857,15 +3556,15 @@
             function localeIsPM(input) {
               // IE8 Quirks Mode & IE7 Standards Mode do not allow accessing strings like arrays
               // Using charAt should be more compatible.
-              return (input + "").toLowerCase().charAt(0) === "p";
+              return (input + '').toLowerCase().charAt(0) === 'p';
             }
 
             var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i;
             function localeMeridiem(hours, minutes, isLower) {
               if (hours > 11) {
-                return isLower ? "pm" : "PM";
+                return isLower ? 'pm' : 'PM';
               } else {
-                return isLower ? "am" : "AM";
+                return isLower ? 'am' : 'AM';
               }
             }
 
@@ -3875,7 +3574,7 @@
             // specified which hour he wants. So trying to maintain the same hour (in
             // a new timezone) makes sense. Adding/subtracting hours does not follow
             // this rule.
-            var getSetHour = makeGetSet("Hours", true);
+            var getSetHour = makeGetSet('Hours', true);
 
             // months
             // week
@@ -3907,7 +3606,7 @@
             var globalLocale;
 
             function normalizeLocale(key) {
-              return key ? key.toLowerCase().replace("_", "-") : key;
+              return key ? key.toLowerCase().replace('_', '-') : key;
             }
 
             // pick the locale from the array
@@ -3921,20 +3620,16 @@
                 split;
 
               while (i < names.length) {
-                split = normalizeLocale(names[i]).split("-");
+                split = normalizeLocale(names[i]).split('-');
                 j = split.length;
                 next = normalizeLocale(names[i + 1]);
-                next = next ? next.split("-") : null;
+                next = next ? next.split('-') : null;
                 while (j > 0) {
-                  locale = loadLocale(split.slice(0, j).join("-"));
+                  locale = loadLocale(split.slice(0, j).join('-'));
                   if (locale) {
                     return locale;
                   }
-                  if (
-                    next &&
-                    next.length >= j &&
-                    compareArrays(split, next, true) >= j - 1
-                  ) {
+                  if (next && next.length >= j && compareArrays(split, next, true) >= j - 1) {
                     //the next array item is better than a shallower substring of this one
                     break;
                   }
@@ -3948,16 +3643,11 @@
             function loadLocale(name) {
               var oldLocale = null;
               // TODO: Find a better way to register and load all the locales in Node
-              if (
-                !locales[name] &&
-                typeof module !== "undefined" &&
-                module &&
-                module.exports
-              ) {
+              if (!locales[name] && typeof module !== 'undefined' && module && module.exports) {
                 try {
                   oldLocale = globalLocale._abbr;
                   var aliasedRequire = require;
-                  aliasedRequire("./locale/" + name);
+                  aliasedRequire('./locale/' + name);
                   getSetGlobalLocale(oldLocale);
                 } catch (e) {}
               }
@@ -3991,11 +3681,11 @@
                 config.abbr = name;
                 if (locales[name] != null) {
                   deprecateSimple(
-                    "defineLocaleOverride",
-                    "use moment.updateLocale(localeName, config) to change " +
-                      "an existing locale. moment.defineLocale(localeName, " +
-                      "config) should only be used for creating a new locale " +
-                      "See http://momentjs.com/guides/#/warnings/define-locale/ for more info."
+                    'defineLocaleOverride',
+                    'use moment.updateLocale(localeName, config) to change ' +
+                      'an existing locale. moment.defineLocale(localeName, ' +
+                      'config) should only be used for creating a new locale ' +
+                      'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.'
                   );
                   parentConfig = locales[name]._config;
                 } else if (config.parentLocale != null) {
@@ -4103,10 +3793,7 @@
                     ? DATE
                     : a[HOUR] < 0 ||
                       a[HOUR] > 24 ||
-                      (a[HOUR] === 24 &&
-                        (a[MINUTE] !== 0 ||
-                          a[SECOND] !== 0 ||
-                          a[MILLISECOND] !== 0))
+                      (a[HOUR] === 24 && (a[MINUTE] !== 0 || a[SECOND] !== 0 || a[MILLISECOND] !== 0))
                     ? HOUR
                     : a[MINUTE] < 0 || a[MINUTE] > 59
                     ? MINUTE
@@ -4116,10 +3803,7 @@
                     ? MILLISECOND
                     : -1;
 
-                if (
-                  getParsingFlags(m)._overflowDayOfYear &&
-                  (overflow < YEAR || overflow > DATE)
-                ) {
+                if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
                   overflow = DATE;
                 }
                 if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
@@ -4150,17 +3834,9 @@
               // hooks is actually the exported moment object
               var nowValue = new Date(hooks.now());
               if (config._useUTC) {
-                return [
-                  nowValue.getUTCFullYear(),
-                  nowValue.getUTCMonth(),
-                  nowValue.getUTCDate()
-                ];
+                return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
               }
-              return [
-                nowValue.getFullYear(),
-                nowValue.getMonth(),
-                nowValue.getDate()
-              ];
+              return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
             }
 
             // convert an array to a date.
@@ -4182,11 +3858,7 @@
               currentDate = currentDateArray(config);
 
               //compute day of the year from weeks and weekdays
-              if (
-                config._w &&
-                config._a[DATE] == null &&
-                config._a[MONTH] == null
-              ) {
+              if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
                 dayOfYearFromWeekInfo(config);
               }
 
@@ -4194,10 +3866,7 @@
               if (config._dayOfYear != null) {
                 yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
 
-                if (
-                  config._dayOfYear > daysInYear(yearToUse) ||
-                  config._dayOfYear === 0
-                ) {
+                if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
                   getParsingFlags(config)._overflowDayOfYear = true;
                 }
 
@@ -4217,8 +3886,7 @@
 
               // Zero out whatever was not defaulted, including time
               for (; i < 7; i++) {
-                config._a[i] = input[i] =
-                  config._a[i] == null ? (i === 2 ? 1 : 0) : config._a[i];
+                config._a[i] = input[i] = config._a[i] == null ? (i === 2 ? 1 : 0) : config._a[i];
               }
 
               // Check for 24:00:00.000
@@ -4232,20 +3900,13 @@
                 config._a[HOUR] = 0;
               }
 
-              config._d = (config._useUTC ? createUTCDate : createDate).apply(
-                null,
-                input
-              );
-              expectedWeekday = config._useUTC
-                ? config._d.getUTCDay()
-                : config._d.getDay();
+              config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+              expectedWeekday = config._useUTC ? config._d.getUTCDay() : config._d.getDay();
 
               // Apply timezone offset from input. The actual utcOffset can be changed
               // with parseZone.
               if (config._tzm != null) {
-                config._d.setUTCMinutes(
-                  config._d.getUTCMinutes() - config._tzm
-                );
+                config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
               }
 
               if (config._nextDay) {
@@ -4253,11 +3914,7 @@
               }
 
               // check for mismatching day of week
-              if (
-                config._w &&
-                typeof config._w.d !== "undefined" &&
-                config._w.d !== expectedWeekday
-              ) {
+              if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== expectedWeekday) {
                 getParsingFlags(config).weekdayMismatch = true;
               }
             }
@@ -4274,11 +3931,7 @@
                 // how we interpret now (local, utc, fixed offset). So create
                 // a now version of current config (take local/utc/offset flags, and
                 // create now).
-                weekYear = defaults(
-                  w.GG,
-                  config._a[YEAR],
-                  weekOfYear(createLocal(), 1, 4).year
-                );
+                weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
                 week = defaults(w.W, 1);
                 weekday = defaults(w.E, 1);
                 if (weekday < 1 || weekday > 7) {
@@ -4331,31 +3984,31 @@
             var tzRegex = /Z|[+-]\d\d(?::?\d\d)?/;
 
             var isoDates = [
-              ["YYYYYY-MM-DD", /[+-]\d{6}-\d\d-\d\d/],
-              ["YYYY-MM-DD", /\d{4}-\d\d-\d\d/],
-              ["GGGG-[W]WW-E", /\d{4}-W\d\d-\d/],
-              ["GGGG-[W]WW", /\d{4}-W\d\d/, false],
-              ["YYYY-DDD", /\d{4}-\d{3}/],
-              ["YYYY-MM", /\d{4}-\d\d/, false],
-              ["YYYYYYMMDD", /[+-]\d{10}/],
-              ["YYYYMMDD", /\d{8}/],
+              ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
+              ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
+              ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
+              ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
+              ['YYYY-DDD', /\d{4}-\d{3}/],
+              ['YYYY-MM', /\d{4}-\d\d/, false],
+              ['YYYYYYMMDD', /[+-]\d{10}/],
+              ['YYYYMMDD', /\d{8}/],
               // YYYYMM is NOT allowed by the standard
-              ["GGGG[W]WWE", /\d{4}W\d{3}/],
-              ["GGGG[W]WW", /\d{4}W\d{2}/, false],
-              ["YYYYDDD", /\d{7}/]
+              ['GGGG[W]WWE', /\d{4}W\d{3}/],
+              ['GGGG[W]WW', /\d{4}W\d{2}/, false],
+              ['YYYYDDD', /\d{7}/]
             ];
 
             // iso time formats and regexes
             var isoTimes = [
-              ["HH:mm:ss.SSSS", /\d\d:\d\d:\d\d\.\d+/],
-              ["HH:mm:ss,SSSS", /\d\d:\d\d:\d\d,\d+/],
-              ["HH:mm:ss", /\d\d:\d\d:\d\d/],
-              ["HH:mm", /\d\d:\d\d/],
-              ["HHmmss.SSSS", /\d\d\d\d\d\d\.\d+/],
-              ["HHmmss,SSSS", /\d\d\d\d\d\d,\d+/],
-              ["HHmmss", /\d\d\d\d\d\d/],
-              ["HHmm", /\d\d\d\d/],
-              ["HH", /\d\d/]
+              ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
+              ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
+              ['HH:mm:ss', /\d\d:\d\d:\d\d/],
+              ['HH:mm', /\d\d:\d\d/],
+              ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
+              ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
+              ['HHmmss', /\d\d\d\d\d\d/],
+              ['HHmm', /\d\d\d\d/],
+              ['HH', /\d\d/]
             ];
 
             var aspNetJsonRegex = /^\/?Date\((\-?\d+)/i;
@@ -4365,8 +4018,7 @@
               var i,
                 l,
                 string = config._i,
-                match =
-                  extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
+                match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
                 allowTime,
                 dateFormat,
                 timeFormat,
@@ -4390,7 +4042,7 @@
                   for (i = 0, l = isoTimes.length; i < l; i++) {
                     if (isoTimes[i][1].exec(match[3])) {
                       // match[2] should be 'T' or space
-                      timeFormat = (match[2] || " ") + isoTimes[i][0];
+                      timeFormat = (match[2] || ' ') + isoTimes[i][0];
                       break;
                     }
                   }
@@ -4405,13 +4057,13 @@
                 }
                 if (match[4]) {
                   if (tzRegex.exec(match[4])) {
-                    tzFormat = "Z";
+                    tzFormat = 'Z';
                   } else {
                     config._isValid = false;
                     return;
                   }
                 }
-                config._f = dateFormat + (timeFormat || "") + (tzFormat || "");
+                config._f = dateFormat + (timeFormat || '') + (tzFormat || '');
                 configFromStringAndFormat(config);
               } else {
                 config._isValid = false;
@@ -4421,14 +4073,7 @@
             // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
             var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;
 
-            function extractFromRFC2822Strings(
-              yearStr,
-              monthStr,
-              dayStr,
-              hourStr,
-              minuteStr,
-              secondStr
-            ) {
+            function extractFromRFC2822Strings(yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
               var result = [
                 untruncateYear(yearStr),
                 defaultLocaleMonthsShort.indexOf(monthStr),
@@ -4457,22 +4102,16 @@
             function preprocessRFC2822(s) {
               // Remove comments and folding whitespace and replace multiple-spaces with a single space
               return s
-                .replace(/\([^)]*\)|[\n\t]/g, " ")
-                .replace(/(\s\s+)/g, " ")
+                .replace(/\([^)]*\)|[\n\t]/g, ' ')
+                .replace(/(\s\s+)/g, ' ')
                 .trim();
             }
 
             function checkWeekday(weekdayStr, parsedInput, config) {
               if (weekdayStr) {
                 // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
-                var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(
-                    weekdayStr
-                  ),
-                  weekdayActual = new Date(
-                    parsedInput[0],
-                    parsedInput[1],
-                    parsedInput[2]
-                  ).getDay();
+                var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
+                  weekdayActual = new Date(parsedInput[0], parsedInput[1], parsedInput[2]).getDay();
                 if (weekdayProvided !== weekdayActual) {
                   getParsingFlags(config).weekdayMismatch = true;
                   config._isValid = false;
@@ -4513,14 +4152,7 @@
             function configFromRFC2822(config) {
               var match = rfc2822.exec(preprocessRFC2822(config._i));
               if (match) {
-                var parsedArray = extractFromRFC2822Strings(
-                  match[4],
-                  match[3],
-                  match[2],
-                  match[5],
-                  match[6],
-                  match[7]
-                );
+                var parsedArray = extractFromRFC2822Strings(match[4], match[3], match[2], match[5], match[6], match[7]);
                 if (!checkWeekday(match[1], parsedArray, config)) {
                   return;
                 }
@@ -4529,9 +4161,7 @@
                 config._tzm = calculateOffset(match[8], match[9], match[10]);
 
                 config._d = createUTCDate.apply(null, config._a);
-                config._d.setUTCMinutes(
-                  config._d.getUTCMinutes() - config._tzm
-                );
+                config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
 
                 getParsingFlags(config).rfc2822 = true;
               } else {
@@ -4567,14 +4197,12 @@
             }
 
             hooks.createFromInputFallback = deprecate(
-              "value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), " +
-                "which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are " +
-                "discouraged and will be removed in an upcoming major release. Please refer to " +
-                "http://momentjs.com/guides/#/warnings/js-date/ for more info.",
+              'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
+                'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
+                'discouraged and will be removed in an upcoming major release. Please refer to ' +
+                'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
               function(config) {
-                config._d = new Date(
-                  config._i + (config._useUTC ? " UTC" : "")
-                );
+                config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
               }
             );
 
@@ -4599,7 +4227,7 @@
               getParsingFlags(config).empty = true;
 
               // This array is used to make a Date, either with `new Date` or `Date.UTC`
-              var string = "" + config._i,
+              var string = '' + config._i,
                 i,
                 parsedInput,
                 tokens,
@@ -4608,16 +4236,11 @@
                 stringLength = string.length,
                 totalParsedInputLength = 0;
 
-              tokens =
-                expandFormat(config._f, config._locale).match(
-                  formattingTokens
-                ) || [];
+              tokens = expandFormat(config._f, config._locale).match(formattingTokens) || [];
 
               for (i = 0; i < tokens.length; i++) {
                 token = tokens[i];
-                parsedInput = (string.match(
-                  getParseRegexForToken(token, config)
-                ) || [])[0];
+                parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
                 // console.log('token', token, 'parsedInput', parsedInput,
                 //         'regex', getParseRegexForToken(token, config));
                 if (parsedInput) {
@@ -4625,9 +4248,7 @@
                   if (skipped.length > 0) {
                     getParsingFlags(config).unusedInput.push(skipped);
                   }
-                  string = string.slice(
-                    string.indexOf(parsedInput) + parsedInput.length
-                  );
+                  string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
                   totalParsedInputLength += parsedInput.length;
                 }
                 // don't parse if it's not a known token
@@ -4644,29 +4265,20 @@
               }
 
               // add remaining unparsed input length to the string
-              getParsingFlags(config).charsLeftOver =
-                stringLength - totalParsedInputLength;
+              getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
               if (string.length > 0) {
                 getParsingFlags(config).unusedInput.push(string);
               }
 
               // clear _12h flag if hour is <= 12
-              if (
-                config._a[HOUR] <= 12 &&
-                getParsingFlags(config).bigHour === true &&
-                config._a[HOUR] > 0
-              ) {
+              if (config._a[HOUR] <= 12 && getParsingFlags(config).bigHour === true && config._a[HOUR] > 0) {
                 getParsingFlags(config).bigHour = undefined;
               }
 
               getParsingFlags(config).parsedDateParts = config._a.slice(0);
               getParsingFlags(config).meridiem = config._meridiem;
               // handle meridiem
-              config._a[HOUR] = meridiemFixWrap(
-                config._locale,
-                config._a[HOUR],
-                config._meridiem
-              );
+              config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
 
               configFromArray(config);
               checkOverflow(config);
@@ -4724,8 +4336,7 @@
                 currentScore += getParsingFlags(tempConfig).charsLeftOver;
 
                 //or tokens
-                currentScore +=
-                  getParsingFlags(tempConfig).unusedTokens.length * 10;
+                currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
 
                 getParsingFlags(tempConfig).score = currentScore;
 
@@ -4744,20 +4355,11 @@
               }
 
               var i = normalizeObjectUnits(config._i);
-              config._a = map(
-                [
-                  i.year,
-                  i.month,
-                  i.day || i.date,
-                  i.hour,
-                  i.minute,
-                  i.second,
-                  i.millisecond
-                ],
-                function(obj) {
-                  return obj && parseInt(obj, 10);
-                }
-              );
+              config._a = map([i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond], function(
+                obj
+              ) {
+                return obj && parseInt(obj, 10);
+              });
 
               configFromArray(config);
             }
@@ -4766,7 +4368,7 @@
               var res = new Moment(checkOverflow(prepareConfig(config)));
               if (res._nextDay) {
                 // Adding is smart enough around DST
-                res.add(1, "d");
+                res.add(1, 'd');
                 res._nextDay = undefined;
               }
 
@@ -4779,11 +4381,11 @@
 
               config._locale = config._locale || getLocale(config._l);
 
-              if (input === null || (format === undefined && input === "")) {
+              if (input === null || (format === undefined && input === '')) {
                 return createInvalid({ nullInput: true });
               }
 
-              if (typeof input === "string") {
+              if (typeof input === 'string') {
                 config._i = input = config._locale.preparse(input);
               }
 
@@ -4812,7 +4414,7 @@
                 config._d = new Date(hooks.now());
               } else if (isDate(input)) {
                 config._d = new Date(input.valueOf());
-              } else if (typeof input === "string") {
+              } else if (typeof input === 'string') {
                 configFromString(config);
               } else if (isArray(input)) {
                 config._a = map(input.slice(0), function(obj) {
@@ -4837,10 +4439,7 @@
                 locale = undefined;
               }
 
-              if (
-                (isObject(input) && isObjectEmpty(input)) ||
-                (isArray(input) && input.length === 0)
-              ) {
+              if ((isObject(input) && isObjectEmpty(input)) || (isArray(input) && input.length === 0)) {
                 input = undefined;
               }
               // object construction must be done this way.
@@ -4860,7 +4459,7 @@
             }
 
             var prototypeMin = deprecate(
-              "moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/",
+              'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
               function() {
                 var other = createLocal.apply(null, arguments);
                 if (this.isValid() && other.isValid()) {
@@ -4872,7 +4471,7 @@
             );
 
             var prototypeMax = deprecate(
-              "moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/",
+              'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
               function() {
                 var other = createLocal.apply(null, arguments);
                 if (this.isValid() && other.isValid()) {
@@ -4909,39 +4508,24 @@
             function min() {
               var args = [].slice.call(arguments, 0);
 
-              return pickBy("isBefore", args);
+              return pickBy('isBefore', args);
             }
 
             function max() {
               var args = [].slice.call(arguments, 0);
 
-              return pickBy("isAfter", args);
+              return pickBy('isAfter', args);
             }
 
             var now = function() {
               return Date.now ? Date.now() : +new Date();
             };
 
-            var ordering = [
-              "year",
-              "quarter",
-              "month",
-              "week",
-              "day",
-              "hour",
-              "minute",
-              "second",
-              "millisecond"
-            ];
+            var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'];
 
             function isDurationValid(m) {
               for (var key in m) {
-                if (
-                  !(
-                    indexOf.call(ordering, key) !== -1 &&
-                    (m[key] == null || !isNaN(m[key]))
-                  )
-                ) {
+                if (!(indexOf.call(ordering, key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
                   return false;
                 }
               }
@@ -5021,28 +4605,23 @@
             function offset(token, separator) {
               addFormatToken(token, 0, 0, function() {
                 var offset = this.utcOffset();
-                var sign = "+";
+                var sign = '+';
                 if (offset < 0) {
                   offset = -offset;
-                  sign = "-";
+                  sign = '-';
                 }
-                return (
-                  sign +
-                  zeroFill(~~(offset / 60), 2) +
-                  separator +
-                  zeroFill(~~offset % 60, 2)
-                );
+                return sign + zeroFill(~~(offset / 60), 2) + separator + zeroFill(~~offset % 60, 2);
               });
             }
 
-            offset("Z", ":");
-            offset("ZZ", "");
+            offset('Z', ':');
+            offset('ZZ', '');
 
             // PARSING
 
-            addRegexToken("Z", matchShortOffset);
-            addRegexToken("ZZ", matchShortOffset);
-            addParseToken(["Z", "ZZ"], function(input, array, config) {
+            addRegexToken('Z', matchShortOffset);
+            addRegexToken('ZZ', matchShortOffset);
+            addParseToken(['Z', 'ZZ'], function(input, array, config) {
               config._useUTC = true;
               config._tzm = offsetFromString(matchShortOffset, input);
             });
@@ -5055,17 +4634,17 @@
             var chunkOffset = /([\+\-]|\d\d)/gi;
 
             function offsetFromString(matcher, string) {
-              var matches = (string || "").match(matcher);
+              var matches = (string || '').match(matcher);
 
               if (matches === null) {
                 return null;
               }
 
               var chunk = matches[matches.length - 1] || [];
-              var parts = (chunk + "").match(chunkOffset) || ["-", 0, 0];
+              var parts = (chunk + '').match(chunkOffset) || ['-', 0, 0];
               var minutes = +(parts[1] * 60) + toInt(parts[2]);
 
-              return minutes === 0 ? 0 : parts[0] === "+" ? minutes : -minutes;
+              return minutes === 0 ? 0 : parts[0] === '+' ? minutes : -minutes;
             }
 
             // Return a moment from input, that is local/utc/zone equivalent to model.
@@ -5074,9 +4653,7 @@
               if (model._isUTC) {
                 res = model.clone();
                 diff =
-                  (isMoment(input) || isDate(input)
-                    ? input.valueOf()
-                    : createLocal(input).valueOf()) - res.valueOf();
+                  (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res.valueOf();
                 // Use low-level api, because this fn is low-level api.
                 res._d.setTime(res._d.valueOf() + diff);
                 hooks.updateOffset(res, false);
@@ -5117,7 +4694,7 @@
                 return input != null ? this : NaN;
               }
               if (input != null) {
-                if (typeof input === "string") {
+                if (typeof input === 'string') {
                   input = offsetFromString(matchShortOffset, input);
                   if (input === null) {
                     return this;
@@ -5131,16 +4708,11 @@
                 this._offset = input;
                 this._isUTC = true;
                 if (localAdjust != null) {
-                  this.add(localAdjust, "m");
+                  this.add(localAdjust, 'm');
                 }
                 if (offset !== input) {
                   if (!keepLocalTime || this._changeInProgress) {
-                    addSubtract(
-                      this,
-                      createDuration(input - offset, "m"),
-                      1,
-                      false
-                    );
+                    addSubtract(this, createDuration(input - offset, 'm'), 1, false);
                   } else if (!this._changeInProgress) {
                     this._changeInProgress = true;
                     hooks.updateOffset(this, true);
@@ -5155,7 +4727,7 @@
 
             function getSetZone(input, keepLocalTime) {
               if (input != null) {
-                if (typeof input !== "string") {
+                if (typeof input !== 'string') {
                   input = -input;
                 }
 
@@ -5177,7 +4749,7 @@
                 this._isUTC = false;
 
                 if (keepLocalTime) {
-                  this.subtract(getDateOffset(this), "m");
+                  this.subtract(getDateOffset(this), 'm');
                 }
               }
               return this;
@@ -5186,7 +4758,7 @@
             function setOffsetToParsedOffset() {
               if (this._tzm != null) {
                 this.utcOffset(this._tzm, false, true);
-              } else if (typeof this._i === "string") {
+              } else if (typeof this._i === 'string') {
                 var tZone = offsetFromString(matchOffset, this._i);
                 if (tZone != null) {
                   this.utcOffset(tZone);
@@ -5231,8 +4803,7 @@
 
               if (c._a) {
                 var other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
-                this._isDSTShifted =
-                  this.isValid() && compareArrays(c._a, other.toArray()) > 0;
+                this._isDSTShifted = this.isValid() && compareArrays(c._a, other.toArray()) > 0;
               } else {
                 this._isDSTShifted = false;
               }
@@ -5282,7 +4853,7 @@
                   duration.milliseconds = input;
                 }
               } else if (!!(match = aspNetRegex.exec(input))) {
-                sign = match[1] === "-" ? -1 : 1;
+                sign = match[1] === '-' ? -1 : 1;
                 duration = {
                   y: 0,
                   d: toInt(match[DATE]) * sign,
@@ -5292,7 +4863,7 @@
                   ms: toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
                 };
               } else if (!!(match = isoRegex.exec(input))) {
-                sign = match[1] === "-" ? -1 : match[1] === "+" ? 1 : 1;
+                sign = match[1] === '-' ? -1 : match[1] === '+' ? 1 : 1;
                 duration = {
                   y: parseIso(match[2], sign),
                   M: parseIso(match[3], sign),
@@ -5305,14 +4876,8 @@
               } else if (duration == null) {
                 // checks for null or undefined
                 duration = {};
-              } else if (
-                typeof duration === "object" &&
-                ("from" in duration || "to" in duration)
-              ) {
-                diffRes = momentsDifference(
-                  createLocal(duration.from),
-                  createLocal(duration.to)
-                );
+              } else if (typeof duration === 'object' && ('from' in duration || 'to' in duration)) {
+                diffRes = momentsDifference(createLocal(duration.from), createLocal(duration.to));
 
                 duration = {};
                 duration.ms = diffRes.milliseconds;
@@ -5321,7 +4886,7 @@
 
               ret = new Duration(duration);
 
-              if (isDuration(input) && hasOwnProp(input, "_locale")) {
+              if (isDuration(input) && hasOwnProp(input, '_locale')) {
                 ret._locale = input._locale;
               }
 
@@ -5335,7 +4900,7 @@
               // We'd normally use ~~inp for this, but unfortunately it also
               // converts floats to ints.
               // inp may be undefined, so careful calling replace on it.
-              var res = inp && parseFloat(inp.replace(",", "."));
+              var res = inp && parseFloat(inp.replace(',', '.'));
               // apply sign while we're at it
               return (isNaN(res) ? 0 : res) * sign;
             }
@@ -5343,20 +4908,17 @@
             function positiveMomentsDifference(base, other) {
               var res = { milliseconds: 0, months: 0 };
 
-              res.months =
-                other.month() -
-                base.month() +
-                (other.year() - base.year()) * 12;
+              res.months = other.month() - base.month() + (other.year() - base.year()) * 12;
               if (
                 base
                   .clone()
-                  .add(res.months, "M")
+                  .add(res.months, 'M')
                   .isAfter(other)
               ) {
                 --res.months;
               }
 
-              res.milliseconds = +other - +base.clone().add(res.months, "M");
+              res.milliseconds = +other - +base.clone().add(res.months, 'M');
 
               return res;
             }
@@ -5387,19 +4949,19 @@
                 if (period !== null && !isNaN(+period)) {
                   deprecateSimple(
                     name,
-                    "moment()." +
+                    'moment().' +
                       name +
-                      "(period, number) is deprecated. Please use moment()." +
+                      '(period, number) is deprecated. Please use moment().' +
                       name +
-                      "(number, period). " +
-                      "See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info."
+                      '(number, period). ' +
+                      'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.'
                   );
                   tmp = val;
                   val = period;
                   period = tmp;
                 }
 
-                val = typeof val === "string" ? +val : val;
+                val = typeof val === 'string' ? +val : val;
                 dur = createDuration(val, period);
                 addSubtract(this, dur, direction);
                 return this;
@@ -5419,10 +4981,10 @@
               updateOffset = updateOffset == null ? true : updateOffset;
 
               if (months) {
-                setMonth(mom, get(mom, "Month") + months * isAdding);
+                setMonth(mom, get(mom, 'Month') + months * isAdding);
               }
               if (days) {
-                set$1(mom, "Date", get(mom, "Date") + days * isAdding);
+                set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
               }
               if (milliseconds) {
                 mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
@@ -5432,43 +4994,36 @@
               }
             }
 
-            var add = createAdder(1, "add");
-            var subtract = createAdder(-1, "subtract");
+            var add = createAdder(1, 'add');
+            var subtract = createAdder(-1, 'subtract');
 
             function getCalendarFormat(myMoment, now) {
-              var diff = myMoment.diff(now, "days", true);
+              var diff = myMoment.diff(now, 'days', true);
               return diff < -6
-                ? "sameElse"
+                ? 'sameElse'
                 : diff < -1
-                ? "lastWeek"
+                ? 'lastWeek'
                 : diff < 0
-                ? "lastDay"
+                ? 'lastDay'
                 : diff < 1
-                ? "sameDay"
+                ? 'sameDay'
                 : diff < 2
-                ? "nextDay"
+                ? 'nextDay'
                 : diff < 7
-                ? "nextWeek"
-                : "sameElse";
+                ? 'nextWeek'
+                : 'sameElse';
             }
 
             function calendar$1(time, formats) {
               // We want to compare the start of today, vs this.
               // Getting start-of-today depends on whether we're local/utc/offset or not.
               var now = time || createLocal(),
-                sod = cloneWithOffset(now, this).startOf("day"),
-                format = hooks.calendarFormat(this, sod) || "sameElse";
+                sod = cloneWithOffset(now, this).startOf('day'),
+                format = hooks.calendarFormat(this, sod) || 'sameElse';
 
-              var output =
-                formats &&
-                (isFunction(formats[format])
-                  ? formats[format].call(this, now)
-                  : formats[format]);
+              var output = formats && (isFunction(formats[format]) ? formats[format].call(this, now) : formats[format]);
 
-              return this.format(
-                output ||
-                  this.localeData().calendar(format, this, createLocal(now))
-              );
+              return this.format(output || this.localeData().calendar(format, this, createLocal(now)));
             }
 
             function clone() {
@@ -5480,10 +5035,8 @@
               if (!(this.isValid() && localInput.isValid())) {
                 return false;
               }
-              units = normalizeUnits(
-                !isUndefined(units) ? units : "millisecond"
-              );
-              if (units === "millisecond") {
+              units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+              if (units === 'millisecond') {
                 return this.valueOf() > localInput.valueOf();
               } else {
                 return (
@@ -5500,10 +5053,8 @@
               if (!(this.isValid() && localInput.isValid())) {
                 return false;
               }
-              units = normalizeUnits(
-                !isUndefined(units) ? units : "millisecond"
-              );
-              if (units === "millisecond") {
+              units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+              if (units === 'millisecond') {
                 return this.valueOf() < localInput.valueOf();
               } else {
                 return (
@@ -5515,14 +5066,10 @@
             }
 
             function isBetween(from, to, units, inclusivity) {
-              inclusivity = inclusivity || "()";
+              inclusivity = inclusivity || '()';
               return (
-                (inclusivity[0] === "("
-                  ? this.isAfter(from, units)
-                  : !this.isBefore(from, units)) &&
-                (inclusivity[1] === ")"
-                  ? this.isBefore(to, units)
-                  : !this.isAfter(to, units))
+                (inclusivity[0] === '(' ? this.isAfter(from, units) : !this.isBefore(from, units)) &&
+                (inclusivity[1] === ')' ? this.isBefore(to, units) : !this.isAfter(to, units))
               );
             }
 
@@ -5532,8 +5079,8 @@
               if (!(this.isValid() && localInput.isValid())) {
                 return false;
               }
-              units = normalizeUnits(units || "millisecond");
-              if (units === "millisecond") {
+              units = normalizeUnits(units || 'millisecond');
+              if (units === 'millisecond') {
                 return this.valueOf() === localInput.valueOf();
               } else {
                 inputMs = localInput.valueOf();
@@ -5575,28 +5122,28 @@
               units = normalizeUnits(units);
 
               switch (units) {
-                case "year":
+                case 'year':
                   output = monthDiff(this, that) / 12;
                   break;
-                case "month":
+                case 'month':
                   output = monthDiff(this, that);
                   break;
-                case "quarter":
+                case 'quarter':
                   output = monthDiff(this, that) / 3;
                   break;
-                case "second":
+                case 'second':
                   output = (this - that) / 1e3;
                   break; // 1000
-                case "minute":
+                case 'minute':
                   output = (this - that) / 6e4;
                   break; // 1000 * 60
-                case "hour":
+                case 'hour':
                   output = (this - that) / 36e5;
                   break; // 1000 * 60 * 60
-                case "day":
+                case 'day':
                   output = (this - that - zoneDelta) / 864e5;
                   break; // 1000 * 60 * 60 * 24, negate dst
-                case "week":
+                case 'week':
                   output = (this - that - zoneDelta) / 6048e5;
                   break; // 1000 * 60 * 60 * 24 * 7, negate dst
                 default:
@@ -5608,19 +5155,18 @@
 
             function monthDiff(a, b) {
               // difference in months
-              var wholeMonthDiff =
-                  (b.year() - a.year()) * 12 + (b.month() - a.month()),
+              var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month()),
                 // b is in (anchor - 1 month, anchor + 1 month)
-                anchor = a.clone().add(wholeMonthDiff, "months"),
+                anchor = a.clone().add(wholeMonthDiff, 'months'),
                 anchor2,
                 adjust;
 
               if (b - anchor < 0) {
-                anchor2 = a.clone().add(wholeMonthDiff - 1, "months");
+                anchor2 = a.clone().add(wholeMonthDiff - 1, 'months');
                 // linear across the month
                 adjust = (b - anchor) / (anchor - anchor2);
               } else {
-                anchor2 = a.clone().add(wholeMonthDiff + 1, "months");
+                anchor2 = a.clone().add(wholeMonthDiff + 1, 'months');
                 // linear across the month
                 adjust = (b - anchor) / (anchor2 - anchor);
               }
@@ -5629,13 +5175,13 @@
               return -(wholeMonthDiff + adjust) || 0;
             }
 
-            hooks.defaultFormat = "YYYY-MM-DDTHH:mm:ssZ";
-            hooks.defaultFormatUtc = "YYYY-MM-DDTHH:mm:ss[Z]";
+            hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+            hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
 
             function toString() {
               return this.clone()
-                .locale("en")
-                .format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ");
+                .locale('en')
+                .format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
             }
 
             function toISOString(keepOffset) {
@@ -5645,29 +5191,17 @@
               var utc = keepOffset !== true;
               var m = utc ? this.clone().utc() : this;
               if (m.year() < 0 || m.year() > 9999) {
-                return formatMoment(
-                  m,
-                  utc
-                    ? "YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]"
-                    : "YYYYYY-MM-DD[T]HH:mm:ss.SSSZ"
-                );
+                return formatMoment(m, utc ? 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYYYY-MM-DD[T]HH:mm:ss.SSSZ');
               }
               if (isFunction(Date.prototype.toISOString)) {
                 // native implementation is ~50x faster, use it when we can
                 if (utc) {
                   return this.toDate().toISOString();
                 } else {
-                  return new Date(this._d.valueOf())
-                    .toISOString()
-                    .replace("Z", formatMoment(m, "Z"));
+                  return new Date(this._d.valueOf()).toISOString().replace('Z', formatMoment(m, 'Z'));
                 }
               }
-              return formatMoment(
-                m,
-                utc
-                  ? "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]"
-                  : "YYYY-MM-DD[T]HH:mm:ss.SSSZ"
-              );
+              return formatMoment(m, utc ? 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYY-MM-DD[T]HH:mm:ss.SSSZ');
             }
 
             /**
@@ -5678,19 +5212,17 @@
              */
             function inspect() {
               if (!this.isValid()) {
-                return "moment.invalid(/* " + this._i + " */)";
+                return 'moment.invalid(/* ' + this._i + ' */)';
               }
-              var func = "moment";
-              var zone = "";
+              var func = 'moment';
+              var zone = '';
               if (!this.isLocal()) {
-                func =
-                  this.utcOffset() === 0 ? "moment.utc" : "moment.parseZone";
-                zone = "Z";
+                func = this.utcOffset() === 0 ? 'moment.utc' : 'moment.parseZone';
+                zone = 'Z';
               }
-              var prefix = "[" + func + '("]';
-              var year =
-                0 <= this.year() && this.year() <= 9999 ? "YYYY" : "YYYYYY";
-              var datetime = "-MM-DD[T]HH:mm:ss.SSS";
+              var prefix = '[' + func + '("]';
+              var year = 0 <= this.year() && this.year() <= 9999 ? 'YYYY' : 'YYYYYY';
+              var datetime = '-MM-DD[T]HH:mm:ss.SSS';
               var suffix = zone + '[")]';
 
               return this.format(prefix + year + datetime + suffix);
@@ -5698,20 +5230,14 @@
 
             function format(inputString) {
               if (!inputString) {
-                inputString = this.isUtc()
-                  ? hooks.defaultFormatUtc
-                  : hooks.defaultFormat;
+                inputString = this.isUtc() ? hooks.defaultFormatUtc : hooks.defaultFormat;
               }
               var output = formatMoment(this, inputString);
               return this.localeData().postformat(output);
             }
 
             function from(time, withoutSuffix) {
-              if (
-                this.isValid() &&
-                ((isMoment(time) && time.isValid()) ||
-                  createLocal(time).isValid())
-              ) {
+              if (this.isValid() && ((isMoment(time) && time.isValid()) || createLocal(time).isValid())) {
                 return createDuration({ to: this, from: time })
                   .locale(this.locale())
                   .humanize(!withoutSuffix);
@@ -5725,11 +5251,7 @@
             }
 
             function to(time, withoutSuffix) {
-              if (
-                this.isValid() &&
-                ((isMoment(time) && time.isValid()) ||
-                  createLocal(time).isValid())
-              ) {
+              if (this.isValid() && ((isMoment(time) && time.isValid()) || createLocal(time).isValid())) {
                 return createDuration({ from: this, to: time })
                   .locale(this.locale())
                   .humanize(!withoutSuffix);
@@ -5760,7 +5282,7 @@
             }
 
             var lang = deprecate(
-              "moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.",
+              'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
               function(key) {
                 if (key === undefined) {
                   return this.localeData();
@@ -5779,39 +5301,39 @@
               // the following switch intentionally omits break keywords
               // to utilize falling through the cases.
               switch (units) {
-                case "year":
+                case 'year':
                   this.month(0);
                 /* falls through */
-                case "quarter":
-                case "month":
+                case 'quarter':
+                case 'month':
                   this.date(1);
                 /* falls through */
-                case "week":
-                case "isoWeek":
-                case "day":
-                case "date":
+                case 'week':
+                case 'isoWeek':
+                case 'day':
+                case 'date':
                   this.hours(0);
                 /* falls through */
-                case "hour":
+                case 'hour':
                   this.minutes(0);
                 /* falls through */
-                case "minute":
+                case 'minute':
                   this.seconds(0);
                 /* falls through */
-                case "second":
+                case 'second':
                   this.milliseconds(0);
               }
 
               // weeks are a special case
-              if (units === "week") {
+              if (units === 'week') {
                 this.weekday(0);
               }
-              if (units === "isoWeek") {
+              if (units === 'isoWeek') {
                 this.isoWeekday(1);
               }
 
               // quarters are also special
-              if (units === "quarter") {
+              if (units === 'quarter') {
                 this.month(Math.floor(this.month() / 3) * 3);
               }
 
@@ -5820,18 +5342,18 @@
 
             function endOf(units) {
               units = normalizeUnits(units);
-              if (units === undefined || units === "millisecond") {
+              if (units === undefined || units === 'millisecond') {
                 return this;
               }
 
               // 'date' is an alias for 'day', so it should be considered as such.
-              if (units === "date") {
-                units = "day";
+              if (units === 'date') {
+                units = 'day';
               }
 
               return this.startOf(units)
-                .add(1, units === "isoWeek" ? "week" : units)
-                .subtract(1, "ms");
+                .add(1, units === 'isoWeek' ? 'week' : units)
+                .subtract(1, 'ms');
             }
 
             function valueOf() {
@@ -5848,15 +5370,7 @@
 
             function toArray() {
               var m = this;
-              return [
-                m.year(),
-                m.month(),
-                m.date(),
-                m.hour(),
-                m.minute(),
-                m.second(),
-                m.millisecond()
-              ];
+              return [m.year(), m.month(), m.date(), m.hour(), m.minute(), m.second(), m.millisecond()];
             }
 
             function toObject() {
@@ -5901,11 +5415,11 @@
 
             // FORMATTING
 
-            addFormatToken(0, ["gg", 2], 0, function() {
+            addFormatToken(0, ['gg', 2], 0, function() {
               return this.weekYear() % 100;
             });
 
-            addFormatToken(0, ["GG", 2], 0, function() {
+            addFormatToken(0, ['GG', 2], 0, function() {
               return this.isoWeekYear() % 100;
             });
 
@@ -5913,47 +5427,37 @@
               addFormatToken(0, [token, token.length], 0, getter);
             }
 
-            addWeekYearFormatToken("gggg", "weekYear");
-            addWeekYearFormatToken("ggggg", "weekYear");
-            addWeekYearFormatToken("GGGG", "isoWeekYear");
-            addWeekYearFormatToken("GGGGG", "isoWeekYear");
+            addWeekYearFormatToken('gggg', 'weekYear');
+            addWeekYearFormatToken('ggggg', 'weekYear');
+            addWeekYearFormatToken('GGGG', 'isoWeekYear');
+            addWeekYearFormatToken('GGGGG', 'isoWeekYear');
 
             // ALIASES
 
-            addUnitAlias("weekYear", "gg");
-            addUnitAlias("isoWeekYear", "GG");
+            addUnitAlias('weekYear', 'gg');
+            addUnitAlias('isoWeekYear', 'GG');
 
             // PRIORITY
 
-            addUnitPriority("weekYear", 1);
-            addUnitPriority("isoWeekYear", 1);
+            addUnitPriority('weekYear', 1);
+            addUnitPriority('isoWeekYear', 1);
 
             // PARSING
 
-            addRegexToken("G", matchSigned);
-            addRegexToken("g", matchSigned);
-            addRegexToken("GG", match1to2, match2);
-            addRegexToken("gg", match1to2, match2);
-            addRegexToken("GGGG", match1to4, match4);
-            addRegexToken("gggg", match1to4, match4);
-            addRegexToken("GGGGG", match1to6, match6);
-            addRegexToken("ggggg", match1to6, match6);
+            addRegexToken('G', matchSigned);
+            addRegexToken('g', matchSigned);
+            addRegexToken('GG', match1to2, match2);
+            addRegexToken('gg', match1to2, match2);
+            addRegexToken('GGGG', match1to4, match4);
+            addRegexToken('gggg', match1to4, match4);
+            addRegexToken('GGGGG', match1to6, match6);
+            addRegexToken('ggggg', match1to6, match6);
 
-            addWeekParseToken(["gggg", "ggggg", "GGGG", "GGGGG"], function(
-              input,
-              week,
-              config,
-              token
-            ) {
+            addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function(input, week, config, token) {
               week[token.substr(0, 2)] = toInt(input);
             });
 
-            addWeekParseToken(["gg", "GG"], function(
-              input,
-              week,
-              config,
-              token
-            ) {
+            addWeekParseToken(['gg', 'GG'], function(input, week, config, token) {
               week[token] = hooks.parseTwoDigitYear(input);
             });
 
@@ -5971,14 +5475,7 @@
             }
 
             function getSetISOWeekYear(input) {
-              return getSetWeekYearHelper.call(
-                this,
-                input,
-                this.isoWeek(),
-                this.isoWeekday(),
-                1,
-                4
-              );
+              return getSetWeekYearHelper.call(this, input, this.isoWeek(), this.isoWeekday(), 1, 4);
             }
 
             function getISOWeeksInYear() {
@@ -6004,18 +5501,8 @@
             }
 
             function setWeekAll(weekYear, week, weekday, dow, doy) {
-              var dayOfYearData = dayOfYearFromWeeks(
-                  weekYear,
-                  week,
-                  weekday,
-                  dow,
-                  doy
-                ),
-                date = createUTCDate(
-                  dayOfYearData.year,
-                  0,
-                  dayOfYearData.dayOfYear
-                );
+              var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+                date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
 
               this.year(date.getUTCFullYear());
               this.month(date.getUTCMonth());
@@ -6025,20 +5512,20 @@
 
             // FORMATTING
 
-            addFormatToken("Q", 0, "Qo", "quarter");
+            addFormatToken('Q', 0, 'Qo', 'quarter');
 
             // ALIASES
 
-            addUnitAlias("quarter", "Q");
+            addUnitAlias('quarter', 'Q');
 
             // PRIORITY
 
-            addUnitPriority("quarter", 7);
+            addUnitPriority('quarter', 7);
 
             // PARSING
 
-            addRegexToken("Q", match1);
-            addParseToken("Q", function(input, array) {
+            addRegexToken('Q', match1);
+            addParseToken('Q', function(input, array) {
               array[MONTH] = (toInt(input) - 1) * 3;
             });
 
@@ -6052,51 +5539,51 @@
 
             // FORMATTING
 
-            addFormatToken("D", ["DD", 2], "Do", "date");
+            addFormatToken('D', ['DD', 2], 'Do', 'date');
 
             // ALIASES
 
-            addUnitAlias("date", "D");
+            addUnitAlias('date', 'D');
 
             // PRIOROITY
-            addUnitPriority("date", 9);
+            addUnitPriority('date', 9);
 
             // PARSING
 
-            addRegexToken("D", match1to2);
-            addRegexToken("DD", match1to2, match2);
-            addRegexToken("Do", function(isStrict, locale) {
+            addRegexToken('D', match1to2);
+            addRegexToken('DD', match1to2, match2);
+            addRegexToken('Do', function(isStrict, locale) {
               // TODO: Remove "ordinalParse" fallback in next major release.
               return isStrict
                 ? locale._dayOfMonthOrdinalParse || locale._ordinalParse
                 : locale._dayOfMonthOrdinalParseLenient;
             });
 
-            addParseToken(["D", "DD"], DATE);
-            addParseToken("Do", function(input, array) {
+            addParseToken(['D', 'DD'], DATE);
+            addParseToken('Do', function(input, array) {
               array[DATE] = toInt(input.match(match1to2)[0]);
             });
 
             // MOMENTS
 
-            var getSetDayOfMonth = makeGetSet("Date", true);
+            var getSetDayOfMonth = makeGetSet('Date', true);
 
             // FORMATTING
 
-            addFormatToken("DDD", ["DDDD", 3], "DDDo", "dayOfYear");
+            addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
 
             // ALIASES
 
-            addUnitAlias("dayOfYear", "DDD");
+            addUnitAlias('dayOfYear', 'DDD');
 
             // PRIORITY
-            addUnitPriority("dayOfYear", 4);
+            addUnitPriority('dayOfYear', 4);
 
             // PARSING
 
-            addRegexToken("DDD", match1to3);
-            addRegexToken("DDDD", match3);
-            addParseToken(["DDD", "DDDD"], function(input, array, config) {
+            addRegexToken('DDD', match1to3);
+            addRegexToken('DDDD', match3);
+            addParseToken(['DDD', 'DDDD'], function(input, array, config) {
               config._dayOfYear = toInt(input);
             });
 
@@ -6105,133 +5592,127 @@
             // MOMENTS
 
             function getSetDayOfYear(input) {
-              var dayOfYear =
-                Math.round(
-                  (this.clone().startOf("day") - this.clone().startOf("year")) /
-                    864e5
-                ) + 1;
-              return input == null
-                ? dayOfYear
-                : this.add(input - dayOfYear, "d");
+              var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
+              return input == null ? dayOfYear : this.add(input - dayOfYear, 'd');
             }
 
             // FORMATTING
 
-            addFormatToken("m", ["mm", 2], 0, "minute");
+            addFormatToken('m', ['mm', 2], 0, 'minute');
 
             // ALIASES
 
-            addUnitAlias("minute", "m");
+            addUnitAlias('minute', 'm');
 
             // PRIORITY
 
-            addUnitPriority("minute", 14);
+            addUnitPriority('minute', 14);
 
             // PARSING
 
-            addRegexToken("m", match1to2);
-            addRegexToken("mm", match1to2, match2);
-            addParseToken(["m", "mm"], MINUTE);
+            addRegexToken('m', match1to2);
+            addRegexToken('mm', match1to2, match2);
+            addParseToken(['m', 'mm'], MINUTE);
 
             // MOMENTS
 
-            var getSetMinute = makeGetSet("Minutes", false);
+            var getSetMinute = makeGetSet('Minutes', false);
 
             // FORMATTING
 
-            addFormatToken("s", ["ss", 2], 0, "second");
+            addFormatToken('s', ['ss', 2], 0, 'second');
 
             // ALIASES
 
-            addUnitAlias("second", "s");
+            addUnitAlias('second', 's');
 
             // PRIORITY
 
-            addUnitPriority("second", 15);
+            addUnitPriority('second', 15);
 
             // PARSING
 
-            addRegexToken("s", match1to2);
-            addRegexToken("ss", match1to2, match2);
-            addParseToken(["s", "ss"], SECOND);
+            addRegexToken('s', match1to2);
+            addRegexToken('ss', match1to2, match2);
+            addParseToken(['s', 'ss'], SECOND);
 
             // MOMENTS
 
-            var getSetSecond = makeGetSet("Seconds", false);
+            var getSetSecond = makeGetSet('Seconds', false);
 
             // FORMATTING
 
-            addFormatToken("S", 0, 0, function() {
+            addFormatToken('S', 0, 0, function() {
               return ~~(this.millisecond() / 100);
             });
 
-            addFormatToken(0, ["SS", 2], 0, function() {
+            addFormatToken(0, ['SS', 2], 0, function() {
               return ~~(this.millisecond() / 10);
             });
 
-            addFormatToken(0, ["SSS", 3], 0, "millisecond");
-            addFormatToken(0, ["SSSS", 4], 0, function() {
+            addFormatToken(0, ['SSS', 3], 0, 'millisecond');
+            addFormatToken(0, ['SSSS', 4], 0, function() {
               return this.millisecond() * 10;
             });
-            addFormatToken(0, ["SSSSS", 5], 0, function() {
+            addFormatToken(0, ['SSSSS', 5], 0, function() {
               return this.millisecond() * 100;
             });
-            addFormatToken(0, ["SSSSSS", 6], 0, function() {
+            addFormatToken(0, ['SSSSSS', 6], 0, function() {
               return this.millisecond() * 1000;
             });
-            addFormatToken(0, ["SSSSSSS", 7], 0, function() {
+            addFormatToken(0, ['SSSSSSS', 7], 0, function() {
               return this.millisecond() * 10000;
             });
-            addFormatToken(0, ["SSSSSSSS", 8], 0, function() {
+            addFormatToken(0, ['SSSSSSSS', 8], 0, function() {
               return this.millisecond() * 100000;
             });
-            addFormatToken(0, ["SSSSSSSSS", 9], 0, function() {
+            addFormatToken(0, ['SSSSSSSSS', 9], 0, function() {
               return this.millisecond() * 1000000;
             });
 
             // ALIASES
 
-            addUnitAlias("millisecond", "ms");
+            addUnitAlias('millisecond', 'ms');
 
             // PRIORITY
 
-            addUnitPriority("millisecond", 16);
+            addUnitPriority('millisecond', 16);
 
             // PARSING
 
-            addRegexToken("S", match1to3, match1);
-            addRegexToken("SS", match1to3, match2);
-            addRegexToken("SSS", match1to3, match3);
+            addRegexToken('S', match1to3, match1);
+            addRegexToken('SS', match1to3, match2);
+            addRegexToken('SSS', match1to3, match3);
 
             var token;
-            for (token = "SSSS"; token.length <= 9; token += "S") {
+            for (token = 'SSSS'; token.length <= 9; token += 'S') {
               addRegexToken(token, matchUnsigned);
             }
 
             function parseMs(input, array) {
-              array[MILLISECOND] = toInt(("0." + input) * 1000);
+              array[MILLISECOND] = toInt(('0.' + input) * 1000);
             }
 
-            for (token = "S"; token.length <= 9; token += "S") {
+            for (token = 'S'; token.length <= 9; token += 'S') {
               addParseToken(token, parseMs);
             }
             // MOMENTS
 
-            var getSetMillisecond = makeGetSet("Milliseconds", false);
+            var getSetMillisecond = makeGetSet('Milliseconds', false);
 
             // FORMATTING
 
-            addFormatToken("z", 0, 0, "zoneAbbr");
-            addFormatToken("zz", 0, 0, "zoneName");
+            addFormatToken('z', 0, 0, 'zoneAbbr');
+            addFormatToken('zz', 0, 0, 'zoneName');
 
             // MOMENTS
 
             function getZoneAbbr() {
-              return this._isUTC ? "UTC" : "";
+              return this._isUTC ? 'UTC' : '';
             }
 
             function getZoneName() {
-              return this._isUTC ? "Coordinated Universal Time" : "";
+              return this._isUTC ? 'Coordinated Universal Time' : '';
             }
 
             var proto = Moment.prototype;
@@ -6332,24 +5813,15 @@
             proto.zoneName = getZoneName;
 
             // Deprecations
-            proto.dates = deprecate(
-              "dates accessor is deprecated. Use date instead.",
-              getSetDayOfMonth
-            );
-            proto.months = deprecate(
-              "months accessor is deprecated. Use month instead",
-              getSetMonth
-            );
-            proto.years = deprecate(
-              "years accessor is deprecated. Use year instead",
-              getSetYear
-            );
+            proto.dates = deprecate('dates accessor is deprecated. Use date instead.', getSetDayOfMonth);
+            proto.months = deprecate('months accessor is deprecated. Use month instead', getSetMonth);
+            proto.years = deprecate('years accessor is deprecated. Use year instead', getSetYear);
             proto.zone = deprecate(
-              "moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/",
+              'moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/',
               getSetZone
             );
             proto.isDSTShifted = deprecate(
-              "isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information",
+              'isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information',
               isDaylightSavingTimeShifted
             );
 
@@ -6415,16 +5887,16 @@
                 format = undefined;
               }
 
-              format = format || "";
+              format = format || '';
 
               if (index != null) {
-                return get$1(format, index, field, "month");
+                return get$1(format, index, field, 'month');
               }
 
               var i;
               var out = [];
               for (i = 0; i < 12; i++) {
-                out[i] = get$1(format, i, field, "month");
+                out[i] = get$1(format, i, field, 'month');
               }
               return out;
             }
@@ -6438,13 +5910,13 @@
             // (true, fmt, 5)
             // (true, fmt)
             function listWeekdaysImpl(localeSorted, format, index, field) {
-              if (typeof localeSorted === "boolean") {
+              if (typeof localeSorted === 'boolean') {
                 if (isNumber(format)) {
                   index = format;
                   format = undefined;
                 }
 
-                format = format || "";
+                format = format || '';
               } else {
                 format = localeSorted;
                 index = format;
@@ -6455,81 +5927,57 @@
                   format = undefined;
                 }
 
-                format = format || "";
+                format = format || '';
               }
 
               var locale = getLocale(),
                 shift = localeSorted ? locale._week.dow : 0;
 
               if (index != null) {
-                return get$1(format, (index + shift) % 7, field, "day");
+                return get$1(format, (index + shift) % 7, field, 'day');
               }
 
               var i;
               var out = [];
               for (i = 0; i < 7; i++) {
-                out[i] = get$1(format, (i + shift) % 7, field, "day");
+                out[i] = get$1(format, (i + shift) % 7, field, 'day');
               }
               return out;
             }
 
             function listMonths(format, index) {
-              return listMonthsImpl(format, index, "months");
+              return listMonthsImpl(format, index, 'months');
             }
 
             function listMonthsShort(format, index) {
-              return listMonthsImpl(format, index, "monthsShort");
+              return listMonthsImpl(format, index, 'monthsShort');
             }
 
             function listWeekdays(localeSorted, format, index) {
-              return listWeekdaysImpl(localeSorted, format, index, "weekdays");
+              return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
             }
 
             function listWeekdaysShort(localeSorted, format, index) {
-              return listWeekdaysImpl(
-                localeSorted,
-                format,
-                index,
-                "weekdaysShort"
-              );
+              return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
             }
 
             function listWeekdaysMin(localeSorted, format, index) {
-              return listWeekdaysImpl(
-                localeSorted,
-                format,
-                index,
-                "weekdaysMin"
-              );
+              return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
             }
 
-            getSetGlobalLocale("en", {
+            getSetGlobalLocale('en', {
               dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
               ordinal: function(number) {
                 var b = number % 10,
                   output =
-                    toInt((number % 100) / 10) === 1
-                      ? "th"
-                      : b === 1
-                      ? "st"
-                      : b === 2
-                      ? "nd"
-                      : b === 3
-                      ? "rd"
-                      : "th";
+                    toInt((number % 100) / 10) === 1 ? 'th' : b === 1 ? 'st' : b === 2 ? 'nd' : b === 3 ? 'rd' : 'th';
                 return number + output;
               }
             });
 
             // Side effect imports
-            hooks.lang = deprecate(
-              "moment.lang is deprecated. Use moment.locale instead.",
-              getSetGlobalLocale
-            );
-            hooks.langData = deprecate(
-              "moment.langData is deprecated. Use moment.localeData instead.",
-              getLocale
-            );
+            hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
+            hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
 
             var mathAbs = Math.abs;
 
@@ -6588,10 +6036,7 @@
               // if we have a mix of positive and negative values, bubble down first
               // check: https://github.com/moment/moment/issues/2166
               if (
-                !(
-                  (milliseconds >= 0 && days >= 0 && months >= 0) ||
-                  (milliseconds <= 0 && days <= 0 && months <= 0)
-                )
+                !((milliseconds >= 0 && days >= 0 && months >= 0) || (milliseconds <= 0 && days <= 0 && months <= 0))
               ) {
                 milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
                 days = 0;
@@ -6650,29 +6095,29 @@
 
               units = normalizeUnits(units);
 
-              if (units === "month" || units === "year") {
+              if (units === 'month' || units === 'year') {
                 days = this._days + milliseconds / 864e5;
                 months = this._months + daysToMonths(days);
-                return units === "month" ? months : months / 12;
+                return units === 'month' ? months : months / 12;
               } else {
                 // handle milliseconds separately because of floating point math errors (issue #1867)
                 days = this._days + Math.round(monthsToDays(this._months));
                 switch (units) {
-                  case "week":
+                  case 'week':
                     return days / 7 + milliseconds / 6048e5;
-                  case "day":
+                  case 'day':
                     return days + milliseconds / 864e5;
-                  case "hour":
+                  case 'hour':
                     return days * 24 + milliseconds / 36e5;
-                  case "minute":
+                  case 'minute':
                     return days * 1440 + milliseconds / 6e4;
-                  case "second":
+                  case 'second':
                     return days * 86400 + milliseconds / 1000;
                   // Math.floor prevents floating point math errors here
-                  case "millisecond":
+                  case 'millisecond':
                     return Math.floor(days * 864e5) + milliseconds;
                   default:
-                    throw new Error("Unknown unit " + units);
+                    throw new Error('Unknown unit ' + units);
                 }
               }
             }
@@ -6696,14 +6141,14 @@
               };
             }
 
-            var asMilliseconds = makeAs("ms");
-            var asSeconds = makeAs("s");
-            var asMinutes = makeAs("m");
-            var asHours = makeAs("h");
-            var asDays = makeAs("d");
-            var asWeeks = makeAs("w");
-            var asMonths = makeAs("M");
-            var asYears = makeAs("y");
+            var asMilliseconds = makeAs('ms');
+            var asSeconds = makeAs('s');
+            var asMinutes = makeAs('m');
+            var asHours = makeAs('h');
+            var asDays = makeAs('d');
+            var asWeeks = makeAs('w');
+            var asMonths = makeAs('M');
+            var asYears = makeAs('y');
 
             function clone$1() {
               return createDuration(this);
@@ -6711,7 +6156,7 @@
 
             function get$2(units) {
               units = normalizeUnits(units);
-              return this.isValid() ? this[units + "s"]() : NaN;
+              return this.isValid() ? this[units + 's']() : NaN;
             }
 
             function makeGetter(name) {
@@ -6720,13 +6165,13 @@
               };
             }
 
-            var milliseconds = makeGetter("milliseconds");
-            var seconds = makeGetter("seconds");
-            var minutes = makeGetter("minutes");
-            var hours = makeGetter("hours");
-            var days = makeGetter("days");
-            var months = makeGetter("months");
-            var years = makeGetter("years");
+            var milliseconds = makeGetter('milliseconds');
+            var seconds = makeGetter('seconds');
+            var minutes = makeGetter('minutes');
+            var hours = makeGetter('hours');
+            var days = makeGetter('days');
+            var months = makeGetter('months');
+            var years = makeGetter('years');
 
             function weeks() {
               return absFloor(this.days() / 7);
@@ -6743,41 +6188,30 @@
             };
 
             // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
-            function substituteTimeAgo(
-              string,
-              number,
-              withoutSuffix,
-              isFuture,
-              locale
-            ) {
-              return locale.relativeTime(
-                number || 1,
-                !!withoutSuffix,
-                string,
-                isFuture
-              );
+            function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
+              return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
             }
 
             function relativeTime$1(posNegDuration, withoutSuffix, locale) {
               var duration = createDuration(posNegDuration).abs();
-              var seconds = round(duration.as("s"));
-              var minutes = round(duration.as("m"));
-              var hours = round(duration.as("h"));
-              var days = round(duration.as("d"));
-              var months = round(duration.as("M"));
-              var years = round(duration.as("y"));
+              var seconds = round(duration.as('s'));
+              var minutes = round(duration.as('m'));
+              var hours = round(duration.as('h'));
+              var days = round(duration.as('d'));
+              var months = round(duration.as('M'));
+              var years = round(duration.as('y'));
 
-              var a = (seconds <= thresholds.ss && ["s", seconds]) ||
-                (seconds < thresholds.s && ["ss", seconds]) ||
-                (minutes <= 1 && ["m"]) ||
-                (minutes < thresholds.m && ["mm", minutes]) ||
-                (hours <= 1 && ["h"]) ||
-                (hours < thresholds.h && ["hh", hours]) ||
-                (days <= 1 && ["d"]) ||
-                (days < thresholds.d && ["dd", days]) ||
-                (months <= 1 && ["M"]) ||
-                (months < thresholds.M && ["MM", months]) ||
-                (years <= 1 && ["y"]) || ["yy", years];
+              var a = (seconds <= thresholds.ss && ['s', seconds]) ||
+                (seconds < thresholds.s && ['ss', seconds]) ||
+                (minutes <= 1 && ['m']) ||
+                (minutes < thresholds.m && ['mm', minutes]) ||
+                (hours <= 1 && ['h']) ||
+                (hours < thresholds.h && ['hh', hours]) ||
+                (days <= 1 && ['d']) ||
+                (days < thresholds.d && ['dd', days]) ||
+                (months <= 1 && ['M']) ||
+                (months < thresholds.M && ['MM', months]) ||
+                (years <= 1 && ['y']) || ['yy', years];
 
               a[2] = withoutSuffix;
               a[3] = +posNegDuration > 0;
@@ -6790,7 +6224,7 @@
               if (roundingFunction === undefined) {
                 return round;
               }
-              if (typeof roundingFunction === "function") {
+              if (typeof roundingFunction === 'function') {
                 round = roundingFunction;
                 return true;
               }
@@ -6806,7 +6240,7 @@
                 return thresholds[threshold];
               }
               thresholds[threshold] = limit;
-              if (threshold === "s") {
+              if (threshold === 's') {
                 thresholds.ss = limit - 1;
               }
               return true;
@@ -6866,30 +6300,30 @@
               var D = days;
               var h = hours;
               var m = minutes;
-              var s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, "") : "";
+              var s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
               var total = this.asSeconds();
 
               if (!total) {
                 // this is the same as C#'s (Noda) and python (isodate)...
                 // but not other JS (goog.date)
-                return "P0D";
+                return 'P0D';
               }
 
-              var totalSign = total < 0 ? "-" : "";
-              var ymSign = sign(this._months) !== sign(total) ? "-" : "";
-              var daysSign = sign(this._days) !== sign(total) ? "-" : "";
-              var hmsSign = sign(this._milliseconds) !== sign(total) ? "-" : "";
+              var totalSign = total < 0 ? '-' : '';
+              var ymSign = sign(this._months) !== sign(total) ? '-' : '';
+              var daysSign = sign(this._days) !== sign(total) ? '-' : '';
+              var hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
 
               return (
                 totalSign +
-                "P" +
-                (Y ? ymSign + Y + "Y" : "") +
-                (M ? ymSign + M + "M" : "") +
-                (D ? daysSign + D + "D" : "") +
-                (h || m || s ? "T" : "") +
-                (h ? hmsSign + h + "H" : "") +
-                (m ? hmsSign + m + "M" : "") +
-                (s ? hmsSign + s + "S" : "")
+                'P' +
+                (Y ? ymSign + Y + 'Y' : '') +
+                (M ? ymSign + M + 'M' : '') +
+                (D ? daysSign + D + 'D' : '') +
+                (h || m || s ? 'T' : '') +
+                (h ? hmsSign + h + 'H' : '') +
+                (m ? hmsSign + m + 'M' : '') +
+                (s ? hmsSign + s + 'S' : '')
               );
             }
 
@@ -6929,7 +6363,7 @@
 
             // Deprecations
             proto$2.toIsoString = deprecate(
-              "toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)",
+              'toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)',
               toISOString$1
             );
             proto$2.lang = lang;
@@ -6938,23 +6372,23 @@
 
             // FORMATTING
 
-            addFormatToken("X", 0, 0, "unix");
-            addFormatToken("x", 0, 0, "valueOf");
+            addFormatToken('X', 0, 0, 'unix');
+            addFormatToken('x', 0, 0, 'valueOf');
 
             // PARSING
 
-            addRegexToken("x", matchSigned);
-            addRegexToken("X", matchTimestamp);
-            addParseToken("X", function(input, array, config) {
+            addRegexToken('x', matchSigned);
+            addRegexToken('X', matchTimestamp);
+            addParseToken('X', function(input, array, config) {
               config._d = new Date(parseFloat(input, 10) * 1000);
             });
-            addParseToken("x", function(input, array, config) {
+            addParseToken('x', function(input, array, config) {
               config._d = new Date(toInt(input));
             });
 
             // Side effect imports
 
-            hooks.version = "2.20.1";
+            hooks.version = '2.20.1';
 
             setHookCallback(createLocal);
 
@@ -6988,15 +6422,15 @@
 
             // currently HTML5 input type only supports 24-hour formats
             hooks.HTML5_FMT = {
-              DATETIME_LOCAL: "YYYY-MM-DDTHH:mm", // <input type="datetime-local" />
-              DATETIME_LOCAL_SECONDS: "YYYY-MM-DDTHH:mm:ss", // <input type="datetime-local" step="1" />
-              DATETIME_LOCAL_MS: "YYYY-MM-DDTHH:mm:ss.SSS", // <input type="datetime-local" step="0.001" />
-              DATE: "YYYY-MM-DD", // <input type="date" />
-              TIME: "HH:mm", // <input type="time" />
-              TIME_SECONDS: "HH:mm:ss", // <input type="time" step="1" />
-              TIME_MS: "HH:mm:ss.SSS", // <input type="time" step="0.001" />
-              WEEK: "YYYY-[W]WW", // <input type="week" />
-              MONTH: "YYYY-MM" // <input type="month" />
+              DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm', // <input type="datetime-local" />
+              DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss', // <input type="datetime-local" step="1" />
+              DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS', // <input type="datetime-local" step="0.001" />
+              DATE: 'YYYY-MM-DD', // <input type="date" />
+              TIME: 'HH:mm', // <input type="time" />
+              TIME_SECONDS: 'HH:mm:ss', // <input type="time" step="1" />
+              TIME_MS: 'HH:mm:ss.SSS', // <input type="time" step="0.001" />
+              WEEK: 'YYYY-[W]WW', // <input type="week" />
+              MONTH: 'YYYY-MM' // <input type="month" />
             };
 
             return hooks;
@@ -7068,7 +6502,7 @@
           Chart.platform.initialize();
 
           module.exports = Chart;
-          if (typeof window !== "undefined") {
+          if (typeof window !== 'undefined') {
             window.Chart = Chart;
           }
 
@@ -7130,53 +6564,53 @@
           Chart.layoutService = Chart.layouts;
         },
         {
-          "10": 10,
-          "11": 11,
-          "12": 12,
-          "13": 13,
-          "14": 14,
-          "15": 15,
-          "16": 16,
-          "17": 17,
-          "18": 18,
-          "19": 19,
-          "20": 20,
-          "21": 21,
-          "22": 22,
-          "23": 23,
-          "24": 24,
-          "25": 25,
-          "26": 26,
-          "27": 27,
-          "28": 28,
-          "29": 29,
-          "30": 30,
-          "31": 31,
-          "32": 32,
-          "33": 33,
-          "34": 34,
-          "35": 35,
-          "40": 40,
-          "45": 45,
-          "48": 48,
-          "49": 49,
-          "53": 53,
-          "54": 54,
-          "55": 55,
-          "56": 56,
-          "57": 57,
-          "58": 58,
-          "8": 8,
-          "9": 9
+          '10': 10,
+          '11': 11,
+          '12': 12,
+          '13': 13,
+          '14': 14,
+          '15': 15,
+          '16': 16,
+          '17': 17,
+          '18': 18,
+          '19': 19,
+          '20': 20,
+          '21': 21,
+          '22': 22,
+          '23': 23,
+          '24': 24,
+          '25': 25,
+          '26': 26,
+          '27': 27,
+          '28': 28,
+          '29': 29,
+          '30': 30,
+          '31': 31,
+          '32': 32,
+          '33': 33,
+          '34': 34,
+          '35': 35,
+          '40': 40,
+          '45': 45,
+          '48': 48,
+          '49': 49,
+          '53': 53,
+          '54': 54,
+          '55': 55,
+          '56': 56,
+          '57': 57,
+          '58': 58,
+          '8': 8,
+          '9': 9
         }
       ],
       8: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.Bar = function(context, config) {
-              config.type = "bar";
+              config.type = 'bar';
 
               return new Chart(context, config);
             };
@@ -7186,11 +6620,11 @@
       ],
       9: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.Bubble = function(context, config) {
-              config.type = "bubble";
+              config.type = 'bubble';
               return new Chart(context, config);
             };
           };
@@ -7199,11 +6633,11 @@
       ],
       10: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.Doughnut = function(context, config) {
-              config.type = "doughnut";
+              config.type = 'doughnut';
 
               return new Chart(context, config);
             };
@@ -7213,11 +6647,11 @@
       ],
       11: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.Line = function(context, config) {
-              config.type = "line";
+              config.type = 'line';
 
               return new Chart(context, config);
             };
@@ -7227,11 +6661,11 @@
       ],
       12: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.PolarArea = function(context, config) {
-              config.type = "polarArea";
+              config.type = 'polarArea';
 
               return new Chart(context, config);
             };
@@ -7241,11 +6675,11 @@
       ],
       13: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.Radar = function(context, config) {
-              config.type = "radar";
+              config.type = 'radar';
 
               return new Chart(context, config);
             };
@@ -7255,11 +6689,11 @@
       ],
       14: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             Chart.Scatter = function(context, config) {
-              config.type = "scatter";
+              config.type = 'scatter';
               return new Chart(context, config);
             };
           };
@@ -7268,21 +6702,21 @@
       ],
       15: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("bar", {
+          defaults._set('bar', {
             hover: {
-              mode: "label"
+              mode: 'label'
             },
 
             scales: {
               xAxes: [
                 {
-                  type: "category",
+                  type: 'category',
 
                   // Specific to Bar Controller
                   categoryPercentage: 0.8,
@@ -7300,30 +6734,30 @@
 
               yAxes: [
                 {
-                  type: "linear"
+                  type: 'linear'
                 }
               ]
             }
           });
 
-          defaults._set("horizontalBar", {
+          defaults._set('horizontalBar', {
             hover: {
-              mode: "index",
-              axis: "y"
+              mode: 'index',
+              axis: 'y'
             },
 
             scales: {
               xAxes: [
                 {
-                  type: "linear",
-                  position: "bottom"
+                  type: 'linear',
+                  position: 'bottom'
                 }
               ],
 
               yAxes: [
                 {
-                  position: "left",
-                  type: "category",
+                  position: 'left',
+                  type: 'category',
 
                   // Specific to Horizontal Bar Controller
                   categoryPercentage: 0.8,
@@ -7342,7 +6776,7 @@
 
             elements: {
               rectangle: {
-                borderSkipped: "left"
+                borderSkipped: 'left'
               }
             },
 
@@ -7350,15 +6784,12 @@
               callbacks: {
                 title: function(item, data) {
                   // Pick first xLabel for now
-                  var title = "";
+                  var title = '';
 
                   if (item.length > 0) {
                     if (item[0].yLabel) {
                       title = item[0].yLabel;
-                    } else if (
-                      data.labels.length > 0 &&
-                      item[0].index < data.labels.length
-                    ) {
+                    } else if (data.labels.length > 0 && item[0].index < data.labels.length) {
                       title = data.labels[item[0].index];
                     }
                   }
@@ -7367,13 +6798,12 @@
                 },
 
                 label: function(item, data) {
-                  var datasetLabel =
-                    data.datasets[item.datasetIndex].label || "";
-                  return datasetLabel + ": " + item.xLabel;
+                  var datasetLabel = data.datasets[item.datasetIndex].label || '';
+                  return datasetLabel + ': ' + item.xLabel;
                 }
               },
-              mode: "index",
-              axis: "y"
+              mode: 'index',
+              axis: 'y'
             }
           });
 
@@ -7472,10 +6902,7 @@
                 var me = this;
                 var meta;
 
-                Chart.DatasetController.prototype.initialize.apply(
-                  me,
-                  arguments
-                );
+                Chart.DatasetController.prototype.initialize.apply(me, arguments);
 
                 meta = me.getMeta();
                 meta.stack = me.getDataset().stack;
@@ -7510,30 +6937,16 @@
                 rectangle._model = {
                   datasetLabel: dataset.label,
                   label: chart.data.labels[index],
-                  borderSkipped: custom.borderSkipped
-                    ? custom.borderSkipped
-                    : rectangleOptions.borderSkipped,
+                  borderSkipped: custom.borderSkipped ? custom.borderSkipped : rectangleOptions.borderSkipped,
                   backgroundColor: custom.backgroundColor
                     ? custom.backgroundColor
-                    : helpers.valueAtIndexOrDefault(
-                        dataset.backgroundColor,
-                        index,
-                        rectangleOptions.backgroundColor
-                      ),
+                    : helpers.valueAtIndexOrDefault(dataset.backgroundColor, index, rectangleOptions.backgroundColor),
                   borderColor: custom.borderColor
                     ? custom.borderColor
-                    : helpers.valueAtIndexOrDefault(
-                        dataset.borderColor,
-                        index,
-                        rectangleOptions.borderColor
-                      ),
+                    : helpers.valueAtIndexOrDefault(dataset.borderColor, index, rectangleOptions.borderColor),
                   borderWidth: custom.borderWidth
                     ? custom.borderWidth
-                    : helpers.valueAtIndexOrDefault(
-                        dataset.borderWidth,
-                        index,
-                        rectangleOptions.borderWidth
-                      )
+                    : helpers.valueAtIndexOrDefault(dataset.borderWidth, index, rectangleOptions.borderWidth)
                 };
 
                 me.updateElementGeometry(rectangle, index, reset);
@@ -7552,24 +6965,12 @@
                 var horizontal = vscale.isHorizontal();
                 var ruler = me._ruler || me.getRuler();
                 var vpixels = me.calculateBarValuePixels(me.index, index);
-                var ipixels = me.calculateBarIndexPixels(
-                  me.index,
-                  index,
-                  ruler
-                );
+                var ipixels = me.calculateBarIndexPixels(me.index, index, ruler);
 
                 model.horizontal = horizontal;
                 model.base = reset ? base : vpixels.base;
-                model.x = horizontal
-                  ? reset
-                    ? base
-                    : vpixels.head
-                  : ipixels.center;
-                model.y = horizontal
-                  ? ipixels.center
-                  : reset
-                  ? base
-                  : vpixels.head;
+                model.x = horizontal ? (reset ? base : vpixels.head) : ipixels.center;
+                model.y = horizontal ? ipixels.center : reset ? base : vpixels.head;
                 model.height = horizontal ? ipixels.size : undefined;
                 model.width = horizontal ? undefined : ipixels.size;
               },
@@ -7613,8 +7014,7 @@
                 var chart = me.chart;
                 var scale = me.getIndexScale();
                 var stacked = scale.options.stacked;
-                var ilen =
-                  last === undefined ? chart.data.datasets.length : last + 1;
+                var ilen = last === undefined ? chart.data.datasets.length : last + 1;
                 var stacks = [];
                 var i, meta;
 
@@ -7625,9 +7025,7 @@
                     chart.isDatasetVisible(i) &&
                     (stacked === false ||
                       (stacked === true && stacks.indexOf(meta.stack) === -1) ||
-                      (stacked === undefined &&
-                        (meta.stack === undefined ||
-                          stacks.indexOf(meta.stack) === -1)))
+                      (stacked === undefined && (meta.stack === undefined || stacks.indexOf(meta.stack) === -1)))
                   ) {
                     stacks.push(meta.stack);
                   }
@@ -7676,9 +7074,7 @@
                   pixels.push(scale.getPixelForValue(null, i, datasetIndex));
                 }
 
-                min = helpers.isNullOrUndef(scale.options.barThickness)
-                  ? computeMinSampleSize(scale, pixels)
-                  : -1;
+                min = helpers.isNullOrUndef(scale.options.barThickness) ? computeMinSampleSize(scale, pixels) : -1;
 
                 return {
                   min: min,
@@ -7700,9 +7096,7 @@
                 var meta = me.getMeta();
                 var scale = me.getValueScale();
                 var datasets = chart.data.datasets;
-                var value = scale.getRightValue(
-                  datasets[datasetIndex].data[index]
-                );
+                var value = scale.getRightValue(datasets[datasetIndex].data[index]);
                 var stacked = scale.options.stacked;
                 var stack = meta.stack;
                 var start = 0;
@@ -7719,10 +7113,7 @@
                       chart.isDatasetVisible(i)
                     ) {
                       ivalue = scale.getRightValue(datasets[i].data[index]);
-                      if (
-                        (value < 0 && ivalue < 0) ||
-                        (value >= 0 && ivalue > 0)
-                      ) {
+                      if ((value < 0 && ivalue < 0) || (value >= 0 && ivalue > 0)) {
                         start += ivalue;
                       }
                     }
@@ -7748,16 +7139,12 @@
                 var me = this;
                 var options = ruler.scale.options;
                 var range =
-                  options.barThickness === "flex"
+                  options.barThickness === 'flex'
                     ? computeFlexCategoryTraits(index, ruler, options)
                     : computeFitCategoryTraits(index, ruler, options);
 
-                var stackIndex = me.getStackIndex(
-                  datasetIndex,
-                  me.getMeta().stack
-                );
-                var center =
-                  range.start + range.chunk * stackIndex + range.chunk / 2;
+                var stackIndex = me.getStackIndex(datasetIndex, me.getMeta().stack);
+                var center = range.start + range.chunk * stackIndex + range.chunk / 2;
                 var size = Math.min(
                   helpers.valueOrDefault(options.maxBarThickness, Infinity),
                   range.chunk * range.ratio
@@ -7813,11 +7200,7 @@
                     );
                 model.borderWidth = custom.hoverBorderWidth
                   ? custom.hoverBorderWidth
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.hoverBorderWidth,
-                      index,
-                      model.borderWidth
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.hoverBorderWidth, index, model.borderWidth);
               },
 
               removeHoverStyle: function(rectangle) {
@@ -7825,8 +7208,7 @@
                 var index = rectangle._index;
                 var custom = rectangle.custom || {};
                 var model = rectangle._model;
-                var rectangleElementOptions = this.chart.options.elements
-                  .rectangle;
+                var rectangleElementOptions = this.chart.options.elements.rectangle;
 
                 model.backgroundColor = custom.backgroundColor
                   ? custom.backgroundColor
@@ -7837,18 +7219,10 @@
                     );
                 model.borderColor = custom.borderColor
                   ? custom.borderColor
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.borderColor,
-                      index,
-                      rectangleElementOptions.borderColor
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.borderColor, index, rectangleElementOptions.borderColor);
                 model.borderWidth = custom.borderWidth
                   ? custom.borderWidth
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.borderWidth,
-                      index,
-                      rectangleElementOptions.borderWidth
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.borderWidth, index, rectangleElementOptions.borderWidth);
               }
             });
 
@@ -7869,34 +7243,34 @@
             });
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       16: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("bubble", {
+          defaults._set('bubble', {
             hover: {
-              mode: "single"
+              mode: 'single'
             },
 
             scales: {
               xAxes: [
                 {
-                  type: "linear", // bubble should probably use a linear scale by default
-                  position: "bottom",
-                  id: "x-axis-0" // need an ID so datasets can reference the scale
+                  type: 'linear', // bubble should probably use a linear scale by default
+                  position: 'bottom',
+                  id: 'x-axis-0' // need an ID so datasets can reference the scale
                 }
               ],
               yAxes: [
                 {
-                  type: "linear",
-                  position: "left",
-                  id: "y-axis-0"
+                  type: 'linear',
+                  position: 'left',
+                  id: 'y-axis-0'
                 }
               ]
             },
@@ -7905,23 +7279,12 @@
               callbacks: {
                 title: function() {
                   // Title doesn't make sense for scatter since we format the data as a point
-                  return "";
+                  return '';
                 },
                 label: function(item, data) {
-                  var datasetLabel =
-                    data.datasets[item.datasetIndex].label || "";
-                  var dataPoint =
-                    data.datasets[item.datasetIndex].data[item.index];
-                  return (
-                    datasetLabel +
-                    ": (" +
-                    item.xLabel +
-                    ", " +
-                    item.yLabel +
-                    ", " +
-                    dataPoint.r +
-                    ")"
-                  );
+                  var datasetLabel = data.datasets[item.datasetIndex].label || '';
+                  var dataPoint = data.datasets[item.datasetIndex].data[item.index];
+                  return datasetLabel + ': (' + item.xLabel + ', ' + item.yLabel + ', ' + dataPoint.r + ')';
                 }
               }
             }
@@ -7963,14 +7326,8 @@
 
                 var x = reset
                   ? xScale.getPixelForDecimal(0.5)
-                  : xScale.getPixelForValue(
-                      typeof data === "object" ? data : NaN,
-                      index,
-                      dsIndex
-                    );
-                var y = reset
-                  ? yScale.getBasePixel()
-                  : yScale.getPixelForValue(data, index, dsIndex);
+                  : xScale.getPixelForValue(typeof data === 'object' ? data : NaN, index, dsIndex);
+                var y = reset ? yScale.getBasePixel() : yScale.getPixelForValue(data, index, dsIndex);
 
                 point._xScale = xScale;
                 point._yScale = yScale;
@@ -8007,10 +7364,7 @@
                   options.hoverBorderColor,
                   helpers.getHoverColor(options.borderColor)
                 );
-                model.borderWidth = helpers.valueOrDefault(
-                  options.hoverBorderWidth,
-                  options.borderWidth
-                );
+                model.borderWidth = helpers.valueOrDefault(options.hoverBorderWidth, options.borderWidth);
                 model.radius = options.radius + options.hoverRadius;
               },
 
@@ -8051,34 +7405,25 @@
                 };
 
                 var keys = [
-                  "backgroundColor",
-                  "borderColor",
-                  "borderWidth",
-                  "hoverBackgroundColor",
-                  "hoverBorderColor",
-                  "hoverBorderWidth",
-                  "hoverRadius",
-                  "hitRadius",
-                  "pointStyle"
+                  'backgroundColor',
+                  'borderColor',
+                  'borderWidth',
+                  'hoverBackgroundColor',
+                  'hoverBorderColor',
+                  'hoverBorderWidth',
+                  'hoverRadius',
+                  'hitRadius',
+                  'pointStyle'
                 ];
 
                 for (i = 0, ilen = keys.length; i < ilen; ++i) {
                   key = keys[i];
-                  values[key] = resolve(
-                    [custom[key], dataset[key], options[key]],
-                    context,
-                    index
-                  );
+                  values[key] = resolve([custom[key], dataset[key], options[key]], context, index);
                 }
 
                 // Custom radius resolution
                 values.radius = resolve(
-                  [
-                    custom.radius,
-                    data ? data.r : undefined,
-                    dataset.radius,
-                    options.radius
-                  ],
+                  [custom.radius, data ? data.r : undefined, dataset.radius, options.radius],
                   context,
                   index
                 );
@@ -8088,17 +7433,17 @@
             });
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       17: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("doughnut", {
+          defaults._set('doughnut', {
             animation: {
               // Boolean - Whether we animate the rotation of the Doughnut
               animateRotate: true,
@@ -8106,7 +7451,7 @@
               animateScale: false
             },
             hover: {
-              mode: "single"
+              mode: 'single'
             },
             legendCallback: function(chart) {
               var text = [];
@@ -8118,20 +7463,16 @@
 
               if (datasets.length) {
                 for (var i = 0; i < datasets[0].data.length; ++i) {
-                  text.push(
-                    '<li><span style="background-color:' +
-                      datasets[0].backgroundColor[i] +
-                      '"></span>'
-                  );
+                  text.push('<li><span style="background-color:' + datasets[0].backgroundColor[i] + '"></span>');
                   if (labels[i]) {
                     text.push(labels[i]);
                   }
-                  text.push("</li>");
+                  text.push('</li>');
                 }
               }
 
-              text.push("</ul>");
-              return text.join("");
+              text.push('</ul>');
+              return text.join('');
             },
             legend: {
               labels: {
@@ -8147,25 +7488,13 @@
                       var arcOpts = chart.options.elements.arc;
                       var fill = custom.backgroundColor
                         ? custom.backgroundColor
-                        : valueAtIndexOrDefault(
-                            ds.backgroundColor,
-                            i,
-                            arcOpts.backgroundColor
-                          );
+                        : valueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
                       var stroke = custom.borderColor
                         ? custom.borderColor
-                        : valueAtIndexOrDefault(
-                            ds.borderColor,
-                            i,
-                            arcOpts.borderColor
-                          );
+                        : valueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
                       var bw = custom.borderWidth
                         ? custom.borderWidth
-                        : valueAtIndexOrDefault(
-                            ds.borderWidth,
-                            i,
-                            arcOpts.borderWidth
-                          );
+                        : valueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
 
                       return {
                         text: label,
@@ -8188,11 +7517,7 @@
                 var chart = this.chart;
                 var i, ilen, meta;
 
-                for (
-                  i = 0, ilen = (chart.data.datasets || []).length;
-                  i < ilen;
-                  ++i
-                ) {
+                for (i = 0, ilen = (chart.data.datasets || []).length; i < ilen; ++i) {
                   meta = chart.getDatasetMeta(i);
                   // toggle visibility of index if exists
                   if (meta.data[index]) {
@@ -8217,15 +7542,11 @@
             tooltips: {
               callbacks: {
                 title: function() {
-                  return "";
+                  return '';
                 },
                 label: function(tooltipItem, data) {
                   var dataLabel = data.labels[tooltipItem.index];
-                  var value =
-                    ": " +
-                    data.datasets[tooltipItem.datasetIndex].data[
-                      tooltipItem.index
-                    ];
+                  var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 
                   if (helpers.isArray(dataLabel)) {
                     // show value on first line of multiline label
@@ -8242,313 +7563,243 @@
             }
           });
 
-          defaults._set("pie", helpers.clone(defaults.doughnut));
-          defaults._set("pie", {
+          defaults._set('pie', helpers.clone(defaults.doughnut));
+          defaults._set('pie', {
             cutoutPercentage: 0
           });
 
           module.exports = function(Chart) {
-            Chart.controllers.doughnut = Chart.controllers.pie = Chart.DatasetController.extend(
-              {
-                dataElementType: elements.Arc,
+            Chart.controllers.doughnut = Chart.controllers.pie = Chart.DatasetController.extend({
+              dataElementType: elements.Arc,
 
-                linkScales: helpers.noop,
+              linkScales: helpers.noop,
 
-                // Get index of the dataset in relation to the visible datasets. This allows determining the inner and outer radius correctly
-                getRingIndex: function(datasetIndex) {
-                  var ringIndex = 0;
+              // Get index of the dataset in relation to the visible datasets. This allows determining the inner and outer radius correctly
+              getRingIndex: function(datasetIndex) {
+                var ringIndex = 0;
 
-                  for (var j = 0; j < datasetIndex; ++j) {
-                    if (this.chart.isDatasetVisible(j)) {
-                      ++ringIndex;
-                    }
+                for (var j = 0; j < datasetIndex; ++j) {
+                  if (this.chart.isDatasetVisible(j)) {
+                    ++ringIndex;
+                  }
+                }
+
+                return ringIndex;
+              },
+
+              update: function(reset) {
+                var me = this;
+                var chart = me.chart;
+                var chartArea = chart.chartArea;
+                var opts = chart.options;
+                var arcOpts = opts.elements.arc;
+                var availableWidth = chartArea.right - chartArea.left - arcOpts.borderWidth;
+                var availableHeight = chartArea.bottom - chartArea.top - arcOpts.borderWidth;
+                var minSize = Math.min(availableWidth, availableHeight);
+                var offset = { x: 0, y: 0 };
+                var meta = me.getMeta();
+                var cutoutPercentage = opts.cutoutPercentage;
+                var circumference = opts.circumference;
+
+                // If the chart's circumference isn't a full circle, calculate minSize as a ratio of the width/height of the arc
+                if (circumference < Math.PI * 2.0) {
+                  var startAngle = opts.rotation % (Math.PI * 2.0);
+                  startAngle += Math.PI * 2.0 * (startAngle >= Math.PI ? -1 : startAngle < -Math.PI ? 1 : 0);
+                  var endAngle = startAngle + circumference;
+                  var start = {
+                    x: Math.cos(startAngle),
+                    y: Math.sin(startAngle)
+                  };
+                  var end = { x: Math.cos(endAngle), y: Math.sin(endAngle) };
+                  var contains0 =
+                    (startAngle <= 0 && endAngle >= 0) || (startAngle <= Math.PI * 2.0 && Math.PI * 2.0 <= endAngle);
+                  var contains90 =
+                    (startAngle <= Math.PI * 0.5 && Math.PI * 0.5 <= endAngle) ||
+                    (startAngle <= Math.PI * 2.5 && Math.PI * 2.5 <= endAngle);
+                  var contains180 =
+                    (startAngle <= -Math.PI && -Math.PI <= endAngle) || (startAngle <= Math.PI && Math.PI <= endAngle);
+                  var contains270 =
+                    (startAngle <= -Math.PI * 0.5 && -Math.PI * 0.5 <= endAngle) ||
+                    (startAngle <= Math.PI * 1.5 && Math.PI * 1.5 <= endAngle);
+                  var cutout = cutoutPercentage / 100.0;
+                  var min = {
+                    x: contains180
+                      ? -1
+                      : Math.min(start.x * (start.x < 0 ? 1 : cutout), end.x * (end.x < 0 ? 1 : cutout)),
+                    y: contains270
+                      ? -1
+                      : Math.min(start.y * (start.y < 0 ? 1 : cutout), end.y * (end.y < 0 ? 1 : cutout))
+                  };
+                  var max = {
+                    x: contains0 ? 1 : Math.max(start.x * (start.x > 0 ? 1 : cutout), end.x * (end.x > 0 ? 1 : cutout)),
+                    y: contains90 ? 1 : Math.max(start.y * (start.y > 0 ? 1 : cutout), end.y * (end.y > 0 ? 1 : cutout))
+                  };
+                  var size = {
+                    width: (max.x - min.x) * 0.5,
+                    height: (max.y - min.y) * 0.5
+                  };
+                  minSize = Math.min(availableWidth / size.width, availableHeight / size.height);
+                  offset = {
+                    x: (max.x + min.x) * -0.5,
+                    y: (max.y + min.y) * -0.5
+                  };
+                }
+
+                chart.borderWidth = me.getMaxBorderWidth(meta.data);
+                chart.outerRadius = Math.max((minSize - chart.borderWidth) / 2, 0);
+                chart.innerRadius = Math.max(cutoutPercentage ? (chart.outerRadius / 100) * cutoutPercentage : 0, 0);
+                chart.radiusLength = (chart.outerRadius - chart.innerRadius) / chart.getVisibleDatasetCount();
+                chart.offsetX = offset.x * chart.outerRadius;
+                chart.offsetY = offset.y * chart.outerRadius;
+
+                meta.total = me.calculateTotal();
+
+                me.outerRadius = chart.outerRadius - chart.radiusLength * me.getRingIndex(me.index);
+                me.innerRadius = Math.max(me.outerRadius - chart.radiusLength, 0);
+
+                helpers.each(meta.data, function(arc, index) {
+                  me.updateElement(arc, index, reset);
+                });
+              },
+
+              updateElement: function(arc, index, reset) {
+                var me = this;
+                var chart = me.chart;
+                var chartArea = chart.chartArea;
+                var opts = chart.options;
+                var animationOpts = opts.animation;
+                var centerX = (chartArea.left + chartArea.right) / 2;
+                var centerY = (chartArea.top + chartArea.bottom) / 2;
+                var startAngle = opts.rotation; // non reset case handled later
+                var endAngle = opts.rotation; // non reset case handled later
+                var dataset = me.getDataset();
+                var circumference =
+                  reset && animationOpts.animateRotate
+                    ? 0
+                    : arc.hidden
+                    ? 0
+                    : me.calculateCircumference(dataset.data[index]) * (opts.circumference / (2.0 * Math.PI));
+                var innerRadius = reset && animationOpts.animateScale ? 0 : me.innerRadius;
+                var outerRadius = reset && animationOpts.animateScale ? 0 : me.outerRadius;
+                var valueAtIndexOrDefault = helpers.valueAtIndexOrDefault;
+
+                helpers.extend(arc, {
+                  // Utility
+                  _datasetIndex: me.index,
+                  _index: index,
+
+                  // Desired view properties
+                  _model: {
+                    x: centerX + chart.offsetX,
+                    y: centerY + chart.offsetY,
+                    startAngle: startAngle,
+                    endAngle: endAngle,
+                    circumference: circumference,
+                    outerRadius: outerRadius,
+                    innerRadius: innerRadius,
+                    label: valueAtIndexOrDefault(dataset.label, index, chart.data.labels[index])
+                  }
+                });
+
+                var model = arc._model;
+                // Resets the visual styles
+                this.removeHoverStyle(arc);
+
+                // Set correct angles if not resetting
+                if (!reset || !animationOpts.animateRotate) {
+                  if (index === 0) {
+                    model.startAngle = opts.rotation;
+                  } else {
+                    model.startAngle = me.getMeta().data[index - 1]._model.endAngle;
                   }
 
-                  return ringIndex;
-                },
+                  model.endAngle = model.startAngle + model.circumference;
+                }
 
-                update: function(reset) {
-                  var me = this;
-                  var chart = me.chart;
-                  var chartArea = chart.chartArea;
-                  var opts = chart.options;
-                  var arcOpts = opts.elements.arc;
-                  var availableWidth =
-                    chartArea.right - chartArea.left - arcOpts.borderWidth;
-                  var availableHeight =
-                    chartArea.bottom - chartArea.top - arcOpts.borderWidth;
-                  var minSize = Math.min(availableWidth, availableHeight);
-                  var offset = { x: 0, y: 0 };
-                  var meta = me.getMeta();
-                  var cutoutPercentage = opts.cutoutPercentage;
-                  var circumference = opts.circumference;
+                arc.pivot();
+              },
 
-                  // If the chart's circumference isn't a full circle, calculate minSize as a ratio of the width/height of the arc
-                  if (circumference < Math.PI * 2.0) {
-                    var startAngle = opts.rotation % (Math.PI * 2.0);
-                    startAngle +=
-                      Math.PI *
-                      2.0 *
-                      (startAngle >= Math.PI
-                        ? -1
-                        : startAngle < -Math.PI
-                        ? 1
-                        : 0);
-                    var endAngle = startAngle + circumference;
-                    var start = {
-                      x: Math.cos(startAngle),
-                      y: Math.sin(startAngle)
-                    };
-                    var end = { x: Math.cos(endAngle), y: Math.sin(endAngle) };
-                    var contains0 =
-                      (startAngle <= 0 && endAngle >= 0) ||
-                      (startAngle <= Math.PI * 2.0 &&
-                        Math.PI * 2.0 <= endAngle);
-                    var contains90 =
-                      (startAngle <= Math.PI * 0.5 &&
-                        Math.PI * 0.5 <= endAngle) ||
-                      (startAngle <= Math.PI * 2.5 &&
-                        Math.PI * 2.5 <= endAngle);
-                    var contains180 =
-                      (startAngle <= -Math.PI && -Math.PI <= endAngle) ||
-                      (startAngle <= Math.PI && Math.PI <= endAngle);
-                    var contains270 =
-                      (startAngle <= -Math.PI * 0.5 &&
-                        -Math.PI * 0.5 <= endAngle) ||
-                      (startAngle <= Math.PI * 1.5 &&
-                        Math.PI * 1.5 <= endAngle);
-                    var cutout = cutoutPercentage / 100.0;
-                    var min = {
-                      x: contains180
-                        ? -1
-                        : Math.min(
-                            start.x * (start.x < 0 ? 1 : cutout),
-                            end.x * (end.x < 0 ? 1 : cutout)
-                          ),
-                      y: contains270
-                        ? -1
-                        : Math.min(
-                            start.y * (start.y < 0 ? 1 : cutout),
-                            end.y * (end.y < 0 ? 1 : cutout)
-                          )
-                    };
-                    var max = {
-                      x: contains0
-                        ? 1
-                        : Math.max(
-                            start.x * (start.x > 0 ? 1 : cutout),
-                            end.x * (end.x > 0 ? 1 : cutout)
-                          ),
-                      y: contains90
-                        ? 1
-                        : Math.max(
-                            start.y * (start.y > 0 ? 1 : cutout),
-                            end.y * (end.y > 0 ? 1 : cutout)
-                          )
-                    };
-                    var size = {
-                      width: (max.x - min.x) * 0.5,
-                      height: (max.y - min.y) * 0.5
-                    };
-                    minSize = Math.min(
-                      availableWidth / size.width,
-                      availableHeight / size.height
-                    );
-                    offset = {
-                      x: (max.x + min.x) * -0.5,
-                      y: (max.y + min.y) * -0.5
-                    };
+              removeHoverStyle: function(arc) {
+                Chart.DatasetController.prototype.removeHoverStyle.call(this, arc, this.chart.options.elements.arc);
+              },
+
+              calculateTotal: function() {
+                var dataset = this.getDataset();
+                var meta = this.getMeta();
+                var total = 0;
+                var value;
+
+                helpers.each(meta.data, function(element, index) {
+                  value = dataset.data[index];
+                  if (!isNaN(value) && !element.hidden) {
+                    total += Math.abs(value);
                   }
+                });
 
-                  chart.borderWidth = me.getMaxBorderWidth(meta.data);
-                  chart.outerRadius = Math.max(
-                    (minSize - chart.borderWidth) / 2,
-                    0
-                  );
-                  chart.innerRadius = Math.max(
-                    cutoutPercentage
-                      ? (chart.outerRadius / 100) * cutoutPercentage
-                      : 0,
-                    0
-                  );
-                  chart.radiusLength =
-                    (chart.outerRadius - chart.innerRadius) /
-                    chart.getVisibleDatasetCount();
-                  chart.offsetX = offset.x * chart.outerRadius;
-                  chart.offsetY = offset.y * chart.outerRadius;
-
-                  meta.total = me.calculateTotal();
-
-                  me.outerRadius =
-                    chart.outerRadius -
-                    chart.radiusLength * me.getRingIndex(me.index);
-                  me.innerRadius = Math.max(
-                    me.outerRadius - chart.radiusLength,
-                    0
-                  );
-
-                  helpers.each(meta.data, function(arc, index) {
-                    me.updateElement(arc, index, reset);
-                  });
-                },
-
-                updateElement: function(arc, index, reset) {
-                  var me = this;
-                  var chart = me.chart;
-                  var chartArea = chart.chartArea;
-                  var opts = chart.options;
-                  var animationOpts = opts.animation;
-                  var centerX = (chartArea.left + chartArea.right) / 2;
-                  var centerY = (chartArea.top + chartArea.bottom) / 2;
-                  var startAngle = opts.rotation; // non reset case handled later
-                  var endAngle = opts.rotation; // non reset case handled later
-                  var dataset = me.getDataset();
-                  var circumference =
-                    reset && animationOpts.animateRotate
-                      ? 0
-                      : arc.hidden
-                      ? 0
-                      : me.calculateCircumference(dataset.data[index]) *
-                        (opts.circumference / (2.0 * Math.PI));
-                  var innerRadius =
-                    reset && animationOpts.animateScale ? 0 : me.innerRadius;
-                  var outerRadius =
-                    reset && animationOpts.animateScale ? 0 : me.outerRadius;
-                  var valueAtIndexOrDefault = helpers.valueAtIndexOrDefault;
-
-                  helpers.extend(arc, {
-                    // Utility
-                    _datasetIndex: me.index,
-                    _index: index,
-
-                    // Desired view properties
-                    _model: {
-                      x: centerX + chart.offsetX,
-                      y: centerY + chart.offsetY,
-                      startAngle: startAngle,
-                      endAngle: endAngle,
-                      circumference: circumference,
-                      outerRadius: outerRadius,
-                      innerRadius: innerRadius,
-                      label: valueAtIndexOrDefault(
-                        dataset.label,
-                        index,
-                        chart.data.labels[index]
-                      )
-                    }
-                  });
-
-                  var model = arc._model;
-                  // Resets the visual styles
-                  this.removeHoverStyle(arc);
-
-                  // Set correct angles if not resetting
-                  if (!reset || !animationOpts.animateRotate) {
-                    if (index === 0) {
-                      model.startAngle = opts.rotation;
-                    } else {
-                      model.startAngle = me.getMeta().data[
-                        index - 1
-                      ]._model.endAngle;
-                    }
-
-                    model.endAngle = model.startAngle + model.circumference;
-                  }
-
-                  arc.pivot();
-                },
-
-                removeHoverStyle: function(arc) {
-                  Chart.DatasetController.prototype.removeHoverStyle.call(
-                    this,
-                    arc,
-                    this.chart.options.elements.arc
-                  );
-                },
-
-                calculateTotal: function() {
-                  var dataset = this.getDataset();
-                  var meta = this.getMeta();
-                  var total = 0;
-                  var value;
-
-                  helpers.each(meta.data, function(element, index) {
-                    value = dataset.data[index];
-                    if (!isNaN(value) && !element.hidden) {
-                      total += Math.abs(value);
-                    }
-                  });
-
-                  /* if (total === 0) {
+                /* if (total === 0) {
 				total = NaN;
 			}*/
 
-                  return total;
-                },
+                return total;
+              },
 
-                calculateCircumference: function(value) {
-                  var total = this.getMeta().total;
-                  if (total > 0 && !isNaN(value)) {
-                    return Math.PI * 2.0 * (Math.abs(value) / total);
-                  }
-                  return 0;
-                },
-
-                // gets the max border or hover width to properly scale pie charts
-                getMaxBorderWidth: function(arcs) {
-                  var max = 0;
-                  var index = this.index;
-                  var length = arcs.length;
-                  var borderWidth;
-                  var hoverWidth;
-
-                  for (var i = 0; i < length; i++) {
-                    borderWidth = arcs[i]._model
-                      ? arcs[i]._model.borderWidth
-                      : 0;
-                    hoverWidth = arcs[i]._chart
-                      ? arcs[i]._chart.config.data.datasets[index]
-                          .hoverBorderWidth
-                      : 0;
-
-                    max = borderWidth > max ? borderWidth : max;
-                    max = hoverWidth > max ? hoverWidth : max;
-                  }
-                  return max;
+              calculateCircumference: function(value) {
+                var total = this.getMeta().total;
+                if (total > 0 && !isNaN(value)) {
+                  return Math.PI * 2.0 * (Math.abs(value) / total);
                 }
+                return 0;
+              },
+
+              // gets the max border or hover width to properly scale pie charts
+              getMaxBorderWidth: function(arcs) {
+                var max = 0;
+                var index = this.index;
+                var length = arcs.length;
+                var borderWidth;
+                var hoverWidth;
+
+                for (var i = 0; i < length; i++) {
+                  borderWidth = arcs[i]._model ? arcs[i]._model.borderWidth : 0;
+                  hoverWidth = arcs[i]._chart ? arcs[i]._chart.config.data.datasets[index].hoverBorderWidth : 0;
+
+                  max = borderWidth > max ? borderWidth : max;
+                  max = hoverWidth > max ? hoverWidth : max;
+                }
+                return max;
               }
-            );
+            });
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       18: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("line", {
+          defaults._set('line', {
             showLines: true,
             spanGaps: false,
 
             hover: {
-              mode: "label"
+              mode: 'label'
             },
 
             scales: {
               xAxes: [
                 {
-                  type: "category",
-                  id: "x-axis-0"
+                  type: 'category',
+                  id: 'x-axis-0'
                 }
               ],
               yAxes: [
                 {
-                  type: "linear",
-                  id: "y-axis-0"
+                  type: 'linear',
+                  id: 'y-axis-0'
                 }
               ]
             }
@@ -8556,10 +7807,7 @@
 
           module.exports = function(Chart) {
             function lineEnabled(dataset, options) {
-              return helpers.valueOrDefault(
-                dataset.showLine,
-                options.showLines
-              );
+              return helpers.valueOrDefault(dataset.showLine, options.showLines);
             }
 
             Chart.controllers.line = Chart.DatasetController.extend({
@@ -8584,10 +7832,7 @@
                   custom = line.custom || {};
 
                   // Compatibility: If the properties are defined with only the old name, use those values
-                  if (
-                    dataset.tension !== undefined &&
-                    dataset.lineTension === undefined
-                  ) {
+                  if (dataset.tension !== undefined && dataset.lineTension === undefined) {
                     dataset.lineTension = dataset.tension;
                   }
 
@@ -8602,19 +7847,13 @@
                     // The default behavior of lines is to break at null values, according
                     // to https://github.com/chartjs/Chart.js/issues/2435#issuecomment-216718158
                     // This option gives lines the ability to span gaps
-                    spanGaps: dataset.spanGaps
-                      ? dataset.spanGaps
-                      : options.spanGaps,
+                    spanGaps: dataset.spanGaps ? dataset.spanGaps : options.spanGaps,
                     tension: custom.tension
                       ? custom.tension
-                      : helpers.valueOrDefault(
-                          dataset.lineTension,
-                          lineElementOptions.tension
-                        ),
+                      : helpers.valueOrDefault(dataset.lineTension, lineElementOptions.tension),
                     backgroundColor: custom.backgroundColor
                       ? custom.backgroundColor
-                      : dataset.backgroundColor ||
-                        lineElementOptions.backgroundColor,
+                      : dataset.backgroundColor || lineElementOptions.backgroundColor,
                     borderWidth: custom.borderWidth
                       ? custom.borderWidth
                       : dataset.borderWidth || lineElementOptions.borderWidth,
@@ -8623,19 +7862,16 @@
                       : dataset.borderColor || lineElementOptions.borderColor,
                     borderCapStyle: custom.borderCapStyle
                       ? custom.borderCapStyle
-                      : dataset.borderCapStyle ||
-                        lineElementOptions.borderCapStyle,
+                      : dataset.borderCapStyle || lineElementOptions.borderCapStyle,
                     borderDash: custom.borderDash
                       ? custom.borderDash
                       : dataset.borderDash || lineElementOptions.borderDash,
                     borderDashOffset: custom.borderDashOffset
                       ? custom.borderDashOffset
-                      : dataset.borderDashOffset ||
-                        lineElementOptions.borderDashOffset,
+                      : dataset.borderDashOffset || lineElementOptions.borderDashOffset,
                     borderJoinStyle: custom.borderJoinStyle
                       ? custom.borderJoinStyle
-                      : dataset.borderJoinStyle ||
-                        lineElementOptions.borderJoinStyle,
+                      : dataset.borderJoinStyle || lineElementOptions.borderJoinStyle,
                     fill: custom.fill
                       ? custom.fill
                       : dataset.fill !== undefined
@@ -8643,10 +7879,7 @@
                       : lineElementOptions.fill,
                     steppedLine: custom.steppedLine
                       ? custom.steppedLine
-                      : helpers.valueOrDefault(
-                          dataset.steppedLine,
-                          lineElementOptions.stepped
-                        ),
+                      : helpers.valueOrDefault(dataset.steppedLine, lineElementOptions.stepped),
                     cubicInterpolationMode: custom.cubicInterpolationMode
                       ? custom.cubicInterpolationMode
                       : helpers.valueOrDefault(
@@ -8674,19 +7907,14 @@
               },
 
               getPointBackgroundColor: function(point, index) {
-                var backgroundColor = this.chart.options.elements.point
-                  .backgroundColor;
+                var backgroundColor = this.chart.options.elements.point.backgroundColor;
                 var dataset = this.getDataset();
                 var custom = point.custom || {};
 
                 if (custom.backgroundColor) {
                   backgroundColor = custom.backgroundColor;
                 } else if (dataset.pointBackgroundColor) {
-                  backgroundColor = helpers.valueAtIndexOrDefault(
-                    dataset.pointBackgroundColor,
-                    index,
-                    backgroundColor
-                  );
+                  backgroundColor = helpers.valueAtIndexOrDefault(dataset.pointBackgroundColor, index, backgroundColor);
                 } else if (dataset.backgroundColor) {
                   backgroundColor = dataset.backgroundColor;
                 }
@@ -8702,11 +7930,7 @@
                 if (custom.borderColor) {
                   borderColor = custom.borderColor;
                 } else if (dataset.pointBorderColor) {
-                  borderColor = helpers.valueAtIndexOrDefault(
-                    dataset.pointBorderColor,
-                    index,
-                    borderColor
-                  );
+                  borderColor = helpers.valueAtIndexOrDefault(dataset.pointBorderColor, index, borderColor);
                 } else if (dataset.borderColor) {
                   borderColor = dataset.borderColor;
                 }
@@ -8721,15 +7945,8 @@
 
                 if (!isNaN(custom.borderWidth)) {
                   borderWidth = custom.borderWidth;
-                } else if (
-                  !isNaN(dataset.pointBorderWidth) ||
-                  helpers.isArray(dataset.pointBorderWidth)
-                ) {
-                  borderWidth = helpers.valueAtIndexOrDefault(
-                    dataset.pointBorderWidth,
-                    index,
-                    borderWidth
-                  );
+                } else if (!isNaN(dataset.pointBorderWidth) || helpers.isArray(dataset.pointBorderWidth)) {
+                  borderWidth = helpers.valueAtIndexOrDefault(dataset.pointBorderWidth, index, borderWidth);
                 } else if (!isNaN(dataset.borderWidth)) {
                   borderWidth = dataset.borderWidth;
                 }
@@ -8750,27 +7967,15 @@
                 var x, y;
 
                 // Compatibility: If the properties are defined with only the old name, use those values
-                if (
-                  dataset.radius !== undefined &&
-                  dataset.pointRadius === undefined
-                ) {
+                if (dataset.radius !== undefined && dataset.pointRadius === undefined) {
                   dataset.pointRadius = dataset.radius;
                 }
-                if (
-                  dataset.hitRadius !== undefined &&
-                  dataset.pointHitRadius === undefined
-                ) {
+                if (dataset.hitRadius !== undefined && dataset.pointHitRadius === undefined) {
                   dataset.pointHitRadius = dataset.hitRadius;
                 }
 
-                x = xScale.getPixelForValue(
-                  typeof value === "object" ? value : NaN,
-                  index,
-                  datasetIndex
-                );
-                y = reset
-                  ? yScale.getBasePixel()
-                  : me.calculatePointY(value, index, datasetIndex);
+                x = xScale.getPixelForValue(typeof value === 'object' ? value : NaN, index, datasetIndex);
+                y = reset ? yScale.getBasePixel() : me.calculatePointY(value, index, datasetIndex);
 
                 // Utility
                 point._xScale = xScale;
@@ -8785,36 +7990,19 @@
                   skip: custom.skip || isNaN(x) || isNaN(y),
                   // Appearance
                   radius:
-                    custom.radius ||
-                    helpers.valueAtIndexOrDefault(
-                      dataset.pointRadius,
-                      index,
-                      pointOptions.radius
-                    ),
+                    custom.radius || helpers.valueAtIndexOrDefault(dataset.pointRadius, index, pointOptions.radius),
                   pointStyle:
                     custom.pointStyle ||
-                    helpers.valueAtIndexOrDefault(
-                      dataset.pointStyle,
-                      index,
-                      pointOptions.pointStyle
-                    ),
+                    helpers.valueAtIndexOrDefault(dataset.pointStyle, index, pointOptions.pointStyle),
                   backgroundColor: me.getPointBackgroundColor(point, index),
                   borderColor: me.getPointBorderColor(point, index),
                   borderWidth: me.getPointBorderWidth(point, index),
-                  tension: meta.dataset._model
-                    ? meta.dataset._model.tension
-                    : 0,
-                  steppedLine: meta.dataset._model
-                    ? meta.dataset._model.steppedLine
-                    : false,
+                  tension: meta.dataset._model ? meta.dataset._model.tension : 0,
+                  steppedLine: meta.dataset._model ? meta.dataset._model.steppedLine : false,
                   // Tooltip
                   hitRadius:
                     custom.hitRadius ||
-                    helpers.valueAtIndexOrDefault(
-                      dataset.pointHitRadius,
-                      index,
-                      pointOptions.hitRadius
-                    )
+                    helpers.valueAtIndexOrDefault(dataset.pointHitRadius, index, pointOptions.hitRadius)
                 };
               },
 
@@ -8831,14 +8019,8 @@
                   for (i = 0; i < datasetIndex; i++) {
                     ds = chart.data.datasets[i];
                     dsMeta = chart.getDatasetMeta(i);
-                    if (
-                      dsMeta.type === "line" &&
-                      dsMeta.yAxisID === yScale.id &&
-                      chart.isDatasetVisible(i)
-                    ) {
-                      var stackedRightValue = Number(
-                        yScale.getRightValue(ds.data[index])
-                      );
+                    if (dsMeta.type === 'line' && dsMeta.yAxisID === yScale.id && chart.isDatasetVisible(i)) {
+                      var stackedRightValue = Number(yScale.getRightValue(ds.data[index]));
                       if (stackedRightValue < 0) {
                         sumNeg += stackedRightValue || 0;
                       } else {
@@ -8875,7 +8057,7 @@
                   return Math.max(Math.min(pt, max), min);
                 }
 
-                if (meta.dataset._model.cubicInterpolationMode === "monotone") {
+                if (meta.dataset._model.cubicInterpolationMode === 'monotone') {
                   helpers.splineCurveMonotone(points);
                 } else {
                   for (i = 0, ilen = points.length; i < ilen; ++i) {
@@ -8897,26 +8079,10 @@
                 if (me.chart.options.elements.line.capBezierPoints) {
                   for (i = 0, ilen = points.length; i < ilen; ++i) {
                     model = points[i]._model;
-                    model.controlPointPreviousX = capControlPoint(
-                      model.controlPointPreviousX,
-                      area.left,
-                      area.right
-                    );
-                    model.controlPointPreviousY = capControlPoint(
-                      model.controlPointPreviousY,
-                      area.top,
-                      area.bottom
-                    );
-                    model.controlPointNextX = capControlPoint(
-                      model.controlPointNextX,
-                      area.left,
-                      area.right
-                    );
-                    model.controlPointNextY = capControlPoint(
-                      model.controlPointNextY,
-                      area.top,
-                      area.bottom
-                    );
+                    model.controlPointPreviousX = capControlPoint(model.controlPointPreviousX, area.left, area.right);
+                    model.controlPointPreviousY = capControlPoint(model.controlPointPreviousY, area.top, area.bottom);
+                    model.controlPointNextX = capControlPoint(model.controlPointNextX, area.left, area.right);
+                    model.controlPointNextY = capControlPoint(model.controlPointNextY, area.top, area.bottom);
                   }
                 }
               },
@@ -8974,11 +8140,7 @@
                   );
                 model.borderWidth =
                   custom.hoverBorderWidth ||
-                  helpers.valueAtIndexOrDefault(
-                    dataset.pointHoverBorderWidth,
-                    index,
-                    model.borderWidth
-                  );
+                  helpers.valueAtIndexOrDefault(dataset.pointHoverBorderWidth, index, model.borderWidth);
               },
 
               removeHoverStyle: function(point) {
@@ -8989,43 +8151,33 @@
                 var model = point._model;
 
                 // Compatibility: If the properties are defined with only the old name, use those values
-                if (
-                  dataset.radius !== undefined &&
-                  dataset.pointRadius === undefined
-                ) {
+                if (dataset.radius !== undefined && dataset.pointRadius === undefined) {
                   dataset.pointRadius = dataset.radius;
                 }
 
                 model.radius =
                   custom.radius ||
-                  helpers.valueAtIndexOrDefault(
-                    dataset.pointRadius,
-                    index,
-                    me.chart.options.elements.point.radius
-                  );
-                model.backgroundColor = me.getPointBackgroundColor(
-                  point,
-                  index
-                );
+                  helpers.valueAtIndexOrDefault(dataset.pointRadius, index, me.chart.options.elements.point.radius);
+                model.backgroundColor = me.getPointBackgroundColor(point, index);
                 model.borderColor = me.getPointBorderColor(point, index);
                 model.borderWidth = me.getPointBorderWidth(point, index);
               }
             });
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       19: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("polarArea", {
+          defaults._set('polarArea', {
             scale: {
-              type: "radialLinear",
+              type: 'radialLinear',
               angleLines: {
                 display: false
               },
@@ -9057,20 +8209,16 @@
 
               if (datasets.length) {
                 for (var i = 0; i < datasets[0].data.length; ++i) {
-                  text.push(
-                    '<li><span style="background-color:' +
-                      datasets[0].backgroundColor[i] +
-                      '"></span>'
-                  );
+                  text.push('<li><span style="background-color:' + datasets[0].backgroundColor[i] + '"></span>');
                   if (labels[i]) {
                     text.push(labels[i]);
                   }
-                  text.push("</li>");
+                  text.push('</li>');
                 }
               }
 
-              text.push("</ul>");
-              return text.join("");
+              text.push('</ul>');
+              return text.join('');
             },
             legend: {
               labels: {
@@ -9086,25 +8234,13 @@
                       var arcOpts = chart.options.elements.arc;
                       var fill = custom.backgroundColor
                         ? custom.backgroundColor
-                        : valueAtIndexOrDefault(
-                            ds.backgroundColor,
-                            i,
-                            arcOpts.backgroundColor
-                          );
+                        : valueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
                       var stroke = custom.borderColor
                         ? custom.borderColor
-                        : valueAtIndexOrDefault(
-                            ds.borderColor,
-                            i,
-                            arcOpts.borderColor
-                          );
+                        : valueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
                       var bw = custom.borderWidth
                         ? custom.borderWidth
-                        : valueAtIndexOrDefault(
-                            ds.borderWidth,
-                            i,
-                            arcOpts.borderWidth
-                          );
+                        : valueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
 
                       return {
                         text: label,
@@ -9127,11 +8263,7 @@
                 var chart = this.chart;
                 var i, ilen, meta;
 
-                for (
-                  i = 0, ilen = (chart.data.datasets || []).length;
-                  i < ilen;
-                  ++i
-                ) {
+                for (i = 0, ilen = (chart.data.datasets || []).length; i < ilen; ++i) {
                   meta = chart.getDatasetMeta(i);
                   meta.data[index].hidden = !meta.data[index].hidden;
                 }
@@ -9144,10 +8276,10 @@
             tooltips: {
               callbacks: {
                 title: function() {
-                  return "";
+                  return '';
                 },
                 label: function(item, data) {
-                  return data.labels[item.index] + ": " + item.yLabel;
+                  return data.labels[item.index] + ': ' + item.yLabel;
                 }
               }
             }
@@ -9166,26 +8298,15 @@
                 var meta = me.getMeta();
                 var opts = chart.options;
                 var arcOpts = opts.elements.arc;
-                var minSize = Math.min(
-                  chartArea.right - chartArea.left,
-                  chartArea.bottom - chartArea.top
-                );
-                chart.outerRadius = Math.max(
-                  (minSize - arcOpts.borderWidth / 2) / 2,
-                  0
-                );
+                var minSize = Math.min(chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
+                chart.outerRadius = Math.max((minSize - arcOpts.borderWidth / 2) / 2, 0);
                 chart.innerRadius = Math.max(
-                  opts.cutoutPercentage
-                    ? (chart.outerRadius / 100) * opts.cutoutPercentage
-                    : 1,
+                  opts.cutoutPercentage ? (chart.outerRadius / 100) * opts.cutoutPercentage : 1,
                   0
                 );
-                chart.radiusLength =
-                  (chart.outerRadius - chart.innerRadius) /
-                  chart.getVisibleDatasetCount();
+                chart.radiusLength = (chart.outerRadius - chart.innerRadius) / chart.getVisibleDatasetCount();
 
-                me.outerRadius =
-                  chart.outerRadius - chart.radiusLength * me.index;
+                me.outerRadius = chart.outerRadius - chart.radiusLength * me.index;
                 me.innerRadius = me.outerRadius - chart.radiusLength;
 
                 meta.count = me.countVisibleElements();
@@ -9204,9 +8325,7 @@
                 var scale = chart.scale;
                 var labels = chart.data.labels;
 
-                var circumference = me.calculateCircumference(
-                  dataset.data[index]
-                );
+                var circumference = me.calculateCircumference(dataset.data[index]);
                 var centerX = scale.xCenter;
                 var centerY = scale.yCenter;
 
@@ -9222,11 +8341,8 @@
 
                 // var negHalfPI = -0.5 * Math.PI;
                 var datasetStartAngle = opts.startAngle;
-                var distance = arc.hidden
-                  ? 0
-                  : scale.getDistanceFromCenterForValue(dataset.data[index]);
-                var startAngle =
-                  datasetStartAngle + circumference * visibleCount;
+                var distance = arc.hidden ? 0 : scale.getDistanceFromCenterForValue(dataset.data[index]);
+                var startAngle = datasetStartAngle + circumference * visibleCount;
                 var endAngle = startAngle + (arc.hidden ? 0 : circumference);
 
                 var resetRadius = animationOpts.animateScale
@@ -9245,19 +8361,9 @@
                     y: centerY,
                     innerRadius: 0,
                     outerRadius: reset ? resetRadius : distance,
-                    startAngle:
-                      reset && animationOpts.animateRotate
-                        ? datasetStartAngle
-                        : startAngle,
-                    endAngle:
-                      reset && animationOpts.animateRotate
-                        ? datasetStartAngle
-                        : endAngle,
-                    label: helpers.valueAtIndexOrDefault(
-                      labels,
-                      index,
-                      labels[index]
-                    )
+                    startAngle: reset && animationOpts.animateRotate ? datasetStartAngle : startAngle,
+                    endAngle: reset && animationOpts.animateRotate ? datasetStartAngle : endAngle,
+                    label: helpers.valueAtIndexOrDefault(labels, index, labels[index])
                   }
                 });
 
@@ -9268,11 +8374,7 @@
               },
 
               removeHoverStyle: function(arc) {
-                Chart.DatasetController.prototype.removeHoverStyle.call(
-                  this,
-                  arc,
-                  this.chart.options.elements.arc
-                );
+                Chart.DatasetController.prototype.removeHoverStyle.call(this, arc, this.chart.options.elements.arc);
               },
 
               countVisibleElements: function() {
@@ -9299,19 +8401,19 @@
             });
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       20: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("radar", {
+          defaults._set('radar', {
             scale: {
-              type: "radialLinear"
+              type: 'radialLinear'
             },
             elements: {
               line: {
@@ -9339,10 +8441,7 @@
                 var scale = me.chart.scale;
 
                 // Compatibility: If the properties are defined with only the old name, use those values
-                if (
-                  dataset.tension !== undefined &&
-                  dataset.lineTension === undefined
-                ) {
+                if (dataset.tension !== undefined && dataset.lineTension === undefined) {
                   dataset.lineTension = dataset.tension;
                 }
 
@@ -9358,14 +8457,10 @@
                     // Appearance
                     tension: custom.tension
                       ? custom.tension
-                      : helpers.valueOrDefault(
-                          dataset.lineTension,
-                          lineElementOptions.tension
-                        ),
+                      : helpers.valueOrDefault(dataset.lineTension, lineElementOptions.tension),
                     backgroundColor: custom.backgroundColor
                       ? custom.backgroundColor
-                      : dataset.backgroundColor ||
-                        lineElementOptions.backgroundColor,
+                      : dataset.backgroundColor || lineElementOptions.backgroundColor,
                     borderWidth: custom.borderWidth
                       ? custom.borderWidth
                       : dataset.borderWidth || lineElementOptions.borderWidth,
@@ -9379,19 +8474,16 @@
                       : lineElementOptions.fill,
                     borderCapStyle: custom.borderCapStyle
                       ? custom.borderCapStyle
-                      : dataset.borderCapStyle ||
-                        lineElementOptions.borderCapStyle,
+                      : dataset.borderCapStyle || lineElementOptions.borderCapStyle,
                     borderDash: custom.borderDash
                       ? custom.borderDash
                       : dataset.borderDash || lineElementOptions.borderDash,
                     borderDashOffset: custom.borderDashOffset
                       ? custom.borderDashOffset
-                      : dataset.borderDashOffset ||
-                        lineElementOptions.borderDashOffset,
+                      : dataset.borderDashOffset || lineElementOptions.borderDashOffset,
                     borderJoinStyle: custom.borderJoinStyle
                       ? custom.borderJoinStyle
-                      : dataset.borderJoinStyle ||
-                        lineElementOptions.borderJoinStyle
+                      : dataset.borderJoinStyle || lineElementOptions.borderJoinStyle
                   }
                 });
 
@@ -9415,22 +8507,13 @@
                 var dataset = me.getDataset();
                 var scale = me.chart.scale;
                 var pointElementOptions = me.chart.options.elements.point;
-                var pointPosition = scale.getPointPositionForValue(
-                  index,
-                  dataset.data[index]
-                );
+                var pointPosition = scale.getPointPositionForValue(index, dataset.data[index]);
 
                 // Compatibility: If the properties are defined with only the old name, use those values
-                if (
-                  dataset.radius !== undefined &&
-                  dataset.pointRadius === undefined
-                ) {
+                if (dataset.radius !== undefined && dataset.pointRadius === undefined) {
                   dataset.pointRadius = dataset.radius;
                 }
-                if (
-                  dataset.hitRadius !== undefined &&
-                  dataset.pointHitRadius === undefined
-                ) {
+                if (dataset.hitRadius !== undefined && dataset.pointHitRadius === undefined) {
                   dataset.pointHitRadius = dataset.hitRadius;
                 }
 
@@ -9448,17 +8531,10 @@
                     // Appearance
                     tension: custom.tension
                       ? custom.tension
-                      : helpers.valueOrDefault(
-                          dataset.lineTension,
-                          me.chart.options.elements.line.tension
-                        ),
+                      : helpers.valueOrDefault(dataset.lineTension, me.chart.options.elements.line.tension),
                     radius: custom.radius
                       ? custom.radius
-                      : helpers.valueAtIndexOrDefault(
-                          dataset.pointRadius,
-                          index,
-                          pointElementOptions.radius
-                        ),
+                      : helpers.valueAtIndexOrDefault(dataset.pointRadius, index, pointElementOptions.radius),
                     backgroundColor: custom.backgroundColor
                       ? custom.backgroundColor
                       : helpers.valueAtIndexOrDefault(
@@ -9468,40 +8544,22 @@
                         ),
                     borderColor: custom.borderColor
                       ? custom.borderColor
-                      : helpers.valueAtIndexOrDefault(
-                          dataset.pointBorderColor,
-                          index,
-                          pointElementOptions.borderColor
-                        ),
+                      : helpers.valueAtIndexOrDefault(dataset.pointBorderColor, index, pointElementOptions.borderColor),
                     borderWidth: custom.borderWidth
                       ? custom.borderWidth
-                      : helpers.valueAtIndexOrDefault(
-                          dataset.pointBorderWidth,
-                          index,
-                          pointElementOptions.borderWidth
-                        ),
+                      : helpers.valueAtIndexOrDefault(dataset.pointBorderWidth, index, pointElementOptions.borderWidth),
                     pointStyle: custom.pointStyle
                       ? custom.pointStyle
-                      : helpers.valueAtIndexOrDefault(
-                          dataset.pointStyle,
-                          index,
-                          pointElementOptions.pointStyle
-                        ),
+                      : helpers.valueAtIndexOrDefault(dataset.pointStyle, index, pointElementOptions.pointStyle),
 
                     // Tooltip
                     hitRadius: custom.hitRadius
                       ? custom.hitRadius
-                      : helpers.valueAtIndexOrDefault(
-                          dataset.pointHitRadius,
-                          index,
-                          pointElementOptions.hitRadius
-                        )
+                      : helpers.valueAtIndexOrDefault(dataset.pointHitRadius, index, pointElementOptions.hitRadius)
                   }
                 });
 
-                point._model.skip = custom.skip
-                  ? custom.skip
-                  : isNaN(point._model.x) || isNaN(point._model.y);
+                point._model.skip = custom.skip ? custom.skip : isNaN(point._model.x) || isNaN(point._model.y);
               },
               updateBezierControlPoints: function() {
                 var chartArea = this.chart.chartArea;
@@ -9526,14 +8584,8 @@
                     chartArea.top
                   );
 
-                  model.controlPointNextX = Math.max(
-                    Math.min(controlPoints.next.x, chartArea.right),
-                    chartArea.left
-                  );
-                  model.controlPointNextY = Math.max(
-                    Math.min(controlPoints.next.y, chartArea.bottom),
-                    chartArea.top
-                  );
+                  model.controlPointNextX = Math.max(Math.min(controlPoints.next.x, chartArea.right), chartArea.left);
+                  model.controlPointNextY = Math.max(Math.min(controlPoints.next.y, chartArea.bottom), chartArea.top);
 
                   // Now pivot the point for animation
                   point.pivot();
@@ -9570,11 +8622,7 @@
                     );
                 model.borderWidth = custom.hoverBorderWidth
                   ? custom.hoverBorderWidth
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.pointHoverBorderWidth,
-                      index,
-                      model.borderWidth
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.pointHoverBorderWidth, index, model.borderWidth);
               },
 
               removeHoverStyle: function(point) {
@@ -9586,11 +8634,7 @@
 
                 model.radius = custom.radius
                   ? custom.radius
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.pointRadius,
-                      index,
-                      pointElementOptions.radius
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.pointRadius, index, pointElementOptions.radius);
                 model.backgroundColor = custom.backgroundColor
                   ? custom.backgroundColor
                   : helpers.valueAtIndexOrDefault(
@@ -9600,48 +8644,40 @@
                     );
                 model.borderColor = custom.borderColor
                   ? custom.borderColor
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.pointBorderColor,
-                      index,
-                      pointElementOptions.borderColor
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.pointBorderColor, index, pointElementOptions.borderColor);
                 model.borderWidth = custom.borderWidth
                   ? custom.borderWidth
-                  : helpers.valueAtIndexOrDefault(
-                      dataset.pointBorderWidth,
-                      index,
-                      pointElementOptions.borderWidth
-                    );
+                  : helpers.valueAtIndexOrDefault(dataset.pointBorderWidth, index, pointElementOptions.borderWidth);
               }
             });
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       21: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
 
-          defaults._set("scatter", {
+          defaults._set('scatter', {
             hover: {
-              mode: "single"
+              mode: 'single'
             },
 
             scales: {
               xAxes: [
                 {
-                  id: "x-axis-1", // need an ID so datasets can reference the scale
-                  type: "linear", // scatter should not use a category axis
-                  position: "bottom"
+                  id: 'x-axis-1', // need an ID so datasets can reference the scale
+                  type: 'linear', // scatter should not use a category axis
+                  position: 'bottom'
                 }
               ],
               yAxes: [
                 {
-                  id: "y-axis-1",
-                  type: "linear",
-                  position: "left"
+                  id: 'y-axis-1',
+                  type: 'linear',
+                  position: 'left'
                 }
               ]
             },
@@ -9651,10 +8687,10 @@
             tooltips: {
               callbacks: {
                 title: function() {
-                  return ""; // doesn't make sense for scatter since data are formatted as a point
+                  return ''; // doesn't make sense for scatter since data are formatted as a point
                 },
                 label: function(item) {
-                  return "(" + item.xLabel + ", " + item.yLabel + ")";
+                  return '(' + item.xLabel + ', ' + item.yLabel + ')';
                 }
               }
             }
@@ -9665,21 +8701,21 @@
             Chart.controllers.scatter = Chart.controllers.line;
           };
         },
-        { "25": 25 }
+        { '25': 25 }
       ],
       22: [
         function(require, module, exports) {
           /* global window: false */
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
           var helpers = require(45);
 
-          defaults._set("global", {
+          defaults._set('global', {
             animation: {
               duration: 1000,
-              easing: "easeOutQuart",
+              easing: 'easeOutQuart',
               onProgress: helpers.noop,
               onComplete: helpers.noop
             }
@@ -9690,7 +8726,7 @@
               chart: null, // the animation associated chart instance
               currentStep: 0, // the current animation step
               numSteps: 60, // default number of steps
-              easing: "", // the easing to use for this animation
+              easing: '', // the easing to use for this animation
               render: null, // render function used by the animation service
 
               onAnimationProgress: null, // user specified callback to fire on each step of the animation
@@ -9735,9 +8771,7 @@
               },
 
               cancelAnimation: function(chart) {
-                var index = helpers.findIndex(this.animations, function(
-                  animation
-                ) {
+                var index = helpers.findIndex(this.animations, function(animation) {
                   return animation.chart === chart;
                 });
 
@@ -9753,13 +8787,10 @@
                   // Skip animation frame requests until the active one is executed.
                   // This can happen when processing mouse events, e.g. 'mousemove'
                   // and 'mouseout' events will trigger multiple renders.
-                  me.request = helpers.requestAnimFrame.call(
-                    window,
-                    function() {
-                      me.request = null;
-                      me.startDigest();
-                    }
-                  );
+                  me.request = helpers.requestAnimFrame.call(window, function() {
+                    me.request = null;
+                    me.startDigest();
+                  });
                 }
               },
 
@@ -9801,24 +8832,13 @@
                   chart = animation.chart;
 
                   animation.currentStep = (animation.currentStep || 0) + count;
-                  animation.currentStep = Math.min(
-                    animation.currentStep,
-                    animation.numSteps
-                  );
+                  animation.currentStep = Math.min(animation.currentStep, animation.numSteps);
 
                   helpers.callback(animation.render, [chart, animation], chart);
-                  helpers.callback(
-                    animation.onAnimationProgress,
-                    [animation],
-                    chart
-                  );
+                  helpers.callback(animation.onAnimationProgress, [animation], chart);
 
                   if (animation.currentStep >= animation.numSteps) {
-                    helpers.callback(
-                      animation.onAnimationComplete,
-                      [animation],
-                      chart
-                    );
+                    helpers.callback(animation.onAnimationComplete, [animation], chart);
                     chart.animating = false;
                     animations.splice(i, 1);
                   } else {
@@ -9834,15 +8854,11 @@
              * @deprecated since version 2.6.0
              * @todo remove at version 3
              */
-            Object.defineProperty(
-              Chart.Animation.prototype,
-              "animationObject",
-              {
-                get: function() {
-                  return this;
-                }
+            Object.defineProperty(Chart.Animation.prototype, 'animationObject', {
+              get: function() {
+                return this;
               }
-            );
+            });
 
             /**
              * Provided for backward compatibility, use Chart.Animation#chart instead
@@ -9850,7 +8866,7 @@
              * @deprecated since version 2.6.0
              * @todo remove at version 3
              */
-            Object.defineProperty(Chart.Animation.prototype, "chartInstance", {
+            Object.defineProperty(Chart.Animation.prototype, 'chartInstance', {
               get: function() {
                 return this.chart;
               },
@@ -9860,11 +8876,11 @@
             });
           };
         },
-        { "25": 25, "26": 26, "45": 45 }
+        { '25': 25, '26': 26, '45': 45 }
       ],
       23: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var helpers = require(45);
@@ -9896,11 +8912,7 @@
               data.datasets = data.datasets || [];
               data.labels = data.labels || [];
 
-              config.options = helpers.configMerge(
-                defaults.global,
-                defaults[config.type],
-                config.options || {}
-              );
+              config.options = helpers.configMerge(defaults.global, defaults[config.type], config.options || {});
 
               return config;
             }
@@ -9916,11 +8928,7 @@
                 layouts.removeBox(chart, scale);
               });
 
-              newOptions = helpers.configMerge(
-                Chart.defaults.global,
-                Chart.defaults[chart.config.type],
-                newOptions
-              );
+              newOptions = helpers.configMerge(Chart.defaults.global, Chart.defaults[chart.config.type], newOptions);
 
               chart.options = chart.config.options = newOptions;
               chart.ensureScalesHaveIDs();
@@ -9931,7 +8939,7 @@
             }
 
             function positionIsHorizontal(position) {
-              return position === "top" || position === "bottom";
+              return position === 'top' || position === 'bottom';
             }
 
             helpers.extend(
@@ -9975,7 +8983,7 @@
                   Chart.instances[me.id] = me;
 
                   // Define alias to the config data: `chart.data === chart.config.data`
-                  Object.defineProperty(me, "data", {
+                  Object.defineProperty(me, 'data', {
                     get: function() {
                       return me.config.data;
                     },
@@ -9989,9 +8997,7 @@
                     // the chart initialization but after setting basic chart / controller properties that
                     // can help to figure out that the chart is not valid (e.g chart.canvas !== null);
                     // https://github.com/chartjs/Chart.js/issues/2807
-                    console.error(
-                      "Failed to create chart: can't acquire context from the given item"
-                    );
+                    console.error("Failed to create chart: can't acquire context from the given item");
                     return;
                   }
 
@@ -10006,7 +9012,7 @@
                   var me = this;
 
                   // Before init plugin notification
-                  plugins.notify(me, "beforeInit");
+                  plugins.notify(me, 'beforeInit');
 
                   helpers.retinaScale(me, me.options.devicePixelRatio);
 
@@ -10023,7 +9029,7 @@
                   me.initToolTip();
 
                   // After init plugin notification
-                  plugins.notify(me, "afterInit");
+                  plugins.notify(me, 'afterInit');
 
                   return me;
                 },
@@ -10043,24 +9049,16 @@
                   var me = this;
                   var options = me.options;
                   var canvas = me.canvas;
-                  var aspectRatio =
-                    (options.maintainAspectRatio && me.aspectRatio) || null;
+                  var aspectRatio = (options.maintainAspectRatio && me.aspectRatio) || null;
 
                   // the canvas render width and height will be casted to integers so make sure that
                   // the canvas display style uses the same integer values to avoid blurring effect.
 
                   // Set to 0 instead of canvas.size because the size defaults to 300x150 if the element is collased
-                  var newWidth = Math.max(
-                    0,
-                    Math.floor(helpers.getMaximumWidth(canvas))
-                  );
+                  var newWidth = Math.max(0, Math.floor(helpers.getMaximumWidth(canvas)));
                   var newHeight = Math.max(
                     0,
-                    Math.floor(
-                      aspectRatio
-                        ? newWidth / aspectRatio
-                        : helpers.getMaximumHeight(canvas)
-                    )
+                    Math.floor(aspectRatio ? newWidth / aspectRatio : helpers.getMaximumHeight(canvas))
                   );
 
                   if (me.width === newWidth && me.height === newHeight) {
@@ -10069,15 +9067,15 @@
 
                   canvas.width = me.width = newWidth;
                   canvas.height = me.height = newHeight;
-                  canvas.style.width = newWidth + "px";
-                  canvas.style.height = newHeight + "px";
+                  canvas.style.width = newWidth + 'px';
+                  canvas.style.height = newHeight + 'px';
 
                   helpers.retinaScale(me, options.devicePixelRatio);
 
                   if (!silent) {
                     // Notify any plugins about the resize
                     var newSize = { width: newWidth, height: newHeight };
-                    plugins.notify(me, "resize", [newSize]);
+                    plugins.notify(me, 'resize', [newSize]);
 
                     // Notify of resize
                     if (me.options.onResize) {
@@ -10094,22 +9092,16 @@
                   var scalesOptions = options.scales || {};
                   var scaleOptions = options.scale;
 
-                  helpers.each(scalesOptions.xAxes, function(
-                    xAxisOptions,
-                    index
-                  ) {
-                    xAxisOptions.id = xAxisOptions.id || "x-axis-" + index;
+                  helpers.each(scalesOptions.xAxes, function(xAxisOptions, index) {
+                    xAxisOptions.id = xAxisOptions.id || 'x-axis-' + index;
                   });
 
-                  helpers.each(scalesOptions.yAxes, function(
-                    yAxisOptions,
-                    index
-                  ) {
-                    yAxisOptions.id = yAxisOptions.id || "y-axis-" + index;
+                  helpers.each(scalesOptions.yAxes, function(yAxisOptions, index) {
+                    yAxisOptions.id = yAxisOptions.id || 'y-axis-' + index;
                   });
 
                   if (scaleOptions) {
-                    scaleOptions.id = scaleOptions.id || "scale";
+                    scaleOptions.id = scaleOptions.id || 'scale';
                   }
                 },
 
@@ -10131,15 +9123,15 @@
                       (options.scales.xAxes || []).map(function(xAxisOptions) {
                         return {
                           options: xAxisOptions,
-                          dtype: "category",
-                          dposition: "bottom"
+                          dtype: 'category',
+                          dposition: 'bottom'
                         };
                       }),
                       (options.scales.yAxes || []).map(function(yAxisOptions) {
                         return {
                           options: yAxisOptions,
-                          dtype: "linear",
-                          dposition: "left"
+                          dtype: 'linear',
+                          dposition: 'left'
                         };
                       })
                     );
@@ -10148,24 +9140,18 @@
                   if (options.scale) {
                     items.push({
                       options: options.scale,
-                      dtype: "radialLinear",
+                      dtype: 'radialLinear',
                       isDefault: true,
-                      dposition: "chartArea"
+                      dposition: 'chartArea'
                     });
                   }
 
                   helpers.each(items, function(item) {
                     var scaleOptions = item.options;
                     var id = scaleOptions.id;
-                    var scaleType = helpers.valueOrDefault(
-                      scaleOptions.type,
-                      item.dtype
-                    );
+                    var scaleType = helpers.valueOrDefault(scaleOptions.type, item.dtype);
 
-                    if (
-                      positionIsHorizontal(scaleOptions.position) !==
-                      positionIsHorizontal(item.dposition)
-                    ) {
+                    if (positionIsHorizontal(scaleOptions.position) !== positionIsHorizontal(item.dposition)) {
                       scaleOptions.position = item.dposition;
                     }
 
@@ -10177,9 +9163,7 @@
                       scale.ctx = me.ctx;
                       scale.chart = me;
                     } else {
-                      var scaleClass = Chart.scaleService.getScaleConstructor(
-                        scaleType
-                      );
+                      var scaleClass = Chart.scaleService.getScaleConstructor(scaleType);
                       if (!scaleClass) {
                         return;
                       }
@@ -10239,9 +9223,7 @@
                       } else {
                         var ControllerClass = Chart.controllers[meta.type];
                         if (ControllerClass === undefined) {
-                          throw new Error(
-                            '"' + meta.type + '" is not a chart type.'
-                          );
+                          throw new Error('"' + meta.type + '" is not a chart type.');
                         }
 
                         meta.controller = new ControllerClass(me, datasetIndex);
@@ -10280,7 +9262,7 @@
                 update: function(config) {
                   var me = this;
 
-                  if (!config || typeof config !== "object") {
+                  if (!config || typeof config !== 'object') {
                     // backwards compatibility
                     config = {
                       duration: config,
@@ -10294,7 +9276,7 @@
                   // https://github.com/chartjs/Chart.js/issues/5111#issuecomment-355934167
                   plugins._invalidate(me);
 
-                  if (plugins.notify(me, "beforeUpdate") === false) {
+                  if (plugins.notify(me, 'beforeUpdate') === false) {
                     return;
                   }
 
@@ -10308,9 +9290,7 @@
                   helpers.each(
                     me.data.datasets,
                     function(dataset, datasetIndex) {
-                      me.getDatasetMeta(
-                        datasetIndex
-                      ).controller.buildOrUpdateElements();
+                      me.getDatasetMeta(datasetIndex).controller.buildOrUpdateElements();
                     },
                     me
                   );
@@ -10335,7 +9315,7 @@
                   me.lastActive = [];
 
                   // Do this before render so that any plugins that need final scale updates can use it
-                  plugins.notify(me, "afterUpdate");
+                  plugins.notify(me, 'afterUpdate');
 
                   if (me._bufferedRender) {
                     me._bufferedRequest = {
@@ -10356,7 +9336,7 @@
                 updateLayout: function() {
                   var me = this;
 
-                  if (plugins.notify(me, "beforeLayout") === false) {
+                  if (plugins.notify(me, 'beforeLayout') === false) {
                     return;
                   }
 
@@ -10369,8 +9349,8 @@
                    * @todo remove at version 3
                    * @private
                    */
-                  plugins.notify(me, "afterScaleUpdate");
-                  plugins.notify(me, "afterLayout");
+                  plugins.notify(me, 'afterScaleUpdate');
+                  plugins.notify(me, 'afterLayout');
                 },
 
                 /**
@@ -10381,19 +9361,15 @@
                 updateDatasets: function() {
                   var me = this;
 
-                  if (plugins.notify(me, "beforeDatasetsUpdate") === false) {
+                  if (plugins.notify(me, 'beforeDatasetsUpdate') === false) {
                     return;
                   }
 
-                  for (
-                    var i = 0, ilen = me.data.datasets.length;
-                    i < ilen;
-                    ++i
-                  ) {
+                  for (var i = 0, ilen = me.data.datasets.length; i < ilen; ++i) {
                     me.updateDataset(i);
                   }
 
-                  plugins.notify(me, "afterDatasetsUpdate");
+                  plugins.notify(me, 'afterDatasetsUpdate');
                 },
 
                 /**
@@ -10409,21 +9385,19 @@
                     index: index
                   };
 
-                  if (
-                    plugins.notify(me, "beforeDatasetUpdate", [args]) === false
-                  ) {
+                  if (plugins.notify(me, 'beforeDatasetUpdate', [args]) === false) {
                     return;
                   }
 
                   meta.controller.update();
 
-                  plugins.notify(me, "afterDatasetUpdate", [args]);
+                  plugins.notify(me, 'afterDatasetUpdate', [args]);
                 },
 
                 render: function(config) {
                   var me = this;
 
-                  if (!config || typeof config !== "object") {
+                  if (!config || typeof config !== 'object') {
                     // backwards compatibility
                     config = {
                       duration: config,
@@ -10434,54 +9408,38 @@
                   var duration = config.duration;
                   var lazy = config.lazy;
 
-                  if (plugins.notify(me, "beforeRender") === false) {
+                  if (plugins.notify(me, 'beforeRender') === false) {
                     return;
                   }
 
                   var animationOptions = me.options.animation;
                   var onComplete = function(animation) {
-                    plugins.notify(me, "afterRender");
-                    helpers.callback(
-                      animationOptions && animationOptions.onComplete,
-                      [animation],
-                      me
-                    );
+                    plugins.notify(me, 'afterRender');
+                    helpers.callback(animationOptions && animationOptions.onComplete, [animation], me);
                   };
 
                   if (
                     animationOptions &&
-                    ((typeof duration !== "undefined" && duration !== 0) ||
-                      (typeof duration === "undefined" &&
-                        animationOptions.duration !== 0))
+                    ((typeof duration !== 'undefined' && duration !== 0) ||
+                      (typeof duration === 'undefined' && animationOptions.duration !== 0))
                   ) {
                     var animation = new Chart.Animation({
                       numSteps: (duration || animationOptions.duration) / 16.66, // 60 fps
                       easing: config.easing || animationOptions.easing,
 
                       render: function(chart, animationObject) {
-                        var easingFunction =
-                          helpers.easing.effects[animationObject.easing];
+                        var easingFunction = helpers.easing.effects[animationObject.easing];
                         var currentStep = animationObject.currentStep;
-                        var stepDecimal =
-                          currentStep / animationObject.numSteps;
+                        var stepDecimal = currentStep / animationObject.numSteps;
 
-                        chart.draw(
-                          easingFunction(stepDecimal),
-                          stepDecimal,
-                          currentStep
-                        );
+                        chart.draw(easingFunction(stepDecimal), stepDecimal, currentStep);
                       },
 
                       onAnimationProgress: animationOptions.onProgress,
                       onAnimationComplete: onComplete
                     });
 
-                    Chart.animationService.addAnimation(
-                      me,
-                      animation,
-                      duration,
-                      lazy
-                    );
+                    Chart.animationService.addAnimation(me, animation, duration, lazy);
                   } else {
                     me.draw();
 
@@ -10503,9 +9461,7 @@
 
                   me.transition(easingValue);
 
-                  if (
-                    plugins.notify(me, "beforeDraw", [easingValue]) === false
-                  ) {
+                  if (plugins.notify(me, 'beforeDraw', [easingValue]) === false) {
                     return;
                   }
 
@@ -10525,7 +9481,7 @@
                   me.drawDatasets(easingValue);
                   me._drawTooltip(easingValue);
 
-                  plugins.notify(me, "afterDraw", [easingValue]);
+                  plugins.notify(me, 'afterDraw', [easingValue]);
                 },
 
                 /**
@@ -10534,11 +9490,7 @@
                 transition: function(easingValue) {
                   var me = this;
 
-                  for (
-                    var i = 0, ilen = (me.data.datasets || []).length;
-                    i < ilen;
-                    ++i
-                  ) {
+                  for (var i = 0, ilen = (me.data.datasets || []).length; i < ilen; ++i) {
                     if (me.isDatasetVisible(i)) {
                       me.getDatasetMeta(i).controller.transition(easingValue);
                     }
@@ -10555,25 +9507,18 @@
                 drawDatasets: function(easingValue) {
                   var me = this;
 
-                  if (
-                    plugins.notify(me, "beforeDatasetsDraw", [easingValue]) ===
-                    false
-                  ) {
+                  if (plugins.notify(me, 'beforeDatasetsDraw', [easingValue]) === false) {
                     return;
                   }
 
                   // Draw datasets reversed to support proper line stacking
-                  for (
-                    var i = (me.data.datasets || []).length - 1;
-                    i >= 0;
-                    --i
-                  ) {
+                  for (var i = (me.data.datasets || []).length - 1; i >= 0; --i) {
                     if (me.isDatasetVisible(i)) {
                       me.drawDataset(i, easingValue);
                     }
                   }
 
-                  plugins.notify(me, "afterDatasetsDraw", [easingValue]);
+                  plugins.notify(me, 'afterDatasetsDraw', [easingValue]);
                 },
 
                 /**
@@ -10590,15 +9535,13 @@
                     easingValue: easingValue
                   };
 
-                  if (
-                    plugins.notify(me, "beforeDatasetDraw", [args]) === false
-                  ) {
+                  if (plugins.notify(me, 'beforeDatasetDraw', [args]) === false) {
                     return;
                   }
 
                   meta.controller.draw(easingValue);
 
-                  plugins.notify(me, "afterDatasetDraw", [args]);
+                  plugins.notify(me, 'afterDatasetDraw', [args]);
                 },
 
                 /**
@@ -10614,15 +9557,13 @@
                     easingValue: easingValue
                   };
 
-                  if (
-                    plugins.notify(me, "beforeTooltipDraw", [args]) === false
-                  ) {
+                  if (plugins.notify(me, 'beforeTooltipDraw', [args]) === false) {
                     return;
                   }
 
                   tooltip.draw();
 
-                  plugins.notify(me, "afterTooltipDraw", [args]);
+                  plugins.notify(me, 'afterTooltipDraw', [args]);
                 },
 
                 // Get the single element that was clicked on
@@ -10636,14 +9577,14 @@
                 },
 
                 getElementsAtXAxis: function(e) {
-                  return Interaction.modes["x-axis"](this, e, {
+                  return Interaction.modes['x-axis'](this, e, {
                     intersect: true
                   });
                 },
 
                 getElementsAtEventForMode: function(e, mode, options) {
                   var method = Interaction.modes[mode];
-                  if (typeof method === "function") {
+                  if (typeof method === 'function') {
                     return method(this, e, options);
                   }
 
@@ -10681,11 +9622,7 @@
 
                 getVisibleDatasetCount: function() {
                   var count = 0;
-                  for (
-                    var i = 0, ilen = this.data.datasets.length;
-                    i < ilen;
-                    ++i
-                  ) {
+                  for (var i = 0, ilen = this.data.datasets.length; i < ilen; ++i) {
                     if (this.isDatasetVisible(i)) {
                       count++;
                     }
@@ -10698,9 +9635,7 @@
 
                   // meta.hidden is a per chart dataset hidden flag override with 3 states: if true or false,
                   // the dataset.hidden value is ignored, else if null, the dataset hidden state is returned.
-                  return typeof meta.hidden === "boolean"
-                    ? !meta.hidden
-                    : !this.data.datasets[datasetIndex].hidden;
+                  return typeof meta.hidden === 'boolean' ? !meta.hidden : !this.data.datasets[datasetIndex].hidden;
                 },
 
                 generateLegend: function() {
@@ -10741,7 +9676,7 @@
                     me.ctx = null;
                   }
 
-                  plugins.notify(me, "destroy");
+                  plugins.notify(me, 'destroy');
 
                   delete Chart.instances[me.id];
                 },
@@ -10785,7 +9720,7 @@
                       me.resize();
                     };
 
-                    platform.addEventListener(me, "resize", listener);
+                    platform.addEventListener(me, 'resize', listener);
                     listeners.resize = listener;
                   }
                 },
@@ -10807,15 +9742,13 @@
                 },
 
                 updateHoverStyle: function(elements, mode, enabled) {
-                  var method = enabled ? "setHoverStyle" : "removeHoverStyle";
+                  var method = enabled ? 'setHoverStyle' : 'removeHoverStyle';
                   var element, i, ilen;
 
                   for (i = 0, ilen = elements.length; i < ilen; ++i) {
                     element = elements[i];
                     if (element) {
-                      this.getDatasetMeta(element._datasetIndex).controller[
-                        method
-                      ](element);
+                      this.getDatasetMeta(element._datasetIndex).controller[method](element);
                     }
                   }
                 },
@@ -10827,7 +9760,7 @@
                   var me = this;
                   var tooltip = me.tooltip;
 
-                  if (plugins.notify(me, "beforeEvent", [e]) === false) {
+                  if (plugins.notify(me, 'beforeEvent', [e]) === false) {
                     return;
                   }
 
@@ -10841,12 +9774,10 @@
                   // Animation check workaround:
                   // tooltip._start will be null when tooltip isn't animating
                   if (tooltip) {
-                    changed = tooltip._start
-                      ? tooltip.handleEvent(e)
-                      : changed | tooltip.handleEvent(e);
+                    changed = tooltip._start ? tooltip.handleEvent(e) : changed | tooltip.handleEvent(e);
                   }
 
-                  plugins.notify(me, "afterEvent", [e]);
+                  plugins.notify(me, 'afterEvent', [e]);
 
                   var bufferedRequest = me._bufferedRequest;
                   if (bufferedRequest) {
@@ -10882,25 +9813,17 @@
                   me.lastActive = me.lastActive || [];
 
                   // Find Active Elements for hover and tooltips
-                  if (e.type === "mouseout") {
+                  if (e.type === 'mouseout') {
                     me.active = [];
                   } else {
-                    me.active = me.getElementsAtEventForMode(
-                      e,
-                      hoverOptions.mode,
-                      hoverOptions
-                    );
+                    me.active = me.getElementsAtEventForMode(e, hoverOptions.mode, hoverOptions);
                   }
 
                   // Invoke onHover hook
                   // Need to call with native event here to not break backwards compatibility
-                  helpers.callback(
-                    options.onHover || options.hover.onHover,
-                    [e.native, me.active],
-                    me
-                  );
+                  helpers.callback(options.onHover || options.hover.onHover, [e.native, me.active], me);
 
-                  if (e.type === "mouseup" || e.type === "click") {
+                  if (e.type === 'mouseup' || e.type === 'click') {
                     if (options.onClick) {
                       // Use e.native here for backwards compatibility
                       options.onClick.call(me, e.native, me.active);
@@ -10909,11 +9832,7 @@
 
                   // Remove styling for last active (even if it may still be active)
                   if (me.lastActive.length) {
-                    me.updateHoverStyle(
-                      me.lastActive,
-                      hoverOptions.mode,
-                      false
-                    );
+                    me.updateHoverStyle(me.lastActive, hoverOptions.mode, false);
                   }
 
                   // Built in hover styling
@@ -10941,16 +9860,16 @@
             Chart.Controller = Chart;
           };
         },
-        { "25": 25, "28": 28, "30": 30, "31": 31, "45": 45, "48": 48 }
+        { '25': 25, '28': 28, '30': 30, '31': 31, '45': 45, '48': 48 }
       ],
       24: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
           module.exports = function(Chart) {
-            var arrayEvents = ["push", "pop", "shift", "splice", "unshift"];
+            var arrayEvents = ['push', 'pop', 'shift', 'splice', 'unshift'];
 
             /**
              * Hooks the array methods that add or remove values ('push', pop', 'shift', 'splice',
@@ -10963,7 +9882,7 @@
                 return;
               }
 
-              Object.defineProperty(array, "_chartjs", {
+              Object.defineProperty(array, '_chartjs', {
                 configurable: true,
                 enumerable: false,
                 value: {
@@ -10972,8 +9891,7 @@
               });
 
               arrayEvents.forEach(function(key) {
-                var method =
-                  "onData" + key.charAt(0).toUpperCase() + key.slice(1);
+                var method = 'onData' + key.charAt(0).toUpperCase() + key.slice(1);
                 var base = array[key];
 
                 Object.defineProperty(array, key, {
@@ -10984,7 +9902,7 @@
                     var res = base.apply(this, args);
 
                     helpers.each(array._chartjs.listeners, function(object) {
-                      if (typeof object[method] === "function") {
+                      if (typeof object[method] === 'function') {
                         object[method].apply(object, args);
                       }
                     });
@@ -11057,19 +9975,11 @@
                 var meta = me.getMeta();
                 var dataset = me.getDataset();
 
-                if (
-                  meta.xAxisID === null ||
-                  !(meta.xAxisID in me.chart.scales)
-                ) {
-                  meta.xAxisID =
-                    dataset.xAxisID || me.chart.options.scales.xAxes[0].id;
+                if (meta.xAxisID === null || !(meta.xAxisID in me.chart.scales)) {
+                  meta.xAxisID = dataset.xAxisID || me.chart.options.scales.xAxes[0].id;
                 }
-                if (
-                  meta.yAxisID === null ||
-                  !(meta.yAxisID in me.chart.scales)
-                ) {
-                  meta.yAxisID =
-                    dataset.yAxisID || me.chart.options.scales.yAxes[0].id;
+                if (meta.yAxisID === null || !(meta.yAxisID in me.chart.scales)) {
+                  meta.yAxisID = dataset.yAxisID || me.chart.options.scales.yAxes[0].id;
                 }
               },
 
@@ -11207,25 +10117,13 @@
 
                 model.backgroundColor = custom.backgroundColor
                   ? custom.backgroundColor
-                  : valueOrDefault(
-                      dataset.backgroundColor,
-                      index,
-                      elementOpts.backgroundColor
-                    );
+                  : valueOrDefault(dataset.backgroundColor, index, elementOpts.backgroundColor);
                 model.borderColor = custom.borderColor
                   ? custom.borderColor
-                  : valueOrDefault(
-                      dataset.borderColor,
-                      index,
-                      elementOpts.borderColor
-                    );
+                  : valueOrDefault(dataset.borderColor, index, elementOpts.borderColor);
                 model.borderWidth = custom.borderWidth
                   ? custom.borderWidth
-                  : valueOrDefault(
-                      dataset.borderWidth,
-                      index,
-                      elementOpts.borderWidth
-                    );
+                  : valueOrDefault(dataset.borderWidth, index, elementOpts.borderWidth);
               },
 
               setHoverStyle: function(element) {
@@ -11238,25 +10136,13 @@
 
                 model.backgroundColor = custom.hoverBackgroundColor
                   ? custom.hoverBackgroundColor
-                  : valueOrDefault(
-                      dataset.hoverBackgroundColor,
-                      index,
-                      getHoverColor(model.backgroundColor)
-                    );
+                  : valueOrDefault(dataset.hoverBackgroundColor, index, getHoverColor(model.backgroundColor));
                 model.borderColor = custom.hoverBorderColor
                   ? custom.hoverBorderColor
-                  : valueOrDefault(
-                      dataset.hoverBorderColor,
-                      index,
-                      getHoverColor(model.borderColor)
-                    );
+                  : valueOrDefault(dataset.hoverBorderColor, index, getHoverColor(model.borderColor));
                 model.borderWidth = custom.hoverBorderWidth
                   ? custom.hoverBorderWidth
-                  : valueOrDefault(
-                      dataset.hoverBorderWidth,
-                      index,
-                      model.borderWidth
-                    );
+                  : valueOrDefault(dataset.hoverBorderWidth, index, model.borderWidth);
               },
 
               /**
@@ -11289,10 +10175,7 @@
                * @private
                */
               onDataPush: function() {
-                this.insertElements(
-                  this.getDataset().data.length - 1,
-                  arguments.length
-                );
+                this.insertElements(this.getDataset().data.length - 1, arguments.length);
               },
 
               /**
@@ -11328,11 +10211,11 @@
             Chart.DatasetController.extend = helpers.inherits;
           };
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       25: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
@@ -11345,11 +10228,11 @@
             }
           };
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       26: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var color = require(2);
           var helpers = require(45);
@@ -11371,7 +10254,7 @@
 
               actual = view[key];
 
-              if (actual === target || key[0] === "_") {
+              if (actual === target || key[0] === '_') {
                 continue;
               }
 
@@ -11384,7 +10267,7 @@
               type = typeof target;
 
               if (type === typeof origin) {
-                if (type === "string") {
+                if (type === 'string') {
                   c0 = color(origin);
                   if (c0.valid) {
                     c1 = color(target);
@@ -11393,11 +10276,7 @@
                       continue;
                     }
                   }
-                } else if (
-                  type === "number" &&
-                  isFinite(origin) &&
-                  isFinite(target)
-                ) {
+                } else if (type === 'number' && isFinite(origin) && isFinite(target)) {
                   view[key] = origin + (target - origin) * ease;
                   continue;
                 }
@@ -11460,10 +10339,7 @@
             },
 
             hasValue: function() {
-              return (
-                helpers.isNumber(this._model.x) &&
-                helpers.isNumber(this._model.y)
-              );
+              return helpers.isNumber(this._model.x) && helpers.isNumber(this._model.y);
             }
           });
 
@@ -11471,13 +10347,13 @@
 
           module.exports = Element;
         },
-        { "2": 2, "45": 45 }
+        { '2': 2, '45': 45 }
       ],
       27: [
         function(require, module, exports) {
           /* global window: false */
           /* global document: false */
-          "use strict";
+          'use strict';
 
           var color = require(2);
           var defaults = require(25);
@@ -11487,77 +10363,57 @@
             // -- Basic js utility methods
 
             helpers.configMerge = function(/* objects ... */) {
-              return helpers.merge(
-                helpers.clone(arguments[0]),
-                [].slice.call(arguments, 1),
-                {
-                  merger: function(key, target, source, options) {
-                    var tval = target[key] || {};
-                    var sval = source[key];
+              return helpers.merge(helpers.clone(arguments[0]), [].slice.call(arguments, 1), {
+                merger: function(key, target, source, options) {
+                  var tval = target[key] || {};
+                  var sval = source[key];
 
-                    if (key === "scales") {
-                      // scale config merging is complex. Add our own function here for that
-                      target[key] = helpers.scaleMerge(tval, sval);
-                    } else if (key === "scale") {
-                      // used in polar area & radar charts since there is only one scale
-                      target[key] = helpers.merge(tval, [
-                        Chart.scaleService.getScaleDefaults(sval.type),
-                        sval
-                      ]);
-                    } else {
-                      helpers._merger(key, target, source, options);
-                    }
+                  if (key === 'scales') {
+                    // scale config merging is complex. Add our own function here for that
+                    target[key] = helpers.scaleMerge(tval, sval);
+                  } else if (key === 'scale') {
+                    // used in polar area & radar charts since there is only one scale
+                    target[key] = helpers.merge(tval, [Chart.scaleService.getScaleDefaults(sval.type), sval]);
+                  } else {
+                    helpers._merger(key, target, source, options);
                   }
                 }
-              );
+              });
             };
 
             helpers.scaleMerge = function(/* objects ... */) {
-              return helpers.merge(
-                helpers.clone(arguments[0]),
-                [].slice.call(arguments, 1),
-                {
-                  merger: function(key, target, source, options) {
-                    if (key === "xAxes" || key === "yAxes") {
-                      var slen = source[key].length;
-                      var i, type, scale;
+              return helpers.merge(helpers.clone(arguments[0]), [].slice.call(arguments, 1), {
+                merger: function(key, target, source, options) {
+                  if (key === 'xAxes' || key === 'yAxes') {
+                    var slen = source[key].length;
+                    var i, type, scale;
 
-                      if (!target[key]) {
-                        target[key] = [];
-                      }
-
-                      for (i = 0; i < slen; ++i) {
-                        scale = source[key][i];
-                        type = helpers.valueOrDefault(
-                          scale.type,
-                          key === "xAxes" ? "category" : "linear"
-                        );
-
-                        if (i >= target[key].length) {
-                          target[key].push({});
-                        }
-
-                        if (
-                          !target[key][i].type ||
-                          (scale.type && scale.type !== target[key][i].type)
-                        ) {
-                          // new/untyped scale or type changed: let's apply the new defaults
-                          // then merge source scale to correctly overwrite the defaults.
-                          helpers.merge(target[key][i], [
-                            Chart.scaleService.getScaleDefaults(type),
-                            scale
-                          ]);
-                        } else {
-                          // scales type are the same
-                          helpers.merge(target[key][i], scale);
-                        }
-                      }
-                    } else {
-                      helpers._merger(key, target, source, options);
+                    if (!target[key]) {
+                      target[key] = [];
                     }
+
+                    for (i = 0; i < slen; ++i) {
+                      scale = source[key][i];
+                      type = helpers.valueOrDefault(scale.type, key === 'xAxes' ? 'category' : 'linear');
+
+                      if (i >= target[key].length) {
+                        target[key].push({});
+                      }
+
+                      if (!target[key][i].type || (scale.type && scale.type !== target[key][i].type)) {
+                        // new/untyped scale or type changed: let's apply the new defaults
+                        // then merge source scale to correctly overwrite the defaults.
+                        helpers.merge(target[key][i], [Chart.scaleService.getScaleDefaults(type), scale]);
+                      } else {
+                        // scales type are the same
+                        helpers.merge(target[key][i], scale);
+                      }
+                    }
+                  } else {
+                    helpers._merger(key, target, source, options);
                   }
                 }
-              );
+              });
             };
 
             helpers.where = function(collection, filterCallback) {
@@ -11587,11 +10443,7 @@
                   }
                   return -1;
                 };
-            helpers.findNextWhere = function(
-              arrayToSearch,
-              filterCallback,
-              startIndex
-            ) {
+            helpers.findNextWhere = function(arrayToSearch, filterCallback, startIndex) {
               // Default to start of the array
               if (helpers.isNullOrUndef(startIndex)) {
                 startIndex = -1;
@@ -11603,11 +10455,7 @@
                 }
               }
             };
-            helpers.findPreviousWhere = function(
-              arrayToSearch,
-              filterCallback,
-              startIndex
-            ) {
+            helpers.findPreviousWhere = function(arrayToSearch, filterCallback, startIndex) {
               // Default to end of the array
               if (helpers.isNullOrUndef(startIndex)) {
                 startIndex = arrayToSearch.length;
@@ -11682,8 +10530,7 @@
               var distanceFromXCenter = anglePoint.x - centrePoint.x;
               var distanceFromYCenter = anglePoint.y - centrePoint.y;
               var radialDistanceFromCenter = Math.sqrt(
-                distanceFromXCenter * distanceFromXCenter +
-                  distanceFromYCenter * distanceFromYCenter
+                distanceFromXCenter * distanceFromXCenter + distanceFromYCenter * distanceFromYCenter
               );
 
               var angle = Math.atan2(distanceFromYCenter, distanceFromXCenter);
@@ -11698,19 +10545,12 @@
               };
             };
             helpers.distanceBetweenPoints = function(pt1, pt2) {
-              return Math.sqrt(
-                Math.pow(pt2.x - pt1.x, 2) + Math.pow(pt2.y - pt1.y, 2)
-              );
+              return Math.sqrt(Math.pow(pt2.x - pt1.x, 2) + Math.pow(pt2.y - pt1.y, 2));
             };
             helpers.aliasPixel = function(pixelWidth) {
               return pixelWidth % 2 === 0 ? 0 : 0.5;
             };
-            helpers.splineCurve = function(
-              firstPoint,
-              middlePoint,
-              afterPoint,
-              t
-            ) {
+            helpers.splineCurve = function(firstPoint, middlePoint, afterPoint, t) {
               // Props to Rob Spencer at scaled innovation for his post on splining between points
               // http://scaledinnovation.com/analytics/splines/aboutSplines.html
 
@@ -11720,14 +10560,8 @@
               var current = middlePoint;
               var next = afterPoint.skip ? middlePoint : afterPoint;
 
-              var d01 = Math.sqrt(
-                Math.pow(current.x - previous.x, 2) +
-                  Math.pow(current.y - previous.y, 2)
-              );
-              var d12 = Math.sqrt(
-                Math.pow(next.x - current.x, 2) +
-                  Math.pow(next.y - current.y, 2)
-              );
+              var d01 = Math.sqrt(Math.pow(current.x - previous.x, 2) + Math.pow(current.y - previous.y, 2));
+              var d12 = Math.sqrt(Math.pow(next.x - current.x, 2) + Math.pow(next.y - current.y, 2));
 
               var s01 = d01 / (d01 + d12);
               var s12 = d12 / (d01 + d12);
@@ -11775,31 +10609,23 @@
                 }
 
                 pointBefore = i > 0 ? pointsWithTangents[i - 1] : null;
-                pointAfter =
-                  i < pointsLen - 1 ? pointsWithTangents[i + 1] : null;
+                pointAfter = i < pointsLen - 1 ? pointsWithTangents[i + 1] : null;
                 if (pointAfter && !pointAfter.model.skip) {
                   var slopeDeltaX = pointAfter.model.x - pointCurrent.model.x;
 
                   // In the case of two points that appear at the same x pixel, slopeDeltaX is 0
                   pointCurrent.deltaK =
-                    slopeDeltaX !== 0
-                      ? (pointAfter.model.y - pointCurrent.model.y) /
-                        slopeDeltaX
-                      : 0;
+                    slopeDeltaX !== 0 ? (pointAfter.model.y - pointCurrent.model.y) / slopeDeltaX : 0;
                 }
 
                 if (!pointBefore || pointBefore.model.skip) {
                   pointCurrent.mK = pointCurrent.deltaK;
                 } else if (!pointAfter || pointAfter.model.skip) {
                   pointCurrent.mK = pointBefore.deltaK;
-                } else if (
-                  this.sign(pointBefore.deltaK) !==
-                  this.sign(pointCurrent.deltaK)
-                ) {
+                } else if (this.sign(pointBefore.deltaK) !== this.sign(pointCurrent.deltaK)) {
                   pointCurrent.mK = 0;
                 } else {
-                  pointCurrent.mK =
-                    (pointBefore.deltaK + pointCurrent.deltaK) / 2;
+                  pointCurrent.mK = (pointBefore.deltaK + pointCurrent.deltaK) / 2;
                 }
               }
 
@@ -11812,9 +10638,7 @@
                   continue;
                 }
 
-                if (
-                  helpers.almostEquals(pointCurrent.deltaK, 0, this.EPSILON)
-                ) {
+                if (helpers.almostEquals(pointCurrent.deltaK, 0, this.EPSILON)) {
                   pointCurrent.mK = pointAfter.mK = 0;
                   continue;
                 }
@@ -11840,39 +10664,28 @@
                 }
 
                 pointBefore = i > 0 ? pointsWithTangents[i - 1] : null;
-                pointAfter =
-                  i < pointsLen - 1 ? pointsWithTangents[i + 1] : null;
+                pointAfter = i < pointsLen - 1 ? pointsWithTangents[i + 1] : null;
                 if (pointBefore && !pointBefore.model.skip) {
                   deltaX = (pointCurrent.model.x - pointBefore.model.x) / 3;
-                  pointCurrent.model.controlPointPreviousX =
-                    pointCurrent.model.x - deltaX;
-                  pointCurrent.model.controlPointPreviousY =
-                    pointCurrent.model.y - deltaX * pointCurrent.mK;
+                  pointCurrent.model.controlPointPreviousX = pointCurrent.model.x - deltaX;
+                  pointCurrent.model.controlPointPreviousY = pointCurrent.model.y - deltaX * pointCurrent.mK;
                 }
                 if (pointAfter && !pointAfter.model.skip) {
                   deltaX = (pointAfter.model.x - pointCurrent.model.x) / 3;
-                  pointCurrent.model.controlPointNextX =
-                    pointCurrent.model.x + deltaX;
-                  pointCurrent.model.controlPointNextY =
-                    pointCurrent.model.y + deltaX * pointCurrent.mK;
+                  pointCurrent.model.controlPointNextX = pointCurrent.model.x + deltaX;
+                  pointCurrent.model.controlPointNextY = pointCurrent.model.y + deltaX * pointCurrent.mK;
                 }
               }
             };
             helpers.nextItem = function(collection, index, loop) {
               if (loop) {
-                return index >= collection.length - 1
-                  ? collection[0]
-                  : collection[index + 1];
+                return index >= collection.length - 1 ? collection[0] : collection[index + 1];
               }
-              return index >= collection.length - 1
-                ? collection[collection.length - 1]
-                : collection[index + 1];
+              return index >= collection.length - 1 ? collection[collection.length - 1] : collection[index + 1];
             };
             helpers.previousItem = function(collection, index, loop) {
               if (loop) {
-                return index <= 0
-                  ? collection[collection.length - 1]
-                  : collection[index - 1];
+                return index <= 0 ? collection[collection.length - 1] : collection[index - 1];
               }
               return index <= 0 ? collection[0] : collection[index - 1];
             };
@@ -11906,7 +10719,7 @@
             };
             // Request animation polyfill - http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
             helpers.requestAnimFrame = (function() {
-              if (typeof window === "undefined") {
+              if (typeof window === 'undefined') {
                 return function(callback) {
                   callback();
                 };
@@ -11941,40 +10754,20 @@
               // Scale mouse coordinates into canvas coordinates
               // by following the pattern laid out by 'jerryj' in the comments of
               // http://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
-              var paddingLeft = parseFloat(
-                helpers.getStyle(canvas, "padding-left")
-              );
-              var paddingTop = parseFloat(
-                helpers.getStyle(canvas, "padding-top")
-              );
-              var paddingRight = parseFloat(
-                helpers.getStyle(canvas, "padding-right")
-              );
-              var paddingBottom = parseFloat(
-                helpers.getStyle(canvas, "padding-bottom")
-              );
-              var width =
-                boundingRect.right -
-                boundingRect.left -
-                paddingLeft -
-                paddingRight;
-              var height =
-                boundingRect.bottom -
-                boundingRect.top -
-                paddingTop -
-                paddingBottom;
+              var paddingLeft = parseFloat(helpers.getStyle(canvas, 'padding-left'));
+              var paddingTop = parseFloat(helpers.getStyle(canvas, 'padding-top'));
+              var paddingRight = parseFloat(helpers.getStyle(canvas, 'padding-right'));
+              var paddingBottom = parseFloat(helpers.getStyle(canvas, 'padding-bottom'));
+              var width = boundingRect.right - boundingRect.left - paddingLeft - paddingRight;
+              var height = boundingRect.bottom - boundingRect.top - paddingTop - paddingBottom;
 
               // We divide by the current device pixel ratio, because the canvas is scaled up by that amount in each direction. However
               // the backend model is in unscaled coordinates. Since we are going to deal with our model coordinates, we go back here
               mouseX = Math.round(
-                (((mouseX - boundingRect.left - paddingLeft) / width) *
-                  canvas.width) /
-                  chart.currentDevicePixelRatio
+                (((mouseX - boundingRect.left - paddingLeft) / width) * canvas.width) / chart.currentDevicePixelRatio
               );
               mouseY = Math.round(
-                (((mouseY - boundingRect.top - paddingTop) / height) *
-                  canvas.height) /
-                  chart.currentDevicePixelRatio
+                (((mouseY - boundingRect.top - paddingTop) / height) * canvas.height) / chart.currentDevicePixelRatio
               );
 
               return {
@@ -11986,13 +10779,12 @@
             // Private helper function to convert max-width/max-height values that may be percentages into a number
             function parseMaxStyle(styleValue, node, parentProperty) {
               var valueInPixels;
-              if (typeof styleValue === "string") {
+              if (typeof styleValue === 'string') {
                 valueInPixels = parseInt(styleValue, 10);
 
-                if (styleValue.indexOf("%") !== -1) {
+                if (styleValue.indexOf('%') !== -1) {
                   // percentage * size in dimension
-                  valueInPixels =
-                    (valueInPixels / 100) * node.parentNode[parentProperty];
+                  valueInPixels = (valueInPixels / 100) * node.parentNode[parentProperty];
                 }
               } else {
                 valueInPixels = styleValue;
@@ -12006,7 +10798,7 @@
              * @private
              */
             function isConstrainedValue(value) {
-              return value !== undefined && value !== null && value !== "none";
+              return value !== undefined && value !== null && value !== 'none';
             }
 
             // Private helper to get a constraint dimension
@@ -12014,57 +10806,31 @@
             // @param maxStyle : the style that defines the maximum for the direction we are using (maxWidth / maxHeight)
             // @param percentageProperty : property of parent to use when calculating width as a percentage
             // @see http://www.nathanaeljones.com/blog/2013/reading-max-width-cross-browser
-            function getConstraintDimension(
-              domNode,
-              maxStyle,
-              percentageProperty
-            ) {
+            function getConstraintDimension(domNode, maxStyle, percentageProperty) {
               var view = document.defaultView;
               var parentNode = domNode.parentNode;
               var constrainedNode = view.getComputedStyle(domNode)[maxStyle];
-              var constrainedContainer = view.getComputedStyle(parentNode)[
-                maxStyle
-              ];
+              var constrainedContainer = view.getComputedStyle(parentNode)[maxStyle];
               var hasCNode = isConstrainedValue(constrainedNode);
               var hasCContainer = isConstrainedValue(constrainedContainer);
               var infinity = Number.POSITIVE_INFINITY;
 
               if (hasCNode || hasCContainer) {
                 return Math.min(
-                  hasCNode
-                    ? parseMaxStyle(
-                        constrainedNode,
-                        domNode,
-                        percentageProperty
-                      )
-                    : infinity,
-                  hasCContainer
-                    ? parseMaxStyle(
-                        constrainedContainer,
-                        parentNode,
-                        percentageProperty
-                      )
-                    : infinity
+                  hasCNode ? parseMaxStyle(constrainedNode, domNode, percentageProperty) : infinity,
+                  hasCContainer ? parseMaxStyle(constrainedContainer, parentNode, percentageProperty) : infinity
                 );
               }
 
-              return "none";
+              return 'none';
             }
             // returns Number or undefined if no constraint
             helpers.getConstraintWidth = function(domNode) {
-              return getConstraintDimension(
-                domNode,
-                "max-width",
-                "clientWidth"
-              );
+              return getConstraintDimension(domNode, 'max-width', 'clientWidth');
             };
             // returns Number or undefined if no constraint
             helpers.getConstraintHeight = function(domNode) {
-              return getConstraintDimension(
-                domNode,
-                "max-height",
-                "clientHeight"
-              );
+              return getConstraintDimension(domNode, 'max-height', 'clientHeight');
             };
             helpers.getMaximumWidth = function(domNode) {
               var container = domNode.parentNode;
@@ -12072,14 +10838,8 @@
                 return domNode.clientWidth;
               }
 
-              var paddingLeft = parseInt(
-                helpers.getStyle(container, "padding-left"),
-                10
-              );
-              var paddingRight = parseInt(
-                helpers.getStyle(container, "padding-right"),
-                10
-              );
+              var paddingLeft = parseInt(helpers.getStyle(container, 'padding-left'), 10);
+              var paddingRight = parseInt(helpers.getStyle(container, 'padding-right'), 10);
               var w = container.clientWidth - paddingLeft - paddingRight;
               var cw = helpers.getConstraintWidth(domNode);
               return isNaN(cw) ? w : Math.min(w, cw);
@@ -12090,14 +10850,8 @@
                 return domNode.clientHeight;
               }
 
-              var paddingTop = parseInt(
-                helpers.getStyle(container, "padding-top"),
-                10
-              );
-              var paddingBottom = parseInt(
-                helpers.getStyle(container, "padding-bottom"),
-                10
-              );
+              var paddingTop = parseInt(helpers.getStyle(container, 'padding-top'), 10);
+              var paddingBottom = parseInt(helpers.getStyle(container, 'padding-bottom'), 10);
               var h = container.clientHeight - paddingTop - paddingBottom;
               var ch = helpers.getConstraintHeight(domNode);
               return isNaN(ch) ? h : Math.min(h, ch);
@@ -12105,13 +10859,10 @@
             helpers.getStyle = function(el, property) {
               return el.currentStyle
                 ? el.currentStyle[property]
-                : document.defaultView
-                    .getComputedStyle(el, null)
-                    .getPropertyValue(property);
+                : document.defaultView.getComputedStyle(el, null).getPropertyValue(property);
             };
             helpers.retinaScale = function(chart, forceRatio) {
-              var pixelRatio = (chart.currentDevicePixelRatio =
-                forceRatio || window.devicePixelRatio || 1);
+              var pixelRatio = (chart.currentDevicePixelRatio = forceRatio || window.devicePixelRatio || 1);
               if (pixelRatio === 1) {
                 return;
               }
@@ -12128,13 +10879,13 @@
               // making the chart visually bigger, so let's enforce it to the "correct" values.
               // See https://github.com/chartjs/Chart.js/issues/3575
               if (!canvas.style.height && !canvas.style.width) {
-                canvas.style.height = height + "px";
-                canvas.style.width = width + "px";
+                canvas.style.height = height + 'px';
+                canvas.style.width = width + 'px';
               }
             };
             // -- Canvas methods
             helpers.fontString = function(pixelSize, fontStyle, fontFamily) {
-              return fontStyle + " " + pixelSize + "px " + fontFamily;
+              return fontStyle + ' ' + pixelSize + 'px ' + fontFamily;
             };
             helpers.longestText = function(ctx, font, arrayOfThings, cache) {
               cache = cache || {};
@@ -12151,29 +10902,15 @@
               var longest = 0;
               helpers.each(arrayOfThings, function(thing) {
                 // Undefined strings and arrays should not be measured
-                if (
-                  thing !== undefined &&
-                  thing !== null &&
-                  helpers.isArray(thing) !== true
-                ) {
+                if (thing !== undefined && thing !== null && helpers.isArray(thing) !== true) {
                   longest = helpers.measureText(ctx, data, gc, longest, thing);
                 } else if (helpers.isArray(thing)) {
                   // if it is an array lets measure each element
                   // to do maybe simplify this function a bit so we can do this more recursively?
                   helpers.each(thing, function(nestedThing) {
                     // Undefined strings and arrays should not be measured
-                    if (
-                      nestedThing !== undefined &&
-                      nestedThing !== null &&
-                      !helpers.isArray(nestedThing)
-                    ) {
-                      longest = helpers.measureText(
-                        ctx,
-                        data,
-                        gc,
-                        longest,
-                        nestedThing
-                      );
+                    if (nestedThing !== undefined && nestedThing !== null && !helpers.isArray(nestedThing)) {
+                      longest = helpers.measureText(ctx, data, gc, longest, nestedThing);
                     }
                   });
                 }
@@ -12213,7 +10950,7 @@
 
             helpers.color = !color
               ? function(value) {
-                  console.error("Color.js not found!");
+                  console.error('Color.js not found!');
                   return value;
                 }
               : function(value) {
@@ -12237,11 +10974,11 @@
             };
           };
         },
-        { "2": 2, "25": 25, "45": 45 }
+        { '2': 2, '25': 25, '45': 45 }
       ],
       28: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
@@ -12342,8 +11079,8 @@
            * @param {String} axis the axis mode. x|y|xy
            */
           function getDistanceMetricForAxis(axis) {
-            var useX = axis.indexOf("x") !== -1;
-            var useY = axis.indexOf("y") !== -1;
+            var useX = axis.indexOf('x') !== -1;
+            var useY = axis.indexOf('y') !== -1;
 
             return function(pt1, pt2) {
               var deltaX = useX ? Math.abs(pt1.x - pt2.x) : 0;
@@ -12355,7 +11092,7 @@
           function indexMode(chart, e, options) {
             var position = getRelativePosition(e, chart);
             // Default axis for index mode is 'x' to match old behaviour
-            options.axis = options.axis || "x";
+            options.axis = options.axis || 'x';
             var distanceMetric = getDistanceMetricForAxis(options.axis);
             var items = options.intersect
               ? getIntersectItems(chart, position)
@@ -12442,7 +11179,7 @@
                */
               dataset: function(chart, e, options) {
                 var position = getRelativePosition(e, chart);
-                options.axis = options.axis || "xy";
+                options.axis = options.axis || 'xy';
                 var distanceMetric = getDistanceMetricForAxis(options.axis);
                 var items = options.intersect
                   ? getIntersectItems(chart, position)
@@ -12461,7 +11198,7 @@
                * @todo remove at version 3
                * @private
                */
-              "x-axis": function(chart, e) {
+              'x-axis': function(chart, e) {
                 return indexMode(chart, e, { intersect: false });
               },
 
@@ -12488,14 +11225,9 @@
                */
               nearest: function(chart, e, options) {
                 var position = getRelativePosition(e, chart);
-                options.axis = options.axis || "xy";
+                options.axis = options.axis || 'xy';
                 var distanceMetric = getDistanceMetricForAxis(options.axis);
-                var nearestItems = getNearestItems(
-                  chart,
-                  position,
-                  options.intersect,
-                  distanceMetric
-                );
+                var nearestItems = getNearestItems(chart, position, options.intersect, distanceMetric);
 
                 // We have multiple items at the same distance from the event. Now sort by smallest
                 if (nearestItems.length > 1) {
@@ -12581,38 +11313,31 @@
             }
           };
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       29: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
 
-          defaults._set("global", {
+          defaults._set('global', {
             responsive: true,
             responsiveAnimationDuration: 0,
             maintainAspectRatio: true,
-            events: [
-              "mousemove",
-              "mouseout",
-              "click",
-              "touchstart",
-              "touchmove"
-            ],
+            events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
             hover: {
               onHover: null,
-              mode: "nearest",
+              mode: 'nearest',
               intersect: true,
               animationDuration: 400
             },
             onClick: null,
-            defaultColor: "rgba(0,0,0,0.1)",
-            defaultFontColor: "#666",
-            defaultFontFamily:
-              "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            defaultColor: 'rgba(0,0,0,0.1)',
+            defaultFontColor: '#666',
+            defaultFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
             defaultFontSize: 12,
-            defaultFontStyle: "normal",
+            defaultFontStyle: 'normal',
             showLines: true,
 
             // Element defaults defined in element extensions
@@ -12641,11 +11366,11 @@
             return Chart;
           };
         },
-        { "25": 25 }
+        { '25': 25 }
       ],
       30: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
@@ -12663,9 +11388,7 @@
             array.sort(function(a, b) {
               var v0 = reverse ? b : a;
               var v1 = reverse ? a : b;
-              return v0.weight === v1.weight
-                ? v0._tmpIndex_ - v1._tmpIndex_
-                : v0.weight - v1.weight;
+              return v0.weight === v1.weight ? v0._tmpIndex_ - v1._tmpIndex_ : v0.weight - v1.weight;
             });
             array.forEach(function(v) {
               delete v._tmpIndex_;
@@ -12708,7 +11431,7 @@
 
               // initialize item with default values
               item.fullWidth = item.fullWidth || false;
-              item.position = item.position || "top";
+              item.position = item.position || 'top';
               item.weight = item.weight || 0;
 
               chart.boxes.push(item);
@@ -12733,7 +11456,7 @@
              * @param {Object} options - the new item options.
              */
             configure: function(chart, item, options) {
-              var props = ["fullWidth", "position", "weight"];
+              var props = ['fullWidth', 'position', 'weight'];
               var ilen = props.length;
               var i = 0;
               var prop;
@@ -12765,11 +11488,11 @@
               var topPadding = padding.top;
               var bottomPadding = padding.bottom;
 
-              var leftBoxes = filterByPosition(chart.boxes, "left");
-              var rightBoxes = filterByPosition(chart.boxes, "right");
-              var topBoxes = filterByPosition(chart.boxes, "top");
-              var bottomBoxes = filterByPosition(chart.boxes, "bottom");
-              var chartAreaBoxes = filterByPosition(chart.boxes, "chartArea");
+              var leftBoxes = filterByPosition(chart.boxes, 'left');
+              var rightBoxes = filterByPosition(chart.boxes, 'right');
+              var topBoxes = filterByPosition(chart.boxes, 'top');
+              var bottomBoxes = filterByPosition(chart.boxes, 'bottom');
+              var chartAreaBoxes = filterByPosition(chart.boxes, 'chartArea');
 
               // Sort boxes by weight. A higher weight is further away from the chart area
               sortByWeight(leftBoxes, true);
@@ -12821,14 +11544,10 @@
               var chartAreaHeight = chartHeight / 2; // min 50%
 
               // Step 2
-              var verticalBoxWidth =
-                (width - chartAreaWidth) /
-                (leftBoxes.length + rightBoxes.length);
+              var verticalBoxWidth = (width - chartAreaWidth) / (leftBoxes.length + rightBoxes.length);
 
               // Step 3
-              var horizontalBoxHeight =
-                (height - chartAreaHeight) /
-                (topBoxes.length + bottomBoxes.length);
+              var horizontalBoxHeight = (height - chartAreaHeight) / (topBoxes.length + bottomBoxes.length);
 
               // Step 4
               var maxChartAreaWidth = chartWidth;
@@ -12840,10 +11559,7 @@
                 var isHorizontal = box.isHorizontal();
 
                 if (isHorizontal) {
-                  minSize = box.update(
-                    box.fullWidth ? chartWidth : maxChartAreaWidth,
-                    horizontalBoxHeight
-                  );
+                  minSize = box.update(box.fullWidth ? chartWidth : maxChartAreaWidth, horizontalBoxHeight);
                   maxChartAreaHeight -= minSize.height;
                 } else {
                   minSize = box.update(verticalBoxWidth, maxChartAreaHeight);
@@ -12857,10 +11573,7 @@
                 });
               }
 
-              helpers.each(
-                leftBoxes.concat(rightBoxes, topBoxes, bottomBoxes),
-                getMinimumBoxSize
-              );
+              helpers.each(leftBoxes.concat(rightBoxes, topBoxes, bottomBoxes), getMinimumBoxSize);
 
               // If a horizontal box has padding, we move the left boxes over to avoid ugly charts (see issue #2478)
               var maxHorizontalLeftPadding = 0;
@@ -12868,33 +11581,19 @@
               var maxVerticalTopPadding = 0;
               var maxVerticalBottomPadding = 0;
 
-              helpers.each(topBoxes.concat(bottomBoxes), function(
-                horizontalBox
-              ) {
+              helpers.each(topBoxes.concat(bottomBoxes), function(horizontalBox) {
                 if (horizontalBox.getPadding) {
                   var boxPadding = horizontalBox.getPadding();
-                  maxHorizontalLeftPadding = Math.max(
-                    maxHorizontalLeftPadding,
-                    boxPadding.left
-                  );
-                  maxHorizontalRightPadding = Math.max(
-                    maxHorizontalRightPadding,
-                    boxPadding.right
-                  );
+                  maxHorizontalLeftPadding = Math.max(maxHorizontalLeftPadding, boxPadding.left);
+                  maxHorizontalRightPadding = Math.max(maxHorizontalRightPadding, boxPadding.right);
                 }
               });
 
               helpers.each(leftBoxes.concat(rightBoxes), function(verticalBox) {
                 if (verticalBox.getPadding) {
                   var boxPadding = verticalBox.getPadding();
-                  maxVerticalTopPadding = Math.max(
-                    maxVerticalTopPadding,
-                    boxPadding.top
-                  );
-                  maxVerticalBottomPadding = Math.max(
-                    maxVerticalBottomPadding,
-                    boxPadding.bottom
-                  );
+                  maxVerticalTopPadding = Math.max(maxVerticalTopPadding, boxPadding.top);
+                  maxVerticalBottomPadding = Math.max(maxVerticalBottomPadding, boxPadding.bottom);
                 }
               });
 
@@ -12908,34 +11607,22 @@
 
               // Function to fit a box
               function fitBox(box) {
-                var minBoxSize = helpers.findNextWhere(minBoxSizes, function(
-                  minBox
-                ) {
+                var minBoxSize = helpers.findNextWhere(minBoxSizes, function(minBox) {
                   return minBox.box === box;
                 });
 
                 if (minBoxSize) {
                   if (box.isHorizontal()) {
                     var scaleMargin = {
-                      left: Math.max(
-                        totalLeftBoxesWidth,
-                        maxHorizontalLeftPadding
-                      ),
-                      right: Math.max(
-                        totalRightBoxesWidth,
-                        maxHorizontalRightPadding
-                      ),
+                      left: Math.max(totalLeftBoxesWidth, maxHorizontalLeftPadding),
+                      right: Math.max(totalRightBoxesWidth, maxHorizontalRightPadding),
                       top: 0,
                       bottom: 0
                     };
 
                     // Don't use min size here because of label rotation. When the labels are rotated, their rotation highly depends
                     // on the margin. Sometimes they need to increase in size slightly
-                    box.update(
-                      box.fullWidth ? chartWidth : maxChartAreaWidth,
-                      chartHeight / 2,
-                      scaleMargin
-                    );
+                    box.update(box.fullWidth ? chartWidth : maxChartAreaWidth, chartHeight / 2, scaleMargin);
                   } else {
                     box.update(minBoxSize.minSize.width, maxChartAreaHeight);
                   }
@@ -12966,9 +11653,7 @@
               });
 
               function finalFitVerticalBox(box) {
-                var minBoxSize = helpers.findNextWhere(minBoxSizes, function(
-                  minSize
-                ) {
+                var minBoxSize = helpers.findNextWhere(minBoxSizes, function(minSize) {
                   return minSize.box === box;
                 });
 
@@ -12980,11 +11665,7 @@
                 };
 
                 if (minBoxSize) {
-                  box.update(
-                    minBoxSize.minSize.width,
-                    maxChartAreaHeight,
-                    scaleMargin
-                  );
+                  box.update(minBoxSize.minSize.width, maxChartAreaHeight, scaleMargin);
                 }
               }
 
@@ -13013,38 +11694,21 @@
               });
 
               // We may be adding some padding to account for rotated x axis labels
-              var leftPaddingAddition = Math.max(
-                maxHorizontalLeftPadding - totalLeftBoxesWidth,
-                0
-              );
+              var leftPaddingAddition = Math.max(maxHorizontalLeftPadding - totalLeftBoxesWidth, 0);
               totalLeftBoxesWidth += leftPaddingAddition;
-              totalRightBoxesWidth += Math.max(
-                maxHorizontalRightPadding - totalRightBoxesWidth,
-                0
-              );
+              totalRightBoxesWidth += Math.max(maxHorizontalRightPadding - totalRightBoxesWidth, 0);
 
-              var topPaddingAddition = Math.max(
-                maxVerticalTopPadding - totalTopBoxesHeight,
-                0
-              );
+              var topPaddingAddition = Math.max(maxVerticalTopPadding - totalTopBoxesHeight, 0);
               totalTopBoxesHeight += topPaddingAddition;
-              totalBottomBoxesHeight += Math.max(
-                maxVerticalBottomPadding - totalBottomBoxesHeight,
-                0
-              );
+              totalBottomBoxesHeight += Math.max(maxVerticalBottomPadding - totalBottomBoxesHeight, 0);
 
               // Figure out if our chart area changed. This would occur if the dataset layout label rotation
               // changed due to the application of the margins in step 6. Since we can only get bigger, this is safe to do
               // without calling `fit` again
-              var newMaxChartAreaHeight =
-                height - totalTopBoxesHeight - totalBottomBoxesHeight;
-              var newMaxChartAreaWidth =
-                width - totalLeftBoxesWidth - totalRightBoxesWidth;
+              var newMaxChartAreaHeight = height - totalTopBoxesHeight - totalBottomBoxesHeight;
+              var newMaxChartAreaWidth = width - totalLeftBoxesWidth - totalRightBoxesWidth;
 
-              if (
-                newMaxChartAreaWidth !== maxChartAreaWidth ||
-                newMaxChartAreaHeight !== maxChartAreaHeight
-              ) {
+              if (newMaxChartAreaWidth !== maxChartAreaWidth || newMaxChartAreaHeight !== maxChartAreaHeight) {
                 helpers.each(leftBoxes, function(box) {
                   box.height = newMaxChartAreaHeight;
                 });
@@ -13076,9 +11740,7 @@
               function placeBox(box) {
                 if (box.isHorizontal()) {
                   box.left = box.fullWidth ? leftPadding : totalLeftBoxesWidth;
-                  box.right = box.fullWidth
-                    ? width - rightPadding
-                    : totalLeftBoxesWidth + maxChartAreaWidth;
+                  box.right = box.fullWidth ? width - rightPadding : totalLeftBoxesWidth + maxChartAreaWidth;
                   box.top = top;
                   box.bottom = top + box.height;
 
@@ -13124,16 +11786,16 @@
             }
           };
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       31: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var helpers = require(45);
 
-          defaults._set("global", {
+          defaults._set('global', {
             plugins: {}
           });
 
@@ -13233,7 +11895,7 @@
                 descriptor = descriptors[i];
                 plugin = descriptor.plugin;
                 method = plugin[hook];
-                if (typeof method === "function") {
+                if (typeof method === 'function') {
                   params = [chart].concat(args || []);
                   params.push(descriptor.options);
                   if (method.apply(plugin, params) === false) {
@@ -13261,30 +11923,28 @@
               var config = (chart && chart.config) || {};
               var options = (config.options && config.options.plugins) || {};
 
-              this._plugins
-                .concat(config.plugins || [])
-                .forEach(function(plugin) {
-                  var idx = plugins.indexOf(plugin);
-                  if (idx !== -1) {
-                    return;
-                  }
+              this._plugins.concat(config.plugins || []).forEach(function(plugin) {
+                var idx = plugins.indexOf(plugin);
+                if (idx !== -1) {
+                  return;
+                }
 
-                  var id = plugin.id;
-                  var opts = options[id];
-                  if (opts === false) {
-                    return;
-                  }
+                var id = plugin.id;
+                var opts = options[id];
+                if (opts === false) {
+                  return;
+                }
 
-                  if (opts === true) {
-                    opts = helpers.clone(defaults.global.plugins[id]);
-                  }
+                if (opts === true) {
+                  opts = helpers.clone(defaults.global.plugins[id]);
+                }
 
-                  plugins.push(plugin);
-                  descriptors.push({
-                    plugin: plugin,
-                    options: opts || {}
-                  });
+                plugins.push(plugin);
+                descriptors.push({
+                  plugin: plugin,
+                  options: opts || {}
                 });
+              });
 
               cache.descriptors = descriptors;
               cache.id = this._cacheId;
@@ -13513,33 +12173,33 @@
            * @param {Object} options - The plugin options.
            */
         },
-        { "25": 25, "45": 45 }
+        { '25': 25, '45': 45 }
       ],
       32: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
           var helpers = require(45);
           var Ticks = require(34);
 
-          defaults._set("scale", {
+          defaults._set('scale', {
             display: true,
-            position: "left",
+            position: 'left',
             offset: false,
 
             // grid line settings
             gridLines: {
               display: true,
-              color: "rgba(0, 0, 0, 0.1)",
+              color: 'rgba(0, 0, 0, 0.1)',
               lineWidth: 1,
               drawBorder: true,
               drawOnChartArea: true,
               drawTicks: true,
               tickMarkLength: 10,
               zeroLineWidth: 1,
-              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineColor: 'rgba(0,0,0,0.25)',
               zeroLineBorderDash: [],
               zeroLineBorderDashOffset: 0.0,
               offsetGridLines: false,
@@ -13553,7 +12213,7 @@
               display: false,
 
               // actual label
-              labelString: "",
+              labelString: '',
 
               // line height
               lineHeight: 1.2,
@@ -13610,26 +12270,15 @@
 
           module.exports = function(Chart) {
             function computeTextSize(context, tick, font) {
-              return helpers.isArray(tick)
-                ? helpers.longestText(context, font, tick)
-                : context.measureText(tick).width;
+              return helpers.isArray(tick) ? helpers.longestText(context, font, tick) : context.measureText(tick).width;
             }
 
             function parseFontOptions(options) {
               var valueOrDefault = helpers.valueOrDefault;
               var globalDefaults = defaults.global;
-              var size = valueOrDefault(
-                options.fontSize,
-                globalDefaults.defaultFontSize
-              );
-              var style = valueOrDefault(
-                options.fontStyle,
-                globalDefaults.defaultFontStyle
-              );
-              var family = valueOrDefault(
-                options.fontFamily,
-                globalDefaults.defaultFontFamily
-              );
+              var size = valueOrDefault(options.fontSize, globalDefaults.defaultFontSize);
+              var style = valueOrDefault(options.fontStyle, globalDefaults.defaultFontStyle);
+              var family = valueOrDefault(options.fontFamily, globalDefaults.defaultFontFamily);
 
               return {
                 size: size,
@@ -13642,10 +12291,7 @@
             function parseLineHeight(options) {
               return helpers.options.toLineHeight(
                 helpers.valueOrDefault(options.lineHeight, 1.2),
-                helpers.valueOrDefault(
-                  options.fontSize,
-                  defaults.global.defaultFontSize
-                )
+                helpers.valueOrDefault(options.fontSize, defaults.global.defaultFontSize)
               );
             }
 
@@ -13691,11 +12337,11 @@
                   };
                 }
                 for (var key in ticks) {
-                  if (key !== "major" && key !== "minor") {
-                    if (typeof ticks.minor[key] === "undefined") {
+                  if (key !== 'major' && key !== 'minor') {
+                    if (typeof ticks.minor[key] === 'undefined') {
                       ticks.minor[key] = ticks[key];
                     }
-                    if (typeof ticks.major[key] === "undefined") {
+                    if (typeof ticks.major[key] === 'undefined') {
                       ticks.major[key] = ticks[key];
                     }
                   }
@@ -13848,31 +12494,22 @@
               },
 
               beforeTickToLabelConversion: function() {
-                helpers.callback(this.options.beforeTickToLabelConversion, [
-                  this
-                ]);
+                helpers.callback(this.options.beforeTickToLabelConversion, [this]);
               },
               convertTicksToLabels: function() {
                 var me = this;
                 // Convert ticks to strings
                 var tickOpts = me.options.ticks;
-                me.ticks = me.ticks.map(
-                  tickOpts.userCallback || tickOpts.callback,
-                  this
-                );
+                me.ticks = me.ticks.map(tickOpts.userCallback || tickOpts.callback, this);
               },
               afterTickToLabelConversion: function() {
-                helpers.callback(this.options.afterTickToLabelConversion, [
-                  this
-                ]);
+                helpers.callback(this.options.afterTickToLabelConversion, [this]);
               },
 
               //
 
               beforeCalculateTickRotation: function() {
-                helpers.callback(this.options.beforeCalculateTickRotation, [
-                  this
-                ]);
+                helpers.callback(this.options.beforeCalculateTickRotation, [this]);
               },
               calculateTickRotation: function() {
                 var me = this;
@@ -13888,24 +12525,15 @@
                 var labelRotation = tickOpts.minRotation || 0;
 
                 if (labels.length && me.options.display && me.isHorizontal()) {
-                  var originalLabelWidth = helpers.longestText(
-                    context,
-                    tickFont.font,
-                    labels,
-                    me.longestTextCache
-                  );
+                  var originalLabelWidth = helpers.longestText(context, tickFont.font, labels, me.longestTextCache);
                   var labelWidth = originalLabelWidth;
                   var cosRotation, sinRotation;
 
                   // Allow 3 pixels x2 padding either side for label readability
-                  var tickWidth =
-                    me.getPixelForTick(1) - me.getPixelForTick(0) - 6;
+                  var tickWidth = me.getPixelForTick(1) - me.getPixelForTick(0) - 6;
 
                   // Max label rotation can be set or default to 90 - also act as a loop counter
-                  while (
-                    labelWidth > tickWidth &&
-                    labelRotation < tickOpts.maxRotation
-                  ) {
+                  while (labelWidth > tickWidth && labelRotation < tickOpts.maxRotation) {
                     var angleRadians = helpers.toRadians(labelRotation);
                     cosRotation = Math.cos(angleRadians);
                     sinRotation = Math.sin(angleRadians);
@@ -13924,9 +12552,7 @@
                 me.labelRotation = labelRotation;
               },
               afterCalculateTickRotation: function() {
-                helpers.callback(this.options.afterCalculateTickRotation, [
-                  this
-                ]);
+                helpers.callback(this.options.afterCalculateTickRotation, [this]);
               },
 
               //
@@ -13957,18 +12583,14 @@
                 // Width
                 if (isHorizontal) {
                   // subtract the margins to line up with the chartArea if we are a full width scale
-                  minSize.width = me.isFullWidth()
-                    ? me.maxWidth - me.margins.left - me.margins.right
-                    : me.maxWidth;
+                  minSize.width = me.isFullWidth() ? me.maxWidth - me.margins.left - me.margins.right : me.maxWidth;
                 } else {
-                  minSize.width =
-                    display && gridLineOpts.drawTicks ? tickMarkLength : 0;
+                  minSize.width = display && gridLineOpts.drawTicks ? tickMarkLength : 0;
                 }
 
                 // height
                 if (isHorizontal) {
-                  minSize.height =
-                    display && gridLineOpts.drawTicks ? tickMarkLength : 0;
+                  minSize.height = display && gridLineOpts.drawTicks ? tickMarkLength : 0;
                 } else {
                   minSize.height = me.maxHeight; // fill all the height
                 }
@@ -13976,11 +12598,8 @@
                 // Are we showing a title for the scale?
                 if (scaleLabelOpts.display && display) {
                   var scaleLabelLineHeight = parseLineHeight(scaleLabelOpts);
-                  var scaleLabelPadding = helpers.options.toPadding(
-                    scaleLabelOpts.padding
-                  );
-                  var deltaHeight =
-                    scaleLabelLineHeight + scaleLabelPadding.height;
+                  var scaleLabelPadding = helpers.options.toPadding(scaleLabelOpts.padding);
+                  var deltaHeight = scaleLabelLineHeight + scaleLabelPadding.height;
 
                   if (isHorizontal) {
                     minSize.height += deltaHeight;
@@ -13991,15 +12610,8 @@
 
                 // Don't bother fitting the ticks if we are not showing them
                 if (tickOpts.display && display) {
-                  var largestTextWidth = helpers.longestText(
-                    me.ctx,
-                    tickFont.font,
-                    labels,
-                    me.longestTextCache
-                  );
-                  var tallestLabelHeightInLines = helpers.numberOfLabelLines(
-                    labels
-                  );
+                  var largestTextWidth = helpers.longestText(me.ctx, tickFont.font, labels, me.longestTextCache);
+                  var tallestLabelHeightInLines = helpers.numberOfLabelLines(labels);
                   var lineSpace = tickFont.size * 0.5;
                   var tickPadding = me.options.ticks.padding;
 
@@ -14018,34 +12630,19 @@
                       lineSpace * (tallestLabelHeightInLines - 1) +
                       lineSpace; // padding
 
-                    minSize.height = Math.min(
-                      me.maxHeight,
-                      minSize.height + labelHeight + tickPadding
-                    );
+                    minSize.height = Math.min(me.maxHeight, minSize.height + labelHeight + tickPadding);
 
                     me.ctx.font = tickFont.font;
-                    var firstLabelWidth = computeTextSize(
-                      me.ctx,
-                      labels[0],
-                      tickFont.font
-                    );
-                    var lastLabelWidth = computeTextSize(
-                      me.ctx,
-                      labels[labels.length - 1],
-                      tickFont.font
-                    );
+                    var firstLabelWidth = computeTextSize(me.ctx, labels[0], tickFont.font);
+                    var lastLabelWidth = computeTextSize(me.ctx, labels[labels.length - 1], tickFont.font);
 
                     // Ensure that our ticks are always inside the canvas. When rotated, ticks are right aligned
                     // which means that the right padding is dominated by the font height
                     if (me.labelRotation !== 0) {
                       me.paddingLeft =
-                        opts.position === "bottom"
-                          ? cosRotation * firstLabelWidth + 3
-                          : cosRotation * lineSpace + 3; // add 3 px to move away from canvas edges
+                        opts.position === 'bottom' ? cosRotation * firstLabelWidth + 3 : cosRotation * lineSpace + 3; // add 3 px to move away from canvas edges
                       me.paddingRight =
-                        opts.position === "bottom"
-                          ? cosRotation * lineSpace + 3
-                          : cosRotation * lastLabelWidth + 3;
+                        opts.position === 'bottom' ? cosRotation * lineSpace + 3 : cosRotation * lastLabelWidth + 3;
                     } else {
                       me.paddingLeft = firstLabelWidth / 2 + 3; // add 3 px to move away from canvas edges
                       me.paddingRight = lastLabelWidth / 2 + 3;
@@ -14061,10 +12658,7 @@
                       largestTextWidth += tickPadding + lineSpace;
                     }
 
-                    minSize.width = Math.min(
-                      me.maxWidth,
-                      minSize.width + largestTextWidth
-                    );
+                    minSize.width = Math.min(me.maxWidth, minSize.width + largestTextWidth);
 
                     me.paddingTop = tickFont.size / 2;
                     me.paddingBottom = tickFont.size / 2;
@@ -14084,19 +12678,10 @@
               handleMargins: function() {
                 var me = this;
                 if (me.margins) {
-                  me.paddingLeft = Math.max(
-                    me.paddingLeft - me.margins.left,
-                    0
-                  );
+                  me.paddingLeft = Math.max(me.paddingLeft - me.margins.left, 0);
                   me.paddingTop = Math.max(me.paddingTop - me.margins.top, 0);
-                  me.paddingRight = Math.max(
-                    me.paddingRight - me.margins.right,
-                    0
-                  );
-                  me.paddingBottom = Math.max(
-                    me.paddingBottom - me.margins.bottom,
-                    0
-                  );
+                  me.paddingRight = Math.max(me.paddingRight - me.margins.right, 0);
+                  me.paddingBottom = Math.max(me.paddingBottom - me.margins.bottom, 0);
                 }
               },
 
@@ -14106,10 +12691,7 @@
 
               // Shared Methods
               isHorizontal: function() {
-                return (
-                  this.options.position === "top" ||
-                  this.options.position === "bottom"
-                );
+                return this.options.position === 'top' || this.options.position === 'bottom';
               },
               isFullWidth: function() {
                 return this.options.fullWidth;
@@ -14122,7 +12704,7 @@
                   return NaN;
                 }
                 // isNaN(object) returns true, so make sure NaN is checking for a number; Discard Infinite values
-                if (typeof rawValue === "number" && !isFinite(rawValue)) {
+                if (typeof rawValue === 'number' && !isFinite(rawValue)) {
                   return NaN;
                 }
                 // If it is in fact an object, dive in one more level
@@ -14171,11 +12753,8 @@
                 var me = this;
                 var offset = me.options.offset;
                 if (me.isHorizontal()) {
-                  var innerWidth =
-                    me.width - (me.paddingLeft + me.paddingRight);
-                  var tickWidth =
-                    innerWidth /
-                    Math.max(me._ticks.length - (offset ? 0 : 1), 1);
+                  var innerWidth = me.width - (me.paddingLeft + me.paddingRight);
+                  var tickWidth = innerWidth / Math.max(me._ticks.length - (offset ? 0 : 1), 1);
                   var pixel = tickWidth * index + me.paddingLeft;
 
                   if (offset) {
@@ -14186,8 +12765,7 @@
                   finalVal += me.isFullWidth() ? me.margins.left : 0;
                   return finalVal;
                 }
-                var innerHeight =
-                  me.height - (me.paddingTop + me.paddingBottom);
+                var innerHeight = me.height - (me.paddingTop + me.paddingBottom);
                 return me.top + index * (innerHeight / (me._ticks.length - 1));
               },
 
@@ -14198,8 +12776,7 @@
               getPixelForDecimal: function(decimal) {
                 var me = this;
                 if (me.isHorizontal()) {
-                  var innerWidth =
-                    me.width - (me.paddingLeft + me.paddingRight);
+                  var innerWidth = me.width - (me.paddingLeft + me.paddingRight);
                   var valueOffset = innerWidth * decimal + me.paddingLeft;
 
                   var finalVal = me.left + Math.round(valueOffset);
@@ -14222,13 +12799,7 @@
                 var min = me.min;
                 var max = me.max;
 
-                return me.beginAtZero
-                  ? 0
-                  : min < 0 && max < 0
-                  ? max
-                  : min > 0 && max > 0
-                  ? min
-                  : 0;
+                return me.beginAtZero ? 0 : min < 0 && max < 0 ? max : min > 0 && max > 0 ? min : 0;
               },
 
               /**
@@ -14257,15 +12828,13 @@
                   skipRatio = false;
 
                   if (
-                    (longestRotatedLabel + optionTicks.autoSkipPadding) *
-                      tickCount >
+                    (longestRotatedLabel + optionTicks.autoSkipPadding) * tickCount >
                     me.width - (me.paddingLeft + me.paddingRight)
                   ) {
                     skipRatio =
                       1 +
                       Math.floor(
-                        ((longestRotatedLabel + optionTicks.autoSkipPadding) *
-                          tickCount) /
+                        ((longestRotatedLabel + optionTicks.autoSkipPadding) * tickCount) /
                           (me.width - (me.paddingLeft + me.paddingRight))
                       );
                   }
@@ -14273,10 +12842,7 @@
                   // if they defined a max number of optionTicks,
                   // increase skipRatio until that number is met
                   if (maxTicks && tickCount > maxTicks) {
-                    skipRatio = Math.max(
-                      skipRatio,
-                      Math.floor(tickCount / maxTicks)
-                    );
+                    skipRatio = Math.max(skipRatio, Math.floor(tickCount / maxTicks));
                   }
                 }
 
@@ -14285,8 +12851,7 @@
 
                   // Since we always show the last tick,we need may need to hide the last shown one before
                   shouldSkip =
-                    (skipRatio > 1 && i % skipRatio > 0) ||
-                    (i % skipRatio === 0 && i + skipRatio >= tickCount);
+                    (skipRatio > 1 && i % skipRatio > 0) || (i % skipRatio === 0 && i + skipRatio >= tickCount);
                   if (shouldSkip && i !== tickCount - 1) {
                     // leave tick in place but make sure it's not displayed (#4635)
                     delete tick.label;
@@ -14315,13 +12880,8 @@
                 var isRotated = me.labelRotation !== 0;
                 var isHorizontal = me.isHorizontal();
 
-                var ticks = optionTicks.autoSkip
-                  ? me._autoSkip(me.getTicks())
-                  : me.getTicks();
-                var tickFontColor = helpers.valueOrDefault(
-                  optionTicks.fontColor,
-                  globalDefaults.defaultFontColor
-                );
+                var ticks = optionTicks.autoSkip ? me._autoSkip(me.getTicks()) : me.getTicks();
+                var tickFontColor = helpers.valueOrDefault(optionTicks.fontColor, globalDefaults.defaultFontColor);
                 var tickFont = parseFontOptions(optionTicks);
                 var majorTickFontColor = helpers.valueOrDefault(
                   optionMajorTicks.fontColor,
@@ -14331,33 +12891,18 @@
 
                 var tl = gridLines.drawTicks ? gridLines.tickMarkLength : 0;
 
-                var scaleLabelFontColor = helpers.valueOrDefault(
-                  scaleLabel.fontColor,
-                  globalDefaults.defaultFontColor
-                );
+                var scaleLabelFontColor = helpers.valueOrDefault(scaleLabel.fontColor, globalDefaults.defaultFontColor);
                 var scaleLabelFont = parseFontOptions(scaleLabel);
-                var scaleLabelPadding = helpers.options.toPadding(
-                  scaleLabel.padding
-                );
+                var scaleLabelPadding = helpers.options.toPadding(scaleLabel.padding);
                 var labelRotationRadians = helpers.toRadians(me.labelRotation);
 
                 var itemsToDraw = [];
 
                 var axisWidth = me.options.gridLines.lineWidth;
-                var xTickStart =
-                  options.position === "right"
-                    ? me.right
-                    : me.right - axisWidth - tl;
-                var xTickEnd =
-                  options.position === "right" ? me.right + tl : me.right;
-                var yTickStart =
-                  options.position === "bottom"
-                    ? me.top + axisWidth
-                    : me.bottom - tl - axisWidth;
-                var yTickEnd =
-                  options.position === "bottom"
-                    ? me.top + axisWidth + tl
-                    : me.bottom + axisWidth;
+                var xTickStart = options.position === 'right' ? me.right : me.right - axisWidth - tl;
+                var xTickEnd = options.position === 'right' ? me.right + tl : me.right;
+                var yTickStart = options.position === 'bottom' ? me.top + axisWidth : me.bottom - tl - axisWidth;
+                var yTickEnd = options.position === 'bottom' ? me.top + axisWidth + tl : me.bottom + axisWidth;
 
                 helpers.each(ticks, function(tick, index) {
                   // autoskipper skipped this tick (#4635)
@@ -14367,28 +12912,16 @@
 
                   var label = tick.label;
                   var lineWidth, lineColor, borderDash, borderDashOffset;
-                  if (
-                    index === me.zeroLineIndex &&
-                    options.offset === gridLines.offsetGridLines
-                  ) {
+                  if (index === me.zeroLineIndex && options.offset === gridLines.offsetGridLines) {
                     // Draw the first index specially
                     lineWidth = gridLines.zeroLineWidth;
                     lineColor = gridLines.zeroLineColor;
                     borderDash = gridLines.zeroLineBorderDash;
                     borderDashOffset = gridLines.zeroLineBorderDashOffset;
                   } else {
-                    lineWidth = helpers.valueAtIndexOrDefault(
-                      gridLines.lineWidth,
-                      index
-                    );
-                    lineColor = helpers.valueAtIndexOrDefault(
-                      gridLines.color,
-                      index
-                    );
-                    borderDash = helpers.valueOrDefault(
-                      gridLines.borderDash,
-                      globalDefaults.borderDash
-                    );
+                    lineWidth = helpers.valueAtIndexOrDefault(gridLines.lineWidth, index);
+                    lineColor = helpers.valueAtIndexOrDefault(gridLines.color, index);
+                    borderDash = helpers.valueOrDefault(gridLines.borderDash, globalDefaults.borderDash);
                     borderDashOffset = helpers.valueOrDefault(
                       gridLines.borderDashOffset,
                       globalDefaults.borderDashOffset
@@ -14397,37 +12930,32 @@
 
                   // Common properties
                   var tx1, ty1, tx2, ty2, x1, y1, x2, y2, labelX, labelY;
-                  var textAlign = "middle";
-                  var textBaseline = "middle";
+                  var textAlign = 'middle';
+                  var textBaseline = 'middle';
                   var tickPadding = optionTicks.padding;
 
                   if (isHorizontal) {
                     var labelYOffset = tl + tickPadding;
 
-                    if (options.position === "bottom") {
+                    if (options.position === 'bottom') {
                       // bottom
-                      textBaseline = !isRotated ? "top" : "middle";
-                      textAlign = !isRotated ? "center" : "right";
+                      textBaseline = !isRotated ? 'top' : 'middle';
+                      textAlign = !isRotated ? 'center' : 'right';
                       labelY = me.top + labelYOffset;
                     } else {
                       // top
-                      textBaseline = !isRotated ? "bottom" : "middle";
-                      textAlign = !isRotated ? "center" : "left";
+                      textBaseline = !isRotated ? 'bottom' : 'middle';
+                      textAlign = !isRotated ? 'center' : 'left';
                       labelY = me.bottom - labelYOffset;
                     }
 
-                    var xLineValue = getLineValue(
-                      me,
-                      index,
-                      gridLines.offsetGridLines && ticks.length > 1
-                    );
+                    var xLineValue = getLineValue(me, index, gridLines.offsetGridLines && ticks.length > 1);
                     if (xLineValue < me.left) {
-                      lineColor = "rgba(0,0,0,0)";
+                      lineColor = 'rgba(0,0,0,0)';
                     }
                     xLineValue += helpers.aliasPixel(lineWidth);
 
-                    labelX =
-                      me.getPixelForTick(index) + optionTicks.labelOffset; // x values for optionTicks (need to consider offsetLabel option)
+                    labelX = me.getPixelForTick(index) + optionTicks.labelOffset; // x values for optionTicks (need to consider offsetLabel option)
 
                     tx1 = tx2 = x1 = x2 = xLineValue;
                     ty1 = yTickStart;
@@ -14435,33 +12963,26 @@
                     y1 = chartArea.top;
                     y2 = chartArea.bottom + axisWidth;
                   } else {
-                    var isLeft = options.position === "left";
+                    var isLeft = options.position === 'left';
                     var labelXOffset;
 
                     if (optionTicks.mirror) {
-                      textAlign = isLeft ? "left" : "right";
+                      textAlign = isLeft ? 'left' : 'right';
                       labelXOffset = tickPadding;
                     } else {
-                      textAlign = isLeft ? "right" : "left";
+                      textAlign = isLeft ? 'right' : 'left';
                       labelXOffset = tl + tickPadding;
                     }
 
-                    labelX = isLeft
-                      ? me.right - labelXOffset
-                      : me.left + labelXOffset;
+                    labelX = isLeft ? me.right - labelXOffset : me.left + labelXOffset;
 
-                    var yLineValue = getLineValue(
-                      me,
-                      index,
-                      gridLines.offsetGridLines && ticks.length > 1
-                    );
+                    var yLineValue = getLineValue(me, index, gridLines.offsetGridLines && ticks.length > 1);
                     if (yLineValue < me.top) {
-                      lineColor = "rgba(0,0,0,0)";
+                      lineColor = 'rgba(0,0,0,0)';
                     }
                     yLineValue += helpers.aliasPixel(lineWidth);
 
-                    labelY =
-                      me.getPixelForTick(index) + optionTicks.labelOffset;
+                    labelY = me.getPixelForTick(index) + optionTicks.labelOffset;
 
                     tx1 = xTickStart;
                     tx2 = xTickEnd;
@@ -14525,12 +13046,8 @@
                     context.save();
                     context.translate(itemToDraw.labelX, itemToDraw.labelY);
                     context.rotate(itemToDraw.rotation);
-                    context.font = itemToDraw.major
-                      ? majorTickFont.font
-                      : tickFont.font;
-                    context.fillStyle = itemToDraw.major
-                      ? majorTickFontColor
-                      : tickFontColor;
+                    context.font = itemToDraw.major ? majorTickFont.font : tickFont.font;
+                    context.fillStyle = itemToDraw.major ? majorTickFontColor : tickFontColor;
                     context.textBaseline = itemToDraw.textBaseline;
                     context.textAlign = itemToDraw.textAlign;
 
@@ -14538,13 +13055,11 @@
                     if (helpers.isArray(label)) {
                       var lineCount = label.length;
                       var lineHeight = tickFont.size * 1.5;
-                      var y = me.isHorizontal()
-                        ? 0
-                        : (-lineHeight * (lineCount - 1)) / 2;
+                      var y = me.isHorizontal() ? 0 : (-lineHeight * (lineCount - 1)) / 2;
 
                       for (var i = 0; i < lineCount; ++i) {
                         // We just make sure the multiline element is a string here..
-                        context.fillText("" + label[i], 0, y);
+                        context.fillText('' + label[i], 0, y);
                         // apply same lineSpacing as calculated @ L#320
                         y += lineHeight;
                       }
@@ -14565,11 +13080,11 @@
                   if (isHorizontal) {
                     scaleLabelX = me.left + (me.right - me.left) / 2; // midpoint of the width
                     scaleLabelY =
-                      options.position === "bottom"
+                      options.position === 'bottom'
                         ? me.bottom - halfLineHeight - scaleLabelPadding.bottom
                         : me.top + halfLineHeight + scaleLabelPadding.top;
                   } else {
-                    var isLeft = options.position === "left";
+                    var isLeft = options.position === 'left';
                     scaleLabelX = isLeft
                       ? me.left + halfLineHeight + scaleLabelPadding.top
                       : me.right - halfLineHeight - scaleLabelPadding.top;
@@ -14580,8 +13095,8 @@
                   context.save();
                   context.translate(scaleLabelX, scaleLabelY);
                   context.rotate(rotation);
-                  context.textAlign = "center";
-                  context.textBaseline = "middle";
+                  context.textAlign = 'center';
+                  context.textBaseline = 'middle';
                   context.fillStyle = scaleLabelFontColor; // render in correct colour
                   context.font = scaleLabelFont.font;
                   context.fillText(scaleLabel.labelString, 0, 0);
@@ -14590,14 +13105,8 @@
 
                 if (gridLines.drawBorder) {
                   // Draw the line at the edge of the axis
-                  context.lineWidth = helpers.valueAtIndexOrDefault(
-                    gridLines.lineWidth,
-                    0
-                  );
-                  context.strokeStyle = helpers.valueAtIndexOrDefault(
-                    gridLines.color,
-                    0
-                  );
+                  context.lineWidth = helpers.valueAtIndexOrDefault(gridLines.lineWidth, 0);
+                  context.strokeStyle = helpers.valueAtIndexOrDefault(gridLines.color, 0);
                   var x1 = me.left;
                   var x2 = me.right + axisWidth;
                   var y1 = me.top;
@@ -14605,11 +13114,11 @@
 
                   var aliasPixel = helpers.aliasPixel(context.lineWidth);
                   if (isHorizontal) {
-                    y1 = y2 = options.position === "top" ? me.bottom : me.top;
+                    y1 = y2 = options.position === 'top' ? me.bottom : me.top;
                     y1 += aliasPixel;
                     y2 += aliasPixel;
                   } else {
-                    x1 = x2 = options.position === "left" ? me.right : me.left;
+                    x1 = x2 = options.position === 'left' ? me.right : me.left;
                     x1 += aliasPixel;
                     x2 += aliasPixel;
                   }
@@ -14623,11 +13132,11 @@
             });
           };
         },
-        { "25": 25, "26": 26, "34": 34, "45": 45 }
+        { '25': 25, '26': 26, '34': 34, '45': 45 }
       ],
       33: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var helpers = require(45);
@@ -14643,18 +13152,12 @@
 
               // Scale config defaults
               defaults: {},
-              registerScaleType: function(
-                type,
-                scaleConstructor,
-                scaleDefaults
-              ) {
+              registerScaleType: function(type, scaleConstructor, scaleDefaults) {
                 this.constructors[type] = scaleConstructor;
                 this.defaults[type] = helpers.clone(scaleDefaults);
               },
               getScaleConstructor: function(type) {
-                return this.constructors.hasOwnProperty(type)
-                  ? this.constructors[type]
-                  : undefined;
+                return this.constructors.hasOwnProperty(type) ? this.constructors[type] : undefined;
               },
               getScaleDefaults: function(type) {
                 // Return the scale defaults merged with the global settings so that we always use the latest ones
@@ -14665,10 +13168,7 @@
               updateScaleDefaults: function(type, additions) {
                 var me = this;
                 if (me.defaults.hasOwnProperty(type)) {
-                  me.defaults[type] = helpers.extend(
-                    me.defaults[type],
-                    additions
-                  );
+                  me.defaults[type] = helpers.extend(me.defaults[type], additions);
                 }
               },
               addScalesToLayout: function(chart) {
@@ -14684,11 +13184,11 @@
             };
           };
         },
-        { "25": 25, "30": 30, "45": 45 }
+        { '25': 25, '30': 30, '45': 45 }
       ],
       34: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
@@ -14709,7 +13209,7 @@
                * @return {String|Array} the label to display
                */
               values: function(value) {
-                return helpers.isArray(value) ? value : "" + value;
+                return helpers.isArray(value) ? value : '' + value;
               },
 
               /**
@@ -14722,8 +13222,7 @@
                */
               linear: function(tickValue, index, ticks) {
                 // If we have lots of ticks, don't use the ones
-                var delta =
-                  ticks.length > 3 ? ticks[2] - ticks[1] : ticks[1] - ticks[0];
+                var delta = ticks.length > 3 ? ticks[2] - ticks[1] : ticks[1] - ticks[0];
 
                 // If we have a number like 2.5 as the delta, figure out how many decimal places we need
                 if (Math.abs(delta) > 1) {
@@ -14734,86 +13233,78 @@
                 }
 
                 var logDelta = helpers.log10(Math.abs(delta));
-                var tickString = "";
+                var tickString = '';
 
                 if (tickValue !== 0) {
                   var numDecimal = -1 * Math.floor(logDelta);
                   numDecimal = Math.max(Math.min(numDecimal, 20), 0); // toFixed has a max of 20 decimal places
                   tickString = tickValue.toFixed(numDecimal);
                 } else {
-                  tickString = "0"; // never show decimal places for 0
+                  tickString = '0'; // never show decimal places for 0
                 }
 
                 return tickString;
               },
 
               logarithmic: function(tickValue, index, ticks) {
-                var remain =
-                  tickValue /
-                  Math.pow(10, Math.floor(helpers.log10(tickValue)));
+                var remain = tickValue / Math.pow(10, Math.floor(helpers.log10(tickValue)));
 
                 if (tickValue === 0) {
-                  return "0";
-                } else if (
-                  remain === 1 ||
-                  remain === 2 ||
-                  remain === 5 ||
-                  index === 0 ||
-                  index === ticks.length - 1
-                ) {
+                  return '0';
+                } else if (remain === 1 || remain === 2 || remain === 5 || index === 0 || index === ticks.length - 1) {
                   return tickValue.toExponential();
                 }
-                return "";
+                return '';
               }
             }
           };
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       35: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
           var helpers = require(45);
 
-          defaults._set("global", {
+          defaults._set('global', {
             tooltips: {
               enabled: true,
               custom: null,
-              mode: "nearest",
-              position: "average",
+              mode: 'nearest',
+              position: 'average',
               intersect: true,
-              backgroundColor: "rgba(0,0,0,0.8)",
-              titleFontStyle: "bold",
+              backgroundColor: 'rgba(0,0,0,0.8)',
+              titleFontStyle: 'bold',
               titleSpacing: 2,
               titleMarginBottom: 6,
-              titleFontColor: "#fff",
-              titleAlign: "left",
+              titleFontColor: '#fff',
+              titleAlign: 'left',
               bodySpacing: 2,
-              bodyFontColor: "#fff",
-              bodyAlign: "left",
-              footerFontStyle: "bold",
+              bodyFontColor: '#fff',
+              bodyAlign: 'left',
+              footerFontStyle: 'bold',
               footerSpacing: 2,
               footerMarginTop: 6,
-              footerFontColor: "#fff",
-              footerAlign: "left",
+              footerFontColor: '#fff',
+              footerAlign: 'left',
               yPadding: 6,
               xPadding: 6,
               caretPadding: 2,
               caretSize: 5,
               cornerRadius: 6,
-              multiKeyBackground: "#fff",
+              multiKeyBackground: '#fff',
               displayColors: true,
-              borderColor: "rgba(0,0,0,0)",
+              borderColor: 'rgba(0,0,0,0)',
               borderWidth: 0,
               callbacks: {
                 // Args are: (tooltipItems, data)
                 beforeTitle: helpers.noop,
                 title: function(tooltipItems, data) {
                   // Pick first xLabel for now
-                  var title = "";
+                  var title = '';
                   var labels = data.labels;
                   var labelCount = labels ? labels.length : 0;
 
@@ -14837,11 +13328,10 @@
                 // Args are: (tooltipItem, data)
                 beforeLabel: helpers.noop,
                 label: function(tooltipItem, data) {
-                  var label =
-                    data.datasets[tooltipItem.datasetIndex].label || "";
+                  var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
                   if (label) {
-                    label += ": ";
+                    label += ': ';
                   }
                   label += tooltipItem.yLabel;
                   return label;
@@ -14904,12 +13394,8 @@
               var datasetIndex = element._datasetIndex;
 
               return {
-                xLabel: xScale
-                  ? xScale.getLabelForIndex(index, datasetIndex)
-                  : "",
-                yLabel: yScale
-                  ? yScale.getLabelForIndex(index, datasetIndex)
-                  : "",
+                xLabel: xScale ? xScale.getLabelForIndex(index, datasetIndex) : '',
+                yLabel: yScale ? yScale.getLabelForIndex(index, datasetIndex) : '',
                 index: index,
                 datasetIndex: datasetIndex,
                 x: element._model.x,
@@ -14934,53 +13420,26 @@
 
                 // Body
                 bodyFontColor: tooltipOpts.bodyFontColor,
-                _bodyFontFamily: valueOrDefault(
-                  tooltipOpts.bodyFontFamily,
-                  globalDefaults.defaultFontFamily
-                ),
-                _bodyFontStyle: valueOrDefault(
-                  tooltipOpts.bodyFontStyle,
-                  globalDefaults.defaultFontStyle
-                ),
+                _bodyFontFamily: valueOrDefault(tooltipOpts.bodyFontFamily, globalDefaults.defaultFontFamily),
+                _bodyFontStyle: valueOrDefault(tooltipOpts.bodyFontStyle, globalDefaults.defaultFontStyle),
                 _bodyAlign: tooltipOpts.bodyAlign,
-                bodyFontSize: valueOrDefault(
-                  tooltipOpts.bodyFontSize,
-                  globalDefaults.defaultFontSize
-                ),
+                bodyFontSize: valueOrDefault(tooltipOpts.bodyFontSize, globalDefaults.defaultFontSize),
                 bodySpacing: tooltipOpts.bodySpacing,
 
                 // Title
                 titleFontColor: tooltipOpts.titleFontColor,
-                _titleFontFamily: valueOrDefault(
-                  tooltipOpts.titleFontFamily,
-                  globalDefaults.defaultFontFamily
-                ),
-                _titleFontStyle: valueOrDefault(
-                  tooltipOpts.titleFontStyle,
-                  globalDefaults.defaultFontStyle
-                ),
-                titleFontSize: valueOrDefault(
-                  tooltipOpts.titleFontSize,
-                  globalDefaults.defaultFontSize
-                ),
+                _titleFontFamily: valueOrDefault(tooltipOpts.titleFontFamily, globalDefaults.defaultFontFamily),
+                _titleFontStyle: valueOrDefault(tooltipOpts.titleFontStyle, globalDefaults.defaultFontStyle),
+                titleFontSize: valueOrDefault(tooltipOpts.titleFontSize, globalDefaults.defaultFontSize),
                 _titleAlign: tooltipOpts.titleAlign,
                 titleSpacing: tooltipOpts.titleSpacing,
                 titleMarginBottom: tooltipOpts.titleMarginBottom,
 
                 // Footer
                 footerFontColor: tooltipOpts.footerFontColor,
-                _footerFontFamily: valueOrDefault(
-                  tooltipOpts.footerFontFamily,
-                  globalDefaults.defaultFontFamily
-                ),
-                _footerFontStyle: valueOrDefault(
-                  tooltipOpts.footerFontStyle,
-                  globalDefaults.defaultFontStyle
-                ),
-                footerFontSize: valueOrDefault(
-                  tooltipOpts.footerFontSize,
-                  globalDefaults.defaultFontSize
-                ),
+                _footerFontFamily: valueOrDefault(tooltipOpts.footerFontFamily, globalDefaults.defaultFontFamily),
+                _footerFontStyle: valueOrDefault(tooltipOpts.footerFontStyle, globalDefaults.defaultFontStyle),
+                footerFontSize: valueOrDefault(tooltipOpts.footerFontSize, globalDefaults.defaultFontSize),
                 _footerAlign: tooltipOpts.footerAlign,
                 footerSpacing: tooltipOpts.footerSpacing,
                 footerMarginTop: tooltipOpts.footerMarginTop,
@@ -15009,15 +13468,9 @@
               // Count of all lines in the body
               var body = model.body;
               var combinedBodyLength = body.reduce(function(count, bodyItem) {
-                return (
-                  count +
-                  bodyItem.before.length +
-                  bodyItem.lines.length +
-                  bodyItem.after.length
-                );
+                return count + bodyItem.before.length + bodyItem.lines.length + bodyItem.after.length;
               }, 0);
-              combinedBodyLength +=
-                model.beforeBody.length + model.afterBody.length;
+              combinedBodyLength += model.beforeBody.length + model.afterBody.length;
 
               var titleLineCount = model.title.length;
               var footerLineCount = model.footer.length;
@@ -15026,46 +13479,26 @@
               var footerFontSize = model.footerFontSize;
 
               height += titleLineCount * titleFontSize; // Title Lines
-              height += titleLineCount
-                ? (titleLineCount - 1) * model.titleSpacing
-                : 0; // Title Line Spacing
+              height += titleLineCount ? (titleLineCount - 1) * model.titleSpacing : 0; // Title Line Spacing
               height += titleLineCount ? model.titleMarginBottom : 0; // Title's bottom Margin
               height += combinedBodyLength * bodyFontSize; // Body Lines
-              height += combinedBodyLength
-                ? (combinedBodyLength - 1) * model.bodySpacing
-                : 0; // Body Line Spacing
+              height += combinedBodyLength ? (combinedBodyLength - 1) * model.bodySpacing : 0; // Body Line Spacing
               height += footerLineCount ? model.footerMarginTop : 0; // Footer Margin
               height += footerLineCount * footerFontSize; // Footer Lines
-              height += footerLineCount
-                ? (footerLineCount - 1) * model.footerSpacing
-                : 0; // Footer Line Spacing
+              height += footerLineCount ? (footerLineCount - 1) * model.footerSpacing : 0; // Footer Line Spacing
 
               // Title width
               var widthPadding = 0;
               var maxLineWidth = function(line) {
-                width = Math.max(
-                  width,
-                  ctx.measureText(line).width + widthPadding
-                );
+                width = Math.max(width, ctx.measureText(line).width + widthPadding);
               };
 
-              ctx.font = helpers.fontString(
-                titleFontSize,
-                model._titleFontStyle,
-                model._titleFontFamily
-              );
+              ctx.font = helpers.fontString(titleFontSize, model._titleFontStyle, model._titleFontFamily);
               helpers.each(model.title, maxLineWidth);
 
               // Body width
-              ctx.font = helpers.fontString(
-                bodyFontSize,
-                model._bodyFontStyle,
-                model._bodyFontFamily
-              );
-              helpers.each(
-                model.beforeBody.concat(model.afterBody),
-                maxLineWidth
-              );
+              ctx.font = helpers.fontString(bodyFontSize, model._bodyFontStyle, model._bodyFontFamily);
+              helpers.each(model.beforeBody.concat(model.afterBody), maxLineWidth);
 
               // Body lines may include some extra width due to the color box
               widthPadding = model.displayColors ? bodyFontSize + 2 : 0;
@@ -15079,11 +13512,7 @@
               widthPadding = 0;
 
               // Footer width
-              ctx.font = helpers.fontString(
-                footerFontSize,
-                model._footerFontStyle,
-                model._footerFontFamily
-              );
+              ctx.font = helpers.fontString(footerFontSize, model._footerFontStyle, model._footerFontFamily);
               helpers.each(model.footer, maxLineWidth);
 
               // Add padding
@@ -15102,13 +13531,13 @@
               var model = tooltip._model;
               var chart = tooltip._chart;
               var chartArea = tooltip._chart.chartArea;
-              var xAlign = "center";
-              var yAlign = "center";
+              var xAlign = 'center';
+              var yAlign = 'center';
 
               if (model.y < size.height) {
-                yAlign = "top";
+                yAlign = 'top';
               } else if (model.y > chart.height - size.height) {
-                yAlign = "bottom";
+                yAlign = 'bottom';
               }
 
               var lf, rf; // functions to determine left, right alignment
@@ -15117,7 +13546,7 @@
               var midX = (chartArea.left + chartArea.right) / 2;
               var midY = (chartArea.top + chartArea.bottom) / 2;
 
-              if (yAlign === "center") {
+              if (yAlign === 'center') {
                 lf = function(x) {
                   return x <= midX;
                 };
@@ -15134,34 +13563,29 @@
               }
 
               olf = function(x) {
-                return (
-                  x + size.width + model.caretSize + model.caretPadding >
-                  chart.width
-                );
+                return x + size.width + model.caretSize + model.caretPadding > chart.width;
               };
               orf = function(x) {
-                return (
-                  x - size.width - model.caretSize - model.caretPadding < 0
-                );
+                return x - size.width - model.caretSize - model.caretPadding < 0;
               };
               yf = function(y) {
-                return y <= midY ? "top" : "bottom";
+                return y <= midY ? 'top' : 'bottom';
               };
 
               if (lf(model.x)) {
-                xAlign = "left";
+                xAlign = 'left';
 
                 // Is tooltip too wide and goes over the right side of the chart.?
                 if (olf(model.x)) {
-                  xAlign = "center";
+                  xAlign = 'center';
                   yAlign = yf(model.y);
                 }
               } else if (rf(model.x)) {
-                xAlign = "right";
+                xAlign = 'right';
 
                 // Is tooltip too wide and goes outside left edge of canvas?
                 if (orf(model.x)) {
-                  xAlign = "center";
+                  xAlign = 'center';
                   yAlign = yf(model.y);
                 }
               }
@@ -15189,9 +13613,9 @@
               var paddingAndSize = caretSize + caretPadding;
               var radiusAndPadding = cornerRadius + caretPadding;
 
-              if (xAlign === "right") {
+              if (xAlign === 'right') {
                 x -= size.width;
-              } else if (xAlign === "center") {
+              } else if (xAlign === 'center') {
                 x -= size.width / 2;
                 if (x + size.width > chart.width) {
                   x = chart.width - size.width;
@@ -15201,23 +13625,23 @@
                 }
               }
 
-              if (yAlign === "top") {
+              if (yAlign === 'top') {
                 y += paddingAndSize;
-              } else if (yAlign === "bottom") {
+              } else if (yAlign === 'bottom') {
                 y -= size.height + paddingAndSize;
               } else {
                 y -= size.height / 2;
               }
 
-              if (yAlign === "center") {
-                if (xAlign === "left") {
+              if (yAlign === 'center') {
+                if (xAlign === 'left') {
                   x += paddingAndSize;
-                } else if (xAlign === "right") {
+                } else if (xAlign === 'right') {
                   x -= paddingAndSize;
                 }
-              } else if (xAlign === "left") {
+              } else if (xAlign === 'left') {
                 x -= radiusAndPadding;
-              } else if (xAlign === "right") {
+              } else if (xAlign === 'right') {
                 x += radiusAndPadding;
               }
 
@@ -15254,15 +13678,8 @@
 
               // Args are: (tooltipItem, data)
               getBeforeBody: function() {
-                var lines = this._options.callbacks.beforeBody.apply(
-                  this,
-                  arguments
-                );
-                return helpers.isArray(lines)
-                  ? lines
-                  : lines !== undefined
-                  ? [lines]
-                  : [];
+                var lines = this._options.callbacks.beforeBody.apply(this, arguments);
+                return helpers.isArray(lines) ? lines : lines !== undefined ? [lines] : [];
               },
 
               // Args are: (tooltipItem, data)
@@ -15277,18 +13694,9 @@
                     lines: [],
                     after: []
                   };
-                  pushOrConcat(
-                    bodyItem.before,
-                    callbacks.beforeLabel.call(me, tooltipItem, data)
-                  );
-                  pushOrConcat(
-                    bodyItem.lines,
-                    callbacks.label.call(me, tooltipItem, data)
-                  );
-                  pushOrConcat(
-                    bodyItem.after,
-                    callbacks.afterLabel.call(me, tooltipItem, data)
-                  );
+                  pushOrConcat(bodyItem.before, callbacks.beforeLabel.call(me, tooltipItem, data));
+                  pushOrConcat(bodyItem.lines, callbacks.label.call(me, tooltipItem, data));
+                  pushOrConcat(bodyItem.after, callbacks.afterLabel.call(me, tooltipItem, data));
 
                   bodyItems.push(bodyItem);
                 });
@@ -15298,15 +13706,8 @@
 
               // Args are: (tooltipItem, data)
               getAfterBody: function() {
-                var lines = this._options.callbacks.afterBody.apply(
-                  this,
-                  arguments
-                );
-                return helpers.isArray(lines)
-                  ? lines
-                  : lines !== undefined
-                  ? [lines]
-                  : [];
+                var lines = this._options.callbacks.afterBody.apply(this, arguments);
+                return helpers.isArray(lines) ? lines : lines !== undefined ? [lines] : [];
               },
 
               // Get the footer and beforeFooter and afterFooter lines
@@ -15365,9 +13766,7 @@
 
                   var labelColors = [];
                   var labelTextColors = [];
-                  tooltipPosition = Chart.Tooltip.positioners[
-                    opts.position
-                  ].call(me, active, me._eventPosition);
+                  tooltipPosition = Chart.Tooltip.positioners[opts.position].call(me, active, me._eventPosition);
 
                   var tooltipItems = [];
                   for (i = 0, len = active.length; i < len; ++i) {
@@ -15390,16 +13789,8 @@
 
                   // Determine colors for boxes
                   helpers.each(tooltipItems, function(tooltipItem) {
-                    labelColors.push(
-                      opts.callbacks.labelColor.call(me, tooltipItem, me._chart)
-                    );
-                    labelTextColors.push(
-                      opts.callbacks.labelTextColor.call(
-                        me,
-                        tooltipItem,
-                        me._chart
-                      )
-                    );
+                    labelColors.push(opts.callbacks.labelColor.call(me, tooltipItem, me._chart));
+                    labelTextColors.push(opts.callbacks.labelTextColor.call(me, tooltipItem, me._chart));
                   });
 
                   // Build the Text Lines
@@ -15423,12 +13814,7 @@
                   tooltipSize = getTooltipSize(this, model);
                   alignment = determineAlignment(this, tooltipSize);
                   // Final Size and Position
-                  backgroundPoint = getBackgroundPoint(
-                    model,
-                    tooltipSize,
-                    alignment,
-                    me._chart
-                  );
+                  backgroundPoint = getBackgroundPoint(model, tooltipSize, alignment, me._chart);
                 } else {
                   model.opacity = 0;
                 }
@@ -15455,11 +13841,7 @@
               drawCaret: function(tooltipPoint, size) {
                 var ctx = this._chart.ctx;
                 var vm = this._view;
-                var caretPosition = this.getCaretPosition(
-                  tooltipPoint,
-                  size,
-                  vm
-                );
+                var caretPosition = this.getCaretPosition(tooltipPoint, size, vm);
 
                 ctx.lineTo(caretPosition.x1, caretPosition.y1);
                 ctx.lineTo(caretPosition.x2, caretPosition.y2);
@@ -15476,10 +13858,10 @@
                 var width = size.width;
                 var height = size.height;
 
-                if (yAlign === "center") {
+                if (yAlign === 'center') {
                   y2 = ptY + height / 2;
 
-                  if (xAlign === "left") {
+                  if (xAlign === 'left') {
                     x1 = ptX;
                     x2 = x1 - caretSize;
                     x3 = x1;
@@ -15495,11 +13877,11 @@
                     y3 = y2 + caretSize;
                   }
                 } else {
-                  if (xAlign === "left") {
+                  if (xAlign === 'left') {
                     x2 = ptX + cornerRadius + caretSize;
                     x1 = x2 - caretSize;
                     x3 = x2 + caretSize;
-                  } else if (xAlign === "right") {
+                  } else if (xAlign === 'right') {
                     x2 = ptX + width - cornerRadius - caretSize;
                     x1 = x2 - caretSize;
                     x3 = x2 + caretSize;
@@ -15508,7 +13890,7 @@
                     x1 = x2 - caretSize;
                     x3 = x2 + caretSize;
                   }
-                  if (yAlign === "top") {
+                  if (yAlign === 'top') {
                     y1 = ptY;
                     y2 = y1 - caretSize;
                     y3 = y1;
@@ -15529,17 +13911,13 @@
 
                 if (title.length) {
                   ctx.textAlign = vm._titleAlign;
-                  ctx.textBaseline = "top";
+                  ctx.textBaseline = 'top';
 
                   var titleFontSize = vm.titleFontSize;
                   var titleSpacing = vm.titleSpacing;
 
                   ctx.fillStyle = mergeOpacity(vm.titleFontColor, opacity);
-                  ctx.font = helpers.fontString(
-                    titleFontSize,
-                    vm._titleFontStyle,
-                    vm._titleFontFamily
-                  );
+                  ctx.font = helpers.fontString(titleFontSize, vm._titleFontStyle, vm._titleFontFamily);
 
                   var i, len;
                   for (i = 0, len = title.length; i < len; ++i) {
@@ -15558,12 +13936,8 @@
                 var body = vm.body;
 
                 ctx.textAlign = vm._bodyAlign;
-                ctx.textBaseline = "top";
-                ctx.font = helpers.fontString(
-                  bodyFontSize,
-                  vm._bodyFontStyle,
-                  vm._bodyFontFamily
-                );
+                ctx.textBaseline = 'top';
+                ctx.font = helpers.fontString(bodyFontSize, vm._bodyFontStyle, vm._bodyFontFamily);
 
                 // Before Body
                 var xLinePadding = 0;
@@ -15589,31 +13963,17 @@
                     // Draw Legend-like boxes if needed
                     if (drawColorBoxes) {
                       // Fill a white rect so that colours merge nicely if the opacity is < 1
-                      ctx.fillStyle = mergeOpacity(
-                        vm.legendColorBackground,
-                        opacity
-                      );
+                      ctx.fillStyle = mergeOpacity(vm.legendColorBackground, opacity);
                       ctx.fillRect(pt.x, pt.y, bodyFontSize, bodyFontSize);
 
                       // Border
                       ctx.lineWidth = 1;
-                      ctx.strokeStyle = mergeOpacity(
-                        vm.labelColors[i].borderColor,
-                        opacity
-                      );
+                      ctx.strokeStyle = mergeOpacity(vm.labelColors[i].borderColor, opacity);
                       ctx.strokeRect(pt.x, pt.y, bodyFontSize, bodyFontSize);
 
                       // Inner square
-                      ctx.fillStyle = mergeOpacity(
-                        vm.labelColors[i].backgroundColor,
-                        opacity
-                      );
-                      ctx.fillRect(
-                        pt.x + 1,
-                        pt.y + 1,
-                        bodyFontSize - 2,
-                        bodyFontSize - 2
-                      );
+                      ctx.fillStyle = mergeOpacity(vm.labelColors[i].backgroundColor, opacity);
+                      ctx.fillRect(pt.x + 1, pt.y + 1, bodyFontSize - 2, bodyFontSize - 2);
                       ctx.fillStyle = textColor;
                     }
 
@@ -15637,14 +13997,10 @@
                   pt.y += vm.footerMarginTop;
 
                   ctx.textAlign = vm._footerAlign;
-                  ctx.textBaseline = "top";
+                  ctx.textBaseline = 'top';
 
                   ctx.fillStyle = mergeOpacity(vm.footerFontColor, opacity);
-                  ctx.font = helpers.fontString(
-                    vm.footerFontSize,
-                    vm._footerFontStyle,
-                    vm._footerFontFamily
-                  );
+                  ctx.font = helpers.fontString(vm.footerFontSize, vm._footerFontStyle, vm._footerFontFamily);
 
                   helpers.each(footer, function(line) {
                     ctx.fillText(line, pt.x, pt.y);
@@ -15666,27 +14022,22 @@
 
                 ctx.beginPath();
                 ctx.moveTo(x + radius, y);
-                if (yAlign === "top") {
+                if (yAlign === 'top') {
                   this.drawCaret(pt, tooltipSize);
                 }
                 ctx.lineTo(x + width - radius, y);
                 ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-                if (yAlign === "center" && xAlign === "right") {
+                if (yAlign === 'center' && xAlign === 'right') {
                   this.drawCaret(pt, tooltipSize);
                 }
                 ctx.lineTo(x + width, y + height - radius);
-                ctx.quadraticCurveTo(
-                  x + width,
-                  y + height,
-                  x + width - radius,
-                  y + height
-                );
-                if (yAlign === "bottom") {
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                if (yAlign === 'bottom') {
                   this.drawCaret(pt, tooltipSize);
                 }
                 ctx.lineTo(x + radius, y + height);
                 ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-                if (yAlign === "center" && xAlign === "left") {
+                if (yAlign === 'center' && xAlign === 'left') {
                   this.drawCaret(pt, tooltipSize);
                 }
                 ctx.lineTo(x, y + radius);
@@ -15721,11 +14072,7 @@
 
                 // Truthy/falsey value for empty tooltip
                 var hasTooltipContent =
-                  vm.title.length ||
-                  vm.beforeBody.length ||
-                  vm.body.length ||
-                  vm.afterBody.length ||
-                  vm.footer.length;
+                  vm.title.length || vm.beforeBody.length || vm.body.length || vm.afterBody.length || vm.footer.length;
 
                 if (this._options.enabled && hasTooltipContent) {
                   // Draw Background
@@ -15760,14 +14107,10 @@
                 me._lastActive = me._lastActive || [];
 
                 // Find Active Elements for tooltips
-                if (e.type === "mouseout") {
+                if (e.type === 'mouseout') {
                   me._active = [];
                 } else {
-                  me._active = me._chart.getElementsAtEventForMode(
-                    e,
-                    options.mode,
-                    options
-                  );
+                  me._active = me._chart.getElementsAtEventForMode(e, options.mode, options);
                 }
 
                 // Remember Last Actives
@@ -15845,10 +14188,7 @@
                   var el = elements[i];
                   if (el && el.hasValue()) {
                     var center = el.getCenterPoint();
-                    var d = helpers.distanceBetweenPoints(
-                      eventPosition,
-                      center
-                    );
+                    var d = helpers.distanceBetweenPoints(eventPosition, center);
 
                     if (d < minDistance) {
                       minDistance = d;
@@ -15871,21 +14211,21 @@
             };
           };
         },
-        { "25": 25, "26": 26, "45": 45 }
+        { '25': 25, '26': 26, '45': 45 }
       ],
       36: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
           var helpers = require(45);
 
-          defaults._set("global", {
+          defaults._set('global', {
             elements: {
               arc: {
                 backgroundColor: defaults.global.defaultColor,
-                borderColor: "#fff",
+                borderColor: '#fff',
                 borderWidth: 2
               }
             }
@@ -15896,10 +14236,7 @@
               var vm = this._view;
 
               if (vm) {
-                return (
-                  Math.pow(mouseX - vm.x, 2) <
-                  Math.pow(vm.radius + vm.hoverRadius, 2)
-                );
+                return Math.pow(mouseX - vm.x, 2) < Math.pow(vm.radius + vm.hoverRadius, 2);
               }
               return false;
             },
@@ -15930,8 +14267,7 @@
 
                 // Check if within the range of the open/close angle
                 var betweenAngles = angle >= startAngle && angle <= endAngle;
-                var withinRadius =
-                  distance >= vm.innerRadius && distance <= vm.outerRadius;
+                var withinRadius = distance >= vm.innerRadius && distance <= vm.outerRadius;
 
                 return betweenAngles && withinRadius;
               }
@@ -15959,10 +14295,8 @@
 
             tooltipPosition: function() {
               var vm = this._view;
-              var centreAngle =
-                vm.startAngle + (vm.endAngle - vm.startAngle) / 2;
-              var rangeFromCentre =
-                (vm.outerRadius - vm.innerRadius) / 2 + vm.innerRadius;
+              var centreAngle = vm.startAngle + (vm.endAngle - vm.startAngle) / 2;
+              var rangeFromCentre = (vm.outerRadius - vm.innerRadius) / 2 + vm.innerRadius;
 
               return {
                 x: vm.x + Math.cos(centreAngle) * rangeFromCentre,
@@ -15988,7 +14322,7 @@
               ctx.fillStyle = vm.backgroundColor;
 
               ctx.fill();
-              ctx.lineJoin = "bevel";
+              ctx.lineJoin = 'bevel';
 
               if (vm.borderWidth) {
                 ctx.stroke();
@@ -15996,11 +14330,11 @@
             }
           });
         },
-        { "25": 25, "26": 26, "45": 45 }
+        { '25': 25, '26': 26, '45': 45 }
       ],
       37: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
@@ -16008,17 +14342,17 @@
 
           var globalDefaults = defaults.global;
 
-          defaults._set("global", {
+          defaults._set('global', {
             elements: {
               line: {
                 tension: 0.4,
                 backgroundColor: globalDefaults.defaultColor,
                 borderWidth: 3,
                 borderColor: globalDefaults.defaultColor,
-                borderCapStyle: "butt",
+                borderCapStyle: 'butt',
                 borderDash: [],
                 borderDashOffset: 0.0,
-                borderJoinStyle: "miter",
+                borderJoinStyle: 'miter',
                 capBezierPoints: true,
                 fill: true // do we fill in the area between the line and its base axis
               }
@@ -16044,23 +14378,16 @@
               ctx.save();
 
               // Stroke Line Options
-              ctx.lineCap =
-                vm.borderCapStyle || globalOptionLineElements.borderCapStyle;
+              ctx.lineCap = vm.borderCapStyle || globalOptionLineElements.borderCapStyle;
 
               // IE 9 and 10 do not support line dash
               if (ctx.setLineDash) {
-                ctx.setLineDash(
-                  vm.borderDash || globalOptionLineElements.borderDash
-                );
+                ctx.setLineDash(vm.borderDash || globalOptionLineElements.borderDash);
               }
 
-              ctx.lineDashOffset =
-                vm.borderDashOffset ||
-                globalOptionLineElements.borderDashOffset;
-              ctx.lineJoin =
-                vm.borderJoinStyle || globalOptionLineElements.borderJoinStyle;
-              ctx.lineWidth =
-                vm.borderWidth || globalOptionLineElements.borderWidth;
+              ctx.lineDashOffset = vm.borderDashOffset || globalOptionLineElements.borderDashOffset;
+              ctx.lineJoin = vm.borderJoinStyle || globalOptionLineElements.borderJoinStyle;
+              ctx.lineWidth = vm.borderWidth || globalOptionLineElements.borderWidth;
               ctx.strokeStyle = vm.borderColor || globalDefaults.defaultColor;
 
               // Stroke Line
@@ -16079,14 +14406,10 @@
                     lastDrawnIndex = index;
                   }
                 } else {
-                  previous =
-                    lastDrawnIndex === -1 ? previous : points[lastDrawnIndex];
+                  previous = lastDrawnIndex === -1 ? previous : points[lastDrawnIndex];
 
                   if (!currentVM.skip) {
-                    if (
-                      (lastDrawnIndex !== index - 1 && !spanGaps) ||
-                      lastDrawnIndex === -1
-                    ) {
+                    if ((lastDrawnIndex !== index - 1 && !spanGaps) || lastDrawnIndex === -1) {
                       // There was a gap and this is the first point after the gap
                       ctx.moveTo(currentVM.x, currentVM.y);
                     } else {
@@ -16103,11 +14426,11 @@
             }
           });
         },
-        { "25": 25, "26": 26, "45": 45 }
+        { '25': 25, '26': 26, '45': 45 }
       ],
       38: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
@@ -16115,11 +14438,11 @@
 
           var defaultColor = defaults.global.defaultColor;
 
-          defaults._set("global", {
+          defaults._set('global', {
             elements: {
               point: {
                 radius: 3,
-                pointStyle: "circle",
+                pointStyle: 'circle',
                 backgroundColor: defaultColor,
                 borderColor: defaultColor,
                 borderWidth: 1,
@@ -16133,24 +14456,19 @@
 
           function xRange(mouseX) {
             var vm = this._view;
-            return vm
-              ? Math.abs(mouseX - vm.x) < vm.radius + vm.hitRadius
-              : false;
+            return vm ? Math.abs(mouseX - vm.x) < vm.radius + vm.hitRadius : false;
           }
 
           function yRange(mouseY) {
             var vm = this._view;
-            return vm
-              ? Math.abs(mouseY - vm.y) < vm.radius + vm.hitRadius
-              : false;
+            return vm ? Math.abs(mouseY - vm.y) < vm.radius + vm.hitRadius : false;
           }
 
           module.exports = Element.extend({
             inRange: function(mouseX, mouseY) {
               var vm = this._view;
               return vm
-                ? Math.pow(mouseX - vm.x, 2) + Math.pow(mouseY - vm.y, 2) <
-                    Math.pow(vm.hitRadius + vm.radius, 2)
+                ? Math.pow(mouseX - vm.x, 2) + Math.pow(mouseY - vm.y, 2) < Math.pow(vm.hitRadius + vm.radius, 2)
                 : false;
             },
 
@@ -16196,10 +14514,7 @@
               }
 
               ctx.strokeStyle = vm.borderColor || defaultColor;
-              ctx.lineWidth = helpers.valueOrDefault(
-                vm.borderWidth,
-                defaults.global.elements.point.borderWidth
-              );
+              ctx.lineWidth = helpers.valueOrDefault(vm.borderWidth, defaults.global.elements.point.borderWidth);
               ctx.fillStyle = vm.backgroundColor || defaultColor;
 
               // Cliping for Points.
@@ -16234,21 +14549,21 @@
             }
           });
         },
-        { "25": 25, "26": 26, "45": 45 }
+        { '25': 25, '26': 26, '45': 45 }
       ],
       39: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
 
-          defaults._set("global", {
+          defaults._set('global', {
             elements: {
               rectangle: {
                 backgroundColor: defaults.global.defaultColor,
                 borderColor: defaults.global.defaultColor,
-                borderSkipped: "bottom",
+                borderSkipped: 'bottom',
                 borderWidth: 0
               }
             }
@@ -16307,7 +14622,7 @@
                 bottom = vm.base;
                 signX = 1;
                 signY = bottom > top ? 1 : -1;
-                borderSkipped = vm.borderSkipped || "bottom";
+                borderSkipped = vm.borderSkipped || 'bottom';
               } else {
                 // horizontal bar
                 left = vm.base;
@@ -16316,29 +14631,21 @@
                 bottom = vm.y + vm.height / 2;
                 signX = right > left ? 1 : -1;
                 signY = 1;
-                borderSkipped = vm.borderSkipped || "left";
+                borderSkipped = vm.borderSkipped || 'left';
               }
 
               // Canvas doesn't allow us to stroke inside the width so we can
               // adjust the sizes to fit if we're setting a stroke on the line
               if (borderWidth) {
                 // borderWidth shold be less than bar width and bar height.
-                var barSize = Math.min(
-                  Math.abs(left - right),
-                  Math.abs(top - bottom)
-                );
+                var barSize = Math.min(Math.abs(left - right), Math.abs(top - bottom));
                 borderWidth = borderWidth > barSize ? barSize : borderWidth;
                 var halfStroke = borderWidth / 2;
                 // Adjust borderWidth when bar top position is near vm.base(zero).
-                var borderLeft =
-                  left + (borderSkipped !== "left" ? halfStroke * signX : 0);
-                var borderRight =
-                  right + (borderSkipped !== "right" ? -halfStroke * signX : 0);
-                var borderTop =
-                  top + (borderSkipped !== "top" ? halfStroke * signY : 0);
-                var borderBottom =
-                  bottom +
-                  (borderSkipped !== "bottom" ? -halfStroke * signY : 0);
+                var borderLeft = left + (borderSkipped !== 'left' ? halfStroke * signX : 0);
+                var borderRight = right + (borderSkipped !== 'right' ? -halfStroke * signX : 0);
+                var borderTop = top + (borderSkipped !== 'top' ? halfStroke * signY : 0);
+                var borderBottom = bottom + (borderSkipped !== 'bottom' ? -halfStroke * signY : 0);
                 // not become a vertical line?
                 if (borderLeft !== borderRight) {
                   top = borderTop;
@@ -16359,15 +14666,10 @@
               // Corner points, from bottom-left to bottom-right clockwise
               // | 1 2 |
               // | 0 3 |
-              var corners = [
-                [left, bottom],
-                [left, top],
-                [right, top],
-                [right, bottom]
-              ];
+              var corners = [[left, bottom], [left, top], [right, top], [right, bottom]];
 
               // Find first (starting) corner with fallback to 'bottom'
-              var borders = ["bottom", "left", "top", "right"];
+              var borders = ['bottom', 'left', 'top', 'right'];
               var startCorner = borders.indexOf(borderSkipped, 0);
               if (startCorner === -1) {
                 startCorner = 0;
@@ -16403,10 +14705,7 @@
               if (this._view) {
                 var bounds = getBarBounds(this);
                 inRange =
-                  mouseX >= bounds.left &&
-                  mouseX <= bounds.right &&
-                  mouseY >= bounds.top &&
-                  mouseY <= bounds.bottom;
+                  mouseX >= bounds.left && mouseX <= bounds.right && mouseY >= bounds.top && mouseY <= bounds.bottom;
               }
 
               return inRange;
@@ -16468,11 +14767,11 @@
             }
           });
         },
-        { "25": 25, "26": 26 }
+        { '25': 25, '26': 26 }
       ],
       40: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = {};
           module.exports.Arc = require(36);
@@ -16480,11 +14779,11 @@
           module.exports.Point = require(38);
           module.exports.Rectangle = require(39);
         },
-        { "36": 36, "37": 37, "38": 38, "39": 39 }
+        { '36': 36, '37': 37, '38': 38, '39': 39 }
       ],
       41: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(42);
 
@@ -16520,12 +14819,7 @@
                 ctx.lineTo(x + width - rx, y);
                 ctx.quadraticCurveTo(x + width, y, x + width, y + ry);
                 ctx.lineTo(x + width, y + height - ry);
-                ctx.quadraticCurveTo(
-                  x + width,
-                  y + height,
-                  x + width - rx,
-                  y + height
-                );
+                ctx.quadraticCurveTo(x + width, y + height, x + width - rx, y + height);
                 ctx.lineTo(x + rx, y + height);
                 ctx.quadraticCurveTo(x, y + height, x, y + height - ry);
                 ctx.lineTo(x, y + ry);
@@ -16538,19 +14832,10 @@
             drawPoint: function(ctx, style, radius, x, y) {
               var type, edgeLength, xOffset, yOffset, height, size;
 
-              if (style && typeof style === "object") {
+              if (style && typeof style === 'object') {
                 type = style.toString();
-                if (
-                  type === "[object HTMLImageElement]" ||
-                  type === "[object HTMLCanvasElement]"
-                ) {
-                  ctx.drawImage(
-                    style,
-                    x - style.width / 2,
-                    y - style.height / 2,
-                    style.width,
-                    style.height
-                  );
+                if (type === '[object HTMLImageElement]' || type === '[object HTMLCanvasElement]') {
+                  ctx.drawImage(style, x - style.width / 2, y - style.height / 2, style.width, style.height);
                   return;
                 }
               }
@@ -16567,7 +14852,7 @@
                   ctx.closePath();
                   ctx.fill();
                   break;
-                case "triangle":
+                case 'triangle':
                   ctx.beginPath();
                   edgeLength = (3 * radius) / Math.sqrt(3);
                   height = (edgeLength * Math.sqrt(3)) / 2;
@@ -16577,30 +14862,23 @@
                   ctx.closePath();
                   ctx.fill();
                   break;
-                case "rect":
+                case 'rect':
                   size = (1 / Math.SQRT2) * radius;
                   ctx.beginPath();
                   ctx.fillRect(x - size, y - size, 2 * size, 2 * size);
                   ctx.strokeRect(x - size, y - size, 2 * size, 2 * size);
                   break;
-                case "rectRounded":
+                case 'rectRounded':
                   var offset = radius / Math.SQRT2;
                   var leftX = x - offset;
                   var topY = y - offset;
                   var sideSize = Math.SQRT2 * radius;
                   ctx.beginPath();
-                  this.roundedRect(
-                    ctx,
-                    leftX,
-                    topY,
-                    sideSize,
-                    sideSize,
-                    radius / 2
-                  );
+                  this.roundedRect(ctx, leftX, topY, sideSize, sideSize, radius / 2);
                   ctx.closePath();
                   ctx.fill();
                   break;
-                case "rectRot":
+                case 'rectRot':
                   size = (1 / Math.SQRT2) * radius;
                   ctx.beginPath();
                   ctx.moveTo(x - size, y);
@@ -16610,7 +14888,7 @@
                   ctx.closePath();
                   ctx.fill();
                   break;
-                case "cross":
+                case 'cross':
                   ctx.beginPath();
                   ctx.moveTo(x, y + radius);
                   ctx.lineTo(x, y - radius);
@@ -16618,7 +14896,7 @@
                   ctx.lineTo(x + radius, y);
                   ctx.closePath();
                   break;
-                case "crossRot":
+                case 'crossRot':
                   ctx.beginPath();
                   xOffset = Math.cos(Math.PI / 4) * radius;
                   yOffset = Math.sin(Math.PI / 4) * radius;
@@ -16628,7 +14906,7 @@
                   ctx.lineTo(x + xOffset, y - yOffset);
                   ctx.closePath();
                   break;
-                case "star":
+                case 'star':
                   ctx.beginPath();
                   ctx.moveTo(x, y + radius);
                   ctx.lineTo(x, y - radius);
@@ -16642,13 +14920,13 @@
                   ctx.lineTo(x + xOffset, y - yOffset);
                   ctx.closePath();
                   break;
-                case "line":
+                case 'line':
                   ctx.beginPath();
                   ctx.moveTo(x - radius, y);
                   ctx.lineTo(x + radius, y);
                   ctx.closePath();
                   break;
-                case "dash":
+                case 'dash':
                   ctx.beginPath();
                   ctx.moveTo(x, y);
                   ctx.lineTo(x + radius, y);
@@ -16662,12 +14940,7 @@
             clipArea: function(ctx, area) {
               ctx.save();
               ctx.beginPath();
-              ctx.rect(
-                area.left,
-                area.top,
-                area.right - area.left,
-                area.bottom - area.top
-              );
+              ctx.rect(area.left, area.top, area.right - area.left, area.bottom - area.top);
               ctx.clip();
             },
 
@@ -16677,10 +14950,7 @@
 
             lineTo: function(ctx, previous, target, flip) {
               if (target.steppedLine) {
-                if (
-                  (target.steppedLine === "after" && !flip) ||
-                  (target.steppedLine !== "after" && flip)
-                ) {
+                if ((target.steppedLine === 'after' && !flip) || (target.steppedLine !== 'after' && flip)) {
                   ctx.lineTo(previous.x, target.y);
                 } else {
                   ctx.lineTo(target.x, previous.y);
@@ -16695,12 +14965,8 @@
               }
 
               ctx.bezierCurveTo(
-                flip
-                  ? previous.controlPointPreviousX
-                  : previous.controlPointNextX,
-                flip
-                  ? previous.controlPointPreviousY
-                  : previous.controlPointNextY,
+                flip ? previous.controlPointPreviousX : previous.controlPointNextX,
+                flip ? previous.controlPointPreviousY : previous.controlPointNextY,
                 flip ? target.controlPointNextX : target.controlPointPreviousX,
                 flip ? target.controlPointNextY : target.controlPointPreviousY,
                 target.x,
@@ -16733,11 +14999,11 @@
             ctx.closePath();
           };
         },
-        { "42": 42 }
+        { '42': 42 }
       ],
       42: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           /**
            * @namespace Chart.helpers
@@ -16767,7 +15033,7 @@
              * @since 2.7.0
              */
             isNullOrUndef: function(value) {
-              return value === null || typeof value === "undefined";
+              return value === null || typeof value === 'undefined';
             },
 
             /**
@@ -16779,9 +15045,7 @@
             isArray: Array.isArray
               ? Array.isArray
               : function(value) {
-                  return (
-                    Object.prototype.toString.call(value) === "[object Array]"
-                  );
+                  return Object.prototype.toString.call(value) === '[object Array]';
                 },
 
             /**
@@ -16791,10 +15055,7 @@
              * @since 2.7.0
              */
             isObject: function(value) {
-              return (
-                value !== null &&
-                Object.prototype.toString.call(value) === "[object Object]"
-              );
+              return value !== null && Object.prototype.toString.call(value) === '[object Object]';
             },
 
             /**
@@ -16804,7 +15065,7 @@
              * @returns {*}
              */
             valueOrDefault: function(value, defaultValue) {
-              return typeof value === "undefined" ? defaultValue : value;
+              return typeof value === 'undefined' ? defaultValue : value;
             },
 
             /**
@@ -16815,10 +15076,7 @@
              * @returns {*}
              */
             valueAtIndexOrDefault: function(value, index, defaultValue) {
-              return helpers.valueOrDefault(
-                helpers.isArray(value) ? value[index] : value,
-                defaultValue
-              );
+              return helpers.valueOrDefault(helpers.isArray(value) ? value[index] : value, defaultValue);
             },
 
             /**
@@ -16830,7 +15088,7 @@
              * @returns {*}
              */
             callback: function(fn, args, thisArg) {
-              if (fn && typeof fn.call === "function") {
+              if (fn && typeof fn.call === 'function') {
                 return fn.apply(thisArg, args);
               }
             },
@@ -17026,7 +15284,7 @@
             inherits: function(extensions) {
               var me = this;
               var ChartElement =
-                extensions && extensions.hasOwnProperty("constructor")
+                extensions && extensions.hasOwnProperty('constructor')
                   ? extensions.constructor
                   : function() {
                       return me.apply(this, arguments);
@@ -17096,7 +15354,7 @@
       ],
       43: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(42);
 
@@ -17240,11 +15498,7 @@
               } else {
                 s = (p / (2 * Math.PI)) * Math.asin(1 / a);
               }
-              return -(
-                a *
-                Math.pow(2, 10 * (t -= 1)) *
-                Math.sin(((t - s) * (2 * Math.PI)) / p)
-              );
+              return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t - s) * (2 * Math.PI)) / p));
             },
 
             easeOutElastic: function(t) {
@@ -17266,12 +15520,7 @@
               } else {
                 s = (p / (2 * Math.PI)) * Math.asin(1 / a);
               }
-              return (
-                a *
-                  Math.pow(2, -10 * t) *
-                  Math.sin(((t - s) * (2 * Math.PI)) / p) +
-                1
-              );
+              return a * Math.pow(2, -10 * t) * Math.sin(((t - s) * (2 * Math.PI)) / p) + 1;
             },
 
             easeInOutElastic: function(t) {
@@ -17294,20 +15543,9 @@
                 s = (p / (2 * Math.PI)) * Math.asin(1 / a);
               }
               if (t < 1) {
-                return (
-                  -0.5 *
-                  (a *
-                    Math.pow(2, 10 * (t -= 1)) *
-                    Math.sin(((t - s) * (2 * Math.PI)) / p))
-                );
+                return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t - s) * (2 * Math.PI)) / p));
               }
-              return (
-                a *
-                  Math.pow(2, -10 * (t -= 1)) *
-                  Math.sin(((t - s) * (2 * Math.PI)) / p) *
-                  0.5 +
-                1
-              );
+              return a * Math.pow(2, -10 * (t -= 1)) * Math.sin(((t - s) * (2 * Math.PI)) / p) * 0.5 + 1;
             },
             easeInBack: function(t) {
               var s = 1.70158;
@@ -17367,11 +15605,11 @@
            */
           helpers.easingEffects = effects;
         },
-        { "42": 42 }
+        { '42': 42 }
       ],
       44: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(42);
 
@@ -17389,19 +15627,17 @@
              * @since 2.7.0
              */
             toLineHeight: function(value, size) {
-              var matches = ("" + value).match(
-                /^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/
-              );
-              if (!matches || matches[1] === "normal") {
+              var matches = ('' + value).match(/^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/);
+              if (!matches || matches[1] === 'normal') {
                 return size * 1.2;
               }
 
               value = +matches[2];
 
               switch (matches[3]) {
-                case "px":
+                case 'px':
                   return value;
-                case "%":
+                case '%':
                   value /= 100;
                   break;
                 default:
@@ -17457,7 +15693,7 @@
                 if (value === undefined) {
                   continue;
                 }
-                if (context !== undefined && typeof value === "function") {
+                if (context !== undefined && typeof value === 'function') {
                   value = value(context);
                 }
                 if (index !== undefined && helpers.isArray(value)) {
@@ -17470,18 +15706,18 @@
             }
           };
         },
-        { "42": 42 }
+        { '42': 42 }
       ],
       45: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = require(42);
           module.exports.easing = require(43);
           module.exports.canvas = require(41);
           module.exports.options = require(44);
         },
-        { "41": 41, "42": 42, "43": 43, "44": 44 }
+        { '41': 41, '42': 42, '43': 43, '44': 44 }
       ],
       46: [
         function(require, module, exports) {
@@ -17497,7 +15733,7 @@
                 item = item.canvas;
               }
 
-              return (item && item.getContext("2d")) || null;
+              return (item && item.getContext('2d')) || null;
             }
           };
         },
@@ -17509,18 +15745,15 @@
            * Chart.Platform implementation for targeting a web browser
            */
 
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
-          var EXPANDO_KEY = "$chartjs";
-          var CSS_PREFIX = "chartjs-";
-          var CSS_RENDER_MONITOR = CSS_PREFIX + "render-monitor";
-          var CSS_RENDER_ANIMATION = CSS_PREFIX + "render-animation";
-          var ANIMATION_START_EVENTS = [
-            "animationstart",
-            "webkitAnimationStart"
-          ];
+          var EXPANDO_KEY = '$chartjs';
+          var CSS_PREFIX = 'chartjs-';
+          var CSS_RENDER_MONITOR = CSS_PREFIX + 'render-monitor';
+          var CSS_RENDER_ANIMATION = CSS_PREFIX + 'render-animation';
+          var ANIMATION_START_EVENTS = ['animationstart', 'webkitAnimationStart'];
 
           /**
            * DOM event types -> Chart.js event types.
@@ -17528,15 +15761,15 @@
            * @see https://developer.mozilla.org/en-US/docs/Web/Events
            */
           var EVENT_TYPES = {
-            touchstart: "mousedown",
-            touchmove: "mousemove",
-            touchend: "mouseup",
-            pointerenter: "mouseenter",
-            pointerdown: "mousedown",
-            pointermove: "mousemove",
-            pointerup: "mouseup",
-            pointerleave: "mouseout",
-            pointerout: "mouseout"
+            touchstart: 'mousedown',
+            touchmove: 'mousemove',
+            touchend: 'mouseup',
+            pointerenter: 'mouseenter',
+            pointerdown: 'mousedown',
+            pointermove: 'mousemove',
+            pointerup: 'mouseup',
+            pointerleave: 'mouseout',
+            pointerout: 'mouseout'
           };
 
           /**
@@ -17564,8 +15797,8 @@
 
             // NOTE(SB) canvas.getAttribute('width') !== canvas.width: in the first case it
             // returns null or '' if no explicit value has been set to the canvas attribute.
-            var renderHeight = canvas.getAttribute("height");
-            var renderWidth = canvas.getAttribute("width");
+            var renderHeight = canvas.getAttribute('height');
+            var renderWidth = canvas.getAttribute('width');
 
             // Chart.js modifies some canvas values that we want to restore on destroy
             canvas[EXPANDO_KEY] = {
@@ -17583,24 +15816,23 @@
             // Force canvas to display as block to avoid extra space caused by inline
             // elements, which would interfere with the responsive resize process.
             // https://github.com/chartjs/Chart.js/issues/2538
-            style.display = style.display || "block";
+            style.display = style.display || 'block';
 
-            if (renderWidth === null || renderWidth === "") {
-              var displayWidth = readUsedSize(canvas, "width");
+            if (renderWidth === null || renderWidth === '') {
+              var displayWidth = readUsedSize(canvas, 'width');
               if (displayWidth !== undefined) {
                 canvas.width = displayWidth;
               }
             }
 
-            if (renderHeight === null || renderHeight === "") {
-              if (canvas.style.height === "") {
+            if (renderHeight === null || renderHeight === '') {
+              if (canvas.style.height === '') {
                 // If no explicit render height and style height, let's apply the aspect ratio,
                 // which one can be specified by the user but also by charts as default option
                 // (i.e. options.aspectRatio). If not specified, use canvas aspect ratio of 2.
-                canvas.height =
-                  canvas.width / (config.options.aspectRatio || 2);
+                canvas.height = canvas.width / (config.options.aspectRatio || 2);
               } else {
-                var displayHeight = readUsedSize(canvas, "height");
+                var displayHeight = readUsedSize(canvas, 'height');
                 if (displayWidth !== undefined) {
                   canvas.height = displayHeight;
                 }
@@ -17618,12 +15850,12 @@
           var supportsEventListenerOptions = (function() {
             var supports = false;
             try {
-              var options = Object.defineProperty({}, "passive", {
+              var options = Object.defineProperty({}, 'passive', {
                 get: function() {
                   supports = true;
                 }
               });
-              window.addEventListener("e", null, options);
+              window.addEventListener('e', null, options);
             } catch (e) {
               // continue regardless of error
             }
@@ -17632,9 +15864,7 @@
 
           // Default passive to true as expected by Chrome for 'touchstart' and 'touchend' events.
           // https://github.com/chartjs/Chart.js/issues/4287
-          var eventListenerOptions = supportsEventListenerOptions
-            ? { passive: true }
-            : false;
+          var eventListenerOptions = supportsEventListenerOptions ? { passive: true } : false;
 
           function addEventListener(node, type, listener) {
             node.addEventListener(type, listener, eventListenerOptions);
@@ -17680,19 +15910,19 @@
 
           // Implementation based on https://github.com/marcj/css-element-queries
           function createResizer(handler) {
-            var resizer = document.createElement("div");
-            var cls = CSS_PREFIX + "size-monitor";
+            var resizer = document.createElement('div');
+            var cls = CSS_PREFIX + 'size-monitor';
             var maxSize = 1000000;
             var style =
-              "position:absolute;" +
-              "left:0;" +
-              "top:0;" +
-              "right:0;" +
-              "bottom:0;" +
-              "overflow:hidden;" +
-              "pointer-events:none;" +
-              "visibility:hidden;" +
-              "z-index:-1;";
+              'position:absolute;' +
+              'left:0;' +
+              'top:0;' +
+              'right:0;' +
+              'bottom:0;' +
+              'overflow:hidden;' +
+              'pointer-events:none;' +
+              'visibility:hidden;' +
+              'z-index:-1;';
 
             resizer.style.cssText = style;
             resizer.className = cls;
@@ -17703,30 +15933,30 @@
               style +
               '">' +
               '<div style="' +
-              "position:absolute;" +
-              "width:" +
+              'position:absolute;' +
+              'width:' +
               maxSize +
-              "px;" +
-              "height:" +
+              'px;' +
+              'height:' +
               maxSize +
-              "px;" +
-              "left:0;" +
+              'px;' +
+              'left:0;' +
               'top:0">' +
-              "</div>" +
-              "</div>" +
+              '</div>' +
+              '</div>' +
               '<div class="' +
               cls +
               '-shrink" style="' +
               style +
               '">' +
               '<div style="' +
-              "position:absolute;" +
-              "width:200%;" +
-              "height:200%;" +
-              "left:0; " +
+              'position:absolute;' +
+              'width:200%;' +
+              'height:200%;' +
+              'left:0; ' +
               'top:0">' +
-              "</div>" +
-              "</div>";
+              '</div>' +
+              '</div>';
 
             var expand = resizer.childNodes[0];
             var shrink = resizer.childNodes[1];
@@ -17742,8 +15972,8 @@
               handler();
             };
 
-            addEventListener(expand, "scroll", onScroll.bind(expand, "expand"));
-            addEventListener(shrink, "scroll", onScroll.bind(shrink, "shrink"));
+            addEventListener(expand, 'scroll', onScroll.bind(expand, 'expand'));
+            addEventListener(shrink, 'scroll', onScroll.bind(shrink, 'shrink'));
 
             return resizer;
           }
@@ -17793,7 +16023,7 @@
             var resizer = (expando.resizer = createResizer(
               throttled(function() {
                 if (expando.resizer) {
-                  return listener(createEvent("resize", chart));
+                  return listener(createEvent('resize', chart));
                 }
               })
             ));
@@ -17827,12 +16057,12 @@
 
           function injectCSS(platform, css) {
             // http://stackoverflow.com/q/3922139
-            var style = platform._style || document.createElement("style");
+            var style = platform._style || document.createElement('style');
             if (!platform._style) {
               platform._style = style;
-              css = "/* Chart.js */\n" + css;
-              style.setAttribute("type", "text/css");
-              document.getElementsByTagName("head")[0].appendChild(style);
+              css = '/* Chart.js */\n' + css;
+              style.setAttribute('type', 'text/css');
+              document.getElementsByTagName('head')[0].appendChild(style);
             }
 
             style.appendChild(document.createTextNode(css));
@@ -17844,41 +16074,40 @@
              * Currently used by platform.js to select the proper implementation.
              * @private
              */
-            _enabled:
-              typeof window !== "undefined" && typeof document !== "undefined",
+            _enabled: typeof window !== 'undefined' && typeof document !== 'undefined',
 
             initialize: function() {
-              var keyframes = "from{opacity:0.99}to{opacity:1}";
+              var keyframes = 'from{opacity:0.99}to{opacity:1}';
 
               injectCSS(
                 this,
                 // DOM rendering detection
                 // https://davidwalsh.name/detect-node-insertion
-                "@-webkit-keyframes " +
+                '@-webkit-keyframes ' +
                   CSS_RENDER_ANIMATION +
-                  "{" +
+                  '{' +
                   keyframes +
-                  "}" +
-                  "@keyframes " +
+                  '}' +
+                  '@keyframes ' +
                   CSS_RENDER_ANIMATION +
-                  "{" +
+                  '{' +
                   keyframes +
-                  "}" +
-                  "." +
+                  '}' +
+                  '.' +
                   CSS_RENDER_MONITOR +
-                  "{" +
-                  "-webkit-animation:" +
+                  '{' +
+                  '-webkit-animation:' +
                   CSS_RENDER_ANIMATION +
-                  " 0.001s;" +
-                  "animation:" +
+                  ' 0.001s;' +
+                  'animation:' +
                   CSS_RENDER_ANIMATION +
-                  " 0.001s;" +
-                  "}"
+                  ' 0.001s;' +
+                  '}'
               );
             },
 
             acquireContext: function(item, config) {
-              if (typeof item === "string") {
+              if (typeof item === 'string') {
                 item = document.getElementById(item);
               } else if (item.length) {
                 // Support for array based queries (such as jQuery)
@@ -17893,7 +16122,7 @@
               // To prevent canvas fingerprinting, some add-ons undefine the getContext
               // method, for example: https://github.com/kkapsner/CanvasBlocker
               // https://github.com/chartjs/Chart.js/issues/2807
-              var context = item && item.getContext && item.getContext("2d");
+              var context = item && item.getContext && item.getContext('2d');
 
               // `instanceof HTMLCanvasElement/CanvasRenderingContext2D` fails when the item is
               // inside an iframe or when running in a protected environment. We could guess the
@@ -17917,7 +16146,7 @@
               }
 
               var initial = canvas[EXPANDO_KEY].initial;
-              ["height", "width"].forEach(function(prop) {
+              ['height', 'width'].forEach(function(prop) {
                 var value = initial[prop];
                 if (helpers.isNullOrUndef(value)) {
                   canvas.removeAttribute(prop);
@@ -17941,16 +16170,15 @@
 
             addEventListener: function(chart, type, listener) {
               var canvas = chart.canvas;
-              if (type === "resize") {
+              if (type === 'resize') {
                 // Note: the resize event is not supported on all browsers.
                 addResizeListener(canvas, listener, chart);
                 return;
               }
 
-              var expando =
-                listener[EXPANDO_KEY] || (listener[EXPANDO_KEY] = {});
+              var expando = listener[EXPANDO_KEY] || (listener[EXPANDO_KEY] = {});
               var proxies = expando.proxies || (expando.proxies = {});
-              var proxy = (proxies[chart.id + "_" + type] = function(event) {
+              var proxy = (proxies[chart.id + '_' + type] = function(event) {
                 listener(fromNativeEvent(event, chart));
               });
 
@@ -17959,7 +16187,7 @@
 
             removeEventListener: function(chart, type, listener) {
               var canvas = chart.canvas;
-              if (type === "resize") {
+              if (type === 'resize') {
                 // Note: the resize event is not supported on all browsers.
                 removeResizeListener(canvas, listener);
                 return;
@@ -17967,7 +16195,7 @@
 
               var expando = listener[EXPANDO_KEY] || {};
               var proxies = expando.proxies || {};
-              var proxy = proxies[chart.id + "_" + type];
+              var proxy = proxies[chart.id + '_' + type];
               if (!proxy) {
                 return;
               }
@@ -18000,11 +16228,11 @@
            */
           helpers.removeEvent = removeEventListener;
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       48: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
           var basic = require(46);
@@ -18081,18 +16309,18 @@
            * @prop {Number} y - The mouse y position, relative to the canvas (null for incompatible events)
            */
         },
-        { "45": 45, "46": 46, "47": 47 }
+        { '45': 45, '46': 46, '47': 47 }
       ],
       49: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = {};
           module.exports.filler = require(50);
           module.exports.legend = require(51);
           module.exports.title = require(52);
         },
-        { "50": 50, "51": 51, "52": 52 }
+        { '50': 50, '51': 51, '52': 52 }
       ],
       50: [
         function(require, module, exports) {
@@ -18102,13 +16330,13 @@
            * @see https://github.com/chartjs/Chart.js/issues/2440#issuecomment-256461897
            */
 
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var elements = require(40);
           var helpers = require(45);
 
-          defaults._set("global", {
+          defaults._set('global', {
             plugins: {
               filler: {
                 propagate: true
@@ -18161,12 +16389,12 @@
             }
 
             if (fill === true) {
-              return "origin";
+              return 'origin';
             }
 
             target = parseFloat(fill, 10);
             if (isFinite(target) && Math.floor(target) === target) {
-              if (fill[0] === "-" || fill[0] === "+") {
+              if (fill[0] === '-' || fill[0] === '+') {
                 target = index + target;
               }
 
@@ -18179,16 +16407,16 @@
 
             switch (fill) {
               // compatibility
-              case "bottom":
-                return "start";
-              case "top":
-                return "end";
-              case "zero":
-                return "origin";
+              case 'bottom':
+                return 'start';
+              case 'top':
+                return 'end';
+              case 'zero':
+                return 'origin';
               // supported boundaries
-              case "origin":
-              case "start":
-              case "end":
+              case 'origin':
+              case 'start':
+              case 'end':
                 return fill;
               // invalid fill values
               default:
@@ -18211,14 +16439,10 @@
             // the model (scaleTop, scaleBottom and scaleZero) because some external plugins and
             // controllers might still use it (e.g. the Smith chart).
 
-            if (fill === "start") {
-              target =
-                model.scaleBottom === undefined
-                  ? scale.bottom
-                  : model.scaleBottom;
-            } else if (fill === "end") {
-              target =
-                model.scaleTop === undefined ? scale.top : model.scaleTop;
+            if (fill === 'start') {
+              target = model.scaleBottom === undefined ? scale.bottom : model.scaleBottom;
+            } else if (fill === 'end') {
+              target = model.scaleTop === undefined ? scale.top : model.scaleTop;
             } else if (model.scaleZero !== undefined) {
               target = model.scaleZero;
             } else if (scale.getBasePosition) {
@@ -18232,7 +16456,7 @@
                 return target;
               }
 
-              if (typeof target === "number" && isFinite(target)) {
+              if (typeof target === 'number' && isFinite(target)) {
                 horizontal = scale.isHorizontal();
                 return {
                   x: horizontal ? target : null,
@@ -18277,14 +16501,14 @@
 
           function createMapper(source) {
             var fill = source.fill;
-            var type = "dataset";
+            var type = 'dataset';
 
             if (fill === false) {
               return null;
             }
 
             if (!isFinite(fill)) {
-              type = "boundary";
+              type = 'boundary';
             }
 
             return mappers[type](source);
@@ -18362,7 +16586,7 @@
           }
 
           module.exports = {
-            id: "filler",
+            id: 'filler',
 
             afterDatasetsUpdate: function(chart, options) {
               var count = (chart.data.datasets || []).length;
@@ -18421,11 +16645,11 @@
             }
           };
         },
-        { "25": 25, "40": 40, "45": 45 }
+        { '25': 25, '40': 40, '45': 45 }
       ],
       51: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
@@ -18434,10 +16658,10 @@
 
           var noop = helpers.noop;
 
-          defaults._set("global", {
+          defaults._set('global', {
             legend: {
               display: true,
-              position: "top",
+              position: 'top',
               fullWidth: true,
               reverse: false,
               weight: 1000,
@@ -18449,8 +16673,7 @@
                 var meta = ci.getDatasetMeta(index);
 
                 // See controller.isDatasetVisible comment
-                meta.hidden =
-                  meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+                meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
 
                 // We hid a dataset ... rerender the chart
                 ci.update();
@@ -18503,18 +16726,14 @@
               var text = [];
               text.push('<ul class="' + chart.id + '-legend">');
               for (var i = 0; i < chart.data.datasets.length; i++) {
-                text.push(
-                  '<li><span style="background-color:' +
-                    chart.data.datasets[i].backgroundColor +
-                    '"></span>'
-                );
+                text.push('<li><span style="background-color:' + chart.data.datasets[i].backgroundColor + '"></span>');
                 if (chart.data.datasets[i].label) {
                   text.push(chart.data.datasets[i].label);
                 }
-                text.push("</li>");
+                text.push('</li>');
               }
-              text.push("</ul>");
-              return text.join("");
+              text.push('</ul>');
+              return text.join('');
             }
           });
 
@@ -18525,9 +16744,7 @@
            * @return {Number} width of the color box area
            */
           function getBoxWidth(labelOpts, fontSize) {
-            return labelOpts.usePointStyle
-              ? fontSize * Math.SQRT2
-              : labelOpts.boxWidth;
+            return labelOpts.usePointStyle ? fontSize * Math.SQRT2 : labelOpts.boxWidth;
           }
 
           /**
@@ -18619,9 +16836,7 @@
             buildLabels: function() {
               var me = this;
               var labelOpts = me.options.labels || {};
-              var legendItems =
-                helpers.callback(labelOpts.generateLabels, [me.chart], me) ||
-                [];
+              var legendItems = helpers.callback(labelOpts.generateLabels, [me.chart], me) || [];
 
               if (labelOpts.filter) {
                 legendItems = legendItems.filter(function(item) {
@@ -18650,23 +16865,10 @@
 
               var globalDefault = defaults.global;
               var valueOrDefault = helpers.valueOrDefault;
-              var fontSize = valueOrDefault(
-                labelOpts.fontSize,
-                globalDefault.defaultFontSize
-              );
-              var fontStyle = valueOrDefault(
-                labelOpts.fontStyle,
-                globalDefault.defaultFontStyle
-              );
-              var fontFamily = valueOrDefault(
-                labelOpts.fontFamily,
-                globalDefault.defaultFontFamily
-              );
-              var labelFont = helpers.fontString(
-                fontSize,
-                fontStyle,
-                fontFamily
-              );
+              var fontSize = valueOrDefault(labelOpts.fontSize, globalDefault.defaultFontSize);
+              var fontStyle = valueOrDefault(labelOpts.fontStyle, globalDefault.defaultFontStyle);
+              var fontFamily = valueOrDefault(labelOpts.fontFamily, globalDefault.defaultFontFamily);
+              var labelFont = helpers.fontString(fontSize, fontStyle, fontFamily);
 
               // Reset hit boxes
               var hitboxes = (me.legendHitBoxes = []);
@@ -18691,26 +16893,16 @@
 
                   // Width of each line of legend boxes. Labels wrap onto multiple lines when there are too many to fit on one
                   var lineWidths = (me.lineWidths = [0]);
-                  var totalHeight = me.legendItems.length
-                    ? fontSize + labelOpts.padding
-                    : 0;
+                  var totalHeight = me.legendItems.length ? fontSize + labelOpts.padding : 0;
 
-                  ctx.textAlign = "left";
-                  ctx.textBaseline = "top";
+                  ctx.textAlign = 'left';
+                  ctx.textBaseline = 'top';
 
                   helpers.each(me.legendItems, function(legendItem, i) {
                     var boxWidth = getBoxWidth(labelOpts, fontSize);
-                    var width =
-                      boxWidth +
-                      fontSize / 2 +
-                      ctx.measureText(legendItem.text).width;
+                    var width = boxWidth + fontSize / 2 + ctx.measureText(legendItem.text).width;
 
-                    if (
-                      lineWidths[lineWidths.length - 1] +
-                        width +
-                        labelOpts.padding >=
-                      me.width
-                    ) {
+                    if (lineWidths[lineWidths.length - 1] + width + labelOpts.padding >= me.width) {
                       totalHeight += fontSize + labelOpts.padding;
                       lineWidths[lineWidths.length] = me.left;
                     }
@@ -18723,8 +16915,7 @@
                       height: fontSize
                     };
 
-                    lineWidths[lineWidths.length - 1] +=
-                      width + labelOpts.padding;
+                    lineWidths[lineWidths.length - 1] += width + labelOpts.padding;
                   });
 
                   minSize.height += totalHeight;
@@ -18738,10 +16929,7 @@
 
                   helpers.each(me.legendItems, function(legendItem, i) {
                     var boxWidth = getBoxWidth(labelOpts, fontSize);
-                    var itemWidth =
-                      boxWidth +
-                      fontSize / 2 +
-                      ctx.measureText(legendItem.text).width;
+                    var itemWidth = boxWidth + fontSize / 2 + ctx.measureText(legendItem.text).width;
 
                     // If too tall, go to new column
                     if (currentColHeight + itemHeight > minSize.height) {
@@ -18778,10 +16966,7 @@
 
             // Shared Methods
             isHorizontal: function() {
-              return (
-                this.options.position === "top" ||
-                this.options.position === "bottom"
-              );
+              return this.options.position === 'top' || this.options.position === 'bottom';
             },
 
             // Actually draw the legend on the canvas
@@ -18797,32 +16982,16 @@
               if (opts.display) {
                 var ctx = me.ctx;
                 var valueOrDefault = helpers.valueOrDefault;
-                var fontColor = valueOrDefault(
-                  labelOpts.fontColor,
-                  globalDefault.defaultFontColor
-                );
-                var fontSize = valueOrDefault(
-                  labelOpts.fontSize,
-                  globalDefault.defaultFontSize
-                );
-                var fontStyle = valueOrDefault(
-                  labelOpts.fontStyle,
-                  globalDefault.defaultFontStyle
-                );
-                var fontFamily = valueOrDefault(
-                  labelOpts.fontFamily,
-                  globalDefault.defaultFontFamily
-                );
-                var labelFont = helpers.fontString(
-                  fontSize,
-                  fontStyle,
-                  fontFamily
-                );
+                var fontColor = valueOrDefault(labelOpts.fontColor, globalDefault.defaultFontColor);
+                var fontSize = valueOrDefault(labelOpts.fontSize, globalDefault.defaultFontSize);
+                var fontStyle = valueOrDefault(labelOpts.fontStyle, globalDefault.defaultFontStyle);
+                var fontFamily = valueOrDefault(labelOpts.fontFamily, globalDefault.defaultFontFamily);
+                var labelFont = helpers.fontString(fontSize, fontStyle, fontFamily);
                 var cursor;
 
                 // Canvas setup
-                ctx.textAlign = "left";
-                ctx.textBaseline = "middle";
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
                 ctx.lineWidth = 0.5;
                 ctx.strokeStyle = fontColor; // for strikethrough effect
                 ctx.fillStyle = fontColor; // render in correct colour
@@ -18840,44 +17009,17 @@
                   // Set the ctx for the box
                   ctx.save();
 
-                  ctx.fillStyle = valueOrDefault(
-                    legendItem.fillStyle,
-                    globalDefault.defaultColor
-                  );
-                  ctx.lineCap = valueOrDefault(
-                    legendItem.lineCap,
-                    lineDefault.borderCapStyle
-                  );
-                  ctx.lineDashOffset = valueOrDefault(
-                    legendItem.lineDashOffset,
-                    lineDefault.borderDashOffset
-                  );
-                  ctx.lineJoin = valueOrDefault(
-                    legendItem.lineJoin,
-                    lineDefault.borderJoinStyle
-                  );
-                  ctx.lineWidth = valueOrDefault(
-                    legendItem.lineWidth,
-                    lineDefault.borderWidth
-                  );
-                  ctx.strokeStyle = valueOrDefault(
-                    legendItem.strokeStyle,
-                    globalDefault.defaultColor
-                  );
-                  var isLineWidthZero =
-                    valueOrDefault(
-                      legendItem.lineWidth,
-                      lineDefault.borderWidth
-                    ) === 0;
+                  ctx.fillStyle = valueOrDefault(legendItem.fillStyle, globalDefault.defaultColor);
+                  ctx.lineCap = valueOrDefault(legendItem.lineCap, lineDefault.borderCapStyle);
+                  ctx.lineDashOffset = valueOrDefault(legendItem.lineDashOffset, lineDefault.borderDashOffset);
+                  ctx.lineJoin = valueOrDefault(legendItem.lineJoin, lineDefault.borderJoinStyle);
+                  ctx.lineWidth = valueOrDefault(legendItem.lineWidth, lineDefault.borderWidth);
+                  ctx.strokeStyle = valueOrDefault(legendItem.strokeStyle, globalDefault.defaultColor);
+                  var isLineWidthZero = valueOrDefault(legendItem.lineWidth, lineDefault.borderWidth) === 0;
 
                   if (ctx.setLineDash) {
                     // IE 9 and 10 do not support line dash
-                    ctx.setLineDash(
-                      valueOrDefault(
-                        legendItem.lineDash,
-                        lineDefault.borderDash
-                      )
-                    );
+                    ctx.setLineDash(valueOrDefault(legendItem.lineDash, lineDefault.borderDash));
                   }
 
                   if (opts.labels && opts.labels.usePointStyle) {
@@ -18889,13 +17031,7 @@
                     var centerY = y + offSet;
 
                     // Draw pointStyle as legend symbol
-                    helpers.canvas.drawPoint(
-                      ctx,
-                      legendItem.pointStyle,
-                      radius,
-                      centerX,
-                      centerY
-                    );
+                    helpers.canvas.drawPoint(ctx, legendItem.pointStyle, radius, centerX, centerY);
                   } else {
                     // Draw box as legend symbol
                     if (!isLineWidthZero) {
@@ -18950,12 +17086,10 @@
                     if (x + width >= legendWidth) {
                       y = cursor.y += itemHeight;
                       cursor.line++;
-                      x = cursor.x =
-                        me.left + (legendWidth - lineWidths[cursor.line]) / 2;
+                      x = cursor.x = me.left + (legendWidth - lineWidths[cursor.line]) / 2;
                     }
                   } else if (y + itemHeight > me.bottom) {
-                    x = cursor.x =
-                      x + me.columnWidths[cursor.line] + labelOpts.padding;
+                    x = cursor.x = x + me.columnWidths[cursor.line] + labelOpts.padding;
                     y = cursor.y = me.top + labelOpts.padding;
                     cursor.line++;
                   }
@@ -18986,14 +17120,14 @@
             handleEvent: function(e) {
               var me = this;
               var opts = me.options;
-              var type = e.type === "mouseup" ? "click" : e.type;
+              var type = e.type === 'mouseup' ? 'click' : e.type;
               var changed = false;
 
-              if (type === "mousemove") {
+              if (type === 'mousemove') {
                 if (!opts.onHover) {
                   return;
                 }
-              } else if (type === "click") {
+              } else if (type === 'click') {
                 if (!opts.onClick) {
                   return;
                 }
@@ -19005,12 +17139,7 @@
               var x = e.x;
               var y = e.y;
 
-              if (
-                x >= me.left &&
-                x <= me.right &&
-                y >= me.top &&
-                y <= me.bottom
-              ) {
+              if (x >= me.left && x <= me.right && y >= me.top && y <= me.bottom) {
                 // See if we are touching one of the dataset boxes
                 var lh = me.legendHitBoxes;
                 for (var i = 0; i < lh.length; ++i) {
@@ -19023,12 +17152,12 @@
                     y <= hitBox.top + hitBox.height
                   ) {
                     // Touching an element
-                    if (type === "click") {
+                    if (type === 'click') {
                       // use e.native for backwards compatibility
                       opts.onClick.call(me, e.native, me.legendItems[i]);
                       changed = true;
                       break;
-                    } else if (type === "mousemove") {
+                    } else if (type === 'mousemove') {
                       // use e.native for backwards compatibility
                       opts.onHover.call(me, e.native, me.legendItems[i]);
                       changed = true;
@@ -19055,7 +17184,7 @@
           }
 
           module.exports = {
-            id: "legend",
+            id: 'legend',
 
             /**
              * Backward compatibility: since 2.1.5, the legend is registered as a plugin, making
@@ -19101,11 +17230,11 @@
             }
           };
         },
-        { "25": 25, "26": 26, "30": 30, "45": 45 }
+        { '25': 25, '26': 26, '30': 30, '45': 45 }
       ],
       52: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var Element = require(26);
@@ -19114,15 +17243,15 @@
 
           var noop = helpers.noop;
 
-          defaults._set("global", {
+          defaults._set('global', {
             title: {
               display: false,
-              fontStyle: "bold",
+              fontStyle: 'bold',
               fullWidth: true,
               lineHeight: 1.2,
               padding: 10,
-              position: "top",
-              text: "",
+              position: 'top',
+              text: '',
               weight: 2000 // by default greater than legend (1000) to be above
             }
           });
@@ -19220,19 +17349,11 @@
               var valueOrDefault = helpers.valueOrDefault;
               var opts = me.options;
               var display = opts.display;
-              var fontSize = valueOrDefault(
-                opts.fontSize,
-                defaults.global.defaultFontSize
-              );
+              var fontSize = valueOrDefault(opts.fontSize, defaults.global.defaultFontSize);
               var minSize = me.minSize;
               var lineCount = helpers.isArray(opts.text) ? opts.text.length : 1;
-              var lineHeight = helpers.options.toLineHeight(
-                opts.lineHeight,
-                fontSize
-              );
-              var textSize = display
-                ? lineCount * lineHeight + opts.padding * 2
-                : 0;
+              var lineHeight = helpers.options.toLineHeight(opts.lineHeight, fontSize);
+              var textSize = display ? lineCount * lineHeight + opts.padding * 2 : 0;
 
               if (me.isHorizontal()) {
                 minSize.width = me.maxWidth; // fill all the width
@@ -19250,7 +17371,7 @@
             // Shared Methods
             isHorizontal: function() {
               var pos = this.options.position;
-              return pos === "top" || pos === "bottom";
+              return pos === 'top' || pos === 'bottom';
             },
 
             // Actually draw the title block on the canvas
@@ -19262,27 +17383,11 @@
               var globalDefaults = defaults.global;
 
               if (opts.display) {
-                var fontSize = valueOrDefault(
-                  opts.fontSize,
-                  globalDefaults.defaultFontSize
-                );
-                var fontStyle = valueOrDefault(
-                  opts.fontStyle,
-                  globalDefaults.defaultFontStyle
-                );
-                var fontFamily = valueOrDefault(
-                  opts.fontFamily,
-                  globalDefaults.defaultFontFamily
-                );
-                var titleFont = helpers.fontString(
-                  fontSize,
-                  fontStyle,
-                  fontFamily
-                );
-                var lineHeight = helpers.options.toLineHeight(
-                  opts.lineHeight,
-                  fontSize
-                );
+                var fontSize = valueOrDefault(opts.fontSize, globalDefaults.defaultFontSize);
+                var fontStyle = valueOrDefault(opts.fontStyle, globalDefaults.defaultFontStyle);
+                var fontFamily = valueOrDefault(opts.fontFamily, globalDefaults.defaultFontFamily);
+                var titleFont = helpers.fontString(fontSize, fontStyle, fontFamily);
+                var lineHeight = helpers.options.toLineHeight(opts.lineHeight, fontSize);
                 var offset = lineHeight / 2 + opts.padding;
                 var rotation = 0;
                 var top = me.top;
@@ -19291,10 +17396,7 @@
                 var right = me.right;
                 var maxWidth, titleX, titleY;
 
-                ctx.fillStyle = valueOrDefault(
-                  opts.fontColor,
-                  globalDefaults.defaultFontColor
-                ); // render in correct colour
+                ctx.fillStyle = valueOrDefault(opts.fontColor, globalDefaults.defaultFontColor); // render in correct colour
                 ctx.font = titleFont;
 
                 // Horizontal
@@ -19303,18 +17405,17 @@
                   titleY = top + offset;
                   maxWidth = right - left;
                 } else {
-                  titleX =
-                    opts.position === "left" ? left + offset : right - offset;
+                  titleX = opts.position === 'left' ? left + offset : right - offset;
                   titleY = top + (bottom - top) / 2;
                   maxWidth = bottom - top;
-                  rotation = Math.PI * (opts.position === "left" ? -0.5 : 0.5);
+                  rotation = Math.PI * (opts.position === 'left' ? -0.5 : 0.5);
                 }
 
                 ctx.save();
                 ctx.translate(titleX, titleY);
                 ctx.rotate(rotation);
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
 
                 var text = opts.text;
                 if (helpers.isArray(text)) {
@@ -19345,7 +17446,7 @@
           }
 
           module.exports = {
-            id: "title",
+            id: 'title',
 
             /**
              * Backward compatibility: since 2.1.5, the title is registered as a plugin, making
@@ -19384,16 +17485,16 @@
             }
           };
         },
-        { "25": 25, "26": 26, "30": 30, "45": 45 }
+        { '25': 25, '26': 26, '30': 30, '45': 45 }
       ],
       53: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           module.exports = function(Chart) {
             // Default config for a category scale
             var defaultConfig = {
-              position: "bottom"
+              position: 'bottom'
             };
 
             var DatasetScale = Chart.Scale.extend({
@@ -19404,11 +17505,7 @@
                */
               getLabels: function() {
                 var data = this.chart.data;
-                return (
-                  this.options.labels ||
-                  (this.isHorizontal() ? data.xLabels : data.yLabels) ||
-                  data.labels
-                );
+                return this.options.labels || (this.isHorizontal() ? data.xLabels : data.yLabels) || data.labels;
               },
 
               determineDataLimits: function() {
@@ -19450,9 +17547,7 @@
                 var isHorizontal = me.isHorizontal();
 
                 if (data.yLabels && !isHorizontal) {
-                  return me.getRightValue(
-                    data.datasets[datasetIndex].data[index]
-                  );
+                  return me.getRightValue(data.datasets[datasetIndex].data[index]);
                 }
                 return me.ticks[index - me.minIndex];
               },
@@ -19462,10 +17557,7 @@
                 var me = this;
                 var offset = me.options.offset;
                 // 1 is added because we need the length but we have the indexes
-                var offsetAmt = Math.max(
-                  me.maxIndex + 1 - me.minIndex - (offset ? 0 : 1),
-                  1
-                );
+                var offsetAmt = Math.max(me.maxIndex + 1 - me.minIndex - (offset ? 0 : 1), 1);
 
                 // If value is a data object, then index is the index in the data array,
                 // not the index of the scale. We need to change that.
@@ -19473,10 +17565,7 @@
                 if (value !== undefined && value !== null) {
                   valueCategory = me.isHorizontal() ? value.x : value.y;
                 }
-                if (
-                  valueCategory !== undefined ||
-                  (value !== undefined && isNaN(index))
-                ) {
+                if (valueCategory !== undefined || (value !== undefined && isNaN(index))) {
                   var labels = me.getLabels();
                   value = valueCategory || value;
                   var idx = labels.indexOf(value);
@@ -19503,20 +17592,13 @@
                 return me.top + Math.round(heightOffset);
               },
               getPixelForTick: function(index) {
-                return this.getPixelForValue(
-                  this.ticks[index],
-                  index + this.minIndex,
-                  null
-                );
+                return this.getPixelForValue(this.ticks[index], index + this.minIndex, null);
               },
               getValueForPixel: function(pixel) {
                 var me = this;
                 var offset = me.options.offset;
                 var value;
-                var offsetAmt = Math.max(
-                  me._ticks.length - (offset ? 0 : 1),
-                  1
-                );
+                var offsetAmt = Math.max(me._ticks.length - (offset ? 0 : 1), 1);
                 var horz = me.isHorizontal();
                 var valueDimension = (horz ? me.width : me.height) / offsetAmt;
 
@@ -19539,18 +17621,14 @@
               }
             });
 
-            Chart.scaleService.registerScaleType(
-              "category",
-              DatasetScale,
-              defaultConfig
-            );
+            Chart.scaleService.registerScaleType('category', DatasetScale, defaultConfig);
           };
         },
         {}
       ],
       54: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var helpers = require(45);
@@ -19558,7 +17636,7 @@
 
           module.exports = function(Chart) {
             var defaultConfig = {
-              position: "left",
+              position: 'left',
               ticks: {
                 callback: Ticks.formatters.linear
               }
@@ -19576,9 +17654,7 @@
                 var DEFAULT_MAX = 1;
 
                 function IDMatches(meta) {
-                  return isHorizontal
-                    ? meta.xAxisID === me.id
-                    : meta.yAxisID === me.id;
+                  return isHorizontal ? meta.xAxisID === me.id : meta.yAxisID === me.id;
                 }
 
                 // First Calculate the range
@@ -19593,11 +17669,7 @@
                     }
 
                     var meta = chart.getDatasetMeta(datasetIndex);
-                    if (
-                      chart.isDatasetVisible(datasetIndex) &&
-                      IDMatches(meta) &&
-                      meta.stack !== undefined
-                    ) {
+                    if (chart.isDatasetVisible(datasetIndex) && IDMatches(meta) && meta.stack !== undefined) {
                       hasStacks = true;
                     }
                   });
@@ -19611,11 +17683,9 @@
                     var key = [
                       meta.type,
                       // we have a separate stack for stack=undefined datasets when the opts.stacked is undefined
-                      opts.stacked === undefined && meta.stack === undefined
-                        ? datasetIndex
-                        : "",
+                      opts.stacked === undefined && meta.stack === undefined ? datasetIndex : '',
                       meta.stack
-                    ].join(".");
+                    ].join('.');
 
                     if (valuesPerStack[key] === undefined) {
                       valuesPerStack[key] = {
@@ -19628,10 +17698,7 @@
                     var positiveValues = valuesPerStack[key].positiveValues;
                     var negativeValues = valuesPerStack[key].negativeValues;
 
-                    if (
-                      chart.isDatasetVisible(datasetIndex) &&
-                      IDMatches(meta)
-                    ) {
+                    if (chart.isDatasetVisible(datasetIndex) && IDMatches(meta)) {
                       helpers.each(dataset.data, function(rawValue, index) {
                         var value = +me.getRightValue(rawValue);
                         if (isNaN(value) || meta.data[index].hidden) {
@@ -19653,23 +17720,16 @@
                   });
 
                   helpers.each(valuesPerStack, function(valuesForType) {
-                    var values = valuesForType.positiveValues.concat(
-                      valuesForType.negativeValues
-                    );
+                    var values = valuesForType.positiveValues.concat(valuesForType.negativeValues);
                     var minVal = helpers.min(values);
                     var maxVal = helpers.max(values);
-                    me.min =
-                      me.min === null ? minVal : Math.min(me.min, minVal);
-                    me.max =
-                      me.max === null ? maxVal : Math.max(me.max, maxVal);
+                    me.min = me.min === null ? minVal : Math.min(me.min, minVal);
+                    me.max = me.max === null ? maxVal : Math.max(me.max, maxVal);
                   });
                 } else {
                   helpers.each(datasets, function(dataset, datasetIndex) {
                     var meta = chart.getDatasetMeta(datasetIndex);
-                    if (
-                      chart.isDatasetVisible(datasetIndex) &&
-                      IDMatches(meta)
-                    ) {
+                    if (chart.isDatasetVisible(datasetIndex) && IDMatches(meta)) {
                       helpers.each(dataset.data, function(rawValue, index) {
                         var value = +me.getRightValue(rawValue);
                         if (isNaN(value) || meta.data[index].hidden) {
@@ -19692,10 +17752,8 @@
                   });
                 }
 
-                me.min =
-                  isFinite(me.min) && !isNaN(me.min) ? me.min : DEFAULT_MIN;
-                me.max =
-                  isFinite(me.max) && !isNaN(me.max) ? me.max : DEFAULT_MAX;
+                me.min = isFinite(me.min) && !isNaN(me.min) ? me.min : DEFAULT_MIN;
+                me.max = isFinite(me.max) && !isNaN(me.max) ? me.max : DEFAULT_MAX;
 
                 // Common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
                 this.handleTickRangeOptions();
@@ -19706,16 +17764,10 @@
                 var tickOpts = me.options.ticks;
 
                 if (me.isHorizontal()) {
-                  maxTicks = Math.min(
-                    tickOpts.maxTicksLimit ? tickOpts.maxTicksLimit : 11,
-                    Math.ceil(me.width / 50)
-                  );
+                  maxTicks = Math.min(tickOpts.maxTicksLimit ? tickOpts.maxTicksLimit : 11, Math.ceil(me.width / 50));
                 } else {
                   // The factor of 2 used to scale the font size has been experimentally determined.
-                  var tickFontSize = helpers.valueOrDefault(
-                    tickOpts.fontSize,
-                    defaults.global.defaultFontSize
-                  );
+                  var tickFontSize = helpers.valueOrDefault(tickOpts.fontSize, defaults.global.defaultFontSize);
                   maxTicks = Math.min(
                     tickOpts.maxTicksLimit ? tickOpts.maxTicksLimit : 11,
                     Math.ceil(me.height / (2 * tickFontSize))
@@ -19732,9 +17784,7 @@
                 }
               },
               getLabelForIndex: function(index, datasetIndex) {
-                return +this.getRightValue(
-                  this.chart.data.datasets[datasetIndex].data[index]
-                );
+                return +this.getRightValue(this.chart.data.datasets[datasetIndex].data[index]);
               },
               // Utils
               getPixelForValue: function(value) {
@@ -19750,8 +17800,7 @@
                 if (me.isHorizontal()) {
                   pixel = me.left + (me.width / range) * (rightValue - start);
                 } else {
-                  pixel =
-                    me.bottom - (me.height / range) * (rightValue - start);
+                  pixel = me.bottom - (me.height / range) * (rightValue - start);
                 }
                 return pixel;
               },
@@ -19759,27 +17808,21 @@
                 var me = this;
                 var isHorizontal = me.isHorizontal();
                 var innerDimension = isHorizontal ? me.width : me.height;
-                var offset =
-                  (isHorizontal ? pixel - me.left : me.bottom - pixel) /
-                  innerDimension;
+                var offset = (isHorizontal ? pixel - me.left : me.bottom - pixel) / innerDimension;
                 return me.start + (me.end - me.start) * offset;
               },
               getPixelForTick: function(index) {
                 return this.getPixelForValue(this.ticksAsNumbers[index]);
               }
             });
-            Chart.scaleService.registerScaleType(
-              "linear",
-              LinearScale,
-              defaultConfig
-            );
+            Chart.scaleService.registerScaleType('linear', LinearScale, defaultConfig);
           };
         },
-        { "25": 25, "34": 34, "45": 45 }
+        { '25': 25, '34': 34, '45': 45 }
       ],
       55: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
 
@@ -19799,29 +17842,18 @@
             if (generationOptions.stepSize && generationOptions.stepSize > 0) {
               spacing = generationOptions.stepSize;
             } else {
-              var niceRange = helpers.niceNum(
-                dataRange.max - dataRange.min,
-                false
-              );
-              spacing = helpers.niceNum(
-                niceRange / (generationOptions.maxTicks - 1),
-                true
-              );
+              var niceRange = helpers.niceNum(dataRange.max - dataRange.min, false);
+              spacing = helpers.niceNum(niceRange / (generationOptions.maxTicks - 1), true);
             }
             var niceMin = Math.floor(dataRange.min / spacing) * spacing;
             var niceMax = Math.ceil(dataRange.max / spacing) * spacing;
 
             // If min, max and stepSize is set and they make an evenly spaced scale use it.
-            if (
-              generationOptions.min &&
-              generationOptions.max &&
-              generationOptions.stepSize
-            ) {
+            if (generationOptions.min && generationOptions.max && generationOptions.stepSize) {
               // If very close to our whole number, use it.
               if (
                 helpers.almostWhole(
-                  (generationOptions.max - generationOptions.min) /
-                    generationOptions.stepSize,
+                  (generationOptions.max - generationOptions.min) / generationOptions.stepSize,
                   spacing / 1000
                 )
               ) {
@@ -19832,13 +17864,7 @@
 
             var numSpaces = (niceMax - niceMin) / spacing;
             // If very close to our rounded value, use it.
-            if (
-              helpers.almostEquals(
-                numSpaces,
-                Math.round(numSpaces),
-                spacing / 1000
-              )
-            ) {
+            if (helpers.almostEquals(numSpaces, Math.round(numSpaces), spacing / 1000)) {
               numSpaces = Math.round(numSpaces);
             } else {
               numSpaces = Math.ceil(numSpaces);
@@ -19850,21 +17876,11 @@
               niceMin = Math.round(niceMin * precision) / precision;
               niceMax = Math.round(niceMax * precision) / precision;
             }
-            ticks.push(
-              generationOptions.min !== undefined
-                ? generationOptions.min
-                : niceMin
-            );
+            ticks.push(generationOptions.min !== undefined ? generationOptions.min : niceMin);
             for (var j = 1; j < numSpaces; ++j) {
-              ticks.push(
-                Math.round((niceMin + j * spacing) * precision) / precision
-              );
+              ticks.push(Math.round((niceMin + j * spacing) * precision) / precision);
             }
-            ticks.push(
-              generationOptions.max !== undefined
-                ? generationOptions.max
-                : niceMax
-            );
+            ticks.push(generationOptions.max !== undefined ? generationOptions.max : niceMax);
 
             return ticks;
           }
@@ -19874,7 +17890,7 @@
 
             Chart.LinearScaleBase = Chart.Scale.extend({
               getRightValue: function(value) {
-                if (typeof value === "string") {
+                if (typeof value === 'string') {
                   return +value;
                 }
                 return Chart.Scale.prototype.getRightValue.call(this, value);
@@ -19901,12 +17917,8 @@
                   }
                 }
 
-                var setMin =
-                  tickOpts.min !== undefined ||
-                  tickOpts.suggestedMin !== undefined;
-                var setMax =
-                  tickOpts.max !== undefined ||
-                  tickOpts.suggestedMax !== undefined;
+                var setMin = tickOpts.min !== undefined || tickOpts.suggestedMin !== undefined;
+                var setMax = tickOpts.max !== undefined || tickOpts.suggestedMax !== undefined;
 
                 if (tickOpts.min !== undefined) {
                   me.min = tickOpts.min;
@@ -19969,15 +17981,9 @@
                   maxTicks: maxTicks,
                   min: tickOpts.min,
                   max: tickOpts.max,
-                  stepSize: helpers.valueOrDefault(
-                    tickOpts.fixedStepSize,
-                    tickOpts.stepSize
-                  )
+                  stepSize: helpers.valueOrDefault(tickOpts.fixedStepSize, tickOpts.stepSize)
                 };
-                var ticks = (me.ticks = generateTicks(
-                  numericGeneratorOptions,
-                  me
-                ));
+                var ticks = (me.ticks = generateTicks(numericGeneratorOptions, me));
 
                 me.handleDirectionalChanges();
 
@@ -20006,11 +18012,11 @@
             });
           };
         },
-        { "45": 45 }
+        { '45': 45 }
       ],
       56: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var helpers = require(45);
           var Ticks = require(34);
@@ -20029,22 +18035,15 @@
             // the axis area. For now, we say that the minimum tick spacing in pixels must be 50
             // We also limit the maximum number of ticks to 11 which gives a nice 10 squares on
             // the graph
-            var tickVal = valueOrDefault(
-              generationOptions.min,
-              Math.pow(10, Math.floor(helpers.log10(dataRange.min)))
-            );
+            var tickVal = valueOrDefault(generationOptions.min, Math.pow(10, Math.floor(helpers.log10(dataRange.min))));
 
             var endExp = Math.floor(helpers.log10(dataRange.max));
-            var endSignificand = Math.ceil(
-              dataRange.max / Math.pow(10, endExp)
-            );
+            var endSignificand = Math.ceil(dataRange.max / Math.pow(10, endExp));
             var exp, significand;
 
             if (tickVal === 0) {
               exp = Math.floor(helpers.log10(dataRange.minNotZero));
-              significand = Math.floor(
-                dataRange.minNotZero / Math.pow(10, exp)
-              );
+              significand = Math.floor(dataRange.minNotZero / Math.pow(10, exp));
 
               ticks.push(tickVal);
               tickVal = significand * Math.pow(10, exp);
@@ -20064,13 +18063,8 @@
                 precision = exp >= 0 ? 1 : precision;
               }
 
-              tickVal =
-                Math.round(significand * Math.pow(10, exp) * precision) /
-                precision;
-            } while (
-              exp < endExp ||
-              (exp === endExp && significand < endSignificand)
-            );
+              tickVal = Math.round(significand * Math.pow(10, exp) * precision) / precision;
+            } while (exp < endExp || (exp === endExp && significand < endSignificand));
 
             var lastTick = valueOrDefault(generationOptions.max, tickVal);
             ticks.push(lastTick);
@@ -20080,7 +18074,7 @@
 
           module.exports = function(Chart) {
             var defaultConfig = {
-              position: "left",
+              position: 'left',
 
               // label settings
               ticks: {
@@ -20097,9 +18091,7 @@
                 var datasets = data.datasets;
                 var isHorizontal = me.isHorizontal();
                 function IDMatches(meta) {
-                  return isHorizontal
-                    ? meta.xAxisID === me.id
-                    : meta.yAxisID === me.id;
+                  return isHorizontal ? meta.xAxisID === me.id : meta.yAxisID === me.id;
                 }
 
                 // Calculate Range
@@ -20115,11 +18107,7 @@
                     }
 
                     var meta = chart.getDatasetMeta(datasetIndex);
-                    if (
-                      chart.isDatasetVisible(datasetIndex) &&
-                      IDMatches(meta) &&
-                      meta.stack !== undefined
-                    ) {
+                    if (chart.isDatasetVisible(datasetIndex) && IDMatches(meta) && meta.stack !== undefined) {
                       hasStacks = true;
                     }
                   });
@@ -20133,16 +18121,11 @@
                     var key = [
                       meta.type,
                       // we have a separate stack for stack=undefined datasets when the opts.stacked is undefined
-                      opts.stacked === undefined && meta.stack === undefined
-                        ? datasetIndex
-                        : "",
+                      opts.stacked === undefined && meta.stack === undefined ? datasetIndex : '',
                       meta.stack
-                    ].join(".");
+                    ].join('.');
 
-                    if (
-                      chart.isDatasetVisible(datasetIndex) &&
-                      IDMatches(meta)
-                    ) {
+                    if (chart.isDatasetVisible(datasetIndex) && IDMatches(meta)) {
                       if (valuesPerStack[key] === undefined) {
                         valuesPerStack[key] = [];
                       }
@@ -20151,11 +18134,7 @@
                         var values = valuesPerStack[key];
                         var value = +me.getRightValue(rawValue);
                         // invalid, hidden and negative values are ignored
-                        if (
-                          isNaN(value) ||
-                          meta.data[index].hidden ||
-                          value < 0
-                        ) {
+                        if (isNaN(value) || meta.data[index].hidden || value < 0) {
                           return;
                         }
                         values[index] = values[index] || 0;
@@ -20168,27 +18147,18 @@
                     if (valuesForType.length > 0) {
                       var minVal = helpers.min(valuesForType);
                       var maxVal = helpers.max(valuesForType);
-                      me.min =
-                        me.min === null ? minVal : Math.min(me.min, minVal);
-                      me.max =
-                        me.max === null ? maxVal : Math.max(me.max, maxVal);
+                      me.min = me.min === null ? minVal : Math.min(me.min, minVal);
+                      me.max = me.max === null ? maxVal : Math.max(me.max, maxVal);
                     }
                   });
                 } else {
                   helpers.each(datasets, function(dataset, datasetIndex) {
                     var meta = chart.getDatasetMeta(datasetIndex);
-                    if (
-                      chart.isDatasetVisible(datasetIndex) &&
-                      IDMatches(meta)
-                    ) {
+                    if (chart.isDatasetVisible(datasetIndex) && IDMatches(meta)) {
                       helpers.each(dataset.data, function(rawValue, index) {
                         var value = +me.getRightValue(rawValue);
                         // invalid, hidden and negative values are ignored
-                        if (
-                          isNaN(value) ||
-                          meta.data[index].hidden ||
-                          value < 0
-                        ) {
+                        if (isNaN(value) || meta.data[index].hidden || value < 0) {
                           return;
                         }
 
@@ -20204,10 +18174,7 @@
                           me.max = value;
                         }
 
-                        if (
-                          value !== 0 &&
-                          (me.minNotZero === null || value < me.minNotZero)
-                        ) {
+                        if (value !== 0 && (me.minNotZero === null || value < me.minNotZero)) {
                           me.minNotZero = value;
                         }
                       });
@@ -20231,14 +18198,8 @@
 
                 if (me.min === me.max) {
                   if (me.min !== 0 && me.min !== null) {
-                    me.min = Math.pow(
-                      10,
-                      Math.floor(helpers.log10(me.min)) - 1
-                    );
-                    me.max = Math.pow(
-                      10,
-                      Math.floor(helpers.log10(me.max)) + 1
-                    );
+                    me.min = Math.pow(10, Math.floor(helpers.log10(me.min)) - 1);
+                    me.max = Math.pow(10, Math.floor(helpers.log10(me.max)) + 1);
                   } else {
                     me.min = DEFAULT_MIN;
                     me.max = DEFAULT_MAX;
@@ -20248,19 +18209,13 @@
                   me.min = Math.pow(10, Math.floor(helpers.log10(me.max)) - 1);
                 }
                 if (me.max === null) {
-                  me.max =
-                    me.min !== 0
-                      ? Math.pow(10, Math.floor(helpers.log10(me.min)) + 1)
-                      : DEFAULT_MAX;
+                  me.max = me.min !== 0 ? Math.pow(10, Math.floor(helpers.log10(me.min)) + 1) : DEFAULT_MAX;
                 }
                 if (me.minNotZero === null) {
                   if (me.min > 0) {
                     me.minNotZero = me.min;
                   } else if (me.max < 1) {
-                    me.minNotZero = Math.pow(
-                      10,
-                      Math.floor(helpers.log10(me.max))
-                    );
+                    me.minNotZero = Math.pow(10, Math.floor(helpers.log10(me.max)));
                   } else {
                     me.minNotZero = DEFAULT_MIN;
                   }
@@ -20302,9 +18257,7 @@
               },
               // Get the correct tooltip label
               getLabelForIndex: function(index, datasetIndex) {
-                return +this.getRightValue(
-                  this.chart.data.datasets[datasetIndex].data[index]
-                );
+                return +this.getRightValue(this.chart.data.datasets[datasetIndex].data[index]);
               },
               getPixelForTick: function(index) {
                 return this.getPixelForValue(this.tickValues[index]);
@@ -20358,9 +18311,7 @@
                     start = firstTickValue;
                   }
                   if (value !== 0) {
-                    offset +=
-                      (innerDimension / (log10(end) - log10(start))) *
-                      (log10(value) - log10(start));
+                    offset += (innerDimension / (log10(end) - log10(start))) * (log10(value) - log10(start));
                   }
                   pixel += sign * offset;
                 }
@@ -20405,18 +18356,14 @@
                 return value;
               }
             });
-            Chart.scaleService.registerScaleType(
-              "logarithmic",
-              LogarithmicScale,
-              defaultConfig
-            );
+            Chart.scaleService.registerScaleType('logarithmic', LogarithmicScale, defaultConfig);
           };
         },
-        { "34": 34, "45": 45 }
+        { '34': 34, '45': 45 }
       ],
       57: [
         function(require, module, exports) {
-          "use strict";
+          'use strict';
 
           var defaults = require(25);
           var helpers = require(45);
@@ -20430,11 +18377,11 @@
 
               // Boolean - Whether to animate scaling the chart from the centre
               animate: true,
-              position: "chartArea",
+              position: 'chartArea',
 
               angleLines: {
                 display: true,
-                color: "rgba(0, 0, 0, 0.1)",
+                color: 'rgba(0, 0, 0, 0.1)',
                 lineWidth: 1
               },
 
@@ -20448,7 +18395,7 @@
                 showLabelBackdrop: true,
 
                 // String - The colour of the label backdrop
-                backdropColor: "rgba(255,255,255,0.75)",
+                backdropColor: 'rgba(255,255,255,0.75)',
 
                 // Number - The backdrop padding above & below the label in pixels
                 backdropPaddingY: 2,
@@ -20475,25 +18422,14 @@
 
             function getValueCount(scale) {
               var opts = scale.options;
-              return opts.angleLines.display || opts.pointLabels.display
-                ? scale.chart.data.labels.length
-                : 0;
+              return opts.angleLines.display || opts.pointLabels.display ? scale.chart.data.labels.length : 0;
             }
 
             function getPointLabelFontOptions(scale) {
               var pointLabelOptions = scale.options.pointLabels;
-              var fontSize = helpers.valueOrDefault(
-                pointLabelOptions.fontSize,
-                globalDefaults.defaultFontSize
-              );
-              var fontStyle = helpers.valueOrDefault(
-                pointLabelOptions.fontStyle,
-                globalDefaults.defaultFontStyle
-              );
-              var fontFamily = helpers.valueOrDefault(
-                pointLabelOptions.fontFamily,
-                globalDefaults.defaultFontFamily
-              );
+              var fontSize = helpers.valueOrDefault(pointLabelOptions.fontSize, globalDefaults.defaultFontSize);
+              var fontStyle = helpers.valueOrDefault(pointLabelOptions.fontStyle, globalDefaults.defaultFontStyle);
+              var fontFamily = helpers.valueOrDefault(pointLabelOptions.fontFamily, globalDefaults.defaultFontFamily);
               var font = helpers.fontString(fontSize, fontStyle, fontFamily);
 
               return {
@@ -20508,9 +18444,7 @@
               if (helpers.isArray(label)) {
                 return {
                   w: helpers.longestText(ctx, ctx.font, label),
-                  h:
-                    label.length * fontSize +
-                    (label.length - 1) * 1.5 * fontSize
+                  h: label.length * fontSize + (label.length - 1) * 1.5 * fontSize
                 };
               }
 
@@ -20575,10 +18509,7 @@
 
               // Get maximum radius of the polygon. Either half the height (minus the text width) or half the width.
               // Use this to calculate the offset + change. - Make sure L/R protrusion is at least 0 to stop issues with centre points
-              var largestPossibleRadius = Math.min(
-                scale.height / 2,
-                scale.width / 2
-              );
+              var largestPossibleRadius = Math.min(scale.height / 2, scale.width / 2);
               var furthestLimits = {
                 r: scale.width,
                 l: 0,
@@ -20593,34 +18524,15 @@
 
               var valueCount = getValueCount(scale);
               for (i = 0; i < valueCount; i++) {
-                pointPosition = scale.getPointPosition(
-                  i,
-                  largestPossibleRadius
-                );
-                textSize = measureLabelSize(
-                  scale.ctx,
-                  plFont.size,
-                  scale.pointLabels[i] || ""
-                );
+                pointPosition = scale.getPointPosition(i, largestPossibleRadius);
+                textSize = measureLabelSize(scale.ctx, plFont.size, scale.pointLabels[i] || '');
                 scale._pointLabelSizes[i] = textSize;
 
                 // Add quarter circle to make degree 0 mean top of circle
                 var angleRadians = scale.getIndexAngle(i);
                 var angle = helpers.toDegrees(angleRadians) % 360;
-                var hLimits = determineLimits(
-                  angle,
-                  pointPosition.x,
-                  textSize.w,
-                  0,
-                  180
-                );
-                var vLimits = determineLimits(
-                  angle,
-                  pointPosition.y,
-                  textSize.h,
-                  90,
-                  270
-                );
+                var hLimits = determineLimits(angle, pointPosition.x, textSize.w, 0, 180);
+                var vLimits = determineLimits(angle, pointPosition.y, textSize.h, 90, 270);
 
                 if (hLimits.start < furthestLimits.l) {
                   furthestLimits.l = hLimits.start;
@@ -20643,33 +18555,26 @@
                 }
               }
 
-              scale.setReductions(
-                largestPossibleRadius,
-                furthestLimits,
-                furthestAngles
-              );
+              scale.setReductions(largestPossibleRadius, furthestLimits, furthestAngles);
             }
 
             /**
              * Helper function to fit a radial linear scale with no point labels
              */
             function fit(scale) {
-              var largestPossibleRadius = Math.min(
-                scale.height / 2,
-                scale.width / 2
-              );
+              var largestPossibleRadius = Math.min(scale.height / 2, scale.width / 2);
               scale.drawingArea = Math.round(largestPossibleRadius);
               scale.setCenterPoint(0, 0, 0, 0);
             }
 
             function getTextAlignForAngle(angle) {
               if (angle === 0 || angle === 180) {
-                return "center";
+                return 'center';
               } else if (angle < 180) {
-                return "left";
+                return 'left';
               }
 
-              return "right";
+              return 'right';
             }
 
             function fillText(ctx, text, position, fontSize) {
@@ -20686,11 +18591,7 @@
               }
             }
 
-            function adjustPointPositionForLabelHeight(
-              angle,
-              textSize,
-              position
-            ) {
+            function adjustPointPositionForLabelHeight(angle, textSize, position) {
               if (angle === 90 || angle === 270) {
                 position.y -= textSize.h / 2;
               } else if (angle > 270 || angle < 90) {
@@ -20707,14 +18608,12 @@
               ctx.lineWidth = angleLineOpts.lineWidth;
               ctx.strokeStyle = angleLineOpts.color;
 
-              var outerDistance = scale.getDistanceFromCenterForValue(
-                opts.ticks.reverse ? scale.min : scale.max
-              );
+              var outerDistance = scale.getDistanceFromCenterForValue(opts.ticks.reverse ? scale.min : scale.max);
 
               // Point Label Font
               var plFont = getPointLabelFontOptions(scale);
 
-              ctx.textBaseline = "top";
+              ctx.textBaseline = 'top';
 
               for (var i = getValueCount(scale) - 1; i >= 0; i--) {
                 if (angleLineOpts.display) {
@@ -20728,10 +18627,7 @@
 
                 if (pointLabelOpts.display) {
                   // Extra 3px out for some label spacing
-                  var pointLabelPosition = scale.getPointPosition(
-                    i,
-                    outerDistance + 5
-                  );
+                  var pointLabelPosition = scale.getPointPosition(i, outerDistance + 5);
 
                   // Keep this in loop since we may support array properties here
                   var pointLabelFontColor = helpers.valueAtIndexOrDefault(
@@ -20745,31 +18641,16 @@
                   var angleRadians = scale.getIndexAngle(i);
                   var angle = helpers.toDegrees(angleRadians);
                   ctx.textAlign = getTextAlignForAngle(angle);
-                  adjustPointPositionForLabelHeight(
-                    angle,
-                    scale._pointLabelSizes[i],
-                    pointLabelPosition
-                  );
-                  fillText(
-                    ctx,
-                    scale.pointLabels[i] || "",
-                    pointLabelPosition,
-                    plFont.size
-                  );
+                  adjustPointPositionForLabelHeight(angle, scale._pointLabelSizes[i], pointLabelPosition);
+                  fillText(ctx, scale.pointLabels[i] || '', pointLabelPosition, plFont.size);
                 }
               }
             }
 
             function drawRadiusLine(scale, gridLineOpts, radius, index) {
               var ctx = scale.ctx;
-              ctx.strokeStyle = helpers.valueAtIndexOrDefault(
-                gridLineOpts.color,
-                index - 1
-              );
-              ctx.lineWidth = helpers.valueAtIndexOrDefault(
-                gridLineOpts.lineWidth,
-                index - 1
-              );
+              ctx.strokeStyle = helpers.valueAtIndexOrDefault(gridLineOpts.color, index - 1);
+              ctx.lineWidth = helpers.valueAtIndexOrDefault(gridLineOpts.lineWidth, index - 1);
 
               if (scale.options.gridLines.circular) {
                 // Draw circular arcs between the points
@@ -20815,10 +18696,7 @@
                 me.yCenter = Math.round(me.height / 2);
 
                 var minSize = helpers.min([me.height, me.width]);
-                var tickFontSize = helpers.valueOrDefault(
-                  tickOpts.fontSize,
-                  globalDefaults.defaultFontSize
-                );
+                var tickFontSize = helpers.valueOrDefault(tickOpts.fontSize, globalDefaults.defaultFontSize);
                 me.drawingArea = opts.display
                   ? minSize / 2 - (tickFontSize / 2 + tickOpts.backdropPaddingY)
                   : minSize / 2;
@@ -20829,10 +18707,7 @@
                 var min = Number.POSITIVE_INFINITY;
                 var max = Number.NEGATIVE_INFINITY;
 
-                helpers.each(chart.data.datasets, function(
-                  dataset,
-                  datasetIndex
-                ) {
+                helpers.each(chart.data.datasets, function(dataset, datasetIndex) {
                   if (chart.isDatasetVisible(datasetIndex)) {
                     var meta = chart.getDatasetMeta(datasetIndex);
 
@@ -20856,10 +18731,7 @@
               },
               getTickLimit: function() {
                 var tickOpts = this.options.ticks;
-                var tickFontSize = helpers.valueOrDefault(
-                  tickOpts.fontSize,
-                  globalDefaults.defaultFontSize
-                );
+                var tickFontSize = helpers.valueOrDefault(tickOpts.fontSize, globalDefaults.defaultFontSize);
                 return Math.min(
                   tickOpts.maxTicksLimit ? tickOpts.maxTicksLimit : 11,
                   Math.ceil(this.drawingArea / (1.5 * tickFontSize))
@@ -20871,15 +18743,10 @@
                 Chart.LinearScaleBase.prototype.convertTicksToLabels.call(me);
 
                 // Point labels
-                me.pointLabels = me.chart.data.labels.map(
-                  me.options.pointLabels.callback,
-                  me
-                );
+                me.pointLabels = me.chart.data.labels.map(me.options.pointLabels.callback, me);
               },
               getLabelForIndex: function(index, datasetIndex) {
-                return +this.getRightValue(
-                  this.chart.data.datasets[datasetIndex].data[index]
-                );
+                return +this.getRightValue(this.chart.data.datasets[datasetIndex].data[index]);
               },
               fit: function() {
                 if (this.options.pointLabels.display) {
@@ -20892,22 +18759,12 @@
                * Set radius reductions and determine new radius and center point
                * @private
                */
-              setReductions: function(
-                largestPossibleRadius,
-                furthestLimits,
-                furthestAngles
-              ) {
+              setReductions: function(largestPossibleRadius, furthestLimits, furthestAngles) {
                 var me = this;
-                var radiusReductionLeft =
-                  furthestLimits.l / Math.sin(furthestAngles.l);
-                var radiusReductionRight =
-                  Math.max(furthestLimits.r - me.width, 0) /
-                  Math.sin(furthestAngles.r);
-                var radiusReductionTop =
-                  -furthestLimits.t / Math.cos(furthestAngles.t);
-                var radiusReductionBottom =
-                  -Math.max(furthestLimits.b - me.height, 0) /
-                  Math.cos(furthestAngles.b);
+                var radiusReductionLeft = furthestLimits.l / Math.sin(furthestAngles.l);
+                var radiusReductionRight = Math.max(furthestLimits.r - me.width, 0) / Math.sin(furthestAngles.r);
+                var radiusReductionTop = -furthestLimits.t / Math.cos(furthestAngles.t);
+                var radiusReductionBottom = -Math.max(furthestLimits.b - me.height, 0) / Math.cos(furthestAngles.b);
 
                 radiusReductionLeft = numberOrZero(radiusReductionLeft);
                 radiusReductionRight = numberOrZero(radiusReductionRight);
@@ -20915,28 +18772,12 @@
                 radiusReductionBottom = numberOrZero(radiusReductionBottom);
 
                 me.drawingArea = Math.min(
-                  Math.round(
-                    largestPossibleRadius -
-                      (radiusReductionLeft + radiusReductionRight) / 2
-                  ),
-                  Math.round(
-                    largestPossibleRadius -
-                      (radiusReductionTop + radiusReductionBottom) / 2
-                  )
+                  Math.round(largestPossibleRadius - (radiusReductionLeft + radiusReductionRight) / 2),
+                  Math.round(largestPossibleRadius - (radiusReductionTop + radiusReductionBottom) / 2)
                 );
-                me.setCenterPoint(
-                  radiusReductionLeft,
-                  radiusReductionRight,
-                  radiusReductionTop,
-                  radiusReductionBottom
-                );
+                me.setCenterPoint(radiusReductionLeft, radiusReductionRight, radiusReductionTop, radiusReductionBottom);
               },
-              setCenterPoint: function(
-                leftMovement,
-                rightMovement,
-                topMovement,
-                bottomMovement
-              ) {
+              setCenterPoint: function(leftMovement, rightMovement, topMovement, bottomMovement) {
                 var me = this;
                 var maxRight = me.width - rightMovement - me.drawingArea;
                 var maxLeft = leftMovement + me.drawingArea;
@@ -20950,9 +18791,7 @@
               getIndexAngle: function(index) {
                 var angleMultiplier = (Math.PI * 2) / getValueCount(this);
                 var startAngle =
-                  this.chart.options && this.chart.options.startAngle
-                    ? this.chart.options.startAngle
-                    : 0;
+                  this.chart.options && this.chart.options.startAngle ? this.chart.options.startAngle : 0;
 
                 var startAngleRadians = (startAngle * Math.PI * 2) / 360;
 
@@ -20977,19 +18816,12 @@
                 var me = this;
                 var thisAngle = me.getIndexAngle(index) - Math.PI / 2;
                 return {
-                  x:
-                    Math.round(Math.cos(thisAngle) * distanceFromCenter) +
-                    me.xCenter,
-                  y:
-                    Math.round(Math.sin(thisAngle) * distanceFromCenter) +
-                    me.yCenter
+                  x: Math.round(Math.cos(thisAngle) * distanceFromCenter) + me.xCenter,
+                  y: Math.round(Math.sin(thisAngle) * distanceFromCenter) + me.yCenter
                 };
               },
               getPointPositionForValue: function(index, value) {
-                return this.getPointPosition(
-                  index,
-                  this.getDistanceFromCenterForValue(value)
-                );
+                return this.getPointPosition(index, this.getDistanceFromCenterForValue(value));
               },
 
               getBasePosition: function() {
@@ -20999,13 +18831,7 @@
 
                 return me.getPointPositionForValue(
                   0,
-                  me.beginAtZero
-                    ? 0
-                    : min < 0 && max < 0
-                    ? max
-                    : min > 0 && max > 0
-                    ? min
-                    : 0
+                  me.beginAtZero ? 0 : min < 0 && max < 0 ? max : min > 0 && max > 0 ? min : 0
                 );
               },
 
@@ -21021,30 +18847,15 @@
                   var startAngle = this.getIndexAngle(0);
 
                   // Tick Font
-                  var tickFontSize = valueOrDefault(
-                    tickOpts.fontSize,
-                    globalDefaults.defaultFontSize
-                  );
-                  var tickFontStyle = valueOrDefault(
-                    tickOpts.fontStyle,
-                    globalDefaults.defaultFontStyle
-                  );
-                  var tickFontFamily = valueOrDefault(
-                    tickOpts.fontFamily,
-                    globalDefaults.defaultFontFamily
-                  );
-                  var tickLabelFont = helpers.fontString(
-                    tickFontSize,
-                    tickFontStyle,
-                    tickFontFamily
-                  );
+                  var tickFontSize = valueOrDefault(tickOpts.fontSize, globalDefaults.defaultFontSize);
+                  var tickFontStyle = valueOrDefault(tickOpts.fontStyle, globalDefaults.defaultFontStyle);
+                  var tickFontFamily = valueOrDefault(tickOpts.fontFamily, globalDefaults.defaultFontFamily);
+                  var tickLabelFont = helpers.fontString(tickFontSize, tickFontStyle, tickFontFamily);
 
                   helpers.each(me.ticks, function(label, index) {
                     // Don't draw a centre value (if it is minimum)
                     if (index > 0 || tickOpts.reverse) {
-                      var yCenterOffset = me.getDistanceFromCenterForValue(
-                        me.ticksAsNumbers[index]
-                      );
+                      var yCenterOffset = me.getDistanceFromCenterForValue(me.ticksAsNumbers[index]);
 
                       // Draw circular lines around the scale
                       if (gridLineOpts.display && index !== 0) {
@@ -21052,10 +18863,7 @@
                       }
 
                       if (tickOpts.display) {
-                        var tickFontColor = valueOrDefault(
-                          tickOpts.fontColor,
-                          globalDefaults.defaultFontColor
-                        );
+                        var tickFontColor = valueOrDefault(tickOpts.fontColor, globalDefaults.defaultFontColor);
                         ctx.font = tickLabelFont;
 
                         ctx.save();
@@ -21067,16 +18875,14 @@
                           ctx.fillStyle = tickOpts.backdropColor;
                           ctx.fillRect(
                             -labelWidth / 2 - tickOpts.backdropPaddingX,
-                            -yCenterOffset -
-                              tickFontSize / 2 -
-                              tickOpts.backdropPaddingY,
+                            -yCenterOffset - tickFontSize / 2 - tickOpts.backdropPaddingY,
                             labelWidth + tickOpts.backdropPaddingX * 2,
                             tickFontSize + tickOpts.backdropPaddingY * 2
                           );
                         }
 
-                        ctx.textAlign = "center";
-                        ctx.textBaseline = "middle";
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
                         ctx.fillStyle = tickFontColor;
                         ctx.fillText(label, 0, -yCenterOffset);
                         ctx.restore();
@@ -21090,22 +18896,18 @@
                 }
               }
             });
-            Chart.scaleService.registerScaleType(
-              "radialLinear",
-              LinearRadialScale,
-              defaultConfig
-            );
+            Chart.scaleService.registerScaleType('radialLinear', LinearRadialScale, defaultConfig);
           };
         },
-        { "25": 25, "34": 34, "45": 45 }
+        { '25': 25, '34': 34, '45': 45 }
       ],
       58: [
         function(require, module, exports) {
           /* global window: false */
-          "use strict";
+          'use strict';
 
           var moment = require(6);
-          moment = typeof moment === "function" ? moment : window.moment;
+          moment = typeof moment === 'function' ? moment : window.moment;
 
           var defaults = require(25);
           var helpers = require(45);
@@ -21199,7 +19001,7 @@
            * best case, all timestamps are linear, the table contains only min and max.
            */
           function buildLookupTable(timestamps, min, max, distribution) {
-            if (distribution === "linear" || !timestamps.length) {
+            if (distribution === 'linear' || !timestamps.length) {
               return [{ time: min, pos: 0 }, { time: max, pos: 1 }];
             }
 
@@ -21222,11 +19024,7 @@
               curr = items[i];
 
               // only add points that breaks the scale linearity
-              if (
-                prev === undefined ||
-                next === undefined ||
-                Math.round((next + prev) / 2) !== curr
-              ) {
+              if (prev === undefined || next === undefined || Math.round((next + prev) / 2) !== curr) {
                 table.push({ time: curr, pos: i / (ilen - 1) });
               }
             }
@@ -21271,16 +19069,8 @@
             var range = lookup(table, skey, sval);
 
             // Note: the lookup table ALWAYS contains at least 2 items (min and max)
-            var prev = !range.lo
-              ? table[0]
-              : !range.hi
-              ? table[table.length - 2]
-              : range.lo;
-            var next = !range.lo
-              ? table[1]
-              : !range.hi
-              ? table[table.length - 1]
-              : range.hi;
+            var prev = !range.lo ? table[0] : !range.hi ? table[table.length - 2] : range.lo;
+            var next = !range.lo ? table[1] : !range.hi ? table[table.length - 1] : range.hi;
 
             var span = next[skey] - prev[skey];
             var ratio = span ? (sval - prev[skey]) / span : 0;
@@ -21297,11 +19087,11 @@
             var parser = options.parser;
             var format = options.parser || options.format;
 
-            if (typeof parser === "function") {
+            if (typeof parser === 'function') {
               return parser(value);
             }
 
-            if (typeof value === "string" && typeof format === "string") {
+            if (typeof value === 'string' && typeof format === 'string') {
               return moment(value, format);
             }
 
@@ -21315,7 +19105,7 @@
 
             // Labels are in an incompatible moment format and no `parser` has been provided.
             // The user might still use the deprecated `format` option to convert his inputs.
-            if (typeof format === "function") {
+            if (typeof format === 'function') {
               return format(value);
             }
 
@@ -21374,14 +19164,9 @@
 
             for (i = UNITS.indexOf(minUnit); i < ilen - 1; ++i) {
               interval = INTERVALS[UNITS[i]];
-              factor = interval.steps
-                ? interval.steps[interval.steps.length - 1]
-                : MAX_INTEGER;
+              factor = interval.steps ? interval.steps[interval.steps.length - 1] : MAX_INTEGER;
 
-              if (
-                interval.common &&
-                Math.ceil((max - min) / (factor * interval.size)) <= capacity
-              ) {
+              if (interval.common && Math.ceil((max - min) / (factor * interval.size)) <= capacity) {
                 return UNITS[i];
               }
             }
@@ -21408,11 +19193,7 @@
           }
 
           function determineMajorUnit(unit) {
-            for (
-              var i = UNITS.indexOf(unit) + 1, ilen = UNITS.length;
-              i < ilen;
-              ++i
-            ) {
+            for (var i = UNITS.indexOf(unit) + 1, ilen = UNITS.length; i < ilen; ++i) {
               if (INTERVALS[UNITS[i]].common) {
                 return UNITS[i];
               }
@@ -21427,15 +19208,10 @@
            */
           function generate(min, max, capacity, options) {
             var timeOpts = options.time;
-            var minor =
-              timeOpts.unit ||
-              determineUnitForAutoTicks(timeOpts.minUnit, min, max, capacity);
+            var minor = timeOpts.unit || determineUnitForAutoTicks(timeOpts.minUnit, min, max, capacity);
             var major = determineMajorUnit(minor);
-            var stepSize = helpers.valueOrDefault(
-              timeOpts.stepSize,
-              timeOpts.unitStepSize
-            );
-            var weekday = minor === "week" ? timeOpts.isoWeekday : false;
+            var stepSize = helpers.valueOrDefault(timeOpts.stepSize, timeOpts.unitStepSize);
+            var weekday = minor === 'week' ? timeOpts.isoWeekday : false;
             var majorTicksEnabled = options.ticks.major.enabled;
             var interval = INTERVALS[minor];
             var first = moment(min);
@@ -21454,8 +19230,8 @@
             }
 
             // Align first/last ticks on unit
-            first = first.startOf(weekday ? "day" : minor);
-            last = last.startOf(weekday ? "day" : minor);
+            first = first.startOf(weekday ? 'day' : minor);
+            last = last.startOf(weekday ? 'day' : minor);
 
             // Make sure that the last tick include max
             if (last < max) {
@@ -21469,10 +19245,7 @@
               // we first aligned time on the previous `major` unit then add the number of full
               // stepSize there is between first and the previous major time.
               time.startOf(major);
-              time.add(
-                ~~((first - time) / (interval.size * stepSize)) * stepSize,
-                minor
-              );
+              time.add(~~((first - time) / (interval.size * stepSize)) * stepSize, minor);
             }
 
             for (; time < last; time.add(stepSize, minor)) {
@@ -21497,18 +19270,12 @@
               if (!options.time.min) {
                 upper = ticks.length > 1 ? ticks[1] : max;
                 lower = ticks[0];
-                left =
-                  (interpolate(table, "time", upper, "pos") -
-                    interpolate(table, "time", lower, "pos")) /
-                  2;
+                left = (interpolate(table, 'time', upper, 'pos') - interpolate(table, 'time', lower, 'pos')) / 2;
               }
               if (!options.time.max) {
                 upper = ticks[ticks.length - 1];
                 lower = ticks.length > 1 ? ticks[ticks.length - 2] : min;
-                right =
-                  (interpolate(table, "time", upper, "pos") -
-                    interpolate(table, "time", lower, "pos")) /
-                  2;
+                right = (interpolate(table, 'time', upper, 'pos') - interpolate(table, 'time', lower, 'pos')) / 2;
               }
             }
 
@@ -21521,9 +19288,7 @@
 
             for (i = 0, ilen = values.length; i < ilen; ++i) {
               value = values[i];
-              major = majorUnit
-                ? value === +moment(value).startOf(majorUnit)
-                : false;
+              major = majorUnit ? value === +moment(value).startOf(majorUnit) : false;
 
               ticks.push({
                 value: value,
@@ -21543,25 +19308,21 @@
             for (i = 0; i < ilen; i++) {
               momentDate = momentify(data[i], timeOpts);
               if (momentDate.millisecond() !== 0) {
-                return "MMM D, YYYY h:mm:ss.SSS a";
+                return 'MMM D, YYYY h:mm:ss.SSS a';
               }
-              if (
-                momentDate.second() !== 0 ||
-                momentDate.minute() !== 0 ||
-                momentDate.hour() !== 0
-              ) {
+              if (momentDate.second() !== 0 || momentDate.minute() !== 0 || momentDate.hour() !== 0) {
                 hasTime = true;
               }
             }
             if (hasTime) {
-              return "MMM D, YYYY h:mm:ss a";
+              return 'MMM D, YYYY h:mm:ss a';
             }
-            return "MMM D, YYYY";
+            return 'MMM D, YYYY';
           }
 
           module.exports = function(Chart) {
             var defaultConfig = {
-              position: "bottom",
+              position: 'bottom',
 
               /**
                * Data distribution along the scale:
@@ -21570,7 +19331,7 @@
                * @see https://github.com/chartjs/Chart.js/pull/4507
                * @since 2.7.0
                */
-              distribution: "linear",
+              distribution: 'linear',
 
               /**
                * Scale boundary strategy (bypassed by min/max time options)
@@ -21579,7 +19340,7 @@
                * @see https://github.com/chartjs/Chart.js/pull/4556
                * @since 2.7.0
                */
-              bounds: "data",
+              bounds: 'data',
 
               time: {
                 parser: false, // false == a pattern string from http://momentjs.com/docs/#/parsing/string-format/ or a custom callback that converts its argument to a moment
@@ -21588,19 +19349,19 @@
                 round: false, // none, or override with week, month, year, etc.
                 displayFormat: false, // DEPRECATED
                 isoWeekday: false, // override week start day - see http://momentjs.com/docs/#/get-set/iso-weekday/
-                minUnit: "millisecond",
+                minUnit: 'millisecond',
 
                 // defaults to unit's corresponding unitFormat below or override using pattern string from http://momentjs.com/docs/#/displaying/format/
                 displayFormats: {
-                  millisecond: "h:mm:ss.SSS a", // 11:20:01.123 AM,
-                  second: "h:mm:ss a", // 11:20:01 AM
-                  minute: "h:mm a", // 11:20 AM
-                  hour: "hA", // 5PM
-                  day: "MMM D", // Sep 4
-                  week: "ll", // Week 46, or maybe "[W]WW - YYYY" ?
-                  month: "MMM YYYY", // Sept 2015
-                  quarter: "[Q]Q - YYYY", // Q3
-                  year: "YYYY" // 2015
+                  millisecond: 'h:mm:ss.SSS a', // 11:20:01.123 AM,
+                  second: 'h:mm:ss a', // 11:20:01 AM
+                  minute: 'h:mm a', // 11:20 AM
+                  hour: 'hA', // 5PM
+                  day: 'MMM D', // Sep 4
+                  week: 'll', // Week 46, or maybe "[W]WW - YYYY" ?
+                  month: 'MMM YYYY', // Sept 2015
+                  quarter: '[Q]Q - YYYY', // Q3
+                  year: 'YYYY' // 2015
                 }
               },
               ticks: {
@@ -21614,7 +19375,7 @@
                  * @see https://github.com/chartjs/Chart.js/pull/4507
                  * @since 2.7.0
                  */
-                source: "auto",
+                source: 'auto',
 
                 major: {
                   enabled: false
@@ -21626,7 +19387,7 @@
               initialize: function() {
                 if (!moment) {
                   throw new Error(
-                    "Chart.js - Moment.js could not be found! You must include it before Chart.js to use the time scale. Download at https://momentjs.com"
+                    'Chart.js - Moment.js could not be found! You must include it before Chart.js to use the time scale. Download at https://momentjs.com'
                   );
                 }
 
@@ -21641,9 +19402,7 @@
 
                 // DEPRECATIONS: output a message only one time per update
                 if (options.time && options.time.format) {
-                  console.warn(
-                    "options.time.format is deprecated and replaced by options.time.parser."
-                  );
+                  console.warn('options.time.format is deprecated and replaced by options.time.parser.');
                 }
 
                 return Chart.Scale.prototype.update.apply(me, arguments);
@@ -21663,7 +19422,7 @@
                 var me = this;
                 var chart = me.chart;
                 var timeOpts = me.options.time;
-                var unit = timeOpts.unit || "day";
+                var unit = timeOpts.unit || 'day';
                 var min = MAX_INTEGER;
                 var max = MIN_INTEGER;
                 var timestamps = [];
@@ -21677,11 +19436,7 @@
                 }
 
                 // Convert data to timestamps
-                for (
-                  i = 0, ilen = (chart.data.datasets || []).length;
-                  i < ilen;
-                  ++i
-                ) {
+                for (i = 0, ilen = (chart.data.datasets || []).length; i < ilen; ++i) {
                   if (chart.isDatasetVisible(i)) {
                     data = chart.data.datasets[i].data;
 
@@ -21748,23 +19503,18 @@
                 var i, ilen, timestamp;
 
                 switch (options.ticks.source) {
-                  case "data":
+                  case 'data':
                     timestamps = me._timestamps.data;
                     break;
-                  case "labels":
+                  case 'labels':
                     timestamps = me._timestamps.labels;
                     break;
-                  case "auto":
+                  case 'auto':
                   default:
-                    timestamps = generate(
-                      min,
-                      max,
-                      me.getLabelCapacity(min),
-                      options
-                    );
+                    timestamps = generate(min, max, me.getLabelCapacity(min), options);
                 }
 
-                if (options.bounds === "ticks" && timestamps.length) {
+                if (options.bounds === 'ticks' && timestamps.length) {
                   min = timestamps[0];
                   max = timestamps[timestamps.length - 1];
                 }
@@ -21785,32 +19535,11 @@
                 me.max = max;
 
                 // PRIVATE
-                me._unit =
-                  timeOpts.unit ||
-                  determineUnitForFormatting(
-                    ticks,
-                    timeOpts.minUnit,
-                    me.min,
-                    me.max
-                  );
+                me._unit = timeOpts.unit || determineUnitForFormatting(ticks, timeOpts.minUnit, me.min, me.max);
                 me._majorUnit = determineMajorUnit(me._unit);
-                me._table = buildLookupTable(
-                  me._timestamps.data,
-                  min,
-                  max,
-                  options.distribution
-                );
-                me._offsets = computeOffsets(
-                  me._table,
-                  ticks,
-                  min,
-                  max,
-                  options
-                );
-                me._labelFormat = determineLabelFormat(
-                  me._timestamps.data,
-                  timeOpts
-                );
+                me._table = buildLookupTable(me._timestamps.data, min, max, options.distribution);
+                me._offsets = computeOffsets(me._table, ticks, min, max, options);
+                me._labelFormat = determineLabelFormat(me._timestamps.data, timeOpts);
 
                 return ticksFromTimestamps(ticks, me._majorUnit);
               },
@@ -21819,21 +19548,16 @@
                 var me = this;
                 var data = me.chart.data;
                 var timeOpts = me.options.time;
-                var label =
-                  data.labels && index < data.labels.length
-                    ? data.labels[index]
-                    : "";
+                var label = data.labels && index < data.labels.length ? data.labels[index] : '';
                 var value = data.datasets[datasetIndex].data[index];
 
                 if (helpers.isObject(value)) {
                   label = me.getRightValue(value);
                 }
                 if (timeOpts.tooltipFormat) {
-                  return momentify(label, timeOpts).format(
-                    timeOpts.tooltipFormat
-                  );
+                  return momentify(label, timeOpts).format(timeOpts.tooltipFormat);
                 }
-                if (typeof label === "string") {
+                if (typeof label === 'string') {
                   return label;
                 }
 
@@ -21857,23 +19581,10 @@
                   .startOf(majorUnit)
                   .valueOf();
                 var majorTickOpts = options.ticks.major;
-                var major =
-                  majorTickOpts.enabled &&
-                  majorUnit &&
-                  majorFormat &&
-                  time === majorTime;
-                var label = tick.format(
-                  formatOverride
-                    ? formatOverride
-                    : major
-                    ? majorFormat
-                    : minorFormat
-                );
+                var major = majorTickOpts.enabled && majorUnit && majorFormat && time === majorTime;
+                var label = tick.format(formatOverride ? formatOverride : major ? majorFormat : minorFormat);
                 var tickOpts = major ? majorTickOpts : options.ticks.minor;
-                var formatter = helpers.valueOrDefault(
-                  tickOpts.callback,
-                  tickOpts.userCallback
-                );
+                var formatter = helpers.valueOrDefault(tickOpts.callback, tickOpts.userCallback);
 
                 return formatter ? formatter(label, index, ticks) : label;
               },
@@ -21883,9 +19594,7 @@
                 var i, ilen;
 
                 for (i = 0, ilen = ticks.length; i < ilen; ++i) {
-                  labels.push(
-                    this.tickFormatFunction(moment(ticks[i].value), i, ticks)
-                  );
+                  labels.push(this.tickFormatFunction(moment(ticks[i].value), i, ticks));
                 }
 
                 return labels;
@@ -21898,13 +19607,9 @@
                 var me = this;
                 var size = me._horizontal ? me.width : me.height;
                 var start = me._horizontal ? me.left : me.top;
-                var pos = interpolate(me._table, "time", time, "pos");
+                var pos = interpolate(me._table, 'time', time, 'pos');
 
-                return (
-                  start +
-                  (size * (me._offsets.left + pos)) /
-                    (me._offsets.left + 1 + me._offsets.right)
-                );
+                return start + (size * (me._offsets.left + pos)) / (me._offsets.left + 1 + me._offsets.right);
               },
 
               getPixelForValue: function(value, index, datasetIndex) {
@@ -21926,9 +19631,7 @@
 
               getPixelForTick: function(index) {
                 var ticks = this.getTicks();
-                return index >= 0 && index < ticks.length
-                  ? this.getPixelForOffset(ticks[index].value)
-                  : null;
+                return index >= 0 && index < ticks.length ? this.getPixelForOffset(ticks[index].value) : null;
               },
 
               getValueForPixel: function(pixel) {
@@ -21936,10 +19639,8 @@
                 var size = me._horizontal ? me.width : me.height;
                 var start = me._horizontal ? me.left : me.top;
                 var pos =
-                  (size ? (pixel - start) / size : 0) *
-                    (me._offsets.left + 1 + me._offsets.left) -
-                  me._offsets.right;
-                var time = interpolate(me._table, "pos", pos, "time");
+                  (size ? (pixel - start) / size : 0) * (me._offsets.left + 1 + me._offsets.left) - me._offsets.right;
+                var time = interpolate(me._table, 'pos', pos, 'time');
 
                 return moment(time);
               },
@@ -21955,14 +19656,9 @@
                 var angle = helpers.toRadians(ticksOpts.maxRotation);
                 var cosRotation = Math.cos(angle);
                 var sinRotation = Math.sin(angle);
-                var tickFontSize = helpers.valueOrDefault(
-                  ticksOpts.fontSize,
-                  defaults.global.defaultFontSize
-                );
+                var tickFontSize = helpers.valueOrDefault(ticksOpts.fontSize, defaults.global.defaultFontSize);
 
-                return (
-                  tickLabelWidth * cosRotation + tickFontSize * sinRotation
-                );
+                return tickLabelWidth * cosRotation + tickFontSize * sinRotation;
               },
 
               /**
@@ -21973,12 +19669,7 @@
 
                 var formatOverride = me.options.time.displayFormats.millisecond; // Pick the longest format for guestimation
 
-                var exampleLabel = me.tickFormatFunction(
-                  moment(exampleTime),
-                  0,
-                  [],
-                  formatOverride
-                );
+                var exampleLabel = me.tickFormatFunction(moment(exampleTime), 0, [], formatOverride);
                 var tickLabelWidth = me.getLabelWidth(exampleLabel);
                 var innerWidth = me.isHorizontal() ? me.width : me.height;
 
@@ -21987,14 +19678,10 @@
               }
             });
 
-            Chart.scaleService.registerScaleType(
-              "time",
-              TimeScale,
-              defaultConfig
-            );
+            Chart.scaleService.registerScaleType('time', TimeScale, defaultConfig);
           };
         },
-        { "25": 25, "45": 45, "6": 6 }
+        { '25': 25, '45': 45, '6': 6 }
       ]
     },
     {},

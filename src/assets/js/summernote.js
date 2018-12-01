@@ -8,15 +8,15 @@
  * Date: 2018-02-20T00:34Z
  */
 (function(global, factory) {
-  typeof exports === "object" && typeof module !== "undefined"
-    ? factory(require("jquery"))
-    : typeof define === "function" && define.amd
-    ? define(["jquery"], factory)
+  typeof exports === 'object' && typeof module !== 'undefined'
+    ? factory(require('jquery'))
+    : typeof define === 'function' && define.amd
+    ? define(['jquery'], factory)
     : factory(global.jQuery);
 })(this, function($$1) {
-  "use strict";
+  'use strict';
 
-  $$1 = $$1 && $$1.hasOwnProperty("default") ? $$1["default"] : $$1;
+  $$1 = $$1 && $$1.hasOwnProperty('default') ? $$1['default'] : $$1;
 
   var Renderer = /** @class */ (function() {
     function Renderer(markup, children, options, callback) {
@@ -35,14 +35,14 @@
       }
       if (this.options && this.options.data) {
         $$1.each(this.options.data, function(k, v) {
-          $node.attr("data-" + k, v);
+          $node.attr('data-' + k, v);
         });
       }
       if (this.options && this.options.click) {
-        $node.on("click", this.options.click);
+        $node.on('click', this.options.click);
       }
       if (this.children) {
-        var $container_1 = $node.find(".note-children-container");
+        var $container_1 = $node.find('.note-children-container');
         this.children.forEach(function(child) {
           child.render($container_1.length ? $container_1 : $node);
         });
@@ -63,8 +63,7 @@
   var renderer = {
     create: function(markup, callback) {
       return function() {
-        var options =
-          typeof arguments[1] === "object" ? arguments[1] : arguments[0];
+        var options = typeof arguments[1] === 'object' ? arguments[1] : arguments[0];
         var children = $$1.isArray(arguments[0]) ? arguments[0] : [];
         if (options && options.children) {
           children = options.children;
@@ -79,9 +78,7 @@
     '<div class="note-toolbar-wrapper panel-default"><div class="note-toolbar panel-heading" role="toolbar"></div></div>'
   );
   var editingArea = renderer.create('<div class="note-editing-area"/>');
-  var codable = renderer.create(
-    '<textarea class="note-codable" role="textbox" aria-multiline="true"/>'
-  );
+  var codable = renderer.create('<textarea class="note-codable" role="textbox" aria-multiline="true"/>');
   var editable = renderer.create(
     '<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>'
   );
@@ -93,77 +90,67 @@
       '    <div class="note-icon-bar"/>',
       '    <div class="note-icon-bar"/>',
       '    <div class="note-icon-bar"/>',
-      "  </div>",
-      "</div>"
-    ].join("")
+      '  </div>',
+      '</div>'
+    ].join('')
   );
   var airEditor = renderer.create('<div class="note-editor"/>');
   var airEditable = renderer.create(
     [
       '  <output class="note-status-output" aria-live="polite"/>',
       '<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>'
-    ].join("")
+    ].join('')
   );
   var buttonGroup = renderer.create('<div class="note-btn-group btn-group">');
-  var dropdown = renderer.create(
-    '<ul class="dropdown-menu" role="list">',
-    function($node, options) {
-      var markup = $$1.isArray(options.items)
-        ? options.items
-            .map(function(item) {
-              var value = typeof item === "string" ? item : item.value || "";
-              var content = options.template ? options.template(item) : item;
-              var option = typeof item === "object" ? item.option : undefined;
-              var dataValue = 'data-value="' + value + '"';
-              var dataOption =
-                option !== undefined ? ' data-option="' + option + '"' : "";
-              return (
-                '<li role="listitem" aria-label="' +
-                item +
-                '"><a href="#" ' +
-                (dataValue + dataOption) +
-                ">" +
-                content +
-                "</a></li>"
-              );
-            })
-            .join("")
-        : options.items;
-      $node.html(markup).attr({ "aria-label": options.title });
-    }
-  );
+  var dropdown = renderer.create('<ul class="dropdown-menu" role="list">', function($node, options) {
+    var markup = $$1.isArray(options.items)
+      ? options.items
+          .map(function(item) {
+            var value = typeof item === 'string' ? item : item.value || '';
+            var content = options.template ? options.template(item) : item;
+            var option = typeof item === 'object' ? item.option : undefined;
+            var dataValue = 'data-value="' + value + '"';
+            var dataOption = option !== undefined ? ' data-option="' + option + '"' : '';
+            return (
+              '<li role="listitem" aria-label="' +
+              item +
+              '"><a href="#" ' +
+              (dataValue + dataOption) +
+              '>' +
+              content +
+              '</a></li>'
+            );
+          })
+          .join('')
+      : options.items;
+    $node.html(markup).attr({ 'aria-label': options.title });
+  });
   var dropdownButtonContents = function(contents, options) {
-    return contents + " " + icon(options.icons.caret, "span");
+    return contents + ' ' + icon(options.icons.caret, 'span');
   };
-  var dropdownCheck = renderer.create(
-    '<ul class="dropdown-menu note-check" role="list">',
-    function($node, options) {
-      var markup = $$1.isArray(options.items)
-        ? options.items
-            .map(function(item) {
-              var value = typeof item === "string" ? item : item.value || "";
-              var content = options.template ? options.template(item) : item;
-              return (
-                '<li role="listitem" aria-label="' +
-                item +
-                '"><a href="#" data-value="' +
-                value +
-                '">' +
-                icon(options.checkClassName) +
-                " " +
-                content +
-                "</a></li>"
-              );
-            })
-            .join("")
-        : options.items;
-      $node.html(markup).attr({ "aria-label": options.title });
-    }
-  );
-  var palette = renderer.create('<div class="note-color-palette"/>', function(
-    $node,
-    options
-  ) {
+  var dropdownCheck = renderer.create('<ul class="dropdown-menu note-check" role="list">', function($node, options) {
+    var markup = $$1.isArray(options.items)
+      ? options.items
+          .map(function(item) {
+            var value = typeof item === 'string' ? item : item.value || '';
+            var content = options.template ? options.template(item) : item;
+            return (
+              '<li role="listitem" aria-label="' +
+              item +
+              '"><a href="#" data-value="' +
+              value +
+              '">' +
+              icon(options.checkClassName) +
+              ' ' +
+              content +
+              '</a></li>'
+            );
+          })
+          .join('')
+      : options.items;
+    $node.html(markup).attr({ 'aria-label': options.title });
+  });
+  var palette = renderer.create('<div class="note-color-palette"/>', function($node, options) {
     var contents = [];
     for (var row = 0, rowSize = options.colors.length; row < rowSize; row++) {
       var eventName = options.eventName;
@@ -192,88 +179,79 @@
             colorName,
             '" ',
             'data-toggle="button" tabindex="-1"></button>'
-          ].join("")
+          ].join('')
         );
       }
-      contents.push(
-        '<div class="note-color-row">' + buttons.join("") + "</div>"
-      );
+      contents.push('<div class="note-color-row">' + buttons.join('') + '</div>');
     }
-    $node.html(contents.join(""));
+    $node.html(contents.join(''));
     if (options.tooltip) {
-      $node.find(".note-color-btn").tooltip({
+      $node.find('.note-color-btn').tooltip({
         container: options.container,
-        trigger: "hover",
-        placement: "bottom"
+        trigger: 'hover',
+        placement: 'bottom'
       });
     }
   });
-  var dialog = renderer.create(
-    '<div class="modal" aria-hidden="false" tabindex="-1" role="dialog"/>',
-    function($node, options) {
-      if (options.fade) {
-        $node.addClass("fade");
-      }
-      $node.attr({
-        "aria-label": options.title
-      });
-      $node.html(
-        [
-          '<div class="modal-dialog">',
-          '  <div class="modal-content">',
-          options.title
-            ? '    <div class="modal-header">' +
-              '      <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">&times;</button>' +
-              '      <h4 class="modal-title">' +
-              options.title +
-              "</h4>" +
-              "    </div>"
-            : "",
-          '    <div class="modal-body">' + options.body + "</div>",
-          options.footer
-            ? '    <div class="modal-footer">' + options.footer + "</div>"
-            : "",
-          "  </div>",
-          "</div>"
-        ].join("")
-      );
+  var dialog = renderer.create('<div class="modal" aria-hidden="false" tabindex="-1" role="dialog"/>', function(
+    $node,
+    options
+  ) {
+    if (options.fade) {
+      $node.addClass('fade');
     }
-  );
+    $node.attr({
+      'aria-label': options.title
+    });
+    $node.html(
+      [
+        '<div class="modal-dialog">',
+        '  <div class="modal-content">',
+        options.title
+          ? '    <div class="modal-header">' +
+            '      <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">&times;</button>' +
+            '      <h4 class="modal-title">' +
+            options.title +
+            '</h4>' +
+            '    </div>'
+          : '',
+        '    <div class="modal-body">' + options.body + '</div>',
+        options.footer ? '    <div class="modal-footer">' + options.footer + '</div>' : '',
+        '  </div>',
+        '</div>'
+      ].join('')
+    );
+  });
   var popover = renderer.create(
     [
       '<div class="note-popover popover in">',
       '  <div class="arrow"/>',
       '  <div class="popover-content note-children-container"/>',
-      "</div>"
-    ].join(""),
+      '</div>'
+    ].join(''),
     function($node, options) {
-      var direction =
-        typeof options.direction !== "undefined" ? options.direction : "bottom";
+      var direction = typeof options.direction !== 'undefined' ? options.direction : 'bottom';
       $node.addClass(direction);
       if (options.hideArrow) {
-        $node.find(".arrow").hide();
+        $node.find('.arrow').hide();
       }
     }
   );
-  var checkbox = renderer.create('<div class="checkbox"></div>', function(
-    $node,
-    options
-  ) {
+  var checkbox = renderer.create('<div class="checkbox"></div>', function($node, options) {
     $node.html(
       [
-        " <label" + (options.id ? ' for="' + options.id + '"' : "") + ">",
-        ' <input role="checkbox" type="checkbox"' +
-          (options.id ? ' id="' + options.id + '"' : ""),
-        options.checked ? " checked" : "",
-        ' aria-checked="' + (options.checked ? "true" : "false") + '"/>',
-        options.text ? options.text : "",
-        "</label>"
-      ].join("")
+        ' <label' + (options.id ? ' for="' + options.id + '"' : '') + '>',
+        ' <input role="checkbox" type="checkbox"' + (options.id ? ' id="' + options.id + '"' : ''),
+        options.checked ? ' checked' : '',
+        ' aria-checked="' + (options.checked ? 'true' : 'false') + '"/>',
+        options.text ? options.text : '',
+        '</label>'
+      ].join('')
     );
   });
   var icon = function(iconClassName, tagName) {
-    tagName = tagName || "i";
-    return "<" + tagName + ' class="' + iconClassName + '"/>';
+    tagName = tagName || 'i';
+    return '<' + tagName + ' class="' + iconClassName + '"/>';
   };
   var ui = {
     editor: editor,
@@ -302,54 +280,50 @@
             $node
               .attr({
                 title: options.tooltip,
-                "aria-label": options.tooltip
+                'aria-label': options.tooltip
               })
               .tooltip({
                 container: options.container,
-                trigger: "hover",
-                placement: "bottom"
+                trigger: 'hover',
+                placement: 'bottom'
               });
           }
         }
       )($node, options);
     },
     toggleBtn: function($btn, isEnable) {
-      $btn.toggleClass("disabled", !isEnable);
-      $btn.attr("disabled", !isEnable);
+      $btn.toggleClass('disabled', !isEnable);
+      $btn.attr('disabled', !isEnable);
     },
     toggleBtnActive: function($btn, isActive) {
-      $btn.toggleClass("active", isActive);
+      $btn.toggleClass('active', isActive);
     },
     onDialogShown: function($dialog, handler) {
-      $dialog.one("shown.bs.modal", handler);
+      $dialog.one('shown.bs.modal', handler);
     },
     onDialogHidden: function($dialog, handler) {
-      $dialog.one("hidden.bs.modal", handler);
+      $dialog.one('hidden.bs.modal', handler);
     },
     showDialog: function($dialog) {
-      $dialog.modal("show");
+      $dialog.modal('show');
     },
     hideDialog: function($dialog) {
-      $dialog.modal("hide");
+      $dialog.modal('hide');
     },
     createLayout: function($note, options) {
       var $editor = (options.airMode
         ? ui.airEditor([ui.editingArea([ui.airEditable()])])
-        : ui.editor([
-            ui.toolbar(),
-            ui.editingArea([ui.codable(), ui.editable()]),
-            ui.statusbar()
-          ])
+        : ui.editor([ui.toolbar(), ui.editingArea([ui.codable(), ui.editable()]), ui.statusbar()])
       ).render();
       $editor.insertAfter($note);
       return {
         note: $note,
         editor: $editor,
-        toolbar: $editor.find(".note-toolbar"),
-        editingArea: $editor.find(".note-editing-area"),
-        editable: $editor.find(".note-editable"),
-        codable: $editor.find(".note-codable"),
-        statusbar: $editor.find(".note-statusbar")
+        toolbar: $editor.find('.note-toolbar'),
+        editingArea: $editor.find('.note-editing-area'),
+        editable: $editor.find('.note-editable'),
+        codable: $editor.find('.note-codable'),
+        statusbar: $editor.find('.note-statusbar')
       };
     },
     removeLayout: function($note, layoutInfo) {
@@ -411,7 +385,7 @@
    * @param {String} [prefix]
    */
   function uniqueId(prefix) {
-    var id = ++idCounter + "";
+    var id = ++idCounter + '';
     return prefix ? prefix + id : id;
   }
   /**
@@ -456,15 +430,15 @@
    * @return {String}
    */
   function namespaceToCamel(namespace, prefix) {
-    prefix = prefix || "";
+    prefix = prefix || '';
     return (
       prefix +
       namespace
-        .split(".")
+        .split('.')
         .map(function(name) {
           return name.substring(0, 1).toUpperCase() + name.substring(1);
         })
-        .join("")
+        .join('')
     );
   }
   /**
@@ -713,7 +687,7 @@
     unique: unique
   };
 
-  var isSupportAmd = typeof define === "function" && define.amd; // eslint-disable-line
+  var isSupportAmd = typeof define === 'function' && define.amd; // eslint-disable-line
   /**
    * returns whether font is installed or not.
    *
@@ -721,21 +695,18 @@
    * @return {Boolean}
    */
   function isFontInstalled(fontName) {
-    var testFontName =
-      fontName === "Comic Sans MS" ? "Courier New" : "Comic Sans MS";
-    var $tester = $$1("<div>")
+    var testFontName = fontName === 'Comic Sans MS' ? 'Courier New' : 'Comic Sans MS';
+    var $tester = $$1('<div>')
       .css({
-        position: "absolute",
-        left: "-9999px",
-        top: "-9999px",
-        fontSize: "200px"
+        position: 'absolute',
+        left: '-9999px',
+        top: '-9999px',
+        fontSize: '200px'
       })
-      .text("mmmmmmmmmwwwwwww")
+      .text('mmmmmmmmmwwwwwww')
       .appendTo(document.body);
-    var originalWidth = $tester.css("fontFamily", testFontName).width();
-    var width = $tester
-      .css("fontFamily", fontName + "," + testFontName)
-      .width();
+    var originalWidth = $tester.css('fontFamily', testFontName).width();
+    var width = $tester.css('fontFamily', fontName + ',' + testFontName).width();
     $tester.remove();
     return originalWidth !== width;
   }
@@ -756,42 +727,36 @@
   var hasCodeMirror = !!window.CodeMirror;
   if (!hasCodeMirror && isSupportAmd) {
     // Webpack
-    if (typeof __webpack_require__ === "function") {
+    if (typeof __webpack_require__ === 'function') {
       try {
         // If CodeMirror can't be resolved, `require.resolve` will throw an
         // exception and `hasCodeMirror` won't be set to `true`.
-        require.resolve("codemirror");
+        require.resolve('codemirror');
         hasCodeMirror = true;
       } catch (e) {
         // do nothing
       }
-    } else if (typeof require !== "undefined") {
+    } else if (typeof require !== 'undefined') {
       // Browserify
-      if (typeof require.resolve !== "undefined") {
+      if (typeof require.resolve !== 'undefined') {
         try {
           // If CodeMirror can't be resolved, `require.resolve` will throw an
           // exception and `hasCodeMirror` won't be set to `true`.
-          require.resolve("codemirror");
+          require.resolve('codemirror');
           hasCodeMirror = true;
         } catch (e) {
           // do nothing
         }
         // Almond/Require
-      } else if (typeof require.specified !== "undefined") {
-        hasCodeMirror = require.specified("codemirror");
+      } else if (typeof require.specified !== 'undefined') {
+        hasCodeMirror = require.specified('codemirror');
       }
     }
   }
-  var isSupportTouch =
-    "ontouchstart" in window ||
-    navigator.MaxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
+  var isSupportTouch = 'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
   // [workaround] IE doesn't have input events for contentEditable
   // - see: https://goo.gl/4bfIvA
-  var inputEventName =
-    isMSIE || isEdge
-      ? "DOMCharacterDataModified DOMSubtreeModified DOMNodeInserted"
-      : "input";
+  var inputEventName = isMSIE || isEdge ? 'DOMCharacterDataModified DOMSubtreeModified DOMNodeInserted' : 'input';
   /**
    * @class core.env
    *
@@ -801,7 +766,7 @@
    * @alternateClassName env
    */
   var env = {
-    isMac: navigator.appVersion.indexOf("Mac") > -1,
+    isMac: navigator.appVersion.indexOf('Mac') > -1,
     isMSIE: isMSIE,
     isEdge: isEdge,
     isFF: !isEdge && /firefox/i.test(userAgent),
@@ -820,7 +785,7 @@
   };
 
   var NBSP_CHAR = String.fromCharCode(160);
-  var ZERO_WIDTH_NBSP_CHAR = "\ufeff";
+  var ZERO_WIDTH_NBSP_CHAR = '\ufeff';
   /**
    * @method isEditable
    *
@@ -830,7 +795,7 @@
    * @return {Boolean}
    */
   function isEditable(node) {
-    return node && $$1(node).hasClass("note-editable");
+    return node && $$1(node).hasClass('note-editable');
   }
   /**
    * @method isControlSizing
@@ -841,7 +806,7 @@
    * @return {Boolean}
    */
   function isControlSizing(node) {
-    return node && $$1(node).hasClass("note-control-sizing");
+    return node && $$1(node).hasClass('note-control-sizing');
   }
   /**
    * @method makePredByNodeName
@@ -884,10 +849,7 @@
    * @see http://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
    */
   function isVoid(node) {
-    return (
-      node &&
-      /^BR|^IMG|^HR|^IFRAME|^BUTTON|^INPUT/.test(node.nodeName.toUpperCase())
-    );
+    return node && /^BR|^IMG|^HR|^IFRAME|^BUTTON|^INPUT/.test(node.nodeName.toUpperCase());
   }
   function isPara(node) {
     if (isEditable(node)) {
@@ -899,13 +861,13 @@
   function isHeading(node) {
     return node && /^H[1-7]/.test(node.nodeName.toUpperCase());
   }
-  var isPre = makePredByNodeName("PRE");
-  var isLi = makePredByNodeName("LI");
+  var isPre = makePredByNodeName('PRE');
+  var isLi = makePredByNodeName('LI');
   function isPurePara(node) {
     return isPara(node) && !isLi(node);
   }
-  var isTable = makePredByNodeName("TABLE");
-  var isData = makePredByNodeName("DATA");
+  var isTable = makePredByNodeName('TABLE');
+  var isData = makePredByNodeName('DATA');
   function isInline(node) {
     return (
       !isBodyContainer(node) &&
@@ -920,22 +882,22 @@
   function isList(node) {
     return node && /^UL|^OL/.test(node.nodeName.toUpperCase());
   }
-  var isHr = makePredByNodeName("HR");
+  var isHr = makePredByNodeName('HR');
   function isCell(node) {
     return node && /^TD|^TH/.test(node.nodeName.toUpperCase());
   }
-  var isBlockquote = makePredByNodeName("BLOCKQUOTE");
+  var isBlockquote = makePredByNodeName('BLOCKQUOTE');
   function isBodyContainer(node) {
     return isCell(node) || isBlockquote(node) || isEditable(node);
   }
-  var isAnchor = makePredByNodeName("A");
+  var isAnchor = makePredByNodeName('A');
   function isParaInline(node) {
     return isInline(node) && !!ancestor(node, isPara);
   }
   function isBodyInline(node) {
     return isInline(node) && !ancestor(node, isPara);
   }
-  var isBody = makePredByNodeName("BODY");
+  var isBody = makePredByNodeName('BODY');
   /**
    * returns whether nodeB is closest sibling of nodeA
    *
@@ -970,7 +932,7 @@
    * - [workaround] old IE only works with &nbsp;
    * - [workaround] IE11 and other browser works with bogus br
    */
-  var blankHTML = env.isMSIE && env.browserVersion < 11 ? "&nbsp;" : "<br>";
+  var blankHTML = env.isMSIE && env.browserVersion < 11 ? '&nbsp;' : '<br>';
   /**
    * @method nodeLength
    *
@@ -1000,7 +962,7 @@
     } else if (!isText(node) && len === 1 && node.innerHTML === blankHTML) {
       // ex) <p><br></p>, <span><br></span>
       return true;
-    } else if (lists.all(node.childNodes, isText) && node.innerHTML === "") {
+    } else if (lists.all(node.childNodes, isText) && node.innerHTML === '') {
       // ex) <p></p>, <span></span>
       return true;
     }
@@ -1158,7 +1120,7 @@
    */
   function wrap(node, wrapperName) {
     var parent = node.parentNode;
-    var wrapper = $$1("<" + wrapperName + ">")[0];
+    var wrapper = $$1('<' + wrapperName + '>')[0];
     parent.insertBefore(wrapper, node);
     wrapper.appendChild(node);
     return wrapper;
@@ -1411,7 +1373,7 @@
       return false;
     }
     var ch = point.node.nodeValue.charAt(point.offset - 1);
-    return ch && (ch !== " " && ch !== NBSP_CHAR);
+    return ch && (ch !== ' ' && ch !== NBSP_CHAR);
   }
   /**
    * @method walkPoint
@@ -1428,10 +1390,7 @@
       if (isSamePoint(point, endPoint)) {
         break;
       }
-      var isSkipOffset =
-        isSkipInnerOffset &&
-        startPoint.node !== point.node &&
-        endPoint.node !== point.node;
+      var isSkipOffset = isSkipInnerOffset && startPoint.node !== point.node && endPoint.node !== point.node;
       point = nextPoint(point, isSkipOffset);
     }
   }
@@ -1644,7 +1603,7 @@
     remove(node);
     return newNode;
   }
-  var isTextarea = makePredByNodeName("TEXTAREA");
+  var isTextarea = makePredByNodeName('TEXTAREA');
   /**
    * @param {jQuery} $node
    * @param {Boolean} [stripLinebreaks] - default: false
@@ -1652,7 +1611,7 @@
   function value($node, stripLinebreaks) {
     var val = isTextarea($node[0]) ? $node.val() : $node.html();
     if (stripLinebreaks) {
-      return val.replace(/[\n\r]/g, "");
+      return val.replace(/[\n\r]/g, '');
     }
     return val;
   }
@@ -1670,12 +1629,9 @@
       var regexTag = /<(\/?)(\b(?!!)[^>\s]*)(.*?)(\s*\/?>)/g;
       markup = markup.replace(regexTag, function(match, endSlash, name) {
         name = name.toUpperCase();
-        var isEndOfInlineContainer =
-          /^DIV|^TD|^TH|^P|^LI|^H[1-7]/.test(name) && !!endSlash;
-        var isBlockNode = /^BLOCKQUOTE|^TABLE|^TBODY|^TR|^HR|^UL|^OL/.test(
-          name
-        );
-        return match + (isEndOfInlineContainer || isBlockNode ? "\n" : "");
+        var isEndOfInlineContainer = /^DIV|^TD|^TH|^P|^LI|^H[1-7]/.test(name) && !!endSlash;
+        var isBlockNode = /^BLOCKQUOTE|^TABLE|^TBODY|^TR|^HR|^UL|^OL/.test(name);
+        return match + (isEndOfInlineContainer || isBlockNode ? '\n' : '');
       });
       markup = $$1.trim(markup);
     }
@@ -1709,9 +1665,7 @@
    * @param {Node} an HTML DOM node
    */
   function isCustomStyleTag(node) {
-    return (
-      node && !isText(node) && lists.contains(node.classList, "note-styletag")
-    );
+    return node && !isText(node) && lists.contains(node.classList, 'note-styletag');
   }
   var dom = {
     /** @property {String} NBSP_CHAR */
@@ -1721,7 +1675,7 @@
     /** @property {String} blank */
     blank: blankHTML,
     /** @property {String} emptyPara */
-    emptyPara: "<p>" + blankHTML + "</p>",
+    emptyPara: '<p>' + blankHTML + '</p>',
     makePredByNodeName: makePredByNodeName,
     isEditable: isEditable,
     isControlSizing: isControlSizing,
@@ -1744,15 +1698,15 @@
     isBlockquote: isBlockquote,
     isBodyContainer: isBodyContainer,
     isAnchor: isAnchor,
-    isDiv: makePredByNodeName("DIV"),
+    isDiv: makePredByNodeName('DIV'),
     isLi: isLi,
-    isBR: makePredByNodeName("BR"),
-    isSpan: makePredByNodeName("SPAN"),
-    isB: makePredByNodeName("B"),
-    isU: makePredByNodeName("U"),
-    isS: makePredByNodeName("S"),
-    isI: makePredByNodeName("I"),
-    isImg: makePredByNodeName("IMG"),
+    isBR: makePredByNodeName('BR'),
+    isSpan: makePredByNodeName('SPAN'),
+    isB: makePredByNodeName('B'),
+    isU: makePredByNodeName('U'),
+    isS: makePredByNodeName('S'),
+    isI: makePredByNodeName('I'),
+    isImg: makePredByNodeName('IMG'),
     isTextarea: isTextarea,
     isEmpty: isEmpty,
     isEmptyAnchor: func.and(isAnchor, isEmpty),
@@ -1808,138 +1762,138 @@
     lang: {}
   };
   $$1.extend($$1.summernote.lang, {
-    "en-US": {
+    'en-US': {
       font: {
-        bold: "Bold",
-        italic: "Italic",
-        underline: "Underline",
-        clear: "Remove Font Style",
-        height: "Line Height",
-        name: "Font Family",
-        strikethrough: "Strikethrough",
-        subscript: "Subscript",
-        superscript: "Superscript",
-        size: "Font Size"
+        bold: 'Bold',
+        italic: 'Italic',
+        underline: 'Underline',
+        clear: 'Remove Font Style',
+        height: 'Line Height',
+        name: 'Font Family',
+        strikethrough: 'Strikethrough',
+        subscript: 'Subscript',
+        superscript: 'Superscript',
+        size: 'Font Size'
       },
       image: {
-        image: "Picture",
-        insert: "Insert Image",
-        resizeFull: "Resize Full",
-        resizeHalf: "Resize Half",
-        resizeQuarter: "Resize Quarter",
-        floatLeft: "Float Left",
-        floatRight: "Float Right",
-        floatNone: "Float None",
-        shapeRounded: "Shape: Rounded",
-        shapeCircle: "Shape: Circle",
-        shapeThumbnail: "Shape: Thumbnail",
-        shapeNone: "Shape: None",
-        dragImageHere: "Drag image or text here",
-        dropImage: "Drop image or Text",
-        selectFromFiles: "Select from files",
-        maximumFileSize: "Maximum file size",
-        maximumFileSizeError: "Maximum file size exceeded.",
-        url: "Image URL",
-        remove: "Remove Image",
-        original: "Original"
+        image: 'Picture',
+        insert: 'Insert Image',
+        resizeFull: 'Resize Full',
+        resizeHalf: 'Resize Half',
+        resizeQuarter: 'Resize Quarter',
+        floatLeft: 'Float Left',
+        floatRight: 'Float Right',
+        floatNone: 'Float None',
+        shapeRounded: 'Shape: Rounded',
+        shapeCircle: 'Shape: Circle',
+        shapeThumbnail: 'Shape: Thumbnail',
+        shapeNone: 'Shape: None',
+        dragImageHere: 'Drag image or text here',
+        dropImage: 'Drop image or Text',
+        selectFromFiles: 'Select from files',
+        maximumFileSize: 'Maximum file size',
+        maximumFileSizeError: 'Maximum file size exceeded.',
+        url: 'Image URL',
+        remove: 'Remove Image',
+        original: 'Original'
       },
       video: {
-        video: "Video",
-        videoLink: "Video Link",
-        insert: "Insert Video",
-        url: "Video URL",
-        providers: "(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)"
+        video: 'Video',
+        videoLink: 'Video Link',
+        insert: 'Insert Video',
+        url: 'Video URL',
+        providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)'
       },
       link: {
-        link: "Link",
-        insert: "Insert Link",
-        unlink: "Unlink",
-        edit: "Edit",
-        textToDisplay: "Text to display",
-        url: "To what URL should this link go?",
-        openInNewWindow: "Open in new window"
+        link: 'Link',
+        insert: 'Insert Link',
+        unlink: 'Unlink',
+        edit: 'Edit',
+        textToDisplay: 'Text to display',
+        url: 'To what URL should this link go?',
+        openInNewWindow: 'Open in new window'
       },
       table: {
-        table: "Table",
-        addRowAbove: "Add row above",
-        addRowBelow: "Add row below",
-        addColLeft: "Add column left",
-        addColRight: "Add column right",
-        delRow: "Delete row",
-        delCol: "Delete column",
-        delTable: "Delete table"
+        table: 'Table',
+        addRowAbove: 'Add row above',
+        addRowBelow: 'Add row below',
+        addColLeft: 'Add column left',
+        addColRight: 'Add column right',
+        delRow: 'Delete row',
+        delCol: 'Delete column',
+        delTable: 'Delete table'
       },
       hr: {
-        insert: "Insert Horizontal Rule"
+        insert: 'Insert Horizontal Rule'
       },
       style: {
-        style: "Style",
-        p: "Normal",
-        blockquote: "Quote",
-        pre: "Code",
-        h1: "Header 1",
-        h2: "Header 2",
-        h3: "Header 3",
-        h4: "Header 4",
-        h5: "Header 5",
-        h6: "Header 6"
+        style: 'Style',
+        p: 'Normal',
+        blockquote: 'Quote',
+        pre: 'Code',
+        h1: 'Header 1',
+        h2: 'Header 2',
+        h3: 'Header 3',
+        h4: 'Header 4',
+        h5: 'Header 5',
+        h6: 'Header 6'
       },
       lists: {
-        unordered: "Unordered list",
-        ordered: "Ordered list"
+        unordered: 'Unordered list',
+        ordered: 'Ordered list'
       },
       options: {
-        help: "Help",
-        fullscreen: "Full Screen",
-        codeview: "Code View"
+        help: 'Help',
+        fullscreen: 'Full Screen',
+        codeview: 'Code View'
       },
       paragraph: {
-        paragraph: "Paragraph",
-        outdent: "Outdent",
-        indent: "Indent",
-        left: "Align left",
-        center: "Align center",
-        right: "Align right",
-        justify: "Justify full"
+        paragraph: 'Paragraph',
+        outdent: 'Outdent',
+        indent: 'Indent',
+        left: 'Align left',
+        center: 'Align center',
+        right: 'Align right',
+        justify: 'Justify full'
       },
       color: {
-        recent: "Recent Color",
-        more: "More Color",
-        background: "Background Color",
-        foreground: "Foreground Color",
-        transparent: "Transparent",
-        setTransparent: "Set transparent",
-        reset: "Reset",
-        resetToDefault: "Reset to default"
+        recent: 'Recent Color',
+        more: 'More Color',
+        background: 'Background Color',
+        foreground: 'Foreground Color',
+        transparent: 'Transparent',
+        setTransparent: 'Set transparent',
+        reset: 'Reset',
+        resetToDefault: 'Reset to default'
       },
       shortcut: {
-        shortcuts: "Keyboard shortcuts",
-        close: "Close",
-        textFormatting: "Text formatting",
-        action: "Action",
-        paragraphFormatting: "Paragraph formatting",
-        documentStyle: "Document Style",
-        extraKeys: "Extra keys"
+        shortcuts: 'Keyboard shortcuts',
+        close: 'Close',
+        textFormatting: 'Text formatting',
+        action: 'Action',
+        paragraphFormatting: 'Paragraph formatting',
+        documentStyle: 'Document Style',
+        extraKeys: 'Extra keys'
       },
       help: {
-        insertParagraph: "Insert Paragraph",
-        undo: "Undoes the last command",
-        redo: "Redoes the last command",
-        tab: "Tab",
-        untab: "Untab",
-        bold: "Set a bold style",
-        italic: "Set a italic style",
-        underline: "Set a underline style",
-        strikethrough: "Set a strikethrough style",
-        removeFormat: "Clean a style",
-        justifyLeft: "Set left align",
-        justifyCenter: "Set center align",
-        justifyRight: "Set right align",
-        justifyFull: "Set full align",
-        insertUnorderedList: "Toggle unordered list",
-        insertOrderedList: "Toggle ordered list",
-        outdent: "Outdent on current paragraph",
-        indent: "Indent on current paragraph",
+        insertParagraph: 'Insert Paragraph',
+        undo: 'Undoes the last command',
+        redo: 'Redoes the last command',
+        tab: 'Tab',
+        untab: 'Untab',
+        bold: 'Set a bold style',
+        italic: 'Set a italic style',
+        underline: 'Set a underline style',
+        strikethrough: 'Set a strikethrough style',
+        removeFormat: 'Clean a style',
+        justifyLeft: 'Set left align',
+        justifyCenter: 'Set center align',
+        justifyRight: 'Set right align',
+        justifyFull: 'Set full align',
+        insertUnorderedList: 'Toggle unordered list',
+        insertOrderedList: 'Toggle ordered list',
+        outdent: 'Outdent on current paragraph',
+        indent: 'Indent on current paragraph',
         formatPara: "Change current block's format as a paragraph(P tag)",
         formatH1: "Change current block's format as H1",
         formatH2: "Change current block's format as H2",
@@ -1947,16 +1901,16 @@
         formatH4: "Change current block's format as H4",
         formatH5: "Change current block's format as H5",
         formatH6: "Change current block's format as H6",
-        insertHorizontalRule: "Insert horizontal rule",
-        "linkDialog.show": "Show Link Dialog"
+        insertHorizontalRule: 'Insert horizontal rule',
+        'linkDialog.show': 'Show Link Dialog'
       },
       history: {
-        undo: "Undo",
-        redo: "Redo"
+        undo: 'Undo',
+        redo: 'Redo'
       },
       specialChar: {
-        specialChar: "SPECIAL CHARACTERS",
-        select: "Select Special characters"
+        specialChar: 'SPECIAL CHARACTERS',
+        select: 'Select Special characters'
       }
     }
   });
@@ -2016,16 +1970,7 @@
      * @return {Boolean}
      */
     isEdit: function(keyCode) {
-      return lists.contains(
-        [
-          KEY_MAP.BACKSPACE,
-          KEY_MAP.TAB,
-          KEY_MAP.ENTER,
-          KEY_MAP.SPACE,
-          KEY_MAP.DELETE
-        ],
-        keyCode
-      );
+      return lists.contains([KEY_MAP.BACKSPACE, KEY_MAP.TAB, KEY_MAP.ENTER, KEY_MAP.SPACE, KEY_MAP.DELETE], keyCode);
     },
     /**
      * @method isMove
@@ -2034,10 +1979,7 @@
      * @return {Boolean}
      */
     isMove: function(keyCode) {
-      return lists.contains(
-        [KEY_MAP.LEFT, KEY_MAP.UP, KEY_MAP.RIGHT, KEY_MAP.DOWN],
-        keyCode
-      );
+      return lists.contains([KEY_MAP.LEFT, KEY_MAP.UP, KEY_MAP.RIGHT, KEY_MAP.DOWN], keyCode);
     },
     /**
      * @property {Object} nameFromCode
@@ -2067,7 +2009,7 @@
         continue;
       }
       tester.moveToElementText(childNodes[offset]);
-      if (tester.compareEndPoints("StartToStart", textRange) >= 0) {
+      if (tester.compareEndPoints('StartToStart', textRange) >= 0) {
         break;
       }
       prevContainer = childNodes[offset];
@@ -2077,16 +2019,11 @@
       var curTextNode = null;
       textRangeStart.moveToElementText(prevContainer || container);
       textRangeStart.collapse(!prevContainer);
-      curTextNode = prevContainer
-        ? prevContainer.nextSibling
-        : container.firstChild;
+      curTextNode = prevContainer ? prevContainer.nextSibling : container.firstChild;
       var pointTester = textRange.duplicate();
-      pointTester.setEndPoint("StartToStart", textRangeStart);
-      var textCount = pointTester.text.replace(/[\r\n]/g, "").length;
-      while (
-        textCount > curTextNode.nodeValue.length &&
-        curTextNode.nextSibling
-      ) {
+      pointTester.setEndPoint('StartToStart', textRangeStart);
+      var textCount = pointTester.text.replace(/[\r\n]/g, '').length;
+      while (textCount > curTextNode.nodeValue.length && curTextNode.nextSibling) {
         textCount -= curTextNode.nodeValue.length;
         curTextNode = curTextNode.nextSibling;
       }
@@ -2141,7 +2078,7 @@
     var info = textRangeInfo(point.node, point.offset);
     textRange.moveToElementText(info.node);
     textRange.collapse(info.collapseToStart);
-    textRange.moveStart("character", info.offset);
+    textRange.moveStart('character', info.offset);
     return textRange;
   }
   /**
@@ -2183,7 +2120,7 @@
           offset: this.so
         });
         textRange.setEndPoint(
-          "EndToEnd",
+          'EndToEnd',
           pointToTextRange({
             node: this.ec,
             offset: this.eo
@@ -2236,9 +2173,7 @@
     WrappedRange.prototype.scrollIntoView = function(container) {
       var height = $$1(container).height();
       if (container.scrollTop + height < this.sc.offsetTop) {
-        container.scrollTop += Math.abs(
-          container.scrollTop + height - this.sc.offsetTop
-        );
+        container.scrollTop += Math.abs(container.scrollTop + height - this.sc.offsetTop);
       }
       return this;
     };
@@ -2254,27 +2189,17 @@
       var getVisiblePoint = function(point, isLeftToRight) {
         if (
           (dom.isVisiblePoint(point) && !dom.isEdgePoint(point)) ||
-          (dom.isVisiblePoint(point) &&
-            dom.isRightEdgePoint(point) &&
-            !isLeftToRight) ||
-          (dom.isVisiblePoint(point) &&
-            dom.isLeftEdgePoint(point) &&
-            isLeftToRight) ||
-          (dom.isVisiblePoint(point) &&
-            dom.isBlock(point.node) &&
-            dom.isEmpty(point.node))
+          (dom.isVisiblePoint(point) && dom.isRightEdgePoint(point) && !isLeftToRight) ||
+          (dom.isVisiblePoint(point) && dom.isLeftEdgePoint(point) && isLeftToRight) ||
+          (dom.isVisiblePoint(point) && dom.isBlock(point.node) && dom.isEmpty(point.node))
         ) {
           return point;
         }
         // point on block's edge
         var block = dom.ancestor(point.node, dom.isBlock);
         if (
-          ((dom.isLeftEdgePointOf(point, block) ||
-            dom.isVoid(dom.prevPoint(point).node)) &&
-            !isLeftToRight) ||
-          ((dom.isRightEdgePointOf(point, block) ||
-            dom.isVoid(dom.nextPoint(point).node)) &&
-            isLeftToRight)
+          ((dom.isLeftEdgePointOf(point, block) || dom.isVoid(dom.prevPoint(point).node)) && !isLeftToRight) ||
+          ((dom.isRightEdgePointOf(point, block) || dom.isVoid(dom.nextPoint(point).node)) && isLeftToRight)
         ) {
           // returns point already on visible point
           if (dom.isVisiblePoint(point)) {
@@ -2289,15 +2214,8 @@
         return nextPoint || point;
       };
       var endPoint = getVisiblePoint(this.getEndPoint(), false);
-      var startPoint = this.isCollapsed()
-        ? endPoint
-        : getVisiblePoint(this.getStartPoint(), true);
-      return new WrappedRange(
-        startPoint.node,
-        startPoint.offset,
-        endPoint.node,
-        endPoint.offset
-      );
+      var startPoint = this.isCollapsed() ? endPoint : getVisiblePoint(this.getStartPoint(), true);
+      return new WrappedRange(startPoint.node, startPoint.offset, endPoint.node, endPoint.offset);
     };
     /**
      * returns matched nodes on range
@@ -2329,10 +2247,7 @@
             if (dom.isLeftEdgePoint(point)) {
               leftEdgeNodes.push(point.node);
             }
-            if (
-              dom.isRightEdgePoint(point) &&
-              lists.contains(leftEdgeNodes, point.node)
-            ) {
+            if (dom.isRightEdgePoint(point) && lists.contains(leftEdgeNodes, point.node)) {
               node = point.node;
             }
           } else if (includeAncestor) {
@@ -2376,12 +2291,7 @@
         boundaryPoints.ec = endAncestor;
         boundaryPoints.eo = dom.nodeLength(endAncestor);
       }
-      return new WrappedRange(
-        boundaryPoints.sc,
-        boundaryPoints.so,
-        boundaryPoints.ec,
-        boundaryPoints.eo
-      );
+      return new WrappedRange(boundaryPoints.sc, boundaryPoints.so, boundaryPoints.ec, boundaryPoints.eo);
     };
     /**
      * @param {Boolean} isCollapseToStart
@@ -2411,12 +2321,7 @@
           boundaryPoints.eo = this.eo - this.so;
         }
       }
-      return new WrappedRange(
-        boundaryPoints.sc,
-        boundaryPoints.so,
-        boundaryPoints.ec,
-        boundaryPoints.eo
-      );
+      return new WrappedRange(boundaryPoints.sc, boundaryPoints.so, boundaryPoints.ec, boundaryPoints.eo);
     };
     /**
      * delete contents on range
@@ -2447,12 +2352,7 @@
       $$1.each(emptyParents, function(idx, node) {
         dom.remove(node, false);
       });
-      return new WrappedRange(
-        point.node,
-        point.offset,
-        point.node,
-        point.offset
-      ).normalize();
+      return new WrappedRange(point.node, point.offset, point.node, point.offset).normalize();
     };
     /**
      * makeIsOn: return isOn(pred) function
@@ -2505,22 +2405,17 @@
         var ancestors = dom.listAncestor(rng.sc, func.not(dom.isInline));
         topAncestor = lists.last(ancestors);
         if (!dom.isInline(topAncestor)) {
-          topAncestor =
-            ancestors[ancestors.length - 2] || rng.sc.childNodes[rng.so];
+          topAncestor = ancestors[ancestors.length - 2] || rng.sc.childNodes[rng.so];
         }
       } else {
         topAncestor = rng.sc.childNodes[rng.so > 0 ? rng.so - 1 : 0];
       }
       // siblings not in paragraph
-      var inlineSiblings = dom
-        .listPrev(topAncestor, dom.isParaInline)
-        .reverse();
-      inlineSiblings = inlineSiblings.concat(
-        dom.listNext(topAncestor.nextSibling, dom.isParaInline)
-      );
+      var inlineSiblings = dom.listPrev(topAncestor, dom.isParaInline).reverse();
+      inlineSiblings = inlineSiblings.concat(dom.listNext(topAncestor.nextSibling, dom.isParaInline));
       // wrap with paragraph
       if (inlineSiblings.length) {
-        var para = dom.wrap(lists.head(inlineSiblings), "p");
+        var para = dom.wrap(lists.head(inlineSiblings), 'p');
         dom.appendChildNodes(para, lists.tail(inlineSiblings));
       }
       return this.normalize();
@@ -2545,7 +2440,7 @@
      * insert html at current cursor
      */
     WrappedRange.prototype.pasteHTML = function(markup) {
-      var contentsContainer = $$1("<div></div>").html(markup)[0];
+      var contentsContainer = $$1('<div></div>').html(markup)[0];
       var childNodes = lists.from(contentsContainer.childNodes);
       var rng = this.wrapBodyInlineWithPara().deleteContents();
       return childNodes
@@ -2583,12 +2478,7 @@
           return !dom.isCharPoint(point);
         });
       }
-      return new WrappedRange(
-        startPoint.node,
-        startPoint.offset,
-        endPoint.node,
-        endPoint.offset
-      );
+      return new WrappedRange(startPoint.node, startPoint.offset, endPoint.node, endPoint.offset);
     };
     /**
      * create offsetPath bookmark
@@ -2662,9 +2552,7 @@
         var wrappedRange = this.createFromSelection();
         if (!wrappedRange && arguments.length === 1) {
           wrappedRange = this.createFromNode(arguments[0]);
-          return wrappedRange.collapse(
-            dom.emptyPara === arguments[0].innerHTML
-          );
+          return wrappedRange.collapse(dom.emptyPara === arguments[0].innerHTML);
         }
         return wrappedRange;
       }
@@ -2825,21 +2713,21 @@
   function createImage(url) {
     return $$1
       .Deferred(function(deferred) {
-        var $img = $$1("<img>");
+        var $img = $$1('<img>');
         $img
-          .one("load", function() {
-            $img.off("error abort");
+          .one('load', function() {
+            $img.off('error abort');
             deferred.resolve($img);
           })
-          .one("error abort", function() {
-            $img.off("load").detach();
+          .one('error abort', function() {
+            $img.off('load').detach();
             deferred.reject($img);
           })
           .css({
-            display: "none"
+            display: 'none'
           })
           .appendTo(document.body)
-          .attr("src", url);
+          .attr('src', url);
       })
       .promise();
   }
@@ -2895,7 +2783,7 @@
       // Restore stackOffset to its original value.
       this.stackOffset = -1;
       // Clear the editable area.
-      this.$editable.html("");
+      this.$editable.html('');
       // Record our first snapshot (of nothing).
       this.recordUndo();
     };
@@ -2968,15 +2856,9 @@
      * @return {Object}
      */
     Style.prototype.fromNode = function($node) {
-      var properties = [
-        "font-family",
-        "font-size",
-        "text-align",
-        "list-style-type",
-        "line-height"
-      ];
+      var properties = ['font-family', 'font-size', 'text-align', 'list-style-type', 'line-height'];
       var styleInfo = this.jQueryCSS($node, properties) || {};
-      styleInfo["font-size"] = parseInt(styleInfo["font-size"], 10);
+      styleInfo['font-size'] = parseInt(styleInfo['font-size'], 10);
       return styleInfo;
     };
     /**
@@ -3007,7 +2889,7 @@
      */
     Style.prototype.styleNodes = function(rng, options) {
       rng = rng.splitText();
-      var nodeName = (options && options.nodeName) || "SPAN";
+      var nodeName = (options && options.nodeName) || 'SPAN';
       var expandClosestSibling = !!(options && options.expandClosestSibling);
       var onlyPartialContains = !!(options && options.onlyPartialContains);
       if (rng.isCollapsed()) {
@@ -3019,9 +2901,7 @@
           fullyContains: true
         })
         .map(function(text) {
-          return (
-            dom.singleChildAncestor(text, pred) || dom.wrap(text, nodeName)
-          );
+          return dom.singleChildAncestor(text, pred) || dom.wrap(text, nodeName);
         });
       if (expandClosestSibling) {
         if (onlyPartialContains) {
@@ -3058,43 +2938,29 @@
       // [workaround] prevent Firefox nsresult: "0x80004005 (NS_ERROR_FAILURE)"
       try {
         styleInfo = $$1.extend(styleInfo, {
-          "font-bold": document.queryCommandState("bold") ? "bold" : "normal",
-          "font-italic": document.queryCommandState("italic")
-            ? "italic"
-            : "normal",
-          "font-underline": document.queryCommandState("underline")
-            ? "underline"
-            : "normal",
-          "font-subscript": document.queryCommandState("subscript")
-            ? "subscript"
-            : "normal",
-          "font-superscript": document.queryCommandState("superscript")
-            ? "superscript"
-            : "normal",
-          "font-strikethrough": document.queryCommandState("strikethrough")
-            ? "strikethrough"
-            : "normal",
-          "font-family":
-            document.queryCommandValue("fontname") || styleInfo["font-family"]
+          'font-bold': document.queryCommandState('bold') ? 'bold' : 'normal',
+          'font-italic': document.queryCommandState('italic') ? 'italic' : 'normal',
+          'font-underline': document.queryCommandState('underline') ? 'underline' : 'normal',
+          'font-subscript': document.queryCommandState('subscript') ? 'subscript' : 'normal',
+          'font-superscript': document.queryCommandState('superscript') ? 'superscript' : 'normal',
+          'font-strikethrough': document.queryCommandState('strikethrough') ? 'strikethrough' : 'normal',
+          'font-family': document.queryCommandValue('fontname') || styleInfo['font-family']
         });
       } catch (e) {}
       // list-style-type to list-style(unordered, ordered)
       if (!rng.isOnList()) {
-        styleInfo["list-style"] = "none";
+        styleInfo['list-style'] = 'none';
       } else {
-        var orderedTypes = ["circle", "disc", "disc-leading-zero", "square"];
-        var isUnordered =
-          $$1.inArray(styleInfo["list-style-type"], orderedTypes) > -1;
-        styleInfo["list-style"] = isUnordered ? "unordered" : "ordered";
+        var orderedTypes = ['circle', 'disc', 'disc-leading-zero', 'square'];
+        var isUnordered = $$1.inArray(styleInfo['list-style-type'], orderedTypes) > -1;
+        styleInfo['list-style'] = isUnordered ? 'unordered' : 'ordered';
       }
       var para = dom.ancestor(rng.sc, dom.isPara);
-      if (para && para.style["line-height"]) {
-        styleInfo["line-height"] = para.style.lineHeight;
+      if (para && para.style['line-height']) {
+        styleInfo['line-height'] = para.style.lineHeight;
       } else {
-        var lineHeight =
-          parseInt(styleInfo["line-height"], 10) /
-          parseInt(styleInfo["font-size"], 10);
-        styleInfo["line-height"] = lineHeight.toFixed(1);
+        var lineHeight = parseInt(styleInfo['line-height'], 10) / parseInt(styleInfo['font-size'], 10);
+        styleInfo['line-height'] = lineHeight.toFixed(1);
       }
       styleInfo.anchor = rng.isOnAnchor() && dom.ancestor(rng.sc, dom.isAnchor);
       styleInfo.ancestors = dom.listAncestor(rng.sc, dom.isEditable);
@@ -3110,13 +2976,13 @@
      * toggle ordered list
      */
     Bullet.prototype.insertOrderedList = function(editable) {
-      this.toggleList("OL", editable);
+      this.toggleList('OL', editable);
     };
     /**
      * toggle unordered list
      */
     Bullet.prototype.insertUnorderedList = function(editable) {
-      this.toggleList("UL", editable);
+      this.toggleList('UL', editable);
     };
     /**
      * indent
@@ -3125,14 +2991,14 @@
       var _this = this;
       var rng = range.create(editable).wrapBodyInlineWithPara();
       var paras = rng.nodes(dom.isPara, { includeAncestor: true });
-      var clustereds = lists.clusterBy(paras, func.peq2("parentNode"));
+      var clustereds = lists.clusterBy(paras, func.peq2('parentNode'));
       $$1.each(clustereds, function(idx, paras) {
         var head = lists.head(paras);
         if (dom.isLi(head)) {
           _this.wrapList(paras, head.parentNode.nodeName);
         } else {
           $$1.each(paras, function(idx, para) {
-            $$1(para).css("marginLeft", function(idx, val) {
+            $$1(para).css('marginLeft', function(idx, val) {
               return (parseInt(val, 10) || 0) + 25;
             });
           });
@@ -3147,16 +3013,16 @@
       var _this = this;
       var rng = range.create(editable).wrapBodyInlineWithPara();
       var paras = rng.nodes(dom.isPara, { includeAncestor: true });
-      var clustereds = lists.clusterBy(paras, func.peq2("parentNode"));
+      var clustereds = lists.clusterBy(paras, func.peq2('parentNode'));
       $$1.each(clustereds, function(idx, paras) {
         var head = lists.head(paras);
         if (dom.isLi(head)) {
           _this.releaseList([paras]);
         } else {
           $$1.each(paras, function(idx, para) {
-            $$1(para).css("marginLeft", function(idx, val) {
+            $$1(para).css('marginLeft', function(idx, val) {
               val = parseInt(val, 10) || 0;
-              return val > 25 ? val - 25 : "";
+              return val > 25 ? val - 25 : '';
             });
           });
         }
@@ -3173,14 +3039,12 @@
       var rng = range.create(editable).wrapBodyInlineWithPara();
       var paras = rng.nodes(dom.isPara, { includeAncestor: true });
       var bookmark = rng.paraBookmark(paras);
-      var clustereds = lists.clusterBy(paras, func.peq2("parentNode"));
+      var clustereds = lists.clusterBy(paras, func.peq2('parentNode'));
       // paragraph to list
       if (lists.find(paras, dom.isPurePara)) {
         var wrappedParas_1 = [];
         $$1.each(clustereds, function(idx, paras) {
-          wrappedParas_1 = wrappedParas_1.concat(
-            _this.wrapList(paras, listName)
-          );
+          wrappedParas_1 = wrappedParas_1.concat(_this.wrapList(paras, listName));
         });
         paras = wrappedParas_1;
         // list to paragraph or change list style
@@ -3212,11 +3076,10 @@
       var last = lists.last(paras);
       var prevList = dom.isList(head.previousSibling) && head.previousSibling;
       var nextList = dom.isList(last.nextSibling) && last.nextSibling;
-      var listNode =
-        prevList || dom.insertAfter(dom.create(listName || "UL"), last);
+      var listNode = prevList || dom.insertAfter(dom.create(listName || 'UL'), last);
       // P to LI
       paras = paras.map(function(para) {
-        return dom.isPurePara(para) ? dom.replace(para, "LI") : para;
+        return dom.isPurePara(para) ? dom.replace(para, 'LI') : para;
       });
       // append to list(<ul>, <ol>)
       dom.appendChildNodes(listNode, paras);
@@ -3238,9 +3101,7 @@
       $$1.each(clustereds, function(idx, paras) {
         var head = lists.head(paras);
         var last = lists.last(paras);
-        var headList = isEscapseToBody
-          ? dom.lastAncestor(head, dom.isList)
-          : head.parentNode;
+        var headList = isEscapseToBody ? dom.lastAncestor(head, dom.isList) : head.parentNode;
         var lastList =
           headList.childNodes.length > 1
             ? dom.splitTree(
@@ -3270,7 +3131,7 @@
         // LI to P
         if (isEscapseToBody || !dom.isList(headList.parentNode)) {
           paras = paras.map(function(para) {
-            return dom.replace(para, "P");
+            return dom.replace(para, 'P');
           });
         }
         $$1.each(lists.from(paras).reverse(), function(idx, para) {
@@ -3279,9 +3140,7 @@
         // remove empty lists
         var rootLists = lists.compact([headList, middleList, lastList]);
         $$1.each(rootLists, function(idx, rootList) {
-          var listNodes = [rootList].concat(
-            dom.listDescendant(rootList, dom.isList)
-          );
+          var listNodes = [rootList].concat(dom.listDescendant(rootList, dom.isList));
           $$1.each(listNodes.reverse(), function(idx, listNode) {
             if (!dom.nodeLength(listNode)) {
               dom.remove(listNode, true);
@@ -3339,11 +3198,7 @@
           this.bullet.toggleList(splitRoot.parentNode.nodeName);
           return;
           // if it is an empty line with para on blockquote
-        } else if (
-          dom.isEmpty(splitRoot) &&
-          dom.isPara(splitRoot) &&
-          dom.isBlockquote(splitRoot.parentNode)
-        ) {
+        } else if (dom.isEmpty(splitRoot) && dom.isPara(splitRoot) && dom.isBlockquote(splitRoot.parentNode)) {
           // escape blockquote
           dom.insertAfter(splitRoot, splitRoot.parentNode);
           nextPara = splitRoot;
@@ -3351,20 +3206,16 @@
         } else {
           nextPara = dom.splitTree(splitRoot, rng.getStartPoint());
           var emptyAnchors = dom.listDescendant(splitRoot, dom.isEmptyAnchor);
-          emptyAnchors = emptyAnchors.concat(
-            dom.listDescendant(nextPara, dom.isEmptyAnchor)
-          );
+          emptyAnchors = emptyAnchors.concat(dom.listDescendant(nextPara, dom.isEmptyAnchor));
           $$1.each(emptyAnchors, function(idx, anchor) {
             dom.remove(anchor);
           });
           // replace empty heading, pre or custom-made styleTag with P tag
           if (
-            (dom.isHeading(nextPara) ||
-              dom.isPre(nextPara) ||
-              dom.isCustomStyleTag(nextPara)) &&
+            (dom.isHeading(nextPara) || dom.isPre(nextPara) || dom.isCustomStyleTag(nextPara)) &&
             dom.isEmpty(nextPara)
           ) {
-            nextPara = dom.replace(nextPara, "p");
+            nextPara = dom.replace(nextPara, 'p');
           }
         }
         // no paragraph: insert empty paragraph
@@ -3407,19 +3258,18 @@
       if (
         !startPoint ||
         !startPoint.tagName ||
-        (startPoint.tagName.toLowerCase() !== "td" &&
-          startPoint.tagName.toLowerCase() !== "th")
+        (startPoint.tagName.toLowerCase() !== 'td' && startPoint.tagName.toLowerCase() !== 'th')
       ) {
-        console.error("Impossible to identify start Cell point.", startPoint);
+        console.error('Impossible to identify start Cell point.', startPoint);
         return;
       }
       _startPoint.colPos = startPoint.cellIndex;
       if (
         !startPoint.parentElement ||
         !startPoint.parentElement.tagName ||
-        startPoint.parentElement.tagName.toLowerCase() !== "tr"
+        startPoint.parentElement.tagName.toLowerCase() !== 'tr'
       ) {
-        console.error("Impossible to identify start Row point.", startPoint);
+        console.error('Impossible to identify start Row point.', startPoint);
         return;
       }
       _startPoint.rowPos = startPoint.parentElement.rowIndex;
@@ -3433,15 +3283,7 @@
      * @param {object} baseCell Cell affected by this position.
      * @param {bool} isSpan Inform if it is an span cell/row.
      */
-    function setVirtualTablePosition(
-      rowIndex,
-      cellIndex,
-      baseRow,
-      baseCell,
-      isRowSpan,
-      isColSpan,
-      isVirtualCell
-    ) {
+    function setVirtualTablePosition(rowIndex, cellIndex, baseRow, baseCell, isRowSpan, isColSpan, isVirtualCell) {
       var objPosition = {
         baseRow: baseRow,
         baseCell: baseCell,
@@ -3460,12 +3302,7 @@
      * @param {object} virtualTableCellObj Object of specific position on virtual table.
      * @param {enum} resultAction Action to be applied in that item.
      */
-    function getActionCell(
-      virtualTableCellObj,
-      resultAction,
-      virtualRowPosition,
-      virtualColPosition
-    ) {
+    function getActionCell(virtualTableCellObj, resultAction, virtualRowPosition, virtualColPosition) {
       return {
         baseCell: virtualTableCellObj.baseCell,
         action: resultAction,
@@ -3506,59 +3343,24 @@
       var cellIndex = recoverCellIndex(row.rowIndex, cell.cellIndex);
       var cellHasColspan = cell.colSpan > 1;
       var cellHasRowspan = cell.rowSpan > 1;
-      var isThisSelectedCell =
-        row.rowIndex === _startPoint.rowPos &&
-        cell.cellIndex === _startPoint.colPos;
-      setVirtualTablePosition(
-        row.rowIndex,
-        cellIndex,
-        row,
-        cell,
-        cellHasRowspan,
-        cellHasColspan,
-        false
-      );
+      var isThisSelectedCell = row.rowIndex === _startPoint.rowPos && cell.cellIndex === _startPoint.colPos;
+      setVirtualTablePosition(row.rowIndex, cellIndex, row, cell, cellHasRowspan, cellHasColspan, false);
       // Add span rows to virtual Table.
-      var rowspanNumber = cell.attributes.rowSpan
-        ? parseInt(cell.attributes.rowSpan.value, 10)
-        : 0;
+      var rowspanNumber = cell.attributes.rowSpan ? parseInt(cell.attributes.rowSpan.value, 10) : 0;
       if (rowspanNumber > 1) {
         for (var rp = 1; rp < rowspanNumber; rp++) {
           var rowspanIndex = row.rowIndex + rp;
           adjustStartPoint(rowspanIndex, cellIndex, cell, isThisSelectedCell);
-          setVirtualTablePosition(
-            rowspanIndex,
-            cellIndex,
-            row,
-            cell,
-            true,
-            cellHasColspan,
-            true
-          );
+          setVirtualTablePosition(rowspanIndex, cellIndex, row, cell, true, cellHasColspan, true);
         }
       }
       // Add span cols to virtual table.
-      var colspanNumber = cell.attributes.colSpan
-        ? parseInt(cell.attributes.colSpan.value, 10)
-        : 0;
+      var colspanNumber = cell.attributes.colSpan ? parseInt(cell.attributes.colSpan.value, 10) : 0;
       if (colspanNumber > 1) {
         for (var cp = 1; cp < colspanNumber; cp++) {
           var cellspanIndex = recoverCellIndex(row.rowIndex, cellIndex + cp);
-          adjustStartPoint(
-            row.rowIndex,
-            cellspanIndex,
-            cell,
-            isThisSelectedCell
-          );
-          setVirtualTablePosition(
-            row.rowIndex,
-            cellspanIndex,
-            row,
-            cell,
-            cellHasRowspan,
-            true,
-            true
-          );
+          adjustStartPoint(row.rowIndex, cellspanIndex, cell, isThisSelectedCell);
+          setVirtualTablePosition(row.rowIndex, cellspanIndex, row, cell, cellHasRowspan, true, true);
         }
       }
     }
@@ -3649,10 +3451,8 @@
      * Recover array os what to do in table.
      */
     this.getActionList = function() {
-      var fixedRow =
-        where === TableResultAction.where.Row ? _startPoint.rowPos : -1;
-      var fixedCol =
-        where === TableResultAction.where.Column ? _startPoint.colPos : -1;
+      var fixedRow = where === TableResultAction.where.Row ? _startPoint.rowPos : -1;
+      var fixedCol = where === TableResultAction.where.Column ? _startPoint.colPos : -1;
       var actualPosition = 0;
       var canContinue = true;
       while (canContinue) {
@@ -3678,9 +3478,7 @@
             resultAction = getDeleteResultActionToCell(cell);
             break;
         }
-        _actionCellList.push(
-          getActionCell(cell, resultAction, rowPosition, colPosition)
-        );
+        _actionCellList.push(getActionCell(cell, resultAction, rowPosition, colPosition));
         actualPosition++;
       }
       return _actionCellList;
@@ -3727,7 +3525,7 @@
       var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
       var table = dom.ancestor(cell, dom.isTable);
       var cells = dom.listDescendant(table, dom.isCell);
-      var nextCell = lists[isShift ? "prev" : "next"](cells, cell);
+      var nextCell = lists[isShift ? 'prev' : 'next'](cells, cell);
       if (nextCell) {
         range.create(nextCell, 0).select();
       }
@@ -3741,14 +3539,14 @@
      */
     Table.prototype.addRow = function(rng, position) {
       var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
-      var currentTr = $$1(cell).closest("tr");
+      var currentTr = $$1(cell).closest('tr');
       var trAttributes = this.recoverAttributes(currentTr);
-      var html = $$1("<tr" + trAttributes + "></tr>");
+      var html = $$1('<tr' + trAttributes + '></tr>');
       var vTable = new TableResultAction(
         cell,
         TableResultAction.where.Row,
         TableResultAction.requestAction.Add,
-        $$1(currentTr).closest("table")[0]
+        $$1(currentTr).closest('table')[0]
       );
       var actions = vTable.getActionList();
       for (var idCell = 0; idCell < actions.length; idCell++) {
@@ -3756,23 +3554,16 @@
         var tdAttributes = this.recoverAttributes(currentCell.baseCell);
         switch (currentCell.action) {
           case TableResultAction.resultAction.AddCell:
-            html.append("<td" + tdAttributes + ">" + dom.blank + "</td>");
+            html.append('<td' + tdAttributes + '>' + dom.blank + '</td>');
             break;
           case TableResultAction.resultAction.SumSpanCount:
-            if (position === "top") {
+            if (position === 'top') {
               var baseCellTr = currentCell.baseCell.parent;
               var isTopFromRowSpan =
-                (!baseCellTr
-                  ? 0
-                  : currentCell.baseCell.closest("tr").rowIndex) <=
-                currentTr[0].rowIndex;
+                (!baseCellTr ? 0 : currentCell.baseCell.closest('tr').rowIndex) <= currentTr[0].rowIndex;
               if (isTopFromRowSpan) {
-                var newTd = $$1("<div></div>")
-                  .append(
-                    $$1(
-                      "<td" + tdAttributes + ">" + dom.blank + "</td>"
-                    ).removeAttr("rowspan")
-                  )
+                var newTd = $$1('<div></div>')
+                  .append($$1('<td' + tdAttributes + '>' + dom.blank + '</td>').removeAttr('rowspan'))
                   .html();
                 html.append(newTd);
                 break;
@@ -3780,11 +3571,11 @@
             }
             var rowspanNumber = parseInt(currentCell.baseCell.rowSpan, 10);
             rowspanNumber++;
-            currentCell.baseCell.setAttribute("rowSpan", rowspanNumber);
+            currentCell.baseCell.setAttribute('rowSpan', rowspanNumber);
             break;
         }
       }
-      if (position === "top") {
+      if (position === 'top') {
         currentTr.before(html);
       } else {
         var cellHasRowspan = cell.rowSpan > 1;
@@ -3793,7 +3584,7 @@
           $$1(
             $$1(currentTr)
               .parent()
-              .find("tr")[lastTrIndex]
+              .find('tr')[lastTrIndex]
           ).after($$1(html));
           return;
         }
@@ -3809,14 +3600,14 @@
      */
     Table.prototype.addCol = function(rng, position) {
       var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
-      var row = $$1(cell).closest("tr");
+      var row = $$1(cell).closest('tr');
       var rowsGroup = $$1(row).siblings();
       rowsGroup.push(row);
       var vTable = new TableResultAction(
         cell,
         TableResultAction.where.Column,
         TableResultAction.requestAction.Add,
-        $$1(row).closest("table")[0]
+        $$1(row).closest('table')[0]
       );
       var actions = vTable.getActionList();
       for (var actionIndex = 0; actionIndex < actions.length; actionIndex++) {
@@ -3824,25 +3615,19 @@
         var tdAttributes = this.recoverAttributes(currentCell.baseCell);
         switch (currentCell.action) {
           case TableResultAction.resultAction.AddCell:
-            if (position === "right") {
-              $$1(currentCell.baseCell).after(
-                "<td" + tdAttributes + ">" + dom.blank + "</td>"
-              );
+            if (position === 'right') {
+              $$1(currentCell.baseCell).after('<td' + tdAttributes + '>' + dom.blank + '</td>');
             } else {
-              $$1(currentCell.baseCell).before(
-                "<td" + tdAttributes + ">" + dom.blank + "</td>"
-              );
+              $$1(currentCell.baseCell).before('<td' + tdAttributes + '>' + dom.blank + '</td>');
             }
             break;
           case TableResultAction.resultAction.SumSpanCount:
-            if (position === "right") {
+            if (position === 'right') {
               var colspanNumber = parseInt(currentCell.baseCell.colSpan, 10);
               colspanNumber++;
-              currentCell.baseCell.setAttribute("colSpan", colspanNumber);
+              currentCell.baseCell.setAttribute('colSpan', colspanNumber);
             } else {
-              $$1(currentCell.baseCell).before(
-                "<td" + tdAttributes + ">" + dom.blank + "</td>"
-              );
+              $$1(currentCell.baseCell).before('<td' + tdAttributes + '>' + dom.blank + '</td>');
             }
             break;
         }
@@ -3855,17 +3640,17 @@
      * @return {string} Copied string elements.
      */
     Table.prototype.recoverAttributes = function(el) {
-      var resultStr = "";
+      var resultStr = '';
       if (!el) {
         return resultStr;
       }
       var attrList = el.attributes || [];
       for (var i = 0; i < attrList.length; i++) {
-        if (attrList[i].name.toLowerCase() === "id") {
+        if (attrList[i].name.toLowerCase() === 'id') {
           continue;
         }
         if (attrList[i].specified) {
-          resultStr += " " + attrList[i].name + "='" + attrList[i].value + "'";
+          resultStr += ' ' + attrList[i].name + "='" + attrList[i].value + "'";
         }
       }
       return resultStr;
@@ -3878,14 +3663,14 @@
      */
     Table.prototype.deleteRow = function(rng) {
       var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
-      var row = $$1(cell).closest("tr");
-      var cellPos = row.children("td, th").index($$1(cell));
+      var row = $$1(cell).closest('tr');
+      var cellPos = row.children('td, th').index($$1(cell));
       var rowPos = row[0].rowIndex;
       var vTable = new TableResultAction(
         cell,
         TableResultAction.where.Row,
         TableResultAction.requestAction.Delete,
-        $$1(row).closest("table")[0]
+        $$1(row).closest('table')[0]
       );
       var actions = vTable.getActionList();
       for (var actionIndex = 0; actionIndex < actions.length; actionIndex++) {
@@ -3900,7 +3685,7 @@
           case TableResultAction.resultAction.Ignore:
             continue;
           case TableResultAction.resultAction.AddCell:
-            var nextRow = row.next("tr")[0];
+            var nextRow = row.next('tr')[0];
             if (!nextRow) {
               continue;
             }
@@ -3909,12 +3694,12 @@
               if (rowspanNumber > 2) {
                 rowspanNumber--;
                 nextRow.insertBefore(cloneRow, nextRow.cells[cellPos]);
-                nextRow.cells[cellPos].setAttribute("rowSpan", rowspanNumber);
-                nextRow.cells[cellPos].innerHTML = "";
+                nextRow.cells[cellPos].setAttribute('rowSpan', rowspanNumber);
+                nextRow.cells[cellPos].innerHTML = '';
               } else if (rowspanNumber === 2) {
                 nextRow.insertBefore(cloneRow, nextRow.cells[cellPos]);
-                nextRow.cells[cellPos].removeAttribute("rowSpan");
-                nextRow.cells[cellPos].innerHTML = "";
+                nextRow.cells[cellPos].removeAttribute('rowSpan');
+                nextRow.cells[cellPos].innerHTML = '';
               }
             }
             continue;
@@ -3922,20 +3707,14 @@
             if (hasRowspan) {
               if (rowspanNumber > 2) {
                 rowspanNumber--;
-                baseCell.setAttribute("rowSpan", rowspanNumber);
-                if (
-                  virtualPosition.rowIndex !== rowPos &&
-                  baseCell.cellIndex === cellPos
-                ) {
-                  baseCell.innerHTML = "";
+                baseCell.setAttribute('rowSpan', rowspanNumber);
+                if (virtualPosition.rowIndex !== rowPos && baseCell.cellIndex === cellPos) {
+                  baseCell.innerHTML = '';
                 }
               } else if (rowspanNumber === 2) {
-                baseCell.removeAttribute("rowSpan");
-                if (
-                  virtualPosition.rowIndex !== rowPos &&
-                  baseCell.cellIndex === cellPos
-                ) {
-                  baseCell.innerHTML = "";
+                baseCell.removeAttribute('rowSpan');
+                if (virtualPosition.rowIndex !== rowPos && baseCell.cellIndex === cellPos) {
+                  baseCell.innerHTML = '';
                 }
               }
             }
@@ -3955,13 +3734,13 @@
      */
     Table.prototype.deleteCol = function(rng) {
       var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
-      var row = $$1(cell).closest("tr");
-      var cellPos = row.children("td, th").index($$1(cell));
+      var row = $$1(cell).closest('tr');
+      var cellPos = row.children('td, th').index($$1(cell));
       var vTable = new TableResultAction(
         cell,
         TableResultAction.where.Column,
         TableResultAction.requestAction.Delete,
-        $$1(row).closest("table")[0]
+        $$1(row).closest('table')[0]
       );
       var actions = vTable.getActionList();
       for (var actionIndex = 0; actionIndex < actions.length; actionIndex++) {
@@ -3975,19 +3754,17 @@
             var baseCell = actions[actionIndex].baseCell;
             var hasColspan = baseCell.colSpan && baseCell.colSpan > 1;
             if (hasColspan) {
-              var colspanNumber = baseCell.colSpan
-                ? parseInt(baseCell.colSpan, 10)
-                : 0;
+              var colspanNumber = baseCell.colSpan ? parseInt(baseCell.colSpan, 10) : 0;
               if (colspanNumber > 2) {
                 colspanNumber--;
-                baseCell.setAttribute("colSpan", colspanNumber);
+                baseCell.setAttribute('colSpan', colspanNumber);
                 if (baseCell.cellIndex === cellPos) {
-                  baseCell.innerHTML = "";
+                  baseCell.innerHTML = '';
                 }
               } else if (colspanNumber === 2) {
-                baseCell.removeAttribute("colSpan");
+                baseCell.removeAttribute('colSpan');
                 if (baseCell.cellIndex === cellPos) {
-                  baseCell.innerHTML = "";
+                  baseCell.innerHTML = '';
                 }
               }
             }
@@ -4009,16 +3786,16 @@
       var tds = [];
       var tdHTML;
       for (var idxCol = 0; idxCol < colCount; idxCol++) {
-        tds.push("<td>" + dom.blank + "</td>");
+        tds.push('<td>' + dom.blank + '</td>');
       }
-      tdHTML = tds.join("");
+      tdHTML = tds.join('');
       var trs = [];
       var trHTML;
       for (var idxRow = 0; idxRow < rowCount; idxRow++) {
-        trs.push("<tr>" + tdHTML + "</tr>");
+        trs.push('<tr>' + tdHTML + '</tr>');
       }
-      trHTML = trs.join("");
-      var $table = $$1("<table>" + trHTML + "</table>");
+      trHTML = trs.join('');
+      var $table = $$1('<table>' + trHTML + '</table>');
       if (options && options.tableClassName) {
         $table.addClass(options.tableClassName);
       }
@@ -4033,13 +3810,13 @@
     Table.prototype.deleteTable = function(rng) {
       var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
       $$1(cell)
-        .closest("table")
+        .closest('table')
         .remove();
     };
     return Table;
   })();
 
-  var KEY_BOGUS = "bogus";
+  var KEY_BOGUS = 'bogus';
   /**
    * @class Editor
    */
@@ -4059,42 +3836,33 @@
       this.typing = new Typing();
       this.bullet = new Bullet();
       this.history = new History(this.$editable);
-      this.context.memo("help.undo", this.lang.help.undo);
-      this.context.memo("help.redo", this.lang.help.redo);
-      this.context.memo("help.tab", this.lang.help.tab);
-      this.context.memo("help.untab", this.lang.help.untab);
-      this.context.memo("help.insertParagraph", this.lang.help.insertParagraph);
-      this.context.memo(
-        "help.insertOrderedList",
-        this.lang.help.insertOrderedList
-      );
-      this.context.memo(
-        "help.insertUnorderedList",
-        this.lang.help.insertUnorderedList
-      );
-      this.context.memo("help.indent", this.lang.help.indent);
-      this.context.memo("help.outdent", this.lang.help.outdent);
-      this.context.memo("help.formatPara", this.lang.help.formatPara);
-      this.context.memo(
-        "help.insertHorizontalRule",
-        this.lang.help.insertHorizontalRule
-      );
-      this.context.memo("help.fontName", this.lang.help.fontName);
+      this.context.memo('help.undo', this.lang.help.undo);
+      this.context.memo('help.redo', this.lang.help.redo);
+      this.context.memo('help.tab', this.lang.help.tab);
+      this.context.memo('help.untab', this.lang.help.untab);
+      this.context.memo('help.insertParagraph', this.lang.help.insertParagraph);
+      this.context.memo('help.insertOrderedList', this.lang.help.insertOrderedList);
+      this.context.memo('help.insertUnorderedList', this.lang.help.insertUnorderedList);
+      this.context.memo('help.indent', this.lang.help.indent);
+      this.context.memo('help.outdent', this.lang.help.outdent);
+      this.context.memo('help.formatPara', this.lang.help.formatPara);
+      this.context.memo('help.insertHorizontalRule', this.lang.help.insertHorizontalRule);
+      this.context.memo('help.fontName', this.lang.help.fontName);
       // native commands(with execCommand), generate function for execCommand
       var commands = [
-        "bold",
-        "italic",
-        "underline",
-        "strikethrough",
-        "superscript",
-        "subscript",
-        "justifyLeft",
-        "justifyCenter",
-        "justifyRight",
-        "justifyFull",
-        "formatBlock",
-        "removeFormat",
-        "backColor"
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'superscript',
+        'subscript',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
+        'formatBlock',
+        'removeFormat',
+        'backColor'
       ];
       for (var idx = 0, len = commands.length; idx < len; idx++) {
         this[commands[idx]] = (function(sCmd) {
@@ -4104,27 +3872,21 @@
             _this.afterCommand(true);
           };
         })(commands[idx]);
-        this.context.memo(
-          "help." + commands[idx],
-          this.lang.help[commands[idx]]
-        );
+        this.context.memo('help.' + commands[idx], this.lang.help[commands[idx]]);
       }
       this.fontName = this.wrapCommand(function(value) {
-        return _this.fontStyling("font-family", "'" + value + "'");
+        return _this.fontStyling('font-family', "'" + value + "'");
       });
       this.fontSize = this.wrapCommand(function(value) {
-        return _this.fontStyling("font-size", value + "px");
+        return _this.fontStyling('font-size', value + 'px');
       });
       for (var idx = 1; idx <= 6; idx++) {
-        this["formatH" + idx] = (function(idx) {
+        this['formatH' + idx] = (function(idx) {
           return function() {
-            _this.formatBlock("H" + idx);
+            _this.formatBlock('H' + idx);
           };
         })(idx);
-        this.context.memo(
-          "help.formatH" + idx,
-          this.lang.help["formatH" + idx]
-        );
+        this.context.memo('help.formatH' + idx, this.lang.help['formatH' + idx]);
       }
 
       this.insertParagraph = this.wrapCommand(function() {
@@ -4186,12 +3948,7 @@
       this.formatBlock = this.wrapCommand(function(tagName, $target) {
         var onApplyCustomStyle = _this.options.callbacks.onApplyCustomStyle;
         if (onApplyCustomStyle) {
-          onApplyCustomStyle.call(
-            _this,
-            $target,
-            _this.context,
-            _this.onFormatBlock
-          );
+          onApplyCustomStyle.call(_this, $target, _this.context, _this.onFormatBlock);
         } else {
           _this.onFormatBlock(tagName, $target);
         }
@@ -4200,7 +3957,7 @@
        * insert horizontal rule
        */
       this.insertHorizontalRule = this.wrapCommand(function() {
-        var hrNode = _this.createRange().insertNode(dom.create("HR"));
+        var hrNode = _this.createRange().insertNode(dom.create('HR'));
         if (hrNode.nextSibling) {
           range
             .create(hrNode.nextSibling, 0)
@@ -4229,49 +3986,40 @@
         var rng = linkInfo.range || _this.createRange();
         var isTextChanged = rng.toString() !== linkText;
         // handle spaced urls from input
-        if (typeof linkUrl === "string") {
+        if (typeof linkUrl === 'string') {
           linkUrl = linkUrl.trim();
         }
         if (_this.options.onCreateLink) {
           linkUrl = _this.options.onCreateLink(linkUrl);
         } else {
           // if url doesn't match an URL schema, set http:// as default
-          linkUrl = /^[A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?/.test(linkUrl)
-            ? linkUrl
-            : "http://" + linkUrl;
+          linkUrl = /^[A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?/.test(linkUrl) ? linkUrl : 'http://' + linkUrl;
         }
         var anchors = [];
         if (isTextChanged) {
           rng = rng.deleteContents();
-          var anchor = rng.insertNode($$1("<A>" + linkText + "</A>")[0]);
+          var anchor = rng.insertNode($$1('<A>' + linkText + '</A>')[0]);
           anchors.push(anchor);
         } else {
           anchors = _this.style.styleNodes(rng, {
-            nodeName: "A",
+            nodeName: 'A',
             expandClosestSibling: true,
             onlyPartialContains: true
           });
         }
         $$1.each(anchors, function(idx, anchor) {
-          $$1(anchor).attr("href", linkUrl);
+          $$1(anchor).attr('href', linkUrl);
           if (isNewWindow) {
-            $$1(anchor).attr("target", "_blank");
+            $$1(anchor).attr('target', '_blank');
           } else {
-            $$1(anchor).removeAttr("target");
+            $$1(anchor).removeAttr('target');
           }
         });
         var startRange = range.createFromNodeBefore(lists.head(anchors));
         var startPoint = startRange.getStartPoint();
         var endRange = range.createFromNodeAfter(lists.last(anchors));
         var endPoint = endRange.getEndPoint();
-        range
-          .create(
-            startPoint.node,
-            startPoint.offset,
-            endPoint.node,
-            endPoint.offset
-          )
-          .select();
+        range.create(startPoint.node, startPoint.offset, endPoint.node, endPoint.offset).select();
       });
       /**
        * setting color
@@ -4284,10 +4032,10 @@
         var foreColor = colorInfo.foreColor;
         var backColor = colorInfo.backColor;
         if (foreColor) {
-          document.execCommand("foreColor", false, foreColor);
+          document.execCommand('foreColor', false, foreColor);
         }
         if (backColor) {
-          document.execCommand("backColor", false, backColor);
+          document.execCommand('backColor', false, backColor);
         }
       });
       /**
@@ -4296,8 +4044,8 @@
        * @param {String} colorCode foreground color code
        */
       this.foreColor = this.wrapCommand(function(colorInfo) {
-        document.execCommand("styleWithCSS", false, true);
-        document.execCommand("foreColor", false, colorInfo);
+        document.execCommand('styleWithCSS', false, true);
+        document.execCommand('foreColor', false, colorInfo);
       });
       /**
        * insert Table
@@ -4305,23 +4053,21 @@
        * @param {String} dimension of table (ex : "5x5")
        */
       this.insertTable = this.wrapCommand(function(dim) {
-        var dimension = dim.split("x");
+        var dimension = dim.split('x');
         var rng = _this.createRange().deleteContents();
-        rng.insertNode(
-          _this.table.createTable(dimension[0], dimension[1], _this.options)
-        );
+        rng.insertNode(_this.table.createTable(dimension[0], dimension[1], _this.options));
       });
       /**
        * remove media object and Figure Elements if media object is img with Figure.
        */
       this.removeMedia = this.wrapCommand(function() {
         var $target = $$1(_this.restoreTarget()).parent();
-        if ($target.parent("figure").length) {
-          $target.parent("figure").remove();
+        if ($target.parent('figure').length) {
+          $target.parent('figure').remove();
         } else {
           $target = $$1(_this.restoreTarget()).detach();
         }
-        _this.context.triggerEvent("media.delete", $target, _this.$editable);
+        _this.context.triggerEvent('media.delete', $target, _this.$editable);
       });
       /**
        * float me
@@ -4330,9 +4076,9 @@
        */
       this.floatMe = this.wrapCommand(function(value) {
         var $target = $$1(_this.restoreTarget());
-        $target.toggleClass("note-float-left", value === "left");
-        $target.toggleClass("note-float-right", value === "right");
-        $target.css("float", value);
+        $target.toggleClass('note-float-left', value === 'left');
+        $target.toggleClass('note-float-right', value === 'right');
+        $target.css('float', value);
       });
       /**
        * resize overlay element
@@ -4341,8 +4087,8 @@
       this.resize = this.wrapCommand(function(value) {
         var $target = $$1(_this.restoreTarget());
         $target.css({
-          width: value * 100 + "%",
-          height: ""
+          width: value * 100 + '%',
+          height: ''
         });
       });
     }
@@ -4350,11 +4096,11 @@
       var _this = this;
       // bind custom events
       this.$editable
-        .on("keydown", function(event) {
+        .on('keydown', function(event) {
           if (event.keyCode === key.code.ENTER) {
-            _this.context.triggerEvent("enter", event);
+            _this.context.triggerEvent('enter', event);
           }
-          _this.context.triggerEvent("keydown", event);
+          _this.context.triggerEvent('keydown', event);
           if (!event.isDefaultPrevented()) {
             if (_this.options.shortcuts) {
               _this.handleKeyMap(event);
@@ -4366,41 +4112,41 @@
             return false;
           }
         })
-        .on("keyup", function(event) {
-          _this.context.triggerEvent("keyup", event);
+        .on('keyup', function(event) {
+          _this.context.triggerEvent('keyup', event);
         })
-        .on("focus", function(event) {
-          _this.context.triggerEvent("focus", event);
+        .on('focus', function(event) {
+          _this.context.triggerEvent('focus', event);
         })
-        .on("blur", function(event) {
-          _this.context.triggerEvent("blur", event);
+        .on('blur', function(event) {
+          _this.context.triggerEvent('blur', event);
         })
-        .on("mousedown", function(event) {
-          _this.context.triggerEvent("mousedown", event);
+        .on('mousedown', function(event) {
+          _this.context.triggerEvent('mousedown', event);
         })
-        .on("mouseup", function(event) {
-          _this.context.triggerEvent("mouseup", event);
+        .on('mouseup', function(event) {
+          _this.context.triggerEvent('mouseup', event);
         })
-        .on("scroll", function(event) {
-          _this.context.triggerEvent("scroll", event);
+        .on('scroll', function(event) {
+          _this.context.triggerEvent('scroll', event);
         })
-        .on("paste", function(event) {
-          _this.context.triggerEvent("paste", event);
+        .on('paste', function(event) {
+          _this.context.triggerEvent('paste', event);
         });
       // init content before set event
       this.$editable.html(dom.html(this.$note) || dom.emptyPara);
       this.$editable.on(
         env.inputEventName,
         func.debounce(function() {
-          _this.context.triggerEvent("change", _this.$editable.html());
+          _this.context.triggerEvent('change', _this.$editable.html());
         }, 100)
       );
       this.$editor
-        .on("focusin", function(event) {
-          _this.context.triggerEvent("focusin", event);
+        .on('focusin', function(event) {
+          _this.context.triggerEvent('focusin', event);
         })
-        .on("focusout", function(event) {
-          _this.context.triggerEvent("focusout", event);
+        .on('focusout', function(event) {
+          _this.context.triggerEvent('focusout', event);
         });
       if (!this.options.airMode) {
         if (this.options.width) {
@@ -4410,10 +4156,10 @@
           this.$editable.outerHeight(this.options.height);
         }
         if (this.options.maxHeight) {
-          this.$editable.css("max-height", this.options.maxHeight);
+          this.$editable.css('max-height', this.options.maxHeight);
         }
         if (this.options.minHeight) {
-          this.$editable.css("min-height", this.options.minHeight);
+          this.$editable.css('min-height', this.options.minHeight);
         }
       }
       this.history.recordUndo();
@@ -4422,22 +4168,22 @@
       this.$editable.off();
     };
     Editor.prototype.handleKeyMap = function(event) {
-      var keyMap = this.options.keyMap[env.isMac ? "mac" : "pc"];
+      var keyMap = this.options.keyMap[env.isMac ? 'mac' : 'pc'];
       var keys = [];
       if (event.metaKey) {
-        keys.push("CMD");
+        keys.push('CMD');
       }
       if (event.ctrlKey && !event.altKey) {
-        keys.push("CTRL");
+        keys.push('CTRL');
       }
       if (event.shiftKey) {
-        keys.push("SHIFT");
+        keys.push('SHIFT');
       }
       var keyName = key.nameFromCode[event.keyCode];
       if (keyName) {
         keys.push(keyName);
       }
-      var eventName = keyMap[keys.join("+")];
+      var eventName = keyMap[keys.join('+')];
       if (eventName) {
         if (this.context.invoke(eventName) !== false) {
           event.preventDefault();
@@ -4448,16 +4194,13 @@
     };
     Editor.prototype.preventDefaultEditableShortCuts = function(event) {
       // B(Bold, 66) / I(Italic, 73) / U(Underline, 85)
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        lists.contains([66, 73, 85], event.keyCode)
-      ) {
+      if ((event.ctrlKey || event.metaKey) && lists.contains([66, 73, 85], event.keyCode)) {
         event.preventDefault();
       }
     };
     Editor.prototype.isLimited = function(pad, event) {
       pad = pad || 0;
-      if (typeof event !== "undefined") {
+      if (typeof event !== 'undefined') {
         if (
           key.isMove(event.keyCode) ||
           (event.ctrlKey || event.metaKey) ||
@@ -4506,13 +4249,13 @@
       }
     };
     Editor.prototype.saveTarget = function(node) {
-      this.$editable.data("target", node);
+      this.$editable.data('target', node);
     };
     Editor.prototype.clearTarget = function() {
-      this.$editable.removeData("target");
+      this.$editable.removeData('target');
     };
     Editor.prototype.restoreTarget = function() {
-      return this.$editable.data("target");
+      return this.$editable.data('target');
     };
     /**
      * currentStyle
@@ -4525,9 +4268,7 @@
       if (rng) {
         rng = rng.normalize();
       }
-      return rng
-        ? this.style.current(rng)
-        : this.style.fromNode(this.$editable);
+      return rng ? this.style.current(rng) : this.style.fromNode(this.$editable);
     };
     /**
      * style from node
@@ -4542,23 +4283,23 @@
      * undo
      */
     Editor.prototype.undo = function() {
-      this.context.triggerEvent("before.command", this.$editable.html());
+      this.context.triggerEvent('before.command', this.$editable.html());
       this.history.undo();
-      this.context.triggerEvent("change", this.$editable.html());
+      this.context.triggerEvent('change', this.$editable.html());
     };
     /**
      * redo
      */
     Editor.prototype.redo = function() {
-      this.context.triggerEvent("before.command", this.$editable.html());
+      this.context.triggerEvent('before.command', this.$editable.html());
       this.history.redo();
-      this.context.triggerEvent("change", this.$editable.html());
+      this.context.triggerEvent('change', this.$editable.html());
     };
     /**
      * before command
      */
     Editor.prototype.beforeCommand = function() {
-      this.context.triggerEvent("before.command", this.$editable.html());
+      this.context.triggerEvent('before.command', this.$editable.html());
       // keep focus on editable before command execution
       this.focus();
     };
@@ -4570,7 +4311,7 @@
       this.normalizeContent();
       this.history.recordUndo();
       if (!isPreventTrigger) {
-        this.context.triggerEvent("change", this.$editable.html());
+        this.context.triggerEvent('change', this.$editable.html());
       }
     };
     /**
@@ -4627,16 +4368,13 @@
       return createImage(src, param)
         .then(function($image) {
           _this.beforeCommand();
-          if (typeof param === "function") {
+          if (typeof param === 'function') {
             param($image);
           } else {
-            if (typeof param === "string") {
-              $image.attr("data-filename", param);
+            if (typeof param === 'string') {
+              $image.attr('data-filename', param);
             }
-            $image.css(
-              "width",
-              Math.min(_this.$editable.width(), $image.width())
-            );
+            $image.css('width', Math.min(_this.$editable.width(), $image.width()));
           }
           $image.show();
           range.create(_this.editable).insertNode($image[0]);
@@ -4644,7 +4382,7 @@
           _this.afterCommand();
         })
         .fail(function(e) {
-          _this.context.triggerEvent("image.upload.error", e);
+          _this.context.triggerEvent('image.upload.error', e);
         });
     };
     /**
@@ -4655,21 +4393,15 @@
       var _this = this;
       $$1.each(files, function(idx, file) {
         var filename = file.name;
-        if (
-          _this.options.maximumImageFileSize &&
-          _this.options.maximumImageFileSize < file.size
-        ) {
-          _this.context.triggerEvent(
-            "image.upload.error",
-            _this.lang.image.maximumFileSizeError
-          );
+        if (_this.options.maximumImageFileSize && _this.options.maximumImageFileSize < file.size) {
+          _this.context.triggerEvent('image.upload.error', _this.lang.image.maximumFileSizeError);
         } else {
           readFileAsDataURL(file)
             .then(function(dataURL) {
               return _this.insertImage(dataURL, filename);
             })
             .fail(function() {
-              _this.context.triggerEvent("image.upload.error");
+              _this.context.triggerEvent('image.upload.error');
             });
         }
       });
@@ -4682,7 +4414,7 @@
       var callbacks = this.options.callbacks;
       // If onImageUpload this.options setted
       if (callbacks.onImageUpload) {
-        this.context.triggerEvent("image.upload", files);
+        this.context.triggerEvent('image.upload', files);
         // else insert Image as dataURL
       } else {
         this.insertImages(files);
@@ -4702,22 +4434,20 @@
     };
     Editor.prototype.onFormatBlock = function(tagName, $target) {
       // [workaround] for MSIE, IE need `<`
-      tagName = env.isMSIE ? "<" + tagName + ">" : tagName;
-      document.execCommand("FormatBlock", false, tagName);
+      tagName = env.isMSIE ? '<' + tagName + '>' : tagName;
+      document.execCommand('FormatBlock', false, tagName);
       // support custom class
       if ($target && $target.length) {
-        var className = $target[0].className || "";
+        var className = $target[0].className || '';
         if (className) {
           var currentRange = this.createRange();
-          var $parent = $$1([currentRange.sc, currentRange.ec]).closest(
-            tagName
-          );
+          var $parent = $$1([currentRange.sc, currentRange.ec]).closest(tagName);
           $parent.addClass(className);
         }
       }
     };
     Editor.prototype.formatPara = function() {
-      this.formatBlock("P");
+      this.formatBlock('P');
     };
     Editor.prototype.fontStyling = function(target, value) {
       var rng = this.createRange();
@@ -4748,7 +4478,7 @@
         rng = range.createFromNode(anchor);
         rng.select();
         this.beforeCommand();
-        document.execCommand("unlink");
+        document.execCommand('unlink');
         this.afterCommand();
       }
     };
@@ -4768,11 +4498,11 @@
       var linkInfo = {
         range: rng,
         text: rng.toString(),
-        url: $anchor.length ? $anchor.attr("href") : ""
+        url: $anchor.length ? $anchor.attr('href') : ''
       };
       // Define isNewWindow when anchor exists.
       if ($anchor.length) {
-        linkInfo.isNewWindow = $anchor.attr("target") === "_blank";
+        linkInfo.isNewWindow = $anchor.attr('target') === '_blank';
       }
       return linkInfo;
     };
@@ -4825,7 +4555,7 @@
       var imageSize;
       if (bKeepRatio) {
         var newRatio = pos.y / pos.x;
-        var ratio = $target.data("ratio");
+        var ratio = $target.data('ratio');
         imageSize = {
           width: ratio > newRatio ? pos.x : pos.y / ratio,
           height: ratio > newRatio ? pos.x * ratio : pos.y
@@ -4842,7 +4572,7 @@
      * returns whether editable area has focus or not.
      */
     Editor.prototype.hasFocus = function() {
-      return this.$editable.is(":focus");
+      return this.$editable.is(':focus');
     };
     /**
      * set focus
@@ -4859,16 +4589,13 @@
      * @return {Boolean}
      */
     Editor.prototype.isEmpty = function() {
-      return (
-        dom.isEmpty(this.$editable[0]) ||
-        dom.emptyPara === this.$editable.html()
-      );
+      return dom.isEmpty(this.$editable[0]) || dom.emptyPara === this.$editable.html();
     };
     /**
      * Removes all contents and restores the editable instance to an _emptyPara_.
      */
     Editor.prototype.empty = function() {
-      this.context.invoke("code", dom.emptyPara);
+      this.context.invoke('code', dom.emptyPara);
     };
     /**
      * normalize content
@@ -4885,7 +4612,7 @@
       this.$editable = context.layoutInfo.editable;
     }
     Clipboard.prototype.initialize = function() {
-      this.$editable.on("paste", this.pasteByEvent.bind(this));
+      this.$editable.on('paste', this.pasteByEvent.bind(this));
     };
     /**
      * paste by clipboard event
@@ -4896,12 +4623,10 @@
       var clipboardData = event.originalEvent.clipboardData;
       if (clipboardData && clipboardData.items && clipboardData.items.length) {
         var item = lists.head(clipboardData.items);
-        if (item.kind === "file" && item.type.indexOf("image/") !== -1) {
-          this.context.invoke("editor.insertImagesOrCallback", [
-            item.getAsFile()
-          ]);
+        if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+          this.context.invoke('editor.insertImagesOrCallback', [item.getAsFile()]);
         }
-        this.context.invoke("editor.afterCommand");
+        this.context.invoke('editor.afterCommand');
       }
     };
     return Clipboard;
@@ -4917,11 +4642,7 @@
       this.lang = this.options.langInfo;
       this.documentEventHandlers = {};
       this.$dropzone = $$1(
-        [
-          '<div class="note-dropzone">',
-          '  <div class="note-dropzone-message"/>',
-          "</div>"
-        ].join("")
+        ['<div class="note-dropzone">', '  <div class="note-dropzone-message"/>', '</div>'].join('')
       ).prependTo(this.$editor);
     }
     /**
@@ -4935,7 +4656,7 @@
         };
         // do not consider outside of dropzone
         this.$eventListener = this.$dropzone;
-        this.$eventListener.on("drop", this.documentEventHandlers.onDrop);
+        this.$eventListener.on('drop', this.documentEventHandlers.onDrop);
       } else {
         this.attachDragAndDropEvent();
       }
@@ -4946,13 +4667,12 @@
     Dropzone.prototype.attachDragAndDropEvent = function() {
       var _this = this;
       var collection = $$1();
-      var $dropzoneMessage = this.$dropzone.find(".note-dropzone-message");
+      var $dropzoneMessage = this.$dropzone.find('.note-dropzone-message');
       this.documentEventHandlers.onDragenter = function(e) {
-        var isCodeview = _this.context.invoke("codeview.isActivated");
-        var hasEditorSize =
-          _this.$editor.width() > 0 && _this.$editor.height() > 0;
+        var isCodeview = _this.context.invoke('codeview.isActivated');
+        var hasEditorSize = _this.$editor.width() > 0 && _this.$editor.height() > 0;
         if (!isCodeview && !collection.length && hasEditorSize) {
-          _this.$editor.addClass("dragover");
+          _this.$editor.addClass('dragover');
           _this.$dropzone.width(_this.$editor.width());
           _this.$dropzone.height(_this.$editor.height());
           $dropzoneMessage.text(_this.lang.image.dragImageHere);
@@ -4962,63 +4682,57 @@
       this.documentEventHandlers.onDragleave = function(e) {
         collection = collection.not(e.target);
         if (!collection.length) {
-          _this.$editor.removeClass("dragover");
+          _this.$editor.removeClass('dragover');
         }
       };
       this.documentEventHandlers.onDrop = function() {
         collection = $$1();
-        _this.$editor.removeClass("dragover");
+        _this.$editor.removeClass('dragover');
       };
       // show dropzone on dragenter when dragging a object to document
       // -but only if the editor is visible, i.e. has a positive width and height
       this.$eventListener
-        .on("dragenter", this.documentEventHandlers.onDragenter)
-        .on("dragleave", this.documentEventHandlers.onDragleave)
-        .on("drop", this.documentEventHandlers.onDrop);
+        .on('dragenter', this.documentEventHandlers.onDragenter)
+        .on('dragleave', this.documentEventHandlers.onDragleave)
+        .on('drop', this.documentEventHandlers.onDrop);
       // change dropzone's message on hover.
       this.$dropzone
-        .on("dragenter", function() {
-          _this.$dropzone.addClass("hover");
+        .on('dragenter', function() {
+          _this.$dropzone.addClass('hover');
           $dropzoneMessage.text(_this.lang.image.dropImage);
         })
-        .on("dragleave", function() {
-          _this.$dropzone.removeClass("hover");
+        .on('dragleave', function() {
+          _this.$dropzone.removeClass('hover');
           $dropzoneMessage.text(_this.lang.image.dragImageHere);
         });
       // attach dropImage
       this.$dropzone
-        .on("drop", function(event) {
+        .on('drop', function(event) {
           var dataTransfer = event.originalEvent.dataTransfer;
           // stop the browser from opening the dropped content
           event.preventDefault();
           if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
             _this.$editable.focus();
-            _this.context.invoke(
-              "editor.insertImagesOrCallback",
-              dataTransfer.files
-            );
+            _this.context.invoke('editor.insertImagesOrCallback', dataTransfer.files);
           } else {
             $$1.each(dataTransfer.types, function(idx, type) {
               var content = dataTransfer.getData(type);
-              if (type.toLowerCase().indexOf("text") > -1) {
-                _this.context.invoke("editor.pasteHTML", content);
+              if (type.toLowerCase().indexOf('text') > -1) {
+                _this.context.invoke('editor.pasteHTML', content);
               } else {
                 $$1(content).each(function(idx, item) {
-                  _this.context.invoke("editor.insertNode", item);
+                  _this.context.invoke('editor.insertNode', item);
                 });
               }
             });
           }
         })
-        .on("dragover", false); // prevent default dragover event
+        .on('dragover', false); // prevent default dragover event
     };
     Dropzone.prototype.destroy = function() {
       var _this = this;
       Object.keys(this.documentEventHandlers).forEach(function(key) {
-        _this.$eventListener.off(
-          key.substr(2).toLowerCase(),
-          _this.documentEventHandlers[key]
-        );
+        _this.$eventListener.off(key.substr(2).toLowerCase(), _this.documentEventHandlers[key]);
       });
       this.documentEventHandlers = {};
     };
@@ -5028,7 +4742,7 @@
   var CodeMirror;
   if (env.hasCodeMirror) {
     if (env.isSupportAmd) {
-      require(["codemirror"], function(cm) {
+      require(['codemirror'], function(cm) {
         CodeMirror = cm;
       });
     } else {
@@ -5049,14 +4763,14 @@
     CodeView.prototype.sync = function() {
       var isCodeview = this.isActivated();
       if (isCodeview && env.hasCodeMirror) {
-        this.$codable.data("cmEditor").save();
+        this.$codable.data('cmEditor').save();
       }
     };
     /**
      * @return {Boolean}
      */
     CodeView.prototype.isActivated = function() {
-      return this.$editor.hasClass("codeview");
+      return this.$editor.hasClass('codeview');
     };
     /**
      * toggle codeview
@@ -5067,7 +4781,7 @@
       } else {
         this.activate();
       }
-      this.context.triggerEvent("codeview.toggled");
+      this.context.triggerEvent('codeview.toggled');
     };
     /**
      * activate code view
@@ -5076,42 +4790,29 @@
       var _this = this;
       this.$codable.val(dom.html(this.$editable, this.options.prettifyHtml));
       this.$codable.height(this.$editable.height());
-      this.context.invoke("toolbar.updateCodeview", true);
-      this.$editor.addClass("codeview");
+      this.context.invoke('toolbar.updateCodeview', true);
+      this.$editor.addClass('codeview');
       this.$codable.focus();
       // activate CodeMirror as codable
       if (env.hasCodeMirror) {
-        var cmEditor_1 = CodeMirror.fromTextArea(
-          this.$codable[0],
-          this.options.codemirror
-        );
+        var cmEditor_1 = CodeMirror.fromTextArea(this.$codable[0], this.options.codemirror);
         // CodeMirror TernServer
         if (this.options.codemirror.tern) {
-          var server_1 = new CodeMirror.TernServer(
-            this.options.codemirror.tern
-          );
+          var server_1 = new CodeMirror.TernServer(this.options.codemirror.tern);
           cmEditor_1.ternServer = server_1;
-          cmEditor_1.on("cursorActivity", function(cm) {
+          cmEditor_1.on('cursorActivity', function(cm) {
             server_1.updateArgHints(cm);
           });
         }
-        cmEditor_1.on("blur", function(event) {
-          _this.context.triggerEvent(
-            "blur.codeview",
-            cmEditor_1.getValue(),
-            event
-          );
+        cmEditor_1.on('blur', function(event) {
+          _this.context.triggerEvent('blur.codeview', cmEditor_1.getValue(), event);
         });
         // CodeMirror hasn't Padding.
         cmEditor_1.setSize(null, this.$editable.outerHeight());
-        this.$codable.data("cmEditor", cmEditor_1);
+        this.$codable.data('cmEditor', cmEditor_1);
       } else {
-        this.$codable.on("blur", function(event) {
-          _this.context.triggerEvent(
-            "blur.codeview",
-            _this.$codable.val(),
-            event
-          );
+        this.$codable.on('blur', function(event) {
+          _this.context.triggerEvent('blur.codeview', _this.$codable.val(), event);
         });
       }
     };
@@ -5121,27 +4822,20 @@
     CodeView.prototype.deactivate = function() {
       // deactivate CodeMirror as codable
       if (env.hasCodeMirror) {
-        var cmEditor = this.$codable.data("cmEditor");
+        var cmEditor = this.$codable.data('cmEditor');
         this.$codable.val(cmEditor.getValue());
         cmEditor.toTextArea();
       }
-      var value =
-        dom.value(this.$codable, this.options.prettifyHtml) || dom.emptyPara;
+      var value = dom.value(this.$codable, this.options.prettifyHtml) || dom.emptyPara;
       var isChange = this.$editable.html() !== value;
       this.$editable.html(value);
-      this.$editable.height(
-        this.options.height ? this.$codable.height() : "auto"
-      );
-      this.$editor.removeClass("codeview");
+      this.$editable.height(this.options.height ? this.$codable.height() : 'auto');
+      this.$editor.removeClass('codeview');
       if (isChange) {
-        this.context.triggerEvent(
-          "change",
-          this.$editable.html(),
-          this.$editable
-        );
+        this.context.triggerEvent('change', this.$editable.html(), this.$editable);
       }
       this.$editable.focus();
-      this.context.invoke("toolbar.updateCodeview", false);
+      this.context.invoke('toolbar.updateCodeview', false);
     };
     CodeView.prototype.destroy = function() {
       if (this.isActivated()) {
@@ -5165,31 +4859,24 @@
         this.destroy();
         return;
       }
-      this.$statusbar.on("mousedown", function(event) {
+      this.$statusbar.on('mousedown', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        var editableTop =
-          _this.$editable.offset().top - _this.$document.scrollTop();
+        var editableTop = _this.$editable.offset().top - _this.$document.scrollTop();
         var onMouseMove = function(event) {
           var height = event.clientY - (editableTop + EDITABLE_PADDING);
-          height =
-            _this.options.minheight > 0
-              ? Math.max(height, _this.options.minheight)
-              : height;
-          height =
-            _this.options.maxHeight > 0
-              ? Math.min(height, _this.options.maxHeight)
-              : height;
+          height = _this.options.minheight > 0 ? Math.max(height, _this.options.minheight) : height;
+          height = _this.options.maxHeight > 0 ? Math.min(height, _this.options.maxHeight) : height;
           _this.$editable.height(height);
         };
-        _this.$document.on("mousemove", onMouseMove).one("mouseup", function() {
-          _this.$document.off("mousemove", onMouseMove);
+        _this.$document.on('mousemove', onMouseMove).one('mouseup', function() {
+          _this.$document.off('mousemove', onMouseMove);
         });
       });
     };
     Statusbar.prototype.destroy = function() {
       this.$statusbar.off();
-      this.$statusbar.addClass("locked");
+      this.$statusbar.addClass('locked');
     };
     return Statusbar;
   })();
@@ -5203,7 +4890,7 @@
       this.$editable = context.layoutInfo.editable;
       this.$codable = context.layoutInfo.codable;
       this.$window = $$1(window);
-      this.$scrollbar = $$1("html, body");
+      this.$scrollbar = $$1('html, body');
       this.onResize = function() {
         _this.resizeTo({
           h: _this.$window.height() - _this.$toolbar.outerHeight()
@@ -5211,30 +4898,30 @@
       };
     }
     Fullscreen.prototype.resizeTo = function(size) {
-      this.$editable.css("height", size.h);
-      this.$codable.css("height", size.h);
-      if (this.$codable.data("cmeditor")) {
-        this.$codable.data("cmeditor").setsize(null, size.h);
+      this.$editable.css('height', size.h);
+      this.$codable.css('height', size.h);
+      if (this.$codable.data('cmeditor')) {
+        this.$codable.data('cmeditor').setsize(null, size.h);
       }
     };
     /**
      * toggle fullscreen
      */
     Fullscreen.prototype.toggle = function() {
-      this.$editor.toggleClass("fullscreen");
+      this.$editor.toggleClass('fullscreen');
       if (this.isFullscreen()) {
-        this.$editable.data("orgHeight", this.$editable.css("height"));
-        this.$window.on("resize", this.onResize).trigger("resize");
-        this.$scrollbar.css("overflow", "hidden");
+        this.$editable.data('orgHeight', this.$editable.css('height'));
+        this.$window.on('resize', this.onResize).trigger('resize');
+        this.$scrollbar.css('overflow', 'hidden');
       } else {
-        this.$window.off("resize", this.onResize);
-        this.resizeTo({ h: this.$editable.data("orgHeight") });
-        this.$scrollbar.css("overflow", "visible");
+        this.$window.off('resize', this.onResize);
+        this.resizeTo({ h: this.$editable.data('orgHeight') });
+        this.$scrollbar.css('overflow', 'visible');
       }
-      this.context.invoke("toolbar.updateFullscreen", this.isFullscreen());
+      this.context.invoke('toolbar.updateFullscreen', this.isFullscreen());
     };
     Fullscreen.prototype.isFullscreen = function() {
-      return this.$editor.hasClass("fullscreen");
+      return this.$editor.hasClass('fullscreen');
     };
     return Fullscreen;
   })();
@@ -5248,18 +4935,18 @@
       this.options = context.options;
       this.lang = this.options.langInfo;
       this.events = {
-        "summernote.mousedown": function(we, e) {
+        'summernote.mousedown': function(we, e) {
           if (_this.update(e.target)) {
             e.preventDefault();
           }
         },
-        "summernote.keyup summernote.scroll summernote.change summernote.dialog.shown": function() {
+        'summernote.keyup summernote.scroll summernote.change summernote.dialog.shown': function() {
           _this.update();
         },
-        "summernote.disable": function() {
+        'summernote.disable': function() {
           _this.hide();
         },
-        "summernote.codeview.toggled": function() {
+        'summernote.codeview.toggled': function() {
           _this.update();
         }
       };
@@ -5275,29 +4962,23 @@
           '<div class="note-control-holder note-control-ne"></div>',
           '<div class="note-control-holder note-control-sw"></div>',
           '<div class="',
-          this.options.disableResizeImage
-            ? "note-control-holder"
-            : "note-control-sizing",
+          this.options.disableResizeImage ? 'note-control-holder' : 'note-control-sizing',
           ' note-control-se"></div>',
-          this.options.disableResizeImage
-            ? ""
-            : '<div class="note-control-selection-info"></div>',
-          "</div>",
-          "</div>"
-        ].join("")
+          this.options.disableResizeImage ? '' : '<div class="note-control-selection-info"></div>',
+          '</div>',
+          '</div>'
+        ].join('')
       ).prependTo(this.$editingArea);
-      this.$handle.on("mousedown", function(event) {
+      this.$handle.on('mousedown', function(event) {
         if (dom.isControlSizing(event.target)) {
           event.preventDefault();
           event.stopPropagation();
-          var $target_1 = _this.$handle
-            .find(".note-control-selection")
-            .data("target");
+          var $target_1 = _this.$handle.find('.note-control-selection').data('target');
           var posStart_1 = $target_1.offset();
           var scrollTop_1 = _this.$document.scrollTop();
           var onMouseMove_1 = function(event) {
             _this.context.invoke(
-              "editor.resizeTo",
+              'editor.resizeTo',
               {
                 x: event.clientX - posStart_1.left,
                 y: event.clientY - (posStart_1.top - scrollTop_1)
@@ -5307,20 +4988,18 @@
             );
             _this.update($target_1[0]);
           };
-          _this.$document
-            .on("mousemove", onMouseMove_1)
-            .one("mouseup", function(e) {
-              e.preventDefault();
-              _this.$document.off("mousemove", onMouseMove_1);
-              _this.context.invoke("editor.afterCommand");
-            });
-          if (!$target_1.data("ratio")) {
-            $target_1.data("ratio", $target_1.height() / $target_1.width());
+          _this.$document.on('mousemove', onMouseMove_1).one('mouseup', function(e) {
+            e.preventDefault();
+            _this.$document.off('mousemove', onMouseMove_1);
+            _this.context.invoke('editor.afterCommand');
+          });
+          if (!$target_1.data('ratio')) {
+            $target_1.data('ratio', $target_1.height() / $target_1.width());
           }
         }
       });
       // Listen for scrolling on the handle overlay.
-      this.$handle.on("wheel", function(e) {
+      this.$handle.on('wheel', function(e) {
         e.preventDefault();
         _this.update();
       });
@@ -5333,14 +5012,14 @@
         return false;
       }
       var isImage = dom.isImg(target);
-      var $selection = this.$handle.find(".note-control-selection");
-      this.context.invoke("imagePopover.update", target);
+      var $selection = this.$handle.find('.note-control-selection');
+      this.context.invoke('imagePopover.update', target);
       if (isImage) {
         var $image = $$1(target);
         var position = $image.position();
         var pos = {
-          left: position.left + parseInt($image.css("marginLeft"), 10),
-          top: position.top + parseInt($image.css("marginTop"), 10)
+          left: position.left + parseInt($image.css('marginLeft'), 10),
+          top: position.top + parseInt($image.css('marginTop'), 10)
         };
         // exclude margin
         var imageSize = {
@@ -5349,28 +5028,28 @@
         };
         $selection
           .css({
-            display: "block",
+            display: 'block',
             left: pos.left,
             top: pos.top,
             width: imageSize.w,
             height: imageSize.h
           })
-          .data("target", $image); // save current image element.
+          .data('target', $image); // save current image element.
         var origImageObj = new Image();
-        origImageObj.src = $image.attr("src");
+        origImageObj.src = $image.attr('src');
         var sizingText =
           imageSize.w +
-          "x" +
+          'x' +
           imageSize.h +
-          " (" +
+          ' (' +
           this.lang.image.original +
-          ": " +
+          ': ' +
           origImageObj.width +
-          "x" +
+          'x' +
           origImageObj.height +
-          ")";
-        $selection.find(".note-control-selection-info").text(sizingText);
-        this.context.invoke("editor.saveTarget", target);
+          ')';
+        $selection.find('.note-control-selection-info').text(sizingText);
+        this.context.invoke('editor.saveTarget', target);
       } else {
         this.hide();
       }
@@ -5382,25 +5061,25 @@
      * @param {jQuery} $handle
      */
     Handle.prototype.hide = function() {
-      this.context.invoke("editor.clearTarget");
+      this.context.invoke('editor.clearTarget');
       this.$handle.children().hide();
     };
     return Handle;
   })();
 
-  var defaultScheme = "http://";
+  var defaultScheme = 'http://';
   var linkPattern = /^([A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?|mailto:[A-Z0-9._%+-]+@)?(www\.)?(.+)$/i;
   var AutoLink = /** @class */ (function() {
     function AutoLink(context) {
       var _this = this;
       this.context = context;
       this.events = {
-        "summernote.keyup": function(we, e) {
+        'summernote.keyup': function(we, e) {
           if (!e.isDefaultPrevented()) {
             _this.handleKeyup(e);
           }
         },
-        "summernote.keydown": function(we, e) {
+        'summernote.keydown': function(we, e) {
           _this.handleKeydown(e);
         }
       };
@@ -5419,19 +5098,17 @@
       var match = keyword.match(linkPattern);
       if (match && (match[1] || match[2])) {
         var link = match[1] ? keyword : defaultScheme + keyword;
-        var node = $$1("<a />")
+        var node = $$1('<a />')
           .html(keyword)
-          .attr("href", link)[0];
+          .attr('href', link)[0];
         this.lastWordRange.insertNode(node);
         this.lastWordRange = null;
-        this.context.invoke("editor.focus");
+        this.context.invoke('editor.focus');
       }
     };
     AutoLink.prototype.handleKeydown = function(e) {
       if (lists.contains([key.code.ENTER, key.code.SPACE], e.keyCode)) {
-        var wordRange = this.context
-          .invoke("editor.createRange")
-          .getWordRange();
+        var wordRange = this.context.invoke('editor.createRange').getWordRange();
         this.lastWordRange = wordRange;
       }
     };
@@ -5451,8 +5128,8 @@
       var _this = this;
       this.$note = context.layoutInfo.note;
       this.events = {
-        "summernote.change": function() {
-          _this.$note.val(context.invoke("code"));
+        'summernote.change': function() {
+          _this.$note.val(context.invoke('code'));
         }
       };
     }
@@ -5469,10 +5146,10 @@
       this.$editingArea = context.layoutInfo.editingArea;
       this.options = context.options;
       this.events = {
-        "summernote.init summernote.change": function() {
+        'summernote.init summernote.change': function() {
           _this.update();
         },
-        "summernote.codeview.toggled": function() {
+        'summernote.codeview.toggled': function() {
           _this.update();
         }
       };
@@ -5484,8 +5161,8 @@
       var _this = this;
       this.$placeholder = $$1('<div class="note-placeholder">');
       this.$placeholder
-        .on("click", function() {
-          _this.context.invoke("focus");
+        .on('click', function() {
+          _this.context.invoke('focus');
         })
         .text(this.options.placeholder)
         .prependTo(this.$editingArea);
@@ -5495,9 +5172,7 @@
       this.$placeholder.remove();
     };
     Placeholder.prototype.update = function() {
-      var isShow =
-        !this.context.invoke("codeview.isActivated") &&
-        this.context.invoke("editor.isEmpty");
+      var isShow = !this.context.invoke('codeview.isActivated') && this.context.invoke('editor.isEmpty');
       this.$placeholder.toggle(isShow);
     };
     return Placeholder;
@@ -5510,24 +5185,22 @@
       this.$toolbar = context.layoutInfo.toolbar;
       this.options = context.options;
       this.lang = this.options.langInfo;
-      this.invertedKeyMap = func.invertObject(
-        this.options.keyMap[env.isMac ? "mac" : "pc"]
-      );
+      this.invertedKeyMap = func.invertObject(this.options.keyMap[env.isMac ? 'mac' : 'pc']);
     }
     Buttons.prototype.representShortcut = function(editorMethod) {
       var shortcut = this.invertedKeyMap[editorMethod];
       if (!this.options.shortcuts || !shortcut) {
-        return "";
+        return '';
       }
       if (env.isMac) {
-        shortcut = shortcut.replace("CMD", "⌘").replace("SHIFT", "⇧");
+        shortcut = shortcut.replace('CMD', '⌘').replace('SHIFT', '⇧');
       }
       shortcut = shortcut
-        .replace("BACKSLASH", "\\")
-        .replace("SLASH", "/")
-        .replace("LEFTBRACKET", "[")
-        .replace("RIGHTBRACKET", "]");
-      return " (" + shortcut + ")";
+        .replace('BACKSLASH', '\\')
+        .replace('SLASH', '/')
+        .replace('LEFTBRACKET', '[')
+        .replace('RIGHTBRACKET', ']');
+      return ' (' + shortcut + ')';
     };
     Buttons.prototype.button = function(o) {
       if (!this.options.tooltip && o.tooltip) {
@@ -5549,186 +5222,141 @@
     Buttons.prototype.isFontInstalled = function(name) {
       if (!this.fontInstalledMap.hasOwnProperty(name)) {
         this.fontInstalledMap[name] =
-          env.isFontInstalled(name) ||
-          lists.contains(this.options.fontNamesIgnoreCheck, name);
+          env.isFontInstalled(name) || lists.contains(this.options.fontNamesIgnoreCheck, name);
       }
       return this.fontInstalledMap[name];
     };
     Buttons.prototype.isFontDeservedToAdd = function(name) {
-      var genericFamilies = [
-        "sans-serif",
-        "serif",
-        "monospace",
-        "cursive",
-        "fantasy"
-      ];
+      var genericFamilies = ['sans-serif', 'serif', 'monospace', 'cursive', 'fantasy'];
       name = name.toLowerCase();
-      return (
-        name !== "" &&
-        this.isFontInstalled(name) &&
-        $$1.inArray(name, genericFamilies) === -1
-      );
+      return name !== '' && this.isFontInstalled(name) && $$1.inArray(name, genericFamilies) === -1;
     };
     Buttons.prototype.addToolbarButtons = function() {
       var _this = this;
-      this.context.memo("button.style", function() {
+      this.context.memo('button.style', function() {
         return _this.ui
           .buttonGroup([
             _this.button({
-              className: "dropdown-toggle",
-              contents: _this.ui.dropdownButtonContents(
-                _this.ui.icon(_this.options.icons.magic),
-                _this.options
-              ),
+              className: 'dropdown-toggle',
+              contents: _this.ui.dropdownButtonContents(_this.ui.icon(_this.options.icons.magic), _this.options),
               tooltip: _this.lang.style.style,
               data: {
-                toggle: "dropdown"
+                toggle: 'dropdown'
               }
             }),
             _this.ui.dropdown({
-              className: "dropdown-style",
+              className: 'dropdown-style',
               items: _this.options.styleTags,
               title: _this.lang.style.style,
               template: function(item) {
-                if (typeof item === "string") {
+                if (typeof item === 'string') {
                   item = {
                     tag: item,
-                    title: _this.lang.style.hasOwnProperty(item)
-                      ? _this.lang.style[item]
-                      : item
+                    title: _this.lang.style.hasOwnProperty(item) ? _this.lang.style[item] : item
                   };
                 }
                 var tag = item.tag;
                 var title = item.title;
-                var style = item.style ? ' style="' + item.style + '" ' : "";
-                var className = item.className
-                  ? ' class="' + item.className + '"'
-                  : "";
-                return (
-                  "<" + tag + style + className + ">" + title + "</" + tag + ">"
-                );
+                var style = item.style ? ' style="' + item.style + '" ' : '';
+                var className = item.className ? ' class="' + item.className + '"' : '';
+                return '<' + tag + style + className + '>' + title + '</' + tag + '>';
               },
-              click: _this.context.createInvokeHandler("editor.formatBlock")
+              click: _this.context.createInvokeHandler('editor.formatBlock')
             })
           ])
           .render();
       });
       var _loop_1 = function(styleIdx, styleLen) {
         var item = this_1.options.styleTags[styleIdx];
-        this_1.context.memo("button.style." + item, function() {
+        this_1.context.memo('button.style.' + item, function() {
           return _this
             .button({
-              className: "note-btn-style-" + item,
-              contents:
-                '<div data-value="' +
-                item +
-                '">' +
-                item.toUpperCase() +
-                "</div>",
+              className: 'note-btn-style-' + item,
+              contents: '<div data-value="' + item + '">' + item.toUpperCase() + '</div>',
               tooltip: _this.lang.style[item],
-              click: _this.context.createInvokeHandler("editor.formatBlock")
+              click: _this.context.createInvokeHandler('editor.formatBlock')
             })
             .render();
         });
       };
       var this_1 = this;
-      for (
-        var styleIdx = 0, styleLen = this.options.styleTags.length;
-        styleIdx < styleLen;
-        styleIdx++
-      ) {
+      for (var styleIdx = 0, styleLen = this.options.styleTags.length; styleIdx < styleLen; styleIdx++) {
         _loop_1(styleIdx, styleLen);
       }
-      this.context.memo("button.bold", function() {
+      this.context.memo('button.bold', function() {
         return _this
           .button({
-            className: "note-btn-bold",
+            className: 'note-btn-bold',
             contents: _this.ui.icon(_this.options.icons.bold),
-            tooltip: _this.lang.font.bold + _this.representShortcut("bold"),
-            click: _this.context.createInvokeHandlerAndUpdateState(
-              "editor.bold"
-            )
+            tooltip: _this.lang.font.bold + _this.representShortcut('bold'),
+            click: _this.context.createInvokeHandlerAndUpdateState('editor.bold')
           })
           .render();
       });
-      this.context.memo("button.italic", function() {
+      this.context.memo('button.italic', function() {
         return _this
           .button({
-            className: "note-btn-italic",
+            className: 'note-btn-italic',
             contents: _this.ui.icon(_this.options.icons.italic),
-            tooltip: _this.lang.font.italic + _this.representShortcut("italic"),
-            click: _this.context.createInvokeHandlerAndUpdateState(
-              "editor.italic"
-            )
+            tooltip: _this.lang.font.italic + _this.representShortcut('italic'),
+            click: _this.context.createInvokeHandlerAndUpdateState('editor.italic')
           })
           .render();
       });
-      this.context.memo("button.underline", function() {
+      this.context.memo('button.underline', function() {
         return _this
           .button({
-            className: "note-btn-underline",
+            className: 'note-btn-underline',
             contents: _this.ui.icon(_this.options.icons.underline),
-            tooltip:
-              _this.lang.font.underline + _this.representShortcut("underline"),
-            click: _this.context.createInvokeHandlerAndUpdateState(
-              "editor.underline"
-            )
+            tooltip: _this.lang.font.underline + _this.representShortcut('underline'),
+            click: _this.context.createInvokeHandlerAndUpdateState('editor.underline')
           })
           .render();
       });
-      this.context.memo("button.clear", function() {
+      this.context.memo('button.clear', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.eraser),
-            tooltip:
-              _this.lang.font.clear + _this.representShortcut("removeFormat"),
-            click: _this.context.createInvokeHandler("editor.removeFormat")
+            tooltip: _this.lang.font.clear + _this.representShortcut('removeFormat'),
+            click: _this.context.createInvokeHandler('editor.removeFormat')
           })
           .render();
       });
-      this.context.memo("button.strikethrough", function() {
+      this.context.memo('button.strikethrough', function() {
         return _this
           .button({
-            className: "note-btn-strikethrough",
+            className: 'note-btn-strikethrough',
             contents: _this.ui.icon(_this.options.icons.strikethrough),
-            tooltip:
-              _this.lang.font.strikethrough +
-              _this.representShortcut("strikethrough"),
-            click: _this.context.createInvokeHandlerAndUpdateState(
-              "editor.strikethrough"
-            )
+            tooltip: _this.lang.font.strikethrough + _this.representShortcut('strikethrough'),
+            click: _this.context.createInvokeHandlerAndUpdateState('editor.strikethrough')
           })
           .render();
       });
-      this.context.memo("button.superscript", function() {
+      this.context.memo('button.superscript', function() {
         return _this
           .button({
-            className: "note-btn-superscript",
+            className: 'note-btn-superscript',
             contents: _this.ui.icon(_this.options.icons.superscript),
             tooltip: _this.lang.font.superscript,
-            click: _this.context.createInvokeHandlerAndUpdateState(
-              "editor.superscript"
-            )
+            click: _this.context.createInvokeHandlerAndUpdateState('editor.superscript')
           })
           .render();
       });
-      this.context.memo("button.subscript", function() {
+      this.context.memo('button.subscript', function() {
         return _this
           .button({
-            className: "note-btn-subscript",
+            className: 'note-btn-subscript',
             contents: _this.ui.icon(_this.options.icons.subscript),
             tooltip: _this.lang.font.subscript,
-            click: _this.context.createInvokeHandlerAndUpdateState(
-              "editor.subscript"
-            )
+            click: _this.context.createInvokeHandlerAndUpdateState('editor.subscript')
           })
           .render();
       });
-      this.context.memo("button.fontname", function() {
-        var styleInfo = _this.context.invoke("editor.currentStyle");
+      this.context.memo('button.fontname', function() {
+        var styleInfo = _this.context.invoke('editor.currentStyle');
         // Add 'default' fonts into the fontnames array if not exist
-        $$1.each(styleInfo["font-family"].split(","), function(idx, fontname) {
-          fontname = fontname.trim().replace(/['"]+/g, "");
+        $$1.each(styleInfo['font-family'].split(','), function(idx, fontname) {
+          fontname = fontname.trim().replace(/['"]+/g, '');
           if (_this.isFontDeservedToAdd(fontname)) {
             if ($$1.inArray(fontname, _this.options.fontNames) === -1) {
               _this.options.fontNames.push(fontname);
@@ -5738,131 +5366,107 @@
         return _this.ui
           .buttonGroup([
             _this.button({
-              className: "dropdown-toggle",
-              contents: _this.ui.dropdownButtonContents(
-                '<span class="note-current-fontname"/>',
-                _this.options
-              ),
+              className: 'dropdown-toggle',
+              contents: _this.ui.dropdownButtonContents('<span class="note-current-fontname"/>', _this.options),
               tooltip: _this.lang.font.name,
               data: {
-                toggle: "dropdown"
+                toggle: 'dropdown'
               }
             }),
             _this.ui.dropdownCheck({
-              className: "dropdown-fontname",
+              className: 'dropdown-fontname',
               checkClassName: _this.options.icons.menuCheck,
-              items: _this.options.fontNames.filter(
-                _this.isFontInstalled.bind(_this)
-              ),
+              items: _this.options.fontNames.filter(_this.isFontInstalled.bind(_this)),
               title: _this.lang.font.name,
               template: function(item) {
-                return (
-                  "<span style=\"font-family: '" +
-                  item +
-                  "'\">" +
-                  item +
-                  "</span>"
-                );
+                return '<span style="font-family: \'' + item + '\'">' + item + '</span>';
               },
-              click: _this.context.createInvokeHandlerAndUpdateState(
-                "editor.fontName"
-              )
+              click: _this.context.createInvokeHandlerAndUpdateState('editor.fontName')
             })
           ])
           .render();
       });
-      this.context.memo("button.fontsize", function() {
+      this.context.memo('button.fontsize', function() {
         return _this.ui
           .buttonGroup([
             _this.button({
-              className: "dropdown-toggle",
-              contents: _this.ui.dropdownButtonContents(
-                '<span class="note-current-fontsize"/>',
-                _this.options
-              ),
+              className: 'dropdown-toggle',
+              contents: _this.ui.dropdownButtonContents('<span class="note-current-fontsize"/>', _this.options),
               tooltip: _this.lang.font.size,
               data: {
-                toggle: "dropdown"
+                toggle: 'dropdown'
               }
             }),
             _this.ui.dropdownCheck({
-              className: "dropdown-fontsize",
+              className: 'dropdown-fontsize',
               checkClassName: _this.options.icons.menuCheck,
               items: _this.options.fontSizes,
               title: _this.lang.font.size,
-              click: _this.context.createInvokeHandlerAndUpdateState(
-                "editor.fontSize"
-              )
+              click: _this.context.createInvokeHandlerAndUpdateState('editor.fontSize')
             })
           ])
           .render();
       });
-      this.context.memo("button.color", function() {
+      this.context.memo('button.color', function() {
         return _this.ui
           .buttonGroup({
-            className: "note-color",
+            className: 'note-color',
             children: [
               _this.button({
-                className: "note-current-color-button",
-                contents: _this.ui.icon(
-                  _this.options.icons.font + " note-recent-color"
-                ),
+                className: 'note-current-color-button',
+                contents: _this.ui.icon(_this.options.icons.font + ' note-recent-color'),
                 tooltip: _this.lang.color.recent,
                 click: function(e) {
                   var $button = $$1(e.currentTarget);
-                  _this.context.invoke("editor.color", {
-                    backColor: $button.attr("data-backColor"),
-                    foreColor: $button.attr("data-foreColor")
+                  _this.context.invoke('editor.color', {
+                    backColor: $button.attr('data-backColor'),
+                    foreColor: $button.attr('data-foreColor')
                   });
                 },
                 callback: function($button) {
-                  var $recentColor = $button.find(".note-recent-color");
-                  $recentColor.css("background-color", "#FFFF00");
-                  $button.attr("data-backColor", "#FFFF00");
+                  var $recentColor = $button.find('.note-recent-color');
+                  $recentColor.css('background-color', '#FFFF00');
+                  $button.attr('data-backColor', '#FFFF00');
                 }
               }),
               _this.button({
-                className: "dropdown-toggle",
-                contents: _this.ui.dropdownButtonContents("", _this.options),
+                className: 'dropdown-toggle',
+                contents: _this.ui.dropdownButtonContents('', _this.options),
                 tooltip: _this.lang.color.more,
                 data: {
-                  toggle: "dropdown"
+                  toggle: 'dropdown'
                 }
               }),
               _this.ui.dropdown({
                 items: [
                   '<div class="note-palette">',
-                  '  <div class="note-palette-title">' +
-                    _this.lang.color.background +
-                    "</div>",
-                  "  <div>",
+                  '  <div class="note-palette-title">' + _this.lang.color.background + '</div>',
+                  '  <div>',
                   '    <button type="button" class="note-color-reset btn btn-light" data-event="backColor" data-value="inherit">',
                   _this.lang.color.transparent,
-                  "    </button>",
-                  "  </div>",
+                  '    </button>',
+                  '  </div>',
                   '  <div class="note-holder" data-event="backColor"/>',
-                  "</div>",
+                  '</div>',
                   '<div class="note-palette">',
-                  '  <div class="note-palette-title">' +
-                    _this.lang.color.foreground +
-                    "</div>",
-                  "  <div>",
+                  '  <div class="note-palette-title">' + _this.lang.color.foreground + '</div>',
+                  '  <div>',
                   '    <button type="button" class="note-color-reset btn btn-light" data-event="removeFormat" data-value="foreColor">',
                   _this.lang.color.resetToDefault,
-                  "    </button>",
-                  "  </div>",
+                  '    </button>',
+                  '  </div>',
                   '  <div class="note-holder" data-event="foreColor"/>',
-                  "</div>"
-                ].join(""),
+                  '</div>'
+                ].join(''),
                 callback: function($dropdown) {
-                  $dropdown.find(".note-holder").each(function(idx, item) {
+                  $dropdown.find('.note-holder').each(function(idx, item) {
                     var $holder = $$1(item);
                     $holder.append(
                       _this.ui
                         .palette({
                           colors: _this.options.colors,
                           colorsName: _this.options.colorsName,
-                          eventName: $holder.data("event"),
+                          eventName: $holder.data('event'),
                           container: _this.options.container,
                           tooltip: _this.options.tooltip
                         })
@@ -5872,20 +5476,15 @@
                 },
                 click: function(event) {
                   var $button = $$1(event.target);
-                  var eventName = $button.data("event");
-                  var value = $button.data("value");
+                  var eventName = $button.data('event');
+                  var value = $button.data('value');
                   if (eventName && value) {
-                    var key =
-                      eventName === "backColor" ? "background-color" : "color";
-                    var $color = $button
-                      .closest(".note-color")
-                      .find(".note-recent-color");
-                    var $currentButton = $button
-                      .closest(".note-color")
-                      .find(".note-current-color-button");
+                    var key = eventName === 'backColor' ? 'background-color' : 'color';
+                    var $color = $button.closest('.note-color').find('.note-recent-color');
+                    var $currentButton = $button.closest('.note-color').find('.note-current-color-button');
                     $color.css(key, value);
-                    $currentButton.attr("data-" + eventName, value);
-                    _this.context.invoke("editor." + eventName, value);
+                    $currentButton.attr('data-' + eventName, value);
+                    _this.context.invoke('editor.' + eventName, value);
                   }
                 }
               })
@@ -5893,271 +5492,225 @@
           })
           .render();
       });
-      this.context.memo("button.ul", function() {
+      this.context.memo('button.ul', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.unorderedlist),
-            tooltip:
-              _this.lang.lists.unordered +
-              _this.representShortcut("insertUnorderedList"),
-            click: _this.context.createInvokeHandler(
-              "editor.insertUnorderedList"
-            )
+            tooltip: _this.lang.lists.unordered + _this.representShortcut('insertUnorderedList'),
+            click: _this.context.createInvokeHandler('editor.insertUnorderedList')
           })
           .render();
       });
-      this.context.memo("button.ol", function() {
+      this.context.memo('button.ol', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.orderedlist),
-            tooltip:
-              _this.lang.lists.ordered +
-              _this.representShortcut("insertOrderedList"),
-            click: _this.context.createInvokeHandler("editor.insertOrderedList")
+            tooltip: _this.lang.lists.ordered + _this.representShortcut('insertOrderedList'),
+            click: _this.context.createInvokeHandler('editor.insertOrderedList')
           })
           .render();
       });
       var justifyLeft = this.button({
         contents: this.ui.icon(this.options.icons.alignLeft),
-        tooltip:
-          this.lang.paragraph.left + this.representShortcut("justifyLeft"),
-        click: this.context.createInvokeHandler("editor.justifyLeft")
+        tooltip: this.lang.paragraph.left + this.representShortcut('justifyLeft'),
+        click: this.context.createInvokeHandler('editor.justifyLeft')
       });
       var justifyCenter = this.button({
         contents: this.ui.icon(this.options.icons.alignCenter),
-        tooltip:
-          this.lang.paragraph.center + this.representShortcut("justifyCenter"),
-        click: this.context.createInvokeHandler("editor.justifyCenter")
+        tooltip: this.lang.paragraph.center + this.representShortcut('justifyCenter'),
+        click: this.context.createInvokeHandler('editor.justifyCenter')
       });
       var justifyRight = this.button({
         contents: this.ui.icon(this.options.icons.alignRight),
-        tooltip:
-          this.lang.paragraph.right + this.representShortcut("justifyRight"),
-        click: this.context.createInvokeHandler("editor.justifyRight")
+        tooltip: this.lang.paragraph.right + this.representShortcut('justifyRight'),
+        click: this.context.createInvokeHandler('editor.justifyRight')
       });
       var justifyFull = this.button({
         contents: this.ui.icon(this.options.icons.alignJustify),
-        tooltip:
-          this.lang.paragraph.justify + this.representShortcut("justifyFull"),
-        click: this.context.createInvokeHandler("editor.justifyFull")
+        tooltip: this.lang.paragraph.justify + this.representShortcut('justifyFull'),
+        click: this.context.createInvokeHandler('editor.justifyFull')
       });
       var outdent = this.button({
         contents: this.ui.icon(this.options.icons.outdent),
-        tooltip:
-          this.lang.paragraph.outdent + this.representShortcut("outdent"),
-        click: this.context.createInvokeHandler("editor.outdent")
+        tooltip: this.lang.paragraph.outdent + this.representShortcut('outdent'),
+        click: this.context.createInvokeHandler('editor.outdent')
       });
       var indent = this.button({
         contents: this.ui.icon(this.options.icons.indent),
-        tooltip: this.lang.paragraph.indent + this.representShortcut("indent"),
-        click: this.context.createInvokeHandler("editor.indent")
+        tooltip: this.lang.paragraph.indent + this.representShortcut('indent'),
+        click: this.context.createInvokeHandler('editor.indent')
       });
-      this.context.memo(
-        "button.justifyLeft",
-        func.invoke(justifyLeft, "render")
-      );
-      this.context.memo(
-        "button.justifyCenter",
-        func.invoke(justifyCenter, "render")
-      );
-      this.context.memo(
-        "button.justifyRight",
-        func.invoke(justifyRight, "render")
-      );
-      this.context.memo(
-        "button.justifyFull",
-        func.invoke(justifyFull, "render")
-      );
-      this.context.memo("button.outdent", func.invoke(outdent, "render"));
-      this.context.memo("button.indent", func.invoke(indent, "render"));
-      this.context.memo("button.paragraph", function() {
+      this.context.memo('button.justifyLeft', func.invoke(justifyLeft, 'render'));
+      this.context.memo('button.justifyCenter', func.invoke(justifyCenter, 'render'));
+      this.context.memo('button.justifyRight', func.invoke(justifyRight, 'render'));
+      this.context.memo('button.justifyFull', func.invoke(justifyFull, 'render'));
+      this.context.memo('button.outdent', func.invoke(outdent, 'render'));
+      this.context.memo('button.indent', func.invoke(indent, 'render'));
+      this.context.memo('button.paragraph', function() {
         return _this.ui
           .buttonGroup([
             _this.button({
-              className: "dropdown-toggle",
-              contents: _this.ui.dropdownButtonContents(
-                _this.ui.icon(_this.options.icons.alignLeft),
-                _this.options
-              ),
+              className: 'dropdown-toggle',
+              contents: _this.ui.dropdownButtonContents(_this.ui.icon(_this.options.icons.alignLeft), _this.options),
               tooltip: _this.lang.paragraph.paragraph,
               data: {
-                toggle: "dropdown"
+                toggle: 'dropdown'
               }
             }),
             _this.ui.dropdown([
               _this.ui.buttonGroup({
-                className: "note-align",
-                children: [
-                  justifyLeft,
-                  justifyCenter,
-                  justifyRight,
-                  justifyFull
-                ]
+                className: 'note-align',
+                children: [justifyLeft, justifyCenter, justifyRight, justifyFull]
               }),
               _this.ui.buttonGroup({
-                className: "note-list",
+                className: 'note-list',
                 children: [outdent, indent]
               })
             ])
           ])
           .render();
       });
-      this.context.memo("button.height", function() {
+      this.context.memo('button.height', function() {
         return _this.ui
           .buttonGroup([
             _this.button({
-              className: "dropdown-toggle",
-              contents: _this.ui.dropdownButtonContents(
-                _this.ui.icon(_this.options.icons.textHeight),
-                _this.options
-              ),
+              className: 'dropdown-toggle',
+              contents: _this.ui.dropdownButtonContents(_this.ui.icon(_this.options.icons.textHeight), _this.options),
               tooltip: _this.lang.font.height,
               data: {
-                toggle: "dropdown"
+                toggle: 'dropdown'
               }
             }),
             _this.ui.dropdownCheck({
               items: _this.options.lineHeights,
               checkClassName: _this.options.icons.menuCheck,
-              className: "dropdown-line-height",
+              className: 'dropdown-line-height',
               title: _this.lang.font.height,
-              click: _this.context.createInvokeHandler("editor.lineHeight")
+              click: _this.context.createInvokeHandler('editor.lineHeight')
             })
           ])
           .render();
       });
-      this.context.memo("button.table", function() {
+      this.context.memo('button.table', function() {
         return _this.ui
           .buttonGroup(
             [
               _this.button({
-                className: "dropdown-toggle",
-                contents: _this.ui.dropdownButtonContents(
-                  _this.ui.icon(_this.options.icons.table),
-                  _this.options
-                ),
+                className: 'dropdown-toggle',
+                contents: _this.ui.dropdownButtonContents(_this.ui.icon(_this.options.icons.table), _this.options),
                 tooltip: _this.lang.table.table,
                 data: {
-                  toggle: "dropdown"
+                  toggle: 'dropdown'
                 }
               }),
               _this.ui.dropdown({
                 title: _this.lang.table.table,
-                className: "note-table",
+                className: 'note-table',
                 items: [
                   '<div class="note-dimension-picker">',
                   '  <div class="note-dimension-picker-mousecatcher" data-event="insertTable" data-value="1x1"/>',
                   '  <div class="note-dimension-picker-highlighted"/>',
                   '  <div class="note-dimension-picker-unhighlighted"/>',
-                  "</div>",
+                  '</div>',
                   '<div class="note-dimension-display">1 x 1</div>'
-                ].join("")
+                ].join('')
               })
             ],
             {
               callback: function($node) {
-                var $catcher = $node.find(
-                  ".note-dimension-picker-mousecatcher"
-                );
+                var $catcher = $node.find('.note-dimension-picker-mousecatcher');
                 $catcher
                   .css({
-                    width: _this.options.insertTableMaxSize.col + "em",
-                    height: _this.options.insertTableMaxSize.row + "em"
+                    width: _this.options.insertTableMaxSize.col + 'em',
+                    height: _this.options.insertTableMaxSize.row + 'em'
                   })
-                  .mousedown(
-                    _this.context.createInvokeHandler("editor.insertTable")
-                  )
-                  .on("mousemove", _this.tableMoveHandler.bind(_this));
+                  .mousedown(_this.context.createInvokeHandler('editor.insertTable'))
+                  .on('mousemove', _this.tableMoveHandler.bind(_this));
               }
             }
           )
           .render();
       });
-      this.context.memo("button.link", function() {
+      this.context.memo('button.link', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.link),
-            tooltip:
-              _this.lang.link.link + _this.representShortcut("linkDialog.show"),
-            click: _this.context.createInvokeHandler("linkDialog.show")
+            tooltip: _this.lang.link.link + _this.representShortcut('linkDialog.show'),
+            click: _this.context.createInvokeHandler('linkDialog.show')
           })
           .render();
       });
-      this.context.memo("button.picture", function() {
+      this.context.memo('button.picture', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.picture),
             tooltip: _this.lang.image.image,
-            click: _this.context.createInvokeHandler("imageDialog.show")
+            click: _this.context.createInvokeHandler('imageDialog.show')
           })
           .render();
       });
-      this.context.memo("button.video", function() {
+      this.context.memo('button.video', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.video),
             tooltip: _this.lang.video.video,
-            click: _this.context.createInvokeHandler("videoDialog.show")
+            click: _this.context.createInvokeHandler('videoDialog.show')
           })
           .render();
       });
-      this.context.memo("button.hr", function() {
+      this.context.memo('button.hr', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.minus),
-            tooltip:
-              _this.lang.hr.insert +
-              _this.representShortcut("insertHorizontalRule"),
-            click: _this.context.createInvokeHandler(
-              "editor.insertHorizontalRule"
-            )
+            tooltip: _this.lang.hr.insert + _this.representShortcut('insertHorizontalRule'),
+            click: _this.context.createInvokeHandler('editor.insertHorizontalRule')
           })
           .render();
       });
-      this.context.memo("button.fullscreen", function() {
+      this.context.memo('button.fullscreen', function() {
         return _this
           .button({
-            className: "btn-fullscreen",
+            className: 'btn-fullscreen',
             contents: _this.ui.icon(_this.options.icons.arrowsAlt),
             tooltip: _this.lang.options.fullscreen,
-            click: _this.context.createInvokeHandler("fullscreen.toggle")
+            click: _this.context.createInvokeHandler('fullscreen.toggle')
           })
           .render();
       });
-      this.context.memo("button.codeview", function() {
+      this.context.memo('button.codeview', function() {
         return _this
           .button({
-            className: "btn-codeview",
+            className: 'btn-codeview',
             contents: _this.ui.icon(_this.options.icons.code),
             tooltip: _this.lang.options.codeview,
-            click: _this.context.createInvokeHandler("codeview.toggle")
+            click: _this.context.createInvokeHandler('codeview.toggle')
           })
           .render();
       });
-      this.context.memo("button.redo", function() {
+      this.context.memo('button.redo', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.redo),
-            tooltip: _this.lang.history.redo + _this.representShortcut("redo"),
-            click: _this.context.createInvokeHandler("editor.redo")
+            tooltip: _this.lang.history.redo + _this.representShortcut('redo'),
+            click: _this.context.createInvokeHandler('editor.redo')
           })
           .render();
       });
-      this.context.memo("button.undo", function() {
+      this.context.memo('button.undo', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.undo),
-            tooltip: _this.lang.history.undo + _this.representShortcut("undo"),
-            click: _this.context.createInvokeHandler("editor.undo")
+            tooltip: _this.lang.history.undo + _this.representShortcut('undo'),
+            click: _this.context.createInvokeHandler('editor.undo')
           })
           .render();
       });
-      this.context.memo("button.help", function() {
+      this.context.memo('button.help', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.question),
             tooltip: _this.lang.options.help,
-            click: _this.context.createInvokeHandler("helpDialog.show")
+            click: _this.context.createInvokeHandler('helpDialog.show')
           })
           .render();
       });
@@ -6172,89 +5725,89 @@
     Buttons.prototype.addImagePopoverButtons = function() {
       var _this = this;
       // Image Size Buttons
-      this.context.memo("button.imageSize100", function() {
+      this.context.memo('button.imageSize100', function() {
         return _this
           .button({
             contents: '<span class="note-fontsize-10">100%</span>',
             tooltip: _this.lang.image.resizeFull,
-            click: _this.context.createInvokeHandler("editor.resize", "1")
+            click: _this.context.createInvokeHandler('editor.resize', '1')
           })
           .render();
       });
-      this.context.memo("button.imageSize50", function() {
+      this.context.memo('button.imageSize50', function() {
         return _this
           .button({
             contents: '<span class="note-fontsize-10">50%</span>',
             tooltip: _this.lang.image.resizeHalf,
-            click: _this.context.createInvokeHandler("editor.resize", "0.5")
+            click: _this.context.createInvokeHandler('editor.resize', '0.5')
           })
           .render();
       });
-      this.context.memo("button.imageSize25", function() {
+      this.context.memo('button.imageSize25', function() {
         return _this
           .button({
             contents: '<span class="note-fontsize-10">25%</span>',
             tooltip: _this.lang.image.resizeQuarter,
-            click: _this.context.createInvokeHandler("editor.resize", "0.25")
+            click: _this.context.createInvokeHandler('editor.resize', '0.25')
           })
           .render();
       });
       // Float Buttons
-      this.context.memo("button.floatLeft", function() {
+      this.context.memo('button.floatLeft', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.alignLeft),
             tooltip: _this.lang.image.floatLeft,
-            click: _this.context.createInvokeHandler("editor.floatMe", "left")
+            click: _this.context.createInvokeHandler('editor.floatMe', 'left')
           })
           .render();
       });
-      this.context.memo("button.floatRight", function() {
+      this.context.memo('button.floatRight', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.alignRight),
             tooltip: _this.lang.image.floatRight,
-            click: _this.context.createInvokeHandler("editor.floatMe", "right")
+            click: _this.context.createInvokeHandler('editor.floatMe', 'right')
           })
           .render();
       });
-      this.context.memo("button.floatNone", function() {
+      this.context.memo('button.floatNone', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.alignJustify),
             tooltip: _this.lang.image.floatNone,
-            click: _this.context.createInvokeHandler("editor.floatMe", "none")
+            click: _this.context.createInvokeHandler('editor.floatMe', 'none')
           })
           .render();
       });
       // Remove Buttons
-      this.context.memo("button.removeMedia", function() {
+      this.context.memo('button.removeMedia', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.trash),
             tooltip: _this.lang.image.remove,
-            click: _this.context.createInvokeHandler("editor.removeMedia")
+            click: _this.context.createInvokeHandler('editor.removeMedia')
           })
           .render();
       });
     };
     Buttons.prototype.addLinkPopoverButtons = function() {
       var _this = this;
-      this.context.memo("button.linkDialogShow", function() {
+      this.context.memo('button.linkDialogShow', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.link),
             tooltip: _this.lang.link.edit,
-            click: _this.context.createInvokeHandler("linkDialog.show")
+            click: _this.context.createInvokeHandler('linkDialog.show')
           })
           .render();
       });
-      this.context.memo("button.unlink", function() {
+      this.context.memo('button.unlink', function() {
         return _this
           .button({
             contents: _this.ui.icon(_this.options.icons.unlink),
             tooltip: _this.lang.link.unlink,
-            click: _this.context.createInvokeHandler("editor.unlink")
+            click: _this.context.createInvokeHandler('editor.unlink')
           })
           .render();
       });
@@ -6267,99 +5820,91 @@
      */
     Buttons.prototype.addTablePopoverButtons = function() {
       var _this = this;
-      this.context.memo("button.addRowUp", function() {
+      this.context.memo('button.addRowUp', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.rowAbove),
             tooltip: _this.lang.table.addRowAbove,
-            click: _this.context.createInvokeHandler("editor.addRow", "top")
+            click: _this.context.createInvokeHandler('editor.addRow', 'top')
           })
           .render();
       });
-      this.context.memo("button.addRowDown", function() {
+      this.context.memo('button.addRowDown', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.rowBelow),
             tooltip: _this.lang.table.addRowBelow,
-            click: _this.context.createInvokeHandler("editor.addRow", "bottom")
+            click: _this.context.createInvokeHandler('editor.addRow', 'bottom')
           })
           .render();
       });
-      this.context.memo("button.addColLeft", function() {
+      this.context.memo('button.addColLeft', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.colBefore),
             tooltip: _this.lang.table.addColLeft,
-            click: _this.context.createInvokeHandler("editor.addCol", "left")
+            click: _this.context.createInvokeHandler('editor.addCol', 'left')
           })
           .render();
       });
-      this.context.memo("button.addColRight", function() {
+      this.context.memo('button.addColRight', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.colAfter),
             tooltip: _this.lang.table.addColRight,
-            click: _this.context.createInvokeHandler("editor.addCol", "right")
+            click: _this.context.createInvokeHandler('editor.addCol', 'right')
           })
           .render();
       });
-      this.context.memo("button.deleteRow", function() {
+      this.context.memo('button.deleteRow', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.rowRemove),
             tooltip: _this.lang.table.delRow,
-            click: _this.context.createInvokeHandler("editor.deleteRow")
+            click: _this.context.createInvokeHandler('editor.deleteRow')
           })
           .render();
       });
-      this.context.memo("button.deleteCol", function() {
+      this.context.memo('button.deleteCol', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.colRemove),
             tooltip: _this.lang.table.delCol,
-            click: _this.context.createInvokeHandler("editor.deleteCol")
+            click: _this.context.createInvokeHandler('editor.deleteCol')
           })
           .render();
       });
-      this.context.memo("button.deleteTable", function() {
+      this.context.memo('button.deleteTable', function() {
         return _this
           .button({
-            className: "btn-md",
+            className: 'btn-md',
             contents: _this.ui.icon(_this.options.icons.trash),
             tooltip: _this.lang.table.delTable,
-            click: _this.context.createInvokeHandler("editor.deleteTable")
+            click: _this.context.createInvokeHandler('editor.deleteTable')
           })
           .render();
       });
     };
     Buttons.prototype.build = function($container, groups) {
-      for (
-        var groupIdx = 0, groupLen = groups.length;
-        groupIdx < groupLen;
-        groupIdx++
-      ) {
+      for (var groupIdx = 0, groupLen = groups.length; groupIdx < groupLen; groupIdx++) {
         var group = groups[groupIdx];
         var groupName = $$1.isArray(group) ? group[0] : group;
-        var buttons = $$1.isArray(group)
-          ? group.length === 1
-            ? [group[0]]
-            : group[1]
-          : [group];
+        var buttons = $$1.isArray(group) ? (group.length === 1 ? [group[0]] : group[1]) : [group];
         var $group = this.ui
           .buttonGroup({
-            className: "note-" + groupName
+            className: 'note-' + groupName
           })
           .render();
         for (var idx = 0, len = buttons.length; idx < len; idx++) {
-          var btn = this.context.memo("button." + buttons[idx]);
+          var btn = this.context.memo('button.' + buttons[idx]);
           if (btn) {
-            $group.append(typeof btn === "function" ? btn(this.context) : btn);
+            $group.append(typeof btn === 'function' ? btn(this.context) : btn);
           }
         }
         $group.appendTo($container);
@@ -6371,62 +5916,62 @@
     Buttons.prototype.updateCurrentStyle = function($container) {
       var _this = this;
       var $cont = $container || this.$toolbar;
-      var styleInfo = this.context.invoke("editor.currentStyle");
+      var styleInfo = this.context.invoke('editor.currentStyle');
       this.updateBtnStates($cont, {
-        ".note-btn-bold": function() {
-          return styleInfo["font-bold"] === "bold";
+        '.note-btn-bold': function() {
+          return styleInfo['font-bold'] === 'bold';
         },
-        ".note-btn-italic": function() {
-          return styleInfo["font-italic"] === "italic";
+        '.note-btn-italic': function() {
+          return styleInfo['font-italic'] === 'italic';
         },
-        ".note-btn-underline": function() {
-          return styleInfo["font-underline"] === "underline";
+        '.note-btn-underline': function() {
+          return styleInfo['font-underline'] === 'underline';
         },
-        ".note-btn-subscript": function() {
-          return styleInfo["font-subscript"] === "subscript";
+        '.note-btn-subscript': function() {
+          return styleInfo['font-subscript'] === 'subscript';
         },
-        ".note-btn-superscript": function() {
-          return styleInfo["font-superscript"] === "superscript";
+        '.note-btn-superscript': function() {
+          return styleInfo['font-superscript'] === 'superscript';
         },
-        ".note-btn-strikethrough": function() {
-          return styleInfo["font-strikethrough"] === "strikethrough";
+        '.note-btn-strikethrough': function() {
+          return styleInfo['font-strikethrough'] === 'strikethrough';
         }
       });
-      if (styleInfo["font-family"]) {
-        var fontNames = styleInfo["font-family"].split(",").map(function(name) {
+      if (styleInfo['font-family']) {
+        var fontNames = styleInfo['font-family'].split(',').map(function(name) {
           return name
-            .replace(/[\'\"]/g, "")
-            .replace(/\s+$/, "")
-            .replace(/^\s+/, "");
+            .replace(/[\'\"]/g, '')
+            .replace(/\s+$/, '')
+            .replace(/^\s+/, '');
         });
         var fontName_1 = lists.find(fontNames, this.isFontInstalled.bind(this));
-        $cont.find(".dropdown-fontname a").each(function(idx, item) {
+        $cont.find('.dropdown-fontname a').each(function(idx, item) {
           var $item = $$1(item);
           // always compare string to avoid creating another func.
-          var isChecked = $item.data("value") + "" === fontName_1 + "";
-          $item.toggleClass("checked", isChecked);
+          var isChecked = $item.data('value') + '' === fontName_1 + '';
+          $item.toggleClass('checked', isChecked);
         });
         $cont
-          .find(".note-current-fontname")
+          .find('.note-current-fontname')
           .text(fontName_1)
-          .css("font-family", fontName_1);
+          .css('font-family', fontName_1);
       }
-      if (styleInfo["font-size"]) {
-        var fontSize_1 = styleInfo["font-size"];
-        $cont.find(".dropdown-fontsize a").each(function(idx, item) {
+      if (styleInfo['font-size']) {
+        var fontSize_1 = styleInfo['font-size'];
+        $cont.find('.dropdown-fontsize a').each(function(idx, item) {
           var $item = $$1(item);
           // always compare with string to avoid creating another func.
-          var isChecked = $item.data("value") + "" === fontSize_1 + "";
-          $item.toggleClass("checked", isChecked);
+          var isChecked = $item.data('value') + '' === fontSize_1 + '';
+          $item.toggleClass('checked', isChecked);
         });
-        $cont.find(".note-current-fontsize").text(fontSize_1);
+        $cont.find('.note-current-fontsize').text(fontSize_1);
       }
-      if (styleInfo["line-height"]) {
-        var lineHeight_1 = styleInfo["line-height"];
-        $cont.find(".dropdown-line-height li a").each(function(idx, item) {
+      if (styleInfo['line-height']) {
+        var lineHeight_1 = styleInfo['line-height'];
+        $cont.find('.dropdown-line-height li a').each(function(idx, item) {
           // always compare with string to avoid creating another func.
-          var isChecked = $$1(item).data("value") + "" === lineHeight_1 + "";
-          _this.className = isChecked ? "checked" : "";
+          var isChecked = $$1(item).data('value') + '' === lineHeight_1 + '';
+          _this.className = isChecked ? 'checked' : '';
         });
       }
     };
@@ -6440,9 +5985,9 @@
       var PX_PER_EM = 18;
       var $picker = $$1(event.target.parentNode); // target is mousecatcher
       var $dimensionDisplay = $picker.next();
-      var $catcher = $picker.find(".note-dimension-picker-mousecatcher");
-      var $highlighted = $picker.find(".note-dimension-picker-highlighted");
-      var $unhighlighted = $picker.find(".note-dimension-picker-unhighlighted");
+      var $catcher = $picker.find('.note-dimension-picker-mousecatcher');
+      var $highlighted = $picker.find('.note-dimension-picker-highlighted');
+      var $unhighlighted = $picker.find('.note-dimension-picker-unhighlighted');
       var posOffset;
       // HTML5 with jQuery - e.offsetX is undefined in Firefox
       if (event.offsetX === undefined) {
@@ -6461,15 +6006,15 @@
         c: Math.ceil(posOffset.x / PX_PER_EM) || 1,
         r: Math.ceil(posOffset.y / PX_PER_EM) || 1
       };
-      $highlighted.css({ width: dim.c + "em", height: dim.r + "em" });
-      $catcher.data("value", dim.c + "x" + dim.r);
+      $highlighted.css({ width: dim.c + 'em', height: dim.r + 'em' });
+      $catcher.data('value', dim.c + 'x' + dim.r);
       if (dim.c > 3 && dim.c < this.options.insertTableMaxSize.col) {
-        $unhighlighted.css({ width: dim.c + 1 + "em" });
+        $unhighlighted.css({ width: dim.c + 1 + 'em' });
       }
       if (dim.r > 3 && dim.r < this.options.insertTableMaxSize.row) {
-        $unhighlighted.css({ height: dim.r + 1 + "em" });
+        $unhighlighted.css({ height: dim.r + 1 + 'em' });
       }
-      $dimensionDisplay.html(dim.c + " x " + dim.r);
+      $dimensionDisplay.html(dim.c + ' x ' + dim.r);
     };
     return Buttons;
   })();
@@ -6495,38 +6040,31 @@
       if (!this.options.toolbar.length) {
         this.$toolbar.hide();
       } else {
-        this.context.invoke(
-          "buttons.build",
-          this.$toolbar,
-          this.options.toolbar
-        );
+        this.context.invoke('buttons.build', this.$toolbar, this.options.toolbar);
       }
       if (this.options.toolbarContainer) {
         this.$toolbar.appendTo(this.options.toolbarContainer);
       }
       this.changeContainer(false);
-      this.$note.on(
-        "summernote.keyup summernote.mouseup summernote.change",
-        function() {
-          _this.context.invoke("buttons.updateCurrentStyle");
-        }
-      );
-      this.context.invoke("buttons.updateCurrentStyle");
+      this.$note.on('summernote.keyup summernote.mouseup summernote.change', function() {
+        _this.context.invoke('buttons.updateCurrentStyle');
+      });
+      this.context.invoke('buttons.updateCurrentStyle');
       if (this.options.followingToolbar) {
-        this.$window.on("scroll resize", this.followScroll);
+        this.$window.on('scroll resize', this.followScroll);
       }
     };
     Toolbar.prototype.destroy = function() {
       this.$toolbar.children().remove();
       if (this.options.followingToolbar) {
-        this.$window.off("scroll resize", this.followScroll);
+        this.$window.off('scroll resize', this.followScroll);
       }
     };
     Toolbar.prototype.followScroll = function() {
-      if (this.$editor.hasClass("fullscreen")) {
+      if (this.$editor.hasClass('fullscreen')) {
         return false;
       }
-      var $toolbarWrapper = this.$toolbar.parent(".note-toolbar-wrapper");
+      var $toolbarWrapper = this.$toolbar.parent('.note-toolbar-wrapper');
       var editorHeight = this.$editor.outerHeight();
       var editorWidth = this.$editor.width();
       var toolbarHeight = this.$toolbar.height();
@@ -6542,22 +6080,18 @@
       var editorOffsetTop = this.$editor.offset().top;
       var editorOffsetBottom = editorOffsetTop + editorHeight;
       var activateOffset = editorOffsetTop - otherBarHeight;
-      var deactivateOffsetBottom =
-        editorOffsetBottom - otherBarHeight - toolbarHeight;
-      if (
-        currentOffset > activateOffset &&
-        currentOffset < deactivateOffsetBottom
-      ) {
+      var deactivateOffsetBottom = editorOffsetBottom - otherBarHeight - toolbarHeight;
+      if (currentOffset > activateOffset && currentOffset < deactivateOffsetBottom) {
         this.$toolbar.css({
-          position: "fixed",
+          position: 'fixed',
           top: otherBarHeight,
           width: editorWidth
         });
       } else {
         this.$toolbar.css({
-          position: "relative",
+          position: 'relative',
           top: 0,
-          width: "100%"
+          width: '100%'
         });
       }
     };
@@ -6571,14 +6105,11 @@
       }
     };
     Toolbar.prototype.updateFullscreen = function(isFullscreen) {
-      this.ui.toggleBtnActive(
-        this.$toolbar.find(".btn-fullscreen"),
-        isFullscreen
-      );
+      this.ui.toggleBtnActive(this.$toolbar.find('.btn-fullscreen'), isFullscreen);
       this.changeContainer(isFullscreen);
     };
     Toolbar.prototype.updateCodeview = function(isCodeview) {
-      this.ui.toggleBtnActive(this.$toolbar.find(".btn-codeview"), isCodeview);
+      this.ui.toggleBtnActive(this.$toolbar.find('.btn-codeview'), isCodeview);
       if (isCodeview) {
         this.deactivate();
       } else {
@@ -6586,16 +6117,16 @@
       }
     };
     Toolbar.prototype.activate = function(isIncludeCodeview) {
-      var $btn = this.$toolbar.find("button");
+      var $btn = this.$toolbar.find('button');
       if (!isIncludeCodeview) {
-        $btn = $btn.not(".btn-codeview");
+        $btn = $btn.not('.btn-codeview');
       }
       this.ui.toggleBtn($btn, true);
     };
     Toolbar.prototype.deactivate = function(isIncludeCodeview) {
-      var $btn = this.$toolbar.find("button");
+      var $btn = this.$toolbar.find('button');
       if (!isIncludeCodeview) {
-        $btn = $btn.not(".btn-codeview");
+        $btn = $btn.not('.btn-codeview');
       }
       this.ui.toggleBtn($btn, false);
     };
@@ -6610,49 +6141,39 @@
       this.$editor = context.layoutInfo.editor;
       this.options = context.options;
       this.lang = this.options.langInfo;
-      context.memo(
-        "help.linkDialog.show",
-        this.options.langInfo.help["linkDialog.show"]
-      );
+      context.memo('help.linkDialog.show', this.options.langInfo.help['linkDialog.show']);
     }
     LinkDialog.prototype.initialize = function() {
       var $container = this.options.dialogsInBody ? this.$body : this.$editor;
       var body = [
         '<div class="form-group note-form-group">',
-        '<label class="note-form-label">' +
-          this.lang.link.textToDisplay +
-          "</label>",
+        '<label class="note-form-label">' + this.lang.link.textToDisplay + '</label>',
         '<input class="note-link-text form-control note-form-control  note-input" type="text" />',
-        "</div>",
+        '</div>',
         '<div class="form-group note-form-group">',
-        '<label class="note-form-label">' + this.lang.link.url + "</label>",
+        '<label class="note-form-label">' + this.lang.link.url + '</label>',
         '<input class="note-link-url form-control note-form-control note-input" type="text" value="http://" />',
-        "</div>",
+        '</div>',
         !this.options.disableLinkTarget
-          ? $$1("<div/>")
+          ? $$1('<div/>')
               .append(
                 this.ui
                   .checkbox({
-                    id: "sn-checkbox-open-in-new-window",
+                    id: 'sn-checkbox-open-in-new-window',
                     text: this.lang.link.openInNewWindow,
                     checked: true
                   })
                   .render()
               )
               .html()
-          : ""
-      ].join("");
-      var buttonClass =
-        "btn btn-primary note-btn note-btn-primary note-link-btn";
+          : ''
+      ].join('');
+      var buttonClass = 'btn btn-primary note-btn note-btn-primary note-link-btn';
       var footer =
-        '<button type="submit" href="#" class="' +
-        buttonClass +
-        '" disabled>' +
-        this.lang.link.insert +
-        "</button>";
+        '<button type="submit" href="#" class="' + buttonClass + '" disabled>' + this.lang.link.insert + '</button>';
       this.$dialog = this.ui
         .dialog({
-          className: "link-dialog",
+          className: 'link-dialog',
           title: this.lang.link.insert,
           fade: this.options.dialogsFade,
           body: body,
@@ -6666,21 +6187,17 @@
       this.$dialog.remove();
     };
     LinkDialog.prototype.bindEnterKey = function($input, $btn) {
-      $input.on("keypress", function(event) {
+      $input.on('keypress', function(event) {
         if (event.keyCode === key.code.ENTER) {
           event.preventDefault();
-          $btn.trigger("click");
+          $btn.trigger('click');
         }
       });
     };
     /**
      * toggle update button
      */
-    LinkDialog.prototype.toggleLinkBtn = function(
-      $linkBtn,
-      $linkText,
-      $linkUrl
-    ) {
+    LinkDialog.prototype.toggleLinkBtn = function($linkBtn, $linkText, $linkUrl) {
       this.ui.toggleBtn($linkBtn, $linkText.val() && $linkUrl.val());
     };
     /**
@@ -6693,12 +6210,12 @@
       var _this = this;
       return $$1
         .Deferred(function(deferred) {
-          var $linkText = _this.$dialog.find(".note-link-text");
-          var $linkUrl = _this.$dialog.find(".note-link-url");
-          var $linkBtn = _this.$dialog.find(".note-link-btn");
-          var $openInNewWindow = _this.$dialog.find("input[type=checkbox]");
+          var $linkText = _this.$dialog.find('.note-link-text');
+          var $linkUrl = _this.$dialog.find('.note-link-url');
+          var $linkBtn = _this.$dialog.find('.note-link-btn');
+          var $openInNewWindow = _this.$dialog.find('input[type=checkbox]');
           _this.ui.onDialogShown(_this.$dialog, function() {
-            _this.context.triggerEvent("dialog.shown");
+            _this.context.triggerEvent('dialog.shown');
             // if no url was given, copy text to url
             if (!linkInfo.url) {
               linkInfo.url = linkInfo.text;
@@ -6710,7 +6227,7 @@
               // stop cloning text from linkUrl
               linkInfo.text = $linkText.val();
             };
-            $linkText.on("input", handleLinkTextUpdate).on("paste", function() {
+            $linkText.on('input', handleLinkTextUpdate).on('paste', function() {
               setTimeout(handleLinkTextUpdate, 0);
             });
             var handleLinkUrlUpdate = function() {
@@ -6722,39 +6239,37 @@
               }
             };
             $linkUrl
-              .on("input", handleLinkUrlUpdate)
-              .on("paste", function() {
+              .on('input', handleLinkUrlUpdate)
+              .on('paste', function() {
                 setTimeout(handleLinkUrlUpdate, 0);
               })
               .val(linkInfo.url);
             if (!env.isSupportTouch) {
-              $linkUrl.trigger("focus");
+              $linkUrl.trigger('focus');
             }
             _this.toggleLinkBtn($linkBtn, $linkText, $linkUrl);
             _this.bindEnterKey($linkUrl, $linkBtn);
             _this.bindEnterKey($linkText, $linkBtn);
             var isChecked =
-              linkInfo.isNewWindow !== undefined
-                ? linkInfo.isNewWindow
-                : _this.context.options.linkTargetBlank;
-            $openInNewWindow.prop("checked", isChecked);
-            $linkBtn.one("click", function(event) {
+              linkInfo.isNewWindow !== undefined ? linkInfo.isNewWindow : _this.context.options.linkTargetBlank;
+            $openInNewWindow.prop('checked', isChecked);
+            $linkBtn.one('click', function(event) {
               event.preventDefault();
               deferred.resolve({
                 range: linkInfo.range,
                 url: $linkUrl.val(),
                 text: $linkText.val(),
-                isNewWindow: $openInNewWindow.is(":checked")
+                isNewWindow: $openInNewWindow.is(':checked')
               });
               _this.ui.hideDialog(_this.$dialog);
             });
           });
           _this.ui.onDialogHidden(_this.$dialog, function() {
             // detach events
-            $linkText.off("input paste keypress");
-            $linkUrl.off("input paste keypress");
-            $linkBtn.off("click");
-            if (deferred.state() === "pending") {
+            $linkText.off('input paste keypress');
+            $linkUrl.off('input paste keypress');
+            $linkBtn.off('click');
+            if (deferred.state() === 'pending') {
               deferred.reject();
             }
           });
@@ -6767,15 +6282,15 @@
      */
     LinkDialog.prototype.show = function() {
       var _this = this;
-      var linkInfo = this.context.invoke("editor.getLinkInfo");
-      this.context.invoke("editor.saveRange");
+      var linkInfo = this.context.invoke('editor.getLinkInfo');
+      this.context.invoke('editor.saveRange');
       this.showLinkDialog(linkInfo)
         .then(function(linkInfo) {
-          _this.context.invoke("editor.restoreRange");
-          _this.context.invoke("editor.createLink", linkInfo);
+          _this.context.invoke('editor.restoreRange');
+          _this.context.invoke('editor.createLink', linkInfo);
         })
         .fail(function() {
-          _this.context.invoke("editor.restoreRange");
+          _this.context.invoke('editor.restoreRange');
         });
     };
     return LinkDialog;
@@ -6788,10 +6303,10 @@
       this.ui = $$1.summernote.ui;
       this.options = context.options;
       this.events = {
-        "summernote.keyup summernote.mouseup summernote.change summernote.scroll": function() {
+        'summernote.keyup summernote.mouseup summernote.change summernote.scroll': function() {
           _this.update();
         },
-        "summernote.disable summernote.dialog.shown": function() {
+        'summernote.disable summernote.dialog.shown': function() {
           _this.hide();
         }
       };
@@ -6802,39 +6317,37 @@
     LinkPopover.prototype.initialize = function() {
       this.$popover = this.ui
         .popover({
-          className: "note-link-popover",
+          className: 'note-link-popover',
           callback: function($node) {
-            var $content = $node.find(".popover-content,.note-popover-content");
+            var $content = $node.find('.popover-content,.note-popover-content');
             $content.prepend('<span><a target="_blank"></a>&nbsp;</span>');
           }
         })
         .render()
         .appendTo(this.options.container);
-      var $content = this.$popover.find(
-        ".popover-content,.note-popover-content"
-      );
-      this.context.invoke("buttons.build", $content, this.options.popover.link);
+      var $content = this.$popover.find('.popover-content,.note-popover-content');
+      this.context.invoke('buttons.build', $content, this.options.popover.link);
     };
     LinkPopover.prototype.destroy = function() {
       this.$popover.remove();
     };
     LinkPopover.prototype.update = function() {
       // Prevent focusing on editable when invoke('code') is executed
-      if (!this.context.invoke("editor.hasFocus")) {
+      if (!this.context.invoke('editor.hasFocus')) {
         this.hide();
         return;
       }
-      var rng = this.context.invoke("editor.createRange");
+      var rng = this.context.invoke('editor.createRange');
       if (rng.isCollapsed() && rng.isOnAnchor()) {
         var anchor = dom.ancestor(rng.sc, dom.isAnchor);
-        var href = $$1(anchor).attr("href");
+        var href = $$1(anchor).attr('href');
         this.$popover
-          .find("a")
-          .attr("href", href)
+          .find('a')
+          .attr('href', href)
           .html(href);
         var pos = dom.posFromPlaceholder(anchor);
         this.$popover.css({
-          display: "block",
+          display: 'block',
           left: pos.left,
           top: pos.top
         });
@@ -6859,47 +6372,29 @@
     }
     ImageDialog.prototype.initialize = function() {
       var $container = this.options.dialogsInBody ? this.$body : this.$editor;
-      var imageLimitation = "";
+      var imageLimitation = '';
       if (this.options.maximumImageFileSize) {
-        var unit = Math.floor(
-          Math.log(this.options.maximumImageFileSize) / Math.log(1024)
-        );
+        var unit = Math.floor(Math.log(this.options.maximumImageFileSize) / Math.log(1024));
         var readableSize =
-          (this.options.maximumImageFileSize / Math.pow(1024, unit)).toFixed(
-            2
-          ) *
-            1 +
-          " " +
-          " KMGTP"[unit] +
-          "B";
-        imageLimitation =
-          "<small>" +
-          (this.lang.image.maximumFileSize + " : " + readableSize) +
-          "</small>";
+          (this.options.maximumImageFileSize / Math.pow(1024, unit)).toFixed(2) * 1 + ' ' + ' KMGTP'[unit] + 'B';
+        imageLimitation = '<small>' + (this.lang.image.maximumFileSize + ' : ' + readableSize) + '</small>';
       }
       var body = [
         '<div class="form-group note-form-group note-group-select-from-files">',
-        '<label class="note-form-label">' +
-          this.lang.image.selectFromFiles +
-          "</label>",
+        '<label class="note-form-label">' + this.lang.image.selectFromFiles + '</label>',
         '<input class="note-image-input note-form-control note-input" ',
         ' type="file" name="files" accept="image/*" multiple="multiple" />',
         imageLimitation,
-        "</div>",
+        '</div>',
         '<div class="form-group note-group-image-url" style="overflow:auto;">',
-        '<label class="note-form-label">' + this.lang.image.url + "</label>",
+        '<label class="note-form-label">' + this.lang.image.url + '</label>',
         '<input class="note-image-url form-control note-form-control note-input ',
         ' col-md-12" type="text" />',
-        "</div>"
-      ].join("");
-      var buttonClass =
-        "btn btn-primary note-btn note-btn-primary note-image-btn";
+        '</div>'
+      ].join('');
+      var buttonClass = 'btn btn-primary note-btn note-btn-primary note-image-btn';
       var footer =
-        '<button type="submit" href="#" class="' +
-        buttonClass +
-        '" disabled>' +
-        this.lang.image.insert +
-        "</button>";
+        '<button type="submit" href="#" class="' + buttonClass + '" disabled>' + this.lang.image.insert + '</button>';
       this.$dialog = this.ui
         .dialog({
           title: this.lang.image.insert,
@@ -6915,29 +6410,29 @@
       this.$dialog.remove();
     };
     ImageDialog.prototype.bindEnterKey = function($input, $btn) {
-      $input.on("keypress", function(event) {
+      $input.on('keypress', function(event) {
         if (event.keyCode === key.code.ENTER) {
           event.preventDefault();
-          $btn.trigger("click");
+          $btn.trigger('click');
         }
       });
     };
     ImageDialog.prototype.show = function() {
       var _this = this;
-      this.context.invoke("editor.saveRange");
+      this.context.invoke('editor.saveRange');
       this.showImageDialog()
         .then(function(data) {
           // [workaround] hide dialog before restore range for IE range focus
           _this.ui.hideDialog(_this.$dialog);
-          _this.context.invoke("editor.restoreRange");
-          if (typeof data === "string") {
-            _this.context.invoke("editor.insertImage", data);
+          _this.context.invoke('editor.restoreRange');
+          if (typeof data === 'string') {
+            _this.context.invoke('editor.insertImage', data);
           } else {
-            _this.context.invoke("editor.insertImagesOrCallback", data);
+            _this.context.invoke('editor.insertImagesOrCallback', data);
           }
         })
         .fail(function() {
-          _this.context.invoke("editor.restoreRange");
+          _this.context.invoke('editor.restoreRange');
         });
     };
     /**
@@ -6949,40 +6444,40 @@
     ImageDialog.prototype.showImageDialog = function() {
       var _this = this;
       return $$1.Deferred(function(deferred) {
-        var $imageInput = _this.$dialog.find(".note-image-input");
-        var $imageUrl = _this.$dialog.find(".note-image-url");
-        var $imageBtn = _this.$dialog.find(".note-image-btn");
+        var $imageInput = _this.$dialog.find('.note-image-input');
+        var $imageUrl = _this.$dialog.find('.note-image-url');
+        var $imageBtn = _this.$dialog.find('.note-image-btn');
         _this.ui.onDialogShown(_this.$dialog, function() {
-          _this.context.triggerEvent("dialog.shown");
+          _this.context.triggerEvent('dialog.shown');
           // Cloning imageInput to clear element.
           $imageInput.replaceWith(
             $imageInput
               .clone()
-              .on("change", function(event) {
+              .on('change', function(event) {
                 deferred.resolve(event.target.files || event.target.value);
               })
-              .val("")
+              .val('')
           );
           $imageBtn.click(function(event) {
             event.preventDefault();
             deferred.resolve($imageUrl.val());
           });
           $imageUrl
-            .on("keyup paste", function() {
+            .on('keyup paste', function() {
               var url = $imageUrl.val();
               _this.ui.toggleBtn($imageBtn, url);
             })
-            .val("");
+            .val('');
           if (!env.isSupportTouch) {
-            $imageUrl.trigger("focus");
+            $imageUrl.trigger('focus');
           }
           _this.bindEnterKey($imageUrl, $imageBtn);
         });
         _this.ui.onDialogHidden(_this.$dialog, function() {
-          $imageInput.off("change");
-          $imageUrl.off("keyup paste keypress");
-          $imageBtn.off("click");
-          if (deferred.state() === "pending") {
+          $imageInput.off('change');
+          $imageUrl.off('keyup paste keypress');
+          $imageBtn.off('click');
+          if (deferred.state() === 'pending') {
             deferred.reject();
           }
         });
@@ -7005,7 +6500,7 @@
       this.editable = context.layoutInfo.editable[0];
       this.options = context.options;
       this.events = {
-        "summernote.disable": function() {
+        'summernote.disable': function() {
           _this.hide();
         }
       };
@@ -7016,18 +6511,12 @@
     ImagePopover.prototype.initialize = function() {
       this.$popover = this.ui
         .popover({
-          className: "note-image-popover"
+          className: 'note-image-popover'
         })
         .render()
         .appendTo(this.options.container);
-      var $content = this.$popover.find(
-        ".popover-content,.note-popover-content"
-      );
-      this.context.invoke(
-        "buttons.build",
-        $content,
-        this.options.popover.image
-      );
+      var $content = this.$popover.find('.popover-content,.note-popover-content');
+      this.context.invoke('buttons.build', $content, this.options.popover.image);
     };
     ImagePopover.prototype.destroy = function() {
       this.$popover.remove();
@@ -7037,11 +6526,9 @@
         var pos = dom.posFromPlaceholder(target);
         var posEditor = dom.posFromPlaceholder(this.editable);
         this.$popover.css({
-          display: "block",
+          display: 'block',
           left: this.options.popatmouse ? event.pageX - 20 : pos.left,
-          top: this.options.popatmouse
-            ? event.pageY
-            : Math.min(pos.top, posEditor.top)
+          top: this.options.popatmouse ? event.pageY : Math.min(pos.top, posEditor.top)
         });
       } else {
         this.hide();
@@ -7060,13 +6547,13 @@
       this.ui = $$1.summernote.ui;
       this.options = context.options;
       this.events = {
-        "summernote.mousedown": function(we, e) {
+        'summernote.mousedown': function(we, e) {
           _this.update(e.target);
         },
-        "summernote.keyup summernote.scroll summernote.change": function() {
+        'summernote.keyup summernote.scroll summernote.change': function() {
           _this.update();
         },
-        "summernote.disable": function() {
+        'summernote.disable': function() {
           _this.hide();
         }
       };
@@ -7077,21 +6564,15 @@
     TablePopover.prototype.initialize = function() {
       this.$popover = this.ui
         .popover({
-          className: "note-table-popover"
+          className: 'note-table-popover'
         })
         .render()
         .appendTo(this.options.container);
-      var $content = this.$popover.find(
-        ".popover-content,.note-popover-content"
-      );
-      this.context.invoke(
-        "buttons.build",
-        $content,
-        this.options.popover.table
-      );
+      var $content = this.$popover.find('.popover-content,.note-popover-content');
+      this.context.invoke('buttons.build', $content, this.options.popover.table);
       // [workaround] Disable Firefox's default table editor
       if (env.isFF) {
-        document.execCommand("enableInlineTableEditing", false, false);
+        document.execCommand('enableInlineTableEditing', false, false);
       }
     };
     TablePopover.prototype.destroy = function() {
@@ -7105,7 +6586,7 @@
       if (isCell) {
         var pos = dom.posFromPlaceholder(target);
         this.$popover.css({
-          display: "block",
+          display: 'block',
           left: pos.left,
           top: pos.top
         });
@@ -7137,18 +6618,13 @@
           this.lang.video.url +
           ' <small class="text-muted">' +
           this.lang.video.providers +
-          "</small></label>",
+          '</small></label>',
         '<input class="note-video-url form-control note-form-control note-input" type="text" />',
-        "</div>"
-      ].join("");
-      var buttonClass =
-        "btn btn-primary note-btn note-btn-primary note-video-btn";
+        '</div>'
+      ].join('');
+      var buttonClass = 'btn btn-primary note-btn note-btn-primary note-video-btn';
       var footer =
-        '<button type="submit" href="#" class="' +
-        buttonClass +
-        '" disabled>' +
-        this.lang.video.insert +
-        "</button>";
+        '<button type="submit" href="#" class="' + buttonClass + '" disabled>' + this.lang.video.insert + '</button>';
       this.$dialog = this.ui
         .dialog({
           title: this.lang.video.insert,
@@ -7164,10 +6640,10 @@
       this.$dialog.remove();
     };
     VideoDialog.prototype.bindEnterKey = function($input, $btn) {
-      $input.on("keypress", function(event) {
+      $input.on('keypress', function(event) {
         if (event.keyCode === key.code.ENTER) {
           event.preventDefault();
-          $btn.trigger("click");
+          $btn.trigger('click');
         }
       });
     };
@@ -7198,93 +6674,81 @@
       var $video;
       if (ytMatch && ytMatch[1].length === 11) {
         var youtubeId = ytMatch[1];
-        $video = $$1("<iframe>")
-          .attr("frameborder", 0)
-          .attr("src", "//www.youtube.com/embed/" + youtubeId)
-          .attr("width", "640")
-          .attr("height", "360");
+        $video = $$1('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', '//www.youtube.com/embed/' + youtubeId)
+          .attr('width', '640')
+          .attr('height', '360');
       } else if (igMatch && igMatch[0].length) {
-        $video = $$1("<iframe>")
-          .attr("frameborder", 0)
-          .attr("src", "https://instagram.com/p/" + igMatch[1] + "/embed/")
-          .attr("width", "612")
-          .attr("height", "710")
-          .attr("scrolling", "no")
-          .attr("allowtransparency", "true");
+        $video = $$1('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', 'https://instagram.com/p/' + igMatch[1] + '/embed/')
+          .attr('width', '612')
+          .attr('height', '710')
+          .attr('scrolling', 'no')
+          .attr('allowtransparency', 'true');
       } else if (vMatch && vMatch[0].length) {
-        $video = $$1("<iframe>")
-          .attr("frameborder", 0)
-          .attr("src", vMatch[0] + "/embed/simple")
-          .attr("width", "600")
-          .attr("height", "600")
-          .attr("class", "vine-embed");
+        $video = $$1('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', vMatch[0] + '/embed/simple')
+          .attr('width', '600')
+          .attr('height', '600')
+          .attr('class', 'vine-embed');
       } else if (vimMatch && vimMatch[3].length) {
-        $video = $$1(
-          "<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>"
-        )
-          .attr("frameborder", 0)
-          .attr("src", "//player.vimeo.com/video/" + vimMatch[3])
-          .attr("width", "640")
-          .attr("height", "360");
+        $video = $$1('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+          .attr('frameborder', 0)
+          .attr('src', '//player.vimeo.com/video/' + vimMatch[3])
+          .attr('width', '640')
+          .attr('height', '360');
       } else if (dmMatch && dmMatch[2].length) {
-        $video = $$1("<iframe>")
-          .attr("frameborder", 0)
-          .attr("src", "//www.dailymotion.com/embed/video/" + dmMatch[2])
-          .attr("width", "640")
-          .attr("height", "360");
+        $video = $$1('<iframe>')
+          .attr('frameborder', 0)
+          .attr('src', '//www.dailymotion.com/embed/video/' + dmMatch[2])
+          .attr('width', '640')
+          .attr('height', '360');
       } else if (youkuMatch && youkuMatch[1].length) {
-        $video = $$1(
-          "<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>"
-        )
-          .attr("frameborder", 0)
-          .attr("height", "498")
-          .attr("width", "510")
-          .attr("src", "//player.youku.com/embed/" + youkuMatch[1]);
-      } else if (
-        (qqMatch && qqMatch[1].length) ||
-        (qqMatch2 && qqMatch2[2].length)
-      ) {
+        $video = $$1('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+          .attr('frameborder', 0)
+          .attr('height', '498')
+          .attr('width', '510')
+          .attr('src', '//player.youku.com/embed/' + youkuMatch[1]);
+      } else if ((qqMatch && qqMatch[1].length) || (qqMatch2 && qqMatch2[2].length)) {
         var vid = qqMatch && qqMatch[1].length ? qqMatch[1] : qqMatch2[2];
-        $video = $$1(
-          "<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>"
-        )
-          .attr("frameborder", 0)
-          .attr("height", "310")
-          .attr("width", "500")
-          .attr(
-            "src",
-            "http://v.qq.com/iframe/player.html?vid=" + vid + "&amp;auto=0"
-          );
+        $video = $$1('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+          .attr('frameborder', 0)
+          .attr('height', '310')
+          .attr('width', '500')
+          .attr('src', 'http://v.qq.com/iframe/player.html?vid=' + vid + '&amp;auto=0');
       } else if (mp4Match || oggMatch || webmMatch) {
-        $video = $$1("<video controls>")
-          .attr("src", url)
-          .attr("width", "640")
-          .attr("height", "360");
+        $video = $$1('<video controls>')
+          .attr('src', url)
+          .attr('width', '640')
+          .attr('height', '360');
       } else {
         // this is not a known video link. Now what, Cat? Now what?
         return false;
       }
-      $video.addClass("note-video-clip");
+      $video.addClass('note-video-clip');
       return $video[0];
     };
     VideoDialog.prototype.show = function() {
       var _this = this;
-      var text = this.context.invoke("editor.getSelectedText");
-      this.context.invoke("editor.saveRange");
+      var text = this.context.invoke('editor.getSelectedText');
+      this.context.invoke('editor.saveRange');
       this.showVideoDialog(text)
         .then(function(url) {
           // [workaround] hide dialog before restore range for IE range focus
           _this.ui.hideDialog(_this.$dialog);
-          _this.context.invoke("editor.restoreRange");
+          _this.context.invoke('editor.restoreRange');
           // build node
           var $node = _this.createVideoNode(url);
           if ($node) {
             // insert video node
-            _this.context.invoke("editor.insertNode", $node);
+            _this.context.invoke('editor.insertNode', $node);
           }
         })
         .fail(function() {
-          _this.context.invoke("editor.restoreRange");
+          _this.context.invoke('editor.restoreRange');
         });
     };
     /**
@@ -7296,15 +6760,15 @@
     VideoDialog.prototype.showVideoDialog = function(text) {
       var _this = this;
       return $$1.Deferred(function(deferred) {
-        var $videoUrl = _this.$dialog.find(".note-video-url");
-        var $videoBtn = _this.$dialog.find(".note-video-btn");
+        var $videoUrl = _this.$dialog.find('.note-video-url');
+        var $videoBtn = _this.$dialog.find('.note-video-btn');
         _this.ui.onDialogShown(_this.$dialog, function() {
-          _this.context.triggerEvent("dialog.shown");
-          $videoUrl.val(text).on("input", function() {
+          _this.context.triggerEvent('dialog.shown');
+          $videoUrl.val(text).on('input', function() {
             _this.ui.toggleBtn($videoBtn, $videoUrl.val());
           });
           if (!env.isSupportTouch) {
-            $videoUrl.trigger("focus");
+            $videoUrl.trigger('focus');
           }
           $videoBtn.click(function(event) {
             event.preventDefault();
@@ -7313,9 +6777,9 @@
           _this.bindEnterKey($videoUrl, $videoBtn);
         });
         _this.ui.onDialogHidden(_this.$dialog, function() {
-          $videoUrl.off("input");
-          $videoBtn.off("click");
-          if (deferred.state() === "pending") {
+          $videoUrl.off('input');
+          $videoBtn.off('click');
+          if (deferred.state() === 'pending') {
             deferred.reject();
           }
         });
@@ -7341,8 +6805,8 @@
         '<a href="http://summernote.org/" target="_blank">Summernote 0.8.10</a> · ',
         '<a href="https://github.com/summernote/summernote" target="_blank">Project</a> · ',
         '<a href="https://github.com/summernote/summernote/issues" target="_blank">Issues</a>',
-        "</p>"
-      ].join("");
+        '</p>'
+      ].join('');
       this.$dialog = this.ui
         .dialog({
           title: this.lang.options.help,
@@ -7350,9 +6814,9 @@
           body: this.createShortcutList(),
           footer: body,
           callback: function($node) {
-            $node.find(".modal-body,.note-modal-body").css({
-              "max-height": 300,
-              overflow: "scroll"
+            $node.find('.modal-body,.note-modal-body').css({
+              'max-height': 300,
+              overflow: 'scroll'
             });
           }
         })
@@ -7365,26 +6829,22 @@
     };
     HelpDialog.prototype.createShortcutList = function() {
       var _this = this;
-      var keyMap = this.options.keyMap[env.isMac ? "mac" : "pc"];
+      var keyMap = this.options.keyMap[env.isMac ? 'mac' : 'pc'];
       return Object.keys(keyMap)
         .map(function(key) {
           var command = keyMap[key];
           var $row = $$1('<div><div class="help-list-item"/></div>');
           $row
             .append(
-              $$1("<label><kbd>" + key + "</kdb></label>").css({
+              $$1('<label><kbd>' + key + '</kdb></label>').css({
                 width: 180,
-                "margin-right": 10
+                'margin-right': 10
               })
             )
-            .append(
-              $$1("<span/>").html(
-                _this.context.memo("help." + command) || command
-              )
-            );
+            .append($$1('<span/>').html(_this.context.memo('help.' + command) || command));
           return $row.html();
         })
-        .join("");
+        .join('');
     };
     /**
      * show help dialog
@@ -7396,7 +6856,7 @@
       return $$1
         .Deferred(function(deferred) {
           _this.ui.onDialogShown(_this.$dialog, function() {
-            _this.context.triggerEvent("dialog.shown");
+            _this.context.triggerEvent('dialog.shown');
             deferred.resolve();
           });
           _this.ui.showDialog(_this.$dialog);
@@ -7405,9 +6865,9 @@
     };
     HelpDialog.prototype.show = function() {
       var _this = this;
-      this.context.invoke("editor.saveRange");
+      this.context.invoke('editor.saveRange');
       this.showHelpDialog().then(function() {
-        _this.context.invoke("editor.restoreRange");
+        _this.context.invoke('editor.restoreRange');
       });
     };
     return HelpDialog;
@@ -7421,22 +6881,19 @@
       this.ui = $$1.summernote.ui;
       this.options = context.options;
       this.events = {
-        "summernote.keyup summernote.mouseup summernote.scroll": function() {
+        'summernote.keyup summernote.mouseup summernote.scroll': function() {
           _this.update();
         },
-        "summernote.disable summernote.change summernote.dialog.shown": function() {
+        'summernote.disable summernote.change summernote.dialog.shown': function() {
           _this.hide();
         },
-        "summernote.focusout": function(we, e) {
+        'summernote.focusout': function(we, e) {
           // [workaround] Firefox doesn't support relatedTarget on focusout
           //  - Ignore hide action on focus out in FF.
           if (env.isFF) {
             return;
           }
-          if (
-            !e.relatedTarget ||
-            !dom.ancestor(e.relatedTarget, func.eq(_this.$popover[0]))
-          ) {
+          if (!e.relatedTarget || !dom.ancestor(e.relatedTarget, func.eq(_this.$popover[0]))) {
             _this.hide();
           }
         }
@@ -7448,29 +6905,28 @@
     AirPopover.prototype.initialize = function() {
       this.$popover = this.ui
         .popover({
-          className: "note-air-popover"
+          className: 'note-air-popover'
         })
         .render()
         .appendTo(this.options.container);
-      var $content = this.$popover.find(".popover-content");
-      this.context.invoke("buttons.build", $content, this.options.popover.air);
+      var $content = this.$popover.find('.popover-content');
+      this.context.invoke('buttons.build', $content, this.options.popover.air);
     };
     AirPopover.prototype.destroy = function() {
       this.$popover.remove();
     };
     AirPopover.prototype.update = function() {
-      var styleInfo = this.context.invoke("editor.currentStyle");
+      var styleInfo = this.context.invoke('editor.currentStyle');
       if (styleInfo.range && !styleInfo.range.isCollapsed()) {
         var rect = lists.last(styleInfo.range.getClientRects());
         if (rect) {
           var bnd = func.rect2bnd(rect);
           this.$popover.css({
-            display: "block",
-            left:
-              Math.max(bnd.left + bnd.width / 2, 0) - AIR_MODE_POPOVER_X_OFFSET,
+            display: 'block',
+            left: Math.max(bnd.left + bnd.width / 2, 0) - AIR_MODE_POPOVER_X_OFFSET,
             top: bnd.top + bnd.height
           });
-          this.context.invoke("buttons.updateCurrentStyle", this.$popover);
+          this.context.invoke('buttons.updateCurrentStyle', this.$popover);
         }
       } else {
         this.hide();
@@ -7491,18 +6947,18 @@
       this.$editable = context.layoutInfo.editable;
       this.options = context.options;
       this.hint = this.options.hint || [];
-      this.direction = this.options.hintDirection || "bottom";
+      this.direction = this.options.hintDirection || 'bottom';
       this.hints = $$1.isArray(this.hint) ? this.hint : [this.hint];
       this.events = {
-        "summernote.keyup": function(we, e) {
+        'summernote.keyup': function(we, e) {
           if (!e.isDefaultPrevented()) {
             _this.handleKeyup(e);
           }
         },
-        "summernote.keydown": function(we, e) {
+        'summernote.keydown': function(we, e) {
           _this.handleKeydown(e);
         },
-        "summernote.disable summernote.dialog.shown": function() {
+        'summernote.disable summernote.dialog.shown': function() {
           _this.hide();
         }
       };
@@ -7515,19 +6971,17 @@
       this.lastWordRange = null;
       this.$popover = this.ui
         .popover({
-          className: "note-hint-popover",
+          className: 'note-hint-popover',
           hideArrow: true,
-          direction: ""
+          direction: ''
         })
         .render()
         .appendTo(this.options.container);
       this.$popover.hide();
-      this.$content = this.$popover.find(
-        ".popover-content,.note-popover-content"
-      );
-      this.$content.on("click", ".note-hint-item", function() {
-        _this.$content.find(".active").removeClass("active");
-        $$1(_this).addClass("active");
+      this.$content = this.$popover.find('.popover-content,.note-popover-content');
+      this.$content.on('click', '.note-hint-item', function() {
+        _this.$content.find('.active').removeClass('active');
+        $$1(_this).addClass('active');
         _this.replace();
       });
     };
@@ -7535,39 +6989,38 @@
       this.$popover.remove();
     };
     HintPopover.prototype.selectItem = function($item) {
-      this.$content.find(".active").removeClass("active");
-      $item.addClass("active");
-      this.$content[0].scrollTop =
-        $item[0].offsetTop - this.$content.innerHeight() / 2;
+      this.$content.find('.active').removeClass('active');
+      $item.addClass('active');
+      this.$content[0].scrollTop = $item[0].offsetTop - this.$content.innerHeight() / 2;
     };
     HintPopover.prototype.moveDown = function() {
-      var $current = this.$content.find(".note-hint-item.active");
+      var $current = this.$content.find('.note-hint-item.active');
       var $next = $current.next();
       if ($next.length) {
         this.selectItem($next);
       } else {
         var $nextGroup = $current.parent().next();
         if (!$nextGroup.length) {
-          $nextGroup = this.$content.find(".note-hint-group").first();
+          $nextGroup = this.$content.find('.note-hint-group').first();
         }
-        this.selectItem($nextGroup.find(".note-hint-item").first());
+        this.selectItem($nextGroup.find('.note-hint-item').first());
       }
     };
     HintPopover.prototype.moveUp = function() {
-      var $current = this.$content.find(".note-hint-item.active");
+      var $current = this.$content.find('.note-hint-item.active');
       var $prev = $current.prev();
       if ($prev.length) {
         this.selectItem($prev);
       } else {
         var $prevGroup = $current.parent().prev();
         if (!$prevGroup.length) {
-          $prevGroup = this.$content.find(".note-hint-group").last();
+          $prevGroup = this.$content.find('.note-hint-group').last();
         }
-        this.selectItem($prevGroup.find(".note-hint-item").last());
+        this.selectItem($prevGroup.find('.note-hint-item').last());
       }
     };
     HintPopover.prototype.replace = function() {
-      var $item = this.$content.find(".note-hint-item.active");
+      var $item = this.$content.find('.note-hint-item.active');
       if ($item.length) {
         var node = this.nodeFromItem($item);
         // XXX: consider to move codes to editor for recording redo/undo.
@@ -7578,19 +7031,15 @@
           .select();
         this.lastWordRange = null;
         this.hide();
-        this.context.triggerEvent(
-          "change",
-          this.$editable.html(),
-          this.$editable[0]
-        );
-        this.context.invoke("editor.focus");
+        this.context.triggerEvent('change', this.$editable.html(), this.$editable[0]);
+        this.context.invoke('editor.focus');
       }
     };
     HintPopover.prototype.nodeFromItem = function($item) {
-      var hint = this.hints[$item.data("index")];
-      var item = $item.data("item");
+      var hint = this.hints[$item.data('index')];
+      var item = $item.data('item');
       var node = hint.content ? hint.content(item) : item;
-      if (typeof node === "string") {
+      if (typeof node === 'string') {
         node = dom.createText(node);
       }
       return node;
@@ -7599,7 +7048,7 @@
       var hint = this.hints[hintIdx];
       return items.map(function(item, idx) {
         var $item = $$1('<div class="note-hint-item"/>');
-        $item.append(hint.template ? hint.template(item) : item + "");
+        $item.append(hint.template ? hint.template(item) : item + '');
         $item.data({
           index: hintIdx,
           item: item
@@ -7608,7 +7057,7 @@
       });
     };
     HintPopover.prototype.handleKeydown = function(e) {
-      if (!this.$popover.is(":visible")) {
+      if (!this.$popover.is(':visible')) {
         return;
       }
       if (e.keyCode === key.code.ENTER) {
@@ -7633,9 +7082,7 @@
     };
     HintPopover.prototype.createGroup = function(idx, keyword) {
       var _this = this;
-      var $group = $$1(
-        '<div class="note-hint-group note-hint-group-' + idx + '"/>'
-      );
+      var $group = $$1('<div class="note-hint-group note-hint-group-' + idx + '"/>');
       this.searchKeyword(idx, keyword, function(items) {
         items = items || [];
         if (items.length) {
@@ -7647,12 +7094,8 @@
     };
     HintPopover.prototype.handleKeyup = function(e) {
       var _this = this;
-      if (
-        !lists.contains([key.code.ENTER, key.code.UP, key.code.DOWN], e.keyCode)
-      ) {
-        var wordRange = this.context
-          .invoke("editor.createRange")
-          .getWordRange();
+      if (!lists.contains([key.code.ENTER, key.code.UP, key.code.DOWN], e.keyCode)) {
+        var wordRange = this.context.invoke('editor.createRange').getWordRange();
         var keyword_1 = wordRange.toString();
         if (this.hints.length && keyword_1) {
           this.$content.empty();
@@ -7666,9 +7109,9 @@
               }
             });
             // select first .note-hint-item
-            this.$content.find(".note-hint-item:first").addClass("active");
+            this.$content.find('.note-hint-item:first').addClass('active');
             // set position for popover after group is created
-            if (this.direction === "top") {
+            if (this.direction === 'top') {
               this.$popover.css({
                 left: bnd.left,
                 top: bnd.top - this.$popover.outerHeight() - POPOVER_DIST
@@ -7722,7 +7165,7 @@
      */
     Context.prototype.destroy = function() {
       this._destroy();
-      this.$note.removeData("summernote");
+      this.$note.removeData('summernote');
       this.ui.removeLayout(this.$note, this.layoutInfo);
     };
     /**
@@ -7742,13 +7185,9 @@
       // add optional buttons
       var buttons = $$1.extend({}, this.options.buttons);
       Object.keys(buttons).forEach(function(key) {
-        _this.memo("button." + key, buttons[key]);
+        _this.memo('button.' + key, buttons[key]);
       });
-      var modules = $$1.extend(
-        {},
-        this.options.modules,
-        $$1.summernote.plugins || {}
-      );
+      var modules = $$1.extend({}, this.options.modules, $$1.summernote.plugins || {});
       // add and initialize modules
       Object.keys(modules).forEach(function(key) {
         _this.module(key, modules[key], true);
@@ -7769,15 +7208,13 @@
         _this.removeMemo(key);
       });
       // trigger custom onDestroy callback
-      this.triggerEvent("destroy", this);
+      this.triggerEvent('destroy', this);
     };
     Context.prototype.code = function(html) {
-      var isActivated = this.invoke("codeview.isActivated");
+      var isActivated = this.invoke('codeview.isActivated');
       if (html === undefined) {
-        this.invoke("codeview.sync");
-        return isActivated
-          ? this.layoutInfo.codable.val()
-          : this.layoutInfo.editable.html();
+        this.invoke('codeview.sync');
+        return isActivated ? this.layoutInfo.codable.val() : this.layoutInfo.editable.html();
       } else {
         if (isActivated) {
           this.layoutInfo.codable.val(html);
@@ -7785,36 +7222,34 @@
           this.layoutInfo.editable.html(html);
         }
         this.$note.val(html);
-        this.triggerEvent("change", html);
+        this.triggerEvent('change', html);
       }
     };
     Context.prototype.isDisabled = function() {
-      return this.layoutInfo.editable.attr("contenteditable") === "false";
+      return this.layoutInfo.editable.attr('contenteditable') === 'false';
     };
     Context.prototype.enable = function() {
-      this.layoutInfo.editable.attr("contenteditable", true);
-      this.invoke("toolbar.activate", true);
-      this.triggerEvent("disable", false);
+      this.layoutInfo.editable.attr('contenteditable', true);
+      this.invoke('toolbar.activate', true);
+      this.triggerEvent('disable', false);
     };
     Context.prototype.disable = function() {
       // close codeview if codeview is opend
-      if (this.invoke("codeview.isActivated")) {
-        this.invoke("codeview.deactivate");
+      if (this.invoke('codeview.isActivated')) {
+        this.invoke('codeview.deactivate');
       }
-      this.layoutInfo.editable.attr("contenteditable", false);
-      this.invoke("toolbar.deactivate", true);
-      this.triggerEvent("disable", true);
+      this.layoutInfo.editable.attr('contenteditable', false);
+      this.invoke('toolbar.deactivate', true);
+      this.triggerEvent('disable', true);
     };
     Context.prototype.triggerEvent = function() {
       var namespace = lists.head(arguments);
       var args = lists.tail(lists.from(arguments));
-      var callback = this.options.callbacks[
-        func.namespaceToCamel(namespace, "on")
-      ];
+      var callback = this.options.callbacks[func.namespaceToCamel(namespace, 'on')];
       if (callback) {
         callback.apply(this.$note[0], args);
       }
-      this.$note.trigger("summernote." + namespace, args);
+      this.$note.trigger('summernote.' + namespace, args);
     };
     Context.prototype.initializeModule = function(key) {
       var module = this.modules[key];
@@ -7867,14 +7302,11 @@
     /**
      * Some buttons need to change their visual style immediately once they get pressed
      */
-    Context.prototype.createInvokeHandlerAndUpdateState = function(
-      namespace,
-      value
-    ) {
+    Context.prototype.createInvokeHandlerAndUpdateState = function(namespace, value) {
       var _this = this;
       return function(event) {
         _this.createInvokeHandler(namespace, value)(event);
-        _this.invoke("buttons.updateCurrentStyle");
+        _this.invoke('buttons.updateCurrentStyle');
       };
     };
     Context.prototype.createInvokeHandler = function(namespace, value) {
@@ -7882,21 +7314,17 @@
       return function(event) {
         event.preventDefault();
         var $target = $$1(event.target);
-        _this.invoke(
-          namespace,
-          value || $target.closest("[data-value]").data("value"),
-          $target
-        );
+        _this.invoke(namespace, value || $target.closest('[data-value]').data('value'), $target);
       };
     };
     Context.prototype.invoke = function() {
       var namespace = lists.head(arguments);
       var args = lists.tail(lists.from(arguments));
-      var splits = namespace.split(".");
+      var splits = namespace.split('.');
       var hasSeparator = splits.length > 1;
       var moduleName = hasSeparator && lists.head(splits);
       var methodName = hasSeparator ? lists.last(splits) : lists.head(splits);
-      var module = this.modules[moduleName || "editor"];
+      var module = this.modules[moduleName || 'editor'];
       if (!moduleName && this[methodName]) {
         return this[methodName].apply(this, args);
       } else if (module && module[methodName] && module.shouldInitialize()) {
@@ -7915,43 +7343,28 @@
      */
     summernote: function() {
       var type = $$1.type(lists.head(arguments));
-      var isExternalAPICalled = type === "string";
-      var hasInitOptions = type === "object";
-      var options = $$1.extend(
-        {},
-        $$1.summernote.options,
-        hasInitOptions ? lists.head(arguments) : {}
-      );
+      var isExternalAPICalled = type === 'string';
+      var hasInitOptions = type === 'object';
+      var options = $$1.extend({}, $$1.summernote.options, hasInitOptions ? lists.head(arguments) : {});
       // Update options
-      options.langInfo = $$1.extend(
-        true,
-        {},
-        $$1.summernote.lang["en-US"],
-        $$1.summernote.lang[options.lang]
-      );
-      options.icons = $$1.extend(
-        true,
-        {},
-        $$1.summernote.options.icons,
-        options.icons
-      );
-      options.tooltip =
-        options.tooltip === "auto" ? !env.isSupportTouch : options.tooltip;
+      options.langInfo = $$1.extend(true, {}, $$1.summernote.lang['en-US'], $$1.summernote.lang[options.lang]);
+      options.icons = $$1.extend(true, {}, $$1.summernote.options.icons, options.icons);
+      options.tooltip = options.tooltip === 'auto' ? !env.isSupportTouch : options.tooltip;
       this.each(function(idx, note) {
         var $note = $$1(note);
-        if (!$note.data("summernote")) {
+        if (!$note.data('summernote')) {
           var context = new Context($note, options);
-          $note.data("summernote", context);
-          $note.data("summernote").triggerEvent("init", context.layoutInfo);
+          $note.data('summernote', context);
+          $note.data('summernote').triggerEvent('init', context.layoutInfo);
         }
       });
       var $note = this.first();
       if ($note.length) {
-        var context = $note.data("summernote");
+        var context = $note.data('summernote');
         if (isExternalAPICalled) {
           return context.invoke.apply(context, lists.from(arguments));
         } else if (options.focus) {
-          context.invoke("editor.focus");
+          context.invoke('editor.focus');
         }
       }
       return this;
@@ -7959,7 +7372,7 @@
   });
 
   $$1.summernote = $$1.extend($$1.summernote, {
-    version: "0.8.10",
+    version: '0.8.10',
     ui: ui,
     dom: dom,
     plugins: {},
@@ -7990,39 +7403,39 @@
         airPopover: AirPopover
       },
       buttons: {},
-      lang: "en-US",
+      lang: 'en-US',
       followingToolbar: true,
-      otherStaticBar: "",
+      otherStaticBar: '',
       // toolbar
       toolbar: [
-        ["style", ["style"]],
-        ["font", ["bold", "underline", "clear"]],
-        ["fontname", ["fontname"]],
-        ["color", ["color"]],
-        ["para", ["ul", "ol", "paragraph"]],
-        ["table", ["table"]],
-        ["insert", ["link", "picture", "video"]],
-        ["view", ["fullscreen", "codeview", "help"]]
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['fontname', ['fontname']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
       ],
       // popover
       popatmouse: true,
       popover: {
         image: [
-          ["imagesize", ["imageSize100", "imageSize50", "imageSize25"]],
-          ["float", ["floatLeft", "floatRight", "floatNone"]],
-          ["remove", ["removeMedia"]]
+          ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+          ['float', ['floatLeft', 'floatRight', 'floatNone']],
+          ['remove', ['removeMedia']]
         ],
-        link: [["link", ["linkDialogShow", "unlink"]]],
+        link: [['link', ['linkDialogShow', 'unlink']]],
         table: [
-          ["add", ["addRowDown", "addRowUp", "addColLeft", "addColRight"]],
-          ["delete", ["deleteRow", "deleteCol", "deleteTable"]]
+          ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+          ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
         ],
         air: [
-          ["color", ["color"]],
-          ["font", ["bold", "underline", "clear"]],
-          ["para", ["ul", "paragraph"]],
-          ["table", ["table"]],
-          ["insert", ["link", "picture"]]
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['para', ['ul', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture']]
         ]
       },
       // air mode: inline editor
@@ -8035,193 +7448,58 @@
       styleWithSpan: true,
       shortcuts: true,
       textareaAutoSync: true,
-      hintDirection: "bottom",
-      tooltip: "auto",
-      container: "body",
+      hintDirection: 'bottom',
+      tooltip: 'auto',
+      container: 'body',
       maxTextLength: 0,
-      styleTags: ["p", "blockquote", "pre", "h1", "h2", "h3", "h4", "h5", "h6"],
+      styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
       fontNames: [
-        "Arial",
-        "Arial Black",
-        "Comic Sans MS",
-        "Courier New",
-        "Helvetica Neue",
-        "Helvetica",
-        "Impact",
-        "Lucida Grande",
-        "Tahoma",
-        "Times New Roman",
-        "Verdana"
+        'Arial',
+        'Arial Black',
+        'Comic Sans MS',
+        'Courier New',
+        'Helvetica Neue',
+        'Helvetica',
+        'Impact',
+        'Lucida Grande',
+        'Tahoma',
+        'Times New Roman',
+        'Verdana'
       ],
-      fontSizes: ["8", "9", "10", "11", "12", "14", "18", "24", "36"],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36'],
       // pallete colors(n x n)
       colors: [
-        [
-          "#000000",
-          "#424242",
-          "#636363",
-          "#9C9C94",
-          "#CEC6CE",
-          "#EFEFEF",
-          "#F7F7F7",
-          "#FFFFFF"
-        ],
-        [
-          "#FF0000",
-          "#FF9C00",
-          "#FFFF00",
-          "#00FF00",
-          "#00FFFF",
-          "#0000FF",
-          "#9C00FF",
-          "#FF00FF"
-        ],
-        [
-          "#F7C6CE",
-          "#FFE7CE",
-          "#FFEFC6",
-          "#D6EFD6",
-          "#CEDEE7",
-          "#CEE7F7",
-          "#D6D6E7",
-          "#E7D6DE"
-        ],
-        [
-          "#E79C9C",
-          "#FFC69C",
-          "#FFE79C",
-          "#B5D6A5",
-          "#A5C6CE",
-          "#9CC6EF",
-          "#B5A5D6",
-          "#D6A5BD"
-        ],
-        [
-          "#E76363",
-          "#F7AD6B",
-          "#FFD663",
-          "#94BD7B",
-          "#73A5AD",
-          "#6BADDE",
-          "#8C7BC6",
-          "#C67BA5"
-        ],
-        [
-          "#CE0000",
-          "#E79439",
-          "#EFC631",
-          "#6BA54A",
-          "#4A7B8C",
-          "#3984C6",
-          "#634AA5",
-          "#A54A7B"
-        ],
-        [
-          "#9C0000",
-          "#B56308",
-          "#BD9400",
-          "#397B21",
-          "#104A5A",
-          "#085294",
-          "#311873",
-          "#731842"
-        ],
-        [
-          "#630000",
-          "#7B3900",
-          "#846300",
-          "#295218",
-          "#083139",
-          "#003163",
-          "#21104A",
-          "#4A1031"
-        ]
+        ['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'],
+        ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'],
+        ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'],
+        ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'],
+        ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'],
+        ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'],
+        ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'],
+        ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']
       ],
       // http://chir.ag/projects/name-that-color/
       colorsName: [
+        ['Black', 'Tundora', 'Dove Gray', 'Star Dust', 'Pale Slate', 'Gallery', 'Alabaster', 'White'],
+        ['Red', 'Orange Peel', 'Yellow', 'Green', 'Cyan', 'Blue', 'Electric Violet', 'Magenta'],
+        ['Azalea', 'Karry', 'Egg White', 'Zanah', 'Botticelli', 'Tropical Blue', 'Mischka', 'Twilight'],
+        ['Tonys Pink', 'Peach Orange', 'Cream Brulee', 'Sprout', 'Casper', 'Perano', 'Cold Purple', 'Careys Pink'],
+        ['Mandy', 'Rajah', 'Dandelion', 'Olivine', 'Gulf Stream', 'Viking', 'Blue Marguerite', 'Puce'],
         [
-          "Black",
-          "Tundora",
-          "Dove Gray",
-          "Star Dust",
-          "Pale Slate",
-          "Gallery",
-          "Alabaster",
-          "White"
+          'Guardsman Red',
+          'Fire Bush',
+          'Golden Dream',
+          'Chelsea Cucumber',
+          'Smalt Blue',
+          'Boston Blue',
+          'Butterfly Bush',
+          'Cadillac'
         ],
-        [
-          "Red",
-          "Orange Peel",
-          "Yellow",
-          "Green",
-          "Cyan",
-          "Blue",
-          "Electric Violet",
-          "Magenta"
-        ],
-        [
-          "Azalea",
-          "Karry",
-          "Egg White",
-          "Zanah",
-          "Botticelli",
-          "Tropical Blue",
-          "Mischka",
-          "Twilight"
-        ],
-        [
-          "Tonys Pink",
-          "Peach Orange",
-          "Cream Brulee",
-          "Sprout",
-          "Casper",
-          "Perano",
-          "Cold Purple",
-          "Careys Pink"
-        ],
-        [
-          "Mandy",
-          "Rajah",
-          "Dandelion",
-          "Olivine",
-          "Gulf Stream",
-          "Viking",
-          "Blue Marguerite",
-          "Puce"
-        ],
-        [
-          "Guardsman Red",
-          "Fire Bush",
-          "Golden Dream",
-          "Chelsea Cucumber",
-          "Smalt Blue",
-          "Boston Blue",
-          "Butterfly Bush",
-          "Cadillac"
-        ],
-        [
-          "Sangria",
-          "Mai Tai",
-          "Buddha Gold",
-          "Forest Green",
-          "Eden",
-          "Venice Blue",
-          "Meteorite",
-          "Claret"
-        ],
-        [
-          "Rosewood",
-          "Cinnamon",
-          "Olive",
-          "Parsley",
-          "Tiber",
-          "Midnight Blue",
-          "Valentino",
-          "Loulou"
-        ]
+        ['Sangria', 'Mai Tai', 'Buddha Gold', 'Forest Green', 'Eden', 'Venice Blue', 'Meteorite', 'Claret'],
+        ['Rosewood', 'Cinnamon', 'Olive', 'Parsley', 'Tiber', 'Midnight Blue', 'Valentino', 'Loulou']
       ],
-      lineHeights: ["1.0", "1.2", "1.4", "1.5", "1.6", "1.8", "2.0", "3.0"],
-      tableClassName: "table table-bordered",
+      lineHeights: ['1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
+      tableClassName: 'table table-bordered',
       insertTableMaxSize: {
         col: 10,
         row: 10
@@ -8241,115 +7519,115 @@
         onImageUploadError: null
       },
       codemirror: {
-        mode: "text/html",
+        mode: 'text/html',
         htmlMode: true,
         lineNumbers: true
       },
       keyMap: {
         pc: {
-          ENTER: "insertParagraph",
-          "CTRL+Z": "undo",
-          "CTRL+Y": "redo",
-          TAB: "tab",
-          "SHIFT+TAB": "untab",
-          "CTRL+B": "bold",
-          "CTRL+I": "italic",
-          "CTRL+U": "underline",
-          "CTRL+SHIFT+S": "strikethrough",
-          "CTRL+BACKSLASH": "removeFormat",
-          "CTRL+SHIFT+L": "justifyLeft",
-          "CTRL+SHIFT+E": "justifyCenter",
-          "CTRL+SHIFT+R": "justifyRight",
-          "CTRL+SHIFT+J": "justifyFull",
-          "CTRL+SHIFT+NUM7": "insertUnorderedList",
-          "CTRL+SHIFT+NUM8": "insertOrderedList",
-          "CTRL+LEFTBRACKET": "outdent",
-          "CTRL+RIGHTBRACKET": "indent",
-          "CTRL+NUM0": "formatPara",
-          "CTRL+NUM1": "formatH1",
-          "CTRL+NUM2": "formatH2",
-          "CTRL+NUM3": "formatH3",
-          "CTRL+NUM4": "formatH4",
-          "CTRL+NUM5": "formatH5",
-          "CTRL+NUM6": "formatH6",
-          "CTRL+ENTER": "insertHorizontalRule",
-          "CTRL+K": "linkDialog.show"
+          ENTER: 'insertParagraph',
+          'CTRL+Z': 'undo',
+          'CTRL+Y': 'redo',
+          TAB: 'tab',
+          'SHIFT+TAB': 'untab',
+          'CTRL+B': 'bold',
+          'CTRL+I': 'italic',
+          'CTRL+U': 'underline',
+          'CTRL+SHIFT+S': 'strikethrough',
+          'CTRL+BACKSLASH': 'removeFormat',
+          'CTRL+SHIFT+L': 'justifyLeft',
+          'CTRL+SHIFT+E': 'justifyCenter',
+          'CTRL+SHIFT+R': 'justifyRight',
+          'CTRL+SHIFT+J': 'justifyFull',
+          'CTRL+SHIFT+NUM7': 'insertUnorderedList',
+          'CTRL+SHIFT+NUM8': 'insertOrderedList',
+          'CTRL+LEFTBRACKET': 'outdent',
+          'CTRL+RIGHTBRACKET': 'indent',
+          'CTRL+NUM0': 'formatPara',
+          'CTRL+NUM1': 'formatH1',
+          'CTRL+NUM2': 'formatH2',
+          'CTRL+NUM3': 'formatH3',
+          'CTRL+NUM4': 'formatH4',
+          'CTRL+NUM5': 'formatH5',
+          'CTRL+NUM6': 'formatH6',
+          'CTRL+ENTER': 'insertHorizontalRule',
+          'CTRL+K': 'linkDialog.show'
         },
         mac: {
-          ENTER: "insertParagraph",
-          "CMD+Z": "undo",
-          "CMD+SHIFT+Z": "redo",
-          TAB: "tab",
-          "SHIFT+TAB": "untab",
-          "CMD+B": "bold",
-          "CMD+I": "italic",
-          "CMD+U": "underline",
-          "CMD+SHIFT+S": "strikethrough",
-          "CMD+BACKSLASH": "removeFormat",
-          "CMD+SHIFT+L": "justifyLeft",
-          "CMD+SHIFT+E": "justifyCenter",
-          "CMD+SHIFT+R": "justifyRight",
-          "CMD+SHIFT+J": "justifyFull",
-          "CMD+SHIFT+NUM7": "insertUnorderedList",
-          "CMD+SHIFT+NUM8": "insertOrderedList",
-          "CMD+LEFTBRACKET": "outdent",
-          "CMD+RIGHTBRACKET": "indent",
-          "CMD+NUM0": "formatPara",
-          "CMD+NUM1": "formatH1",
-          "CMD+NUM2": "formatH2",
-          "CMD+NUM3": "formatH3",
-          "CMD+NUM4": "formatH4",
-          "CMD+NUM5": "formatH5",
-          "CMD+NUM6": "formatH6",
-          "CMD+ENTER": "insertHorizontalRule",
-          "CMD+K": "linkDialog.show"
+          ENTER: 'insertParagraph',
+          'CMD+Z': 'undo',
+          'CMD+SHIFT+Z': 'redo',
+          TAB: 'tab',
+          'SHIFT+TAB': 'untab',
+          'CMD+B': 'bold',
+          'CMD+I': 'italic',
+          'CMD+U': 'underline',
+          'CMD+SHIFT+S': 'strikethrough',
+          'CMD+BACKSLASH': 'removeFormat',
+          'CMD+SHIFT+L': 'justifyLeft',
+          'CMD+SHIFT+E': 'justifyCenter',
+          'CMD+SHIFT+R': 'justifyRight',
+          'CMD+SHIFT+J': 'justifyFull',
+          'CMD+SHIFT+NUM7': 'insertUnorderedList',
+          'CMD+SHIFT+NUM8': 'insertOrderedList',
+          'CMD+LEFTBRACKET': 'outdent',
+          'CMD+RIGHTBRACKET': 'indent',
+          'CMD+NUM0': 'formatPara',
+          'CMD+NUM1': 'formatH1',
+          'CMD+NUM2': 'formatH2',
+          'CMD+NUM3': 'formatH3',
+          'CMD+NUM4': 'formatH4',
+          'CMD+NUM5': 'formatH5',
+          'CMD+NUM6': 'formatH6',
+          'CMD+ENTER': 'insertHorizontalRule',
+          'CMD+K': 'linkDialog.show'
         }
       },
       icons: {
-        align: "note-icon-align",
-        alignCenter: "note-icon-align-center",
-        alignJustify: "note-icon-align-justify",
-        alignLeft: "note-icon-align-left",
-        alignRight: "note-icon-align-right",
-        rowBelow: "note-icon-row-below",
-        colBefore: "note-icon-col-before",
-        colAfter: "note-icon-col-after",
-        rowAbove: "note-icon-row-above",
-        rowRemove: "note-icon-row-remove",
-        colRemove: "note-icon-col-remove",
-        indent: "note-icon-align-indent",
-        outdent: "note-icon-align-outdent",
-        arrowsAlt: "note-icon-arrows-alt",
-        bold: "note-icon-bold",
-        caret: "note-icon-caret",
-        circle: "note-icon-circle",
-        close: "note-icon-close",
-        code: "note-icon-code",
-        eraser: "note-icon-eraser",
-        font: "note-icon-font",
-        frame: "note-icon-frame",
-        italic: "note-icon-italic",
-        link: "note-icon-link",
-        unlink: "note-icon-chain-broken",
-        magic: "note-icon-magic",
-        menuCheck: "note-icon-menu-check",
-        minus: "note-icon-minus",
-        orderedlist: "note-icon-orderedlist",
-        pencil: "note-icon-pencil",
-        picture: "note-icon-picture",
-        question: "note-icon-question",
-        redo: "note-icon-redo",
-        square: "note-icon-square",
-        strikethrough: "note-icon-strikethrough",
-        subscript: "note-icon-subscript",
-        superscript: "note-icon-superscript",
-        table: "note-icon-table",
-        textHeight: "note-icon-text-height",
-        trash: "note-icon-trash",
-        underline: "note-icon-underline",
-        undo: "note-icon-undo",
-        unorderedlist: "note-icon-unorderedlist",
-        video: "note-icon-video"
+        align: 'note-icon-align',
+        alignCenter: 'note-icon-align-center',
+        alignJustify: 'note-icon-align-justify',
+        alignLeft: 'note-icon-align-left',
+        alignRight: 'note-icon-align-right',
+        rowBelow: 'note-icon-row-below',
+        colBefore: 'note-icon-col-before',
+        colAfter: 'note-icon-col-after',
+        rowAbove: 'note-icon-row-above',
+        rowRemove: 'note-icon-row-remove',
+        colRemove: 'note-icon-col-remove',
+        indent: 'note-icon-align-indent',
+        outdent: 'note-icon-align-outdent',
+        arrowsAlt: 'note-icon-arrows-alt',
+        bold: 'note-icon-bold',
+        caret: 'note-icon-caret',
+        circle: 'note-icon-circle',
+        close: 'note-icon-close',
+        code: 'note-icon-code',
+        eraser: 'note-icon-eraser',
+        font: 'note-icon-font',
+        frame: 'note-icon-frame',
+        italic: 'note-icon-italic',
+        link: 'note-icon-link',
+        unlink: 'note-icon-chain-broken',
+        magic: 'note-icon-magic',
+        menuCheck: 'note-icon-menu-check',
+        minus: 'note-icon-minus',
+        orderedlist: 'note-icon-orderedlist',
+        pencil: 'note-icon-pencil',
+        picture: 'note-icon-picture',
+        question: 'note-icon-question',
+        redo: 'note-icon-redo',
+        square: 'note-icon-square',
+        strikethrough: 'note-icon-strikethrough',
+        subscript: 'note-icon-subscript',
+        superscript: 'note-icon-superscript',
+        table: 'note-icon-table',
+        textHeight: 'note-icon-text-height',
+        trash: 'note-icon-trash',
+        underline: 'note-icon-underline',
+        undo: 'note-icon-undo',
+        unorderedlist: 'note-icon-unorderedlist',
+        video: 'note-icon-video'
       }
     }
   });

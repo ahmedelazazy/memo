@@ -1,17 +1,17 @@
-import { Component, OnInit, Input, OnChanges } from "@angular/core";
-import { TemplateService } from "src/app/services/template.service";
-import { Helper } from "src/app/models/helper";
-import { FormGroup, FormArray } from "@angular/forms";
-import * as _ from "lodash";
-import { FieldVisibility } from "src/app/models/enums";
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { TemplateService } from 'src/app/services/template.service';
+import { Helper } from 'src/app/models/helper';
+import { FormGroup, FormArray } from '@angular/forms';
+import * as _ from 'lodash';
+import { FieldVisibility } from 'src/app/models/enums';
 
 @Component({
-  selector: "app-template-step-fields",
-  templateUrl: "./template-step-fields.component.html",
-  styleUrls: ["./template-step-fields.component.css"]
+  selector: 'app-template-step-fields',
+  templateUrl: './template-step-fields.component.html',
+  styleUrls: ['./template-step-fields.component.css']
 })
 export class TemplateStepFieldsComponent implements OnInit {
-  @Input("step") stepForm: FormGroup;
+  @Input('step') stepForm: FormGroup;
   templateForm: any;
   fieldVisibilityEnum = FieldVisibility;
 
@@ -22,7 +22,7 @@ export class TemplateStepFieldsComponent implements OnInit {
   ngOnChanges() {
     if (!this.stepForm) return;
 
-    let fieldsVisibilityValues = this.stepForm.get("fieldsVisibility").value;
+    let fieldsVisibilityValues = this.stepForm.get('fieldsVisibility').value;
 
     this.templateService.templateForm$.subscribe(data => {
       if (data) {
@@ -33,16 +33,11 @@ export class TemplateStepFieldsComponent implements OnInit {
             if (section) {
               for (let j = 0; j < section.fields.length; j++) {
                 const field = section.fields[j];
-                let exisitngField = fieldsVisibilityValues.find(
-                  f => f.controlUiId == field.controlUiId
-                );
+                let exisitngField = fieldsVisibilityValues.find(f => f.controlUiId == field.controlUiId);
                 if (exisitngField) {
                   field.visibility = exisitngField.visibility;
                 }
-                field.visibility =
-                  field.visibility == null
-                    ? FieldVisibility.Editable
-                    : field.visibility;
+                field.visibility = field.visibility == null ? FieldVisibility.Editable : field.visibility;
               }
             }
           }
@@ -53,9 +48,9 @@ export class TemplateStepFieldsComponent implements OnInit {
   }
 
   onVisibilityChange(val, controlUiId) {
-    let arr = this.stepForm.get("fieldsVisibility").value;
+    let arr = this.stepForm.get('fieldsVisibility').value;
     let searchResult = arr.find(c => c.controlUiId == controlUiId);
     searchResult.visibility = val;
-    this.stepForm.get("fieldsVisibility").setValue(arr);
+    this.stepForm.get('fieldsVisibility').setValue(arr);
   }
 }

@@ -18,18 +18,18 @@
  * ========================================================== */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     //RequireJS
-    define(["jquery"], factory);
-  } else if (typeof exports === "object") {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
     //Backbone.js
-    factory(require("jquery"));
+    factory(require('jquery'));
   } else {
     //Jquery plugin
     factory(jQuery);
   }
 })(function($) {
-  "use strict"; // jshint ;_;
+  'use strict'; // jshint ;_;
 
   /* MARKDOWN CLASS DEFINITION
    * ========================== */
@@ -38,29 +38,29 @@
     // @TODO : remove this BC on next major release
     // @see : https://github.com/toopay/bootstrap-markdown/issues/109
     var opts = [
-      "autofocus",
-      "savable",
-      "hideable",
-      "width",
-      "height",
-      "resize",
-      "iconlibrary",
-      "language",
-      "footer",
-      "fullscreen",
-      "hiddenButtons",
-      "disabledButtons"
+      'autofocus',
+      'savable',
+      'hideable',
+      'width',
+      'height',
+      'resize',
+      'iconlibrary',
+      'language',
+      'footer',
+      'fullscreen',
+      'hiddenButtons',
+      'disabledButtons'
     ];
     $.each(opts, function(_, opt) {
-      if (typeof $(element).data(opt) !== "undefined") {
-        options = typeof options == "object" ? options : {};
+      if (typeof $(element).data(opt) !== 'undefined') {
+        options = typeof options == 'object' ? options : {};
         options[opt] = $(element).data(opt);
       }
     });
     // End BC
 
     // Class Properties
-    this.$ns = "bootstrap-markdown";
+    this.$ns = 'bootstrap-markdown';
     this.$element = $(element);
     this.$editable = {
       el: null,
@@ -69,13 +69,7 @@
       attrValues: [],
       content: null
     };
-    this.$options = $.extend(
-      true,
-      {},
-      $.fn.markdown.defaults,
-      options,
-      this.$element.data("options")
-    );
+    this.$options = $.extend(true, {}, $.fn.markdown.defaults, options, this.$element.data('options'));
     this.$oldContent = null;
     this.$isPreview = false;
     this.$isFullscreen = false;
@@ -93,7 +87,7 @@
 
     __alterButtons: function(name, alter) {
       var handler = this.$handler,
-        isAll = name == "all",
+        isAll = name == 'all',
         that = this;
 
       $.each(handler, function(k, v) {
@@ -124,49 +118,43 @@
           // Build each button group
           var z,
             buttons = btnGroups[y].data,
-            btnGroupContainer = $("<div/>", {
-              class: "btn-group"
+            btnGroupContainer = $('<div/>', {
+              class: 'btn-group'
             });
 
           for (z = 0; z < buttons.length; z++) {
             var button = buttons[z],
               buttonContainer,
               buttonIconContainer,
-              buttonHandler = ns + "-" + button.name,
+              buttonHandler = ns + '-' + button.name,
               buttonIcon = this.__getIcon(button.icon),
-              btnText = button.btnText ? button.btnText : "",
-              btnClass = button.btnClass ? button.btnClass : "btn",
-              tabIndex = button.tabIndex ? button.tabIndex : "-1",
-              hotkey =
-                typeof button.hotkey !== "undefined" ? button.hotkey : "",
-              hotkeyCaption =
-                typeof jQuery.hotkeys !== "undefined" && hotkey !== ""
-                  ? " (" + hotkey + ")"
-                  : "";
+              btnText = button.btnText ? button.btnText : '',
+              btnClass = button.btnClass ? button.btnClass : 'btn',
+              tabIndex = button.tabIndex ? button.tabIndex : '-1',
+              hotkey = typeof button.hotkey !== 'undefined' ? button.hotkey : '',
+              hotkeyCaption = typeof jQuery.hotkeys !== 'undefined' && hotkey !== '' ? ' (' + hotkey + ')' : '';
 
             // Construct the button object
-            buttonContainer = $("<button></button>");
+            buttonContainer = $('<button></button>');
             buttonContainer
-              .text(" " + this.__localize(btnText))
-              .addClass("btn-default btn-sm")
+              .text(' ' + this.__localize(btnText))
+              .addClass('btn-default btn-sm')
               .addClass(btnClass);
-            if (
-              btnClass.match(/btn\-(primary|success|info|warning|danger|link)/)
-            ) {
-              buttonContainer.removeClass("btn-default");
+            if (btnClass.match(/btn\-(primary|success|info|warning|danger|link)/)) {
+              buttonContainer.removeClass('btn-default');
             }
             buttonContainer.attr({
-              type: "button",
+              type: 'button',
               title: this.__localize(button.title) + hotkeyCaption,
               tabindex: tabIndex,
-              "data-provider": ns,
-              "data-handler": buttonHandler,
-              "data-hotkey": hotkey
+              'data-provider': ns,
+              'data-handler': buttonHandler,
+              'data-hotkey': hotkey
             });
             if (button.toggle === true) {
-              buttonContainer.attr("data-toggle", "button");
+              buttonContainer.attr('data-toggle', 'button');
             }
-            buttonIconContainer = $("<span/>");
+            buttonIconContainer = $('<span/>');
             buttonIconContainer.addClass(buttonIcon);
             buttonIconContainer.prependTo(buttonContainer);
 
@@ -187,16 +175,13 @@
     },
     __setListener: function() {
       // Set size and resizable Properties
-      var hasRows = typeof this.$textarea.attr("rows") !== "undefined",
-        maxRows =
-          this.$textarea.val().split("\n").length > 5
-            ? this.$textarea.val().split("\n").length
-            : "5",
-        rowsVal = hasRows ? this.$textarea.attr("rows") : maxRows;
+      var hasRows = typeof this.$textarea.attr('rows') !== 'undefined',
+        maxRows = this.$textarea.val().split('\n').length > 5 ? this.$textarea.val().split('\n').length : '5',
+        rowsVal = hasRows ? this.$textarea.attr('rows') : maxRows;
 
-      this.$textarea.attr("rows", rowsVal);
+      this.$textarea.attr('rows', rowsVal);
       if (this.$options.resize) {
-        this.$textarea.css("resize", this.$options.resize);
+        this.$textarea.css('resize', this.$options.resize);
       }
 
       this.$textarea.on({
@@ -206,23 +191,23 @@
         select: $.proxy(this.select, this)
       });
 
-      if (this.eventSupported("keydown")) {
-        this.$textarea.on("keydown", $.proxy(this.keydown, this));
+      if (this.eventSupported('keydown')) {
+        this.$textarea.on('keydown', $.proxy(this.keydown, this));
       }
 
-      if (this.eventSupported("keypress")) {
-        this.$textarea.on("keypress", $.proxy(this.keypress, this));
+      if (this.eventSupported('keypress')) {
+        this.$textarea.on('keypress', $.proxy(this.keypress, this));
       }
 
       // Re-attach markdown data
-      this.$textarea.data("markdown", this);
+      this.$textarea.data('markdown', this);
     },
 
     __handle: function(e) {
       var target = $(e.currentTarget),
         handler = this.$handler,
         callback = this.$callback,
-        handlerName = target.attr("data-handler"),
+        handlerName = target.attr('data-handler'),
         callbackIndex = handler.indexOf(handlerName),
         callbackHandler = callback[callbackIndex];
 
@@ -236,7 +221,7 @@
 
       // Unless it was the save handler,
       // focusin the textarea
-      if (handlerName.indexOf("cmdSave") < 0) {
+      if (handlerName.indexOf('cmdSave') < 0) {
         this.$textarea.focus();
       }
 
@@ -247,9 +232,9 @@
       var messages = $.fn.markdown.messages,
         language = this.$options.language;
       if (
-        typeof messages !== "undefined" &&
-        typeof messages[language] !== "undefined" &&
-        typeof messages[language][string] !== "undefined"
+        typeof messages !== 'undefined' &&
+        typeof messages[language] !== 'undefined' &&
+        typeof messages[language][string] !== 'undefined'
       ) {
         return messages[language][string];
       }
@@ -257,7 +242,7 @@
     },
 
     __getIcon: function(src) {
-      return typeof src == "object" ? src[this.$options.iconlibrary] : src;
+      return typeof src == 'object' ? src[this.$options.iconlibrary] : src;
     },
 
     setFullscreen: function(mode) {
@@ -265,12 +250,12 @@
         $textarea = this.$textarea;
 
       if (mode === true) {
-        $editor.addClass("md-fullscreen-mode");
-        $("body").addClass("md-nooverflow");
+        $editor.addClass('md-fullscreen-mode');
+        $('body').addClass('md-nooverflow');
         this.$options.onFullscreen(this);
       } else {
-        $editor.removeClass("md-fullscreen-mode");
-        $("body").removeClass("md-nooverflow");
+        $editor.removeClass('md-fullscreen-mode');
+        $('body').removeClass('md-nooverflow');
 
         if (this.$isPreview == true) this.hidePreview().showPreview();
       }
@@ -284,14 +269,14 @@
         textarea,
         ns = this.$ns,
         container = this.$element,
-        originalHeigth = container.css("height"),
-        originalWidth = container.css("width"),
+        originalHeigth = container.css('height'),
+        originalWidth = container.css('width'),
         editable = this.$editable,
         handler = this.$handler,
         callback = this.$callback,
         options = this.$options,
-        editor = $("<div/>", {
-          class: "md-editor",
+        editor = $('<div/>', {
+          class: 'md-editor',
           click: function() {
             instance.focus();
           }
@@ -300,30 +285,24 @@
       // Prepare the editor
       if (this.$editor === null) {
         // Create the panel
-        var editorHeader = $("<div/>", {
-          class: "md-header btn-toolbar"
+        var editorHeader = $('<div/>', {
+          class: 'md-header btn-toolbar'
         });
 
         // Merge the main & additional button groups together
         var allBtnGroups = [];
-        if (options.buttons.length > 0)
-          allBtnGroups = allBtnGroups.concat(options.buttons[0]);
+        if (options.buttons.length > 0) allBtnGroups = allBtnGroups.concat(options.buttons[0]);
         if (options.additionalButtons.length > 0) {
           // iterate the additional button groups
           $.each(options.additionalButtons[0], function(idx, buttonGroup) {
             // see if the group name of the addional group matches an existing group
-            var matchingGroups = $.grep(allBtnGroups, function(
-              allButtonGroup,
-              allIdx
-            ) {
+            var matchingGroups = $.grep(allBtnGroups, function(allButtonGroup, allIdx) {
               return allButtonGroup.name === buttonGroup.name;
             });
 
             // if it matches add the addional buttons to that group, if not just add it to the all buttons group
             if (matchingGroups.length > 0) {
-              matchingGroups[0].data = matchingGroups[0].data.concat(
-                buttonGroup.data
-              );
+              matchingGroups[0].data = matchingGroups[0].data.concat(buttonGroup.data);
             } else {
               allBtnGroups.push(options.additionalButtons[0][idx]);
             }
@@ -337,16 +316,8 @@
               return options.reorderButtonGroups.indexOf(btnGroup.name) > -1;
             })
             .sort(function(a, b) {
-              if (
-                options.reorderButtonGroups.indexOf(a.name) <
-                options.reorderButtonGroups.indexOf(b.name)
-              )
-                return -1;
-              if (
-                options.reorderButtonGroups.indexOf(a.name) >
-                options.reorderButtonGroups.indexOf(b.name)
-              )
-                return 1;
+              if (options.reorderButtonGroups.indexOf(a.name) < options.reorderButtonGroups.indexOf(b.name)) return -1;
+              if (options.reorderButtonGroups.indexOf(a.name) > options.reorderButtonGroups.indexOf(b.name)) return 1;
               return 0;
             });
         }
@@ -363,7 +334,7 @@
                 this.__getIcon(options.fullscreen.icons.fullscreenOn) +
                 '"></span></a></div>'
             )
-            .on("click", ".md-control-fullscreen", function(e) {
+            .on('click', '.md-control-fullscreen', function(e) {
               e.preventDefault();
               instance.setFullscreen(true);
             });
@@ -372,21 +343,18 @@
         editor.append(editorHeader);
 
         // Wrap the textarea
-        if (container.is("textarea")) {
+        if (container.is('textarea')) {
           container.before(editor);
           textarea = container;
-          textarea.addClass("md-input");
+          textarea.addClass('md-input');
           editor.append(textarea);
         } else {
-          var rawContent =
-              typeof toMarkdown == "function"
-                ? toMarkdown(container.html())
-                : container.html(),
+          var rawContent = typeof toMarkdown == 'function' ? toMarkdown(container.html()) : container.html(),
             currentContent = $.trim(rawContent);
 
           // This is some arbitrary content that could be edited
-          textarea = $("<textarea/>", {
-            class: "md-input",
+          textarea = $('<textarea/>', {
+            class: 'md-input',
             val: currentContent
           });
 
@@ -394,7 +362,7 @@
 
           // Save the editable
           editable.el = container;
-          editable.type = container.prop("tagName").toLowerCase();
+          editable.type = container.prop('tagName').toLowerCase();
           editable.content = container.html();
 
           $(container[0].attributes).each(function() {
@@ -406,15 +374,15 @@
           container.replaceWith(editor);
         }
 
-        var editorFooter = $("<div/>", {
-            class: "md-footer"
+        var editorFooter = $('<div/>', {
+            class: 'md-footer'
           }),
           createFooter = false,
-          footer = "";
+          footer = '';
         // Create the footer if savable
         if (options.savable) {
           createFooter = true;
-          var saveHandler = "cmdSave";
+          var saveHandler = 'cmdSave';
 
           // Register handler and callback
           handler.push(saveHandler);
@@ -426,17 +394,14 @@
               '" data-handler="' +
               saveHandler +
               '"><i class="icon icon-white icon-ok"></i> ' +
-              this.__localize("Save") +
-              "</button>"
+              this.__localize('Save') +
+              '</button>'
           );
         }
 
-        footer =
-          typeof options.footer === "function"
-            ? options.footer(this)
-            : options.footer;
+        footer = typeof options.footer === 'function' ? options.footer(this) : options.footer;
 
-        if ($.trim(footer) !== "") {
+        if ($.trim(footer) !== '') {
           createFooter = true;
           editorFooter.append(footer);
         }
@@ -444,24 +409,22 @@
         if (createFooter) editor.append(editorFooter);
 
         // Set width
-        if (options.width && options.width !== "inherit") {
+        if (options.width && options.width !== 'inherit') {
           if (jQuery.isNumeric(options.width)) {
-            editor.css("display", "table");
-            textarea.css("width", options.width + "px");
+            editor.css('display', 'table');
+            textarea.css('width', options.width + 'px');
           } else {
             editor.addClass(options.width);
           }
         }
 
         // Set height
-        if (options.height && options.height !== "inherit") {
+        if (options.height && options.height !== 'inherit') {
           if (jQuery.isNumeric(options.height)) {
             var height = options.height;
-            if (editorHeader)
-              height = Math.max(0, height - editorHeader.outerHeight());
-            if (editorFooter)
-              height = Math.max(0, height - editorFooter.outerHeight());
-            textarea.css("height", height + "px");
+            if (editorHeader) height = Math.max(0, height - editorHeader.outerHeight());
+            if (editorFooter) height = Math.max(0, height - editorFooter.outerHeight());
+            textarea.css('height', height + 'px');
           } else {
             editor.addClass(options.height);
           }
@@ -476,42 +439,30 @@
         this.__setListener();
 
         // Set editor attributes, data short-hand API and listener
-        this.$editor.attr("id", new Date().getTime());
-        this.$editor.on(
-          "click",
-          '[data-provider="bootstrap-markdown"]',
-          $.proxy(this.__handle, this)
-        );
+        this.$editor.attr('id', new Date().getTime());
+        this.$editor.on('click', '[data-provider="bootstrap-markdown"]', $.proxy(this.__handle, this));
 
-        if (this.$element.is(":disabled") || this.$element.is("[readonly]")) {
-          this.$editor.addClass("md-editor-disabled");
-          this.disableButtons("all");
+        if (this.$element.is(':disabled') || this.$element.is('[readonly]')) {
+          this.$editor.addClass('md-editor-disabled');
+          this.disableButtons('all');
         }
 
-        if (
-          this.eventSupported("keydown") &&
-          typeof jQuery.hotkeys === "object"
-        ) {
-          editorHeader
-            .find('[data-provider="bootstrap-markdown"]')
-            .each(function() {
-              var $button = $(this),
-                hotkey = $button.attr("data-hotkey");
-              if (hotkey.toLowerCase() !== "") {
-                textarea.bind("keydown", hotkey, function() {
-                  $button.trigger("click");
-                  return false;
-                });
-              }
-            });
+        if (this.eventSupported('keydown') && typeof jQuery.hotkeys === 'object') {
+          editorHeader.find('[data-provider="bootstrap-markdown"]').each(function() {
+            var $button = $(this),
+              hotkey = $button.attr('data-hotkey');
+            if (hotkey.toLowerCase() !== '') {
+              textarea.bind('keydown', hotkey, function() {
+                $button.trigger('click');
+                return false;
+              });
+            }
+          });
         }
 
-        if (options.initialstate === "preview") {
+        if (options.initialstate === 'preview') {
           this.showPreview();
-        } else if (
-          options.initialstate === "fullscreen" &&
-          options.fullscreen.enable
-        ) {
+        } else if (options.initialstate === 'fullscreen' && options.fullscreen.enable) {
           this.setFullscreen(true);
         }
       } else {
@@ -520,7 +471,7 @@
 
       if (options.autofocus) {
         this.$textarea.focus();
-        this.$editor.addClass("active");
+        this.$editor.addClass('active');
       }
 
       if (options.fullscreen.enable && options.fullscreen !== false) {
@@ -529,10 +480,10 @@
             '<a href="#" class="exit-fullscreen" title="Exit fullscreen"><span class="' +
             this.__getIcon(options.fullscreen.icons.fullscreenOff) +
             '">' +
-            "</span></a>" +
-            "</div>"
+            '</span></a>' +
+            '</div>'
         );
-        this.$editor.on("click", ".exit-fullscreen", function(e) {
+        this.$editor.on('click', '.exit-fullscreen', function(e) {
           e.preventDefault();
           instance.setFullscreen(false);
         });
@@ -558,9 +509,9 @@
 
       if (this.$options.parser) {
         content = this.$options.parser(val);
-      } else if (typeof markdown == "object") {
+      } else if (typeof markdown == 'object') {
         content = markdown.toHTML(val);
-      } else if (typeof marked == "function") {
+      } else if (typeof marked == 'function') {
         content = marked(val);
       } else {
         content = val;
@@ -573,9 +524,9 @@
       var options = this.$options,
         container = this.$textarea,
         afterContainer = container.next(),
-        replacementContainer = $("<div/>", {
-          class: "md-preview",
-          "data-provider": "markdown-preview"
+        replacementContainer = $('<div/>', {
+          class: 'md-preview',
+          'data-provider': 'markdown-preview'
         }),
         content,
         callbackContent;
@@ -589,20 +540,17 @@
       // Give flag that tell the editor enter preview mode
       this.$isPreview = true;
       // Disable all buttons
-      this.disableButtons("all").enableButtons("cmdPreview");
+      this.disableButtons('all').enableButtons('cmdPreview');
 
       // Try to get the content from callback
       callbackContent = options.onPreview(this);
       // Set the content based from the callback content if string otherwise parse value from textarea
-      content =
-        typeof callbackContent == "string"
-          ? callbackContent
-          : this.parseContent();
+      content = typeof callbackContent == 'string' ? callbackContent : this.parseContent();
 
       // Build preview element
       replacementContainer.html(content);
 
-      if (afterContainer && afterContainer.attr("class") == "md-footer") {
+      if (afterContainer && afterContainer.attr('class') == 'md-footer') {
         // If there is footer element, insert the preview container before it
         replacementContainer.insertBefore(afterContainer);
       } else {
@@ -612,23 +560,23 @@
 
       // Set the preview element dimensions
       replacementContainer.css({
-        width: container.outerWidth() + "px",
-        height: container.outerHeight() + "px"
+        width: container.outerWidth() + 'px',
+        height: container.outerHeight() + 'px'
       });
 
       if (this.$options.resize) {
-        replacementContainer.css("resize", this.$options.resize);
+        replacementContainer.css('resize', this.$options.resize);
       }
 
       // Hide the last-active textarea
       container.hide();
 
       // Attach the editor instances
-      replacementContainer.data("markdown", this);
+      replacementContainer.data('markdown', this);
 
-      if (this.$element.is(":disabled") || this.$element.is("[readonly]")) {
-        this.$editor.addClass("md-editor-disabled");
-        this.disableButtons("all");
+      if (this.$element.is(':disabled') || this.$element.is('[readonly]')) {
+        this.$editor.addClass('md-editor-disabled');
+        this.disableButtons('all');
       }
 
       return this;
@@ -639,15 +587,13 @@
       this.$isPreview = false;
 
       // Obtain the preview container
-      var container = this.$editor.find(
-        'div[data-provider="markdown-preview"]'
-      );
+      var container = this.$editor.find('div[data-provider="markdown-preview"]');
 
       // Remove the preview container
       container.remove();
 
       // Enable all buttons
-      this.enableButtons("all");
+      this.enableButtons('all');
       // Disable configured disabled buttons
       this.disableButtons(this.$options.disabledButtons);
 
@@ -676,17 +622,11 @@
       var content = this.getContent(),
         startChunkPosition;
 
-      if (
-        ((startChunkPosition = content.indexOf(chunk)),
-        startChunkPosition >= 0 && chunk.length > 0)
-      ) {
+      if (((startChunkPosition = content.indexOf(chunk)), startChunkPosition >= 0 && chunk.length > 0)) {
         var oldSelection = this.getSelection(),
           selection;
 
-        this.setSelection(
-          startChunkPosition,
-          startChunkPosition + chunk.length
-        );
+        this.setSelection(startChunkPosition, startChunkPosition + chunk.length);
         selection = this.getSelection();
 
         this.setSelection(oldSelection.start, oldSelection.end);
@@ -700,7 +640,7 @@
     getSelection: function() {
       var e = this.$textarea[0];
 
-      return (("selectionStart" in e &&
+      return (('selectionStart' in e &&
         function() {
           var l = e.selectionEnd - e.selectionStart;
           return {
@@ -719,7 +659,7 @@
     setSelection: function(start, end) {
       var e = this.$textarea[0];
 
-      return (("selectionStart" in e &&
+      return (('selectionStart' in e &&
         function() {
           e.selectionStart = start;
           e.selectionEnd = end;
@@ -734,12 +674,9 @@
     replaceSelection: function(text) {
       var e = this.$textarea[0];
 
-      return (("selectionStart" in e &&
+      return (('selectionStart' in e &&
         function() {
-          e.value =
-            e.value.substr(0, e.selectionStart) +
-            text +
-            e.value.substr(e.selectionEnd, e.value.length);
+          e.value = e.value.substr(0, e.selectionStart) + text + e.value.substr(e.selectionEnd, e.value.length);
           // Set cursor to the last replacement end
           e.selectionStart = e.value.length;
           return this;
@@ -759,9 +696,9 @@
         var nextTab,
           tab = this.$nextTab.shift();
 
-        if (typeof tab == "function") {
+        if (typeof tab == 'function') {
           nextTab = tab();
-        } else if (typeof tab == "object" && tab.length > 0) {
+        } else if (typeof tab == 'object' && tab.length > 0) {
           nextTab = tab;
         }
 
@@ -771,12 +708,12 @@
 
     setNextTab: function(start, end) {
       // Push new selection into nextTab collections
-      if (typeof start == "string") {
+      if (typeof start == 'string') {
         var that = this;
         this.$nextTab.push(function() {
           return that.findSelection(start);
         });
-      } else if (typeof start == "number" && typeof end == "number") {
+      } else if (typeof start == 'number' && typeof end == 'number') {
         var oldSelection = this.getSelection();
 
         this.setSelection(start, end);
@@ -789,7 +726,7 @@
     },
 
     __parseButtonNameParam: function(names) {
-      return typeof names == "string" ? names.split(" ") : names;
+      return typeof names == 'string' ? names.split(' ') : names;
     },
 
     enableButtons: function(name) {
@@ -798,7 +735,7 @@
 
       $.each(buttons, function(i, v) {
         that.__alterButtons(buttons[i], function(el) {
-          el.removeAttr("disabled");
+          el.removeAttr('disabled');
         });
       });
 
@@ -811,7 +748,7 @@
 
       $.each(buttons, function(i, v) {
         that.__alterButtons(buttons[i], function(el) {
-          el.attr("disabled", "disabled");
+          el.attr('disabled', 'disabled');
         });
       });
 
@@ -824,7 +761,7 @@
 
       $.each(buttons, function(i, v) {
         that.__alterButtons(buttons[i], function(el) {
-          el.addClass("hidden");
+          el.addClass('hidden');
         });
       });
 
@@ -837,7 +774,7 @@
 
       $.each(buttons, function(i, v) {
         that.__alterButtons(buttons[i], function(el) {
-          el.removeClass("hidden");
+          el.removeClass('hidden');
         });
       });
 
@@ -847,8 +784,8 @@
     eventSupported: function(eventName) {
       var isSupported = eventName in this.$element;
       if (!isSupported) {
-        this.$element.setAttribute(eventName, "return;");
-        isSupported = typeof this.$element[eventName] === "function";
+        this.$element.setAttribute(eventName, 'return;');
+        isSupported = typeof this.$element[eventName] === 'function';
       }
       return isSupported;
     },
@@ -878,18 +815,12 @@
             // check the cursor position to determine tab action
             var cursor = this.getSelection();
 
-            if (
-              cursor.start == cursor.end &&
-              cursor.end == this.getContent().length
-            ) {
+            if (cursor.start == cursor.end && cursor.end == this.getContent().length) {
               // The cursor already reach the end of the content
               blocked = false;
             } else {
               // Put the cursor to the end
-              this.setSelection(
-                this.getContent().length,
-                this.getContent().length
-              );
+              this.setSelection(this.getContent().length, this.getContent().length);
 
               blocked = true;
             }
@@ -930,24 +861,24 @@
         isHideable = options.hideable,
         editor = this.$editor;
 
-      editor.addClass("active");
+      editor.addClass('active');
 
       // Blur other markdown(s)
       $(document)
-        .find(".md-editor")
+        .find('.md-editor')
         .each(function() {
-          if ($(this).attr("id") !== editor.attr("id")) {
+          if ($(this).attr('id') !== editor.attr('id')) {
             var attachedMarkdown;
 
             if (
               ((attachedMarkdown = $(this)
-                .find("textarea")
-                .data("markdown")),
+                .find('textarea')
+                .data('markdown')),
               attachedMarkdown === null)
             ) {
               attachedMarkdown = $(this)
                 .find('div[data-provider="markdown-preview"]')
-                .data("markdown");
+                .data('markdown');
             }
 
             if (attachedMarkdown) {
@@ -968,14 +899,14 @@
         editor = this.$editor,
         editable = this.$editable;
 
-      if (editor.hasClass("active") || this.$element.parent().length === 0) {
-        editor.removeClass("active");
+      if (editor.hasClass('active') || this.$element.parent().length === 0) {
+        editor.removeClass('active');
 
         if (isHideable) {
           // Check for editable elements
           if (editable.el !== null) {
             // Build the original element
-            var oldElement = $("<" + editable.type + "/>"),
+            var oldElement = $('<' + editable.type + '/>'),
               content = this.getContent(),
               currentContent = this.parseContent(content);
 
@@ -1008,9 +939,9 @@
   $.fn.markdown = function(option) {
     return this.each(function() {
       var $this = $(this),
-        data = $this.data("markdown"),
-        options = typeof option == "object" && option;
-      if (!data) $this.data("markdown", (data = new Markdown(this, options)));
+        data = $this.data('markdown'),
+        options = typeof option == 'object' && option;
+      if (!data) $this.data('markdown', (data = new Markdown(this, options)));
     });
   };
 
@@ -1021,28 +952,28 @@
     autofocus: false,
     hideable: false,
     savable: false,
-    width: "inherit",
-    height: "inherit",
-    resize: "none",
-    iconlibrary: "glyph",
-    language: "en",
-    initialstate: "editor",
+    width: 'inherit',
+    height: 'inherit',
+    resize: 'none',
+    iconlibrary: 'glyph',
+    language: 'en',
+    initialstate: 'editor',
     parser: null,
 
     /* Buttons Properties */
     buttons: [
       [
         {
-          name: "groupFont",
+          name: 'groupFont',
           data: [
             {
-              name: "cmdBold",
-              hotkey: "Ctrl+B",
-              title: "Bold",
+              name: 'cmdBold',
+              hotkey: 'Ctrl+B',
+              title: 'Bold',
               icon: {
-                glyph: "glyphicon glyphicon-bold",
-                fa: "fa fa-bold",
-                "fa-3": "icon-bold"
+                glyph: 'glyphicon glyphicon-bold',
+                fa: 'fa fa-bold',
+                'fa-3': 'icon-bold'
               },
               callback: function(e) {
                 // Give/remove ** surround the selection
@@ -1053,21 +984,18 @@
 
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("strong text");
+                  chunk = e.__localize('strong text');
                 } else {
                   chunk = selected.text;
                 }
 
                 // transform selection and set the cursor into chunked text
-                if (
-                  content.substr(selected.start - 2, 2) === "**" &&
-                  content.substr(selected.end, 2) === "**"
-                ) {
+                if (content.substr(selected.start - 2, 2) === '**' && content.substr(selected.end, 2) === '**') {
                   e.setSelection(selected.start - 2, selected.end + 2);
                   e.replaceSelection(chunk);
                   cursor = selected.start - 2;
                 } else {
-                  e.replaceSelection("**" + chunk + "**");
+                  e.replaceSelection('**' + chunk + '**');
                   cursor = selected.start + 2;
                 }
 
@@ -1076,13 +1004,13 @@
               }
             },
             {
-              name: "cmdItalic",
-              title: "Italic",
-              hotkey: "Ctrl+I",
+              name: 'cmdItalic',
+              title: 'Italic',
+              hotkey: 'Ctrl+I',
               icon: {
-                glyph: "glyphicon glyphicon-italic",
-                fa: "fa fa-italic",
-                "fa-3": "icon-italic"
+                glyph: 'glyphicon glyphicon-italic',
+                fa: 'fa fa-italic',
+                'fa-3': 'icon-italic'
               },
               callback: function(e) {
                 // Give/remove * surround the selection
@@ -1093,21 +1021,18 @@
 
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("emphasized text");
+                  chunk = e.__localize('emphasized text');
                 } else {
                   chunk = selected.text;
                 }
 
                 // transform selection and set the cursor into chunked text
-                if (
-                  content.substr(selected.start - 1, 1) === "_" &&
-                  content.substr(selected.end, 1) === "_"
-                ) {
+                if (content.substr(selected.start - 1, 1) === '_' && content.substr(selected.end, 1) === '_') {
                   e.setSelection(selected.start - 1, selected.end + 1);
                   e.replaceSelection(chunk);
                   cursor = selected.start - 1;
                 } else {
-                  e.replaceSelection("_" + chunk + "_");
+                  e.replaceSelection('_' + chunk + '_');
                   cursor = selected.start + 1;
                 }
 
@@ -1116,13 +1041,13 @@
               }
             },
             {
-              name: "cmdHeading",
-              title: "Heading",
-              hotkey: "Ctrl+H",
+              name: 'cmdHeading',
+              title: 'Heading',
+              hotkey: 'Ctrl+H',
               icon: {
-                glyph: "glyphicon glyphicon-header",
-                fa: "fa fa-header",
-                "fa-3": "icon-font"
+                glyph: 'glyphicon glyphicon-header',
+                fa: 'fa fa-header',
+                'fa-3': 'icon-font'
               },
               callback: function(e) {
                 // Append/remove ### surround the selection
@@ -1135,32 +1060,28 @@
 
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("heading text");
+                  chunk = e.__localize('heading text');
                 } else {
-                  chunk = selected.text + "\n";
+                  chunk = selected.text + '\n';
                 }
 
                 // transform selection and set the cursor into chunked text
                 if (
-                  ((pointer = 4),
-                  content.substr(selected.start - pointer, pointer) ===
-                    "### ") ||
-                  ((pointer = 3),
-                  content.substr(selected.start - pointer, pointer) === "###")
+                  ((pointer = 4), content.substr(selected.start - pointer, pointer) === '### ') ||
+                  ((pointer = 3), content.substr(selected.start - pointer, pointer) === '###')
                 ) {
                   e.setSelection(selected.start - pointer, selected.end);
                   e.replaceSelection(chunk);
                   cursor = selected.start - pointer;
                 } else if (
                   selected.start > 0 &&
-                  ((prevChar = content.substr(selected.start - 1, 1)),
-                  !!prevChar && prevChar != "\n")
+                  ((prevChar = content.substr(selected.start - 1, 1)), !!prevChar && prevChar != '\n')
                 ) {
-                  e.replaceSelection("\n\n### " + chunk);
+                  e.replaceSelection('\n\n### ' + chunk);
                   cursor = selected.start + 6;
                 } else {
                   // Empty string before element
-                  e.replaceSelection("### " + chunk);
+                  e.replaceSelection('### ' + chunk);
                   cursor = selected.start + 4;
                 }
 
@@ -1171,16 +1092,16 @@
           ]
         },
         {
-          name: "groupLink",
+          name: 'groupLink',
           data: [
             {
-              name: "cmdUrl",
-              title: "URL/Link",
-              hotkey: "Ctrl+L",
+              name: 'cmdUrl',
+              title: 'URL/Link',
+              hotkey: 'Ctrl+L',
               icon: {
-                glyph: "glyphicon glyphicon-link",
-                fa: "fa fa-link",
-                "fa-3": "icon-link"
+                glyph: 'glyphicon glyphicon-link',
+                fa: 'fa fa-link',
+                'fa-3': 'icon-link'
               },
               callback: function(e) {
                 // Give [] surround the selection and prepend the link
@@ -1192,27 +1113,19 @@
 
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("enter link description here");
+                  chunk = e.__localize('enter link description here');
                 } else {
                   chunk = selected.text;
                 }
 
-                link = prompt(e.__localize("Insert Hyperlink"), "http://");
+                link = prompt(e.__localize('Insert Hyperlink'), 'http://');
 
-                var urlRegex = new RegExp(
-                  "^((http|https)://|(mailto:)|(//))[a-z0-9]",
-                  "i"
-                );
-                if (
-                  link !== null &&
-                  link !== "" &&
-                  link !== "http://" &&
-                  urlRegex.test(link)
-                ) {
-                  var sanitizedLink = $("<div>" + link + "</div>").text();
+                var urlRegex = new RegExp('^((http|https)://|(mailto:)|(//))[a-z0-9]', 'i');
+                if (link !== null && link !== '' && link !== 'http://' && urlRegex.test(link)) {
+                  var sanitizedLink = $('<div>' + link + '</div>').text();
 
                   // transform selection and set the cursor into chunked text
-                  e.replaceSelection("[" + chunk + "](" + sanitizedLink + ")");
+                  e.replaceSelection('[' + chunk + '](' + sanitizedLink + ')');
                   cursor = selected.start + 1;
 
                   // Set the cursor
@@ -1221,13 +1134,13 @@
               }
             },
             {
-              name: "cmdImage",
-              title: "Image",
-              hotkey: "Ctrl+G",
+              name: 'cmdImage',
+              title: 'Image',
+              hotkey: 'Ctrl+G',
               icon: {
-                glyph: "glyphicon glyphicon-picture",
-                fa: "fa fa-picture-o",
-                "fa-3": "icon-picture"
+                glyph: 'glyphicon glyphicon-picture',
+                fa: 'fa fa-picture-o',
+                'fa-3': 'icon-picture'
               },
               callback: function(e) {
                 // Give ![] surround the selection and prepend the image link
@@ -1239,42 +1152,25 @@
 
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("enter image description here");
+                  chunk = e.__localize('enter image description here');
                 } else {
                   chunk = selected.text;
                 }
 
-                link = prompt(
-                  e.__localize("Insert Image Hyperlink"),
-                  "http://"
-                );
+                link = prompt(e.__localize('Insert Image Hyperlink'), 'http://');
 
-                var urlRegex = new RegExp(
-                  "^((http|https)://|(//))[a-z0-9]",
-                  "i"
-                );
-                if (
-                  link !== null &&
-                  link !== "" &&
-                  link !== "http://" &&
-                  urlRegex.test(link)
-                ) {
-                  var sanitizedLink = $("<div>" + link + "</div>").text();
+                var urlRegex = new RegExp('^((http|https)://|(//))[a-z0-9]', 'i');
+                if (link !== null && link !== '' && link !== 'http://' && urlRegex.test(link)) {
+                  var sanitizedLink = $('<div>' + link + '</div>').text();
 
                   // transform selection and set the cursor into chunked text
                   e.replaceSelection(
-                    "![" +
-                      chunk +
-                      "](" +
-                      sanitizedLink +
-                      ' "' +
-                      e.__localize("enter image title here") +
-                      '")'
+                    '![' + chunk + '](' + sanitizedLink + ' "' + e.__localize('enter image title here') + '")'
                   );
                   cursor = selected.start + 2;
 
                   // Set the next tab
-                  e.setNextTab(e.__localize("enter image title here"));
+                  e.setNextTab(e.__localize('enter image title here'));
 
                   // Set the cursor
                   e.setSelection(cursor, cursor + chunk.length);
@@ -1284,16 +1180,16 @@
           ]
         },
         {
-          name: "groupMisc",
+          name: 'groupMisc',
           data: [
             {
-              name: "cmdList",
-              hotkey: "Ctrl+U",
-              title: "Unordered List",
+              name: 'cmdList',
+              hotkey: 'Ctrl+U',
+              title: 'Unordered List',
               icon: {
-                glyph: "glyphicon glyphicon-list",
-                fa: "fa fa-list",
-                "fa-3": "icon-list-ul"
+                glyph: 'glyphicon glyphicon-list',
+                fa: 'fa fa-list',
+                'fa-3': 'icon-list-ul'
               },
               callback: function(e) {
                 // Prepend/Give - surround the selection
@@ -1305,30 +1201,30 @@
                 // transform selection and set the cursor into chunked text
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("list text here");
+                  chunk = e.__localize('list text here');
 
-                  e.replaceSelection("- " + chunk);
+                  e.replaceSelection('- ' + chunk);
                   // Set the cursor
                   cursor = selected.start + 2;
                 } else {
-                  if (selected.text.indexOf("\n") < 0) {
+                  if (selected.text.indexOf('\n') < 0) {
                     chunk = selected.text;
 
-                    e.replaceSelection("- " + chunk);
+                    e.replaceSelection('- ' + chunk);
 
                     // Set the cursor
                     cursor = selected.start + 2;
                   } else {
                     var list = [];
 
-                    list = selected.text.split("\n");
+                    list = selected.text.split('\n');
                     chunk = list[0];
 
                     $.each(list, function(k, v) {
-                      list[k] = "- " + v;
+                      list[k] = '- ' + v;
                     });
 
-                    e.replaceSelection("\n\n" + list.join("\n"));
+                    e.replaceSelection('\n\n' + list.join('\n'));
 
                     // Set the cursor
                     cursor = selected.start + 4;
@@ -1340,13 +1236,13 @@
               }
             },
             {
-              name: "cmdListO",
-              hotkey: "Ctrl+O",
-              title: "Ordered List",
+              name: 'cmdListO',
+              hotkey: 'Ctrl+O',
+              title: 'Ordered List',
               icon: {
-                glyph: "glyphicon glyphicon-th-list",
-                fa: "fa fa-list-ol",
-                "fa-3": "icon-list-ol"
+                glyph: 'glyphicon glyphicon-th-list',
+                fa: 'fa fa-list-ol',
+                'fa-3': 'icon-list-ol'
               },
               callback: function(e) {
                 // Prepend/Give - surround the selection
@@ -1358,29 +1254,29 @@
                 // transform selection and set the cursor into chunked text
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("list text here");
-                  e.replaceSelection("1. " + chunk);
+                  chunk = e.__localize('list text here');
+                  e.replaceSelection('1. ' + chunk);
                   // Set the cursor
                   cursor = selected.start + 3;
                 } else {
-                  if (selected.text.indexOf("\n") < 0) {
+                  if (selected.text.indexOf('\n') < 0) {
                     chunk = selected.text;
 
-                    e.replaceSelection("1. " + chunk);
+                    e.replaceSelection('1. ' + chunk);
 
                     // Set the cursor
                     cursor = selected.start + 3;
                   } else {
                     var list = [];
 
-                    list = selected.text.split("\n");
+                    list = selected.text.split('\n');
                     chunk = list[0];
 
                     $.each(list, function(k, v) {
-                      list[k] = "1. " + v;
+                      list[k] = '1. ' + v;
                     });
 
-                    e.replaceSelection("\n\n" + list.join("\n"));
+                    e.replaceSelection('\n\n' + list.join('\n'));
 
                     // Set the cursor
                     cursor = selected.start + 5;
@@ -1392,13 +1288,13 @@
               }
             },
             {
-              name: "cmdCode",
-              hotkey: "Ctrl+K",
-              title: "Code",
+              name: 'cmdCode',
+              hotkey: 'Ctrl+K',
+              title: 'Code',
               icon: {
-                glyph: "glyphicon glyphicon-asterisk",
-                fa: "fa fa-code",
-                "fa-3": "icon-code"
+                glyph: 'glyphicon glyphicon-asterisk',
+                fa: 'fa fa-code',
+                'fa-3': 'icon-code'
               },
               callback: function(e) {
                 // Give/remove ** surround the selection
@@ -1409,31 +1305,25 @@
 
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("code text here");
+                  chunk = e.__localize('code text here');
                 } else {
                   chunk = selected.text;
                 }
 
                 // transform selection and set the cursor into chunked text
-                if (
-                  content.substr(selected.start - 4, 4) === "```\n" &&
-                  content.substr(selected.end, 4) === "\n```"
-                ) {
+                if (content.substr(selected.start - 4, 4) === '```\n' && content.substr(selected.end, 4) === '\n```') {
                   e.setSelection(selected.start - 4, selected.end + 4);
                   e.replaceSelection(chunk);
                   cursor = selected.start - 4;
-                } else if (
-                  content.substr(selected.start - 1, 1) === "`" &&
-                  content.substr(selected.end, 1) === "`"
-                ) {
+                } else if (content.substr(selected.start - 1, 1) === '`' && content.substr(selected.end, 1) === '`') {
                   e.setSelection(selected.start - 1, selected.end + 1);
                   e.replaceSelection(chunk);
                   cursor = selected.start - 1;
-                } else if (content.indexOf("\n") > -1) {
-                  e.replaceSelection("```\n" + chunk + "\n```");
+                } else if (content.indexOf('\n') > -1) {
+                  e.replaceSelection('```\n' + chunk + '\n```');
                   cursor = selected.start + 4;
                 } else {
-                  e.replaceSelection("`" + chunk + "`");
+                  e.replaceSelection('`' + chunk + '`');
                   cursor = selected.start + 1;
                 }
 
@@ -1442,13 +1332,13 @@
               }
             },
             {
-              name: "cmdQuote",
-              hotkey: "Ctrl+Q",
-              title: "Quote",
+              name: 'cmdQuote',
+              hotkey: 'Ctrl+Q',
+              title: 'Quote',
               icon: {
-                glyph: "glyphicon glyphicon-comment",
-                fa: "fa fa-quote-left",
-                "fa-3": "icon-quote-left"
+                glyph: 'glyphicon glyphicon-comment',
+                fa: 'fa fa-quote-left',
+                'fa-3': 'icon-quote-left'
               },
               callback: function(e) {
                 // Prepend/Give - surround the selection
@@ -1460,31 +1350,31 @@
                 // transform selection and set the cursor into chunked text
                 if (selected.length === 0) {
                   // Give extra word
-                  chunk = e.__localize("quote here");
+                  chunk = e.__localize('quote here');
 
-                  e.replaceSelection("> " + chunk);
+                  e.replaceSelection('> ' + chunk);
 
                   // Set the cursor
                   cursor = selected.start + 2;
                 } else {
-                  if (selected.text.indexOf("\n") < 0) {
+                  if (selected.text.indexOf('\n') < 0) {
                     chunk = selected.text;
 
-                    e.replaceSelection("> " + chunk);
+                    e.replaceSelection('> ' + chunk);
 
                     // Set the cursor
                     cursor = selected.start + 2;
                   } else {
                     var list = [];
 
-                    list = selected.text.split("\n");
+                    list = selected.text.split('\n');
                     chunk = list[0];
 
                     $.each(list, function(k, v) {
-                      list[k] = "> " + v;
+                      list[k] = '> ' + v;
                     });
 
-                    e.replaceSelection("\n\n" + list.join("\n"));
+                    e.replaceSelection('\n\n' + list.join('\n'));
 
                     // Set the cursor
                     cursor = selected.start + 4;
@@ -1498,19 +1388,19 @@
           ]
         },
         {
-          name: "groupUtil",
+          name: 'groupUtil',
           data: [
             {
-              name: "cmdPreview",
+              name: 'cmdPreview',
               toggle: true,
-              hotkey: "Ctrl+P",
-              title: "Preview",
-              btnText: "Preview",
-              btnClass: "btn btn-primary btn-sm",
+              hotkey: 'Ctrl+P',
+              title: 'Preview',
+              btnText: 'Preview',
+              btnClass: 'btn btn-primary btn-sm',
               icon: {
-                glyph: "glyphicon glyphicon-search",
-                fa: "fa fa-search",
-                "fa-3": "icon-search"
+                glyph: 'glyphicon glyphicon-search',
+                fa: 'fa fa-search',
+                'fa-3': 'icon-search'
               },
               callback: function(e) {
                 // Check the preview mode and toggle based on this flag
@@ -1533,19 +1423,19 @@
     reorderButtonGroups: [],
     hiddenButtons: [], // Default hidden buttons
     disabledButtons: [], // Default disabled buttons
-    footer: "",
+    footer: '',
     fullscreen: {
       enable: true,
       icons: {
         fullscreenOn: {
-          fa: "fa fa-expand",
-          glyph: "glyphicon glyphicon-fullscreen",
-          "fa-3": "icon-resize-full"
+          fa: 'fa fa-expand',
+          glyph: 'glyphicon glyphicon-fullscreen',
+          'fa-3': 'icon-resize-full'
         },
         fullscreenOff: {
-          fa: "fa fa-compress",
-          glyph: "glyphicon glyphicon-fullscreen",
-          "fa-3": "icon-resize-small"
+          fa: 'fa fa-compress',
+          glyph: 'glyphicon glyphicon-fullscreen',
+          'fa-3': 'icon-resize-small'
         }
       }
     },
@@ -1576,8 +1466,8 @@
   var initMarkdown = function(el) {
     var $this = el;
 
-    if ($this.data("markdown")) {
-      $this.data("markdown").showEditor();
+    if ($this.data('markdown')) {
+      $this.data('markdown').showEditor();
       return;
     }
 
@@ -1589,15 +1479,13 @@
 
     // Blur event
     $(document)
-      .find(".md-editor")
+      .find('.md-editor')
       .each(function() {
         var $this = $(this),
-          focused = $activeElement.closest(".md-editor")[0] === this,
+          focused = $activeElement.closest('.md-editor')[0] === this,
           attachedMarkdown =
-            $this.find("textarea").data("markdown") ||
-            $this
-              .find('div[data-provider="markdown-preview"]')
-              .data("markdown");
+            $this.find('textarea').data('markdown') ||
+            $this.find('div[data-provider="markdown-preview"]').data('markdown');
 
         if (attachedMarkdown && !focused) {
           attachedMarkdown.blur();
@@ -1606,15 +1494,11 @@
   };
 
   $(document)
-    .on(
-      "click.markdown.data-api",
-      '[data-provide="markdown-editable"]',
-      function(e) {
-        initMarkdown($(this));
-        e.preventDefault();
-      }
-    )
-    .on("click focusin", function(e) {
+    .on('click.markdown.data-api', '[data-provide="markdown-editable"]', function(e) {
+      initMarkdown($(this));
+      e.preventDefault();
+    })
+    .on('click focusin', function(e) {
       blurNonFocused(e);
     })
     .ready(function() {

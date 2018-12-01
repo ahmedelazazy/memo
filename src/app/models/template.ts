@@ -1,4 +1,4 @@
-import { Step } from "./step";
+import { Step } from './step';
 
 export class Template {
   id?: number;
@@ -7,8 +7,8 @@ export class Template {
   steps: Step[];
 
   constructor() {
-    this.title = "";
-    this.description = "";
+    this.title = '';
+    this.description = '';
     this.steps = [];
   }
 }

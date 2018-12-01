@@ -1,18 +1,18 @@
-import { Injectable } from "@angular/core";
-import { User } from "../models/user";
-import { from, Subject, of } from "rxjs";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
-import { environment } from "src/environments/environment";
-import { map, tap } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { User } from '../models/user';
+import { from, Subject, of } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map, tap } from 'rxjs/operators';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class UserService {
-  tableName = "Users";
+  tableName = 'Users';
   users: User[] = [];
   usersChange: Subject<User[]> = new Subject();
-  apiUrl = environment["url"] + "user/";
-  serverUrl = environment["api"] + "users/";
+  apiUrl = environment['url'] + 'user/';
+  serverUrl = environment['api'] + 'users/';
 
   constructor(private http: HttpClient) {}
 
@@ -27,7 +27,7 @@ export class UserService {
   }
 
   get(id: number) {
-    let url = this.apiUrl + "getbyid";
+    let url = this.apiUrl + 'getbyid';
     let data = { id: id };
     return this.http.post(url, data).pipe(
       map(data => {
@@ -38,18 +38,15 @@ export class UserService {
   }
 
   add(obj: User) {
-    let url = this.apiUrl + "add";
+    let url = this.apiUrl + 'add';
 
     const body = new HttpParams()
-      .set("email", obj.email)
-      .set("password", obj.password)
-      .set("name", obj.name);
+      .set('email', obj.email)
+      .set('password', obj.password)
+      .set('name', obj.name);
 
     let result = this.http.post(url, body.toString(), {
-      headers: new HttpHeaders().set(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
-      )
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     });
 
     this.init();
@@ -57,15 +54,12 @@ export class UserService {
   }
 
   delete(id: number) {
-    let url = this.apiUrl + "remove";
+    let url = this.apiUrl + 'remove';
 
-    const body = new HttpParams().set("id", id + "");
+    const body = new HttpParams().set('id', id + '');
 
     let result = this.http.post(url, body.toString(), {
-      headers: new HttpHeaders().set(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
-      )
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     });
 
     this.init();
@@ -73,19 +67,16 @@ export class UserService {
   }
 
   update(id: number, obj: User) {
-    let url = this.apiUrl + "edit";
+    let url = this.apiUrl + 'edit';
 
     const body = new HttpParams()
-      .set("id", id + "")
-      .set("email", obj.email)
-      .set("password", obj.password)
-      .set("name", obj.name);
+      .set('id', id + '')
+      .set('email', obj.email)
+      .set('password', obj.password)
+      .set('name', obj.name);
 
     let result = this.http.post(url, body.toString(), {
-      headers: new HttpHeaders().set(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
-      )
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     });
 
     this.init();

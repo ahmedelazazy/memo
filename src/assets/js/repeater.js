@@ -4,11 +4,11 @@ $.fn.repeaterVal = function() {
 
     foreach(raw, function(val, key) {
       var parsedKey = [];
-      if (key !== "undefined") {
+      if (key !== 'undefined') {
         parsedKey.push(key.match(/^[^\[]*/)[0]);
         parsedKey = parsedKey.concat(
           map(key.match(/\[[^\]]*\]/g), function(bracketed) {
-            return bracketed.replace(/[\[\]]/g, "");
+            return bracketed.replace(/[\[\]]/g, '');
           })
         );
 
@@ -23,11 +23,7 @@ $.fn.repeaterVal = function() {
   };
 
   var build = function(parsed) {
-    if (
-      parsed.length === 1 &&
-      (parsed[0].key.length === 0 ||
-        (parsed[0].key.length === 1 && !parsed[0].key[0]))
-    ) {
+    if (parsed.length === 1 && (parsed[0].key.length === 0 || (parsed[0].key.length === 1 && !parsed[0].key[0]))) {
       return parsed[0].val;
     }
 
@@ -88,30 +84,28 @@ $.fn.repeater = function(fig) {
         removeElement();
       };
 
-    var $list = $self.find("[data-repeater-list]").first();
+    var $list = $self.find('[data-repeater-list]').first();
 
     var $filterNested = function($items, repeaters) {
       return $items.filter(function() {
-        return repeaters
-          ? $(this).closest(pluck(repeaters, "selector").join(",")).length === 0
-          : true;
+        return repeaters ? $(this).closest(pluck(repeaters, 'selector').join(',')).length === 0 : true;
       });
     };
 
     var $items = function() {
-      return $filterNested($list.find("[data-repeater-item]"), fig.repeaters);
+      return $filterNested($list.find('[data-repeater-item]'), fig.repeaters);
     };
 
     var $itemTemplate = $list
-      .find("[data-repeater-item]")
+      .find('[data-repeater-item]')
       .first()
       .clone()
       .hide();
 
     var $firstDeleteButton = $filterNested(
-      $filterNested($(this).find("[data-repeater-item]"), fig.repeaters)
+      $filterNested($(this).find('[data-repeater-item]'), fig.repeaters)
         .first()
-        .find("[data-repeater-delete]"),
+        .find('[data-repeater-delete]'),
       fig.repeaters
     );
 
@@ -120,10 +114,8 @@ $.fn.repeater = function(fig) {
     }
 
     var getGroupName = function() {
-      var groupName = $list.data("repeater-list");
-      return fig.$parent
-        ? fig.$parent.data("item-name") + "[" + groupName + "]"
-        : groupName;
+      var groupName = $list.data('repeater-list');
+      return fig.$parent ? fig.$parent.data('item-name') + '[' + groupName + ']' : groupName;
     };
 
     var initNested = function($listItems) {
@@ -131,9 +123,7 @@ $.fn.repeater = function(fig) {
         $listItems.each(function() {
           var $item = $(this);
           foreach(fig.repeaters, function(nestedFig) {
-            $item
-              .find(nestedFig.selector)
-              .repeater(extend(nestedFig, { $parent: $item }));
+            $item.find(nestedFig.selector).repeater(extend(nestedFig, { $parent: $item }));
           });
         });
       }
@@ -150,45 +140,42 @@ $.fn.repeater = function(fig) {
     var setIndexes = function($items, groupName, repeaters) {
       $items.each(function(index) {
         var $item = $(this);
-        $item.data("item-name", groupName + "[" + index + "]");
-        $filterNested($item.find("[name]"), repeaters).each(function() {
+        $item.data('item-name', groupName + '[' + index + ']');
+        $filterNested($item.find('[name]'), repeaters).each(function() {
           var $input = $(this);
           // match non empty brackets (ex: "[foo]")
-          var matches = $input.attr("name").match(/\[[^\]]+\]/g);
+          var matches = $input.attr('name').match(/\[[^\]]+\]/g);
 
           var name = matches
             ? // strip "[" and "]" characters
-              last(matches).replace(/\[|\]/g, "")
-            : $input.attr("name");
+              last(matches).replace(/\[|\]/g, '')
+            : $input.attr('name');
 
           var newName =
             groupName +
-            "[" +
+            '[' +
             index +
-            "][" +
+            '][' +
             name +
-            "]" +
-            ($input.is(":checkbox") || $input.attr("multiple") ? "[]" : "");
+            ']' +
+            ($input.is(':checkbox') || $input.attr('multiple') ? '[]' : '');
 
-          $input.attr("name", newName);
+          $input.attr('name', newName);
 
           $foreachRepeaterInItem(repeaters, $item, function(nestedFig) {
             var $repeater = $(this);
             setIndexes(
-              $filterNested(
-                $repeater.find("[data-repeater-item]"),
-                nestedFig.repeaters || []
-              ),
+              $filterNested($repeater.find('[data-repeater-item]'), nestedFig.repeaters || []),
               groupName +
-                "[" +
+                '[' +
                 index +
-                "]" +
-                "[" +
+                ']' +
+                '[' +
                 $repeater
-                  .find("[data-repeater-list]")
+                  .find('[data-repeater-list]')
                   .first()
-                  .data("repeater-list") +
-                "]",
+                  .data('repeater-list') +
+                ']',
               nestedFig.repeaters
             );
           });
@@ -196,9 +183,9 @@ $.fn.repeater = function(fig) {
       });
 
       $list
-        .find("input[name][checked]")
-        .removeAttr("checked")
-        .prop("checked", true);
+        .find('input[name][checked]')
+        .removeAttr('checked')
+        .prop('checked', true);
     };
 
     setIndexes($items(), getGroupName(), fig.repeaters);
@@ -217,11 +204,11 @@ $.fn.repeater = function(fig) {
       var setItemsValues = function($item, data, repeaters) {
         if (data || fig.defaultValues) {
           var inputNames = {};
-          $filterNested($item.find("[name]"), repeaters).each(function() {
+          $filterNested($item.find('[name]'), repeaters).each(function() {
             var key = $(this)
-              .attr("name")
+              .attr('name')
               .match(/\[([^\]]*)(\]|\]\[\])$/)[1];
-            inputNames[key] = $(this).attr("name");
+            inputNames[key] = $(this).attr('name');
           });
 
           $item.inputVal(
@@ -239,27 +226,18 @@ $.fn.repeater = function(fig) {
 
         $foreachRepeaterInItem(repeaters, $item, function(nestedFig) {
           var $repeater = $(this);
-          $filterNested(
-            $repeater.find("[data-repeater-item]"),
-            nestedFig.repeaters
-          ).each(function() {
-            var fieldName = $repeater
-              .find("[data-repeater-list]")
-              .data("repeater-list");
+          $filterNested($repeater.find('[data-repeater-item]'), nestedFig.repeaters).each(function() {
+            var fieldName = $repeater.find('[data-repeater-list]').data('repeater-list');
             if (data && data[fieldName]) {
               var $template = $(this).clone();
-              $repeater.find("[data-repeater-item]").remove();
+              $repeater.find('[data-repeater-item]').remove();
               foreach(data[fieldName], function(data) {
                 var $item = $template.clone();
                 setItemsValues($item, data, nestedFig.repeaters || []);
-                $repeater.find("[data-repeater-list]").append($item);
+                $repeater.find('[data-repeater-list]').append($item);
               });
             } else {
-              setItemsValues(
-                $(this),
-                nestedFig.defaultValues,
-                nestedFig.repeaters || []
-              );
+              setItemsValues($(this), nestedFig.defaultValues, nestedFig.repeaters || []);
             }
           });
         });
@@ -268,7 +246,7 @@ $.fn.repeater = function(fig) {
       return function($item, data) {
         $list.append($item);
         setIndexes($items(), getGroupName(), fig.repeaters);
-        $item.find("[name]").each(function() {
+        $item.find('[name]').each(function() {
           $(this).inputClear();
         });
         setItemsValues($item, data || fig.defaultValues, fig.repeaters);
@@ -289,15 +267,13 @@ $.fn.repeater = function(fig) {
       foreach(rows, addItem);
     };
 
-    $filterNested($self.find("[data-repeater-create]"), fig.repeaters).click(
-      function() {
-        addItem();
-      }
-    );
+    $filterNested($self.find('[data-repeater-create]'), fig.repeaters).click(function() {
+      addItem();
+    });
 
-    $list.on("click", "[data-repeater-delete]", function() {
+    $list.on('click', '[data-repeater-delete]', function() {
       var self = $(this)
-        .closest("[data-repeater-item]")
+        .closest('[data-repeater-item]')
         .get(0);
       hide.call(self, function() {
         $(self).remove();

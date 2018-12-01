@@ -70,9 +70,7 @@ var mapToObject = function(collection, callback, keyCallback) {
 };
 
 var map = function(collection, callback, keyCallback) {
-  return isArray(collection)
-    ? mapToArray(collection, callback)
-    : mapToObject(collection, callback, keyCallback);
+  return isArray(collection) ? mapToArray(collection, callback) : mapToObject(collection, callback, keyCallback);
 };
 
 var pluck = function(arrayOfObjects, key) {

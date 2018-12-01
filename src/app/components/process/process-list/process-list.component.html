@@ -12,12 +12,7 @@
           </div>
 
           <div class="m-portlet__body">
-            <p class="text-center">
-              {{
-                template.description ||
-                  "This process does not have a description"
-              }}
-            </p>
+            <p class="text-center">{{ template.description || 'This process does not have a description' }}</p>
             <hr />
 
             <div class="tab-content" *ngFor="let step of template.steps">
@@ -34,10 +29,7 @@
             </div>
 
             <div class="text-center">
-              <button
-                class=" text-center btn btn-primary"
-                [routerLink]="['/process', 'new', template.id]"
-              >
+              <button class=" text-center btn btn-primary" [routerLink]="['/process', 'new', template.id]">
                 Start Process
               </button>
             </div>
@@ -46,7 +38,5 @@
       </div>
     </ng-container>
   </ng-container>
-  <ng-template #noTemplates>
-    <p>You cannot start a process because there is no saved templates.</p>
-  </ng-template>
+  <ng-template #noTemplates> <p>You cannot start a process because there is no saved templates.</p> </ng-template>
 </div>

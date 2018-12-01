@@ -11,12 +11,7 @@
     </div>
   </div>
   <div class="m-portlet__body">
-    <form
-      [formGroup]="actionForm"
-      #f="ngForm"
-      class="m-form"
-      [class.invalidform]="submitted"
-    >
+    <form [formGroup]="actionForm" #f="ngForm" class="m-form" [class.invalidform]="submitted">
       <div
         class="section-container"
         formArrayName="sections"
@@ -29,43 +24,29 @@
           <ng-container *ngFor="let field of section.controls; let j = index">
             <div [formGroupName]="j" class="form-group m-form__group row">
               <label for="example-text-input" class="col-4 col-form-label">
-                {{ field.label ? field.label : "Unnamed
-                Field"
-                }}{{
-                  field.label &&
-                  field.controlConfig.visibility == fieldVisibilityEnum.Required
-                    ? "*"
-                    : ""
-                }}</label
+                {{ field.label ? field.label : 'Unnamed
+                Field'
+                }}{{ field.label && field.controlConfig.visibility == fieldVisibilityEnum.Required ? '*' : '' }}</label
               >
               <div class="col-8">
                 <input
                   type="text"
                   class="form-control m-input"
                   readonly
-                  *ngIf="
-                    field.controlConfig.visibility ==
-                    fieldVisibilityEnum.Readonly
-                  "
+                  *ngIf="field.controlConfig.visibility == fieldVisibilityEnum.Readonly"
                   formControlName="value"
                 />
                 <input
                   type="text"
                   class="form-control m-input"
-                  *ngIf="
-                    field.controlConfig.visibility ==
-                    fieldVisibilityEnum.Editable
-                  "
+                  *ngIf="field.controlConfig.visibility == fieldVisibilityEnum.Editable"
                   formControlName="value"
                 />
                 <input
                   type="text"
                   class="form-control m-input"
                   required
-                  *ngIf="
-                    field.controlConfig.visibility ==
-                    fieldVisibilityEnum.Required
-                  "
+                  *ngIf="field.controlConfig.visibility == fieldVisibilityEnum.Required"
                   formControlName="value"
                 />
               </div>
@@ -75,45 +56,18 @@
       </div>
 
       <div class="form-group">
-        <div class="m-form__heading">
-          <h3 class="m-form__heading-title">Comment</h3>
-        </div>
-        <textarea
-          class="form-control"
-          type="text"
-          formControlName="comment"
-          rows="3"
-        ></textarea>
+        <div class="m-form__heading"><h3 class="m-form__heading-title">Comment</h3></div>
+        <textarea class="form-control" type="text" formControlName="comment" rows="3"></textarea>
       </div>
 
       <div class="form-group" *ngIf="action?.step?.type == taskTypeEnum.Task">
-        <button
-          class="btn btn-success"
-          (click)="onSave(actionStatusEnum.completed_or_approved)"
-        >
-          Complete
-        </button>
-        <button class="btn btn-default" [routerLink]="['/action']">
-          Cancel
-        </button>
+        <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">Complete</button>
+        <button class="btn btn-default" [routerLink]="['/action']">Cancel</button>
       </div>
 
-      <div
-        class="form-group"
-        *ngIf="action?.step?.type == taskTypeEnum.Approval"
-      >
-        <button
-          class="btn btn-success"
-          (click)="onSave(actionStatusEnum.completed_or_approved)"
-        >
-          Approve
-        </button>
-        <button
-          class="btn btn-danger"
-          (click)="onSave(actionStatusEnum.rejected)"
-        >
-          Reject
-        </button>
+      <div class="form-group" *ngIf="action?.step?.type == taskTypeEnum.Approval">
+        <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">Approve</button>
+        <button class="btn btn-danger" (click)="onSave(actionStatusEnum.rejected)">Reject</button>
       </div>
     </form>
   </div>

@@ -3,13 +3,13 @@ export class Helper {
     return (
       Helper.s4() +
       Helper.s4() +
-      "-" +
+      '-' +
       Helper.s4() +
-      "-" +
+      '-' +
       Helper.s4() +
-      "-" +
+      '-' +
       Helper.s4() +
-      "-" +
+      '-' +
       Helper.s4() +
       Helper.s4() +
       Helper.s4()

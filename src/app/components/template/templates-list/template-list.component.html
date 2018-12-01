@@ -1,13 +1,8 @@
 <div class="m-subheader ">
   <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <!-- <h3 class="m-subheader__title m-subheader__title--separator">Process</h3> -->
-    </div>
+    <div class="mr-auto"><!-- <h3 class="m-subheader__title m-subheader__title--separator">Process</h3> --></div>
     <div>
-      <a
-        [routerLink]="['/templates/create']"
-        class="btn btn-accent m-btn m-btn--icon m-btn--pill"
-      >
+      <a [routerLink]="['/templates/create']" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
         <span> <i class="la la-plus"></i> <span>Create Template</span> </span>
       </a>
     </div>
@@ -27,12 +22,7 @@
             </div>
           </div>
           <div class="m-portlet__body">
-            <p class="text-center">
-              {{
-                template.description ||
-                  "This template does not have a description"
-              }}
-            </p>
+            <p class="text-center">{{ template.description || 'This template does not have a description' }}</p>
             <hr />
 
             <div class="tab-content" *ngFor="let step of template.steps">
@@ -52,7 +42,5 @@
       </div>
     </ng-container>
   </ng-container>
-  <ng-template #noTemplates>
-    <p>There is no available templates. Start by adding one.</p>
-  </ng-template>
+  <ng-template #noTemplates> <p>There is no available templates. Start by adding one.</p> </ng-template>
 </div>

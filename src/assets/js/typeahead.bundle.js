@@ -5,18 +5,18 @@
  */
 
 (function(root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define("bloodhound", ["jquery"], function(a0) {
-      return (root["Bloodhound"] = factory(a0));
+  if (typeof define === 'function' && define.amd) {
+    define('bloodhound', ['jquery'], function(a0) {
+      return (root['Bloodhound'] = factory(a0));
     });
-  } else if (typeof exports === "object") {
-    module.exports = factory(require("jquery"));
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
   } else {
-    root["Bloodhound"] = factory(jQuery);
+    root['Bloodhound'] = factory(jQuery);
   }
 })(this, function($) {
   var _ = (function() {
-    "use strict";
+    'use strict';
     return {
       isMsie: function() {
         return /(msie|trident)/i.test(navigator.userAgent)
@@ -27,19 +27,19 @@
         return !str || /^\s*$/.test(str);
       },
       escapeRegExChars: function(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
       },
       isString: function(obj) {
-        return typeof obj === "string";
+        return typeof obj === 'string';
       },
       isNumber: function(obj) {
-        return typeof obj === "number";
+        return typeof obj === 'number';
       },
       isArray: $.isArray,
       isFunction: $.isFunction,
       isObject: $.isPlainObject,
       isUndefined: function(obj) {
-        return typeof obj === "undefined";
+        return typeof obj === 'undefined';
       },
       isElement: function(obj) {
         return !!(obj && obj.nodeType === 1);
@@ -48,7 +48,7 @@
         return obj instanceof $;
       },
       toStr: function toStr(s) {
-        return _.isUndefined(s) || s === null ? "" : s + "";
+        return _.isUndefined(s) || s === null ? '' : s + '';
       },
       bind: $.proxy,
       each: function(collection, cb) {
@@ -157,9 +157,9 @@
       noop: function() {}
     };
   })();
-  var VERSION = "0.11.1";
+  var VERSION = '0.11.1';
   var tokenizers = (function() {
-    "use strict";
+    'use strict';
     return {
       nonword: nonword,
       whitespace: whitespace,
@@ -190,7 +190,7 @@
     }
   })();
   var LruCache = (function() {
-    "use strict";
+    'use strict';
     function LruCache(maxSize) {
       this.maxSize = _.isNumber(maxSize) ? maxSize : 100;
       this.reset();
@@ -259,19 +259,19 @@
     return LruCache;
   })();
   var PersistentStorage = (function() {
-    "use strict";
+    'use strict';
     var LOCAL_STORAGE;
     try {
       LOCAL_STORAGE = window.localStorage;
-      LOCAL_STORAGE.setItem("~~~", "!");
-      LOCAL_STORAGE.removeItem("~~~");
+      LOCAL_STORAGE.setItem('~~~', '!');
+      LOCAL_STORAGE.removeItem('~~~');
     } catch (err) {
       LOCAL_STORAGE = null;
     }
     function PersistentStorage(namespace, override) {
-      this.prefix = ["__", namespace, "__"].join("");
-      this.ttlKey = "__ttl__";
-      this.keyMatcher = new RegExp("^" + _.escapeRegExChars(this.prefix));
+      this.prefix = ['__', namespace, '__'].join('');
+      this.ttlKey = '__ttl__';
+      this.keyMatcher = new RegExp('^' + _.escapeRegExChars(this.prefix));
       this.ls = override || LOCAL_STORAGE;
       !this.ls && this._noop();
     }
@@ -283,14 +283,13 @@
         return this._prefix(key) + this.ttlKey;
       },
       _noop: function() {
-        this.get = this.set = this.remove = this.clear = this.isExpired =
-          _.noop;
+        this.get = this.set = this.remove = this.clear = this.isExpired = _.noop;
       },
       _safeSet: function(key, val) {
         try {
           this.ls.setItem(key, val);
         } catch (err) {
-          if (err.name === "QuotaExceededError") {
+          if (err.name === 'QuotaExceededError') {
             this.clear();
             this._noop();
           }
@@ -345,14 +344,14 @@
         len = LOCAL_STORAGE.length;
       for (i = 0; i < len; i++) {
         if ((key = LOCAL_STORAGE.key(i)).match(keyMatcher)) {
-          keys.push(key.replace(keyMatcher, ""));
+          keys.push(key.replace(keyMatcher, ''));
         }
       }
       return keys;
     }
   })();
   var Transport = (function() {
-    "use strict";
+    'use strict';
     var pendingRequestsCount = 0,
       pendingRequests = {},
       maxPendingRequests = 6,
@@ -435,13 +434,13 @@
     return Transport;
   })();
   var SearchIndex = (window.SearchIndex = (function() {
-    "use strict";
-    var CHILDREN = "c",
-      IDS = "i";
+    'use strict';
+    var CHILDREN = 'c',
+      IDS = 'i';
     function SearchIndex(o) {
       o = o || {};
       if (!o.datumTokenizer || !o.queryTokenizer) {
-        $.error("datumTokenizer and queryTokenizer are both required");
+        $.error('datumTokenizer and queryTokenizer are both required');
       }
       this.identify = o.identify || _.stringify;
       this.datumTokenizer = o.datumTokenizer;
@@ -463,7 +462,7 @@
           _.each(tokens, function(token) {
             var node, chars, ch;
             node = that.trie;
-            chars = token.split("");
+            chars = token.split('');
             while ((ch = chars.shift())) {
               node = node[CHILDREN][ch] || (node[CHILDREN][ch] = newNode());
               node[IDS].push(id);
@@ -488,7 +487,7 @@
             return false;
           }
           node = that.trie;
-          chars = token.split("");
+          chars = token.split('');
           while (node && (ch = chars.shift())) {
             node = node[CHILDREN][ch];
           }
@@ -574,12 +573,12 @@
     }
   })());
   var Prefetch = (function() {
-    "use strict";
+    'use strict';
     var keys;
     keys = {
-      data: "data",
-      protocol: "protocol",
-      thumbprint: "thumbprint"
+      data: 'data',
+      protocol: 'protocol',
+      thumbprint: 'thumbprint'
     };
     function Prefetch(o) {
       this.url = o.url;
@@ -595,8 +594,8 @@
       _settings: function settings() {
         return {
           url: this.url,
-          type: "GET",
-          dataType: "json"
+          type: 'GET',
+          dataType: 'json'
         };
       },
       store: function store(data) {
@@ -616,9 +615,7 @@
         stored.data = this.storage.get(keys.data);
         stored.protocol = this.storage.get(keys.protocol);
         stored.thumbprint = this.storage.get(keys.thumbprint);
-        isExpired =
-          stored.thumbprint !== this.thumbprint ||
-          stored.protocol !== location.protocol;
+        isExpired = stored.thumbprint !== this.thumbprint || stored.protocol !== location.protocol;
         return stored.data && !isExpired ? stored.data : null;
       },
       fromNetwork: function(cb) {
@@ -646,7 +643,7 @@
     return Prefetch;
   })();
   var Remote = (function() {
-    "use strict";
+    'use strict';
     function Remote(o) {
       this.url = o.url;
       this.prepare = o.prepare;
@@ -661,8 +658,8 @@
       _settings: function settings() {
         return {
           url: this.url,
-          type: "GET",
-          dataType: "json"
+          type: 'GET',
+          dataType: 'json'
         };
       },
       get: function get(query, cb) {
@@ -671,7 +668,7 @@
         if (!cb) {
           return;
         }
-        query = query || "";
+        query = query || '';
         settings = this.prepare(query, this._settings());
         return this.transport.get(settings, onResponse);
         function onResponse(err, resp) {
@@ -685,7 +682,7 @@
     return Remote;
   })();
   var oParser = (function() {
-    "use strict";
+    'use strict';
     return function parse(o) {
       var defaults, sorter;
       defaults = {
@@ -700,8 +697,8 @@
         remote: null
       };
       o = _.mixin(defaults, o || {});
-      !o.datumTokenizer && $.error("datumTokenizer is required");
-      !o.queryTokenizer && $.error("queryTokenizer is required");
+      !o.datumTokenizer && $.error('datumTokenizer is required');
+      !o.queryTokenizer && $.error('queryTokenizer is required');
       sorter = o.sorter;
       o.sorter = sorter
         ? function(x) {
@@ -723,7 +720,7 @@
         ttl: 24 * 60 * 60 * 1e3,
         cache: true,
         cacheKey: null,
-        thumbprint: "",
+        thumbprint: '',
         prepare: _.identity,
         transform: _.identity,
         transport: null
@@ -734,7 +731,7 @@
           }
         : o;
       o = _.mixin(defaults, o);
-      !o.url && $.error("prefetch requires url to be set");
+      !o.url && $.error('prefetch requires url to be set');
       o.transform = o.filter || o.transform;
       o.cacheKey = o.cacheKey || o.url;
       o.thumbprint = VERSION + o.thumbprint;
@@ -753,7 +750,7 @@
         replace: null,
         wildcard: null,
         limiter: null,
-        rateLimitBy: "debounce",
+        rateLimitBy: 'debounce',
         rateLimitWait: 300,
         transform: _.identity,
         transport: null
@@ -764,7 +761,7 @@
           }
         : o;
       o = _.mixin(defaults, o);
-      !o.url && $.error("remote requires url to be set");
+      !o.url && $.error('remote requires url to be set');
       o.transform = o.filter || o.transform;
       o.prepare = toRemotePrepare(o);
       o.limiter = toLimiter(o);
@@ -796,10 +793,7 @@
         return settings;
       }
       function prepareByWildcard(query, settings) {
-        settings.url = settings.url.replace(
-          wildcard,
-          encodeURIComponent(query)
-        );
+        settings.url = settings.url.replace(wildcard, encodeURIComponent(query));
         return settings;
       }
       function idenityPrepare(query, settings) {
@@ -845,7 +839,7 @@
     }
   })();
   var Bloodhound = (function() {
-    "use strict";
+    'use strict';
     var old;
     old = window && window.Bloodhound;
     function Bloodhound(o) {
@@ -913,9 +907,7 @@
         }
       },
       initialize: function initialize(force) {
-        return !this.initPromise || force
-          ? this._initialize()
-          : this.initPromise;
+        return !this.initPromise || force ? this._initialize() : this.initPromise;
       },
       add: function add(data) {
         this.index.add(data);
@@ -971,18 +963,18 @@
 });
 
 (function(root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define("typeahead.js", ["jquery"], function(a0) {
+  if (typeof define === 'function' && define.amd) {
+    define('typeahead.js', ['jquery'], function(a0) {
       return factory(a0);
     });
-  } else if (typeof exports === "object") {
-    module.exports = factory(require("jquery"));
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
   } else {
     factory(jQuery);
   }
 })(this, function($) {
   var _ = (function() {
-    "use strict";
+    'use strict';
     return {
       isMsie: function() {
         return /(msie|trident)/i.test(navigator.userAgent)
@@ -993,19 +985,19 @@
         return !str || /^\s*$/.test(str);
       },
       escapeRegExChars: function(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
       },
       isString: function(obj) {
-        return typeof obj === "string";
+        return typeof obj === 'string';
       },
       isNumber: function(obj) {
-        return typeof obj === "number";
+        return typeof obj === 'number';
       },
       isArray: $.isArray,
       isFunction: $.isFunction,
       isObject: $.isPlainObject,
       isUndefined: function(obj) {
-        return typeof obj === "undefined";
+        return typeof obj === 'undefined';
       },
       isElement: function(obj) {
         return !!(obj && obj.nodeType === 1);
@@ -1014,7 +1006,7 @@
         return obj instanceof $;
       },
       toStr: function toStr(s) {
-        return _.isUndefined(s) || s === null ? "" : s + "";
+        return _.isUndefined(s) || s === null ? '' : s + '';
       },
       bind: $.proxy,
       each: function(collection, cb) {
@@ -1124,19 +1116,19 @@
     };
   })();
   var WWW = (function() {
-    "use strict";
+    'use strict';
     var defaultClassNames = {
-      wrapper: "twitter-typeahead",
-      input: "tt-input",
-      hint: "tt-hint",
-      menu: "tt-menu",
-      dataset: "tt-dataset",
-      suggestion: "tt-suggestion",
-      selectable: "tt-selectable",
-      empty: "tt-empty",
-      open: "tt-open",
-      cursor: "tt-cursor",
-      highlight: "tt-highlight"
+      wrapper: 'twitter-typeahead',
+      input: 'tt-input',
+      hint: 'tt-hint',
+      menu: 'tt-menu',
+      dataset: 'tt-dataset',
+      suggestion: 'tt-suggestion',
+      selectable: 'tt-selectable',
+      empty: 'tt-empty',
+      open: 'tt-open',
+      cursor: 'tt-cursor',
+      highlight: 'tt-highlight'
     };
     return build;
     function build(o) {
@@ -1167,71 +1159,70 @@
     function buildSelectors(classes) {
       var selectors = {};
       _.each(classes, function(v, k) {
-        selectors[k] = "." + v;
+        selectors[k] = '.' + v;
       });
       return selectors;
     }
     function buildCss() {
       var css = {
         wrapper: {
-          position: "relative",
-          display: "inline-block"
+          position: 'relative',
+          display: 'inline-block'
         },
         hint: {
-          position: "absolute",
-          top: "0",
-          left: "0",
-          borderColor: "transparent",
-          boxShadow: "none",
-          opacity: "1"
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          borderColor: 'transparent',
+          boxShadow: 'none',
+          opacity: '1'
         },
         input: {
-          position: "relative",
-          verticalAlign: "top",
-          backgroundColor: "transparent"
+          position: 'relative',
+          verticalAlign: 'top',
+          backgroundColor: 'transparent'
         },
         inputWithNoHint: {
-          position: "relative",
-          verticalAlign: "top"
+          position: 'relative',
+          verticalAlign: 'top'
         },
         menu: {
-          position: "absolute",
-          top: "100%",
-          left: "0",
-          zIndex: "100",
-          display: "none"
+          position: 'absolute',
+          top: '100%',
+          left: '0',
+          zIndex: '100',
+          display: 'none'
         },
         ltr: {
-          left: "0",
-          right: "auto"
+          left: '0',
+          right: 'auto'
         },
         rtl: {
-          left: "auto",
-          right: " 0"
+          left: 'auto',
+          right: ' 0'
         }
       };
       if (_.isMsie()) {
         _.mixin(css.input, {
-          backgroundImage:
-            "url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)"
+          backgroundImage: 'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)'
         });
       }
       return css;
     }
   })();
   var EventBus = (function() {
-    "use strict";
+    'use strict';
     var namespace, deprecationMap;
-    namespace = "typeahead:";
+    namespace = 'typeahead:';
     deprecationMap = {
-      render: "rendered",
-      cursorchange: "cursorchanged",
-      select: "selected",
-      autocomplete: "autocompleted"
+      render: 'rendered',
+      cursorchange: 'cursorchanged',
+      select: 'selected',
+      autocomplete: 'autocompleted'
     };
     function EventBus(o) {
       if (!o || !o.el) {
-        $.error("EventBus initialized without el");
+        $.error('EventBus initialized without el');
       }
       this.$el = $(o.el);
     }
@@ -1246,7 +1237,7 @@
       before: function(type) {
         var args, $e;
         args = [].slice.call(arguments, 1);
-        $e = this._trigger("before" + type, args);
+        $e = this._trigger('before' + type, args);
         return $e.isDefaultPrevented();
       },
       trigger: function(type) {
@@ -1260,7 +1251,7 @@
     return EventBus;
   })();
   var EventEmitter = (function() {
-    "use strict";
+    'use strict';
     var splitter = /\s+/,
       nextTick = getNextTick();
     return {
@@ -1287,10 +1278,10 @@
       return this;
     }
     function onAsync(types, cb, context) {
-      return on.call(this, "async", types, cb, context);
+      return on.call(this, 'async', types, cb, context);
     }
     function onSync(types, cb, context) {
-      return on.call(this, "sync", types, cb, context);
+      return on.call(this, 'sync', types, cb, context);
     }
     function off(types) {
       var type;
@@ -1353,11 +1344,11 @@
     }
   })();
   var highlight = (function(doc) {
-    "use strict";
+    'use strict';
     var defaults = {
       node: null,
       pattern: null,
-      tagName: "strong",
+      tagName: 'strong',
       className: null,
       wordsOnly: false,
       caseSensitive: false
@@ -1402,28 +1393,26 @@
       for (var i = 0, len = patterns.length; i < len; i++) {
         escapedPatterns.push(_.escapeRegExChars(patterns[i]));
       }
-      regexStr = wordsOnly
-        ? "\\b(" + escapedPatterns.join("|") + ")\\b"
-        : "(" + escapedPatterns.join("|") + ")";
-      return caseSensitive ? new RegExp(regexStr) : new RegExp(regexStr, "i");
+      regexStr = wordsOnly ? '\\b(' + escapedPatterns.join('|') + ')\\b' : '(' + escapedPatterns.join('|') + ')';
+      return caseSensitive ? new RegExp(regexStr) : new RegExp(regexStr, 'i');
     }
   })(window.document);
   var Input = (function() {
-    "use strict";
+    'use strict';
     var specialKeyCodeMap;
     specialKeyCodeMap = {
-      9: "tab",
-      27: "esc",
-      37: "left",
-      39: "right",
-      13: "enter",
-      38: "up",
-      40: "down"
+      9: 'tab',
+      27: 'esc',
+      37: 'left',
+      39: 'right',
+      13: 'enter',
+      38: 'up',
+      40: 'down'
     };
     function Input(o, www) {
       o = o || {};
       if (!o.input) {
-        $.error("input is missing");
+        $.error('input is missing');
       }
       www.mixin(this);
       this.$hint = $(o.hint);
@@ -1433,29 +1422,28 @@
       this.$overflowHelper = buildOverflowHelper(this.$input);
       this._checkLanguageDirection();
       if (this.$hint.length === 0) {
-        this.setHint = this.getHint = this.clearHint = this.clearHintIfInvalid =
-          _.noop;
+        this.setHint = this.getHint = this.clearHint = this.clearHintIfInvalid = _.noop;
       }
     }
     Input.normalizeQuery = function(str) {
       return _.toStr(str)
-        .replace(/^\s*/g, "")
-        .replace(/\s{2,}/g, " ");
+        .replace(/^\s*/g, '')
+        .replace(/\s{2,}/g, ' ');
     };
     _.mixin(Input.prototype, EventEmitter, {
       _onBlur: function onBlur() {
         this.resetInputValue();
-        this.trigger("blurred");
+        this.trigger('blurred');
       },
       _onFocus: function onFocus() {
         this.queryWhenFocused = this.query;
-        this.trigger("focused");
+        this.trigger('focused');
       },
       _onKeydown: function onKeydown($e) {
         var keyName = specialKeyCodeMap[$e.which || $e.keyCode];
         this._managePreventDefault(keyName, $e);
         if (keyName && this._shouldTrigger(keyName, $e)) {
-          this.trigger(keyName + "Keyed", $e);
+          this.trigger(keyName + 'Keyed', $e);
         }
       },
       _onInput: function onInput() {
@@ -1466,8 +1454,8 @@
       _managePreventDefault: function managePreventDefault(keyName, $e) {
         var preventDefault;
         switch (keyName) {
-          case "up":
-          case "down":
+          case 'up':
+          case 'down':
             preventDefault = !withModifier($e);
             break;
 
@@ -1479,7 +1467,7 @@
       _shouldTrigger: function shouldTrigger(keyName, $e) {
         var trigger;
         switch (keyName) {
-          case "tab":
+          case 'tab':
             trigger = !withModifier($e);
             break;
 
@@ -1489,24 +1477,22 @@
         return trigger;
       },
       _checkLanguageDirection: function checkLanguageDirection() {
-        var dir = (this.$input.css("direction") || "ltr").toLowerCase();
+        var dir = (this.$input.css('direction') || 'ltr').toLowerCase();
         if (this.dir !== dir) {
           this.dir = dir;
-          this.$hint.attr("dir", dir);
-          this.trigger("langDirChanged", dir);
+          this.$hint.attr('dir', dir);
+          this.trigger('langDirChanged', dir);
         }
       },
       _setQuery: function setQuery(val, silent) {
         var areEquivalent, hasDifferentWhitespace;
         areEquivalent = areQueriesEquivalent(val, this.query);
-        hasDifferentWhitespace = areEquivalent
-          ? this.query.length !== val.length
-          : false;
+        hasDifferentWhitespace = areEquivalent ? this.query.length !== val.length : false;
         this.query = val;
         if (!silent && !areEquivalent) {
-          this.trigger("queryChanged", this.query);
+          this.trigger('queryChanged', this.query);
         } else if (!silent && hasDifferentWhitespace) {
-          this.trigger("whitespaceChanged", this.query);
+          this.trigger('whitespaceChanged', this.query);
         }
       },
       bind: function() {
@@ -1520,15 +1506,13 @@
         onKeydown = _.bind(this._onKeydown, this);
         onInput = _.bind(this._onInput, this);
         this.$input
-          .on("blur.tt", onBlur)
-          .on("focus.tt", onFocus)
-          .on("keydown.tt", onKeydown);
+          .on('blur.tt', onBlur)
+          .on('focus.tt', onFocus)
+          .on('keydown.tt', onKeydown);
         if (!_.isMsie() || _.isMsie() > 9) {
-          this.$input.on("input.tt", onInput);
+          this.$input.on('input.tt', onInput);
         } else {
-          this.$input.on("keydown.tt keypress.tt cut.tt paste.tt", function(
-            $e
-          ) {
+          this.$input.on('keydown.tt keypress.tt cut.tt paste.tt', function($e) {
             if (specialKeyCodeMap[$e.which || $e.keyCode]) {
               return;
             }
@@ -1547,7 +1531,7 @@
         return this.dir;
       },
       getQuery: function getQuery() {
-        return this.query || "";
+        return this.query || '';
       },
       setQuery: function setQuery(val, silent) {
         this.setInputValue(val);
@@ -1574,18 +1558,18 @@
         this.$hint.val(value);
       },
       clearHint: function clearHint() {
-        this.setHint("");
+        this.setHint('');
       },
       clearHintIfInvalid: function clearHintIfInvalid() {
         var val, hint, valIsPrefixOfHint, isValid;
         val = this.getInputValue();
         hint = this.getHint();
         valIsPrefixOfHint = val !== hint && hint.indexOf(val) === 0;
-        isValid = val !== "" && valIsPrefixOfHint && !this.hasOverflow();
+        isValid = val !== '' && valIsPrefixOfHint && !this.hasOverflow();
         !isValid && this.clearHint();
       },
       hasFocus: function hasFocus() {
-        return this.$input.is(":focus");
+        return this.$input.is(':focus');
       },
       hasOverflow: function hasOverflow() {
         var constraint = this.$input.width() - 2;
@@ -1600,35 +1584,35 @@
           return selectionStart === valueLength;
         } else if (document.selection) {
           range = document.selection.createRange();
-          range.moveStart("character", -valueLength);
+          range.moveStart('character', -valueLength);
           return valueLength === range.text.length;
         }
         return true;
       },
       destroy: function destroy() {
-        this.$hint.off(".tt");
-        this.$input.off(".tt");
+        this.$hint.off('.tt');
+        this.$input.off('.tt');
         this.$overflowHelper.remove();
-        this.$hint = this.$input = this.$overflowHelper = $("<div>");
+        this.$hint = this.$input = this.$overflowHelper = $('<div>');
       }
     });
     return Input;
     function buildOverflowHelper($input) {
       return $('<pre aria-hidden="true"></pre>')
         .css({
-          position: "absolute",
-          visibility: "hidden",
-          whiteSpace: "pre",
-          fontFamily: $input.css("font-family"),
-          fontSize: $input.css("font-size"),
-          fontStyle: $input.css("font-style"),
-          fontVariant: $input.css("font-variant"),
-          fontWeight: $input.css("font-weight"),
-          wordSpacing: $input.css("word-spacing"),
-          letterSpacing: $input.css("letter-spacing"),
-          textIndent: $input.css("text-indent"),
-          textRendering: $input.css("text-rendering"),
-          textTransform: $input.css("text-transform")
+          position: 'absolute',
+          visibility: 'hidden',
+          whiteSpace: 'pre',
+          fontFamily: $input.css('font-family'),
+          fontSize: $input.css('font-size'),
+          fontStyle: $input.css('font-style'),
+          fontVariant: $input.css('font-variant'),
+          fontWeight: $input.css('font-weight'),
+          wordSpacing: $input.css('word-spacing'),
+          letterSpacing: $input.css('letter-spacing'),
+          textIndent: $input.css('text-indent'),
+          textRendering: $input.css('text-rendering'),
+          textTransform: $input.css('text-transform')
         })
         .insertAfter($input);
     }
@@ -1640,11 +1624,11 @@
     }
   })();
   var Dataset = (function() {
-    "use strict";
+    'use strict';
     var keys, nameGenerator;
     keys = {
-      val: "tt-selectable-display",
-      obj: "tt-selectable-object"
+      val: 'tt-selectable-display',
+      obj: 'tt-selectable-object'
     };
     nameGenerator = _.getIdGenerator();
     function Dataset(o, www) {
@@ -1652,13 +1636,13 @@
       o.templates = o.templates || {};
       o.templates.notFound = o.templates.notFound || o.templates.empty;
       if (!o.source) {
-        $.error("missing source");
+        $.error('missing source');
       }
       if (!o.node) {
-        $.error("missing node");
+        $.error('missing node');
       }
       if (o.name && !isValidName(o.name)) {
-        $.error("invalid dataset name: " + o.name);
+        $.error('invalid dataset name: ' + o.name);
       }
       www.mixin(this);
       this.highlight = !!o.highlight;
@@ -1671,13 +1655,13 @@
       this._resetLastSuggestion();
       this.$el = $(o.node)
         .addClass(this.classes.dataset)
-        .addClass(this.classes.dataset + "-" + this.name);
+        .addClass(this.classes.dataset + '-' + this.name);
     }
     Dataset.extractData = function extractData(el) {
       var $el = $(el);
       if ($el.data(keys.obj)) {
         return {
-          val: $el.data(keys.val) || "",
+          val: $el.data(keys.val) || '',
           obj: $el.data(keys.obj) || null
         };
       }
@@ -1695,7 +1679,7 @@
         } else {
           this._empty();
         }
-        this.trigger("rendered", this.name, suggestions, false);
+        this.trigger('rendered', this.name, suggestions, false);
       },
       _append: function append(query, suggestions) {
         suggestions = suggestions || [];
@@ -1706,7 +1690,7 @@
         } else if (!this.$lastSuggestion.length && this.templates.notFound) {
           this._renderNotFound(query);
         }
-        this.trigger("rendered", this.name, suggestions, true);
+        this.trigger('rendered', this.name, suggestions, true);
       },
       _renderSuggestions: function renderSuggestions(query, suggestions) {
         var $fragment;
@@ -1750,10 +1734,7 @@
         this.$el.empty();
         this._resetLastSuggestion();
       },
-      _getSuggestionsFragment: function getSuggestionsFragment(
-        query,
-        suggestions
-      ) {
+      _getSuggestionsFragment: function getSuggestionsFragment(query, suggestions) {
         var that = this,
           fragment;
         fragment = document.createDocumentFragment();
@@ -1763,7 +1744,7 @@
           $el = $(that.templates.suggestion(context))
             .data(keys.obj, suggestion)
             .data(keys.val, that.displayFn(suggestion))
-            .addClass(that.classes.suggestion + " " + that.classes.selectable);
+            .addClass(that.classes.suggestion + ' ' + that.classes.selectable);
           fragment.appendChild($el[0]);
         });
         this.highlight &&
@@ -1814,7 +1795,7 @@
         this.cancel = function cancel() {
           canceled = true;
           that.cancel = $.noop;
-          that.async && that.trigger("asyncCanceled", query);
+          that.async && that.trigger('asyncCanceled', query);
         };
         this.source(query, sync, async);
         !syncCalled && sync([]);
@@ -1827,7 +1808,7 @@
           rendered = suggestions.length;
           that._overwrite(query, suggestions);
           if (rendered < that.limit && that.async) {
-            that.trigger("asyncRequested", query);
+            that.trigger('asyncRequested', query);
           }
         }
         function async(suggestions) {
@@ -1836,7 +1817,7 @@
             that.cancel = $.noop;
             rendered += suggestions.length;
             that._append(query, suggestions.slice(0, that.limit - rendered));
-            that.async && that.trigger("asyncReceived", query);
+            that.async && that.trigger('asyncReceived', query);
           }
         }
       },
@@ -1844,13 +1825,13 @@
       clear: function clear() {
         this._empty();
         this.cancel();
-        this.trigger("cleared");
+        this.trigger('cleared');
       },
       isEmpty: function isEmpty() {
-        return this.$el.is(":empty");
+        return this.$el.is(':empty');
       },
       destroy: function destroy() {
-        this.$el = $("<div>");
+        this.$el = $('<div>');
       }
     });
     return Dataset;
@@ -1870,7 +1851,7 @@
         suggestion: templates.suggestion || suggestionTemplate
       };
       function suggestionTemplate(context) {
-        return $("<div>").text(displayFn(context));
+        return $('<div>').text(displayFn(context));
       }
     }
     function isValidName(str) {
@@ -1878,12 +1859,12 @@
     }
   })();
   var Menu = (function() {
-    "use strict";
+    'use strict';
     function Menu(o, www) {
       var that = this;
       o = o || {};
       if (!o.node) {
-        $.error("node is required");
+        $.error('node is required');
       }
       www.mixin(this);
       this.$node = $(o.node);
@@ -1891,21 +1872,21 @@
       this.datasets = _.map(o.datasets, initializeDataset);
       function initializeDataset(oDataset) {
         var node = that.$node.find(oDataset.node).first();
-        oDataset.node = node.length ? node : $("<div>").appendTo(that.$node);
+        oDataset.node = node.length ? node : $('<div>').appendTo(that.$node);
         return new Dataset(oDataset, www);
       }
     }
     _.mixin(Menu.prototype, EventEmitter, {
       _onSelectableClick: function onSelectableClick($e) {
-        this.trigger("selectableClicked", $($e.currentTarget));
+        this.trigger('selectableClicked', $($e.currentTarget));
       },
       _onRendered: function onRendered(type, dataset, suggestions, async) {
         this.$node.toggleClass(this.classes.empty, this._allDatasetsEmpty());
-        this.trigger("datasetRendered", dataset, suggestions, async);
+        this.trigger('datasetRendered', dataset, suggestions, async);
       },
       _onCleared: function onCleared() {
         this.$node.toggleClass(this.classes.empty, this._allDatasetsEmpty());
-        this.trigger("datasetCleared");
+        this.trigger('datasetCleared');
       },
       _propagate: function propagate() {
         this.trigger.apply(this, arguments);
@@ -1930,8 +1911,8 @@
         nodeScrollTop = this.$node.scrollTop();
         nodeHeight =
           this.$node.height() +
-          parseInt(this.$node.css("paddingTop"), 10) +
-          parseInt(this.$node.css("paddingBottom"), 10);
+          parseInt(this.$node.css('paddingTop'), 10) +
+          parseInt(this.$node.css('paddingBottom'), 10);
         if (elTop < 0) {
           this.$node.scrollTop(nodeScrollTop + elTop);
         } else if (nodeHeight < elBottom) {
@@ -1942,14 +1923,14 @@
         var that = this,
           onSelectableClick;
         onSelectableClick = _.bind(this._onSelectableClick, this);
-        this.$node.on("click.tt", this.selectors.selectable, onSelectableClick);
+        this.$node.on('click.tt', this.selectors.selectable, onSelectableClick);
         _.each(this.datasets, function(dataset) {
           dataset
-            .onSync("asyncRequested", that._propagate, that)
-            .onSync("asyncCanceled", that._propagate, that)
-            .onSync("asyncReceived", that._propagate, that)
-            .onSync("rendered", that._onRendered, that)
-            .onSync("cleared", that._onCleared, that);
+            .onSync('asyncRequested', that._propagate, that)
+            .onSync('asyncCanceled', that._propagate, that)
+            .onSync('asyncReceived', that._propagate, that)
+            .onSync('rendered', that._onRendered, that)
+            .onSync('cleared', that._onCleared, that);
         });
         return this;
       },
@@ -1964,7 +1945,7 @@
         this._removeCursor();
       },
       setLanguageDirection: function setLanguageDirection(dir) {
-        this.$node.attr("dir", dir);
+        this.$node.attr('dir', dir);
       },
       selectableRelativeToCursor: function selectableRelativeToCursor(delta) {
         var $selectables, $oldCursor, oldIndex, newIndex;
@@ -2016,8 +1997,8 @@
         }
       },
       destroy: function destroy() {
-        this.$node.off(".tt");
-        this.$node = $("<div>");
+        this.$node.off('.tt');
+        this.$node = $('<div>');
         _.each(this.datasets, destroyDataset);
         function destroyDataset(dataset) {
           dataset.destroy();
@@ -2027,7 +2008,7 @@
     return Menu;
   })();
   var DefaultMenu = (function() {
-    "use strict";
+    'use strict';
     var s = Menu.prototype;
     function DefaultMenu() {
       Menu.apply(this, [].slice.call(arguments, 0));
@@ -2058,20 +2039,20 @@
         return s._onCleared.apply(this, [].slice.call(arguments, 0));
       },
       setLanguageDirection: function setLanguageDirection(dir) {
-        this.$node.css(dir === "ltr" ? this.css.ltr : this.css.rtl);
+        this.$node.css(dir === 'ltr' ? this.css.ltr : this.css.rtl);
         return s.setLanguageDirection.apply(this, [].slice.call(arguments, 0));
       },
       _hide: function hide() {
         this.$node.hide();
       },
       _show: function show() {
-        this.$node.css("display", "block");
+        this.$node.css('display', 'block');
       }
     });
     return DefaultMenu;
   })();
   var Typeahead = (function() {
-    "use strict";
+    'use strict';
     function Typeahead(o, www) {
       var onFocused,
         onBlurred,
@@ -2086,13 +2067,13 @@
         onWhitespaceChanged;
       o = o || {};
       if (!o.input) {
-        $.error("missing input");
+        $.error('missing input');
       }
       if (!o.menu) {
-        $.error("missing menu");
+        $.error('missing menu');
       }
       if (!o.eventBus) {
-        $.error("missing event bus");
+        $.error('missing event bus');
       }
       www.mixin(this);
       this.eventBus = o.eventBus;
@@ -2106,44 +2087,44 @@
       this._hacks();
       this.menu
         .bind()
-        .onSync("selectableClicked", this._onSelectableClicked, this)
-        .onSync("asyncRequested", this._onAsyncRequested, this)
-        .onSync("asyncCanceled", this._onAsyncCanceled, this)
-        .onSync("asyncReceived", this._onAsyncReceived, this)
-        .onSync("datasetRendered", this._onDatasetRendered, this)
-        .onSync("datasetCleared", this._onDatasetCleared, this);
-      onFocused = c(this, "activate", "open", "_onFocused");
-      onBlurred = c(this, "deactivate", "_onBlurred");
-      onEnterKeyed = c(this, "isActive", "isOpen", "_onEnterKeyed");
-      onTabKeyed = c(this, "isActive", "isOpen", "_onTabKeyed");
-      onEscKeyed = c(this, "isActive", "_onEscKeyed");
-      onUpKeyed = c(this, "isActive", "open", "_onUpKeyed");
-      onDownKeyed = c(this, "isActive", "open", "_onDownKeyed");
-      onLeftKeyed = c(this, "isActive", "isOpen", "_onLeftKeyed");
-      onRightKeyed = c(this, "isActive", "isOpen", "_onRightKeyed");
-      onQueryChanged = c(this, "_openIfActive", "_onQueryChanged");
-      onWhitespaceChanged = c(this, "_openIfActive", "_onWhitespaceChanged");
+        .onSync('selectableClicked', this._onSelectableClicked, this)
+        .onSync('asyncRequested', this._onAsyncRequested, this)
+        .onSync('asyncCanceled', this._onAsyncCanceled, this)
+        .onSync('asyncReceived', this._onAsyncReceived, this)
+        .onSync('datasetRendered', this._onDatasetRendered, this)
+        .onSync('datasetCleared', this._onDatasetCleared, this);
+      onFocused = c(this, 'activate', 'open', '_onFocused');
+      onBlurred = c(this, 'deactivate', '_onBlurred');
+      onEnterKeyed = c(this, 'isActive', 'isOpen', '_onEnterKeyed');
+      onTabKeyed = c(this, 'isActive', 'isOpen', '_onTabKeyed');
+      onEscKeyed = c(this, 'isActive', '_onEscKeyed');
+      onUpKeyed = c(this, 'isActive', 'open', '_onUpKeyed');
+      onDownKeyed = c(this, 'isActive', 'open', '_onDownKeyed');
+      onLeftKeyed = c(this, 'isActive', 'isOpen', '_onLeftKeyed');
+      onRightKeyed = c(this, 'isActive', 'isOpen', '_onRightKeyed');
+      onQueryChanged = c(this, '_openIfActive', '_onQueryChanged');
+      onWhitespaceChanged = c(this, '_openIfActive', '_onWhitespaceChanged');
       this.input
         .bind()
-        .onSync("focused", onFocused, this)
-        .onSync("blurred", onBlurred, this)
-        .onSync("enterKeyed", onEnterKeyed, this)
-        .onSync("tabKeyed", onTabKeyed, this)
-        .onSync("escKeyed", onEscKeyed, this)
-        .onSync("upKeyed", onUpKeyed, this)
-        .onSync("downKeyed", onDownKeyed, this)
-        .onSync("leftKeyed", onLeftKeyed, this)
-        .onSync("rightKeyed", onRightKeyed, this)
-        .onSync("queryChanged", onQueryChanged, this)
-        .onSync("whitespaceChanged", onWhitespaceChanged, this)
-        .onSync("langDirChanged", this._onLangDirChanged, this);
+        .onSync('focused', onFocused, this)
+        .onSync('blurred', onBlurred, this)
+        .onSync('enterKeyed', onEnterKeyed, this)
+        .onSync('tabKeyed', onTabKeyed, this)
+        .onSync('escKeyed', onEscKeyed, this)
+        .onSync('upKeyed', onUpKeyed, this)
+        .onSync('downKeyed', onDownKeyed, this)
+        .onSync('leftKeyed', onLeftKeyed, this)
+        .onSync('rightKeyed', onRightKeyed, this)
+        .onSync('queryChanged', onQueryChanged, this)
+        .onSync('whitespaceChanged', onWhitespaceChanged, this)
+        .onSync('langDirChanged', this._onLangDirChanged, this);
     }
     _.mixin(Typeahead.prototype, {
       _hacks: function hacks() {
         var $input, $menu;
-        $input = this.input.$input || $("<div>");
-        $menu = this.menu.$node || $("<div>");
-        $input.on("blur.tt", function($e) {
+        $input = this.input.$input || $('<div>');
+        $menu = this.menu.$node || $('<div>');
+        $input.on('blur.tt', function($e) {
           var active, isActive, hasActive;
           active = document.activeElement;
           isActive = $menu.is(active);
@@ -2156,7 +2137,7 @@
             });
           }
         });
-        $menu.on("mousedown.tt", function($e) {
+        $menu.on('mousedown.tt', function($e) {
           $e.preventDefault();
         });
       },
@@ -2166,30 +2147,25 @@
       _onDatasetCleared: function onDatasetCleared() {
         this._updateHint();
       },
-      _onDatasetRendered: function onDatasetRendered(
-        type,
-        dataset,
-        suggestions,
-        async
-      ) {
+      _onDatasetRendered: function onDatasetRendered(type, dataset, suggestions, async) {
         this._updateHint();
-        this.eventBus.trigger("render", suggestions, async, dataset);
+        this.eventBus.trigger('render', suggestions, async, dataset);
       },
       _onAsyncRequested: function onAsyncRequested(type, dataset, query) {
-        this.eventBus.trigger("asyncrequest", query, dataset);
+        this.eventBus.trigger('asyncrequest', query, dataset);
       },
       _onAsyncCanceled: function onAsyncCanceled(type, dataset, query) {
-        this.eventBus.trigger("asynccancel", query, dataset);
+        this.eventBus.trigger('asynccancel', query, dataset);
       },
       _onAsyncReceived: function onAsyncReceived(type, dataset, query) {
-        this.eventBus.trigger("asyncreceive", query, dataset);
+        this.eventBus.trigger('asyncreceive', query, dataset);
       },
       _onFocused: function onFocused() {
         this._minLengthMet() && this.menu.update(this.input.getQuery());
       },
       _onBlurred: function onBlurred() {
         if (this.input.hasQueryChangedSinceLastFocus()) {
-          this.eventBus.trigger("change", this.input.getQuery());
+          this.eventBus.trigger('change', this.input.getQuery());
         }
       },
       _onEnterKeyed: function onEnterKeyed(type, $e) {
@@ -2216,12 +2192,12 @@
         this.moveCursor(+1);
       },
       _onLeftKeyed: function onLeftKeyed() {
-        if (this.dir === "rtl" && this.input.isCursorAtEnd()) {
+        if (this.dir === 'rtl' && this.input.isCursorAtEnd()) {
           this.autocomplete(this.menu.getTopSelectable());
         }
       },
       _onRightKeyed: function onRightKeyed() {
-        if (this.dir === "ltr" && this.input.isCursorAtEnd()) {
+        if (this.dir === 'ltr' && this.input.isCursorAtEnd()) {
           this.autocomplete(this.menu.getTopSelectable());
         }
       },
@@ -2241,7 +2217,7 @@
         this.isActive() && this.open();
       },
       _minLengthMet: function minLengthMet(query) {
-        query = _.isString(query) ? query : this.input.getQuery() || "";
+        query = _.isString(query) ? query : this.input.getQuery() || '';
         return query.length >= this.minLength;
       },
       _updateHint: function updateHint() {
@@ -2252,7 +2228,7 @@
         if (data && !_.isBlankString(val) && !this.input.hasOverflow()) {
           query = Input.normalizeQuery(val);
           escapedQuery = _.escapeRegExChars(query);
-          frontMatchRegEx = new RegExp("^(?:" + escapedQuery + ")(.+$)", "i");
+          frontMatchRegEx = new RegExp('^(?:' + escapedQuery + ')(.+$)', 'i');
           match = frontMatchRegEx.exec(data.val);
           match && this.input.setHint(val + match[1]);
         } else {
@@ -2274,23 +2250,23 @@
       activate: function activate() {
         if (this.isActive()) {
           return true;
-        } else if (!this.isEnabled() || this.eventBus.before("active")) {
+        } else if (!this.isEnabled() || this.eventBus.before('active')) {
           return false;
         } else {
           this.active = true;
-          this.eventBus.trigger("active");
+          this.eventBus.trigger('active');
           return true;
         }
       },
       deactivate: function deactivate() {
         if (!this.isActive()) {
           return true;
-        } else if (this.eventBus.before("idle")) {
+        } else if (this.eventBus.before('idle')) {
           return false;
         } else {
           this.active = false;
           this.close();
-          this.eventBus.trigger("idle");
+          this.eventBus.trigger('idle');
           return true;
         }
       },
@@ -2298,19 +2274,19 @@
         return this.menu.isOpen();
       },
       open: function open() {
-        if (!this.isOpen() && !this.eventBus.before("open")) {
+        if (!this.isOpen() && !this.eventBus.before('open')) {
           this.menu.open();
           this._updateHint();
-          this.eventBus.trigger("open");
+          this.eventBus.trigger('open');
         }
         return this.isOpen();
       },
       close: function close() {
-        if (this.isOpen() && !this.eventBus.before("close")) {
+        if (this.isOpen() && !this.eventBus.before('close')) {
           this.menu.close();
           this.input.clearHint();
           this.input.resetInputValue();
-          this.eventBus.trigger("close");
+          this.eventBus.trigger('close');
         }
         return !this.isOpen();
       },
@@ -2322,9 +2298,9 @@
       },
       select: function select($selectable) {
         var data = this.menu.getSelectableData($selectable);
-        if (data && !this.eventBus.before("select", data.obj)) {
+        if (data && !this.eventBus.before('select', data.obj)) {
           this.input.setQuery(data.val, true);
-          this.eventBus.trigger("select", data.obj);
+          this.eventBus.trigger('select', data.obj);
           this.close();
           return true;
         }
@@ -2335,9 +2311,9 @@
         query = this.input.getQuery();
         data = this.menu.getSelectableData($selectable);
         isValid = data && query !== data.val;
-        if (isValid && !this.eventBus.before("autocomplete", data.obj)) {
+        if (isValid && !this.eventBus.before('autocomplete', data.obj)) {
           this.input.setQuery(data.val);
-          this.eventBus.trigger("autocomplete", data.obj);
+          this.eventBus.trigger('autocomplete', data.obj);
           return true;
         }
         return false;
@@ -2349,7 +2325,7 @@
         data = this.menu.getSelectableData($candidate);
         payload = data ? data.obj : null;
         cancelMove = this._minLengthMet() && this.menu.update(query);
-        if (!cancelMove && !this.eventBus.before("cursorchange", payload)) {
+        if (!cancelMove && !this.eventBus.before('cursorchange', payload)) {
           this.menu.setCursor($candidate);
           if (data) {
             this.input.setInputValue(data.val);
@@ -2357,7 +2333,7 @@
             this.input.resetInputValue();
             this._updateHint();
           }
-          this.eventBus.trigger("cursorchange", payload);
+          this.eventBus.trigger('cursorchange', payload);
           return true;
         }
         return false;
@@ -2379,13 +2355,13 @@
     }
   })();
   (function() {
-    "use strict";
+    'use strict';
     var old, keys, methods;
     old = $.fn.typeahead;
     keys = {
-      www: "tt-www",
-      attrs: "tt-attrs",
-      typeahead: "tt-typeahead"
+      www: 'tt-www',
+      attrs: 'tt-attrs',
+      typeahead: 'tt-typeahead'
     };
     methods = {
       initialize: function initialize(o, datasets) {
@@ -2417,7 +2393,7 @@
           defaultMenu = o.menu !== false && !$menu;
           defaultHint && ($hint = buildHintFromInput($input, www));
           defaultMenu && ($menu = $(www.html.menu).css(www.css.menu));
-          $hint && $hint.val("");
+          $hint && $hint.val('');
           $input = prepInput($input, www);
           if (defaultHint || defaultMenu) {
             $wrapper.css(www.css.wrapper);
@@ -2586,40 +2562,40 @@
         .removeData()
         .css(www.css.hint)
         .css(getBackgroundStyles($input))
-        .prop("readonly", true)
-        .removeAttr("id name placeholder required")
+        .prop('readonly', true)
+        .removeAttr('id name placeholder required')
         .attr({
-          autocomplete: "off",
-          spellcheck: "false",
+          autocomplete: 'off',
+          spellcheck: 'false',
           tabindex: -1
         });
     }
     function prepInput($input, www) {
       $input.data(keys.attrs, {
-        dir: $input.attr("dir"),
-        autocomplete: $input.attr("autocomplete"),
-        spellcheck: $input.attr("spellcheck"),
-        style: $input.attr("style")
+        dir: $input.attr('dir'),
+        autocomplete: $input.attr('autocomplete'),
+        spellcheck: $input.attr('spellcheck'),
+        style: $input.attr('style')
       });
       $input.addClass(www.classes.input).attr({
-        autocomplete: "off",
+        autocomplete: 'off',
         spellcheck: false
       });
       try {
-        !$input.attr("dir") && $input.attr("dir", "auto");
+        !$input.attr('dir') && $input.attr('dir', 'auto');
       } catch (e) {}
       return $input;
     }
     function getBackgroundStyles($el) {
       return {
-        backgroundAttachment: $el.css("background-attachment"),
-        backgroundClip: $el.css("background-clip"),
-        backgroundColor: $el.css("background-color"),
-        backgroundImage: $el.css("background-image"),
-        backgroundOrigin: $el.css("background-origin"),
-        backgroundPosition: $el.css("background-position"),
-        backgroundRepeat: $el.css("background-repeat"),
-        backgroundSize: $el.css("background-size")
+        backgroundAttachment: $el.css('background-attachment'),
+        backgroundClip: $el.css('background-clip'),
+        backgroundColor: $el.css('background-color'),
+        backgroundImage: $el.css('background-image'),
+        backgroundOrigin: $el.css('background-origin'),
+        backgroundPosition: $el.css('background-position'),
+        backgroundRepeat: $el.css('background-repeat'),
+        backgroundSize: $el.css('background-size')
       };
     }
     function revert($input) {

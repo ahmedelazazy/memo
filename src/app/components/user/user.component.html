@@ -27,20 +27,11 @@
       <span *ngIf="!user.editing">{{ user.password }}</span>
     </td>
     <td>
-      <button *ngIf="user.editing" (click)="update(); user.editing = false">
-        Update
-      </button>
-      <button
-        *ngIf="!user.editing"
-        (click)="cancelAll(); user.editing = true; get(user.id)"
-      >
-        Edit
-      </button>
+      <button *ngIf="user.editing" (click)="update(); user.editing = false">Update</button>
+      <button *ngIf="!user.editing" (click)="cancelAll(); user.editing = true; get(user.id)">Edit</button>
     </td>
     <td>
-      <button *ngIf="user.editing" (click)="user.editing = false">
-        Cancel
-      </button>
+      <button *ngIf="user.editing" (click)="user.editing = false">Cancel</button>
       <button *ngIf="!user.editing" (click)="delete(user.id)">Delete</button>
     </td>
   </tr>

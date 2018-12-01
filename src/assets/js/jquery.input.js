@@ -3,7 +3,7 @@
 // (MIT) 09-04-2014
 // Brian Detering <BDeterin@gmail.com> (http://www.briandetering.net/)
 (function($) {
-  "use strict";
+  'use strict';
 
   var createBaseInput = function(fig, my) {
     var self = mixinPubSub(),
@@ -18,13 +18,13 @@
     };
 
     self.disable = function() {
-      self.$().prop("disabled", true);
-      self.publish("isEnabled", false);
+      self.$().prop('disabled', true);
+      self.publish('isEnabled', false);
     };
 
     self.enable = function() {
-      self.$().prop("disabled", false);
-      self.publish("isEnabled", true);
+      self.$().prop('disabled', false);
+      self.publish('isEnabled', true);
     };
 
     my.equalTo = function(a, b) {
@@ -36,7 +36,7 @@
       return function(e, domElement) {
         var newValue = self.get();
         if (!my.equalTo(newValue, oldValue)) {
-          self.publish("change", { e: e, domElement: domElement });
+          self.publish('change', { e: e, domElement: domElement });
         }
         oldValue = newValue;
       };
@@ -57,7 +57,7 @@
     };
 
     self.clear = function() {
-      self.set("");
+      self.set('');
     };
 
     my.buildSetter = function(callback) {
@@ -92,10 +92,10 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "button";
+      return 'button';
     };
 
-    self.$().on("change", function(e) {
+    self.$().on('change', function(e) {
       my.publishChange(e, this);
     });
 
@@ -107,14 +107,14 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "checkbox";
+      return 'checkbox';
     };
 
     self.get = function() {
       var values = [];
       self
         .$()
-        .filter(":checked")
+        .filter(':checked')
         .each(function() {
           values.push($(this).val());
         });
@@ -125,14 +125,14 @@
       newValues = isArray(newValues) ? newValues : [newValues];
 
       self.$().each(function() {
-        $(this).prop("checked", false);
+        $(this).prop('checked', false);
       });
 
       foreach(newValues, function(value) {
         self
           .$()
           .filter('[value="' + value + '"]')
-          .prop("checked", true);
+          .prop('checked', true);
       });
     };
 
@@ -150,7 +150,7 @@
       self = createInputText(fig, my);
 
     self.getType = function() {
-      return "email";
+      return 'email';
     };
 
     return self;
@@ -161,7 +161,7 @@
       self = createBaseInput(fig, my);
 
     self.getType = function() {
-      return "file";
+      return 'file';
     };
 
     self.get = function() {
@@ -169,7 +169,7 @@
         self
           .$()
           .val()
-          .split("\\")
+          .split('\\')
       );
     };
 
@@ -177,8 +177,8 @@
       // http://stackoverflow.com/questions/1043957/clearing-input-type-file-using-jquery
       this.$().each(function() {
         $(this)
-          .wrap("<form>")
-          .closest("form")
+          .wrap('<form>')
+          .closest('form')
           .get(0)
           .reset();
         $(this).unwrap();
@@ -198,7 +198,7 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "hidden";
+      return 'hidden';
     };
 
     self.$().change(function(e) {
@@ -212,7 +212,7 @@
       self = createBaseInput(fig, my);
 
     self.getType = function() {
-      return "file[multiple]";
+      return 'file[multiple]';
     };
 
     self.get = function() {
@@ -232,8 +232,8 @@
       // http://stackoverflow.com/questions/1043957/clearing-input-type-file-using-jquery
       this.$().each(function() {
         $(this)
-          .wrap("<form>")
-          .closest("form")
+          .wrap('<form>')
+          .closest('form')
           .get(0)
           .reset();
         $(this).unwrap();
@@ -252,7 +252,7 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "select[multiple]";
+      return 'select[multiple]';
     };
 
     self.get = function() {
@@ -260,11 +260,7 @@
     };
 
     self.set = function(newValues) {
-      self
-        .$()
-        .val(
-          newValues === "" ? [] : isArray(newValues) ? newValues : [newValues]
-        );
+      self.$().val(newValues === '' ? [] : isArray(newValues) ? newValues : [newValues]);
     };
 
     my.equalTo = inputEqualToArray;
@@ -281,7 +277,7 @@
       self = createInputText(fig, my);
 
     self.getType = function() {
-      return "password";
+      return 'password';
     };
 
     return self;
@@ -292,14 +288,14 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "radio";
+      return 'radio';
     };
 
     self.get = function() {
       return (
         self
           .$()
-          .filter(":checked")
+          .filter(':checked')
           .val() || null
       );
     };
@@ -307,13 +303,13 @@
     self.set = function(newValue) {
       if (!newValue) {
         self.$().each(function() {
-          $(this).prop("checked", false);
+          $(this).prop('checked', false);
         });
       } else {
         self
           .$()
           .filter('[value="' + newValue + '"]')
-          .prop("checked", true);
+          .prop('checked', true);
       }
     };
 
@@ -329,7 +325,7 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "range";
+      return 'range';
     };
 
     self.$().change(function(e) {
@@ -344,7 +340,7 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "select";
+      return 'select';
     };
 
     self.$().change(function(e) {
@@ -359,10 +355,10 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "text";
+      return 'text';
     };
 
-    self.$().on("change keyup keydown", function(e) {
+    self.$().on('change keyup keydown', function(e) {
       my.publishChange(e, this);
     });
 
@@ -374,10 +370,10 @@
       self = createInput(fig, my);
 
     self.getType = function() {
-      return "textarea";
+      return 'textarea';
     };
 
-    self.$().on("change keyup keydown", function(e) {
+    self.$().on('change keyup keydown', function(e) {
       my.publishChange(e, this);
     });
 
@@ -389,7 +385,7 @@
       self = createInputText(fig, my);
 
     self.getType = function() {
-      return "url";
+      return 'url';
     };
 
     return self;
@@ -408,11 +404,11 @@
       range: createInputRange,
       textarea: createInputTextarea,
       select: createInputSelect,
-      "select[multiple]": createInputMultipleSelect,
+      'select[multiple]': createInputMultipleSelect,
       radio: createInputRadio,
       checkbox: createInputCheckbox,
       file: createInputFile,
-      "file[multiple]": createInputMultipleFile,
+      'file[multiple]': createInputMultipleFile,
       hidden: createInputHidden
     };
 
@@ -420,7 +416,7 @@
       var $input = isObject(selector) ? selector : $self.find(selector);
 
       $input.each(function() {
-        var name = $(this).attr("name");
+        var name = $(this).attr('name');
         inputs[name] = constructor[type]({
           $: $(this)
         });
@@ -432,14 +428,14 @@
         $input = isObject(selector) ? selector : $self.find(selector);
 
       if (isObject(selector)) {
-        inputs[$input.attr("name")] = constructor[type]({
+        inputs[$input.attr('name')] = constructor[type]({
           $: $input
         });
       } else {
         // group by name attribute
         $input.each(function() {
-          if (indexOf(names, $(this).attr("name")) === -1) {
-            names.push($(this).attr("name"));
+          if (indexOf(names, $(this).attr('name')) === -1) {
+            names.push($(this).attr('name'));
           }
         });
 
@@ -451,64 +447,58 @@
       }
     };
 
-    if ($self.is("input, select, textarea")) {
+    if ($self.is('input, select, textarea')) {
       if ($self.is('input[type="button"], button, input[type="submit"]')) {
-        addInputsBasic("button", $self);
-      } else if ($self.is("textarea")) {
-        addInputsBasic("textarea", $self);
-      } else if (
-        $self.is('input[type="text"]') ||
-        ($self.is("input") && !$self.attr("type"))
-      ) {
-        addInputsBasic("text", $self);
+        addInputsBasic('button', $self);
+      } else if ($self.is('textarea')) {
+        addInputsBasic('textarea', $self);
+      } else if ($self.is('input[type="text"]') || ($self.is('input') && !$self.attr('type'))) {
+        addInputsBasic('text', $self);
       } else if ($self.is('input[type="password"]')) {
-        addInputsBasic("password", $self);
+        addInputsBasic('password', $self);
       } else if ($self.is('input[type="email"]')) {
-        addInputsBasic("email", $self);
+        addInputsBasic('email', $self);
       } else if ($self.is('input[type="url"]')) {
-        addInputsBasic("url", $self);
+        addInputsBasic('url', $self);
       } else if ($self.is('input[type="range"]')) {
-        addInputsBasic("range", $self);
-      } else if ($self.is("select")) {
-        if ($self.is("[multiple]")) {
-          addInputsBasic("select[multiple]", $self);
+        addInputsBasic('range', $self);
+      } else if ($self.is('select')) {
+        if ($self.is('[multiple]')) {
+          addInputsBasic('select[multiple]', $self);
         } else {
-          addInputsBasic("select", $self);
+          addInputsBasic('select', $self);
         }
       } else if ($self.is('input[type="file"]')) {
-        if ($self.is("[multiple]")) {
-          addInputsBasic("file[multiple]", $self);
+        if ($self.is('[multiple]')) {
+          addInputsBasic('file[multiple]', $self);
         } else {
-          addInputsBasic("file", $self);
+          addInputsBasic('file', $self);
         }
       } else if ($self.is('input[type="hidden"]')) {
-        addInputsBasic("hidden", $self);
+        addInputsBasic('hidden', $self);
       } else if ($self.is('input[type="radio"]')) {
-        addInputsGroup("radio", $self);
+        addInputsGroup('radio', $self);
       } else if ($self.is('input[type="checkbox"]')) {
-        addInputsGroup("checkbox", $self);
+        addInputsGroup('checkbox', $self);
       } else {
         //in all other cases default to a "text" input interface.
-        addInputsBasic("text", $self);
+        addInputsBasic('text', $self);
       }
     } else {
-      addInputsBasic(
-        "button",
-        'input[type="button"], button, input[type="submit"]'
-      );
-      addInputsBasic("text", 'input[type="text"]');
-      addInputsBasic("password", 'input[type="password"]');
-      addInputsBasic("email", 'input[type="email"]');
-      addInputsBasic("url", 'input[type="url"]');
-      addInputsBasic("range", 'input[type="range"]');
-      addInputsBasic("textarea", "textarea");
-      addInputsBasic("select", "select:not([multiple])");
-      addInputsBasic("select[multiple]", "select[multiple]");
-      addInputsBasic("file", 'input[type="file"]:not([multiple])');
-      addInputsBasic("file[multiple]", 'input[type="file"][multiple]');
-      addInputsBasic("hidden", 'input[type="hidden"]');
-      addInputsGroup("radio", 'input[type="radio"]');
-      addInputsGroup("checkbox", 'input[type="checkbox"]');
+      addInputsBasic('button', 'input[type="button"], button, input[type="submit"]');
+      addInputsBasic('text', 'input[type="text"]');
+      addInputsBasic('password', 'input[type="password"]');
+      addInputsBasic('email', 'input[type="email"]');
+      addInputsBasic('url', 'input[type="url"]');
+      addInputsBasic('range', 'input[type="range"]');
+      addInputsBasic('textarea', 'textarea');
+      addInputsBasic('select', 'select:not([multiple])');
+      addInputsBasic('select[multiple]', 'select[multiple]');
+      addInputsBasic('file', 'input[type="file"]:not([multiple])');
+      addInputsBasic('file[multiple]', 'input[type="file"][multiple]');
+      addInputsBasic('hidden', 'input[type="hidden"]');
+      addInputsGroup('radio', 'input[type="radio"]');
+      addInputsGroup('checkbox', 'input[type="checkbox"]');
     }
 
     return inputs;
@@ -519,16 +509,16 @@
 
     var inputs = buildFormInputs({ $: $self });
 
-    if ($self.is("input, textarea, select")) {
-      if (typeof newValue === "undefined") {
-        return inputs[$self.attr("name")].get();
+    if ($self.is('input, textarea, select')) {
+      if (typeof newValue === 'undefined') {
+        return inputs[$self.attr('name')].get();
       } else {
-        inputs[$self.attr("name")].set(newValue);
+        inputs[$self.attr('name')].set(newValue);
         return $self;
       }
     } else {
-      if (typeof newValue === "undefined") {
-        return call(inputs, "get");
+      if (typeof newValue === 'undefined') {
+        return call(inputs, 'get');
       } else {
         foreach(newValue, function(value, inputName) {
           inputs[inputName].set(value);
@@ -542,7 +532,7 @@
     var $self = $(this);
     var inputs = buildFormInputs({ $: $self });
     foreach(inputs, function(input) {
-      input.subscribe("change", function(data) {
+      input.subscribe('change', function(data) {
         callback.call(data.domElement, data.e);
       });
     });
@@ -551,19 +541,19 @@
 
   $.fn.inputDisable = function() {
     var $self = $(this);
-    call(buildFormInputs({ $: $self }), "disable");
+    call(buildFormInputs({ $: $self }), 'disable');
     return $self;
   };
 
   $.fn.inputEnable = function() {
     var $self = $(this);
-    call(buildFormInputs({ $: $self }), "enable");
+    call(buildFormInputs({ $: $self }), 'enable');
     return $self;
   };
 
   $.fn.inputClear = function() {
     var $self = $(this);
-    call(buildFormInputs({ $: $self }), "clear");
+    call(buildFormInputs({ $: $self }), 'clear');
     return $self;
   };
 })(jQuery);

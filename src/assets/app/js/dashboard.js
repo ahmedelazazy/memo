@@ -7,39 +7,28 @@ var Dashboard = (function() {
     }
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "",
+            label: '',
             borderColor: color,
             borderWidth: border,
 
             pointHoverRadius: 4,
             pointHoverBorderWidth: 12,
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
             fill: false,
@@ -54,7 +43,7 @@ var Dashboard = (function() {
         tooltips: {
           enabled: false,
           intersect: false,
-          mode: "nearest",
+          mode: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -68,7 +57,7 @@ var Dashboard = (function() {
         responsive: true,
         maintainAspectRatio: true,
         hover: {
-          mode: "index"
+          mode: 'index'
         },
         scales: {
           xAxes: [
@@ -77,7 +66,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -87,7 +76,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -120,7 +109,7 @@ var Dashboard = (function() {
   //== Daily Sales chart.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var dailySales = function() {
-    var chartContainer = $("#m_chart_daily_sales");
+    var chartContainer = $('#m_chart_daily_sales');
 
     if (chartContainer.length == 0) {
       return;
@@ -128,39 +117,39 @@ var Dashboard = (function() {
 
     var chartData = {
       labels: [
-        "Label 1",
-        "Label 2",
-        "Label 3",
-        "Label 4",
-        "Label 5",
-        "Label 6",
-        "Label 7",
-        "Label 8",
-        "Label 9",
-        "Label 10",
-        "Label 11",
-        "Label 12",
-        "Label 13",
-        "Label 14",
-        "Label 15",
-        "Label 16"
+        'Label 1',
+        'Label 2',
+        'Label 3',
+        'Label 4',
+        'Label 5',
+        'Label 6',
+        'Label 7',
+        'Label 8',
+        'Label 9',
+        'Label 10',
+        'Label 11',
+        'Label 12',
+        'Label 13',
+        'Label 14',
+        'Label 15',
+        'Label 16'
       ],
       datasets: [
         {
           //label: 'Dataset 1',
-          backgroundColor: mApp.getColor("success"),
+          backgroundColor: mApp.getColor('success'),
           data: [15, 20, 25, 30, 25, 20, 15, 20, 25, 30, 25, 20, 15, 10, 15, 20]
         },
         {
           //label: 'Dataset 2',
-          backgroundColor: "#f3f3fb",
+          backgroundColor: '#f3f3fb',
           data: [15, 20, 25, 30, 25, 20, 15, 20, 25, 30, 25, 20, 15, 10, 15, 20]
         }
       ]
     };
 
     var chart = new Chart(chartContainer, {
-      type: "bar",
+      type: 'bar',
       data: chartData,
       options: {
         title: {
@@ -168,7 +157,7 @@ var Dashboard = (function() {
         },
         tooltips: {
           intersect: false,
-          mode: "nearest",
+          mode: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -210,33 +199,33 @@ var Dashboard = (function() {
   //== Profit Share Chart.
   //** Based on Chartist plugin - https://gionkunz.github.io/chartist-js/index.html
   var profitShare = function() {
-    if ($("#m_chart_profit_share").length == 0) {
+    if ($('#m_chart_profit_share').length == 0) {
       return;
     }
 
     var chart = new Chartist.Pie(
-      "#m_chart_profit_share",
+      '#m_chart_profit_share',
       {
         series: [
           {
             value: 32,
-            className: "custom",
+            className: 'custom',
             meta: {
-              color: mApp.getColor("brand")
+              color: mApp.getColor('brand')
             }
           },
           {
             value: 32,
-            className: "custom",
+            className: 'custom',
             meta: {
-              color: mApp.getColor("accent")
+              color: mApp.getColor('accent')
             }
           },
           {
             value: 36,
-            className: "custom",
+            className: 'custom',
             meta: {
-              color: mApp.getColor("warning")
+              color: mApp.getColor('warning')
             }
           }
         ],
@@ -249,40 +238,39 @@ var Dashboard = (function() {
       }
     );
 
-    chart.on("draw", function(data) {
-      if (data.type === "slice") {
+    chart.on('draw', function(data) {
+      if (data.type === 'slice') {
         // Get the total path length in order to use for dash array animation
         var pathLength = data.element._node.getTotalLength();
 
         // Set a dasharray that matches the path length as prerequisite to animate dashoffset
         data.element.attr({
-          "stroke-dasharray": pathLength + "px " + pathLength + "px"
+          'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
         });
 
         // Create animation definition while also assigning an ID to the animation for later sync usage
         var animationDefinition = {
-          "stroke-dashoffset": {
-            id: "anim" + data.index,
+          'stroke-dashoffset': {
+            id: 'anim' + data.index,
             dur: 1000,
-            from: -pathLength + "px",
-            to: "0px",
+            from: -pathLength + 'px',
+            to: '0px',
             easing: Chartist.Svg.Easing.easeOutQuint,
             // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-            fill: "freeze",
+            fill: 'freeze',
             stroke: data.meta.color
           }
         };
 
         // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
         if (data.index !== 0) {
-          animationDefinition["stroke-dashoffset"].begin =
-            "anim" + (data.index - 1) + ".end";
+          animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
         }
 
         // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
 
         data.element.attr({
-          "stroke-dashoffset": -pathLength + "px",
+          'stroke-dashoffset': -pathLength + 'px',
           stroke: data.meta.color
         });
 
@@ -309,65 +297,46 @@ var Dashboard = (function() {
   //== Sales Stats.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var salesStats = function() {
-    if ($("#m_chart_sales_stats").length == 0) {
+    if ($('#m_chart_sales_stats').length == 0) {
       return;
     }
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-          "January",
-          "February",
-          "March",
-          "April"
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+          'January',
+          'February',
+          'March',
+          'April'
         ],
         datasets: [
           {
-            label: "Sales Stats",
-            borderColor: mApp.getColor("brand"),
+            label: 'Sales Stats',
+            borderColor: mApp.getColor('brand'),
             borderWidth: 2,
-            pointBackgroundColor: mApp.getColor("brand"),
+            pointBackgroundColor: mApp.getColor('brand'),
 
-            backgroundColor: mApp.getColor("accent"),
+            backgroundColor: mApp.getColor('accent'),
 
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color(mApp.getColor("danger"))
+              .color(mApp.getColor('danger'))
               .alpha(0.2)
               .rgbString(),
-            data: [
-              10,
-              20,
-              16,
-              18,
-              12,
-              40,
-              35,
-              30,
-              33,
-              34,
-              45,
-              40,
-              60,
-              55,
-              70,
-              65,
-              75,
-              62
-            ]
+            data: [10, 20, 16, 18, 12, 40, 35, 30, 33, 34, 45, 40, 60, 55, 70, 65, 75, 62]
           }
         ]
       },
@@ -377,7 +346,7 @@ var Dashboard = (function() {
         },
         tooltips: {
           intersect: false,
-          mode: "nearest",
+          mode: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -391,7 +360,7 @@ var Dashboard = (function() {
         responsive: true,
         maintainAspectRatio: false,
         hover: {
-          mode: "index"
+          mode: 'index'
         },
         scales: {
           xAxes: [
@@ -400,7 +369,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -410,7 +379,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               }
             }
           ]
@@ -428,7 +397,7 @@ var Dashboard = (function() {
       }
     };
 
-    var chart = new Chart($("#m_chart_sales_stats"), config);
+    var chart = new Chart($('#m_chart_sales_stats'), config);
   };
 
   //== Sales By mUtillication Stats.
@@ -436,52 +405,52 @@ var Dashboard = (function() {
   var salesByApps = function() {
     // Init chart instances
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_1_1"),
+      $('#m_chart_sales_by_apps_1_1'),
       [10, 20, -5, 8, -20, -2, -4, 15, 5, 8],
-      mApp.getColor("accent"),
+      mApp.getColor('accent'),
       2
     );
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_1_2"),
+      $('#m_chart_sales_by_apps_1_2'),
       [2, 16, 0, 12, 22, 5, -10, 5, 15, 2],
-      mApp.getColor("danger"),
+      mApp.getColor('danger'),
       2
     );
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_1_3"),
+      $('#m_chart_sales_by_apps_1_3'),
       [15, 5, -10, 5, 16, 22, 6, -6, -12, 5],
-      mApp.getColor("success"),
+      mApp.getColor('success'),
       2
     );
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_1_4"),
+      $('#m_chart_sales_by_apps_1_4'),
       [8, 18, -12, 12, 22, -2, -14, 16, 18, 2],
-      mApp.getColor("warning"),
+      mApp.getColor('warning'),
       2
     );
 
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_2_1"),
+      $('#m_chart_sales_by_apps_2_1'),
       [10, 20, -5, 8, -20, -2, -4, 15, 5, 8],
-      mApp.getColor("danger"),
+      mApp.getColor('danger'),
       2
     );
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_2_2"),
+      $('#m_chart_sales_by_apps_2_2'),
       [2, 16, 0, 12, 22, 5, -10, 5, 15, 2],
-      mApp.getColor("metal"),
+      mApp.getColor('metal'),
       2
     );
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_2_3"),
+      $('#m_chart_sales_by_apps_2_3'),
       [15, 5, -10, 5, 16, 22, 6, -6, -12, 5],
-      mApp.getColor("brand"),
+      mApp.getColor('brand'),
       2
     );
     _initSparklineChart(
-      $("#m_chart_sales_by_apps_2_4"),
+      $('#m_chart_sales_by_apps_2_4'),
       [8, 18, -12, 12, 22, -2, -14, 16, 18, 2],
-      mApp.getColor("info"),
+      mApp.getColor('info'),
       2
     );
   };
@@ -489,45 +458,32 @@ var Dashboard = (function() {
   //== Latest Updates.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var latestUpdates = function() {
-    if ($("#m_chart_latest_updates").length == 0) {
+    if ($('#m_chart_latest_updates').length == 0) {
       return;
     }
 
-    var ctx = document
-      .getElementById("m_chart_latest_updates")
-      .getContext("2d");
+    var ctx = document.getElementById('m_chart_latest_updates').getContext('2d');
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "Sales Stats",
-            backgroundColor: mApp.getColor("danger"), // Put the gradient here as a fill color
-            borderColor: mApp.getColor("danger"),
+            label: 'Sales Stats',
+            backgroundColor: mApp.getColor('danger'), // Put the gradient here as a fill color
+            borderColor: mApp.getColor('danger'),
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("accent"),
+            pointHoverBackgroundColor: mApp.getColor('accent'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
 
@@ -542,7 +498,7 @@ var Dashboard = (function() {
         },
         tooltips: {
           intersect: false,
-          mode: "nearest",
+          mode: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -553,7 +509,7 @@ var Dashboard = (function() {
         responsive: true,
         maintainAspectRatio: false,
         hover: {
-          mode: "index"
+          mode: 'index'
         },
         scales: {
           xAxes: [
@@ -562,7 +518,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -572,7 +528,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -598,84 +554,84 @@ var Dashboard = (function() {
   //== Trends Stats.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var trendsStats = function() {
-    if ($("#m_chart_trends_stats").length == 0) {
+    if ($('#m_chart_trends_stats').length == 0) {
       return;
     }
 
-    var ctx = document.getElementById("m_chart_trends_stats").getContext("2d");
+    var ctx = document.getElementById('m_chart_trends_stats').getContext('2d');
 
     var gradient = ctx.createLinearGradient(0, 0, 0, 240);
     gradient.addColorStop(
       0,
       Chart.helpers
-        .color("#00c5dc")
+        .color('#00c5dc')
         .alpha(0.7)
         .rgbString()
     );
     gradient.addColorStop(
       1,
       Chart.helpers
-        .color("#f2feff")
+        .color('#f2feff')
         .alpha(0)
         .rgbString()
     );
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "January",
-          "February",
-          "March",
-          "April"
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'January',
+          'February',
+          'March',
+          'April'
         ],
         datasets: [
           {
-            label: "Sales Stats",
+            label: 'Sales Stats',
             backgroundColor: gradient, // Put the gradient here as a fill color
-            borderColor: "#0dc8de",
+            borderColor: '#0dc8de',
 
             pointBackgroundColor: Chart.helpers
-              .color("#ffffff")
+              .color('#ffffff')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#ffffff")
+              .color('#ffffff')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.2)
               .rgbString(),
 
@@ -725,7 +681,7 @@ var Dashboard = (function() {
         },
         tooltips: {
           intersect: false,
-          mode: "nearest",
+          mode: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -736,7 +692,7 @@ var Dashboard = (function() {
         responsive: true,
         maintainAspectRatio: false,
         hover: {
-          mode: "index"
+          mode: 'index'
         },
         scales: {
           xAxes: [
@@ -745,7 +701,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -755,7 +711,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -789,70 +745,68 @@ var Dashboard = (function() {
   //== Trends Stats 2.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var trendsStats2 = function() {
-    if ($("#m_chart_trends_stats_2").length == 0) {
+    if ($('#m_chart_trends_stats_2').length == 0) {
       return;
     }
 
-    var ctx = document
-      .getElementById("m_chart_trends_stats_2")
-      .getContext("2d");
+    var ctx = document.getElementById('m_chart_trends_stats_2').getContext('2d');
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "January",
-          "February",
-          "March",
-          "April"
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'January',
+          'February',
+          'March',
+          'April'
         ],
         datasets: [
           {
-            label: "Sales Stats",
-            backgroundColor: "#d2f5f9", // Put the gradient here as a fill color
-            borderColor: mApp.getColor("brand"),
+            label: 'Sales Stats',
+            backgroundColor: '#d2f5f9', // Put the gradient here as a fill color
+            borderColor: mApp.getColor('brand'),
 
             pointBackgroundColor: Chart.helpers
-              .color("#ffffff")
+              .color('#ffffff')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#ffffff")
+              .color('#ffffff')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.2)
               .rgbString(),
 
@@ -902,7 +856,7 @@ var Dashboard = (function() {
         },
         tooltips: {
           intersect: false,
-          mode: "nearest",
+          mode: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -913,7 +867,7 @@ var Dashboard = (function() {
         responsive: true,
         maintainAspectRatio: false,
         hover: {
-          mode: "index"
+          mode: 'index'
         },
         scales: {
           xAxes: [
@@ -922,7 +876,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -932,7 +886,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -966,13 +920,13 @@ var Dashboard = (function() {
   //== Trends Stats.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var latestTrendsMap = function() {
-    if ($("#m_chart_latest_trends_map").length == 0) {
+    if ($('#m_chart_latest_trends_map').length == 0) {
       return;
     }
 
     try {
       var map = new GMaps({
-        div: "#m_chart_latest_trends_map",
+        div: '#m_chart_latest_trends_map',
         lat: -12.043333,
         lng: -77.028333
       });
@@ -984,63 +938,55 @@ var Dashboard = (function() {
   //== Revenue Change.
   //** Based on Morris plugin - http://morrisjs.github.io/morris.js/
   var revenueChange = function() {
-    if ($("#m_chart_revenue_change").length == 0) {
+    if ($('#m_chart_revenue_change').length == 0) {
       return;
     }
 
     Morris.Donut({
-      element: "m_chart_revenue_change",
+      element: 'm_chart_revenue_change',
       data: [
         {
-          label: "New York",
+          label: 'New York',
           value: 10
         },
         {
-          label: "London",
+          label: 'London',
           value: 7
         },
         {
-          label: "Paris",
+          label: 'Paris',
           value: 20
         }
       ],
-      colors: [
-        mApp.getColor("accent"),
-        mApp.getColor("danger"),
-        mApp.getColor("brand")
-      ]
+      colors: [mApp.getColor('accent'), mApp.getColor('danger'), mApp.getColor('brand')]
     });
   };
 
   //== Support Tickets Chart.
   //** Based on Morris plugin - http://morrisjs.github.io/morris.js/
   var supportTickets = function() {
-    if ($("#m_chart_support_tickets").length == 0) {
+    if ($('#m_chart_support_tickets').length == 0) {
       return;
     }
 
     Morris.Donut({
-      element: "m_chart_support_tickets",
+      element: 'm_chart_support_tickets',
       data: [
         {
-          label: "Margins",
+          label: 'Margins',
           value: 20
         },
         {
-          label: "Profit",
+          label: 'Profit',
           value: 70
         },
         {
-          label: "Lost",
+          label: 'Lost',
           value: 10
         }
       ],
-      labelColor: "#a7a7c2",
-      colors: [
-        mApp.getColor("accent"),
-        mApp.getColor("brand"),
-        mApp.getColor("danger")
-      ]
+      labelColor: '#a7a7c2',
+      colors: [mApp.getColor('accent'), mApp.getColor('brand'), mApp.getColor('danger')]
       //formatter: function (x) { return x + "%"}
     });
   };
@@ -1048,33 +994,33 @@ var Dashboard = (function() {
   //== Support Tickets Chart.
   //** Based on Morris plugin - http://morrisjs.github.io/morris.js/
   var supportTickets2 = function() {
-    if ($("#m_chart_support_tickets2").length == 0) {
+    if ($('#m_chart_support_tickets2').length == 0) {
       return;
     }
 
     var chart = new Chartist.Pie(
-      "#m_chart_support_tickets2",
+      '#m_chart_support_tickets2',
       {
         series: [
           {
             value: 32,
-            className: "custom",
+            className: 'custom',
             meta: {
-              color: mApp.getColor("brand")
+              color: mApp.getColor('brand')
             }
           },
           {
             value: 32,
-            className: "custom",
+            className: 'custom',
             meta: {
-              color: mApp.getColor("accent")
+              color: mApp.getColor('accent')
             }
           },
           {
             value: 36,
-            className: "custom",
+            className: 'custom',
             meta: {
-              color: mApp.getColor("warning")
+              color: mApp.getColor('warning')
             }
           }
         ],
@@ -1087,40 +1033,39 @@ var Dashboard = (function() {
       }
     );
 
-    chart.on("draw", function(data) {
-      if (data.type === "slice") {
+    chart.on('draw', function(data) {
+      if (data.type === 'slice') {
         // Get the total path length in order to use for dash array animation
         var pathLength = data.element._node.getTotalLength();
 
         // Set a dasharray that matches the path length as prerequisite to animate dashoffset
         data.element.attr({
-          "stroke-dasharray": pathLength + "px " + pathLength + "px"
+          'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
         });
 
         // Create animation definition while also assigning an ID to the animation for later sync usage
         var animationDefinition = {
-          "stroke-dashoffset": {
-            id: "anim" + data.index,
+          'stroke-dashoffset': {
+            id: 'anim' + data.index,
             dur: 1000,
-            from: -pathLength + "px",
-            to: "0px",
+            from: -pathLength + 'px',
+            to: '0px',
             easing: Chartist.Svg.Easing.easeOutQuint,
             // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-            fill: "freeze",
+            fill: 'freeze',
             stroke: data.meta.color
           }
         };
 
         // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
         if (data.index !== 0) {
-          animationDefinition["stroke-dashoffset"].begin =
-            "anim" + (data.index - 1) + ".end";
+          animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
         }
 
         // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
 
         data.element.attr({
-          "stroke-dashoffset": -pathLength + "px",
+          'stroke-dashoffset': -pathLength + 'px',
           stroke: data.meta.color
         });
 
@@ -1134,60 +1079,49 @@ var Dashboard = (function() {
   //== Activities Charts.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var activitiesChart = function() {
-    if ($("#m_chart_activities").length == 0) {
+    if ($('#m_chart_activities').length == 0) {
       return;
     }
 
-    var ctx = document.getElementById("m_chart_activities").getContext("2d");
+    var ctx = document.getElementById('m_chart_activities').getContext('2d');
 
     var gradient = ctx.createLinearGradient(0, 0, 0, 240);
     gradient.addColorStop(
       0,
       Chart.helpers
-        .color("#e14c86")
+        .color('#e14c86')
         .alpha(1)
         .rgbString()
     );
     gradient.addColorStop(
       1,
       Chart.helpers
-        .color("#e14c86")
+        .color('#e14c86')
         .alpha(0.3)
         .rgbString()
     );
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "Sales Stats",
+            label: 'Sales Stats',
             backgroundColor: gradient,
-            borderColor: "#e13a58",
+            borderColor: '#e13a58',
 
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("light"),
+            pointHoverBackgroundColor: mApp.getColor('light'),
             pointHoverBorderColor: Chart.helpers
-              .color("#ffffff")
+              .color('#ffffff')
               .alpha(0.1)
               .rgbString(),
 
@@ -1201,9 +1135,9 @@ var Dashboard = (function() {
           display: false
         },
         tooltips: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: false,
-          position: "nearest",
+          position: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -1220,7 +1154,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -1230,7 +1164,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -1264,60 +1198,49 @@ var Dashboard = (function() {
   //== Bandwidth Charts 1.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var bandwidthChart1 = function() {
-    if ($("#m_chart_bandwidth1").length == 0) {
+    if ($('#m_chart_bandwidth1').length == 0) {
       return;
     }
 
-    var ctx = document.getElementById("m_chart_bandwidth1").getContext("2d");
+    var ctx = document.getElementById('m_chart_bandwidth1').getContext('2d');
 
     var gradient = ctx.createLinearGradient(0, 0, 0, 240);
     gradient.addColorStop(
       0,
       Chart.helpers
-        .color("#d1f1ec")
+        .color('#d1f1ec')
         .alpha(1)
         .rgbString()
     );
     gradient.addColorStop(
       1,
       Chart.helpers
-        .color("#d1f1ec")
+        .color('#d1f1ec')
         .alpha(0.3)
         .rgbString()
     );
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "Bandwidth Stats",
+            label: 'Bandwidth Stats',
             backgroundColor: gradient,
-            borderColor: mApp.getColor("success"),
+            borderColor: mApp.getColor('success'),
 
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
 
@@ -1331,9 +1254,9 @@ var Dashboard = (function() {
           display: false
         },
         tooltips: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: false,
-          position: "nearest",
+          position: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -1350,7 +1273,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -1360,7 +1283,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -1394,60 +1317,49 @@ var Dashboard = (function() {
   //== Bandwidth Charts 2.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var bandwidthChart2 = function() {
-    if ($("#m_chart_bandwidth2").length == 0) {
+    if ($('#m_chart_bandwidth2').length == 0) {
       return;
     }
 
-    var ctx = document.getElementById("m_chart_bandwidth2").getContext("2d");
+    var ctx = document.getElementById('m_chart_bandwidth2').getContext('2d');
 
     var gradient = ctx.createLinearGradient(0, 0, 0, 240);
     gradient.addColorStop(
       0,
       Chart.helpers
-        .color("#ffefce")
+        .color('#ffefce')
         .alpha(1)
         .rgbString()
     );
     gradient.addColorStop(
       1,
       Chart.helpers
-        .color("#ffefce")
+        .color('#ffefce')
         .alpha(0.3)
         .rgbString()
     );
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "Bandwidth Stats",
+            label: 'Bandwidth Stats',
             backgroundColor: gradient,
-            borderColor: mApp.getColor("warning"),
+            borderColor: mApp.getColor('warning'),
 
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
 
@@ -1461,9 +1373,9 @@ var Dashboard = (function() {
           display: false
         },
         tooltips: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: false,
-          position: "nearest",
+          position: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -1480,7 +1392,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -1490,7 +1402,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -1524,81 +1436,70 @@ var Dashboard = (function() {
   //== Bandwidth Charts 2.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var adWordsStat = function() {
-    if ($("#m_chart_adwords_stats").length == 0) {
+    if ($('#m_chart_adwords_stats').length == 0) {
       return;
     }
 
-    var ctx = document.getElementById("m_chart_adwords_stats").getContext("2d");
+    var ctx = document.getElementById('m_chart_adwords_stats').getContext('2d');
 
     var gradient = ctx.createLinearGradient(0, 0, 0, 240);
     gradient.addColorStop(
       0,
       Chart.helpers
-        .color("#ffefce")
+        .color('#ffefce')
         .alpha(1)
         .rgbString()
     );
     gradient.addColorStop(
       1,
       Chart.helpers
-        .color("#ffefce")
+        .color('#ffefce')
         .alpha(0.3)
         .rgbString()
     );
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "AdWord Clicks",
-            backgroundColor: mApp.getColor("brand"),
-            borderColor: mApp.getColor("brand"),
+            label: 'AdWord Clicks',
+            backgroundColor: mApp.getColor('brand'),
+            borderColor: mApp.getColor('brand'),
 
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
             data: [12, 16, 9, 18, 13, 12, 18, 12, 15, 17]
           },
           {
-            label: "AdWords Views",
+            label: 'AdWords Views',
 
-            backgroundColor: mApp.getColor("accent"),
-            borderColor: mApp.getColor("accent"),
+            backgroundColor: mApp.getColor('accent'),
+            borderColor: mApp.getColor('accent'),
 
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
             data: [10, 14, 12, 16, 9, 11, 13, 9, 13, 15]
@@ -1610,9 +1511,9 @@ var Dashboard = (function() {
           display: false
         },
         tooltips: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: false,
-          position: "nearest",
+          position: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -1629,7 +1530,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -1640,7 +1541,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -1674,47 +1575,34 @@ var Dashboard = (function() {
   //== Bandwidth Charts 2.
   //** Based on Chartjs plugin - http://www.chartjs.org/
   var financeSummary = function() {
-    if ($("#m_chart_finance_summary").length == 0) {
+    if ($('#m_chart_finance_summary').length == 0) {
       return;
     }
 
-    var ctx = document
-      .getElementById("m_chart_finance_summary")
-      .getContext("2d");
+    var ctx = document.getElementById('m_chart_finance_summary').getContext('2d');
 
     var config = {
-      type: "line",
+      type: 'line',
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October"
-        ],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
           {
-            label: "AdWords Views",
+            label: 'AdWords Views',
 
-            backgroundColor: mApp.getColor("accent"),
-            borderColor: mApp.getColor("accent"),
+            backgroundColor: mApp.getColor('accent'),
+            borderColor: mApp.getColor('accent'),
 
             pointBackgroundColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
             pointBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0)
               .rgbString(),
-            pointHoverBackgroundColor: mApp.getColor("danger"),
+            pointHoverBackgroundColor: mApp.getColor('danger'),
             pointHoverBorderColor: Chart.helpers
-              .color("#000000")
+              .color('#000000')
               .alpha(0.1)
               .rgbString(),
             data: [10, 14, 12, 16, 9, 11, 13, 9, 13, 15]
@@ -1726,9 +1614,9 @@ var Dashboard = (function() {
           display: false
         },
         tooltips: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: false,
-          position: "nearest",
+          position: 'nearest',
           xPadding: 10,
           yPadding: 10,
           caretPadding: 10
@@ -1745,7 +1633,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Month"
+                labelString: 'Month'
               }
             }
           ],
@@ -1755,7 +1643,7 @@ var Dashboard = (function() {
               gridLines: false,
               scaleLabel: {
                 display: true,
-                labelString: "Value"
+                labelString: 'Value'
               },
               ticks: {
                 beginAtZero: true
@@ -1789,56 +1677,56 @@ var Dashboard = (function() {
   //== Quick Stat Charts
   var quickStats = function() {
     _initSparklineChart(
-      $("#m_chart_quick_stats_1"),
+      $('#m_chart_quick_stats_1'),
       [10, 14, 18, 11, 9, 12, 14, 17, 18, 14],
-      mApp.getColor("brand"),
+      mApp.getColor('brand'),
       3
     );
     _initSparklineChart(
-      $("#m_chart_quick_stats_2"),
+      $('#m_chart_quick_stats_2'),
       [11, 12, 18, 13, 11, 12, 15, 13, 19, 15],
-      mApp.getColor("danger"),
+      mApp.getColor('danger'),
       3
     );
     _initSparklineChart(
-      $("#m_chart_quick_stats_3"),
+      $('#m_chart_quick_stats_3'),
       [12, 12, 18, 11, 15, 12, 13, 16, 11, 18],
-      mApp.getColor("success"),
+      mApp.getColor('success'),
       3
     );
     _initSparklineChart(
-      $("#m_chart_quick_stats_4"),
+      $('#m_chart_quick_stats_4'),
       [11, 9, 13, 18, 13, 15, 14, 13, 18, 15],
-      mApp.getColor("accent"),
+      mApp.getColor('accent'),
       3
     );
   };
 
   var daterangepickerInit = function() {
-    if ($("#m_dashboard_daterangepicker").length == 0) {
+    if ($('#m_dashboard_daterangepicker').length == 0) {
       return;
     }
 
-    var picker = $("#m_dashboard_daterangepicker");
+    var picker = $('#m_dashboard_daterangepicker');
     var start = moment();
     var end = moment();
 
     function cb(start, end, label) {
-      var title = "";
-      var range = "";
+      var title = '';
+      var range = '';
 
-      if (end - start < 100 || label == "Today") {
-        title = "Today:";
-        range = start.format("MMM D");
-      } else if (label == "Yesterday") {
-        title = "Yesterday:";
-        range = start.format("MMM D");
+      if (end - start < 100 || label == 'Today') {
+        title = 'Today:';
+        range = start.format('MMM D');
+      } else if (label == 'Yesterday') {
+        title = 'Yesterday:';
+        range = start.format('MMM D');
       } else {
-        range = start.format("MMM D") + " - " + end.format("MMM D");
+        range = start.format('MMM D') + ' - ' + end.format('MMM D');
       }
 
-      picker.find(".m-subheader__daterange-date").html(range);
-      picker.find(".m-subheader__daterange-title").html(title);
+      picker.find('.m-subheader__daterange-date').html(range);
+      picker.find('.m-subheader__daterange-title').html(title);
     }
 
     picker.daterangepicker(
@@ -1846,44 +1734,41 @@ var Dashboard = (function() {
         direction: mUtil.isRTL(),
         startDate: start,
         endDate: end,
-        opens: "left",
+        opens: 'left',
         ranges: {
           Today: [moment(), moment()],
-          Yesterday: [
-            moment().subtract(1, "days"),
-            moment().subtract(1, "days")
-          ],
-          "Last 7 Days": [moment().subtract(6, "days"), moment()],
-          "Last 30 Days": [moment().subtract(29, "days"), moment()],
-          "This Month": [moment().startOf("month"), moment().endOf("month")],
-          "Last Month": [
+          Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [
             moment()
-              .subtract(1, "month")
-              .startOf("month"),
+              .subtract(1, 'month')
+              .startOf('month'),
             moment()
-              .subtract(1, "month")
-              .endOf("month")
+              .subtract(1, 'month')
+              .endOf('month')
           ]
         }
       },
       cb
     );
 
-    cb(start, end, "");
+    cb(start, end, '');
   };
 
   var datatableLatestOrders = function() {
-    if ($("#m_datatable_latest_orders").length === 0) {
+    if ($('#m_datatable_latest_orders').length === 0) {
       return;
     }
 
-    var datatable = $(".m_datatable").mDatatable({
+    var datatable = $('.m_datatable').mDatatable({
       data: {
-        type: "remote",
+        type: 'remote',
         source: {
           read: {
             url:
-              "https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/datatables/demos/default.php"
+              'https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/datatables/demos/default.php'
           }
         },
         pageSize: 10,
@@ -1897,8 +1782,8 @@ var Dashboard = (function() {
       },
 
       layout: {
-        theme: "default",
-        class: "",
+        theme: 'default',
+        class: '',
         scroll: true,
         height: 380,
         footer: false
@@ -1912,69 +1797,69 @@ var Dashboard = (function() {
 
       columns: [
         {
-          field: "RecordID",
-          title: "#",
+          field: 'RecordID',
+          title: '#',
           sortable: false,
           width: 40,
           selector: {
-            class: "m-checkbox--solid m-checkbox--brand"
+            class: 'm-checkbox--solid m-checkbox--brand'
           },
-          textAlign: "center"
+          textAlign: 'center'
         },
         {
-          field: "OrderID",
-          title: "Order ID",
-          sortable: "asc",
+          field: 'OrderID',
+          title: 'Order ID',
+          sortable: 'asc',
           filterable: false,
           width: 150,
-          template: "{{OrderID}} - {{ShipCountry}}"
+          template: '{{OrderID}} - {{ShipCountry}}'
         },
         {
-          field: "ShipName",
-          title: "Ship Name",
+          field: 'ShipName',
+          title: 'Ship Name',
           width: 150,
           responsive: {
-            visible: "lg"
+            visible: 'lg'
           }
         },
         {
-          field: "ShipDate",
-          title: "Ship Date"
+          field: 'ShipDate',
+          title: 'Ship Date'
         },
         {
-          field: "Status",
-          title: "Status",
+          field: 'Status',
+          title: 'Status',
           width: 100,
           // callback function support for column rendering
           template: function(row) {
             var status = {
               1: {
-                title: "Pending",
-                class: "m-badge--brand"
+                title: 'Pending',
+                class: 'm-badge--brand'
               },
               2: {
-                title: "Delivered",
-                class: " m-badge--metal"
+                title: 'Delivered',
+                class: ' m-badge--metal'
               },
               3: {
-                title: "Canceled",
-                class: " m-badge--primary"
+                title: 'Canceled',
+                class: ' m-badge--primary'
               },
               4: {
-                title: "Success",
-                class: " m-badge--success"
+                title: 'Success',
+                class: ' m-badge--success'
               },
               5: {
-                title: "Info",
-                class: " m-badge--info"
+                title: 'Info',
+                class: ' m-badge--info'
               },
               6: {
-                title: "Danger",
-                class: " m-badge--danger"
+                title: 'Danger',
+                class: ' m-badge--danger'
               },
               7: {
-                title: "Warning",
-                class: " m-badge--warning"
+                title: 'Warning',
+                class: ' m-badge--warning'
               }
             };
             return (
@@ -1982,28 +1867,28 @@ var Dashboard = (function() {
               status[row.Status].class +
               ' m-badge--wide">' +
               status[row.Status].title +
-              "</span>"
+              '</span>'
             );
           }
         },
         {
-          field: "Type",
-          title: "Type",
+          field: 'Type',
+          title: 'Type',
           width: 100,
           // callback function support for column rendering
           template: function(row) {
             var status = {
               1: {
-                title: "Online",
-                state: "danger"
+                title: 'Online',
+                state: 'danger'
               },
               2: {
-                title: "Retail",
-                state: "primary"
+                title: 'Retail',
+                state: 'primary'
               },
               3: {
-                title: "Direct",
-                state: "accent"
+                title: 'Direct',
+                state: 'accent'
               }
             };
             return (
@@ -2013,18 +1898,18 @@ var Dashboard = (function() {
               status[row.Type].state +
               '">' +
               status[row.Type].title +
-              "</span>"
+              '</span>'
             );
           }
         },
         {
-          field: "Actions",
+          field: 'Actions',
           width: 110,
-          title: "Actions",
+          title: 'Actions',
           sortable: false,
-          overflow: "visible",
+          overflow: 'visible',
           template: function(row, index, datatable) {
-            var dropup = datatable.getPageSize() - index <= 4 ? "dropup" : "";
+            var dropup = datatable.getPageSize() - index <= 4 ? 'dropup' : '';
             return (
               '\
                         <div class="dropdown ' +
@@ -2054,188 +1939,180 @@ var Dashboard = (function() {
   };
 
   var calendarInit = function() {
-    if ($("#m_calendar").length === 0) {
+    if ($('#m_calendar').length === 0) {
       return;
     }
 
-    var todayDate = moment().startOf("day");
-    var YM = todayDate.format("YYYY-MM");
+    var todayDate = moment().startOf('day');
+    var YM = todayDate.format('YYYY-MM');
     var YESTERDAY = todayDate
       .clone()
-      .subtract(1, "day")
-      .format("YYYY-MM-DD");
-    var TODAY = todayDate.format("YYYY-MM-DD");
+      .subtract(1, 'day')
+      .format('YYYY-MM-DD');
+    var TODAY = todayDate.format('YYYY-MM-DD');
     var TOMORROW = todayDate
       .clone()
-      .add(1, "day")
-      .format("YYYY-MM-DD");
+      .add(1, 'day')
+      .format('YYYY-MM-DD');
 
-    $("#m_calendar").fullCalendar({
+    $('#m_calendar').fullCalendar({
       isRTL: mUtil.isRTL(),
       header: {
-        left: "prev,next today",
-        center: "title",
-        right: "month,agendaWeek,agendaDay,listWeek"
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listWeek'
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       navLinks: true,
-      defaultDate: moment("2017-09-15"),
+      defaultDate: moment('2017-09-15'),
       events: [
         {
-          title: "Meeting",
-          start: moment("2017-08-28"),
-          description: "Lorem ipsum dolor sit incid idunt ut",
-          className: "m-fc-event--light m-fc-event--solid-warning"
+          title: 'Meeting',
+          start: moment('2017-08-28'),
+          description: 'Lorem ipsum dolor sit incid idunt ut',
+          className: 'm-fc-event--light m-fc-event--solid-warning'
         },
         {
-          title: "Conference",
-          description: "Lorem ipsum dolor incid idunt ut labore",
-          start: moment("2017-08-29T13:30:00"),
-          end: moment("2017-08-29T17:30:00"),
-          className: "m-fc-event--accent"
+          title: 'Conference',
+          description: 'Lorem ipsum dolor incid idunt ut labore',
+          start: moment('2017-08-29T13:30:00'),
+          end: moment('2017-08-29T17:30:00'),
+          className: 'm-fc-event--accent'
         },
         {
-          title: "Dinner",
-          start: moment("2017-08-30"),
-          description: "Lorem ipsum dolor sit tempor incid",
-          className: "m-fc-event--light  m-fc-event--solid-danger"
+          title: 'Dinner',
+          start: moment('2017-08-30'),
+          description: 'Lorem ipsum dolor sit tempor incid',
+          className: 'm-fc-event--light  m-fc-event--solid-danger'
         },
         {
-          title: "All Day Event",
-          start: moment("2017-09-01"),
-          description: "Lorem ipsum dolor sit incid idunt ut",
-          className: "m-fc-event--danger m-fc-event--solid-focus"
+          title: 'All Day Event',
+          start: moment('2017-09-01'),
+          description: 'Lorem ipsum dolor sit incid idunt ut',
+          className: 'm-fc-event--danger m-fc-event--solid-focus'
         },
         {
-          title: "Reporting",
-          description: "Lorem ipsum dolor incid idunt ut labore",
-          start: moment("2017-09-03T13:30:00"),
-          end: moment("2017-09-04T17:30:00"),
-          className: "m-fc-event--accent"
+          title: 'Reporting',
+          description: 'Lorem ipsum dolor incid idunt ut labore',
+          start: moment('2017-09-03T13:30:00'),
+          end: moment('2017-09-04T17:30:00'),
+          className: 'm-fc-event--accent'
         },
         {
-          title: "Company Trip",
-          start: moment("2017-09-05"),
-          end: moment("2017-09-07"),
-          description: "Lorem ipsum dolor sit tempor incid",
-          className: "m-fc-event--primary"
+          title: 'Company Trip',
+          start: moment('2017-09-05'),
+          end: moment('2017-09-07'),
+          description: 'Lorem ipsum dolor sit tempor incid',
+          className: 'm-fc-event--primary'
         },
         {
-          title: "ICT Expo 2017 - Product Release",
-          start: moment("2017-09-09"),
-          description: "Lorem ipsum dolor sit tempor inci",
-          className: "m-fc-event--light m-fc-event--solid-primary"
+          title: 'ICT Expo 2017 - Product Release',
+          start: moment('2017-09-09'),
+          description: 'Lorem ipsum dolor sit tempor inci',
+          className: 'm-fc-event--light m-fc-event--solid-primary'
         },
         {
-          title: "Dinner",
-          start: moment("2017-09-12"),
-          description: "Lorem ipsum dolor sit amet, conse ctetur"
+          title: 'Dinner',
+          start: moment('2017-09-12'),
+          description: 'Lorem ipsum dolor sit amet, conse ctetur'
         },
         {
           id: 999,
-          title: "Repeating Event",
-          start: moment("2017-09-15T16:00:00"),
-          description: "Lorem ipsum dolor sit ncididunt ut labore",
-          className: "m-fc-event--danger"
+          title: 'Repeating Event',
+          start: moment('2017-09-15T16:00:00'),
+          description: 'Lorem ipsum dolor sit ncididunt ut labore',
+          className: 'm-fc-event--danger'
         },
         {
           id: 1000,
-          title: "Repeating Event",
-          description: "Lorem ipsum dolor sit amet, labore",
-          start: moment("2017-09-18T19:00:00")
+          title: 'Repeating Event',
+          description: 'Lorem ipsum dolor sit amet, labore',
+          start: moment('2017-09-18T19:00:00')
         },
         {
-          title: "Conference",
-          start: moment("2017-09-20T13:00:00"),
-          end: moment("2017-09-21T19:00:00"),
-          description: "Lorem ipsum dolor eius mod tempor labore",
-          className: "m-fc-event--accent"
+          title: 'Conference',
+          start: moment('2017-09-20T13:00:00'),
+          end: moment('2017-09-21T19:00:00'),
+          description: 'Lorem ipsum dolor eius mod tempor labore',
+          className: 'm-fc-event--accent'
         },
         {
-          title: "Meeting",
-          start: moment("2017-09-11"),
-          description: "Lorem ipsum dolor eiu idunt ut labore"
+          title: 'Meeting',
+          start: moment('2017-09-11'),
+          description: 'Lorem ipsum dolor eiu idunt ut labore'
         },
         {
-          title: "Lunch",
-          start: moment("2017-09-18"),
-          className: "m-fc-event--info m-fc-event--solid-accent",
-          description: "Lorem ipsum dolor sit amet, ut labore"
+          title: 'Lunch',
+          start: moment('2017-09-18'),
+          className: 'm-fc-event--info m-fc-event--solid-accent',
+          description: 'Lorem ipsum dolor sit amet, ut labore'
         },
         {
-          title: "Meeting",
-          start: moment("2017-09-24"),
-          className: "m-fc-event--warning",
-          description: "Lorem ipsum conse ctetur adipi scing"
+          title: 'Meeting',
+          start: moment('2017-09-24'),
+          className: 'm-fc-event--warning',
+          description: 'Lorem ipsum conse ctetur adipi scing'
         },
         {
-          title: "Happy Hour",
-          start: moment("2017-09-24"),
-          className: "m-fc-event--light m-fc-event--solid-focus",
-          description: "Lorem ipsum dolor sit amet, conse ctetur"
+          title: 'Happy Hour',
+          start: moment('2017-09-24'),
+          className: 'm-fc-event--light m-fc-event--solid-focus',
+          description: 'Lorem ipsum dolor sit amet, conse ctetur'
         },
         {
-          title: "Dinner",
-          start: moment("2017-09-24"),
-          className: "m-fc-event--solid-focus m-fc-event--light",
-          description: "Lorem ipsum dolor sit ctetur adipi scing"
+          title: 'Dinner',
+          start: moment('2017-09-24'),
+          className: 'm-fc-event--solid-focus m-fc-event--light',
+          description: 'Lorem ipsum dolor sit ctetur adipi scing'
         },
         {
-          title: "Birthday Party",
-          start: moment("2017-09-24"),
-          className: "m-fc-event--primary",
-          description: "Lorem ipsum dolor sit amet, scing"
+          title: 'Birthday Party',
+          start: moment('2017-09-24'),
+          className: 'm-fc-event--primary',
+          description: 'Lorem ipsum dolor sit amet, scing'
         },
         {
-          title: "Company Event",
-          start: moment("2017-09-24"),
-          className: "m-fc-event--danger",
-          description: "Lorem ipsum dolor sit amet, scing"
+          title: 'Company Event',
+          start: moment('2017-09-24'),
+          className: 'm-fc-event--danger',
+          description: 'Lorem ipsum dolor sit amet, scing'
         },
         {
-          title: "Click for Google",
-          url: "http://google.com/",
-          start: moment("2017-09-26"),
-          className: "m-fc-event--solid-info m-fc-event--light",
-          description: "Lorem ipsum dolor sit amet, labore"
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: moment('2017-09-26'),
+          className: 'm-fc-event--solid-info m-fc-event--light',
+          description: 'Lorem ipsum dolor sit amet, labore'
         }
       ],
 
       eventRender: function(event, element) {
-        if (element.hasClass("fc-day-grid-event")) {
-          element.data("content", event.description);
-          element.data("placement", "top");
+        if (element.hasClass('fc-day-grid-event')) {
+          element.data('content', event.description);
+          element.data('placement', 'top');
           mApp.initPopover(element);
-        } else if (element.hasClass("fc-time-grid-event")) {
-          element
-            .find(".fc-title")
-            .append(
-              '<div class="fc-description">' + event.description + "</div>"
-            );
-        } else if (element.find(".fc-list-item-title").lenght !== 0) {
-          element
-            .find(".fc-list-item-title")
-            .append(
-              '<div class="fc-description">' + event.description + "</div>"
-            );
+        } else if (element.hasClass('fc-time-grid-event')) {
+          element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
+        } else if (element.find('.fc-list-item-title').lenght !== 0) {
+          element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
         }
       }
     });
   };
 
   var earningsSlide = function() {
-    var $owl1 = $(".owl-carousel");
-    var $owl2 = $("#m_widget_body_owlcarousel_items");
+    var $owl1 = $('.owl-carousel');
+    var $owl2 = $('#m_widget_body_owlcarousel_items');
 
     $owl1.children().each(function(index) {
-      $(this).attr("data-position", index);
+      $(this).attr('data-position', index);
     });
 
     $owl2.owlCarousel({
       rtl: mUtil.isRTL(),
       items: 1,
-      animateIn: "fadeIn(100)",
+      animateIn: 'fadeIn(100)',
       loop: true
     });
 
@@ -2246,41 +2123,41 @@ var Dashboard = (function() {
       items: 2
     });
 
-    $(document).on("click", ".carousel", function() {
-      $owl1.trigger("to.owl.carousel", $(this).data("position"));
+    $(document).on('click', '.carousel', function() {
+      $owl1.trigger('to.owl.carousel', $(this).data('position'));
     });
   };
 
   var personalIncome = function() {
     //** Based on Chartist plugin - https://gionkunz.github.io/chartist-js/index.html
     var quater1Chart = function() {
-      if ($("#m_chart_personal_income_quater_1").length == 0) {
+      if ($('#m_chart_personal_income_quater_1').length == 0) {
         return;
       }
 
       var chart = new Chartist.Pie(
-        "#m_chart_personal_income_quater_1",
+        '#m_chart_personal_income_quater_1',
         {
           series: [
             {
               value: 32,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("accent")
+                color: mApp.getColor('accent')
               }
             },
             {
               value: 32,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("warning")
+                color: mApp.getColor('warning')
               }
             },
             {
               value: 36,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("brand")
+                color: mApp.getColor('brand')
               }
             }
           ],
@@ -2293,40 +2170,39 @@ var Dashboard = (function() {
         }
       );
 
-      chart.on("draw", function(data) {
-        if (data.type === "slice") {
+      chart.on('draw', function(data) {
+        if (data.type === 'slice') {
           // Get the total path length in order to use for dash array animation
           var pathLength = data.element._node.getTotalLength();
 
           // Set a dasharray that matches the path length as prerequisite to animate dashoffset
           data.element.attr({
-            "stroke-dasharray": pathLength + "px " + pathLength + "px"
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
           });
 
           // Create animation definition while also assigning an ID to the animation for later sync usage
           var animationDefinition = {
-            "stroke-dashoffset": {
-              id: "anim" + data.index,
+            'stroke-dashoffset': {
+              id: 'anim' + data.index,
               dur: 1000,
-              from: -pathLength + "px",
-              to: "0px",
+              from: -pathLength + 'px',
+              to: '0px',
               easing: Chartist.Svg.Easing.easeOutQuint,
               // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-              fill: "freeze",
+              fill: 'freeze',
               stroke: data.meta.color
             }
           };
 
           // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
           if (data.index !== 0) {
-            animationDefinition["stroke-dashoffset"].begin =
-              "anim" + (data.index - 1) + ".end";
+            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
           }
 
           // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
 
           data.element.attr({
-            "stroke-dashoffset": -pathLength + "px",
+            'stroke-dashoffset': -pathLength + 'px',
             stroke: data.meta.color
           });
 
@@ -2337,7 +2213,7 @@ var Dashboard = (function() {
       });
 
       // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-      chart.on("created", function() {
+      chart.on('created', function() {
         if (window.__anim21278907124) {
           clearTimeout(window.__anim21278907124);
           window.__anim21278907124 = null;
@@ -2347,33 +2223,33 @@ var Dashboard = (function() {
     };
 
     var quater2Chart = function() {
-      if ($("#m_chart_personal_income_quater_2").length == 0) {
+      if ($('#m_chart_personal_income_quater_2').length == 0) {
         return;
       }
 
       var chart = new Chartist.Pie(
-        "#m_chart_personal_income_quater_2",
+        '#m_chart_personal_income_quater_2',
         {
           series: [
             {
               value: 22,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("focus")
+                color: mApp.getColor('focus')
               }
             },
             {
               value: 44,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("success")
+                color: mApp.getColor('success')
               }
             },
             {
               value: 34,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("danger")
+                color: mApp.getColor('danger')
               }
             }
           ],
@@ -2386,40 +2262,39 @@ var Dashboard = (function() {
         }
       );
 
-      chart.on("draw", function(data) {
-        if (data.type === "slice") {
+      chart.on('draw', function(data) {
+        if (data.type === 'slice') {
           // Get the total path length in order to use for dash array animation
           var pathLength = data.element._node.getTotalLength();
 
           // Set a dasharray that matches the path length as prerequisite to animate dashoffset
           data.element.attr({
-            "stroke-dasharray": pathLength + "px " + pathLength + "px"
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
           });
 
           // Create animation definition while also assigning an ID to the animation for later sync usage
           var animationDefinition = {
-            "stroke-dashoffset": {
-              id: "anim" + data.index,
+            'stroke-dashoffset': {
+              id: 'anim' + data.index,
               dur: 1000,
-              from: -pathLength + "px",
-              to: "0px",
+              from: -pathLength + 'px',
+              to: '0px',
               easing: Chartist.Svg.Easing.easeOutQuint,
               // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-              fill: "freeze",
+              fill: 'freeze',
               stroke: data.meta.color
             }
           };
 
           // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
           if (data.index !== 0) {
-            animationDefinition["stroke-dashoffset"].begin =
-              "anim" + (data.index - 1) + ".end";
+            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
           }
 
           // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
 
           data.element.attr({
-            "stroke-dashoffset": -pathLength + "px",
+            'stroke-dashoffset': -pathLength + 'px',
             stroke: data.meta.color
           });
 
@@ -2430,46 +2305,43 @@ var Dashboard = (function() {
       });
 
       // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-      chart.on("created", function() {
+      chart.on('created', function() {
         if (window.__anim212789071241111) {
           clearTimeout(window.__anim212789071241111);
           window.__anim212789071241111 = null;
         }
-        window.__anim212789071241111 = setTimeout(
-          chart.update.bind(chart),
-          15000
-        );
+        window.__anim212789071241111 = setTimeout(chart.update.bind(chart), 15000);
       });
     };
 
     var quater3Chart = function() {
-      if ($("#m_chart_personal_income_quater_3").length == 0) {
+      if ($('#m_chart_personal_income_quater_3').length == 0) {
         return;
       }
 
       var chart = new Chartist.Pie(
-        "#m_chart_personal_income_quater_3",
+        '#m_chart_personal_income_quater_3',
         {
           series: [
             {
               value: 47,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("info")
+                color: mApp.getColor('info')
               }
             },
             {
               value: 55,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("danger")
+                color: mApp.getColor('danger')
               }
             },
             {
               value: 27,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("brand")
+                color: mApp.getColor('brand')
               }
             }
           ],
@@ -2482,40 +2354,39 @@ var Dashboard = (function() {
         }
       );
 
-      chart.on("draw", function(data) {
-        if (data.type === "slice") {
+      chart.on('draw', function(data) {
+        if (data.type === 'slice') {
           // Get the total path length in order to use for dash array animation
           var pathLength = data.element._node.getTotalLength();
 
           // Set a dasharray that matches the path length as prerequisite to animate dashoffset
           data.element.attr({
-            "stroke-dasharray": pathLength + "px " + pathLength + "px"
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
           });
 
           // Create animation definition while also assigning an ID to the animation for later sync usage
           var animationDefinition = {
-            "stroke-dashoffset": {
-              id: "anim" + data.index,
+            'stroke-dashoffset': {
+              id: 'anim' + data.index,
               dur: 1000,
-              from: -pathLength + "px",
-              to: "0px",
+              from: -pathLength + 'px',
+              to: '0px',
               easing: Chartist.Svg.Easing.easeOutQuint,
               // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-              fill: "freeze",
+              fill: 'freeze',
               stroke: data.meta.color
             }
           };
 
           // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
           if (data.index !== 0) {
-            animationDefinition["stroke-dashoffset"].begin =
-              "anim" + (data.index - 1) + ".end";
+            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
           }
 
           // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
 
           data.element.attr({
-            "stroke-dashoffset": -pathLength + "px",
+            'stroke-dashoffset': -pathLength + 'px',
             stroke: data.meta.color
           });
 
@@ -2526,46 +2397,43 @@ var Dashboard = (function() {
       });
 
       // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-      chart.on("created", function() {
+      chart.on('created', function() {
         if (window.__anim212789071241111) {
           clearTimeout(window.__anim212789071241111);
           window.__anim212789071241111 = null;
         }
-        window.__anim212789071241111 = setTimeout(
-          chart.update.bind(chart),
-          15000
-        );
+        window.__anim212789071241111 = setTimeout(chart.update.bind(chart), 15000);
       });
     };
 
     var quater4Chart = function() {
-      if ($("#m_chart_personal_income_quater_4").length == 0) {
+      if ($('#m_chart_personal_income_quater_4').length == 0) {
         return;
       }
 
       var chart = new Chartist.Pie(
-        "#m_chart_personal_income_quater_4",
+        '#m_chart_personal_income_quater_4',
         {
           series: [
             {
               value: 37,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("warning")
+                color: mApp.getColor('warning')
               }
             },
             {
               value: 65,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("primary")
+                color: mApp.getColor('primary')
               }
             },
             {
               value: 33,
-              className: "custom",
+              className: 'custom',
               meta: {
-                color: mApp.getColor("danger")
+                color: mApp.getColor('danger')
               }
             }
           ],
@@ -2578,40 +2446,39 @@ var Dashboard = (function() {
         }
       );
 
-      chart.on("draw", function(data) {
-        if (data.type === "slice") {
+      chart.on('draw', function(data) {
+        if (data.type === 'slice') {
           // Get the total path length in order to use for dash array animation
           var pathLength = data.element._node.getTotalLength();
 
           // Set a dasharray that matches the path length as prerequisite to animate dashoffset
           data.element.attr({
-            "stroke-dasharray": pathLength + "px " + pathLength + "px"
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
           });
 
           // Create animation definition while also assigning an ID to the animation for later sync usage
           var animationDefinition = {
-            "stroke-dashoffset": {
-              id: "anim" + data.index,
+            'stroke-dashoffset': {
+              id: 'anim' + data.index,
               dur: 1000,
-              from: -pathLength + "px",
-              to: "0px",
+              from: -pathLength + 'px',
+              to: '0px',
               easing: Chartist.Svg.Easing.easeOutQuint,
               // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-              fill: "freeze",
+              fill: 'freeze',
               stroke: data.meta.color
             }
           };
 
           // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
           if (data.index !== 0) {
-            animationDefinition["stroke-dashoffset"].begin =
-              "anim" + (data.index - 1) + ".end";
+            animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
           }
 
           // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
 
           data.element.attr({
-            "stroke-dashoffset": -pathLength + "px",
+            'stroke-dashoffset': -pathLength + 'px',
             stroke: data.meta.color
           });
 
@@ -2622,15 +2489,12 @@ var Dashboard = (function() {
       });
 
       // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-      chart.on("created", function() {
+      chart.on('created', function() {
         if (window.__anim212789071241111) {
           clearTimeout(window.__anim212789071241111);
           window.__anim212789071241111 = null;
         }
-        window.__anim212789071241111 = setTimeout(
-          chart.update.bind(chart),
-          15000
-        );
+        window.__anim212789071241111 = setTimeout(chart.update.bind(chart), 15000);
       });
     };
 
@@ -2638,19 +2502,19 @@ var Dashboard = (function() {
 
     $(document)
       .find('a[data-toggle="pill"]')
-      .on("shown.bs.tab", function(e) {
-        var target = $(e.target).attr("href");
+      .on('shown.bs.tab', function(e) {
+        var target = $(e.target).attr('href');
         switch (target) {
-          case "#m_personal_income_quater_1":
+          case '#m_personal_income_quater_1':
             quater1Chart();
             break;
-          case "#m_personal_income_quater_2":
+          case '#m_personal_income_quater_2':
             quater2Chart();
             break;
-          case "#m_personal_income_quater_3":
+          case '#m_personal_income_quater_3':
             quater3Chart();
             break;
-          case "#m_personal_income_quater_4":
+          case '#m_personal_income_quater_4':
             quater4Chart();
             break;
         }

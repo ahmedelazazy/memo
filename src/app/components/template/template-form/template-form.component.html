@@ -1,36 +1,21 @@
 <div class="row" *ngIf="templateForm.get('sections'); else noForm">
   <div class="col-md-12">
-    <div
-      id="templateForm"
-      [formGroup]="templateForm"
-      #formRef="ngForm"
-      class="m-form"
-    >
+    <div id="templateForm" [formGroup]="templateForm" #formRef="ngForm" class="m-form">
       <div
         id="sortableContainer"
         [sortablejs]="templateForm.get('sections').controls"
         [sortablejsOptions]="sortableOptions"
       >
-        <div
-          formArrayName="sections"
-          *ngFor="
-            let section of templateForm.get('sections').controls;
-            let i = index
-          "
-        >
+        <div formArrayName="sections" *ngFor="let section of templateForm.get('sections').controls; let i = index">
           <div [formGroupName]="i">
-            <div
-              class="m-portlet m-portlet--bordered m-portlet--rounded m-portlet--unair "
-            >
+            <div class="m-portlet m-portlet--bordered m-portlet--rounded m-portlet--unair ">
               <div class="m-portlet__head move m--bg-metal">
                 <div class="m-portlet__head-caption">
                   <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
                       <div class="form-group m-form__group row">
                         <div class="col-1"><i class="la la-sort"></i></div>
-                        <label for="sectionLabel" class="col-2 col-form-label"
-                          >Section*</label
-                        >
+                        <label for="sectionLabel" class="col-2 col-form-label">Section*</label>
                         <div class="col-8">
                           <input
                             type="text"
@@ -42,13 +27,7 @@
                           />
                         </div>
                         <div class="col-1">
-                          <button
-                            class="btn btn-danger btn-sm"
-                            type="button"
-                            (click)="deleteSection(i)"
-                          >
-                            X
-                          </button>
+                          <button class="btn btn-danger btn-sm" type="button" (click)="deleteSection(i)">X</button>
                         </div>
                       </div>
                     </h3>
@@ -57,17 +36,8 @@
               </div>
               <div class="m-portlet__body">
                 <div class="">
-                  <div
-                    [sortablejs]="section.get('fields').controls"
-                    [sortablejsOptions]="sortableOptions"
-                  >
-                    <div
-                      formArrayName="fields"
-                      *ngFor="
-                        let field of section.get('fields').controls;
-                        let j = index
-                      "
-                    >
+                  <div [sortablejs]="section.get('fields').controls" [sortablejsOptions]="sortableOptions">
+                    <div formArrayName="fields" *ngFor="let field of section.get('fields').controls; let j = index">
                       <div class="row field-container move">
                         <div class="col-md-10">
                           <div class="form-inline" [formGroupName]="j">
@@ -86,12 +56,7 @@
                             </div>
                             <div class="form-group">
                               <label for="fieldType">Type*</label>
-                              <select
-                                id="fieldType"
-                                formControlName="type"
-                                class="form-control"
-                                required
-                              >
+                              <select id="fieldType" formControlName="type" class="form-control" required>
                                 <option [ngValue]="'text'">Text</option>
                                 <option [ngValue]="'text'">Date</option>
                                 <option [ngValue]="'text'">List</option>
@@ -114,11 +79,7 @@
                       </div>
                     </div>
                   </div>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    (click)="onAddControl(section.controls.fields)"
-                  >
+                  <button class="btn btn-primary" type="button" (click)="onAddControl(section.controls.fields)">
                     Add Control
                   </button>
                 </div>
@@ -130,19 +91,13 @@
     </div>
   </div>
 
-  <div>
-    <button class="btn btn-primary" type="button" (click)="onAddSection()">
-      Add Section
-    </button>
-  </div>
+  <div><button class="btn btn-primary" type="button" (click)="onAddSection()">Add Section</button></div>
 </div>
 
 <ng-template #noForm>
   <div class="jumbotron center m--bg-metal">
     <h3>Template Form</h3>
     <p>Allows specific data to be passed between tasks</p>
-    <button type="button" class="btn btn-primary" (click)="onAddForm()">
-      Create Form
-    </button>
+    <button type="button" class="btn btn-primary" (click)="onAddForm()">Create Form</button>
   </div>
 </ng-template>

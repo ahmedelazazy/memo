@@ -1,13 +1,8 @@
 <div class="m-subheader ">
   <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <!-- <h3 class="m-subheader__title m-subheader__title--separator">Process</h3> -->
-    </div>
+    <div class="mr-auto"><!-- <h3 class="m-subheader__title m-subheader__title--separator">Process</h3> --></div>
     <div>
-      <a
-        [routerLink]="['/process/new']"
-        class="btn btn-accent m-btn m-btn--icon m-btn--pill"
-      >
+      <a [routerLink]="['/process/new']" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
         <span> <i class="la la-plus"></i> <span>Start Process</span> </span>
       </a>
     </div>
@@ -19,9 +14,7 @@
     <div class="m-portlet m-portlet--full-height ">
       <div class="m-portlet__head">
         <div class="m-portlet__head-caption">
-          <div class="m-portlet__head-title">
-            <h3 class="m-portlet__head-text">Processes</h3>
-          </div>
+          <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">Processes</h3></div>
         </div>
         <div class="m-portlet__head-tools">
           <ul
@@ -29,24 +22,10 @@
             role="tablist"
           >
             <li class="nav-item m-tabs__item">
-              <a
-                class="nav-link m-tabs__link active"
-                data-toggle="tab"
-                href="#tabActive"
-                role="tab"
-              >
-                Active
-              </a>
+              <a class="nav-link m-tabs__link active" data-toggle="tab" href="#tabActive" role="tab"> Active </a>
             </li>
             <li class="nav-item m-tabs__item">
-              <a
-                class="nav-link m-tabs__link"
-                data-toggle="tab"
-                href="#tabCompleted"
-                role="tab"
-              >
-                Completed
-              </a>
+              <a class="nav-link m-tabs__link" data-toggle="tab" href="#tabCompleted" role="tab"> Completed </a>
             </li>
           </ul>
         </div>
@@ -54,34 +33,22 @@
       <div class="m-portlet__body">
         <div class="tab-content">
           <div class="tab-pane active" id="tabActive">
-            <div
-              class="m-widget4 m-widget4--progress"
-              *ngIf="pendingProcesses?.length > 0; else noPendingProcess"
-            >
-              <div
-                class="m-widget4__item"
-                *ngFor="let process of pendingProcesses"
-              >
+            <div class="m-widget4 m-widget4--progress" *ngIf="pendingProcesses?.length > 0; else noPendingProcess">
+              <div class="m-widget4__item" *ngFor="let process of pendingProcesses">
                 <div class="m-widget4__img m-widget4__img--pic">
                   <i class="fa fa-lg fa-list-alt m--font-primary"></i>
                 </div>
                 <div class="m-widget4__info user">
-                  <span class="m-widget4__title">
-                    {{ process.user?.name }}
-                  </span>
+                  <span class="m-widget4__title"> {{ process.user?.name }} </span>
                 </div>
 
                 <div class="m-widget4__info">
-                  <span class="m-widget4__title">
-                    {{ process.template?.title }} ({{ process.title }})
-                  </span>
+                  <span class="m-widget4__title"> {{ process.template?.title }} ({{ process.title }}) </span>
                 </div>
 
                 <div class="m-widget4__progress">
                   <div class="">
-                    <span class="m-widget17__progress-number">{{
-                      getProgress(process)
-                    }}</span>
+                    <span class="m-widget17__progress-number">{{ getProgress(process) }}</span>
                     <div class="progress m-progress--sm">
                       <div
                         class="progress-bar m--bg-info"
@@ -93,9 +60,7 @@
                 </div>
 
                 <div class="m-widget4__ext">
-                  <span class="m-widget4__title">
-                    {{ process.dateOpened | date }} </span
-                  ><br />
+                  <span class="m-widget4__title"> {{ process.dateOpened | date }} </span><br />
                 </div>
 
                 <div class="m-widget4__ext">
@@ -107,9 +72,7 @@
                 </div>
               </div>
             </div>
-            <ng-template #noPendingProcess>
-              <p>You don't have any processes in progress</p>
-            </ng-template>
+            <ng-template #noPendingProcess> <p>You don't have any processes in progress</p> </ng-template>
           </div>
           <div class="tab-pane" id="tabCompleted">
             <div class="m-widget4 m-widget4--progress">
@@ -117,30 +80,21 @@
                 class="m-widget4 m-widget4--progress"
                 *ngIf="completedProcesses?.length > 0; else noCompletedProcess"
               >
-                <div
-                  class="m-widget4__item"
-                  *ngFor="let process of completedProcesses"
-                >
+                <div class="m-widget4__item" *ngFor="let process of completedProcesses">
                   <div class="m-widget4__img m-widget4__img--pic">
                     <i class="fa fa-lg fa-list-alt m--font-primary"></i>
                   </div>
                   <div class="m-widget4__info user">
-                    <span class="m-widget4__title">
-                      {{ process.user?.name }}
-                    </span>
+                    <span class="m-widget4__title"> {{ process.user?.name }} </span>
                   </div>
 
                   <div class="m-widget4__info">
-                    <span class="m-widget4__title">
-                      {{ process.template?.title }} ({{ process.title }})
-                    </span>
+                    <span class="m-widget4__title"> {{ process.template?.title }} ({{ process.title }}) </span>
                   </div>
 
                   <div class="m-widget4__progress">
                     <div class="">
-                      <span class="m-widget17__progress-number">{{
-                        getProgress(process)
-                      }}</span>
+                      <span class="m-widget17__progress-number">{{ getProgress(process) }}</span>
                       <div class="progress m-progress--sm">
                         <div
                           class="progress-bar m--bg-info"
@@ -152,9 +106,7 @@
                   </div>
 
                   <div class="m-widget4__ext">
-                    <span class="m-widget4__title">
-                      {{ process.dateOpened | date }} </span
-                    ><br />
+                    <span class="m-widget4__title"> {{ process.dateOpened | date }} </span><br />
                   </div>
 
                   <div class="m-widget4__ext">
@@ -166,9 +118,7 @@
                   </div>
                 </div>
               </div>
-              <ng-template #noCompletedProcess>
-                <p>You don't have any completed processes</p>
-              </ng-template>
+              <ng-template #noCompletedProcess> <p>You don't have any completed processes</p> </ng-template>
             </div>
           </div>
         </div>

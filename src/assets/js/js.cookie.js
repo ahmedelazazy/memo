@@ -7,11 +7,11 @@
  */
 (function(factory) {
   var registeredInModuleLoader = false;
-  if (typeof define === "function" && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     define(factory);
     registeredInModuleLoader = true;
   }
-  if (typeof exports === "object") {
+  if (typeof exports === 'object') {
     module.exports = factory();
     registeredInModuleLoader = true;
   }
@@ -39,7 +39,7 @@
   function init(converter) {
     function api(key, value, attributes) {
       var result;
-      if (typeof document === "undefined") {
+      if (typeof document === 'undefined') {
         return;
       }
 
@@ -48,24 +48,20 @@
       if (arguments.length > 1) {
         attributes = extend(
           {
-            path: "/"
+            path: '/'
           },
           api.defaults,
           attributes
         );
 
-        if (typeof attributes.expires === "number") {
+        if (typeof attributes.expires === 'number') {
           var expires = new Date();
-          expires.setMilliseconds(
-            expires.getMilliseconds() + attributes.expires * 864e5
-          );
+          expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e5);
           attributes.expires = expires;
         }
 
         // We're using "expires" because "max-age" is not supported by IE
-        attributes.expires = attributes.expires
-          ? attributes.expires.toUTCString()
-          : "";
+        attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
 
         try {
           result = JSON.stringify(value);
@@ -87,19 +83,19 @@
         key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
         key = key.replace(/[\(\)]/g, escape);
 
-        var stringifiedAttributes = "";
+        var stringifiedAttributes = '';
 
         for (var attributeName in attributes) {
           if (!attributes[attributeName]) {
             continue;
           }
-          stringifiedAttributes += "; " + attributeName;
+          stringifiedAttributes += '; ' + attributeName;
           if (attributes[attributeName] === true) {
             continue;
           }
-          stringifiedAttributes += "=" + attributes[attributeName];
+          stringifiedAttributes += '=' + attributes[attributeName];
         }
-        return (document.cookie = key + "=" + value + stringifiedAttributes);
+        return (document.cookie = key + '=' + value + stringifiedAttributes);
       }
 
       // Read
@@ -111,13 +107,13 @@
       // To prevent the for loop in the first place assign an empty array
       // in case there are no cookies at all. Also prevents odd result when
       // calling "get()"
-      var cookies = document.cookie ? document.cookie.split("; ") : [];
+      var cookies = document.cookie ? document.cookie.split('; ') : [];
       var rdecode = /(%[0-9A-Z]{2})+/g;
       var i = 0;
 
       for (; i < cookies.length; i++) {
-        var parts = cookies[i].split("=");
-        var cookie = parts.slice(1).join("=");
+        var parts = cookies[i].split('=');
+        var cookie = parts.slice(1).join('=');
 
         if (!this.json && cookie.charAt(0) === '"') {
           cookie = cookie.slice(1, -1);
@@ -127,8 +123,7 @@
           var name = parts[0].replace(rdecode, decodeURIComponent);
           cookie = converter.read
             ? converter.read(cookie, name)
-            : converter(cookie, name) ||
-              cookie.replace(rdecode, decodeURIComponent);
+            : converter(cookie, name) || cookie.replace(rdecode, decodeURIComponent);
 
           if (this.json) {
             try {
@@ -167,7 +162,7 @@
     api.remove = function(key, attributes) {
       api(
         key,
-        "",
+        '',
         extend(attributes, {
           expires: -1
         })

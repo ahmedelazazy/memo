@@ -2,10 +2,7 @@
   <div class="d-flex align-items-center">
     <div class="mr-auto"></div>
     <div>
-      <a
-        [routerLink]="['/memo/new']"
-        class="btn btn-accent m-btn m-btn--icon m-btn--pill"
-      >
+      <a [routerLink]="['/memo/new']" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
         <span> <i class="la la-plus"></i> <span>Create Memo</span> </span>
       </a>
     </div>
@@ -17,9 +14,7 @@
     <div class="m-portlet m-portlet--full-height ">
       <div class="m-portlet__head">
         <div class="m-portlet__head-caption">
-          <div class="m-portlet__head-title">
-            <h3 class="m-portlet__head-text">Tasks</h3>
-          </div>
+          <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">Tasks</h3></div>
         </div>
         <div class="m-portlet__head-tools">
           <ul
@@ -68,17 +63,13 @@
             <ng-container *ngIf="tasks && tasks.length; else noActiveMemos">
               <ng-container *ngTemplateOutlet="activeMemos"></ng-container>
             </ng-container>
-            <ng-template #noActiveMemos
-              >You don't have any active memos.</ng-template
-            >
+            <ng-template #noActiveMemos>You don't have any active memos.</ng-template>
           </div>
           <div class="tab-pane" id="tabCompleted">
             <ng-container *ngIf="tasks && tasks.length; else noInactiveMemos">
               <ng-container *ngTemplateOutlet="inactiveMemos"></ng-container>
             </ng-container>
-            <ng-template #noInactiveMemos
-              >You don't have any inactive memos.</ng-template
-            >
+            <ng-template #noInactiveMemos>You don't have any inactive memos.</ng-template>
           </div>
           <div class="tab-pane" id="tabMine">
             <ng-container *ngIf="memos && memos.length; else noMine">
@@ -97,64 +88,38 @@
     <div class="m-widget4 m-widget4--progress">
       <div class="m-widget4__item" *ngFor="let task of tasks">
         <div class="m-widget4__img m-widget4__img--pic">
-          <i
-            class="fa fa-lg fa-tasks m--font-accent"
-            *ngIf="task.type == taskTypeEnum.Task"
-          ></i>
-          <i
-            class="fa fa-lg fa-check m--font-focus"
-            *ngIf="task.type == taskTypeEnum.Approval"
-          ></i>
+          <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="task.type == taskTypeEnum.Task"></i>
+          <i class="fa fa-lg fa-check m--font-focus" *ngIf="task.type == taskTypeEnum.Approval"></i>
         </div>
         <div class="m-widget4__info user">
-          <span
-            class="m-widget4__title"
-            tooltip="Memo owner"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Memo owner" containerClass="m-tooltip">
             {{ task.memo?.user?.name }}
           </span>
         </div>
 
         <div class="m-widget4__info">
-          <span
-            class="m-widget4__title"
-            tooltip="Memo subject"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Memo subject" containerClass="m-tooltip">
             {{ task.memo?.title }}
           </span>
         </div>
 
         <div class="m-widget4__progress">
           <div class="">
-            <span class="m-widget17__progress-number">{{
-              getProgress(task.memo)
-            }}</span>
+            <span class="m-widget17__progress-number">{{ getProgress(task.memo) }}</span>
             <div class="progress m-progress--sm">
-              <div
-                class="progress-bar m--bg-info"
-                role="progressbar"
-                [style.width]="getProgress(task.memo)"
-              ></div>
+              <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(task.memo)"></div>
             </div>
           </div>
         </div>
 
         <div class="m-widget4__ext">
-          <span
-            class="m-widget4__title"
-            tooltip="Date assigned"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Date assigned" containerClass="m-tooltip">
             {{ task.dateOpened | date }}
           </span>
         </div>
 
         <div class="m-widget4__ext">
-          <a
-            class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary"
-            (click)="onStepSelect(task)"
+          <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onStepSelect(task)"
             >Details</a
           >
         </div>
@@ -168,64 +133,38 @@
     <div class="m-widget4 m-widget4--progress">
       <div class="m-widget4__item" *ngFor="let task of tasks">
         <div class="m-widget4__img m-widget4__img--pic">
-          <i
-            class="fa fa-lg fa-tasks m--font-accent"
-            *ngIf="task.type == taskTypeEnum.Task"
-          ></i>
-          <i
-            class="fa fa-lg fa-check m--font-focus"
-            *ngIf="task.type == taskTypeEnum.Approval"
-          ></i>
+          <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="task.type == taskTypeEnum.Task"></i>
+          <i class="fa fa-lg fa-check m--font-focus" *ngIf="task.type == taskTypeEnum.Approval"></i>
         </div>
         <div class="m-widget4__info user">
-          <span
-            class="m-widget4__title"
-            tooltip="Memo owner"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Memo owner" containerClass="m-tooltip">
             {{ task.memo?.user?.name }}
           </span>
         </div>
 
         <div class="m-widget4__info">
-          <span
-            class="m-widget4__title"
-            tooltip="Memo subject"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Memo subject" containerClass="m-tooltip">
             {{ task.memo?.title }}
           </span>
         </div>
 
         <div class="m-widget4__progress">
           <div class="">
-            <span class="m-widget17__progress-number">{{
-              getProgress(task.memo)
-            }}</span>
+            <span class="m-widget17__progress-number">{{ getProgress(task.memo) }}</span>
             <div class="progress m-progress--sm">
-              <div
-                class="progress-bar m--bg-info"
-                role="progressbar"
-                [style.width]="getProgress(task.memo)"
-              ></div>
+              <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(task.memo)"></div>
             </div>
           </div>
         </div>
 
         <div class="m-widget4__ext">
-          <span
-            class="m-widget4__title"
-            tooltip="Date assigned"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Date assigned" containerClass="m-tooltip">
             {{ task.dateOpened | date }}
           </span>
         </div>
 
         <div class="m-widget4__ext">
-          <a
-            class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary"
-            (click)="onStepSelect(task)"
+          <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onStepSelect(task)"
             >Details</a
           >
         </div>
@@ -238,58 +177,32 @@
   <ng-container>
     <div class="m-widget4 m-widget4--progress">
       <div class="m-widget4__item" *ngFor="let memo of memos">
-        <div class="m-widget4__img m-widget4__img--pic">
-          <i class="fa fa-lg fa-th-list m--font-secondary"></i>
-        </div>
+        <div class="m-widget4__img m-widget4__img--pic"><i class="fa fa-lg fa-th-list m--font-secondary"></i></div>
         <div class="m-widget4__info user">
-          <span
-            class="m-widget4__title"
-            tooltip="Memo owner"
-            containerClass="m-tooltip"
-          >
-            {{ memo?.user?.name }}
-          </span>
+          <span class="m-widget4__title" tooltip="Memo owner" containerClass="m-tooltip"> {{ memo?.user?.name }} </span>
         </div>
 
         <div class="m-widget4__info">
-          <span
-            class="m-widget4__title"
-            tooltip="Memo subject"
-            containerClass="m-tooltip"
-          >
-            {{ memo?.title }}
-          </span>
+          <span class="m-widget4__title" tooltip="Memo subject" containerClass="m-tooltip"> {{ memo?.title }} </span>
         </div>
 
         <div class="m-widget4__progress">
           <div class="">
-            <span class="m-widget17__progress-number">{{
-              getProgress(memo)
-            }}</span>
+            <span class="m-widget17__progress-number">{{ getProgress(memo) }}</span>
             <div class="progress m-progress--sm">
-              <div
-                class="progress-bar m--bg-info"
-                role="progressbar"
-                [style.width]="getProgress(memo)"
-              ></div>
+              <div class="progress-bar m--bg-info" role="progressbar" [style.width]="getProgress(memo)"></div>
             </div>
           </div>
         </div>
 
         <div class="m-widget4__ext">
-          <span
-            class="m-widget4__title"
-            tooltip="Date started"
-            containerClass="m-tooltip"
-          >
+          <span class="m-widget4__title" tooltip="Date started" containerClass="m-tooltip">
             {{ memo.dateOpened | date }}
           </span>
         </div>
 
         <div class="m-widget4__ext">
-          <a
-            class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary"
-            (click)="onStepSelect(memo)"
+          <a class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary" (click)="onStepSelect(memo)"
             >Details</a
           >
         </div>

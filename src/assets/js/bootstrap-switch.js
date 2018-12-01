@@ -8,10 +8,10 @@
  */
 
 (function(global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(["jquery"], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(require("jquery"));
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports !== 'undefined') {
+    factory(require('jquery'));
   } else {
     var mod = {
       exports: {}
@@ -20,7 +20,7 @@
     global.bootstrapSwitch = mod.exports;
   }
 })(this, function(_jquery) {
-  "use strict";
+  'use strict';
 
   var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -50,7 +50,7 @@
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
+      throw new TypeError('Cannot call a class as a function');
     }
   }
 
@@ -60,7 +60,7 @@
         var descriptor = props[i];
         descriptor.enumerable = descriptor.enumerable || false;
         descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
+        if ('value' in descriptor) descriptor.writable = true;
         Object.defineProperty(target, descriptor.key, descriptor);
       }
     }
@@ -78,91 +78,66 @@
     function BootstrapSwitch(element) {
       var _this = this;
 
-      var options =
-        arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       _classCallCheck(this, BootstrapSwitch);
 
       this.$element = $(element);
-      this.options = $.extend(
-        {},
-        $.fn.bootstrapSwitch.defaults,
-        this._getElementOptions(),
-        options
-      );
+      this.options = $.extend({}, $.fn.bootstrapSwitch.defaults, this._getElementOptions(), options);
       this.prevOptions = {};
-      this.$wrapper = $("<div>", {
+      this.$wrapper = $('<div>', {
         class: function _class() {
           var classes = [];
-          classes.push(_this.options.state ? "on" : "off");
+          classes.push(_this.options.state ? 'on' : 'off');
           if (_this.options.size) {
             classes.push(_this.options.size);
           }
           if (_this.options.disabled) {
-            classes.push("disabled");
+            classes.push('disabled');
           }
           if (_this.options.readonly) {
-            classes.push("readonly");
+            classes.push('readonly');
           }
           if (_this.options.indeterminate) {
-            classes.push("indeterminate");
+            classes.push('indeterminate');
           }
           if (_this.options.inverse) {
-            classes.push("inverse");
+            classes.push('inverse');
           }
-          if (_this.$element.attr("id")) {
-            classes.push("id-" + _this.$element.attr("id"));
+          if (_this.$element.attr('id')) {
+            classes.push('id-' + _this.$element.attr('id'));
           }
           return classes
             .map(_this._getClass.bind(_this))
-            .concat(
-              [_this.options.baseClass],
-              _this._getClasses(_this.options.wrapperClass)
-            )
-            .join(" ");
+            .concat([_this.options.baseClass], _this._getClasses(_this.options.wrapperClass))
+            .join(' ');
         }
       });
-      this.$container = $("<div>", { class: this._getClass("container") });
-      this.$on = $("<span>", {
+      this.$container = $('<div>', { class: this._getClass('container') });
+      this.$on = $('<span>', {
         html: this.options.onText,
-        class:
-          this._getClass("handle-on") +
-          " " +
-          this._getClass(this.options.onColor)
+        class: this._getClass('handle-on') + ' ' + this._getClass(this.options.onColor)
       });
-      this.$off = $("<span>", {
+      this.$off = $('<span>', {
         html: this.options.offText,
-        class:
-          this._getClass("handle-off") +
-          " " +
-          this._getClass(this.options.offColor)
+        class: this._getClass('handle-off') + ' ' + this._getClass(this.options.offColor)
       });
-      this.$label = $("<span>", {
+      this.$label = $('<span>', {
         html: this.options.labelText,
-        class: this._getClass("label")
+        class: this._getClass('label')
       });
 
-      this.$element.on(
-        "init.bootstrapSwitch",
-        this.options.onInit.bind(this, element)
-      );
-      this.$element.on("switchChange.bootstrapSwitch", function() {
-        for (
-          var _len = arguments.length, args = Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
+      this.$element.on('init.bootstrapSwitch', this.options.onInit.bind(this, element));
+      this.$element.on('switchChange.bootstrapSwitch', function() {
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
         }
 
         if (_this.options.onSwitchChange.apply(element, args) === false) {
-          if (_this.$element.is(":radio")) {
-            $('[name="' + _this.$element.attr("name") + '"]').trigger(
-              "previousState.bootstrapSwitch",
-              true
-            );
+          if (_this.$element.is(':radio')) {
+            $('[name="' + _this.$element.attr('name') + '"]').trigger('previousState.bootstrapSwitch', true);
           } else {
-            _this.$element.trigger("previousState.bootstrapSwitch", true);
+            _this.$element.trigger('previousState.bootstrapSwitch', true);
           }
         }
       });
@@ -175,7 +150,7 @@
         .before(this.options.inverse ? this.$on : this.$off);
 
       if (this.options.indeterminate) {
-        this.$element.prop("indeterminate", true);
+        this.$element.prop('indeterminate', true);
       }
 
       this._init();
@@ -184,49 +159,43 @@
       this._labelHandlers();
       this._formHandler();
       this._externalLabelHandler();
-      this.$element.trigger("init.bootstrapSwitch", this.options.state);
+      this.$element.trigger('init.bootstrapSwitch', this.options.state);
     }
 
     _createClass(BootstrapSwitch, [
       {
-        key: "setPrevOptions",
+        key: 'setPrevOptions',
         value: function setPrevOptions() {
           this.prevOptions = _extends({}, this.options);
         }
       },
       {
-        key: "state",
+        key: 'state',
         value: function state(value, skip) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.state;
           }
           if (
             this.options.disabled ||
             this.options.readonly ||
-            (this.options.state &&
-              !this.options.radioAllOff &&
-              this.$element.is(":radio"))
+            (this.options.state && !this.options.radioAllOff && this.$element.is(':radio'))
           ) {
             return this.$element;
           }
-          if (this.$element.is(":radio")) {
-            $('[name="' + this.$element.attr("name") + '"]').trigger(
-              "setPreviousOptions.bootstrapSwitch"
-            );
+          if (this.$element.is(':radio')) {
+            $('[name="' + this.$element.attr('name') + '"]').trigger('setPreviousOptions.bootstrapSwitch');
           } else {
-            this.$element.trigger("setPreviousOptions.bootstrapSwitch");
+            this.$element.trigger('setPreviousOptions.bootstrapSwitch');
           }
           if (this.options.indeterminate) {
             this.indeterminate(false);
           }
-          this.$element
-            .prop("checked", Boolean(value))
-            .trigger("change.bootstrapSwitch", skip);
+          this.$element.prop('checked', Boolean(value)).trigger('change.bootstrapSwitch', skip);
           return this.$element;
         }
       },
       {
-        key: "toggleState",
+        key: 'toggleState',
         value: function toggleState(skip) {
           if (this.options.disabled || this.options.readonly) {
             return this.$element;
@@ -235,16 +204,14 @@
             this.indeterminate(false);
             return this.state(true);
           } else {
-            return this.$element
-              .prop("checked", !this.options.state)
-              .trigger("change.bootstrapSwitch", skip);
+            return this.$element.prop('checked', !this.options.state).trigger('change.bootstrapSwitch', skip);
           }
         }
       },
       {
-        key: "size",
+        key: 'size',
         value: function size(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.size;
           }
           if (this.options.size != null) {
@@ -260,9 +227,9 @@
         }
       },
       {
-        key: "animate",
+        key: 'animate',
         value: function animate(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.animate;
           }
           if (this.options.animate === Boolean(value)) {
@@ -272,17 +239,17 @@
         }
       },
       {
-        key: "toggleAnimate",
+        key: 'toggleAnimate',
         value: function toggleAnimate() {
           this.options.animate = !this.options.animate;
-          this.$wrapper.toggleClass(this._getClass("animate"));
+          this.$wrapper.toggleClass(this._getClass('animate'));
           return this.$element;
         }
       },
       {
-        key: "disabled",
+        key: 'disabled',
         value: function disabled(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.disabled;
           }
           if (this.options.disabled === Boolean(value)) {
@@ -292,18 +259,18 @@
         }
       },
       {
-        key: "toggleDisabled",
+        key: 'toggleDisabled',
         value: function toggleDisabled() {
           this.options.disabled = !this.options.disabled;
-          this.$element.prop("disabled", this.options.disabled);
-          this.$wrapper.toggleClass(this._getClass("disabled"));
+          this.$element.prop('disabled', this.options.disabled);
+          this.$wrapper.toggleClass(this._getClass('disabled'));
           return this.$element;
         }
       },
       {
-        key: "readonly",
+        key: 'readonly',
         value: function readonly(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.readonly;
           }
           if (this.options.readonly === Boolean(value)) {
@@ -313,18 +280,18 @@
         }
       },
       {
-        key: "toggleReadonly",
+        key: 'toggleReadonly',
         value: function toggleReadonly() {
           this.options.readonly = !this.options.readonly;
-          this.$element.prop("readonly", this.options.readonly);
-          this.$wrapper.toggleClass(this._getClass("readonly"));
+          this.$element.prop('readonly', this.options.readonly);
+          this.$wrapper.toggleClass(this._getClass('readonly'));
           return this.$element;
         }
       },
       {
-        key: "indeterminate",
+        key: 'indeterminate',
         value: function indeterminate(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.indeterminate;
           }
           if (this.options.indeterminate === Boolean(value)) {
@@ -334,19 +301,19 @@
         }
       },
       {
-        key: "toggleIndeterminate",
+        key: 'toggleIndeterminate',
         value: function toggleIndeterminate() {
           this.options.indeterminate = !this.options.indeterminate;
-          this.$element.prop("indeterminate", this.options.indeterminate);
-          this.$wrapper.toggleClass(this._getClass("indeterminate"));
+          this.$element.prop('indeterminate', this.options.indeterminate);
+          this.$wrapper.toggleClass(this._getClass('indeterminate'));
           this._containerPosition();
           return this.$element;
         }
       },
       {
-        key: "inverse",
+        key: 'inverse',
         value: function inverse(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.inverse;
           }
           if (this.options.inverse === Boolean(value)) {
@@ -356,9 +323,9 @@
         }
       },
       {
-        key: "toggleInverse",
+        key: 'toggleInverse',
         value: function toggleInverse() {
-          this.$wrapper.toggleClass(this._getClass("inverse"));
+          this.$wrapper.toggleClass(this._getClass('inverse'));
           var $on = this.$on.clone(true);
           var $off = this.$off.clone(true);
           this.$on.replaceWith($off);
@@ -370,9 +337,9 @@
         }
       },
       {
-        key: "onColor",
+        key: 'onColor',
         value: function onColor(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.onColor;
           }
           if (this.options.onColor) {
@@ -384,9 +351,9 @@
         }
       },
       {
-        key: "offColor",
+        key: 'offColor',
         value: function offColor(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.offColor;
           }
           if (this.options.offColor) {
@@ -398,9 +365,9 @@
         }
       },
       {
-        key: "onText",
+        key: 'onText',
         value: function onText(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.onText;
           }
           this.$on.html(value);
@@ -411,9 +378,9 @@
         }
       },
       {
-        key: "offText",
+        key: 'offText',
         value: function offText(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.offText;
           }
           this.$off.html(value);
@@ -424,9 +391,9 @@
         }
       },
       {
-        key: "labelText",
+        key: 'labelText',
         value: function labelText(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.labelText;
           }
           this.$label.html(value);
@@ -436,9 +403,9 @@
         }
       },
       {
-        key: "handleWidth",
+        key: 'handleWidth',
         value: function handleWidth(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.handleWidth;
           }
           this.options.handleWidth = value;
@@ -448,9 +415,9 @@
         }
       },
       {
-        key: "labelWidth",
+        key: 'labelWidth',
         value: function labelWidth(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.labelWidth;
           }
           this.options.labelWidth = value;
@@ -460,32 +427,30 @@
         }
       },
       {
-        key: "baseClass",
+        key: 'baseClass',
         value: function baseClass(value) {
           return this.options.baseClass;
         }
       },
       {
-        key: "wrapperClass",
+        key: 'wrapperClass',
         value: function wrapperClass(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.wrapperClass;
           }
           if (!value) {
             value = $.fn.bootstrapSwitch.defaults.wrapperClass;
           }
-          this.$wrapper.removeClass(
-            this._getClasses(this.options.wrapperClass).join(" ")
-          );
-          this.$wrapper.addClass(this._getClasses(value).join(" "));
+          this.$wrapper.removeClass(this._getClasses(this.options.wrapperClass).join(' '));
+          this.$wrapper.addClass(this._getClasses(value).join(' '));
           this.options.wrapperClass = value;
           return this.$element;
         }
       },
       {
-        key: "radioAllOff",
+        key: 'radioAllOff',
         value: function radioAllOff(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.radioAllOff;
           }
           var val = Boolean(value);
@@ -497,9 +462,9 @@
         }
       },
       {
-        key: "onInit",
+        key: 'onInit',
         value: function onInit(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.onInit;
           }
           if (!value) {
@@ -510,9 +475,9 @@
         }
       },
       {
-        key: "onSwitchChange",
+        key: 'onSwitchChange',
         value: function onSwitchChange(value) {
-          if (typeof value === "undefined") {
+          if (typeof value === 'undefined') {
             return this.options.onSwitchChange;
           }
           if (!value) {
@@ -523,11 +488,11 @@
         }
       },
       {
-        key: "destroy",
+        key: 'destroy',
         value: function destroy() {
-          var $form = this.$element.closest("form");
+          var $form = this.$element.closest('form');
           if ($form.length) {
-            $form.off("reset.bootstrapSwitch").removeData("bootstrap-switch");
+            $form.off('reset.bootstrapSwitch').removeData('bootstrap-switch');
           }
           this.$container
             .children()
@@ -536,51 +501,51 @@
           this.$element
             .unwrap()
             .unwrap()
-            .off(".bootstrapSwitch")
-            .removeData("bootstrap-switch");
+            .off('.bootstrapSwitch')
+            .removeData('bootstrap-switch');
           return this.$element;
         }
       },
       {
-        key: "_getElementOptions",
+        key: '_getElementOptions',
         value: function _getElementOptions() {
           return {
-            state: this.$element.is(":checked"),
-            size: this.$element.data("size"),
-            animate: this.$element.data("animate"),
-            disabled: this.$element.is(":disabled"),
-            readonly: this.$element.is("[readonly]"),
-            indeterminate: this.$element.data("indeterminate"),
-            inverse: this.$element.data("inverse"),
-            radioAllOff: this.$element.data("radio-all-off"),
-            onColor: this.$element.data("on-color"),
-            offColor: this.$element.data("off-color"),
-            onText: this.$element.data("on-text"),
-            offText: this.$element.data("off-text"),
-            labelText: this.$element.data("label-text"),
-            handleWidth: this.$element.data("handle-width"),
-            labelWidth: this.$element.data("label-width"),
-            baseClass: this.$element.data("base-class"),
-            wrapperClass: this.$element.data("wrapper-class")
+            state: this.$element.is(':checked'),
+            size: this.$element.data('size'),
+            animate: this.$element.data('animate'),
+            disabled: this.$element.is(':disabled'),
+            readonly: this.$element.is('[readonly]'),
+            indeterminate: this.$element.data('indeterminate'),
+            inverse: this.$element.data('inverse'),
+            radioAllOff: this.$element.data('radio-all-off'),
+            onColor: this.$element.data('on-color'),
+            offColor: this.$element.data('off-color'),
+            onText: this.$element.data('on-text'),
+            offText: this.$element.data('off-text'),
+            labelText: this.$element.data('label-text'),
+            handleWidth: this.$element.data('handle-width'),
+            labelWidth: this.$element.data('label-width'),
+            baseClass: this.$element.data('base-class'),
+            wrapperClass: this.$element.data('wrapper-class')
           };
         }
       },
       {
-        key: "_width",
+        key: '_width',
         value: function _width() {
           var _this2 = this;
 
           var $handles = this.$on
             .add(this.$off)
             .add(this.$label)
-            .css("width", "");
+            .css('width', '');
           var handleWidth =
-            this.options.handleWidth === "auto"
+            this.options.handleWidth === 'auto'
               ? Math.round(Math.max(this.$on.width(), this.$off.width()))
               : this.options.handleWidth;
           $handles.width(handleWidth);
           this.$label.width(function(index, width) {
-            if (_this2.options.labelWidth !== "auto") {
+            if (_this2.options.labelWidth !== 'auto') {
               return _this2.options.labelWidth;
             }
             if (width < handleWidth) {
@@ -595,20 +560,17 @@
         }
       },
       {
-        key: "_containerPosition",
+        key: '_containerPosition',
         value: function _containerPosition() {
           var _this3 = this;
 
-          var state =
-            arguments.length > 0 && arguments[0] !== undefined
-              ? arguments[0]
-              : this.options.state;
+          var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.state;
           var callback = arguments[1];
 
-          this.$container.css("margin-left", function() {
-            var values = [0, "-" + _this3._handleWidth + "px"];
+          this.$container.css('margin-left', function() {
+            var values = [0, '-' + _this3._handleWidth + 'px'];
             if (_this3.options.indeterminate) {
-              return "-" + _this3._handleWidth / 2 + "px";
+              return '-' + _this3._handleWidth / 2 + 'px';
             }
             if (state) {
               if (_this3.options.inverse) {
@@ -627,7 +589,7 @@
         }
       },
       {
-        key: "_init",
+        key: '_init',
         value: function _init() {
           var _this4 = this;
 
@@ -637,16 +599,16 @@
             _this4._containerPosition();
             setTimeout(function() {
               if (_this4.options.animate) {
-                return _this4.$wrapper.addClass(_this4._getClass("animate"));
+                return _this4.$wrapper.addClass(_this4._getClass('animate'));
               }
             }, 50);
           };
-          if (this.$wrapper.is(":visible")) {
+          if (this.$wrapper.is(':visible')) {
             init();
             return;
           }
           var initInterval = window.setInterval(function() {
-            if (_this4.$wrapper.is(":visible")) {
+            if (_this4.$wrapper.is(':visible')) {
               init();
               return window.clearInterval(initInterval);
             }
@@ -654,69 +616,54 @@
         }
       },
       {
-        key: "_elementHandlers",
+        key: '_elementHandlers',
         value: function _elementHandlers() {
           var _this5 = this;
 
           return this.$element.on({
-            "setPreviousOptions.bootstrapSwitch": this.setPrevOptions.bind(
-              this
-            ),
+            'setPreviousOptions.bootstrapSwitch': this.setPrevOptions.bind(this),
 
-            "previousState.bootstrapSwitch": function previousStateBootstrapSwitch() {
+            'previousState.bootstrapSwitch': function previousStateBootstrapSwitch() {
               _this5.options = _this5.prevOptions;
               if (_this5.options.indeterminate) {
-                _this5.$wrapper.addClass(_this5._getClass("indeterminate"));
+                _this5.$wrapper.addClass(_this5._getClass('indeterminate'));
               }
-              _this5.$element
-                .prop("checked", _this5.options.state)
-                .trigger("change.bootstrapSwitch", true);
+              _this5.$element.prop('checked', _this5.options.state).trigger('change.bootstrapSwitch', true);
             },
 
-            "change.bootstrapSwitch": function changeBootstrapSwitch(
-              event,
-              skip
-            ) {
+            'change.bootstrapSwitch': function changeBootstrapSwitch(event, skip) {
               event.preventDefault();
               event.stopImmediatePropagation();
-              var state = _this5.$element.is(":checked");
+              var state = _this5.$element.is(':checked');
               _this5._containerPosition(state);
               if (state === _this5.options.state) {
                 return;
               }
               _this5.options.state = state;
-              _this5.$wrapper
-                .toggleClass(_this5._getClass("off"))
-                .toggleClass(_this5._getClass("on"));
+              _this5.$wrapper.toggleClass(_this5._getClass('off')).toggleClass(_this5._getClass('on'));
               if (!skip) {
-                if (_this5.$element.is(":radio")) {
-                  $('[name="' + _this5.$element.attr("name") + '"]')
+                if (_this5.$element.is(':radio')) {
+                  $('[name="' + _this5.$element.attr('name') + '"]')
                     .not(_this5.$element)
-                    .prop("checked", false)
-                    .trigger("change.bootstrapSwitch", true);
+                    .prop('checked', false)
+                    .trigger('change.bootstrapSwitch', true);
                 }
-                _this5.$element.trigger("switchChange.bootstrapSwitch", [
-                  state
-                ]);
+                _this5.$element.trigger('switchChange.bootstrapSwitch', [state]);
               }
             },
 
-            "focus.bootstrapSwitch": function focusBootstrapSwitch(event) {
+            'focus.bootstrapSwitch': function focusBootstrapSwitch(event) {
               event.preventDefault();
-              _this5.$wrapper.addClass(_this5._getClass("focused"));
+              _this5.$wrapper.addClass(_this5._getClass('focused'));
             },
 
-            "blur.bootstrapSwitch": function blurBootstrapSwitch(event) {
+            'blur.bootstrapSwitch': function blurBootstrapSwitch(event) {
               event.preventDefault();
-              _this5.$wrapper.removeClass(_this5._getClass("focused"));
+              _this5.$wrapper.removeClass(_this5._getClass('focused'));
             },
 
-            "keydown.bootstrapSwitch": function keydownBootstrapSwitch(event) {
-              if (
-                !event.which ||
-                _this5.options.disabled ||
-                _this5.options.readonly
-              ) {
+            'keydown.bootstrapSwitch': function keydownBootstrapSwitch(event) {
+              if (!event.which || _this5.options.disabled || _this5.options.readonly) {
                 return;
               }
               if (event.which === 37 || event.which === 39) {
@@ -729,26 +676,26 @@
         }
       },
       {
-        key: "_handleHandlers",
+        key: '_handleHandlers',
         value: function _handleHandlers() {
           var _this6 = this;
 
-          this.$on.on("click.bootstrapSwitch", function(event) {
+          this.$on.on('click.bootstrapSwitch', function(event) {
             event.preventDefault();
             event.stopPropagation();
             _this6.state(false);
-            return _this6.$element.trigger("focus.bootstrapSwitch");
+            return _this6.$element.trigger('focus.bootstrapSwitch');
           });
-          return this.$off.on("click.bootstrapSwitch", function(event) {
+          return this.$off.on('click.bootstrapSwitch', function(event) {
             event.preventDefault();
             event.stopPropagation();
             _this6.state(true);
-            return _this6.$element.trigger("focus.bootstrapSwitch");
+            return _this6.$element.trigger('focus.bootstrapSwitch');
           });
         }
       },
       {
-        key: "_labelHandlers",
+        key: '_labelHandlers',
         value: function _labelHandlers() {
           var _this7 = this;
 
@@ -757,45 +704,39 @@
               event.stopPropagation();
             },
 
-            "mousedown.bootstrapSwitch touchstart.bootstrapSwitch": function mousedownBootstrapSwitchTouchstartBootstrapSwitch(
+            'mousedown.bootstrapSwitch touchstart.bootstrapSwitch': function mousedownBootstrapSwitchTouchstartBootstrapSwitch(
               event
             ) {
-              if (
-                _this7._dragStart ||
-                _this7.options.disabled ||
-                _this7.options.readonly
-              ) {
+              if (_this7._dragStart || _this7.options.disabled || _this7.options.readonly) {
                 return;
               }
               event.preventDefault();
               event.stopPropagation();
               _this7._dragStart =
                 (event.pageX || event.originalEvent.touches[0].pageX) -
-                parseInt(_this7.$container.css("margin-left"), 10);
+                parseInt(_this7.$container.css('margin-left'), 10);
               if (_this7.options.animate) {
-                _this7.$wrapper.removeClass(_this7._getClass("animate"));
+                _this7.$wrapper.removeClass(_this7._getClass('animate'));
               }
-              _this7.$element.trigger("focus.bootstrapSwitch");
+              _this7.$element.trigger('focus.bootstrapSwitch');
             },
 
-            "mousemove.bootstrapSwitch touchmove.bootstrapSwitch": function mousemoveBootstrapSwitchTouchmoveBootstrapSwitch(
+            'mousemove.bootstrapSwitch touchmove.bootstrapSwitch': function mousemoveBootstrapSwitchTouchmoveBootstrapSwitch(
               event
             ) {
               if (_this7._dragStart == null) {
                 return;
               }
-              var difference =
-                (event.pageX || event.originalEvent.touches[0].pageX) -
-                _this7._dragStart;
+              var difference = (event.pageX || event.originalEvent.touches[0].pageX) - _this7._dragStart;
               event.preventDefault();
               if (difference < -_this7._handleWidth || difference > 0) {
                 return;
               }
               _this7._dragEnd = difference;
-              _this7.$container.css("margin-left", _this7._dragEnd + "px");
+              _this7.$container.css('margin-left', _this7._dragEnd + 'px');
             },
 
-            "mouseup.bootstrapSwitch touchend.bootstrapSwitch": function mouseupBootstrapSwitchTouchendBootstrapSwitch(
+            'mouseup.bootstrapSwitch touchend.bootstrapSwitch': function mouseupBootstrapSwitchTouchendBootstrapSwitch(
               event
             ) {
               if (!_this7._dragStart) {
@@ -803,7 +744,7 @@
               }
               event.preventDefault();
               if (_this7.options.animate) {
-                _this7.$wrapper.addClass(_this7._getClass("animate"));
+                _this7.$wrapper.addClass(_this7._getClass('animate'));
               }
               if (_this7._dragEnd) {
                 var state = _this7._dragEnd > -(_this7._handleWidth / 2);
@@ -815,20 +756,20 @@
               _this7._dragStart = false;
             },
 
-            "mouseleave.bootstrapSwitch": function mouseleaveBootstrapSwitch() {
-              _this7.$label.trigger("mouseup.bootstrapSwitch");
+            'mouseleave.bootstrapSwitch': function mouseleaveBootstrapSwitch() {
+              _this7.$label.trigger('mouseup.bootstrapSwitch');
             }
           };
           this.$label.on(handlers);
         }
       },
       {
-        key: "_externalLabelHandler",
+        key: '_externalLabelHandler',
         value: function _externalLabelHandler() {
           var _this8 = this;
 
-          var $externalLabel = this.$element.closest("label");
-          $externalLabel.on("click", function(event) {
+          var $externalLabel = this.$element.closest('label');
+          $externalLabel.on('click', function(event) {
             event.preventDefault();
             event.stopImmediatePropagation();
             if (event.target === $externalLabel[0]) {
@@ -838,36 +779,36 @@
         }
       },
       {
-        key: "_formHandler",
+        key: '_formHandler',
         value: function _formHandler() {
-          var $form = this.$element.closest("form");
-          if ($form.data("bootstrap-switch")) {
+          var $form = this.$element.closest('form');
+          if ($form.data('bootstrap-switch')) {
             return;
           }
           $form
-            .on("reset.bootstrapSwitch", function() {
+            .on('reset.bootstrapSwitch', function() {
               window.setTimeout(function() {
                 $form
-                  .find("input")
+                  .find('input')
                   .filter(function() {
-                    return $(this).data("bootstrap-switch");
+                    return $(this).data('bootstrap-switch');
                   })
                   .each(function() {
-                    return $(this).bootstrapSwitch("state", this.checked);
+                    return $(this).bootstrapSwitch('state', this.checked);
                   });
               }, 1);
             })
-            .data("bootstrap-switch", true);
+            .data('bootstrap-switch', true);
         }
       },
       {
-        key: "_getClass",
+        key: '_getClass',
         value: function _getClass(name) {
-          return this.options.baseClass + "-" + name;
+          return this.options.baseClass + '-' + name;
         }
       },
       {
-        key: "_getClasses",
+        key: '_getClasses',
         value: function _getClasses(classes) {
           if (!$.isArray(classes)) {
             return [this._getClass(classes)];
@@ -881,24 +822,18 @@
   })();
 
   $.fn.bootstrapSwitch = function(option) {
-    for (
-      var _len2 = arguments.length,
-        args = Array(_len2 > 1 ? _len2 - 1 : 0),
-        _key2 = 1;
-      _key2 < _len2;
-      _key2++
-    ) {
+    for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
       args[_key2 - 1] = arguments[_key2];
     }
 
     function reducer(ret, next) {
       var $this = $(next);
-      var existingData = $this.data("bootstrap-switch");
+      var existingData = $this.data('bootstrap-switch');
       var data = existingData || new BootstrapSwitch(next, option);
       if (!existingData) {
-        $this.data("bootstrap-switch", data);
+        $this.data('bootstrap-switch', data);
       }
-      if (typeof option === "string") {
+      if (typeof option === 'string') {
         return data[option].apply(data, args);
       }
       return ret;
@@ -915,15 +850,15 @@
     indeterminate: false,
     inverse: false,
     radioAllOff: false,
-    onColor: "primary",
-    offColor: "default",
-    onText: "ON",
-    offText: "OFF",
-    labelText: "&nbsp",
-    handleWidth: "auto",
-    labelWidth: "auto",
-    baseClass: "bootstrap-switch",
-    wrapperClass: "wrapper",
+    onColor: 'primary',
+    offColor: 'default',
+    onText: 'ON',
+    offText: 'OFF',
+    labelText: '&nbsp',
+    handleWidth: 'auto',
+    labelWidth: 'auto',
+    baseClass: 'bootstrap-switch',
+    wrapperClass: 'wrapper',
     onInit: function onInit() {},
     onSwitchChange: function onSwitchChange() {}
   };

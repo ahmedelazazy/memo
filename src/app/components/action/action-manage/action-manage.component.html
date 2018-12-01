@@ -11,29 +11,14 @@
       <div class="m-portlet m-portlet--tabs">
         <div class="m-portlet__head">
           <div class="m-portlet__head-tools">
-            <ul
-              class="nav nav-tabs m-tabs-line m-tabs-line--info m-tabs-line--2x m-tabs-line--right"
-              role="tablist"
-            >
+            <ul class="nav nav-tabs m-tabs-line m-tabs-line--info m-tabs-line--2x m-tabs-line--right" role="tablist">
               <li class="nav-item m-tabs__item">
-                <a
-                  class="nav-link m-tabs__link  active show"
-                  data-toggle="tab"
-                  href="#tab1"
-                  role="tab"
-                >
+                <a class="nav-link m-tabs__link  active show" data-toggle="tab" href="#tab1" role="tab">
                   Process Info
                 </a>
               </li>
               <li class="nav-item m-tabs__item">
-                <a
-                  class="nav-link m-tabs__link"
-                  data-toggle="tab"
-                  href="#tab2"
-                  role="tab"
-                >
-                  History
-                </a>
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#tab2" role="tab"> History </a>
               </li>
             </ul>
           </div>
@@ -41,15 +26,10 @@
         <div class="m-portlet__body">
           <div class="tab-content">
             <div class="tab-pane active show" id="tab1" role="tab1">
-              <app-action-manage-info
-                [action]="action"
-                [showForm]="showForm"
-              ></app-action-manage-info>
+              <app-action-manage-info [action]="action" [showForm]="showForm"></app-action-manage-info>
             </div>
             <div class="tab-pane " id="tab2" role="tab2">
-              <app-action-manage-history
-                [action]="action"
-              ></app-action-manage-history>
+              <app-action-manage-history [action]="action"></app-action-manage-history>
             </div>
           </div>
         </div>
@@ -62,16 +42,11 @@
       <div class="m-portlet">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">Process Info</h3>
-            </div>
+            <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">Process Info</h3></div>
           </div>
         </div>
         <div class="m-portlet__body">
-          <app-action-manage-info
-            [action]="action"
-            [showForm]="showForm"
-          ></app-action-manage-info>
+          <app-action-manage-info [action]="action" [showForm]="showForm"></app-action-manage-info>
         </div>
       </div>
     </div>
@@ -80,16 +55,10 @@
       <div class="m-portlet">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">History</h3>
-            </div>
+            <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">History</h3></div>
           </div>
         </div>
-        <div class="m-portlet__body">
-          <app-action-manage-history
-            [action]="action"
-          ></app-action-manage-history>
-        </div>
+        <div class="m-portlet__body"><app-action-manage-history [action]="action"></app-action-manage-history></div>
       </div>
     </div>
   </div>

@@ -1,41 +1,21 @@
-<p>
-  <strong>Process</strong> {{ action?.template?.title }} ({{
-    action?.process?.title
-  }})
-</p>
+<p><strong>Process</strong> {{ action?.template?.title }} ({{ action?.process?.title }})</p>
 <p><strong>Description</strong> {{ action?.process?.description }}</p>
 <p><strong>Date</strong> {{ action?.process?.dateOpened | date }}</p>
 <p><strong>Requested by</strong> {{ action?.process?.user?.name }}</p>
 <!-- <p>{{action?.step?.description}}</p> -->
 
-<div
-  class="m-form"
-  *ngIf="showForm && action.status != actionStatusEnum.assigned"
->
+<div class="m-form" *ngIf="showForm && action.status != actionStatusEnum.assigned">
   <hr />
   <h3 class="m-form__heading-title">Data Form</h3>
 
-  <div
-    class="section-container"
-    *ngFor="let section of action?.step?.sections; let i = index"
-  >
+  <div class="section-container" *ngFor="let section of action?.step?.sections; let i = index">
     <div class="m-form__heading" *ngIf="section.controls.length">
       <h3 class="m-form__heading-title">{{ section.label }}</h3>
     </div>
-    <div
-      *ngFor="let field of section.controls; let j = index"
-      class="form-group m-form__group row"
-    >
-      <label for="example-text-input" class="col-4 col-form-label">
-        {{ field.label }}
-      </label>
+    <div *ngFor="let field of section.controls; let j = index" class="form-group m-form__group row">
+      <label for="example-text-input" class="col-4 col-form-label"> {{ field.label }} </label>
       <div class="col-8">
-        <input
-          type="text"
-          class="form-control m-input"
-          readonly
-          [value]="field.controlValue.value"
-        />
+        <input type="text" class="form-control m-input" readonly [value]="field.controlValue.value" />
       </div>
     </div>
   </div>
@@ -49,10 +29,7 @@
       <div class="m-demo__preview">
         <div class="m-list-timeline">
           <div class="m-list-timeline__items">
-            <div
-              class="m-list-timeline__item"
-              *ngFor="let step of action.template.steps"
-            >
+            <div class="m-list-timeline__item" *ngFor="let step of action.template.steps">
               <span class="m-list-timeline__badge"></span>
               <span class="m-list-timeline__text"
                 >{{ step.title }}
@@ -62,18 +39,12 @@
                 -->
                 <span
                   class="m-badge m-badge--warning m-badge--wide"
-                  *ngIf="
-                    step.id == action.stepId &&
-                    action.status == actionStatusEnum.assigned
-                  "
+                  *ngIf="step.id == action.stepId && action.status == actionStatusEnum.assigned"
                   >CurrentTask</span
                 >
                 <span
                   class="m-badge m-badge--success m-badge--wide"
-                  *ngIf="
-                    getStepStatus(step.id) ==
-                    actionStatusEnum.completed_or_approved
-                  "
+                  *ngIf="getStepStatus(step.id) == actionStatusEnum.completed_or_approved"
                   >Completed</span
                 >
                 <span
@@ -82,9 +53,7 @@
                   >Rejected</span
                 >
               </span>
-              <span class="m-list-timeline__time">{{
-                step?.user.name || ""
-              }}</span>
+              <span class="m-list-timeline__time">{{ step?.user.name || '' }}</span>
             </div>
           </div>
         </div>
