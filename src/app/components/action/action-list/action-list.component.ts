@@ -3,7 +3,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { Observable } from 'rxjs';
 import { Action } from 'src/app/models/action';
 import { Router } from '@angular/router';
-import { TaskType } from 'src/app/models/enums';
+import { TaskType, ActionStatus } from 'src/app/models/enums';
 
 @Component({
   selector: 'app-action-list',
@@ -11,21 +11,20 @@ import { TaskType } from 'src/app/models/enums';
   styleUrls: ['./action-list.component.css']
 })
 export class ActionListComponent implements OnInit {
-
   pendingActions: any[];
   completedActions: any[];
   taskTypeEnum = TaskType;
 
-  constructor(private actionService: ActionService, private router: Router) { }
+  constructor(private actionService: ActionService, private router: Router) {}
 
   ngOnInit() {
-    this.actionService.get().subscribe(
-      actions => {
-        console.log(actions);
-        this.pendingActions = actions.filter(a => a.status == 1);
-        this.completedActions = actions.filter(a => a.status != 1);
-      }
-    );
+    this.actionService.get().subscribe(actions => {
+      console.log(actions);
+      this.pendingActions = actions.filter(a => a.status == ActionStatus.assigned);
+      this.completedActions = actions.filter(
+        a => a.status == ActionStatus.completed_or_approved || a.status == ActionStatus.rejected
+      );
+    });
   }
 
   onActionSelect(action: Action) {
@@ -34,15 +33,14 @@ export class ActionListComponent implements OnInit {
     //   data: action
     // });
     // btoa(action.id.toString());
-    this.router.navigate(["action", action.id]);
+    this.router.navigate(['action', action.id]);
   }
 
   getProgress(action) {
     let total = action.process.actions.length;
-    let completed = action.process.actions.filter(a => a.status == 2).length;
-    return (completed / total * 100).toFixed(0) + "%";
+    let completed = action.process.actions.filter(
+      a => a.status == ActionStatus.completed_or_approved || a.status == ActionStatus.rejected
+    ).length;
+    return ((completed / total) * 100).toFixed(0) + '%';
   }
-
-
-
 }

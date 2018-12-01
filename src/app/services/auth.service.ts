@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   user: User;
-  apiUrl = environment['url'] + 'user/';
+  serverUrl = environment['api'] + 'users/';
 
   constructor(private http: HttpClient, private router: Router) {
-    let user = localStorage.getItem("user");
+    let user = localStorage.getItem('user');
     let userObj = JSON.parse(user);
     if (user) {
       this.user = userObj;
@@ -24,24 +24,21 @@ export class AuthService {
   }
 
   login(email, password) {
-    let url = this.apiUrl + 'login';
-    let data = { 'email': email, 'password': password };
-    this.http.post<User>(url, data)
-      .subscribe(data => {
-        this.user = data
-        if (data) {
-          localStorage.setItem("user", JSON.stringify(this.user));
-          this.router.navigate(['/']);
-        } else {
-          alert("invalid login");
-        }
-      });
-
+    let url = this.serverUrl + 'login';
+    let user = { email: email, password: password };
+    this.http.post<User>(url, user).subscribe(data => {
+      this.user = data;
+      if (data) {
+        localStorage.setItem('user', JSON.stringify(this.user));
+        this.router.navigate(['/']);
+      } else {
+        alert('invalid login');
+      }
+    });
   }
 
   logout() {
-    localStorage.removeItem("user");
-    this.router.navigate(['/login']);
-
+    localStorage.removeItem('user');
+    this.router.navigate(['/', 'login']);
   }
 }

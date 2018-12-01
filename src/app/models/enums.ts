@@ -1,29 +1,32 @@
 export enum ActionStatus {
-  assigned = 1,
-  completed_or_approved = 2,
-  rejected = 3,
-  revoked = 4
-
-
+  pending = 'pending',
+  assigned = 'assigned',
+  completed_or_approved = 'completed/approved',
+  rejected = 'rejected',
+  revoked = 'revoked'
 }
 
 export enum ProcessStatus {
-  started = 1,
-  completed_or_approved = 2,
-  rejected = 3,
-  revoked = 4
+  started = 'started',
+  completed_or_approved = 'completed/approved',
+  rejected = 'rejected',
+  revoked = 'revoked'
 }
 
 export enum TaskType {
-  Task = "1",
-  Approval = "2"
+  Task = 'task',
+  Approval = 'approval'
 }
 
 export enum FieldVisibility {
-  Hidden = 1,
-  Readonly = 2,
-  Editable = 3,
-  Required = 4,
+  Hidden = 'hidden',
+  Readonly = 'readonly',
+  Editable = 'editable',
+  Required = 'required'
 }
 
-
+export enum MemoMode {
+  Active = 'active',
+  Inactive = 'inactive',
+  Mine = 'mine'
+}

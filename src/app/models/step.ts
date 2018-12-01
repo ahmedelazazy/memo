@@ -4,7 +4,7 @@ export class Step {
   description: string;
   type: number;
   template_id?: number;
-  user_id?: number;
+  userId?: number;
   order?: number;
   user?: any;
   stepVisibility: any;

@@ -5,10 +5,10 @@ export class Action {
   date: Date;
   action: number;
   step?: Step;
-  step_id?: number;
+  stepId?: number;
   template_id?: number;
   comment?: string;
-  status: number;
+  status: string;
 
   constructor() {
   }

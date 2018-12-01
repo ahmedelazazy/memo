@@ -7,8 +7,6 @@ import { FieldVisibility, ActionStatus, TaskType, ProcessStatus } from 'src/app/
   styleUrls: ['./action-manage-info.component.css']
 })
 export class ActionManageInfoComponent implements OnInit {
-
-
   @Input('action') action;
   @Input('showForm') showForm;
 
@@ -17,13 +15,11 @@ export class ActionManageInfoComponent implements OnInit {
   taskTypeEnum = TaskType;
   processStatusEnum = ProcessStatus;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  getStepStatus(stepId) {
+    return this.action.process.actions.find(a => a.stepId == stepId).status;
   }
-
-  getStepStatus(step_id) {
-    return this.action.process.actions.find(a => a.step_id == step_id).status;
-  }
-
 }

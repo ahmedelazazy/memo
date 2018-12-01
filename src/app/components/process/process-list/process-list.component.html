@@ -1,46 +1,46 @@
 <div class="row">
-  <ng-container *ngIf="templates$ | async as templates">
-    <div class="col-md-4" *ngFor="let template of templates">
-      <div class="m-portlet m-portlet--full-height ">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption" style="margin: auto;">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">
-                {{template.title}}
-              </h3>
-            </div>
-          </div>
-        </div>
-
-        <div class="m-portlet__body">
-          <p class="text-center"> {{template.description || 'This process does not have a description'}} </p>
-          <hr>
-
-          <div class="tab-content" *ngFor="let step of template.steps">
-            <div class="tab-pane active" id="m_widget2_tab1_content">
-              <div class="m-widget2">
-                <div class="m-widget2__item m-widget2__item--primary">
-                  <div class="m-widget2__checkbox">
-
-                  </div>
-                  <div class="m-widget2__desc">
-                    <span class="m-widget2__text">
-                      {{step.title}}
-                    </span>
-                  </div>
-                </div>
+  <ng-container *ngIf="(templates$ | async) as templates; else: noTemplates">
+    <ng-container *ngIf="templates?.length; else: noTemplates">
+      <div class="col-md-4" *ngFor="let template of templates">
+        <div class="m-portlet m-portlet--full-height ">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption" style="margin: auto;">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{ template.title }}</h3>
               </div>
             </div>
           </div>
 
-          <div class="text-center">
-            <button class=" text-center btn btn-primary" [routerLink]="['/process', 'new', template.id]">Start
-              Process</button>
-          </div>
+          <div class="m-portlet__body">
+            <p class="text-center">
+              {{ template.description || 'This process does not have a description' }}
+            </p>
+            <hr />
 
+            <div class="tab-content" *ngFor="let step of template.steps">
+              <div class="tab-pane active" id="m_widget2_tab1_content">
+                <div class="m-widget2">
+                  <div class="m-widget2__item m-widget2__item--primary">
+                    <div class="m-widget2__checkbox"></div>
+                    <div class="m-widget2__desc">
+                      <span class="m-widget2__text"> {{ step.title }} </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button class=" text-center btn btn-primary" [routerLink]="['/process', 'new', template.id]">
+                Start Process
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
+    </ng-container>
   </ng-container>
+  <ng-template #noTemplates>
+    <p>You cannot start a process because there is no saved templates.</p>
+  </ng-template>
 </div>

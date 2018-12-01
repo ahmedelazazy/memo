@@ -4,43 +4,50 @@
   cursor: pointer;
 }
 
-button{
+button {
   margin: 5px;
 }
 
-.right{
+.right {
   text-align: right;
 }
 
-
-form input.ng-touched.ng-invalid,
+/* form input.ng-touched.ng-invalid,
 form select.ng-touched.ng-invalid
 {
   border: 1px solid red;
+} */
+
+form.invalidform input.ng-invalid,
+form.invalidform select.ng-invalid,
+form.invalidform .invaliditem {
+  border: 1px solid #d43835 !important;
 }
 
+form.invalidform .invaliditemcolor {
+  color: #d43835 !important;
+}
 
-.center{
+invaliditemcolor .center {
   text-align: center;
 }
 
-input.inline{
-      display: inline-block;
-     width: auto;
-     margin-right: 10px;
-     margin-left: 10px;
+input.inline {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+  margin-left: 10px;
 }
-
 
 .m-subheader {
   padding-bottom: 30px;
 }
 
-@media (min-width: 1025px){
+@media (min-width: 1025px) {
   .m-aside-left--enabled .m-body .m-wrapper {
-      padding-left: 30px;
+    padding-left: 30px;
   }
 }
-.move{
+.move {
   cursor: move;
 }

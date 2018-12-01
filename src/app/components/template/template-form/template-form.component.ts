@@ -13,19 +13,18 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./template-form.component.css']
 })
 export class TemplateFormComponent implements OnInit {
-
   @Input('templateContainer') templateContainer;
   templateForm: FormGroup;
   subscription: Subscription;
 
-  private sortableOptions: SortablejsOptions = {
+  sortableOptions: SortablejsOptions = {
     handle: '.move',
-    onUpdate: (event) => {
-      this._updateValueAndValidity(this.templateForm);
+    onUpdate: event => {
+      new FormHelper().updateValueAndValidity(this.templateForm);
     }
   };
 
-  constructor(private cdRef: ChangeDetectorRef, private templateService: TemplateService) { }
+  constructor(private cdRef: ChangeDetectorRef, private templateService: TemplateService) {}
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
@@ -41,10 +40,9 @@ export class TemplateFormComponent implements OnInit {
   onAddForm() {
     this.templateService.templateForm$.next({});
 
-    this.subscription = this.templateForm.valueChanges.subscribe(
-      (value) => {
-        this.templateService.templateForm$.next(value);
-      });
+    this.subscription = this.templateForm.valueChanges.subscribe(value => {
+      this.templateService.templateForm$.next(value);
+    });
     this.templateForm.addControl('sections', new FormHelper().getFormData());
   }
 
@@ -58,7 +56,7 @@ export class TemplateFormComponent implements OnInit {
     parent.push(control);
   }
 
-  onSubmitTemplateForm() { }
+  onSubmitTemplateForm() {}
 
   deleteSection(index) {
     let sections = <FormArray>this.templateForm.controls.sections;
@@ -76,19 +74,7 @@ export class TemplateFormComponent implements OnInit {
 
   removeForm() {
     this.templateForm.removeControl('sections');
-    this.templateService.templateForm$.next(null);
+    this.templateService.templateForm$.next({});
     this.subscription.unsubscribe();
-  }
-
-  public _updateValueAndValidity(group: FormGroup | FormArray): void {
-    Object.keys(group.controls).forEach((key: string) => {
-      const abstractControl = group.controls[key];
-
-      if (abstractControl instanceof FormGroup || abstractControl instanceof FormArray) {
-        this._updateValueAndValidity(abstractControl);
-      } else {
-        abstractControl.updateValueAndValidity();
-      }
-    });
   }
 }

@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./action-manage-active.component.css']
 })
 export class ActionManageActiveComponent implements OnInit {
-
   @Input('action') action;
   @Input('actionForm') actionForm;
   @Input('showForm') showForm;
@@ -19,13 +18,24 @@ export class ActionManageActiveComponent implements OnInit {
   actionStatusEnum = ActionStatus;
   taskTypeEnum = TaskType;
   processStatusEnum = ProcessStatus;
+  submitted = false;
+  constructor(
+    private router: Router,
+    private actionService: ActionService,
+    private toastrService: ToastrService
+  ) {}
 
-  constructor(private router: Router, private actionService: ActionService, private toastrService: ToastrService) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSave(actionStatus) {
+    this.submitted = true;
+
+    if (this.actionForm) {
+      if (this.actionForm.invalid) {
+        this.toastrService.error('Some fields have invalid values');
+        return;
+      }
+    }
 
     let flatFields = [];
     if (this.actionForm.value.sections) {
@@ -37,10 +47,10 @@ export class ActionManageActiveComponent implements OnInit {
       }
     }
 
-    this.actionForm.value.process_control_value = flatFields;
+    this.actionForm.value.controlValues = flatFields;
     this.actionForm.value.status = actionStatus;
 
-    this.actionService.update(this.actionForm.value).subscribe(
+    this.actionService.update(this.action.id, this.actionForm.value).subscribe(
       data => {
         this.toastrService.success('Data saved successfully');
         this.router.navigate(['/action']);
@@ -51,5 +61,4 @@ export class ActionManageActiveComponent implements OnInit {
       }
     );
   }
-
 }

@@ -1,35 +1,44 @@
 <div class="row" [formGroup]="templateContainer">
   <div class="col-md-6">
-
     <div class="list-group">
       <a class="list-group-item pointer" [class.active]="step == selectedStep" (click)="onProcessClick()">
-        <h4 class="list-group-item-heading">
-          Process Start Task
-        </h4>
-        <p class="list-group-item-text"> Process details and general configuration</p>
+        <h4 class="list-group-item-heading">Process Start Task</h4>
+        <p class="list-group-item-text">Process details and general configuration</p>
       </a>
 
       <div [sortablejs]="steps.controls" formArrayName="steps">
-        <div *ngFor="let step of steps.controls;  let i = index">
+        <div *ngFor="let step of steps.controls; let i = index">
           <div [formGroupName]="i">
-            <a class="list-group-item" [class.active]="step == selectedStep">
+            <a
+              class="list-group-item"
+              [class.invaliditemcolor]="step.invalid"
+              [class.active]="step == selectedStep"
+            >
               <div class="row">
-                <div class="col-md-1">
-                  <i class="la la-sort"></i>
-                </div>
+                <div class="col-md-1"><i class="la la-sort"></i></div>
                 <div class="col-md-9">
                   <div class=" pointer" (click)="edit(step)">
                     <h5 class="list-group-item-heading" [class.new]="!step.get('title').value">
-                      {{step.get('title').value ? step.get('title').value : 'New Task' }}
+                      {{ step.get('title').value ? step.get('title').value : 'New Task' }}
                     </h5>
-                    <p class="list-group-item-text" [class.new]="!step.get('user_id').value">
-                      {{step.get('user_id').value ?
-                      templateService.getUserName(step.get('user_id').value) : 'No assignee' }}</p>
+                    <p class="list-group-item-text" [class.new]="!step.get('userId').value">
+                      {{
+                        step.get('userId').value
+                          ? templateService.getUserName(step.get('userId').value)
+                          : 'No assignee'
+                      }}
+                    </p>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="right">
-                    <button class="btn btn-sm btn-danger" *ngIf="steps.controls.length > 1" (click)="remove(i)">X</button>
+                    <button
+                      class="btn btn-sm btn-danger"
+                      *ngIf="steps.controls.length > 1"
+                      (click)="remove(i)"
+                    >
+                      X
+                    </button>
                   </div>
                 </div>
               </div>
@@ -41,30 +50,42 @@
         <button type="button" class="btn btn-primary" (click)="addStep()">Add new step</button>
       </div>
     </div>
-
   </div>
 
-
-
   <div class="col-md-6">
-
-
     <div class="m-portlet m-portlet--tabs">
       <div class="m-portlet__head">
         <div class="m-portlet__head-tools">
-          <ul class="nav nav-tabs m-tabs-line m-tabs-line--info m-tabs-line--2x m-tabs-line--right" role="tablist">
+          <ul
+            class="nav nav-tabs m-tabs-line m-tabs-line--info m-tabs-line--2x m-tabs-line--right"
+            role="tablist"
+          >
             <li class="nav-item m-tabs__item" *ngIf="!processSelected">
-              <a class="nav-link m-tabs__link  active show" data-toggle="tab" href="#tabStepCreate" role="tab">
+              <a
+                class="nav-link m-tabs__link  active show"
+                data-toggle="tab"
+                href="#tabStepCreate"
+                role="tab"
+                [class.invaliditemcolor]="selectedStep.invalid"
+              >
                 Task Details
               </a>
             </li>
-            <li class="nav-item m-tabs__item" *ngIf="!processSelected && (templateService.templateForm$ | async)">
+            <li
+              class="nav-item m-tabs__item"
+              *ngIf="!processSelected && (templateService.templateForm$ | async)"
+            >
               <a class="nav-link m-tabs__link" data-toggle="tab" href="#tabStepFields" role="tab">
                 Fields Visibilty
               </a>
             </li>
             <li class="nav-item m-tabs__item" *ngIf="processSelected">
-              <a class="nav-link m-tabs__link  active show" data-toggle="tab" href="#tabStepProcess" role="tab">
+              <a
+                class="nav-link m-tabs__link  active show"
+                data-toggle="tab"
+                href="#tabStepProcess"
+                role="tab"
+              >
                 Process Details
               </a>
             </li>
@@ -74,15 +95,31 @@
       <div class="m-portlet__body">
         <div class="tab-content">
           <div class="tab-pane active show" id="tabStepCreate" role="tabStepCreate" *ngIf="!processSelected">
-            <app-step-create *ngIf="selectedStep" [step]="selectedStep" (stepUpdated)="onStepUpdated($event)" active="true"></app-step-create>
+            <app-step-create
+              *ngIf="selectedStep"
+              [step]="selectedStep"
+              (stepUpdated)="onStepUpdated($event)"
+              active="true"
+            ></app-step-create>
           </div>
-          <div class="tab-pane " id="tabStepFields" role="tabStepFields" *ngIf="!processSelected && (templateService.templateForm$ | async)">
+          <div
+            class="tab-pane "
+            id="tabStepFields"
+            role="tabStepFields"
+            *ngIf="!processSelected && (templateService.templateForm$ | async)"
+          >
             <app-template-step-fields [step]="selectedStep"></app-template-step-fields>
           </div>
-          <div class="tab-pane  active show" id="tabStepProcess" role="tabStepProcess" *ngIf="processSelected">
+          <div
+            class="tab-pane  active show"
+            id="tabStepProcess"
+            role="tabStepProcess"
+            *ngIf="processSelected"
+          >
             <app-template-step-process [templateContainer]="templateContainer"></app-template-step-process>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,66 +1,173 @@
-<div *ngIf="step">
-  <div class="row" *ngIf="step.status == actionStatusEnum.assigned">
+<div *ngIf="task">
+  <div class="row">
     <div class="col-md-6">
+      <p><strong>Subject</strong> {{ task.memo?.title }}</p>
+      <p><strong>Body</strong> {{ task.memo?.description || 'This memo does not have a body' }}</p>
+      <p><strong>Owner</strong> {{ task.memo?.user.name }}</p>
+      <p><strong>Start Date</strong> {{ task.memo?.dateOpened | date }}</p>
 
-      <p><strong>Subject</strong> {{step.memo?.title}}</p>
-      <p><strong>Body</strong> {{step.memo?.description}}</p>
-      <p><strong>Owner</strong> {{step.memo?.user.name}}</p>
-      <p><strong>Start date</strong> {{step.memo?.date_opened | date}}</p>
-      <hr>
-      <div>Your comment</div>
-      <div>Add someone to the loop</div>
-      <div>Complete or approve</div>
+      <div *ngIf="editMode">
+        <hr />
+        <form [formGroup]="memoForm" class=" m-form" [class.invalidform]="submitted && memoForm.invalid">
+          <div class="form-group m-form__group">
+            <label for="comment">Comment</label>
+            <textarea
+              class="form-control m-input"
+              id="comment"
+              name="comment"
+              formControlName="comment"
+              placeholder="Comment"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <div class="margin-top-20">
+            <h5>Invite Participant</h5>
+
+            <div
+              [sortablejs]="memoForm.get('tasks').controls"
+              [sortablejsOptions]="sortableOptions"
+              formArrayName="tasks"
+            >
+              <div *ngFor="let task of memoForm.get('tasks').controls; let i = index">
+                <div [formGroupName]="i">
+                  <a class="">
+                    <div class="row">
+                      <div class="col-md-1 move"><i class="la la-sort"></i></div>
+                      <div class="col-md-1">
+                        <i
+                          class="fa fa-lg fa-tasks m--font-accent"
+                          *ngIf="task.value.type == taskTypeEnum.Task"
+                        ></i>
+                        <i
+                          class="fa fa-lg fa-check m--font-focus"
+                          *ngIf="task.value.type == taskTypeEnum.Approval"
+                        ></i>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="form-group m-form__group">
+                          <select
+                            class="form-control m-input"
+                            name="user"
+                            id="user"
+                            formControlName="userId"
+                            required
+                          >
+                            <option value="null" disabled selected>Assigned to</option>
+                            <option [ngValue]="user.id" *ngFor="let user of users">{{ user.name }}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="right">
+                          <button class="btn btn-sm btn-danger" (click)="remove(i)">X</button>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="margin-top-20 row">
+              <div class="col-md-10">
+                <button
+                  type="button"
+                  class="btn btn-accent m-btn--pill btn-sm"
+                  (click)="addTask(taskTypeEnum.Task)"
+                >
+                  + Task
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-focus m-btn--pill btn-sm"
+                  (click)="addTask(taskTypeEnum.Approval)"
+                >
+                  + Approval
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="margin-top-20">
+            <div class="form-group" *ngIf="task.type == taskTypeEnum.Task">
+              <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">
+                Complete
+              </button>
+              <button class="btn btn-default" [routerLink]="['/memo']">Cancel</button>
+            </div>
+
+            <div class="form-group" *ngIf="task.type == taskTypeEnum.Approval">
+              <button
+                class="btn btn-success"
+                type="submit"
+                (click)="onSave(actionStatusEnum.completed_or_approved)"
+              >
+                Approve
+              </button>
+              <button class="btn btn-danger" type="submit" (click)="onSave(actionStatusEnum.rejected)">
+                Reject
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="col-md-6">
-
       <div class="m-portlet">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <h3 class="m-portlet__head-text">
-                More Info
-              </h3>
-            </div>
+            <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">More Info</h3></div>
           </div>
         </div>
         <div class="m-portlet__body">
           <div class="m-section">
-            <h3 class="m-form__heading-title">
-              Users
-            </h3>
+            <h3 class="m-form__heading-title">Participants</h3>
             <div class="m-section__content">
               <div class="m-demo__preview">
                 <div class="m-list-timeline">
                   <div class="m-list-timeline__items">
-                    <div class="m-list-timeline__item" *ngFor="let memoStep of step.memo.steps">
+                    <div class="m-list-timeline__item" *ngFor="let memoTask of task.memo.tasks">
                       <span class="m-list-timeline__badge"></span>
-                      <span class="m-list-timeline__icon fa fa-lg fa-tasks m--font-accent" *ngIf="memoStep.type == taskTypeEnum.Task"></span>
-                      <span class="m-list-timeline__icon fa fa-lg fa-check m--font-focus" *ngIf="memoStep.type == taskTypeEnum.Approval"></span>
-                      <span class="m-list-timeline__text m--font-boldest">{{memoStep.user?.name}}
-                        <span class="m-list-timeline__text not-bold"> Here is the comment!!!! </span>
-                        <span class="m-badge m-badge--warning m-badge--wide not-bold" *ngIf="step.id == memoStep.id &&  memoStep.status == actionStatusEnum.assigned">Current
-                          Task</span>
-                        <span class="m-badge m-badge--success m-badge--wide not-bold" *ngIf="memoStep.status == actionStatusEnum.completed_or_approved">Completed</span>
-                        <span class="m-badge m-badge--danger m-badge--wide not-bold" *ngIf="memoStep.status == actionStatusEnum.rejected">Rejected</span>
+                      <span
+                        class="m-list-timeline__icon fa fa-lg fa-tasks m--font-accent"
+                        *ngIf="memoTask.type == taskTypeEnum.Task"
+                      ></span>
+                      <span
+                        class="m-list-timeline__icon fa fa-lg fa-check m--font-focus"
+                        *ngIf="memoTask.type == taskTypeEnum.Approval"
+                      ></span>
+                      <span class="m-list-timeline__text m--font-boldest"
+                        >{{ memoTask.user?.name }}
+                        <span class="m-list-timeline__text not-bold"> {{ memoTask.comment }} </span>
+
+                        <div class="not-bold" *ngFor="let t of memoTask.addedTasks">{{ t }}</div>
+
+                        <span
+                          class="m-badge m-badge--warning m-badge--wide not-bold"
+                          *ngIf="task.id == memoTask.id && memoTask.status == actionStatusEnum.assigned"
+                          >Current Task</span
+                        >
+                        <span
+                          class="m-badge m-badge--success m-badge--wide not-bold"
+                          *ngIf="memoTask.status == actionStatusEnum.completed_or_approved"
+                          >Completed</span
+                        >
+                        <span
+                          class="m-badge m-badge--danger m-badge--wide not-bold"
+                          *ngIf="memoTask.status == actionStatusEnum.rejected"
+                          >Rejected</span
+                        >
                       </span>
-                      <span class="m-list-timeline__time">{{memoStep?.date_opened | date}}</span>
+                      <span class="m-list-timeline__time">{{ memoTask?.dateOpened | date }}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
-
-
-
-
     </div>
   </div>
-
-
-
 </div>

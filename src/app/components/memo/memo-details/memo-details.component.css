@@ -1,8 +1,18 @@
-
-.not-bold{
+.not-bold {
   font-weight: initial;
 }
 
-.m-form__heading-title{
+.m-form__heading-title {
   margin-bottom: 20px;
+}
+
+.save {
+  margin: 20px auto;
+}
+.margin-top-20 {
+  margin: 10px;
+}
+
+i {
+  padding: 10px;
 }

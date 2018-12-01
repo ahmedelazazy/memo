@@ -7,18 +7,16 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./notification-list.component.css']
 })
 export class NotificationListComponent implements OnInit {
-
   notifications$;
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
     this.notifications$ = this.notificationService.get();
   }
 
   onMarkRead(notification) {
-    notification.is_new = false;
-    this.notificationService.markRead(notification.id);
+    notification.isNew = false;
+    this.notificationService.markRead(notification.id).subscribe();
   }
-
 }

@@ -7,24 +7,21 @@ import { pipe } from 'rxjs';
 import { LogService } from './log.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
+import { serializePath } from '@angular/router/src/url_tree';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessService {
-  apiUrl = environment['url'] + 'process/';
+  serverUrl = environment['api'] + 'processes/';
 
-  constructor(private http: HttpClient, private logService: LogService, private authService: AuthService) { }
+  constructor(private http: HttpClient, private logService: LogService, private authService: AuthService) {}
 
   add(obj: Process) {
-
-    let url = this.apiUrl + 'add';
-    return this.http.post(url, obj);
+    return this.http.post(this.serverUrl, obj);
   }
 
   get() {
-    let url = this.apiUrl + 'index';
-    let data = { 'user_id': this.authService.user.id };
-    return this.http.post<any>(url, data)
+    return this.http.get<any>(this.serverUrl);
   }
 }

@@ -13,7 +13,6 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./action-manage.component.css']
 })
 export class ActionManageComponent implements OnInit {
-
   action;
 
   fieldVisibilityEnum = FieldVisibility;
@@ -24,9 +23,13 @@ export class ActionManageComponent implements OnInit {
   actionForm: FormGroup;
   showForm;
   actionId: number;
-  constructor(private router: Router, private actionService: ActionService, private toastrService: ToastrService, private cdRef: ChangeDetectorRef, private route: ActivatedRoute) {
-
-  }
+  constructor(
+    private router: Router,
+    private actionService: ActionService,
+    private toastrService: ToastrService,
+    private cdRef: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {}
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
@@ -39,9 +42,12 @@ export class ActionManageComponent implements OnInit {
     // }
 
     this.route.params
-      .pipe(map(params => params['id']), tap(id => (this.actionId = +id)))
-      .subscribe(id => this.actionService.getById(id)
-        .subscribe(action => {
+      .pipe(
+        map(params => params['id']),
+        tap(id => (this.actionId = +id))
+      )
+      .subscribe(id =>
+        this.actionService.getById(id).subscribe(action => {
           if (!action) {
             this.router.navigate(['/action']);
             return;
@@ -52,7 +58,6 @@ export class ActionManageComponent implements OnInit {
           this.actionForm = this.prepareForm();
         })
       );
-
   }
 
   prepareForm() {
@@ -76,16 +81,15 @@ export class ActionManageComponent implements OnInit {
 
   getSectionFields(section) {
     let sectionFields = new FormArray([]);
-    for (let i = 0; i < section.fields.length; i++) {
-      const field = section.fields[i];
-      sectionFields.push(new FormGroup({
-        value: new FormControl(field.value),
-        id: new FormControl(field.processControlValueId),
-      }));
+    for (let i = 0; i < section.controls.length; i++) {
+      const field = section.controls[i];
+      sectionFields.push(
+        new FormGroup({
+          value: new FormControl(field.controlValue ? field.controlValue.value : null),
+          id: new FormControl(field.controlValue ? field.controlValue.id : null)
+        })
+      );
     }
     return sectionFields;
   }
-
-
-
 }

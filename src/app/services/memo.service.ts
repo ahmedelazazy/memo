@@ -2,36 +2,58 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { ActionStatus, MemoMode } from '../models/enums';
 
-@Injectable( {
+@Injectable({
   providedIn: 'root'
-} )
+})
 export class MemoService {
-
   apiUrl = environment['url'] + 'memo/';
+  serverUrl = environment['api'] + 'memos/';
 
-  constructor( private http: HttpClient, private authService: AuthService ) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  add( obj ) {
-    let url = this.apiUrl + 'add';
-
-    obj.user_id = this.authService.user.id;
-
-    return this.http.post( url, obj );
+  add(obj) {
+    this.formatProperties(obj);
+    return this.http.post(this.serverUrl, obj);
   }
 
-  get() {
-    let url = this.apiUrl + 'index';
-    let data = { 'user_id': this.authService.user.id };
-
-    return this.http.post( url, data );
+  formatProperties(memo) {
+    for (let i = 0; i < memo.tasks.length; i++) {
+      memo.tasks[i].order = i;
+    }
   }
 
-  getById( id ) {
-    console.log( "getting the memo by this id", id );
-    let url = this.apiUrl + 'getById';
-    let data = { 'user_id': this.authService.user.id, 'id': id };
+  get(status) {
+    let url = '';
+    let filter;
+    if (status == MemoMode.Mine) {
+      url = this.serverUrl + MemoMode.Mine;
+      return this.http.get<any>(url);
+    } else {
+      url = this.serverUrl + 'filter';
+      filter = status;
 
-    return this.http.post( url, data );
+      // if (status == 'active') {
+      //   let filter = MemoMode.Active;
+      // } else if (status == 'inactive') {
+      //   let filter = MemoMode.Inactive;
+      // }
+
+      return this.http.post<any>(url, { filter });
+    }
+  }
+
+  getById(id) {
+    return this.http.get<any>(this.serverUrl + id);
+  }
+
+  update(id, task) {
+    if (task.tasks && task.tasks.length > 0) {
+      for (let i = 0; i < task.tasks.length; i++) {
+        task.tasks[i].order = i;
+      }
+    }
+    return this.http.post(this.serverUrl + id, task);
   }
 }

@@ -1,5 +1,4 @@
-<div *ngIf="notifications$ | async as notifications; else noData">
-
+<div *ngIf="(notifications$ | async) as notifications; else: noData">
   <table class="table table-hover">
     <thead>
       <tr>
@@ -9,19 +8,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let notification of notifications" [class.info]="notification.is_new == 1">
-        <td>{{notification.text}}</td>
-        <td>{{notification.date | date}}</td>
-        <td><button *ngIf="notification.is_new == 1" class="btn btn-sm m-btn--pill btn-primary" (click)="onMarkRead(notification)">Mark
-            as read</button></td>
+      <tr *ngFor="let notification of notifications" [class.info]="notification.isNew">
+        <td>{{ notification.text }}</td>
+        <td>{{ notification.addedOn | date }}</td>
+        <td>
+          <button
+            *ngIf="notification.isNew"
+            class="btn btn-sm m-btn--pill btn-primary"
+            (click)="onMarkRead(notification)"
+          >
+            Mark as read
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-
 <ng-template #noData>
-  <div class="jumbotron">
-    <p>You do not have any notifications.</p>
-  </div>
+  <div class="jumbotron"><p>You do not have any notifications.</p></div>
 </ng-template>

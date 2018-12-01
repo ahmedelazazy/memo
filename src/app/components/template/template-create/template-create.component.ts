@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { FormHelper } from '../form-helper';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-template-create',
@@ -21,46 +22,46 @@ export class TemplateCreateComponent implements OnInit {
   isEdit = false;
   users: User[];
   templateForm: FormGroup;
+  submitted = false;
   @ViewChild('templateFormRef') templateFormRef;
 
-  constructor(private cdRef: ChangeDetectorRef, public templateService: TemplateService, private toastrService: ToastrService, private router: Router, private userService: UserService) {
-
-
-  }
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    public templateService: TemplateService,
+    private toastrService: ToastrService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
-    // setTimeout(() => {
-    //   this.dateNow = new Date();
-    // });
   }
 
   ngOnInit() {
-    this.userService.getAll().subscribe(data => this.users = data);
-    this.containerForm = this.templateService.containerForm;
+    this.userService.getAll().subscribe(data => (this.users = data));
+    this.containerForm = this.templateService.createNewTemplate();
   }
 
-
-
-
   addTemplate() {
+    this.submitted = true;
+
     if (this.containerForm.invalid) {
-      this.toastrService.error('invalid form');
+      this.toastrService.error('Some fields have invalid values');
       return;
     }
 
-    if (this.containerForm.value.steps.length == 0) {
-      this.toastrService.error('Template must have at least one step');
-      return;
-    }
+    // if (this.containerForm.value.steps.length == 0) {
+    //   this.toastrService.error('Template must have at least one step');
+    //   return;
+    // }
 
-    for (let i = 0; i < this.containerForm.value.steps.length; i++) {
-      const step = this.containerForm.value.steps[i];
-      if (!step || !step.title || !step.user_id || !step.type) {
-        this.toastrService.error('Please fill all requied data');
-        return;
-      }
-    }
+    // for (let i = 0; i < this.containerForm.value.steps.length; i++) {
+    //   const step = this.containerForm.value.steps[i];
+    //   if (!step || !step.title || !step.userId || !step.type) {
+    //     this.toastrService.error('Some fields have invalid values');
+    //     return;
+    //   }
+    // }
 
     for (let i = 0; i < this.containerForm.value.steps.length; i++) {
       this.containerForm.value.steps[i].user = undefined;
@@ -69,14 +70,12 @@ export class TemplateCreateComponent implements OnInit {
     this.templateService.add(this.containerForm.value).subscribe(
       data => {
         this.toastrService.success('Data saved successfully');
-        // this.router.navigate(['/templates']);
+        this.router.navigate(['/templates']);
       },
       error => {
         this.toastrService.error('Error wile saving');
         console.error(error);
       }
     );
-
   }
-
 }

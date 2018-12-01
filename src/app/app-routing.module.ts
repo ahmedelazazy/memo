@@ -19,10 +19,11 @@ import { MemosListComponent } from './components/memo/memos-list/memos-list.comp
 import { MemoDetailsComponent } from './components/memo/memo-details/memo-details.component';
 
 const routes: Routes = [
-
   { path: 'login', component: LoginComponent },
   {
-    path: '', component: HomeComponent, children: [
+    path: '',
+    component: HomeComponent,
+    children: [
       { path: '', component: WelcomeComponent },
       { path: 'users', component: UserComponent },
       { path: 'templates', component: TemplateListComponent },
@@ -36,14 +37,13 @@ const routes: Routes = [
       { path: 'notifications', component: NotificationListComponent },
       { path: 'memo/new', component: MemoCreateComponent },
       { path: 'memo', component: MemosListComponent },
-      { path: 'memo/:id', component: MemoDetailsComponent },
+      { path: 'memo/:id', component: MemoDetailsComponent }
     ]
-  },
-
+  }
 ];
 
-@NgModule( {
-  imports: [RouterModule.forRoot( routes )],
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
-} )
-export class AppRoutingModule { }
+})
+export class AppRoutingModule {}

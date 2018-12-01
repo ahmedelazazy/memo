@@ -1,12 +1,11 @@
-
 export class UserNotification {
   id?: number;
-  user_id: number;
+  userId: number;
   text: string;
   entity: string;
   entity_id: number;
   url: string;
-  date: Date;
-  is_new: boolean;
+  addedOn: Date;
+  isNew: boolean;
   details: string;
 }

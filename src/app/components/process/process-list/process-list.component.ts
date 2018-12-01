@@ -22,16 +22,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   startProcess(template) {
-    // let process = new Process();
-    // process.template_id = template.id;
-    // process.user_id = this.authService.userId;
-    // //set date on server
-    // process.template = { ...template };
-    // process.init();
-    // this.processService.save(process);
-
     this.selectedTemplate = template;
-
   }
 
   onProcessUpdated(data) {

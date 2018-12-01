@@ -6,8 +6,8 @@ export class Process {
   title: string;
   description: string;
   template: Template;
-  template_id: number;
-  user_id?: number;
+  templateId: number;
+  userId?: number;
   actions: Action[];
   date: Date;
 
@@ -18,7 +18,7 @@ export class Process {
 
     for (let i = 0; i < this.template.steps.length; i++) {
       let action = new Action();
-      action.step_id = this.template.steps[i].id;
+      action.stepId = this.template.steps[i].id;
       action.template_id = this.template.id;
       this.actions.push(action);
     }

@@ -8,25 +8,28 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   newNotificaitonsCount = null;
+  user;
 
-  constructor(public authService: AuthService, private notificationService: NotificationService) { }
+  constructor(public authService: AuthService, private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.notificationService.getNewNotificationCount().subscribe(count => this.newNotificaitonsCount = count);
+    this.user = this.authService.user;
+
+    this.notificationService
+      .getNewNotificationCount()
+      .subscribe(count => (this.newNotificaitonsCount = +count));
 
     setInterval(this.getNotificationsCount.bind(this), 60000); //1 minute 60000
-
   }
 
-  logout() {
+  onLogout() {
     this.authService.logout();
   }
 
   getNotificationsCount() {
-    this.notificationService.getNewNotificationCount().subscribe(count => this.newNotificaitonsCount = count);
+    this.notificationService
+      .getNewNotificationCount()
+      .subscribe(count => (this.newNotificaitonsCount = +count));
   }
-
-
 }

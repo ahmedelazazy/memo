@@ -9,31 +9,21 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NotificationService {
-
   apiUrl = environment['url'] + 'notification/';
+  serverUrl = environment['api'] + 'notifications/';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   get() {
-    let url = this.apiUrl + 'index';
-    let data = { 'user_id': this.authService.user.id };
-
-    return this.http.post<UserNotification[]>(url, data);
+    return this.http.get<UserNotification[]>(this.serverUrl);
   }
 
-
   markRead(id) {
-    let url = this.apiUrl + 'edit';
-    let data = { 'id': id };
-
-    this.http.post(url, data).subscribe();
+    return this.http.get(this.serverUrl + id);
   }
 
   getNewNotificationCount() {
-    let url = this.apiUrl + 'new';
-    let data = { 'user_id': this.authService.user.id };
-
-    return this.http.post(url, data);
+    let url = this.serverUrl + 'new';
+    return this.http.get(url);
   }
-
 }

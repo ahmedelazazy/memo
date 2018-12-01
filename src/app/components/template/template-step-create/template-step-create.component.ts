@@ -3,6 +3,7 @@ import { Step } from 'src/app/models/step';
 import { UserService } from 'src/app/services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TemplateService } from 'src/app/services/template.service';
+import { TaskType } from 'src/app/models/enums';
 
 @Component({
   selector: 'app-step-create',
@@ -10,18 +11,17 @@ import { TemplateService } from 'src/app/services/template.service';
   styleUrls: ['./template-step-create.component.css']
 })
 export class TemplateStepCreateComponent implements OnInit {
-
   @Input('step') stepForm: FormGroup;
   @Output('stepUpdated') stepUpdated = new EventEmitter<Step>();
 
   users;
   showError = false;
   isEdit = false;
+  TaskTypeEnum = TaskType;
 
-
-  constructor(private userService: UserService, private templateService: TemplateService) { }
+  constructor(private userService: UserService, private templateService: TemplateService) {}
 
   ngOnInit() {
-    this.userService.getAll().subscribe(users => this.users = users);
+    this.userService.getAll().subscribe(users => (this.users = users));
   }
 }

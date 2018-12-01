@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Template } from '../models/template';
 import { Subject, from } from 'rxjs';
-import { StepService } from './step.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash';
 import { FormHelper } from '../components/template/form-helper';
@@ -17,28 +16,30 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class TemplateService {
-
-
   containerForm: FormGroup;
-
 
   tableName = 'Templates';
   templates: Template[] = [];
   usersChange: Subject<Template[]> = new Subject();
-  apiUrl = environment['url'] + 'template/';
+  serverUrl = environment['api'] + 'templates/';
+
   users;
   templateForm$: BehaviorSubject<any>;
   // containerForm = new FormHelper().getContainer();
 
-  constructor(private stepService: StepService, private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService) {
 
+
+    this.userService.getAll().subscribe(data => (this.users = data));
+  }
+
+  createNewTemplate(){
     this.containerForm = new FormHelper().getContainer();
     this.templateForm$ = new BehaviorSubject(null);
 
-
     this.templateForm$.subscribe(data => {
       if (data && this.containerForm && this.containerForm.get('steps')) {
-        const steps: FormArray = (this.containerForm.get('steps') as FormArray);
+        const steps: FormArray = this.containerForm.get('steps') as FormArray;
         let flatData = this.flattenData(data);
         for (let i = 0; i < steps.controls.length; i++) {
           const step = steps.controls[i];
@@ -47,7 +48,7 @@ export class TemplateService {
       }
     });
 
-    this.userService.getAll().subscribe(data => this.users = data);
+    return this.containerForm;
   }
 
   getEmptyStep() {
@@ -66,7 +67,10 @@ export class TemplateService {
           for (let j = 0; j < section.fields.length; j++) {
             const field = section.fields[j];
             if (field) {
-              flatData.push({ field_ui_id: field.field_ui_id, visibility: FieldVisibility.Editable });
+              flatData.push({
+                controlUiId: field.controlUiId,
+                visibility: FieldVisibility.Editable
+              });
             }
           }
         }
@@ -81,73 +85,72 @@ export class TemplateService {
     if (step) {
       if (step.get('fieldsVisibility') && step.get('fieldsVisibility').value) {
         for (let i = 0; i < dataCopy.length; i++) {
-
           let newField = dataCopy[i];
-          let existingField = step.get('fieldsVisibility').value.find(f => f.field_ui_id == newField.field_ui_id);
+          let existingField = step
+            .get('fieldsVisibility')
+            .value.find(f => f.controlUiId == newField.controlUiId);
           if (existingField) {
             newField.visibility = existingField.visibility;
           }
         }
       }
-      step.patchValue({ fieldsVisibility: dataCopy });
+      step.patchValue({
+        fieldsVisibility: dataCopy
+      });
     }
     return step;
   }
 
   getAll() {
-    let url = this.apiUrl + 'getWithDetails';
-    return this.http.get<Template[]>(url);
+    return this.http.get<Template[]>(this.serverUrl);
   }
 
   get(id: number) {
-    let url = this.apiUrl + 'getbyid';
-    let data = { 'id': id };
-    return this.http.post(url, data);
+    let url = `${this.serverUrl}/${id}`;
+    return this.http.get(url);
   }
 
   add(obj: Template) {
-    for (let index = 0; index < obj.steps.length; index++) {
-      obj.steps[index].order = index + 1;
+    let toBeSaved = this.reformatProperties(obj);
+    this.containerForm = null;
+    this.templateForm$ = null;
+    return this.http.post(this.serverUrl, toBeSaved);
+  }
+
+  reformatProperties(templateObj) {
+    let newTemplate = _.cloneDeep(templateObj);
+
+    for (let index = 0; index < newTemplate.steps.length; index++) {
+      newTemplate.steps[index].order = index;
     }
 
-    let url = this.apiUrl + 'add';
-    return this.http.post(url, obj);
-  }
-
-  delete(id: number) {
-    let url = this.apiUrl + 'remove';
-
-    const body = new HttpParams()
-      .set('id', id + "")
-
-    let result = this.http.post(url,
-      body.toString(),
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
+    if (newTemplate.dataForm) {
+      newTemplate.sections = newTemplate.dataForm.sections;
+      delete newTemplate.dataForm;
+    }
+    if (newTemplate.sections) {
+      for (let i = 0; i < newTemplate.sections.length; i++) {
+        const section = newTemplate.sections[i];
+        section.controls = section.fields;
+        delete section.fields;
       }
-    );
-    return result;
-  }
+    }
 
-  update(id: number, obj: Template) {
+    var stepControlRelatiobObj = [];
 
-    let url = this.apiUrl + 'edit';
+    for (let i = 0; i < newTemplate.steps.length; i++) {
+      const step = newTemplate.steps[i];
+      stepControlRelatiobObj.push({
+        stepUiId: step.stepUiId,
+        controls: step.fieldsVisibility
+      });
+      delete step.fieldsVisibility;
+    }
 
-    const body = new HttpParams()
-      .set('id', id + "")
-      .set('title', obj.title)
-      .set('description', obj.description)
-
-    let result = this.http.post(url,
-      body.toString(),
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-      }
-    );
-
-    return result;
+    return {
+      template: newTemplate,
+      controlConfig: stepControlRelatiobObj
+    };
   }
 
   getUserName(userId) {

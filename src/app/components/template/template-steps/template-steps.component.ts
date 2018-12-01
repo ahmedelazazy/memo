@@ -12,16 +12,14 @@ import { TabsetComponent } from 'ngx-bootstrap';
   styleUrls: ['./template-steps.component.css']
 })
 export class TemplateStepsComponent implements OnInit {
-
   @Input('users') users;
   @Input('templateContainer') templateContainer: FormGroup;
   selectedStep: FormGroup;
   processSelected: boolean;
   steps: FormArray;
-  constructor(public templateService: TemplateService) { }
+  constructor(public templateService: TemplateService) {}
 
   ngOnInit() {
-
     this.processSelected = true;
   }
 
@@ -32,7 +30,7 @@ export class TemplateStepsComponent implements OnInit {
 
   addStep() {
     let emptyStep = this.templateService.getEmptyStep();
-    (this.steps).push(emptyStep);
+    this.steps.push(emptyStep);
   }
 
   edit(step) {
@@ -40,7 +38,7 @@ export class TemplateStepsComponent implements OnInit {
     this.processSelected = false;
   }
   remove(index) {
-    (this.steps).removeAt(index);
+    this.steps.removeAt(index);
     // this.resort();
 
     if (this.steps.controls.length > index + 1) {
@@ -55,38 +53,12 @@ export class TemplateStepsComponent implements OnInit {
   }
 
   onStepUpdated(step: Step) {
-    step.user = this.users.find(user => user.id == step.user_id);
+    step.user = this.users.find(user => user.id == step.userId);
     this.selectedStep = null;
   }
 
   ngOnChanges() {
     this.steps = this.templateContainer.get('steps') as FormArray;
-
   }
-
-  // up(index) {
-  //   if (index == 0) return;
-  //   this.arraymove(this.steps, index, --index);
-  //   this.resort();
-  // }
-
-  // down(index) {
-  //   if (index == this.steps.length - 1) return;
-  //   this.arraymove(this.steps, index, ++index);
-  //   this.resort();
-  // }
-
-  // arraymove(arr, fromIndex, toIndex) {
-  //   var element = arr[fromIndex];
-  //   arr.splice(fromIndex, 1);
-  //   arr.splice(toIndex, 0, element);
-  // }
-
-  // resort() {
-  //   for (let i = 0; i < this.steps.length; i++) {
-  //     const step = this.steps[i];
-  //     step.order = i + 1;
-  //   }
-  // }
 
 }

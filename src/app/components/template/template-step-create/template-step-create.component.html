@@ -1,45 +1,46 @@
-<form [formGroup]="stepForm" class="m-form">
+<div [formGroup]="stepForm" class="m-form">
   <div class="form-group m-form__group">
     <label for="title">Title*</label>
-    <input class="form-control m-input" id="title" name="title" formControlName="title" placeholder="Title" required>
+    <input
+      class="form-control m-input"
+      id="title"
+      name="title"
+      formControlName="title"
+      placeholder="Title"
+      required
+    />
   </div>
-
 
   <div class="m-form__group form-group">
     <label for="">Type*</label>
     <div class="m-radio-inline">
       <label class="m-radio">
-        <input type="radio" name="type" formControlName="type" value="1" required>Task
-        <span></span>
+        <input type="radio" name="type" formControlName="type" value="task" required />Task <span></span>
       </label>
       <label class="m-radio">
-        <input type="radio" name="type" formControlName="type" value="2" required>Approval
+        <input type="radio" name="type" formControlName="type" value="approval" required />Approval
         <span></span>
       </label>
     </div>
   </div>
 
-  <!-- <div class="form-group m-form__group">
-    <label style="margin-right: 10px;">Type*</label>
-
-    <label class="radio-inline">
-      <input type="radio" name="type" formControlName="type" value="1" required>Task
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="type" formControlName="type" value="2" required>Approval
-    </label>
-  </div> -->
-
   <div class="form-group m-form__group">
     <label for="description">Description</label>
-    <textarea class="form-control m-input" id="description" name="description" formControlName="description"
-      placeholder="Description" rows="3"></textarea>
+    <textarea
+      class="form-control m-input"
+      id="description"
+      name="description"
+      formControlName="description"
+      placeholder="Description"
+      rows="3"
+    ></textarea>
   </div>
 
   <div class="form-group m-form__group">
     <label for="email">Assigned To*</label>
-    <select class="form-control m-input" name="user" id="user" formControlName="user_id" required>
-      <option [ngValue]="user.id" *ngFor="let user of users">{{user.name}}</option>
+    <select class="form-control m-input" name="user" id="user" formControlName="userId" required>
+      <option value="null" disabled selected>Assigned to</option>
+      <option [ngValue]="user.id" *ngFor="let user of users">{{ user.name }}</option>
     </select>
   </div>
-</form>
+</div>

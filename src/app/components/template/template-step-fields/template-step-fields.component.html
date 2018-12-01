@@ -2,26 +2,36 @@
   <div class="m-list-search__results">
     <div *ngFor="let section of templateForm.sections" class="section-container">
       <span class="m-list-search__result-category m-list-search__result-category--first">
-        {{section.label}}
+        {{ section.label }}
       </span>
-
 
       <a class="m-list-search__result-item" *ngFor="let field of section.fields">
         <span class="m-list-search__result-item-text">
-
           <div class="form-inline">
             <div class="form-group">
-
-              <input type="text" class="form-control" id="fieldLabel" name="label" [value]="field.label" disabled="disabled"
-                placeholder="Unnamed Field">
+              <input
+                type="text"
+                class="form-control"
+                id="fieldLabel"
+                name="label"
+                [value]="field.label"
+                disabled="disabled"
+                placeholder="Unnamed Field"
+              />
 
               <div class="form-group">
-                <select class="form-control" class="form-control" id="visibility" name="visibility" [value]="field.visibility"
-                  (change)="onVisibilityChange($event.target.value, field.field_ui_id)">
-                  <option value=1>Hidden</option>
-                  <option value=2>Read-only</option>
-                  <option value=3>Editable</option>
-                  <option value=4>Required</option>
+                <select
+                  class="form-control"
+                  class="form-control"
+                  id="visibility"
+                  name="visibility"
+                  [value]="field.visibility"
+                  (change)="onVisibilityChange($event.target.value, field.controlUiId)"
+                >
+                  <option [value]="fieldVisibilityEnum.Hidden">Hidden</option>
+                  <option [value]="fieldVisibilityEnum.Readonly">Read-only</option>
+                  <option [value]="fieldVisibilityEnum.Editable">Editable</option>
+                  <option [value]="fieldVisibilityEnum.Required">Required</option>
                 </select>
               </div>
             </div>

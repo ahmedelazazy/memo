@@ -7,7 +7,6 @@ import { FieldVisibility, ActionStatus, TaskType, ProcessStatus } from 'src/app/
   styleUrls: ['./action-manage-history.component.css']
 })
 export class ActionManageHistoryComponent implements OnInit {
-
   @Input('action') action;
 
   fieldVisibilityEnum = FieldVisibility;
@@ -15,13 +14,13 @@ export class ActionManageHistoryComponent implements OnInit {
   taskTypeEnum = TaskType;
   processStatusEnum = ProcessStatus;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    console.log(this.action);
   }
 
-
   getStep(act) {
-    return this.action.template.steps.find(s => act.step_id == s.id);
+    return this.action.template.steps.find(s => act.stepId == s.id);
   }
 }
