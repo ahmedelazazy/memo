@@ -7,43 +7,40 @@
     <th></th>
   </tr>
   <tr>
-    <td>
-      <input type="text" [(ngModel)]="newUser.name" />
-    </td>
-    <td>
-      <input type="text" [(ngModel)]="newUser.email" />
-    </td>
-    <td>
-      <input type="text" [(ngModel)]="newUser.password" />
-    </td>
-    <td>
-      <button (click)="add()">Add</button>
-    </td>
-    <td>
-      <button (click)="clearNewUser()">Cancel</button>
-    </td>
+    <td><input type="text" [(ngModel)]="newUser.name" /></td>
+    <td><input type="text" [(ngModel)]="newUser.email" /></td>
+    <td><input type="text" [(ngModel)]="newUser.password" /></td>
+    <td><button (click)="add()">Add</button></td>
+    <td><button (click)="clearNewUser()">Cancel</button></td>
   </tr>
   <tr *ngFor="let user of users" [attr.data-id]="user.id">
     <td>
       <input type="text" *ngIf="user.editing" [(ngModel)]="oldUser.name" />
-      <span *ngIf="!user.editing">
-        {{user.name}}
-      </span>
+      <span *ngIf="!user.editing"> {{ user.name }} </span>
     </td>
     <td>
       <input type="text" *ngIf="user.editing" [(ngModel)]="oldUser.email" />
-      <span *ngIf="!user.editing">{{user.email}}</span>
+      <span *ngIf="!user.editing">{{ user.email }}</span>
     </td>
     <td>
       <input type="text" *ngIf="user.editing" [(ngModel)]="oldUser.password" />
-      <span *ngIf="!user.editing">{{user.password}}</span>
+      <span *ngIf="!user.editing">{{ user.password }}</span>
     </td>
     <td>
-      <button *ngIf="user.editing" (click)="update();user.editing=false">Update</button>
-      <button *ngIf="!user.editing" (click)="cancelAll();user.editing=true;get(user.id);">Edit</button>
+      <button *ngIf="user.editing" (click)="update(); user.editing = false">
+        Update
+      </button>
+      <button
+        *ngIf="!user.editing"
+        (click)="cancelAll(); user.editing = true; get(user.id)"
+      >
+        Edit
+      </button>
     </td>
     <td>
-      <button *ngIf="user.editing" (click)="user.editing=false">Cancel</button>
+      <button *ngIf="user.editing" (click)="user.editing = false">
+        Cancel
+      </button>
       <button *ngIf="!user.editing" (click)="delete(user.id)">Delete</button>
     </td>
   </tr>

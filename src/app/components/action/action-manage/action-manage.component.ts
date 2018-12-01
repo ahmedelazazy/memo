@@ -1,16 +1,21 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Action } from 'src/app/models/action';
-import { ActionService } from 'src/app/services/action.service';
-import { ToastrService } from 'ngx-toastr';
-import { FieldVisibility, ActionStatus, TaskType, ProcessStatus } from 'src/app/models/enums';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { map, tap } from 'rxjs/operators';
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Action } from "src/app/models/action";
+import { ActionService } from "src/app/services/action.service";
+import { ToastrService } from "ngx-toastr";
+import {
+  FieldVisibility,
+  ActionStatus,
+  TaskType,
+  ProcessStatus
+} from "src/app/models/enums";
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
+import { map, tap } from "rxjs/operators";
 
 @Component({
-  selector: 'app-action-manage',
-  templateUrl: './action-manage.component.html',
-  styleUrls: ['./action-manage.component.css']
+  selector: "app-action-manage",
+  templateUrl: "./action-manage.component.html",
+  styleUrls: ["./action-manage.component.css"]
 })
 export class ActionManageComponent implements OnInit {
   action;
@@ -43,13 +48,13 @@ export class ActionManageComponent implements OnInit {
 
     this.route.params
       .pipe(
-        map(params => params['id']),
+        map(params => params["id"]),
         tap(id => (this.actionId = +id))
       )
       .subscribe(id =>
         this.actionService.getById(id).subscribe(action => {
           if (!action) {
-            this.router.navigate(['/action']);
+            this.router.navigate(["/action"]);
             return;
           }
           console.log(action);
@@ -85,7 +90,9 @@ export class ActionManageComponent implements OnInit {
       const field = section.controls[i];
       sectionFields.push(
         new FormGroup({
-          value: new FormControl(field.controlValue ? field.controlValue.value : null),
+          value: new FormControl(
+            field.controlValue ? field.controlValue.value : null
+          ),
           id: new FormControl(field.controlValue ? field.controlValue.id : null)
         })
       );

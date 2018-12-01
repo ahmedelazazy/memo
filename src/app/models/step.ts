@@ -12,7 +12,4 @@ export class Step {
   constructor() {
     this.type = 1;
   }
-
-
-
 }

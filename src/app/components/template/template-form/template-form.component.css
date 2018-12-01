@@ -1,33 +1,32 @@
 .form-inline label,
 .form-inline select,
-.form-inline input{
+.form-inline input {
   margin-right: 10px;
 }
 
-.form-inline .form-group{
+.form-inline .form-group {
   margin-right: 25px;
-
 }
 
-.list-group{
+.list-group {
   margin-bottom: 0;
 }
 
-.move{
+.move {
   /* color: #aaa; */
   /* margin-right: 10px; */
   /* padding: 5px; */
   cursor: move;
 }
 
-.panel-heading{
+.panel-heading {
   background: #eee;
 }
-.field-container{
+.field-container {
   margin-bottom: 15px;
 }
 
-i{
+i {
   padding: 10px;
   color: #aaa;
 }

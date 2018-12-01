@@ -1,19 +1,19 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Template } from './../../../models/template';
-import { Step } from 'src/app/models/step';
-import { TemplateService } from 'src/app/services/template.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { FormHelper } from '../form-helper';
-import * as _ from 'lodash';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from "@angular/core";
+import { Template } from "./../../../models/template";
+import { Step } from "src/app/models/step";
+import { TemplateService } from "src/app/services/template.service";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
+import { UserService } from "src/app/services/user.service";
+import { User } from "src/app/models/user";
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
+import { FormHelper } from "../form-helper";
+import * as _ from "lodash";
 
 @Component({
-  selector: 'app-template-create',
-  templateUrl: './template-create.component.html',
-  styleUrls: ['./template-create.component.css']
+  selector: "app-template-create",
+  templateUrl: "./template-create.component.html",
+  styleUrls: ["./template-create.component.css"]
 })
 export class TemplateCreateComponent implements OnInit {
   containerForm: FormGroup;
@@ -23,7 +23,7 @@ export class TemplateCreateComponent implements OnInit {
   users: User[];
   templateForm: FormGroup;
   submitted = false;
-  @ViewChild('templateFormRef') templateFormRef;
+  @ViewChild("templateFormRef") templateFormRef;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -46,7 +46,7 @@ export class TemplateCreateComponent implements OnInit {
     this.submitted = true;
 
     if (this.containerForm.invalid) {
-      this.toastrService.error('Some fields have invalid values');
+      this.toastrService.error("Some fields have invalid values");
       return;
     }
 
@@ -69,11 +69,11 @@ export class TemplateCreateComponent implements OnInit {
 
     this.templateService.add(this.containerForm.value).subscribe(
       data => {
-        this.toastrService.success('Data saved successfully');
-        this.router.navigate(['/templates']);
+        this.toastrService.success("Data saved successfully");
+        this.router.navigate(["/templates"]);
       },
       error => {
-        this.toastrService.error('Error wile saving');
+        this.toastrService.error("Error wile saving");
         console.error(error);
       }
     );

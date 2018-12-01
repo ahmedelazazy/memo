@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { ActionStatus, MemoMode } from '../models/enums';
+import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { AuthService } from "./auth.service";
+import { ActionStatus, MemoMode } from "../models/enums";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class MemoService {
-  apiUrl = environment['url'] + 'memo/';
-  serverUrl = environment['api'] + 'memos/';
+  apiUrl = environment["url"] + "memo/";
+  serverUrl = environment["api"] + "memos/";
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -25,13 +25,13 @@ export class MemoService {
   }
 
   get(status) {
-    let url = '';
+    let url = "";
     let filter;
     if (status == MemoMode.Mine) {
       url = this.serverUrl + MemoMode.Mine;
       return this.http.get<any>(url);
     } else {
-      url = this.serverUrl + 'filter';
+      url = this.serverUrl + "filter";
       filter = status;
 
       // if (status == 'active') {

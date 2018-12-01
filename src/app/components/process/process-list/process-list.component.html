@@ -1,6 +1,6 @@
 <div class="row">
-  <ng-container *ngIf="(templates$ | async) as templates; else: noTemplates">
-    <ng-container *ngIf="templates?.length; else: noTemplates">
+  <ng-container *ngIf="(templates$ | async) as templates; else noTemplates">
+    <ng-container *ngIf="templates?.length; else noTemplates">
       <div class="col-md-4" *ngFor="let template of templates">
         <div class="m-portlet m-portlet--full-height ">
           <div class="m-portlet__head">
@@ -13,7 +13,10 @@
 
           <div class="m-portlet__body">
             <p class="text-center">
-              {{ template.description || 'This process does not have a description' }}
+              {{
+                template.description ||
+                  "This process does not have a description"
+              }}
             </p>
             <hr />
 
@@ -31,7 +34,10 @@
             </div>
 
             <div class="text-center">
-              <button class=" text-center btn btn-primary" [routerLink]="['/process', 'new', template.id]">
+              <button
+                class=" text-center btn btn-primary"
+                [routerLink]="['/process', 'new', template.id]"
+              >
                 Start Process
               </button>
             </div>

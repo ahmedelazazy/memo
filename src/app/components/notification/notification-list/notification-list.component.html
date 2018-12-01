@@ -1,4 +1,4 @@
-<div *ngIf="(notifications$ | async) as notifications; else: noData">
+<div *ngIf="(notifications$ | async) as notifications; else noData">
   <table class="table table-hover">
     <thead>
       <tr>
@@ -8,7 +8,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let notification of notifications" [class.info]="notification.isNew">
+      <tr
+        *ngFor="let notification of notifications"
+        [class.info]="notification.isNew"
+      >
         <td>{{ notification.text }}</td>
         <td>{{ notification.addedOn | date }}</td>
         <td>

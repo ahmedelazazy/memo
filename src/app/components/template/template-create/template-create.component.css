@@ -1,27 +1,23 @@
-.disabled{
+.disabled {
   color: #999 !important;
   font-style: italic;
 }
 
-.right{
+.right {
   text-align: right;
 }
 
-button{
+button {
   margin-right: 5px;
-
 }
-button.btn-lg{
+button.btn-lg {
   margin-top: 0;
 }
 
-
-.btn-success{
+.btn-success {
   margin: 0;
 }
 
-.margin-bottom-30{
-margin-bottom: 30px;
+.margin-bottom-30 {
+  margin-bottom: 30px;
 }
-
-

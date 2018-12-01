@@ -15,11 +15,22 @@
     <label for="">Type*</label>
     <div class="m-radio-inline">
       <label class="m-radio">
-        <input type="radio" name="type" formControlName="type" value="task" required />Task <span></span>
+        <input
+          type="radio"
+          name="type"
+          formControlName="type"
+          value="task"
+          required
+        />Task <span></span>
       </label>
       <label class="m-radio">
-        <input type="radio" name="type" formControlName="type" value="approval" required />Approval
-        <span></span>
+        <input
+          type="radio"
+          name="type"
+          formControlName="type"
+          value="approval"
+          required
+        />Approval <span></span>
       </label>
     </div>
   </div>
@@ -38,9 +49,17 @@
 
   <div class="form-group m-form__group">
     <label for="email">Assigned To*</label>
-    <select class="form-control m-input" name="user" id="user" formControlName="userId" required>
+    <select
+      class="form-control m-input"
+      name="user"
+      id="user"
+      formControlName="userId"
+      required
+    >
       <option value="null" disabled selected>Assigned to</option>
-      <option [ngValue]="user.id" *ngFor="let user of users">{{ user.name }}</option>
+      <option [ngValue]="user.id" *ngFor="let user of users">{{
+        user.name
+      }}</option>
     </select>
   </div>
 </div>

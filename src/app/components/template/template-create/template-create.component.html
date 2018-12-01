@@ -17,7 +17,9 @@
           />
         </div>
         <div class="col-md-2">
-          <button type="submit" class="btn btn-success btn-block btn-lg">Create</button>
+          <button type="submit" class="btn btn-success btn-block btn-lg">
+            Create
+          </button>
         </div>
       </div>
     </div>
@@ -49,7 +51,9 @@
                   data-toggle="tab"
                   href="#tab2"
                   role="tab"
-                  [class.invaliditemcolor]="containerForm.get('dataForm').invalid"
+                  [class.invaliditemcolor]="
+                    containerForm.get('dataForm').invalid
+                  "
                 >
                   Data Form
                 </a>
@@ -60,10 +64,15 @@
         <div class="m-portlet__body">
           <div class="tab-content">
             <div class="tab-pane active show" id="tab1" role="tab1">
-              <app-template-steps [users]="users" [templateContainer]="containerForm"></app-template-steps>
+              <app-template-steps
+                [users]="users"
+                [templateContainer]="containerForm"
+              ></app-template-steps>
             </div>
             <div class="tab-pane " id="tab2" role="tab2">
-              <app-template-form [templateContainer]="containerForm"></app-template-form>
+              <app-template-form
+                [templateContainer]="containerForm"
+              ></app-template-form>
             </div>
           </div>
         </div>

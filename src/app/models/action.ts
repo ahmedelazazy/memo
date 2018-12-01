@@ -1,4 +1,4 @@
-import { Step } from './step';
+import { Step } from "./step";
 
 export class Action {
   id?: number;
@@ -10,7 +10,5 @@ export class Action {
   comment?: string;
   status: string;
 
-  constructor() {
-  }
-
+  constructor() {}
 }

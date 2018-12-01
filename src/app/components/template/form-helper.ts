@@ -1,6 +1,12 @@
-import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Helper } from 'src/app/models/helper';
-import { TaskType } from 'src/app/models/enums';
+import {
+  FormGroup,
+  FormArray,
+  FormControl,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
+import { Helper } from "src/app/models/helper";
+import { TaskType } from "src/app/models/enums";
 
 export class FormHelper {
   constructor() {}
@@ -50,7 +56,10 @@ export class FormHelper {
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = group.controls[key];
 
-      if (abstractControl instanceof FormGroup || abstractControl instanceof FormArray) {
+      if (
+        abstractControl instanceof FormGroup ||
+        abstractControl instanceof FormArray
+      ) {
         this.updateValueAndValidity(abstractControl);
       } else {
         abstractControl.updateValueAndValidity();

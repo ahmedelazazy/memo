@@ -4,7 +4,10 @@
       <!-- <h3 class="m-subheader__title m-subheader__title--separator">Process</h3> -->
     </div>
     <div>
-      <a [routerLink]="['/templates/create']" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
+      <a
+        [routerLink]="['/templates/create']"
+        class="btn btn-accent m-btn m-btn--icon m-btn--pill"
+      >
         <span> <i class="la la-plus"></i> <span>Create Template</span> </span>
       </a>
     </div>
@@ -12,8 +15,8 @@
 </div>
 
 <div class="row">
-  <ng-container *ngIf="(templates$ | async) as templates; else: noTemplates">
-    <ng-container *ngIf="templates?.length; else: noTemplates">
+  <ng-container *ngIf="(templates$ | async) as templates; else noTemplates">
+    <ng-container *ngIf="templates?.length; else noTemplates">
       <div class="col-md-4" *ngFor="let template of templates">
         <div class="m-portlet m-portlet--full-height ">
           <div class="m-portlet__head">
@@ -25,7 +28,10 @@
           </div>
           <div class="m-portlet__body">
             <p class="text-center">
-              {{ template.description || 'This template does not have a description' }}
+              {{
+                template.description ||
+                  "This template does not have a description"
+              }}
             </p>
             <hr />
 
@@ -46,5 +52,7 @@
       </div>
     </ng-container>
   </ng-container>
-  <ng-template #noTemplates> <p>There is no available templates. Start by adding one.</p> </ng-template>
+  <ng-template #noTemplates>
+    <p>There is no available templates. Start by adding one.</p>
+  </ng-template>
 </div>

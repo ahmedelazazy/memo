@@ -1,9 +1,19 @@
-
 export class Helper {
-
   static guid() {
-
-    return Helper.s4() + Helper.s4() + '-' + Helper.s4() + '-' + Helper.s4() + '-' + Helper.s4() + '-' + Helper.s4() + Helper.s4() + Helper.s4();
+    return (
+      Helper.s4() +
+      Helper.s4() +
+      "-" +
+      Helper.s4() +
+      "-" +
+      Helper.s4() +
+      "-" +
+      Helper.s4() +
+      "-" +
+      Helper.s4() +
+      Helper.s4() +
+      Helper.s4()
+    );
   }
 
   private static s4() {

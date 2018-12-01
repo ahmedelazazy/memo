@@ -2,13 +2,20 @@
   <div class="row">
     <div class="col-md-6">
       <p><strong>Subject</strong> {{ task.memo?.title }}</p>
-      <p><strong>Body</strong> {{ task.memo?.description || 'This memo does not have a body' }}</p>
+      <p>
+        <strong>Body</strong>
+        {{ task.memo?.description || "This memo does not have a body" }}
+      </p>
       <p><strong>Owner</strong> {{ task.memo?.user.name }}</p>
       <p><strong>Start Date</strong> {{ task.memo?.dateOpened | date }}</p>
 
       <div *ngIf="editMode">
         <hr />
-        <form [formGroup]="memoForm" class=" m-form" [class.invalidform]="submitted && memoForm.invalid">
+        <form
+          [formGroup]="memoForm"
+          class=" m-form"
+          [class.invalidform]="submitted && memoForm.invalid"
+        >
           <div class="form-group m-form__group">
             <label for="comment">Comment</label>
             <textarea
@@ -29,11 +36,18 @@
               [sortablejsOptions]="sortableOptions"
               formArrayName="tasks"
             >
-              <div *ngFor="let task of memoForm.get('tasks').controls; let i = index">
+              <div
+                *ngFor="
+                  let task of memoForm.get('tasks').controls;
+                  let i = index
+                "
+              >
                 <div [formGroupName]="i">
                   <a class="">
                     <div class="row">
-                      <div class="col-md-1 move"><i class="la la-sort"></i></div>
+                      <div class="col-md-1 move">
+                        <i class="la la-sort"></i>
+                      </div>
                       <div class="col-md-1">
                         <i
                           class="fa fa-lg fa-tasks m--font-accent"
@@ -53,14 +67,25 @@
                             formControlName="userId"
                             required
                           >
-                            <option value="null" disabled selected>Assigned to</option>
-                            <option [ngValue]="user.id" *ngFor="let user of users">{{ user.name }}</option>
+                            <option value="null" disabled selected
+                              >Assigned to</option
+                            >
+                            <option
+                              [ngValue]="user.id"
+                              *ngFor="let user of users"
+                              >{{ user.name }}</option
+                            >
                           </select>
                         </div>
                       </div>
                       <div class="col-md-2">
                         <div class="right">
-                          <button class="btn btn-sm btn-danger" (click)="remove(i)">X</button>
+                          <button
+                            class="btn btn-sm btn-danger"
+                            (click)="remove(i)"
+                          >
+                            X
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -91,10 +116,15 @@
           <hr />
           <div class="margin-top-20">
             <div class="form-group" *ngIf="task.type == taskTypeEnum.Task">
-              <button class="btn btn-success" (click)="onSave(actionStatusEnum.completed_or_approved)">
+              <button
+                class="btn btn-success"
+                (click)="onSave(actionStatusEnum.completed_or_approved)"
+              >
                 Complete
               </button>
-              <button class="btn btn-default" [routerLink]="['/memo']">Cancel</button>
+              <button class="btn btn-default" [routerLink]="['/memo']">
+                Cancel
+              </button>
             </div>
 
             <div class="form-group" *ngIf="task.type == taskTypeEnum.Approval">
@@ -105,7 +135,11 @@
               >
                 Approve
               </button>
-              <button class="btn btn-danger" type="submit" (click)="onSave(actionStatusEnum.rejected)">
+              <button
+                class="btn btn-danger"
+                type="submit"
+                (click)="onSave(actionStatusEnum.rejected)"
+              >
                 Reject
               </button>
             </div>
@@ -117,7 +151,9 @@
       <div class="m-portlet">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">More Info</h3></div>
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">More Info</h3>
+            </div>
           </div>
         </div>
         <div class="m-portlet__body">
@@ -127,7 +163,10 @@
               <div class="m-demo__preview">
                 <div class="m-list-timeline">
                   <div class="m-list-timeline__items">
-                    <div class="m-list-timeline__item" *ngFor="let memoTask of task.memo.tasks">
+                    <div
+                      class="m-list-timeline__item"
+                      *ngFor="let memoTask of task.memo.tasks"
+                    >
                       <span class="m-list-timeline__badge"></span>
                       <span
                         class="m-list-timeline__icon fa fa-lg fa-tasks m--font-accent"
@@ -139,18 +178,31 @@
                       ></span>
                       <span class="m-list-timeline__text m--font-boldest"
                         >{{ memoTask.user?.name }}
-                        <span class="m-list-timeline__text not-bold"> {{ memoTask.comment }} </span>
+                        <span class="m-list-timeline__text not-bold">
+                          {{ memoTask.comment }}
+                        </span>
 
-                        <div class="not-bold" *ngFor="let t of memoTask.addedTasks">{{ t }}</div>
+                        <div
+                          class="not-bold"
+                          *ngFor="let t of memoTask.addedTasks"
+                        >
+                          {{ t }}
+                        </div>
 
                         <span
                           class="m-badge m-badge--warning m-badge--wide not-bold"
-                          *ngIf="task.id == memoTask.id && memoTask.status == actionStatusEnum.assigned"
+                          *ngIf="
+                            task.id == memoTask.id &&
+                            memoTask.status == actionStatusEnum.assigned
+                          "
                           >Current Task</span
                         >
                         <span
                           class="m-badge m-badge--success m-badge--wide not-bold"
-                          *ngIf="memoTask.status == actionStatusEnum.completed_or_approved"
+                          *ngIf="
+                            memoTask.status ==
+                            actionStatusEnum.completed_or_approved
+                          "
                           >Completed</span
                         >
                         <span
@@ -159,7 +211,9 @@
                           >Rejected</span
                         >
                       </span>
-                      <span class="m-list-timeline__time">{{ memoTask?.dateOpened | date }}</span>
+                      <span class="m-list-timeline__time">{{
+                        memoTask?.dateOpened | date
+                      }}</span>
                     </div>
                   </div>
                 </div>

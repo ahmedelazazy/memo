@@ -1,45 +1,43 @@
-import { Injectable } from '@angular/core';
-import { Template } from '../models/template';
-import { Subject, from } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
-import * as _ from 'lodash';
-import { FormHelper } from '../components/template/form-helper';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
-import { FieldVisibility } from '../models/enums';
-import { UserService } from './user.service';
+import { Injectable } from "@angular/core";
+import { Template } from "../models/template";
+import { Subject, from } from "rxjs";
+import { environment } from "src/environments/environment";
+import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { map, tap } from "rxjs/operators";
+import { BehaviorSubject } from "rxjs";
+import * as _ from "lodash";
+import { FormHelper } from "../components/template/form-helper";
+import { FormGroup, FormArray, FormControl } from "@angular/forms";
+import { formArrayNameProvider } from "@angular/forms/src/directives/reactive_directives/form_group_name";
+import { FieldVisibility } from "../models/enums";
+import { UserService } from "./user.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class TemplateService {
   containerForm: FormGroup;
 
-  tableName = 'Templates';
+  tableName = "Templates";
   templates: Template[] = [];
   usersChange: Subject<Template[]> = new Subject();
-  serverUrl = environment['api'] + 'templates/';
+  serverUrl = environment["api"] + "templates/";
 
   users;
   templateForm$: BehaviorSubject<any>;
   // containerForm = new FormHelper().getContainer();
 
   constructor(private http: HttpClient, private userService: UserService) {
-
-
     this.userService.getAll().subscribe(data => (this.users = data));
   }
 
-  createNewTemplate(){
+  createNewTemplate() {
     this.containerForm = new FormHelper().getContainer();
     this.templateForm$ = new BehaviorSubject(null);
 
     this.templateForm$.subscribe(data => {
-      if (data && this.containerForm && this.containerForm.get('steps')) {
-        const steps: FormArray = this.containerForm.get('steps') as FormArray;
+      if (data && this.containerForm && this.containerForm.get("steps")) {
+        const steps: FormArray = this.containerForm.get("steps") as FormArray;
         let flatData = this.flattenData(data);
         for (let i = 0; i < steps.controls.length; i++) {
           const step = steps.controls[i];
@@ -83,11 +81,11 @@ export class TemplateService {
     let dataCopy = _.cloneDeep(flatData);
 
     if (step) {
-      if (step.get('fieldsVisibility') && step.get('fieldsVisibility').value) {
+      if (step.get("fieldsVisibility") && step.get("fieldsVisibility").value) {
         for (let i = 0; i < dataCopy.length; i++) {
           let newField = dataCopy[i];
           let existingField = step
-            .get('fieldsVisibility')
+            .get("fieldsVisibility")
             .value.find(f => f.controlUiId == newField.controlUiId);
           if (existingField) {
             newField.visibility = existingField.visibility;

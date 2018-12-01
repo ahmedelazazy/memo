@@ -44,7 +44,9 @@
           [sortablejsOptions]="sortableOptions"
           formArrayName="tasks"
         >
-          <div *ngFor="let task of memoForm.get('tasks').controls; let i = index">
+          <div
+            *ngFor="let task of memoForm.get('tasks').controls; let i = index"
+          >
             <div [formGroupName]="i">
               <a class="">
                 <div class="row">
@@ -68,8 +70,14 @@
                         formControlName="userId"
                         required
                       >
-                        <option value="null" disabled selected>Assigned to</option>
-                        <option [ngValue]="user.id" *ngFor="let user of users">{{ user.name }}</option>
+                        <option value="null" disabled selected
+                          >Assigned to</option
+                        >
+                        <option
+                          [ngValue]="user.id"
+                          *ngFor="let user of users"
+                          >{{ user.name }}</option
+                        >
                       </select>
                     </div>
                   </div>

@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { environment } from 'src/environments/environment';
-import { UserNotification } from '../models/user-notification';
-import { tap } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { AuthService } from "./auth.service";
+import { environment } from "src/environments/environment";
+import { UserNotification } from "../models/user-notification";
+import { tap } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class NotificationService {
-  apiUrl = environment['url'] + 'notification/';
-  serverUrl = environment['api'] + 'notifications/';
+  apiUrl = environment["url"] + "notification/";
+  serverUrl = environment["api"] + "notifications/";
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -23,7 +23,7 @@ export class NotificationService {
   }
 
   getNewNotificationCount() {
-    let url = this.serverUrl + 'new';
+    let url = this.serverUrl + "new";
     return this.http.get(url);
   }
 }

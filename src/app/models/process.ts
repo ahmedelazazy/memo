@@ -1,5 +1,5 @@
-import { Action } from './action';
-import { Template } from './template';
+import { Action } from "./action";
+import { Template } from "./template";
 
 export class Process {
   id?: number;

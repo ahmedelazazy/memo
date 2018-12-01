@@ -1,37 +1,34 @@
-.move{
+.move {
   color: #aaa;
   margin-right: 10px;
   padding: 5px;
   cursor: move;
 }
 
-.selected{
-  border:1px #3175af solid;
+.selected {
+  border: 1px #3175af solid;
 }
 
 /* .active i{
   color: #fff;
 } */
 p.new,
-h5.new
-{
+h5.new {
   /* color: #999 ; */
-  font-style: italic ;
+  font-style: italic;
 }
 
-
-.list-group-item.active{
+.list-group-item.active {
   color: #fff;
 }
 .list-group-item.active:hover {
   color: #fff;
 }
 
-
-i{
+i {
   padding-top: 10px;
 }
 
-.margin-top-20{
-margin-top: 20px
+.margin-top-20 {
+  margin-top: 20px;
 }

@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LogService {
-
   enable = true;
 
-  constructor() { }
+  constructor() {}
 
   log(file, func, message) {
     if (this.enable) {
