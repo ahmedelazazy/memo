@@ -37,6 +37,7 @@ import { MemosListComponent } from './components/memo/memos-list/memos-list.comp
 import { MemoDetailsComponent } from './components/memo/memo-details/memo-details.component';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ReactiveFormsModule,
     SortablejsModule.forRoot({ animation: 150 }),
     TabsModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    MomentModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

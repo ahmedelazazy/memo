@@ -17,12 +17,14 @@ import { TemplateFormComponent } from './components/template/template-form/templ
 import { MemoCreateComponent } from './components/memo/memo-create/memo-create.component';
 import { MemosListComponent } from './components/memo/memos-list/memos-list.component';
 import { MemoDetailsComponent } from './components/memo/memo-details/memo-details.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: WelcomeComponent },
       { path: 'users', component: UserComponent },

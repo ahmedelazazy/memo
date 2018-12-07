@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <!--begin:: Widgets/User Progress -->
+    <!-- begin:: Widgets/User Progress -->
     <div class="m-portlet m-portlet--full-height ">
       <div class="m-portlet__head">
         <div class="m-portlet__head-caption">
@@ -23,7 +23,7 @@
       <div class="m-portlet__body">
         <div class="tab-content">
           <div class="tab-pane active" id="tabActive">
-            <div class="m-widget4 m-widget4--progress" *ngIf="pendingActions?.length > 0; else noPendingActions">
+            <div class="m-widget4 m-widget4--progress" *ngIf="pendingActions?.length > 0; else: noPendingActions">
               <div class="m-widget4__item" *ngFor="let action of pendingActions">
                 <div class="m-widget4__img m-widget4__img--pic">
                   <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="action.step.type == taskTypeEnum.Task"></i>
@@ -35,7 +35,7 @@
 
                 <div class="m-widget4__info">
                   <span class="m-widget4__title"> {{ action.step?.title }} </span><br />
-                  <span class="m-widget4__sub"> {{ action?.template?.title }} ({{ action.process?.title }}) </span>
+                  <span class="m-widget4__sub"> {{ action?.template?.title }} </span>
                 </div>
 
                 <div class="m-widget4__progress">
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="m-widget4__ext">
-                  <span class="m-widget4__title"> {{ action.dateOpened | date }} </span><br />
+                  <span class="m-widget4__title"> {{ action.dateOpened | amCalendar }} </span><br />
                 </div>
 
                 <div class="m-widget4__ext">
@@ -63,7 +63,7 @@
             <ng-template #noPendingActions>You don't have any pending actions.</ng-template>
           </div>
           <div class="tab-pane" id="tabCompleted">
-            <div class="m-widget4 m-widget4--progress" *ngIf="completedActions?.length > 0; else noCompletedActions">
+            <div class="m-widget4 m-widget4--progress" *ngIf="completedActions?.length > 0; else: noCompletedActions">
               <div class="m-widget4__item" *ngFor="let action of completedActions">
                 <div class="m-widget4__img m-widget4__img--pic">
                   <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="action.step.type == taskTypeEnum.Task"></i>
@@ -75,7 +75,7 @@
 
                 <div class="m-widget4__info">
                   <span class="m-widget4__title"> {{ action.step?.title }} </span><br />
-                  <span class="m-widget4__sub"> {{ action?.template?.title }} ({{ action.process?.title }}) </span>
+                  <span class="m-widget4__sub"> {{ action?.template?.title }}</span>
                 </div>
 
                 <div class="m-widget4__progress">
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="m-widget4__ext">
-                  <span class="m-widget4__title"> {{ action.dateOpened | date }} </span><br />
+                  <span class="m-widget4__title"> {{ action.dateOpened | amCalendar }} </span><br />
                 </div>
 
                 <div class="m-widget4__ext">
@@ -105,6 +105,6 @@
         </div>
       </div>
     </div>
-    <!--end:: Widgets/User Progress -->
+    <!-- end:: Widgets/User Progress -->
   </div>
 </div>

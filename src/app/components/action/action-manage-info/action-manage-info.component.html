@@ -1,6 +1,6 @@
 <p><strong>Process</strong> {{ action?.template?.title }} ({{ action?.process?.title }})</p>
 <p><strong>Description</strong> {{ action?.process?.description }}</p>
-<p><strong>Date</strong> {{ action?.process?.dateOpened | date }}</p>
+<p><strong>Date</strong> {{ action?.process?.dateOpened | amCalendar }}</p>
 <p><strong>Requested by</strong> {{ action?.process?.user?.name }}</p>
 <!-- <p>{{action?.step?.description}}</p> -->
 

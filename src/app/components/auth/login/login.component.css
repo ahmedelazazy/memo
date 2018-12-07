@@ -1,4 +1,4 @@
-body {
+/* body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
@@ -37,4 +37,46 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+} */
+
+.body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-size: 13px;
+  font-weight: 300;
+  font-family: Poppins;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body a:active,
+.body a:focus {
+  text-decoration: none !important;
+}
+
+.body a,
+.body button {
+  outline: none !important;
+}
+
+.body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.body.m--skin-light {
+  color: #333333;
+}
+.body.m--skin-dark {
+  color: #efefef;
+}
+
+.logo {
+  max-width: 250px;
 }

@@ -5,7 +5,7 @@
     <!-- FIRST -->
     <div class="m-timeline-1__item m-timeline-1__item--right">
       <div class="m-timeline-1__item-circle"><div class="m--bg-warning"></div></div>
-      <span class="m-timeline-1__item-time m--font-brand">{{ action?.process?.dateOpened | date }}</span>
+      <span class="m-timeline-1__item-time m--font-brand">{{ action?.process?.dateOpened | amCalendar }}</span>
       <div class="m-timeline-1__item-content">
         <div class="m-timeline-1__item-title">{{ action?.template?.title }} ({{ action?.process?.title }})</div>
         <hr class="no-margin" />
@@ -27,7 +27,7 @@
         <ng-container *ngIf="getStep(act) as s">
           <div class="m-timeline-1__item m-timeline-1__item--right">
             <div class="m-timeline-1__item-circle"><div class="m--bg-metal"></div></div>
-            <span class="m-timeline-1__item-time m--font-brand">{{ act.dateOpened | date }}</span>
+            <span class="m-timeline-1__item-time m--font-brand">{{ act.dateOpened | amCalendar }}</span>
             <div class="m-timeline-1__item-content">
               <div class="m-timeline-1__item-title">{{ s.title }}</div>
               <hr class="no-margin" />
@@ -42,7 +42,7 @@
             *ngIf="act.status == actionStatusEnum.completed_or_approved || act.status == actionStatusEnum.rejected"
           >
             <div class="m-timeline-1__item-circle"><div class="m--bg-info"></div></div>
-            <span class="m-timeline-1__item-time m--font-brand">{{ act.dateClosed | date }}</span>
+            <span class="m-timeline-1__item-time m--font-brand">{{ act.dateClosed | amCalendar }}</span>
             <div class="m-timeline-1__item-content">
               <div class="m-timeline-1__item-title">{{ s.title }}</div>
               <hr class="no-margin" />
@@ -80,7 +80,7 @@
       "
     >
       <div class="m-timeline-1__item-circle"><div class="m--bg-warning"></div></div>
-      <span class="m-timeline-1__item-time m--font-brand">{{ action?.process?.dateClosed | date }}</span>
+      <span class="m-timeline-1__item-time m--font-brand">{{ action?.process?.dateClosed | amCalendar }}</span>
       <div class="m-timeline-1__item-content">
         <div class="m-timeline-1__item-title">{{ action?.template?.title }} ({{ action?.process?.title }})</div>
         <hr class="no-margin" />

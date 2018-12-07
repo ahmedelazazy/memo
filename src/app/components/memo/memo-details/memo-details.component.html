@@ -4,7 +4,7 @@
       <p><strong>Subject</strong> {{ task.memo?.title }}</p>
       <p><strong>Body</strong> {{ task.memo?.description || 'This memo does not have a body' }}</p>
       <p><strong>Owner</strong> {{ task.memo?.user.name }}</p>
-      <p><strong>Start Date</strong> {{ task.memo?.dateOpened | date }}</p>
+      <p><strong>Start Date</strong> {{ task.memo?.dateOpened | amCalendar }}</p>
 
       <div *ngIf="editMode">
         <hr />
@@ -129,7 +129,7 @@
                           >Rejected</span
                         >
                       </span>
-                      <span class="m-list-timeline__time">{{ memoTask?.dateOpened | date }}</span>
+                      <span class="m-list-timeline__time">{{ memoTask?.dateOpened | amCalendar }}</span>
                     </div>
                   </div>
                 </div>
