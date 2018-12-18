@@ -80,3 +80,20 @@
 .logo {
   max-width: 250px;
 }
+
+.m-login__form input::placeholder {
+  color: #fff !important;
+}
+
+.m-link,
+.m-checkbox,
+.m-login__account-msg {
+  color: #fff !important;
+}
+.btn,
+.m-checkbox.m-checkbox--light > span {
+  border-color: #fff !important;
+}
+.m-login {
+  height: 100vh;
+}

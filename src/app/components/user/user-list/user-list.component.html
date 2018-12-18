@@ -1,0 +1,53 @@
+<div class="m-subheader ">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto"></div>
+    <div>
+      <a [routerLink]="['/users/create']" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
+        <span> <i class="la la-plus"></i> <span>Create User</span> </span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="m-portlet m-portlet--full-height ">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title"><h3 class="m-portlet__head-text">Users</h3></div>
+        </div>
+      </div>
+      <div class="m-portlet__body" [@animation]="animate">
+        <ng-container *ngIf="users && users.length; else: noUsers">
+          <div class="m-widget4 m-widget4--progress">
+            <div
+              class="m-widget4__item"
+              *ngFor="let user of (users | paginate: { itemsPerPage: 10, currentPage: p })"
+              style="width:100%;"
+            >
+              <div class="w30">{{ user.name }}</div>
+
+              <div class="w30">{{ user.email }}</div>
+
+              <div class=" w30">
+                <span class="m-widget4__title" tooltip="Date created" containerClass="m-tooltip">
+                  {{ user.createdAt | amCalendar }}
+                </span>
+              </div>
+
+              <div class="w10">
+                <a
+                  class="m-btn m-btn--hover-brand m-btn--pill btn btn-sm btn-secondary"
+                  [routerLink]="['/users/edit/', user.id]"
+                  >Edit</a
+                >
+              </div>
+            </div>
+            <div class="pagination"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+          </div>
+        </ng-container>
+        <ng-template #noUsers>System does not have any users.</ng-template>
+      </div>
+    </div>
+  </div>
+</div>

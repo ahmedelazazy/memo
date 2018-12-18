@@ -22,19 +22,35 @@
             role="tablist"
           >
             <li class="nav-item m-tabs__item">
-              <a class="nav-link m-tabs__link active" data-toggle="tab" href="#tabActive" role="tab"> Active </a>
+              <a
+                class="nav-link m-tabs__link active"
+                data-toggle="tab"
+                href="#tabActive"
+                role="tab"
+                (click)="doAnimation()"
+              >
+                Active
+              </a>
             </li>
             <li class="nav-item m-tabs__item">
-              <a class="nav-link m-tabs__link" data-toggle="tab" href="#tabCompleted" role="tab"> Completed </a>
+              <a
+                class="nav-link m-tabs__link"
+                data-toggle="tab"
+                href="#tabCompleted"
+                role="tab"
+                (click)="doAnimation()"
+              >
+                Completed
+              </a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="m-portlet__body">
+      <div class="m-portlet__body" [@animation]="animate">
         <div class="tab-content">
           <div class="tab-pane active" id="tabActive">
             <div class="m-widget4 m-widget4--progress" *ngIf="pendingProcesses?.length > 0; else: noPendingProcess">
-              <div class="m-widget4__item" *ngFor="let process of pendingProcesses">
+              <div class="m-widget4__item" *ngFor="let process of pendingProcesses | paginate: { itemsPerPage: 10, currentPage: p }">
                 <div class="m-widget4__img m-widget4__img--pic">
                   <i class="fa fa-lg fa-list-alt m--font-primary"></i>
                 </div>
@@ -71,6 +87,7 @@
                   >
                 </div>
               </div>
+              <div class="pagination"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
             </div>
             <ng-template #noPendingProcess> <p>You don't have any processes in progress</p> </ng-template>
           </div>
@@ -80,7 +97,7 @@
                 class="m-widget4 m-widget4--progress"
                 *ngIf="completedProcesses?.length > 0; else: noCompletedProcess"
               >
-                <div class="m-widget4__item" *ngFor="let process of completedProcesses">
+                <div class="m-widget4__item" *ngFor="let process of completedProcesses | paginate: { itemsPerPage: 10, currentPage: p }">
                   <div class="m-widget4__img m-widget4__img--pic">
                     <i class="fa fa-lg fa-list-alt m--font-primary"></i>
                   </div>
@@ -117,6 +134,7 @@
                     >
                   </div>
                 </div>
+                <div class="pagination"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
               </div>
               <ng-template #noCompletedProcess> <p>You don't have any completed processes</p> </ng-template>
             </div>

@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class NotificationListComponent implements OnInit {
   notifications$;
+  p: number = 1;
 
   constructor(private notificationService: NotificationService) {}
 

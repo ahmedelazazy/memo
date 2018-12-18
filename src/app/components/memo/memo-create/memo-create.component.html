@@ -34,8 +34,12 @@
     <div class="col-md-6">
       <label>Memo Participants</label>
       <div class="">
-        <div [sortablejs]="memoForm.get('tasks').controls" [sortablejsOptions]="sortableOptions" formArrayName="tasks">
-          <div *ngFor="let task of memoForm.get('tasks').controls; let i = index">
+        <div
+          [sortablejs]="memoForm.get('tasks')['controls']"
+          [sortablejsOptions]="sortableOptions"
+          formArrayName="tasks"
+        >
+          <div *ngFor="let task of memoForm.get('tasks')['controls']; let i = index">
             <div [formGroupName]="i">
               <a class="">
                 <div class="row">

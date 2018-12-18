@@ -27,59 +27,14 @@ export class UserService {
   }
 
   get(id: number) {
-    let url = this.apiUrl + 'getbyid';
-    let data = { id: id };
-    return this.http.post(url, data).pipe(
-      map(data => {
-        if (data && Array.isArray(data)) return data[0] as User[];
-        else return data as User[];
-      })
-    );
+    return this.http.get<User>(this.serverUrl + id);
   }
 
   add(obj: User) {
-    let url = this.apiUrl + 'add';
-
-    const body = new HttpParams()
-      .set('email', obj.email)
-      .set('password', obj.password)
-      .set('name', obj.name);
-
-    let result = this.http.post(url, body.toString(), {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    });
-
-    this.init();
-    return result;
+    return this.http.post(this.serverUrl, obj);
   }
 
-  delete(id: number) {
-    let url = this.apiUrl + 'remove';
-
-    const body = new HttpParams().set('id', id + '');
-
-    let result = this.http.post(url, body.toString(), {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    });
-
-    this.init();
-    return result;
-  }
-
-  update(id: number, obj: User) {
-    let url = this.apiUrl + 'edit';
-
-    const body = new HttpParams()
-      .set('id', id + '')
-      .set('email', obj.email)
-      .set('password', obj.password)
-      .set('name', obj.name);
-
-    let result = this.http.post(url, body.toString(), {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    });
-
-    this.init();
-    return result;
+  update(obj: User) {
+    return this.http.post(this.serverUrl + obj.id, obj);
   }
 }

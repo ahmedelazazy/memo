@@ -57,7 +57,7 @@
           </ul>
         </div>
       </div>
-      <div class="m-portlet__body">
+      <div class="m-portlet__body" [@animation]="animate">
         <div class="tab-content">
           <div class="tab-pane active" id="tabActive">
             <ng-container *ngIf="tasks && tasks.length; else: noActiveMemos">
@@ -86,7 +86,7 @@
 <ng-template #activeMemos>
   <ng-container>
     <div class="m-widget4 m-widget4--progress">
-      <div class="m-widget4__item" *ngFor="let task of tasks">
+      <div class="m-widget4__item" *ngFor="let task of (tasks | paginate: { itemsPerPage: 10, currentPage: p })">
         <div class="m-widget4__img m-widget4__img--pic">
           <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="task.type == taskTypeEnum.Task"></i>
           <i class="fa fa-lg fa-check m--font-focus" *ngIf="task.type == taskTypeEnum.Approval"></i>
@@ -125,13 +125,15 @@
         </div>
       </div>
     </div>
+
+    <div class="pagination"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
   </ng-container>
 </ng-template>
 
 <ng-template #inactiveMemos>
   <ng-container>
     <div class="m-widget4 m-widget4--progress">
-      <div class="m-widget4__item" *ngFor="let task of tasks">
+      <div class="m-widget4__item" *ngFor="let task of (tasks | paginate: { itemsPerPage: 10, currentPage: p })">
         <div class="m-widget4__img m-widget4__img--pic">
           <i class="fa fa-lg fa-tasks m--font-accent" *ngIf="task.type == taskTypeEnum.Task"></i>
           <i class="fa fa-lg fa-check m--font-focus" *ngIf="task.type == taskTypeEnum.Approval"></i>
@@ -170,13 +172,15 @@
         </div>
       </div>
     </div>
+
+    <div class="pagination"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
   </ng-container>
 </ng-template>
 
 <ng-template #myMemosContent>
   <ng-container>
     <div class="m-widget4 m-widget4--progress">
-      <div class="m-widget4__item" *ngFor="let memo of memos">
+      <div class="m-widget4__item" *ngFor="let memo of (memos | paginate: { itemsPerPage: 10, currentPage: p })">
         <div class="m-widget4__img m-widget4__img--pic"><i class="fa fa-lg fa-th-list m--font-secondary"></i></div>
         <div class="m-widget4__info user">
           <span class="m-widget4__title" tooltip="Memo owner" containerClass="m-tooltip"> {{ memo?.user?.name }} </span>
@@ -208,5 +212,7 @@
         </div>
       </div>
     </div>
+
+    <div class="pagination"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
   </ng-container>
 </ng-template>

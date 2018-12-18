@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './components/user/user.component';
 import { TemplateStepCreateComponent } from './components/template/template-step-create/template-step-create.component';
 import { TemplateCreateComponent } from './components/template/template-create/template-create.component';
 import { TemplateListComponent } from './components/template/templates-list/template-list.component';
@@ -38,11 +37,13 @@ import { MemoDetailsComponent } from './components/memo/memo-details/memo-detail
 import { AuthInterceptor } from './services/auth-interceptor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MomentModule } from 'ngx-moment';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { UserCreateComponent } from './components/user/user-create/user-create.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     TemplateStepCreateComponent,
     TemplateCreateComponent,
     TemplateListComponent,
@@ -65,7 +66,9 @@ import { MomentModule } from 'ngx-moment';
     ActionManageActiveComponent,
     MemoCreateComponent,
     MemosListComponent,
-    MemoDetailsComponent
+    MemoDetailsComponent,
+    UserCreateComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ import { MomentModule } from 'ngx-moment';
     SortablejsModule.forRoot({ animation: 150 }),
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
-    MomentModule
+    MomentModule,
+    NgxPaginationModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -3,18 +3,24 @@ import { TaskType, ActionStatus, MemoMode } from 'src/app/models/enums';
 import { MemoService } from 'src/app/services/memo.service';
 import { Router } from '@angular/router';
 import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { zoomIn } from 'ng-animate';
 
 @Component({
   selector: 'app-memos-list',
   templateUrl: './memos-list.component.html',
-  styleUrls: ['./memos-list.component.css']
+  styleUrls: ['./memos-list.component.css'],
+  animations: [trigger('animation', [transition('* => *', useAnimation(zoomIn))])]
 })
 export class MemosListComponent implements OnInit {
+  animate: any;
+
   taskTypeEnum = TaskType;
   tasks = [];
   memos = [];
   Mode = MemoMode;
   selectedMode = this.Mode.Active;
+  p: number = 1;
 
   constructor(private memoService: MemoService, private router: Router) {}
 
@@ -23,6 +29,8 @@ export class MemosListComponent implements OnInit {
   }
 
   getTasks(status) {
+    this.animate = !this.animate;
+
     this.tasks = [];
     this.memos = [];
     this.selectedMode = status;

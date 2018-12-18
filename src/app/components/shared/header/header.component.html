@@ -44,7 +44,7 @@
                     <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div class="m-dropdown__inner">
                       <div class="m-dropdown__header m--align-center">
-                        <ng-container *ngIf="newNotificaitonsCount > 0; else noNotifications">
+                        <ng-container *ngIf="newNotificaitonsCount > 0; else: noNotifications">
                           <span class="m-dropdown__header-title">{{ newNotificaitonsCount }} New</span>
                           <span class="m-dropdown__header-subtitle">Notifications</span>
                           <hr />

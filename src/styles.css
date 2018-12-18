@@ -104,3 +104,30 @@ body.m--skin-light {
 body.m--skin-dark {
   color: #efefef;
 }
+
+.pagination {
+  margin-top: 40px;
+  /* text-align: center; */
+}
+
+.pagination pagination-controls {
+  margin: auto;
+}
+
+.w30,
+.w10 {
+  display: table-cell;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.w10 {
+  width: 10%;
+}
+
