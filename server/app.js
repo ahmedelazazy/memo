@@ -47,6 +47,10 @@ app.use('/api/actions', authenticate, actions);
 app.use('/api/notifications', authenticate, notifications);
 app.use('/api/memos', authenticate, memos);
 
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, 'angular', 'index.html'));
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
