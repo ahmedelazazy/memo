@@ -6,11 +6,18 @@ var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
 var db = {};
 
-const sequelize = new Sequelize('test', 'root', '', {
-  host: 'localhost',
+// const sequelize = new Sequelize('autoflow', 'root', '', {
+//   host: 'localhost',
+//   dialect: 'mysql',
+//   operatorsAliases: false,
+//   logging: console.log
+// });
+
+const sequelize = new Sequelize('mohsende_autoflow', 'mohsende_memo', 'memo@autoflow', {
+  host: 'gator3278.hostgator.com',
   dialect: 'mysql',
-  operatorsAliases: false,
-  logging: console.log
+  operatorsAliases: false
+  // logging: console.log
 });
 
 fs.readdirSync(__dirname)
