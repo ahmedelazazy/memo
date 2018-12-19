@@ -4,9 +4,11 @@
 /dist
 /tmp
 /out-tsc
-
+/server/angular
 # dependencies
 /node_modules
+/server/node_modules
+
 
 # IDEs and editors
 /.idea

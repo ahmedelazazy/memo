@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server/bin/www",
+    "postinstall": "ng build --prod",
+    "heroku-postbuild": "cd server && npm install",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
